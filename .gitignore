@@ -11,6 +11,9 @@ src/build-configuration.json
 # Build directory
 dist/
 
+# Android apk generated directory?
+android/
+
 # dotenv environment variables file
 .env
 .env.test

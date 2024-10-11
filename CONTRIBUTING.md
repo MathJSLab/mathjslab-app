@@ -8,11 +8,11 @@ I'm really glad you're reading this, because we need volunteer developers to
 help this project come to fruition.
 
 All notable changes to this project will be documented in
-[CHANGES.md](https://github.com/MathJSLab/mathjslab-demo/blob/main/CHANGES.md) file.
+[CHANGES.md](https://github.com/MathJSLab/mathjslab-app/blob/main/CHANGES.md) file.
 
 Please consider contributing to the [MathJSLab](https://github.com/MathJSLab/mathjslab)
-project, which is the core of the [MathJSLab Demo](https://github.com/MathJSLab/mathjslab-demo).
-See the [Work fronts](#work-fronts) section in the [CONTRIBUTING.md](https://github.com/MathJSLab/mathjslab-demo/blob/main/CONTRIBUTING.md)
+project, which is the core of the [MathJSLab Demo](https://github.com/MathJSLab/mathjslab-app).
+See the [Work fronts](#work-fronts) section in the [CONTRIBUTING.md](https://github.com/MathJSLab/mathjslab-app/blob/main/CONTRIBUTING.md)
 file for each project to see which project your contribution fits into.
 
 This project has an ISBN assigned to it. Whenever significant changes are made
@@ -32,15 +32,15 @@ educational software.
 ## Code of Conduct
 
 This project and everyone participating in it is governed by the
-[MathJSLab Code of Conduct](https://github.com/MathJSLab/mathjslab-demo/blob/main/CODE_OF_CONDUCT.md).
+[MathJSLab Code of Conduct](https://github.com/MathJSLab/mathjslab-app/blob/main/CODE_OF_CONDUCT.md).
 By participating, you are expected to uphold this code. Please report
 unacceptable behavior to [sergiolindau@gmail.com](mailto:sergiolindau@gmail.com).
 
 ## How to Contribute
 
-Check for similar previous [issues](https://github.com/MathJSLab/mathjslab-demo/issues) before send your own.
+Check for similar previous [issues](https://github.com/MathJSLab/mathjslab-app/issues) before send your own.
 
-Please send a [GitHub Pull Request to MathJSLab Demo](https://github.com/MathJSLab/mathjslab-demo/pull/new/main)
+Please send a [GitHub Pull Request to MathJSLab Demo](https://github.com/MathJSLab/mathjslab-app/pull/new/main)
 with a clear list of what you've done (read more about
 [pull requests](http://help.github.com/pull-requests/)). Please follow our
 coding conventions (below) and make sure all of your commits are atomic (one

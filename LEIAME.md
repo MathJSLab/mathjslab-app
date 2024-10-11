@@ -5,28 +5,28 @@
 # [MathJSLab](https://mathjslab.com/) - [mathjslab.com](https://mathjslab.com/)
 
 [![Estado Netlify](https://api.netlify.com/api/v1/badges/b5d64f05-80e8-4cc6-b428-923447f43621/deploy-status)](https://app.netlify.com/sites/mathjslab/deploys)
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/MathJSLab/mathjslab-demo/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/MathJSLab/mathjslab-demo/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/MathJSLab/mathjslab-app/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/MathJSLab/mathjslab-app/tree/main)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fmathjslab.com%2F)](https://mathjslab.com/)
-[![Criado no GitHub em](https://img.shields.io/github/created-at/MathJSLab/mathjslab-demo)](https://github.com/MathJSLab/mathjslab-demo)
-[![Licença MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/MathJSLab/mathjslab-demo/blob/main/LICENSE)
+[![Criado no GitHub em](https://img.shields.io/github/created-at/MathJSLab/mathjslab-app)](https://github.com/MathJSLab/mathjslab-app)
+[![Licença MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/MathJSLab/mathjslab-app/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8396263.svg)](https://doi.org/10.5281/zenodo.8396263)
 [![ISBN](https://img.shields.io/badge/ISBN-978--65--00--84828--1-green?style=flat&link=https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)](https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)
-[![Acessos via jsDelivr](https://img.shields.io/jsdelivr/gh/hy/MathJSLab/mathjslab-demo)](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/)
+[![Acessos via jsDelivr](https://img.shields.io/jsdelivr/gh/hy/MathJSLab/mathjslab-app)](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
 
-> Um [interpretador](https://pt.wikipedia.org/wiki/Interpretador) com sintaxe de linguagem tipo [MATLAB&reg;](https://www.mathworks.com/)/[Octave](https://www.gnu.org/software/octave/) escrito em [Typescript](https://www.typescriptlang.org/).
+> Um [interpretador](https://pt.wikipedia.org/wiki/Interpretador) com sintaxe de linguagem tipo [MATLAB&reg;](https://www.mathworks.com/)/[Octave](https://www.gnu.org/software/octave/) escrito em [TypeScript](https://www.typescriptlang.org/).
 
 **[ISBN 978-65-00-84828-1](https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)**
 
 Este é um aplicativo de demonstração do [pacote npm](https://pt.wikipedia.org/wiki/Npm_(software)) [MathJSLab](https://www.npmjs.com/package/mathjslab). Veja esta demonstração na página do projeto em [mathjslab.com](https://mathjslab.com/). O repositório está na [Organização MathJSLab](https://github.com/MathJSLab) no [GitHub](https://github.com/).
 
 Obtenha uma versão reduzida através de [CDN](https://pt.wikipedia.org/wiki/Rede_de_fornecimento_de_conte%C3%BAdo).
-Para incorporar a [demonstração do MathJSLab](https://github.com/MathJSLab/mathjslab-demo) em uma página da web usando [CDN jsDelivr](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/)
+Para incorporar a [demonstração do MathJSLab](https://github.com/MathJSLab/mathjslab-app) em uma página da web usando [CDN jsDelivr](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
 copie o seguinte código [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML):
 
 ```html
 <head>
     ...
-    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/mathjslab-demo.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/mathjslab-app.min.js"></script>
     ...
 </head>
 
@@ -43,19 +43,19 @@ Para que os exemplos e o comando `help` estejam disponíveis, é necessário
 copiar os diretórios `example` e `help` para a raiz da página web.
 
 Outra opção é configurar para usar diretamente do
-[repositório](https://github.com/MathJSLab/mathjslab-demo) via
-[CDN jsDelivr](https://www.jsdelivr.com/) também, antes de carregar o script `mathjslab-demo.min.js` usando:
+[repositório](https://github.com/MathJSLab/mathjslab-app) via
+[CDN jsDelivr](https://www.jsdelivr.com/) também, antes de carregar o script `mathjslab-app.min.js` usando:
 
 ```html
 <head>
     ...
     <script>
         MathJSLabCalc = {
-            exampleBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/",
-            helpBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/",
+            exampleBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/",
+            helpBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/",
         }
     </script>
-    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/mathjslab-demo.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/mathjslab-app.min.js"></script>
     ...
 </head>
 
@@ -78,7 +78,7 @@ Esta aplicação de demontração também usa:
 ## Contribuindo
 
 Para contribuir com este projeto, consulte nossas
-[diretrizes de contribuição](https://github.com/MathJSLab/mathjslab-demo/blob/main/CONTRIBUTING.md).
+[diretrizes de contribuição](https://github.com/MathJSLab/mathjslab-app/blob/main/CONTRIBUTING.md).
 
 Participe do bate-papo da comunidade:
 
@@ -88,29 +88,29 @@ Participe do bate-papo da comunidade:
 
 Os seguintes scripts de compilação são definidos:
 
-1. **Antes de compilar** `mathjslab-demo`, para **iniciar** a área de trabalho do projeto, execute:
+1. **Antes de compilar** `mathjslab-app`, para **iniciar** a área de trabalho do projeto, execute:
 ```bash
 npm run update
 ```
 Isso atualizará as dependências e instalará todas elas, preparando todos os
 recursos necessários para compilar o projeto.
 
-2. Para **formatar** e aplicar a **ferramenta de lint** no código do `mathjslab-demo`, execute:
+2. Para **formatar** e aplicar a **ferramenta de lint** no código do `mathjslab-app`, execute:
 ```bash
 npm run format:lint
 ```
 
-3. **Compile** o `mathjslab-demo` no **modo de desenvolvimento** usando:
+3. **Compile** o `mathjslab-app` no **modo de desenvolvimento** usando:
 ```bash
 npm run build:dev
 ```
 
-4. **Compile** o `mathjslab-demo` no **modo de depuração** usando:
+4. **Compile** o `mathjslab-app` no **modo de depuração** usando:
 ```bash
 npm run build:debug
 ```
 
-5. **Compile** o `mathjslab-demo` no **modo de produção** usando:
+5. **Compile** o `mathjslab-app` no **modo de produção** usando:
 ```bash
 npm run build:prod
 ```

@@ -1,10 +1,10 @@
 {
-  "name": "mathjslab-demo",
-  "version": "1.4.0",
+  "name": "mathjslab-app",
+  "version": "1.5.0",
   "description": "MathJSLab - An interpreter with language syntax like MATLAB®/Octave, ISBN 978-65-00-82338-7. A demo application from the mathjslab npm package, ISBN 978-65-00-84828-1.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MathJSLab/mathjslab-demo.git"
+    "url": "git+https://github.com/MathJSLab/mathjslab-app.git"
   },
   "keywords": [
     "MathJSLab",
@@ -24,14 +24,17 @@
   "author": "Sergio Lindau <sergiolindau@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MathJSLab/mathjslab-demo/issues"
+    "url": "https://github.com/MathJSLab/mathjslab-app/issues"
   },
   "homepage": "https://mathjslab.com/",
   "scripts": {
     "clean:package-lock": "node script/clean-package-lock.cjs",
-    "clean": "rimraf dist src/first-example.json src/build-configuration.json mathjslab-demo.min.js",
+    "clean:build": "rimraf dist src/first-example.json src/build-configuration.json mathjslab-app.min.js",
+    "clean:android": "rimraf android",
+    "clean:build:android": "npm run clean:build && npm run clean:android",
+    "clean": "npm run clean:build:android",
     "clean:all": "npm run clean && npm run clean:package-lock",
-    "update": "npx ncu -u && npm install",
+    "update": "npx npm-check-updates -u && npm install",
     "git:add": "git add .",
     "git:commit": "git commit -m \"Initial Commit\"",
     "git:push": "git push",
@@ -51,6 +54,11 @@
     "build:prod": "tsx --require tsconfig-paths/register ./node_modules/webpack/bin/webpack --mode production",
     "postbuild:prod": "npm run save-bundle",
     "build": "npm run build:prod",
+    "add:android": "npx cap add android",
+    "sync:android": "npx cap sync android",
+    "build:add:android": "npm run build:prod && npm run add:android",
+    "open:android": "npx cap open android",
+    "build:all": "npm run clean && npm run update && npm run build:prod && npm run add:android",
     "do:all": "npm run clean && npm run update && npm run format:lint && npm run build:prod && npm run git:add:commit:push"
   },
   "browser": {
@@ -59,13 +67,14 @@
     "path": false
   },
   "devDependencies": {
+    "@capacitor/cli": "^6.1.2",
     "@types/dotenv-webpack": "^7.0.7",
-    "@types/node": "^22.7.4",
+    "@types/node": "^22.7.5",
     "@types/plotly.js": "^2.33.4",
     "@types/webpack": "^5.28.5",
     "@types/wicg-file-system-access": "^2023.10.5",
-    "@typescript-eslint/eslint-plugin": "^8.8.0",
-    "@typescript-eslint/parser": "^8.8.0",
+    "@typescript-eslint/eslint-plugin": "^8.8.1",
+    "@typescript-eslint/parser": "^8.8.1",
     "ajv": "^8.17.1",
     "css-loader": "^7.1.2",
     "dotenv": "^16.4.5",
@@ -84,12 +93,15 @@
     "ts-loader": "^9.5.1",
     "tsconfig-paths": "^4.2.0",
     "tsx": "^4.19.1",
-    "typescript": "^5.6.2",
+    "typescript": "^5.6.3",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
-    "mathjslab": "^1.6.1"
+    "@capacitor/android": "^6.1.2",
+    "@capacitor/core": "^6.1.2",
+    "mathjslab": "^1.6.1",
+    "mathjslab-app": "file:"
   }
 }

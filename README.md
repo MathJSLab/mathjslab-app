@@ -4,16 +4,16 @@
 
 # [MathJSLab](https://mathjslab.com/) - [mathjslab.com](https://mathjslab.com/)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/b5d64f05-80e8-4cc6-b428-923447f43621/deploy-status)](https://app.netlify.com/sites/mathjslab/deploys)
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/MathJSLab/mathjslab-demo/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/MathJSLab/mathjslab-demo/tree/main)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6cec5ea5-c2dd-4b90-a3c1-ff95c8d1f521/deploy-status)](https://app.netlify.com/sites/mathjslab-app/deploys)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/MathJSLab/mathjslab-app/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/MathJSLab/mathjslab-app/tree/main)
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fmathjslab.com%2F)](https://mathjslab.com/)
-[![GitHub Created At](https://img.shields.io/github/created-at/MathJSLab/mathjslab-demo)](https://github.com/MathJSLab/mathjslab-demo)
-[![MIT License](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/MathJSLab/mathjslab-demo/blob/main/LICENSE)
+[![GitHub Created At](https://img.shields.io/github/created-at/MathJSLab/mathjslab-app)](https://github.com/MathJSLab/mathjslab-app)
+[![MIT License](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/MathJSLab/mathjslab-app/blob/main/LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.8396263.svg)](https://doi.org/10.5281/zenodo.8396263)
 [![ISBN](https://img.shields.io/badge/ISBN-978--65--00--84828--1-green?style=flat&link=https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)](https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)
-[![jsDelivr hits](https://img.shields.io/jsdelivr/gh/hy/MathJSLab/mathjslab-demo)](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/)
+[![jsDelivr hits](https://img.shields.io/jsdelivr/gh/hy/MathJSLab/mathjslab-app)](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
 
-> An [interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing)) with language syntax like [MATLAB&reg;](https://www.mathworks.com/)/[Octave](https://www.gnu.org/software/octave/) written in [Typescript](https://www.typescriptlang.org/).
+> An [interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing)) with language syntax like [MATLAB&reg;](https://www.mathworks.com/)/[Octave](https://www.gnu.org/software/octave/) written in [TypeScript](https://www.typescriptlang.org/).
 
 **[ISBN 978-65-00-84828-1](https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)**
 
@@ -22,13 +22,13 @@ This is a demo application of [MathJSLab](https://www.npmjs.com/package/mathjsla
 [GitHub](https://github.com/).
 
 Get a minified version from a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network).
-To embed [MathJSLab Demo](https://github.com/MathJSLab/mathjslab-demo) in a webpage using [jsDelivr CDN](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/)
+To embed [MathJSLab Demo](https://github.com/MathJSLab/mathjslab-app) in a webpage using [jsDelivr CDN](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
 copy the following [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) code:
 
 ```html
 <head>
     ...
-    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/mathjslab-demo.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/mathjslab-app.min.js"></script>
     ...
 </head>
 
@@ -45,8 +45,8 @@ For the examples and the `help` command to be available, it is necessary to
 copy the `example` and `help` directories to the root of the web page.
 
 Another option is to configure to use assets directly from
-[repository](https://github.com/MathJSLab/mathjslab-demo) via
-[jsDelivr CDN](https://www.jsdelivr.com/) too before load `mathjslab-demo.min.js`
+[repository](https://github.com/MathJSLab/mathjslab-app) via
+[jsDelivr CDN](https://www.jsdelivr.com/) too before load `mathjslab-app.min.js`
 script using:
 
 ```html
@@ -54,11 +54,11 @@ script using:
     ...
     <script>
         MathJSLabCalc = {
-            exampleBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/",
-            helpBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/",
+            exampleBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/",
+            helpBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/",
         }
     </script>
-    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-demo/mathjslab-demo.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/mathjslab-app.min.js"></script>
     ...
 </head>
 
@@ -81,7 +81,7 @@ This demo also uses:
 ## Contributing
 
 To contribute to this project see our
-[contributing guidelines](https://github.com/MathJSLab/mathjslab-demo/blob/main/CONTRIBUTING.md).
+[contributing guidelines](https://github.com/MathJSLab/mathjslab-app/blob/main/CONTRIBUTING.md).
 
 Join the community chat:
 
@@ -91,29 +91,29 @@ Join the community chat:
 
 The following build scripts are defined:
 
-1. **Before building** `mathjslab-demo`, to **initialize** the project workspace, run:
+1. **Before building** `mathjslab-app`, to **initialize** the project workspace, run:
 ```bash
 npm run update
 ```
 This will update the dependencies and install all of them, preparing any
 resources needed to build the project.
 
-2. **Format** and **lint** `mathjslab-demo` code:
+2. **Format** and **lint** `mathjslab-app` code:
 ```bash
 npm run format:lint
 ```
 
-3. Build `mathjslab-demo` in **development mode**:
+3. Build `mathjslab-app` in **development mode**:
 ```bash
 npm run build:dev
 ```
 
-4. Build `mathjslab-demo` in **debug mode**:
+4. Build `mathjslab-app` in **debug mode**:
 ```bash
 npm run build:debug
 ```
 
-5. Build `mathjslab-demo` in **production mode**:
+5. Build `mathjslab-app` in **production mode**:
 ```bash
 npm run build:prod
 ```

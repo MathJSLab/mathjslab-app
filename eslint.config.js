@@ -24,7 +24,7 @@ module.exports = [
             '@typescript-eslint': tsPlugin,
             prettier: prettierPlugin,
         },
-        ignores: ['eslint.config.js', 'webpack.config.ts', 'dist/**'],
+        ignores: ['eslint.config.js', 'webpack.config.ts', 'capacitor.config.ts', 'dist/**'],
         rules: {
             ...tsPlugin.configs['eslint-recommended'].rules,
             ...tsPlugin.configs['recommended'].rules,
