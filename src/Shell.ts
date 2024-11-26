@@ -96,6 +96,7 @@ export class Shell {
             shell.evalInput = options.evalInput;
         } else {
             shell.evalInput = function (input: HTMLTextAreaElement): [string[], string[]] {
+                /* eslint-disable-next-line no-console */
                 console.log(`evalInput(${input.value})`);
                 return [[], input.value.split(/\r?\n/)];
             };
@@ -104,6 +105,7 @@ export class Shell {
             shell.evalPrompt = options.evalPrompt;
         } else {
             shell.evalPrompt = function (div: HTMLDivElement, box: HTMLDivElement, input: HTMLTextAreaElement, output: HTMLDivElement) {
+                /* eslint-disable-next-line no-console */
                 console.log(`evalPrompt(${input.value})`);
                 output.innerHTML = `evalPrompt(${input.value})`;
             };

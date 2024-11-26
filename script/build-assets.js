@@ -12,8 +12,7 @@ try {
     if (fs.existsSync(directory)) {
         fs.rmSync(directory, { recursive: true });
         fs.mkdirSync(directory);
-    }
-    else {
+    } else {
         fs.mkdirSync(directory);
     }
     // Copy manifest.json
@@ -42,7 +41,10 @@ try {
     const example = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'example', 'example.json')));
     let first = true;
     for (let name in example) {
-        fs.copyFileSync(path.resolve(__dirname, '..', 'example', example[name].file), path.resolve(__dirname, '..', 'dist', 'example', example[name].file));
+        fs.copyFileSync(
+            path.resolve(__dirname, '..', 'example', example[name].file),
+            path.resolve(__dirname, '..', 'dist', 'example', example[name].file),
+        );
         if (first) {
             const firstExample = {
                 name,
@@ -68,7 +70,7 @@ try {
         const files = fs.readdirSync(path.resolve(__dirname, '..', 'help', language));
         files.forEach((file) => {
             fs.copyFileSync(path.resolve(__dirname, '..', 'help', language, file), path.resolve(__dirname, '..', 'dist', 'help', language, file));
-        })
+        });
     });
     // Copy README.md, LEIAME.MD and LEAME.md to dist/
     fs.copyFileSync(path.resolve(__dirname, '..', 'README.md'), path.resolve(__dirname, '..', 'dist', 'README.md'));

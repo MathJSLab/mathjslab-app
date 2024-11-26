@@ -1,0 +1,80 @@
+{
+  "files": [
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/clean-package-lock.cjs",
+      "dest": "script/clean-package-lock.cjs"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/favicon.ico",
+      "dest": "images/favicon.ico"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/favicon-dark.ico",
+      "dest": "images/favicon-dark.ico"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-16.png",
+      "dest": "images/mathjslab-logo-16.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-32.png",
+      "dest": "images/mathjslab-logo-32.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-48.png",
+      "dest": "images/mathjslab-logo-48.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-64.png",
+      "dest": "images/mathjslab-logo-64.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-72.png",
+      "dest": "images/mathjslab-logo-72.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-96.png",
+      "dest": "images/mathjslab-logo-96.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-128.png",
+      "dest": "images/mathjslab-logo-128.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-144.png",
+      "dest": "images/mathjslab-logo-144.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-152.png",
+      "dest": "images/mathjslab-logo-152.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-192.png",
+      "dest": "images/mathjslab-logo-192.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-256.png",
+      "dest": "images/mathjslab-logo-256.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-384.png",
+      "dest": "images/mathjslab-logo-384.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/mathjslab-logo-512.png",
+      "dest": "images/mathjslab-logo-512.png"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/mathjslab-logo.svg",
+      "dest": "images/mathjslab-logo.svg"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/mathjslab-logo-light.svg",
+      "dest": "images/mathjslab-logo-light.svg"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/mathjslab-logo-dark.svg",
+      "dest": "images/mathjslab-logo-dark.svg"
+    }
+  ]
+}

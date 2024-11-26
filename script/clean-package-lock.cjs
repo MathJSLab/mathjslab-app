@@ -5,24 +5,27 @@
 const fs = require('node:fs');
 const path = require('node:path');
 
-console.log(`Running ${__filename} ...`);
-console.warn('Removing package-lock.json file and node_modules directory ...');
+global.console.log(`Running ${__filename} ...`);
+global.console.warn('Removing package-lock.json file and node_modules directory ...');
+const root = process.argv.length > 2 ? path.resolve(process.argv[2]) : process.cwd();
+global.console.warn('Project root:', root);
+const dirPath = path.join(root, 'node_modules');
 try {
-    const dirPath = path.resolve(__dirname, '..', 'node_modules');
+    fs.accessSync(dirPath, fs.constants.W_OK);
     fs.rmSync(dirPath, { recursive: true, force: true });
-    console.log(`${dirPath} removed.`);
+    global.console.log(`${dirPath} removed.`);
 } catch (err) {
-    console.error(`Error removing ${dirPath} : ${err.message}`);
-    console.error('ignoring...');
+    global.console.error(`Error removing ${dirPath} : ${err.message}`);
+    global.console.error('ignoring...');
 }
-const filePath = path.resolve(__dirname, '..', 'package-lock.json');
+const filePath = path.join(root, 'package-lock.json');
 try {
     fs.accessSync(filePath, fs.constants.W_OK);
     fs.unlinkSync(filePath);
-    console.log(`${filePath} removed.`);
+    global.console.log(`${filePath} removed.`);
 } catch (err) {
-    console.error(`Error removing ${filePath} : ${err.message}`);
-    console.error('ignoring...');
+    global.console.error(`Error removing ${filePath} : ${err.message}`);
+    global.console.error('ignoring...');
 }
-console.warn('Removing package-lock.json file and node_modules directory done.');
-console.log(`Running ${__filename} done.\n\n`);
+global.console.warn('Removing package-lock.json file and node_modules directory done.');
+global.console.log(`Running ${__filename} done.\r\n`);

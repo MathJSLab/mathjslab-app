@@ -7,11 +7,11 @@ const imprt = require('eslint-plugin-import');
 
 module.exports = [
     {
-        files: ["**/*.ts"],
+        files: ['**/*.ts'],
         languageOptions: {
             parser: tsParser,
             parserOptions: {
-                project: 'tsconfig.json',
+                project: 'tsconfig.build.json',
                 tsconfigRootDir: __dirname,
                 sourceType: 'module',
                 globals: {
@@ -24,7 +24,7 @@ module.exports = [
             '@typescript-eslint': tsPlugin,
             prettier: prettierPlugin,
         },
-        ignores: ['eslint.config.js', 'webpack.config.ts', 'capacitor.config.ts', 'dist/**'],
+        ignores: ['eslint.config.cjs', 'webpack.config.ts', 'capacitor.config.ts', 'dist/**'],
         rules: {
             ...tsPlugin.configs['eslint-recommended'].rules,
             ...tsPlugin.configs['recommended'].rules,
@@ -41,5 +41,5 @@ module.exports = [
             ...prettierPlugin.configs.recommended.rules,
             ...eslintConfigPrettier.rules,
         },
-    }
+    },
 ];

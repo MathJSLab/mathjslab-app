@@ -2,10 +2,22 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.5.1
+- The MathJSLab logo has been modified. It is built on the MathJSLab
+organization repository, and the 'mathjslab-app' application downloads the
+logo-related files (and other common files too) from the organization
+repository using the `download-files.cjs` script, which also provides a means
+to clean up the downloaded files. The download of these files is triggered by
+the script in the `package.json` file called "download-resources".
+
 ## 1.5.0
 - The application has been renamed to 'mathjslab-app', with the repository
 also being renamed. All references to the name have been updated.
-- The '@capacitor/core' and '@capacitor/android' packages has been installed as regular dependencies and '@capacitor/cli' package has been installed as development dependency. Build scripts for android apk added in 'package.json' file. The generated directory 'android' by apk build scripts added to exclusion in '.gitignore' file.
+- The '@capacitor/core' and '@capacitor/android' packages has been installed
+as regular dependencies and '@capacitor/cli' package has been installed as
+development dependency. Build scripts for android apk added in 'package.json'
+file. The generated directory 'android' by apk build scripts added to
+exclusion in '.gitignore' file.
 
 ## 1.4.0
 - Dependencies update.

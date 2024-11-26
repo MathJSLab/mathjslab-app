@@ -2,20 +2,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
   <style>
 .fillSymbol {
-  fill: hsl(120, 52%, 88%);
+  fill: hsl(120, 52%, 16%);
 }
 .strokePanel {
   stroke: green;
 }
 .fillPanel {
-  fill: hsl(120, 52%, 16%);
+  fill: hsl(120, 52%, 88%);
 }
 .strokeTrace {
   fill: none;
-  stroke: hsl(0, 0%, 92%);
+  stroke: hsl(0, 0%, 24%);
 }
 .fillTrace {
-  fill: hsl(0, 0%, 92%);
+  fill: hsl(0, 0%, 24%);
 }
   </style>
   <circle style="fill:none;stroke:none;stroke-opacity:1" cx="512" cy="512" r="512"/>

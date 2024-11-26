@@ -8,12 +8,12 @@ const path = require('node:path');
 
 console.log(`Running ${__filename} ...`);
 console.warn('Setting build configuration...');
-const package = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'package.json')).toString());
+const packageJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'package.json')).toString());
 const debug = Boolean(process.env.DEBUG ?? false);
 const buildConfiguration = {
-    buildMessage: `MathJSLab Demo v${package.version} built at ${new Date().toUTCString()}.${debug ? ` Debug flag enable.` : ``} Homepage: ${package.homepage}, License: ${package.license}`,
+    buildMessage: `MathJSLab Demo v${packageJson.version} built at ${new Date().toUTCString()}.${debug ? ` Debug flag enable.` : ``} Homepage: ${packageJson.homepage}, License: ${packageJson.license}`,
     debug,
-}
+};
 fs.writeFileSync(path.resolve(__dirname, '..', 'src', 'build-configuration.json'), JSON.stringify(buildConfiguration, null, 2));
 console.warn('Setting build configuration done.');
 console.log(`Running ${__filename} done.`);
