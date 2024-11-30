@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+<svg xmlns="http://www.w3.org/2000/svg" width="630" height="630" viewBox="0 0 630 630">
   <style>
 .fillSymbol {
   fill: hsl(120, 52%, 16%);
@@ -18,12 +18,12 @@
   fill: hsl(0, 0%, 24%);
 }
   </style>
-  <circle style="fill:none;stroke:none;stroke-opacity:1" cx="512" cy="512" r="512"/>
-  <circle class="strokePanel fillPanel" style="stroke-width:21px" cx="512" cy="512" r="463"/>
-  <text class="fillSymbol" style="font-size:614px;font-family:Symbol" x="346" y="382">p</text>
-  <text class="fillSymbol" style="font-size:135px;font-family:'Times New Roman';font-style:italic" x="335" y="702">a+bx<tspan style="font-size:65%;baseline-shift:super">2</tspan>+cx<tspan style="font-size:65%;baseline-shift:super">3</tspan></text>
-  <path class="strokeTrace" style="stroke-width:21px;stroke-linecap:round" d="M 195,146 V 792 H 910"/>
-  <path class="strokeTrace" style="stroke-width:21px" d="M 200,707 H 283 V 792"/>
-  <circle class="fillTrace" style="stroke:none" cx="241" cy="751" r="7"/>
-  <path class="strokeTrace" style="stroke-width:21px;stroke-linecap:round" d="M 202,707 C 236,634 330,432 416,431 C 502,429 546,536 616,536 C 686,536 847,306 887,249"/>
+  <circle style="fill:none;stroke:none;stroke-opacity:1" cx="315" cy="315" r="315"/>
+  <circle class="strokePanel fillPanel" style="stroke-width:14px" cx="315" cy="315" r="288"/>
+  <text class="fillSymbol" style="font-size:378px;font-family:Symbol" x="210" y="252">p</text>
+  <text class="fillSymbol" style="font-size:79px;font-family:'Times New Roman';font-style:italic" x="198" y="432">ax+bx<tspan style="font-size:65%;baseline-shift:super">2</tspan>+cx<tspan style="font-size:65%;baseline-shift:super">3</tspan></text>
+  <path class="strokeTrace" style="stroke-width:14px;stroke-linecap:round" d="M 126,90 V 490 H 560"/>
+  <path class="strokeTrace" style="stroke-width:14px" d="M 126,441 H 176 V 490"/>
+  <circle class="fillTrace" style="stroke:none" cx="152" cy="464" r="4.1"/>
+  <path class="strokeTrace" style="stroke-width:14px;stroke-linecap:round" d="M 126,441 C 140,390 210,273 252,273 315,273 336,330 378,330 420,330 504,210 546,154"/>
 </svg>
