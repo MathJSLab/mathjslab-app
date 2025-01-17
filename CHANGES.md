@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.5.2
+- The `collapsible-content-panel` **Web Component** has been created an used in
+the examples and readme panels.
+- The
+
 ## 1.5.1
 - The MathJSLab logo has been modified. It is built on the MathJSLab
 organization repository, and the 'mathjslab-app' application downloads the
@@ -9,6 +14,30 @@ logo-related files (and other common files too) from the organization
 repository using the `download-files.cjs` script, which also provides a means
 to clean up the downloaded files. The download of these files is triggered by
 the script in the `package.json` file called "download-resources".
+- Some changes to the `package.json` file scripts, including scripts to
+install and remove dependencies related to the android apk build.
+- Various packages are installed as project development dependencies, among
+them the packages necessary to build Nunjucks templates such as Eleventy, EJS
+and SASS templates. The `data` directory was created to support the building
+of Nunjucks templates using Eleventy (with `script/helper/EleventyUtil.mjs`).
+- The `src/build-configuration.json` and `sitemap.xml` files is now generated
+by Nunjucks templates. Previous scripts used to generate this files has been
+removed.
+- The `src/component/` directory has been created to contain reused components
+using the **Web Components** suite. The `src/style/` directory has been
+created to contain CSS stylesheets, SASS templates and other related files. It
+has been populated with a subdirectory structure and some `.scss` template
+files.
+- The `src/types/` directory has been created with `src/types/scss.d.ts` file
+to tells TypeScript that any file with the `.scss` extension can be imported
+as a module that exports a string. The `tsconfig.json` file has been modified
+to include `paths` and `typeRoots` fields pointing to this type definitions
+directory.
+- The `script/tsconfig.json` file has been created with TypeScript
+configurations for the build scripts in the `script` directory. The
+`eslint.config.cjs` file has been enhanced to reflect these updates.
+Additional rule sets have been added. Rules for all build-time code are now
+more permissive. A rule has been added to lint JavaScript files too.
 
 ## 1.5.0
 - The application has been renamed to 'mathjslab-app', with the repository

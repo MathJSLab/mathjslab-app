@@ -1,0 +1,73 @@
+// @use '../../styles/abstract/variables';
+// @use '../../styles/abstract/functions';
+// @use '../../styles/abstract/mixins';
+
+.wrap-collapsible {
+    box-shadow: 0px 10px 14px -7px var(--color-panel-box-shadow);
+    border-radius: 1rem;
+}
+
+input.toggle {
+    display: none;
+}
+
+.lbl-toggle {
+    display: block;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1rem;
+    color: var(--color-a-text);
+    background: var(--green-backgroung);
+    cursor: pointer;
+    border: 2px solid var(--green-border);
+    border-radius: 1rem;
+    transition: all 0.25s ease-out;
+}
+
+.lbl-toggle:hover {
+    color: var(--color-a-text-hover);
+}
+
+.lbl-toggle::before {
+    content: ' ';
+    display: inline-block;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentColor;
+    vertical-align: middle;
+    margin-right: 0.7rem;
+    transform: translateY(-2px);
+    transition: transform 0.2s ease-out;
+}
+
+.collapsible-content .content-inner {
+    background: var(--color-background);
+    border-left: 2px solid var(--green-border);
+    border-right: 2px solid var(--green-border);
+    border-bottom: 2px solid var(--green-border);
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    padding: 0.5rem;
+}
+
+.collapsible-content {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.25s ease-in-out;
+}
+
+.toggle:checked + .lbl-toggle + .collapsible-content {
+    max-height: fit-content;
+}
+
+.toggle:checked + .lbl-toggle::before {
+    transform: rotate(90deg) translateX(-3px);
+}
+
+.toggle:checked + .lbl-toggle {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom: 0;
+}

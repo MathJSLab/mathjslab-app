@@ -1,0 +1,18 @@
+// Spacing scale
+$base-spacing-unit: 1rem;
+$base-font-size-base: 15px;
+$spacing-unit: 8px;
+
+// Border radius
+$border-radius-small: 4px;
+$border-radius-large: 8px;
+
+// Font sizes
+$font-size-small: 0.875rem;
+$font-size-base: 1rem;
+$font-size-large: 1.25rem;
+
+:root {
+    --spacing-unit: #{$base-spacing-unit};
+    --font-size-base: #{$base-font-size-base};
+}

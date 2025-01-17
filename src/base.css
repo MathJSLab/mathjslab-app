@@ -1,5 +1,4 @@
 :root {
-
     --mathjslab-c-white: hsl(0, 0%, 100%);
     --mathjslab-c-white-soft: hsl(0, 0%, 96%);
     --mathjslab-c-white-mute: hsl(0, 0%, 93%);
@@ -87,12 +86,10 @@
     --mathjslab-c-divider-blue-dark-2: blue;
     --mathjslab-c-divider-yellow-dark-1: yellow;
     --mathjslab-c-divider-yellow-dark-2: yellow;
-
 }
 
 /* semantic color variables */
 :root {
-
     --color-background: var(--mathjslab-c-white);
     --color-background-soft: var(--mathjslab-c-white-soft);
     --color-background-mute: var(--mathjslab-c-white-mute);
@@ -139,13 +136,10 @@
     --yellow-backgroung: var(--mathjslab-c-backgroung-yellow-light);
     --yellow-border: var(--mathjslab-c-divider-yellow-light-2);
     --yellow-border-hover: var(--mathjslab-c-divider-yellow-light-1);
-
 }
 
 @media (prefers-color-scheme: dark) {
-
     :root {
-
         --color-background: var(--mathjslab-c-black);
         --color-background-soft: var(--mathjslab-c-black-soft);
         --color-background-mute: var(--mathjslab-c-black-mute);
@@ -191,9 +185,7 @@
         --yellow-backgroung: var(--mathjslab-c-backgroung-yellow-dark);
         --yellow-border: var(--mathjslab-c-divider-yellow-dark-2);
         --yellow-border-hover: var(--mathjslab-c-divider-yellow-dark-1);
-
     }
-
 }
 
 *,

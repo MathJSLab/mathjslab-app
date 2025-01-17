@@ -1,4 +1,8 @@
 {
   "extends": "./tsconfig.json",
-  "exclude": ["node_modules", "eslint.config.js", "webpack.config.ts", "capacitor.config.ts", "dist", "doc", "example", "help", "images", "m-file", "script", "mathjs-calculator.js"]
+  "compilerOptions": {
+    "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
+    "outDir": "./dist" /* Specify an output folder for all emitted files. */
+  },
+  "exclude": ["node_modules", "webpack.config.ts", "capacitor.config.ts", "data", "dist", "doc", "example", "help", "images", "m-file", "script"]
 }

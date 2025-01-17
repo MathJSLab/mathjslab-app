@@ -1,12 +1,41 @@
 {
+  "dataset": "mathjslab-app",
   "files": [
     {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/resource/mathjslab-app/builddata.json",
+      "dest": "data/builddata.json"
+    },
+    {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/clean-package-lock.cjs",
-      "dest": "script/clean-package-lock.cjs"
+      "dest": "script/helper/clean-package-lock.cjs"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/EleventyUtil.mjs",
+      "dest": "script/helper/EleventyUtil.mjs"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/readFileBom.ts",
+      "dest": "script/helper/readFileBom.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/readFileBomSync.ts",
+      "dest": "script/helper/readFileBomSync.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/mkDirIfNotExist.ts",
+      "dest": "script/helper/mkDirIfNotExist.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/toIco.ts",
+      "dest": "script/helper/toIco.ts"
     },
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/favicon.ico",
       "dest": "images/favicon.ico"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/data/environment.js",
+      "dest": "data/environment.js"
     },
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/favicon-dark.ico",

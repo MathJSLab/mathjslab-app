@@ -1,0 +1,16 @@
+@use '../base/base';
+
+// Variables for light mode
+$color-background-light: hsl(0, 0%, 100%);
+$color-text-light: hsl(0, 0%, 10%);
+
+// Variables for dark mode
+$color-background-dark: hsl(0, 0%, 10%);
+$color-text-dark: hsl(0, 0%, 90%);
+
+// Semantic variables
+$color-background: $color-background-light;
+$color-text: $color-text-light;
+
+// Transitions
+$transition-default: 0.3s ease;

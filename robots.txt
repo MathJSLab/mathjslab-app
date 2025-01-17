@@ -10,4 +10,4 @@ Allow: /*.jpg$
 Allow: /*.png$
 Allow: /*.gif$
 Allow: /*.svg$
-Sitemap: https://mathjslab.com/sitemap.xml
+Sitemap: https://app.mathjslab.com/sitemap.xml

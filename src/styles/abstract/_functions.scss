@@ -1,0 +1,40 @@
+// _functions.scss
+
+/// Converts a pixel value to rem units based on a base font size.
+/// @param {Number} $px - The pixel value to convert.
+/// @param {Number} $base - The base font size in pixels (default: 16px).
+/// @return {Number} - The equivalent rem value.
+@function px-to-rem($px, $base: 16px) {
+    @return $px / $base * 1rem;
+}
+
+/// Darkens a color by a specified percentage.
+/// @param {Color} $color - The color to darken.
+/// @param {Number} $percentage - The percentage to darken (0% to 100%).
+/// @return {Color} - The darkened color.
+@function darken-color($color, $percentage) {
+    @return darken($color, $percentage);
+}
+
+/// Lightens a color by a specified percentage.
+/// @param {Color} $color - The color to lighten.
+/// @param {Number} $percentage - The percentage to lighten (0% to 100%).
+/// @return {Color} - The lightened color.
+@function lighten-color($color, $percentage) {
+    @return lighten($color, $percentage);
+}
+
+/// Generates a consistent spacing value based on a scale factor.
+/// @param {Number} $factor - The scaling factor (e.g., 1 for base, 2 for double).
+/// @param {Number} $base - The base spacing unit (default: 8px).
+/// @return {Number} - The scaled spacing value.
+@function spacing($factor, $base: 8px) {
+    @return $factor * $base;
+}
+
+/// Combines multiple shadow values into a single property.
+/// @param {List} $shadows - A list of shadow values.
+/// @return {String} - The combined shadow value.
+// @function box-shadow(...$shadows) {
+//     @return join($shadows, ', ');
+// }

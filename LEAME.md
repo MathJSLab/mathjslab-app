@@ -88,10 +88,15 @@ Se definen los siguientes scripts de compilación:
 
 1. **Antes de compilar** `mathjslab-app`, para **iniciar** el área de trabajo del proyecto, ejecute:
 ```bash
-npm run update
+npm run initialize
 ```
 Esto actualizará las dependencias y las instalará todas, preparando todo
 recursos necesarios para compilar el proyecto.
+
+Para actualizar las dependencias nuevamente ejecute:
+```bash
+npm run update
+```
 
 2. Para **formatear** y aplicar la **herramienta lint** al código `mathjslab-app`, ejecute:
 ```bash
@@ -123,7 +128,7 @@ npm run clean
 ```bash
 npm run clean:all
 ```
-Después de ejecutar este comando, deberá configurar el área de trabajo ejecutando `npm run update` nuevamente.
+Después de ejecutar este comando, deberá configurar el área de trabajo ejecutando `npm run initialize` nuevamente.
 
 ## Comunidad
 

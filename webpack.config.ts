@@ -1,14 +1,19 @@
 /**
  * webpack.config.ts: Webpack configuration factory.
  */
+
+import fs from 'node:fs';
 import path from 'node:path';
 import dotenv from 'dotenv';
 import dotenvExpand from 'dotenv-expand';
+import ejs from 'ejs';
 import webpack from 'webpack';
 import 'webpack-dev-server';
-import DotenvWebpackPlugin from 'dotenv-webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import DotenvWebpackPlugin from 'dotenv-webpack';
+
+import component from './src/components/component.include.json';
 
 export default (env: any, argv: any): webpack.Configuration => {
     const buildEnvPath = path.join(__dirname, 'build.env');
@@ -37,6 +42,7 @@ export default (env: any, argv: any): webpack.Configuration => {
                     exclude: [
                         'node_modules',
                         process.env.MATHJSLAB_APP_WEBPACK_OUTPUT_PATH!,
+                        'data',
                         'doc',
                         'example',
                         'help',
@@ -46,9 +52,58 @@ export default (env: any, argv: any): webpack.Configuration => {
                     ].map((dir) => path.join(__dirname, dir)),
                 },
                 {
-                    test: /\.css$/i,
-                    use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
+                    test: /\.(c|sa|sc)ss$/i,
+                    exclude: [/node_modules/, /\.styles.scss$/],
+                    use: [
+                        isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: {
+                                    auto: true, // Enable CSS modules for files with `.module.scss`
+                                    localIdentName: isProduction ? '[hash:base64]' : '[path][name]__[local]',
+                                },
+                            },
+                        },
+                        {
+                            loader: 'sass-loader',
+                        },
+                    ],
                 },
+                {
+                    test: /\.styles.scss$/,
+                    exclude: /node_modules/,
+                    use: [
+                        'sass-to-string',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                sassOptions: {
+                                    outputStyle: 'compressed',
+                                },
+                            },
+                        },
+                    ],
+                },
+                // {
+                //     test: /\.s[ac]ss$/i,
+                //     exclude: [/node_modules/],
+                //     use: [
+                //         isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                //         {
+                //             loader: 'css-loader',
+                //             options: {
+                //                 modules: {
+                //                     auto: true,
+                //                     localIdentName: isProduction
+                //                         ? '[hash:base64]'
+                //                         : '[path][name]__[local]',
+                //                 },
+                //             },
+                //         },
+                //         'sass-loader'
+                //     ],
+                // },
             ],
         },
         resolve: {
@@ -58,7 +113,7 @@ export default (env: any, argv: any): webpack.Configuration => {
             filename: process.env.MATHJSLAB_APP_WEBPACK_OUTPUT_FILENAME!,
             path: path.join(__dirname, process.env.MATHJSLAB_APP_WEBPACK_OUTPUT_PATH!),
             environment: {
-                module: true,
+                // module: true, // Enable CSS modules for files with `.module.scss`
                 dynamicImport: true,
             },
         },
@@ -69,18 +124,38 @@ export default (env: any, argv: any): webpack.Configuration => {
             }),
             new HtmlWebpackPlugin({
                 title: process.env.MATHJSLAB_APP_TITLE,
-                template: path.join(__dirname, 'src', 'main.html'),
+                // template: path.join(__dirname, 'src', 'main.html'),
+                templateContent: (_templateParameters: { [option: string]: any }): string => {
+                    let baseHtml = fs.readFileSync(path.join(__dirname, 'src', 'main.html'), 'utf-8');
+                    component.include.forEach((component) => {
+                        const componentTemplate = fs.readFileSync(
+                            path.join(__dirname, 'src', 'components', component, component + '.template.html'),
+                            'utf-8',
+                        );
+                        baseHtml = baseHtml.replace('</body>', `\n${componentTemplate}\n</body>`);
+                    });
+                    return ejs.render(baseHtml, {
+                        process,
+                    });
+                },
+                inject: 'body' /* Inject the assets at the end of the body. */,
             }),
+            ...(isProduction ? [new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })] : []),
         ],
     };
     if (isProduction) {
-        configuration.plugins!.push(new MiniCssExtractPlugin());
+        configuration.plugins!.push(
+            new MiniCssExtractPlugin({
+                // filename: '[name].[contenthash].css',
+            }),
+        );
     } else {
         configuration.devtool = 'inline-source-map';
         configuration.devServer = {
             static: path.join(__dirname, process.env.MATHJSLAB_APP_WEBPACK_OUTPUT_PATH!),
             compress: true,
             port: process.env.MATHJSLAB_APP_WEBPACK_DEVSERVER_PORT,
+            hot: true,
         };
     }
     console.warn(

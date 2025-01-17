@@ -1,177 +1,196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-
-<head>
-    <title><%= process.env.MATHJSLAB_APP_TITLE %></title>
-    <!-- Default meta tags -->
-    <meta charset="UTF-8">
-    <meta name="description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
-    <meta name="author" content="<%= process.env.MATHJSLAB_APP_AUTHOR %>" />
-    <meta name="keywords" content="<%= process.env.MATHJSLAB_APP_KEYWORDS %>" />
-    <meta name="robots" content="index,follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark" />
-    <meta name="hostname" content="<%= process.env.MATHJSLAB_APP_HOSTNAME %>" />
-    <meta name="expected-hostname" content="<%= process.env.MATHJSLAB_APP_HOSTNAME %>" />
-    <!-- Open Graph meta tags -->
-    <meta property="og:title" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
-    <meta property="og:site_name" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
-    <meta property="og:description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
-    <meta property="og:url" content="<%= `${process.env.MATHJSLAB_APP_URL}/` %>" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE %>" />
-    <meta property="og:image:alt" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
-    <meta property="og:image:width" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE_WIDTH %>" />
-    <meta property="og:image:height" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE_HEIGHT %>" />
-    <!-- Twitter meta tags -->
-    <meta name="twitter:image" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE %>" />
-    <meta name="twitter:site" content="@mathjslab" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
-    <meta name="twitter:description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
-    <!-- Icons and manifest -->
-    <link rel="icon" href="images/favicon.ico" />
-    <link rel="icon" href="images/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
-    <link rel="manifest" href="manifest.json" />
-    <script>
-        function loadText() {
-            if (!document.location.href.startsWith('file:')) {
-                window.fetch({
-                    en: 'README.md',
-                    es: 'LEAME.md',
-                    pt: 'LEIAME.md',
-                }[window.lang])
-                    .then((response) => {
-                        if (!response.ok) {
-                            throw new URIError('loadText: Network error.');
-                        }
-                        return response.text();
-                    })
-                    .then((readme) => {
-                        document.getElementById('readme').innerHTML = marked.parse(readme);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+    <head>
+        <title><%= process.env.MATHJSLAB_APP_TITLE %></title>
+        <!-- Default meta tags -->
+        <meta charset="UTF-8" />
+        <meta name="description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
+        <meta name="author" content="<%= process.env.MATHJSLAB_APP_AUTHOR %>" />
+        <meta name="keywords" content="<%= process.env.MATHJSLAB_APP_KEYWORDS %>" />
+        <meta name="robots" content="index,follow" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="color-scheme" content="light dark" />
+        <meta name="hostname" content="<%= process.env.MATHJSLAB_APP_HOSTNAME %>" />
+        <meta name="expected-hostname" content="<%= process.env.MATHJSLAB_APP_HOSTNAME %>" />
+        <!-- Open Graph meta tags -->
+        <meta property="og:title" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
+        <meta property="og:site_name" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
+        <meta property="og:description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
+        <meta property="og:url" content="<%= `${process.env.MATHJSLAB_APP_URL}/` %>" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE %>" />
+        <meta property="og:image:alt" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
+        <meta property="og:image:width" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE_WIDTH %>" />
+        <meta property="og:image:height" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE_HEIGHT %>" />
+        <!-- Twitter meta tags -->
+        <meta name="twitter:image" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE %>" />
+        <meta name="twitter:site" content="@mathjslab" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
+        <meta name="twitter:description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
+        <!-- Icons and manifest -->
+        <link rel="icon" href="images/favicon.ico" />
+        <link rel="icon" href="images/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
+        <link rel="manifest" href="manifest.json" />
+        <script>
+            function loadText() {
+                if (!document.location.href.startsWith('file:')) {
+                    window
+                        .fetch(
+                            {
+                                en: 'README.md',
+                                es: 'LEAME.md',
+                                pt: 'LEIAME.md',
+                            }[window.lang],
+                        )
+                        .then((response) => {
+                            if (!response.ok) {
+                                throw new URIError('loadText: Network error.');
+                            }
+                            return response.text();
+                        })
+                        .then((readme) => {
+                            document.getElementById('readme').innerHTML = marked.parse(readme);
+                        })
+                        .catch((error) => {
+                            console.error(error);
+                        });
+                }
+                document.getElementById('title').innerHTML = {
+                    en: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
+                    es: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
+                    pt: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
+                }[window.lang];
+                document.getElementById('subtitle').innerHTML = {
+                    en: 'An <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">interpreter</a> with language syntax like <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
+                    es: 'Un <a href="https://es.wikipedia.org/wiki/Int%C3%A9rprete_(inform%C3%A1tica)" target="_blank" rel="noopener">intérprete</a> con sintaxis de lenguaje como <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
+                    pt: 'Um <a href="https://pt.wikipedia.org/wiki/Interpretador" target="_blank" rel="noopener">interpretador</a> com sintaxe de linguagem como o <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
+                }[window.lang];
+                document.getElementById('abstract').innerHTML = {
+                    en: 'This is a demo application of the <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> <a href="https://en.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">npm package</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repository</a>), an emulator of a subset of the <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> language written completely in <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. This application is intended for educational purposes. See the <a href="#notes">notes</a> below for detailed information.',
+                    es: 'Esta es una aplicación de demostración del <a href="https://es.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">paquete npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositorio</a>), un emulador de un subconjunto del lenguaje <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente en <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Esta aplicación está destinada a fines educativos. Consulte las <a href="#notes">notas</a> a continuación para obtener información detallada.',
+                    pt: 'Este é um aplicativo de demonstração do <a href="https://pt.wikipedia.org/wiki/Npm_(software)" target="_blank" rel="noopener">pacote npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositório</a>), um emulador de um subconjunto da linguagem <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente em <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Este aplicativo é destinado a fins educacionais. Consulte as <a href="#notes">notas</a> abaixo para obter informações detalhadas.',
+                }[window.lang];
+                document.getElementById('examples-panel').setTitle(
+                    {
+                        en: 'Examples',
+                        es: 'Ejemplos',
+                        pt: 'Exemplos',
+                    }[window.lang],
+                );
+                document.getElementById('open-file').innerHTML = {
+                    en: 'Open...',
+                    es: 'Abrir...',
+                    pt: 'Abrir...',
+                }[window.lang];
+                document.getElementById('readme-panel').setTitle(
+                    {
+                        en: 'More Info',
+                        es: 'Más información',
+                        pt: 'Mais Informações',
+                    }[window.lang],
+                );
+                document.getElementById('github-repository').innerHTML = {
+                    en: 'GitHub Repository',
+                    es: 'Repositorio GitHub',
+                    pt: 'Repositório GitHub',
+                }[window.lang];
+                document.getElementById('curriculum').innerHTML = {
+                    en: 'Curriculum',
+                    es: 'Currículum',
+                    pt: 'Currículo Lattes',
+                }[window.lang];
             }
-            document.getElementById('title').innerHTML = {
-                en: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
-                es: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
-                pt: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
-            }[window.lang];
-            document.getElementById('subtitle').innerHTML = {
-                en: 'An <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">interpreter</a> with language syntax like <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-                es: 'Un <a href="https://es.wikipedia.org/wiki/Int%C3%A9rprete_(inform%C3%A1tica)" target="_blank" rel="noopener">intérprete</a> con sintaxis de lenguaje como <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-                pt: 'Um <a href="https://pt.wikipedia.org/wiki/Interpretador" target="_blank" rel="noopener">interpretador</a> com sintaxe de linguagem como o <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-            }[window.lang];
-            document.getElementById('abstract').innerHTML = {
-                en: 'This is a demo application of the <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> <a href="https://en.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">npm package</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repository</a>), an emulator of a subset of the <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> language written completely in <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. This application is intended for educational purposes. See the <a href="#notes">notes</a> below for detailed information.',
-                es: 'Esta es una aplicación de demostración del <a href="https://es.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">paquete npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositorio</a>), un emulador de un subconjunto del lenguaje <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente en <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Esta aplicación está destinada a fines educativos. Consulte las <a href="#notes">notas</a> a continuación para obtener información detallada.',
-                pt: 'Este é um aplicativo de demonstração do <a href="https://pt.wikipedia.org/wiki/Npm_(software)" target="_blank" rel="noopener">pacote npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositório</a>), um emulador de um subconjunto da linguagem <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente em <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Este aplicativo é destinado a fins educacionais. Consulte as <a href="#notes">notas</a> abaixo para obter informações detalhadas.',
-            }[window.lang];
-            document.getElementById('examples-title').innerHTML = {
-                en: 'Examples',
-                es: 'Ejemplos',
-                pt: 'Exemplos',
-            }[window.lang];
-            document.getElementById('open-file').innerHTML = {
-                en: 'Open...',
-                es: 'Abrir...',
-                pt: 'Abrir...',
-            }[window.lang];
-            document.getElementById('readme-title').innerHTML = {
-                en: 'More Info',
-                es: 'Más información',
-                pt: 'Mais Informações',
-            }[window.lang];
-            document.getElementById('github-repository').innerHTML = {
-                en: 'GitHub Repository',
-                es: 'Repositorio GitHub',
-                pt: 'Repositório GitHub',
-            }[window.lang];
-            document.getElementById('curriculum').innerHTML = {
-                en: 'Curriculum',
-                es: 'Currículum',
-                pt: 'Currículo Lattes',
-            }[window.lang];
-        }
-        function scrollToTop() {
-            window.setTimeout(() => { window.scrollTo(0, 0) }, 600);
-        }
-    </script>
-</head>
+            function scrollToTop() {
+                window.setTimeout(() => {
+                    window.scrollTo(0, 0);
+                }, 600);
+            }
+        </script>
+    </head>
 
-<body onload="javascript:loadText();document.getElementById('language').value=window.lang;scrollToTop();">
+    <body onload="javascript:loadText();document.getElementById('language').value=window.lang;scrollToTop();">
+        <!-- Custom Navigation Component -->
+        <!-- <simple-nav>
+            <li slot="nav-item"><a href="#home">Home</a></li>
+            <li slot="nav-item"><a href="#about">About</a></li>
+            <li slot="nav-item"><a href="#services">Services</a></li>
+            <li slot="nav-item"><a href="#contact">Contact</a></li>
+        </simple-nav> -->
+        <!-- End of Custom Navigation Component -->
 
-    <div id="app">
-
-        <header>
-            <img alt="MathJSLab logo" class="logo" src="./images/mathjslab-logo.svg" width="125" height="125" />
-            <noscript>You need to enable JavaScript to run MathJSLab.</noscript>
-            <div class="header-wrapper">
-                <div class="header-panel">
-                    <h1 id="title" class="green"></h1>
-                    <h3 id="subtitle"></h3>
-                    <p><a href="https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1"
-                            target="_blank" rel="noopener"><b>ISBN 978-65-00-84828-1</b></a></p>
+        <div id="app">
+            <header>
+                <img alt="MathJSLab logo" class="logo" src="./images/mathjslab-logo.svg" width="125" height="125" />
+                <noscript>You need to enable JavaScript to run MathJSLab.</noscript>
+                <div class="header-wrapper">
+                    <div class="header-panel">
+                        <h1 id="title" class="green"></h1>
+                        <h3 id="subtitle"></h3>
+                        <p>
+                            <a href="https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1" target="_blank" rel="noopener"
+                                ><b>ISBN 978-65-00-84828-1</b></a
+                            >
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="right-align-panel">
-                <div class="green-panel width-fit-content right-align-panel" align="center">
-                    <select id="language"
-                        onchange="javascript:window.setLanguage(document.getElementById('language').value);loadText();scrollToTop();">
-                        <option value="en">English</option>
-                        <option value="es">Español</option>
-                        <option value="pt">Português</option>
-                    </select>
-                    <br />
-                    <button id="open-file" onclick="openFile()"></button>
+                <div class="right-align-panel">
+                    <div class="green-panel width-fit-content right-align-panel" align="center">
+                        <select
+                            id="language"
+                            onchange="javascript:window.setLanguage(document.getElementById('language').value);loadText();scrollToTop();"
+                        >
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="pt">Português</option>
+                        </select>
+                        <br />
+                        <button id="open-file" onclick="openFile()"></button>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
 
-        <main>
-            <p id="abstract"></p>
+            <main>
+                <p id="abstract"></p>
 
-            <div class="wrap-collabsible">
-                <input id="examples-collapsible" class="toggle" type="checkbox">
-                <label id="examples-title" for="examples-collapsible" class="lbl-toggle"></label>
-                <div class="collapsible-content">
-                    <div id="mathjslab-examples" class="content-inner" align="center"></div>
-                </div>
-            </div>
+                <!-- Examples collapsible content panel -->
+                <collapsible-content-panel id="examples-panel">
+                    <div id="mathjslab-examples" slot="content" style="display: block; text-align: center"></div>
+                </collapsible-content-panel>
+                <!-- End of Examples collapsible content panel -->
 
-            <br />
-            <div id="mathjslab-prompt"></div>
-            <br />
+                <br />
+                <div id="mathjslab-prompt"></div>
+                <br />
 
-            <div class="wrap-collabsible">
-                <a id="notes"></a>
-                <input id="readme-collapsible" class="toggle" type="checkbox">
-                <label id="readme-title" for="readme-collapsible" class="lbl-toggle"></label>
-                <div class="collapsible-content">
-                    <div id="readme" class="content-inner"></div>
-                </div>
-            </div>
-        </main>
+                <!-- Notes collapsible content panel -->
+                <collapsible-content-panel id="readme-panel">
+                    <div id="readme" slot="content"></div>
+                </collapsible-content-panel>
+                <!-- End of Notes collapsible content panel -->
+            </main>
 
-        <footer>
-            <p align="center">
-                <a href="https://github.com/MathJSLab" target="_blank" rel="noopener">
-                    <img alt="GitHub Repository" src="./images/github-mark.svg" width="24" height="24" />
-                    <span id="github-repository"></span>
-                </a>
-            </p>
+            <footer>
+                <p align="center">
+                    <a href="https://github.com/MathJSLab" target="_blank" rel="noopener">
+                        <img alt="GitHub Repository" src="./images/github-mark.svg" width="24" height="24" />
+                        <span id="github-repository"></span>
+                    </a>
+                </p>
 
-            <p align="center">&copy; 2016 &mdash;
-                <script>document.write((new Date()).getFullYear())</script> <a href="mailto:sergiolindau@gmail.com"
-                    target="_blank" rel="noopener">Sergio Lindau</a> (<a href="http://lattes.cnpq.br/3843370693067429"
-                    target="_blank" rel="noopener"><span id="curriculum"></span></a>)
-            </p>
-        </footer>
-
-    </div>
-
-</body>
-
+                <p align="center">
+                    &copy; 2016 &mdash;
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    <a href="mailto:sergiolindau@gmail.com" target="_blank" rel="noopener">Sergio Lindau</a> (<a
+                        href="http://lattes.cnpq.br/3843370693067429"
+                        target="_blank"
+                        rel="noopener"
+                        ><span id="curriculum"></span></a
+                    >)
+                </p>
+            </footer>
+        </div>
+    </body>
 </html>

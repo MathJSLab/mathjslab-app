@@ -1,0 +1,4 @@
+{
+  "buildMessage": "MathJSLab Demo v{{ pkg.version }} built at {% currentDate 'HTTP' %}.{{ environment | field('DEBUG') | printIfTruthy(' Debug flag enable.') }} Homepage: {{ pkg.homepage }}, License: {{ pkg.license }}",
+  "debug": {% processEnv 'DEBUG', false %}
+}

@@ -1,0 +1,11 @@
+<template id="collapsible-content-panel-template">
+    <div class="wrap-collapsible">
+        <input id="collapsible-content-panel-toggle" class="toggle" type="checkbox" />
+        <label id="collapsible-content-panel-title" for="collapsible-content-panel-toggle" class="lbl-toggle"></label>
+        <div class="collapsible-content">
+            <div class="content-inner">
+                <slot name="content">Default Content</slot>
+            </div>
+        </div>
+    </div>
+</template>
