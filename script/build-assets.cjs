@@ -1,5 +1,5 @@
 /**
- * build-assets.js: This script creates the build directory and copies all the project assets.
+ * build-assets.cjs: This script creates the build directory and copies all the project assets.
  */
 const fs = require('node:fs');
 const path = require('node:path');

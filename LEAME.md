@@ -19,6 +19,13 @@
 
 Esta es una aplicación de demostración del [paquete npm](https://es.wikipedia.org/wiki/Npm) [MathJSLab](https://www.npmjs.com/package/mathjslab). Vea esta demostración en la página del proyecto en [mathjslab.com](https://mathjslab.com/). El repositorio está en la [Organización MathJSLab](https://github.com/MathJSLab) en [GitHub](https://github.com/).
 
+**Aviso Importante:** Este software, **[MathJSLab](https://mathjslab.com/), no
+está afiliado, patrocinado ni respaldado por [The MathWorks, Inc.](https://www.mathworks.com/)**
+[MATLAB&reg;](https://www.mathworks.com/products/matlab.html) es una marca
+registrada de [The MathWorks, Inc.](https://www.mathworks.com/) Para más
+información sobre [MATLAB](https://www.mathworks.com/products/matlab.html),
+visita [www.mathworks.com](https://www.mathworks.com).
+
 Obtenga una versión minimizada de un [CDN](https://es.wikipedia.org/wiki/Red_de_distribuci%C3%B3n_de_contenidos).
 Para insertar la [demostración de MathJSLab](https://github.com/MathJSLab/mathjslab-app) en una página web usando [CDN jsDelivr](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
 copie el siguiente código [HTML](https://developer.mozilla.org/es/docs/Web/HTML):
@@ -135,6 +142,11 @@ Después de ejecutar este comando, deberá configurar el área de trabajo ejecut
 Únase al chat de la comunidad:
 
 [![Únase al chat en https://matrix.to/#/#mathjslab:gitter.im](https://badges.gitter.im/Join%20Chat.svg)](https://matrix.to/#/#mathjslab:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## Notas sobre Marcas Registradas
+
+- [MATLAB&reg;](https://www.mathworks.com/products/matlab.html) es una marca registrada de [The MathWorks, Inc.](https://www.mathworks.com/)
+- [MathJSLab](https://mathjslab.com/) no está afiliado, patrocinado ni respaldado por [The MathWorks, Inc.](https://www.mathworks.com/)
 
 ## Licencia
 

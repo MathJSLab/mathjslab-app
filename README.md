@@ -21,6 +21,13 @@ This is a demo application of [MathJSLab](https://www.npmjs.com/package/mathjsla
 [MathJSLab Organization](https://github.com/MathJSLab) on
 [GitHub](https://github.com/).
 
+**Important Notice:** This software, the **[MathJSLab](https://mathjslab.com/),
+is not affiliated, sponsored, or endorsed by [The MathWorks, Inc.](https://www.mathworks.com/)**
+[MATLAB&reg;](https://www.mathworks.com/products/matlab.html) is a registered
+trademark of [The MathWorks, Inc.](https://www.mathworks.com/) For more
+information about [MATLAB](https://www.mathworks.com/products/matlab.html), visit
+[www.mathworks.com](https://www.mathworks.com/).
+
 Get a minified version from a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network).
 To embed [MathJSLab Demo](https://github.com/MathJSLab/mathjslab-app) in a webpage using [jsDelivr CDN](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
 copy the following [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) code:
@@ -141,6 +148,11 @@ After run this command you will need to do workspace setup running
 Join the community chat:
 
 [![Join the chat at https://matrix.to/#/#mathjslab:gitter.im](https://badges.gitter.im/Join%20Chat.svg)](https://matrix.to/#/#mathjslab:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## Trademark Notes
+
+- [MATLAB&reg;](https://www.mathworks.com/products/matlab.html) is a registered trademark of [The MathWorks, Inc.](https://www.mathworks.com/)
+- [MathJSLab](https://mathjslab.com/) is not affiliated, sponsored, or endorsed by [The MathWorks, Inc.](https://www.mathworks.com/)
 
 ## License
 

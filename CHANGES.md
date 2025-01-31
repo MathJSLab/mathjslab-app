@@ -5,7 +5,8 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ## 1.5.2
 - The `collapsible-content-panel` **Web Component** has been created an used in
 the examples and readme panels.
-- The
+- All dependencies has been updated.
+- Trademark notices in documentation and after abstract.
 
 ## 1.5.1
 - The MathJSLab logo has been modified. It is built on the MathJSLab

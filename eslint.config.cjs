@@ -10,6 +10,8 @@ const prettierPlugin = require('eslint-plugin-prettier');
 const eslintConfigPrettier = require('eslint-config-prettier');
 const importPlugin = require('eslint-plugin-import');
 
+console.log(`Running project lint (configuration: ${path.basename(__filename)}) ...`);
+
 module.exports = [
     {
         files: ['src/**/*.ts'],

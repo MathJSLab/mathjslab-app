@@ -71,6 +71,11 @@
                     es: 'Esta es una aplicación de demostración del <a href="https://es.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">paquete npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositorio</a>), un emulador de un subconjunto del lenguaje <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente en <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Esta aplicación está destinada a fines educativos. Consulte las <a href="#notes">notas</a> a continuación para obtener información detallada.',
                     pt: 'Este é um aplicativo de demonstração do <a href="https://pt.wikipedia.org/wiki/Npm_(software)" target="_blank" rel="noopener">pacote npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositório</a>), um emulador de um subconjunto da linguagem <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente em <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Este aplicativo é destinado a fins educacionais. Consulte as <a href="#notes">notas</a> abaixo para obter informações detalhadas.',
                 }[window.lang];
+                document.getElementById('trademark-notice').innerHTML = {
+                    en: '<strong>Important Notice:</strong> This software, the <strong><a href="https://mathjslab.com/">MathJSLab</a>, is not affiliated, sponsored, or endorsed by <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> is a registered trademark of <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> For more information about <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visit <a href="https://www.mathworks.com/">www.mathworks.com</a>.',
+                    es: '<strong>Aviso Importante:</strong> Este software, <strong><a href="https://mathjslab.com/">MathJSLab</a>, no está afiliado, patrocinado ni respaldado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> es una marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para más información sobre <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visita <a href="https://www.mathworks.com">www.mathworks.com</a>.',
+                    pt: '<strong>Aviso importante:</strong> Este software, o <strong><a href="https://mathjslab.com/">MathJSLab</a>, não é afiliado, patrocinado ou endossado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> é uma marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para mais informações sobre o <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visite <a href="https://www.mathworks.com">www.mathworks.com</a>.',
+                }[window.lang];
                 document.getElementById('examples-panel').setTitle(
                     {
                         en: 'Examples',
@@ -152,6 +157,8 @@
 
             <main>
                 <p id="abstract"></p>
+
+                <p id="trademark-notice"></p>
 
                 <!-- Examples collapsible content panel -->
                 <collapsible-content-panel id="examples-panel">

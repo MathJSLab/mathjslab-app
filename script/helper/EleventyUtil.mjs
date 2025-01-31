@@ -25,7 +25,7 @@
  * npm install --save-dev uuid chalk @11ty/eleventy @11ty/eleventy-img yaml json5 smol-toml sass coffeescript cson png-to-ico
  * ```
  *
- * MIT License, Copyright (c) 2016-2024 Sergio Lindau, mathjslab.com
+ * MIT License, Copyright (c) 2016-2025 Sergio Lindau, mathjslab.com
  */
 
 /**
@@ -40,7 +40,7 @@ import { v4 as uuid } from 'uuid';
 import chalk from 'chalk';
 import Eleventy, { EleventyRenderPlugin } from '@11ty/eleventy';
 import Image from '@11ty/eleventy-img';
-import markdownIt from 'markdown-it';
+// import markdownIt from 'markdown-it';
 import JSON5 from 'json5';
 import YAML from 'yaml';
 import TOML from 'smol-toml';
@@ -528,7 +528,7 @@ const utilFilters = {
     mapField: function (value, field) {
         return value.map((value) => value[field]);
     },
-    readFile: function (filePath, encoding) {
+    readFile: function (filePath, _encoding) {
         return readFileBomSync(path.resolve(filePath));
     },
     removeFrontMatter: function (value) {

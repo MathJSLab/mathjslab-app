@@ -1,5 +1,5 @@
 /**
- * save-bundle.js: This script saves the bundle in the project root directory.
+ * save-bundle.cjs: This script saves the bundle in the project root directory.
  */
 const fs = require('node:fs');
 const path = require('node:path');

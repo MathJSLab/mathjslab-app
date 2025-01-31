@@ -25,8 +25,12 @@ export default (env: any, argv: any): webpack.Configuration => {
     envVars.parsed!.WEBPACK_MODE = argv.mode;
     const isProduction = argv.mode.startsWith('prod') || !argv.mode.startsWith('dev');
     const configuration: webpack.Configuration = {
+        name: 'mathjslab-app',
         mode: argv.mode,
-        entry: path.join(__dirname, 'src', 'main.ts'),
+        // entry: path.join(__dirname, 'src', 'main.ts'),
+        entry: {
+            'mathjslab-app': path.join(__dirname, 'src', 'main.ts'),
+        },
         module: {
             rules: [
                 {
@@ -140,23 +144,19 @@ export default (env: any, argv: any): webpack.Configuration => {
                 },
                 inject: 'body' /* Inject the assets at the end of the body. */,
             }),
-            ...(isProduction ? [new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' })] : []),
+            ...(isProduction ? [new MiniCssExtractPlugin({ filename: '[name].css' })] : []),
         ],
     };
-    if (isProduction) {
-        configuration.plugins!.push(
-            new MiniCssExtractPlugin({
-                // filename: '[name].[contenthash].css',
-            }),
-        );
-    } else {
-        configuration.devtool = 'inline-source-map';
-        configuration.devServer = {
-            static: path.join(__dirname, process.env.MATHJSLAB_APP_WEBPACK_OUTPUT_PATH!),
-            compress: true,
-            port: process.env.MATHJSLAB_APP_WEBPACK_DEVSERVER_PORT,
-            hot: true,
-        };
+    if (!isProduction) {
+        Object.assign(configuration, {
+            devtool: 'inline-source-map',
+            devServer: {
+                static: path.join(__dirname, process.env.MATHJSLAB_APP_WEBPACK_OUTPUT_PATH!),
+                compress: true,
+                port: process.env.MATHJSLAB_APP_WEBPACK_DEVSERVER_PORT,
+                hot: true,
+            },
+        });
     }
     console.warn(
         `Webpack configuration path: ${__filename}\n- Building ${process.env.MATHJSLAB_APP_TITLE} ${argv.mode} bundle.\n- Environment file: ${buildEnvPath}\n- Build environment variables:`,

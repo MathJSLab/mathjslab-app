@@ -12,8 +12,10 @@ import {
     LinearAlgebra,
     EvaluatorConfig,
     AliasNameTable,
-    ElementType,
+    bundleConfiguration,
 } from 'mathjslab';
+
+import type { ElementType } from 'mathjslab';
 
 export { Evaluator };
 
@@ -831,7 +833,7 @@ function bootstrap() {
     EvaluatorConfiguration.aliasNameTable = languageAlias[global.lang];
     global.EvaluatorPointer = new Evaluator(EvaluatorConfiguration);
     global.EvaluatorPointer.debug = buildConfiguration.debug;
-    global.MathJSLabCalcBuildMessage = buildConfiguration.buildMessage;
+    global.MathJSLabCalcBuildMessage = buildConfiguration.buildMessage + `, bundle: ${bundleConfiguration}`;
     MathMarkdown.initialize();
 }
 bootstrap();

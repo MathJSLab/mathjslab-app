@@ -1,6 +1,6 @@
 {
   "name": "mathjslab-app",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "MathJSLab - An interpreter with language syntax like MATLAB®/Octave, ISBN 978-65-00-82338-7. A demo application from the mathjslab npm package, ISBN 978-65-00-84828-1.",
   "repository": {
     "type": "git",
@@ -37,9 +37,6 @@
     "clean:download-resources": "node script/helper/download-files.cjs clean && rimraf script/helper/download-files.cjs download.config.json",
     "clean": "npm run clean:script:build:android",
     "clean:all": "npm run clean && npm run remove:webapp-dep && npm run clean:package-lock && npm run clean:download-resources",
-    "clean:mathjslab.wiki": "rimraf mathjslab.wiki",
-    "clone:mathjslab.wiki": "git clone https://github.com/MathJSLab/mathjslab.wiki.git",
-    "push:mathjslab.wiki": "cd mathjslab.wiki && git add . && git commit -m \"Initial Commit\" && git push && cd ..",
     "download-resources": "curl -k -o ./script/helper/download-files.cjs https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/download-files.cjs && curl -k -o ./download.config.json https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/resource/mathjslab-app/download.config.json && node script/helper/download-files.cjs",
     "preinstall:android-dep": "npm install @capacitor/core && npm install --save-dev @capacitor/cli",
     "install:android-dep": "npm install @capacitor/android",
@@ -48,15 +45,15 @@
     "remove:webapp-dep": "npm run remove:android-dep && npm remove @capacitor/core @capacitor/cli",
     "update": "npx npm-check-updates -u && npm install && npm run install:webapp-dep && npm run download-resources && npm run build:script",
     "git:add": "git add .",
-    "git:commit": "git commit -m \"Initial Commit\"",
+    "git:commit": "node script/helper/git-commit.cjs",
     "git:push": "git push",
     "git:all": "npm run git:add && npm run git:commit && npm run git:push",
     "format": "prettier --plugin=@prettier/plugin-xml --write **/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,sass,html,htm,json,jsonc,yml,yaml,xml,svg}",
     "lint": "eslint --fix",
     "format:lint": "npm run format && npm run lint",
     "build:script": "tsc -p script/tsconfig.json",
-    "build-assets": "node script/build-assets.js",
-    "save-bundle": "node script/save-bundle.js",
+    "build-assets": "node script/build-assets.cjs",
+    "save-bundle": "node script/save-bundle.cjs",
     "prebuild:dev": "npm run build-assets && node --disable-warning=DEP0040 eleventy.build.mjs",
     "build:dev": "tsx --require tsconfig-paths/register ./node_modules/webpack-dev-server/bin/webpack-dev-server --mode development",
     "prebuild:debug": "set DEBUG=true && npm run prebuild:dev",
@@ -70,26 +67,21 @@
     "build:add:android": "npm run build:prod && npm run add:android",
     "open:android": "npx cap open android",
     "build:all": "npm run clean && npm run update && npm run build:prod && npm run add:android",
-    "do:all": "npm run clean:all && npm run update && npm run format:lint && npm run build:prod"
-  },
-  "browser": {
-    "fs": false,
-    "os": false,
-    "path": false
+    "do:all": "npm run clean:all && npm run update && npm run format:lint && npm run build:prod && npm run git:all"
   },
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-img": "^6.0.1",
-    "@capacitor/cli": "^6.2.0",
+    "@capacitor/cli": "^7.0.1",
     "@prettier/plugin-xml": "^3.4.1",
     "@types/dotenv-webpack": "^7.0.8",
     "@types/ejs": "^3.1.5",
-    "@types/node": "^22.10.7",
+    "@types/node": "^22.12.0",
     "@types/plotly.js": "^2.35.2",
     "@types/webpack": "^5.28.5",
     "@types/wicg-file-system-access": "^2023.10.5",
-    "@typescript-eslint/eslint-plugin": "^8.20.0",
-    "@typescript-eslint/parser": "^8.20.0",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
     "ajv": "^8.17.1",
     "chalk": "^5.4.1",
     "coffeescript": "^2.7.0",
@@ -99,14 +91,14 @@
     "dotenv-expand": "^12.0.1",
     "dotenv-webpack": "^8.1.0",
     "ejs": "^3.1.10",
-    "eslint": "^9.18.0",
+    "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.2",
+    "eslint-plugin-prettier": "^5.2.3",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "json5": "^2.2.3",
-    "lint-staged": "^15.4.1",
+    "lint-staged": "^15.4.3",
     "mini-css-extract-plugin": "^2.9.2",
     "png-to-ico": "^2.1.8",
     "prettier": "^3.4.2",
@@ -127,8 +119,8 @@
     "yaml": "^2.7.0"
   },
   "dependencies": {
-    "@capacitor/android": "^6.2.0",
-    "@capacitor/core": "^6.2.0",
-    "mathjslab": "^1.6.2"
+    "@capacitor/android": "^7.0.1",
+    "@capacitor/core": "^7.0.1",
+    "mathjslab": "^1.7.0"
   }
 }
