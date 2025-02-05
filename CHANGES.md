@@ -4,9 +4,26 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.5.2
 - The `collapsible-content-panel` **Web Component** has been created an used in
-the examples and readme panels.
+the examples and readme panels. Some other components has been created in the
+`src/components/` directory but they are not yet implemented and in use.
 - All dependencies has been updated.
 - Trademark notices in documentation and after abstract.
+- The `build.env` file has been removed and the packages `dotenv`,
+`dotenv-expand`, `dotenv-webpack`, `ejs` and `@types/ejs` has been removed too.
+- The `build.config.json` file was created, which is imported by
+`webpack.config.json` to customize some Webpack build configurations.
+- A script (`component.include.ts`) was created that processes the
+`component.include.json` file and generates the `components.ts` file used to
+import the project's components. The script also loads the content of the
+templates to be injected into the HTML.
+- The use of `global.ShellPointer` inside the `Shell` class has been removed.
+The `ShellPointer` declaration has been moved to the `main.ts` file and the
+instantiation of `Shell` in the `bootstrap` function has been assigned to
+`global.ShellPointer`. The `bootstrap` function has been made asynchronous for
+this reason. The `export input` in the `main.ts` has been removed and the
+empty string is passed as option to `Shell` instantiation. The
+`global.ShellPointer` variable has been kept as it is required in the
+`EvaluatorConfiguration.ts` file.
 
 ## 1.5.1
 - The MathJSLab logo has been modified. It is built on the MathJSLab

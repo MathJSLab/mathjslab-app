@@ -3,7 +3,7 @@ import styles from './collapsible-content-panel.styles.scss';
 /**
  * # CollapsibleContentPanel Web Component
  */
-class CollapsibleContentPanel extends HTMLElement {
+export class CollapsibleContentPanel extends HTMLElement {
     /* Panel title */
     protected titleElement: HTMLLabelElement;
     /* Web Component constructor. */
@@ -33,14 +33,11 @@ class CollapsibleContentPanel extends HTMLElement {
             this.attachShadow({ mode: 'open' }).append(styleElement, clone);
         }
     }
-    /**
-     * Sets the title of the element.
-     * @param title
-     * @returns
-     */
-    public setTitle(title: string): HTMLLabelElement {
-        this.titleElement.innerHTML = title;
-        return this.titleElement;
+    public set title(value: string) {
+        this.titleElement.innerHTML = value;
+    }
+    public get title(): string {
+        return this.titleElement.innerHTML;
     }
 }
 /* Defines the custom element. */

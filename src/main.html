@@ -1,33 +1,33 @@
 <!doctype html>
 <html>
     <head>
-        <title><%= process.env.MATHJSLAB_APP_TITLE %></title>
+        <title>MathJSLab</title>
         <!-- Default meta tags -->
         <meta charset="UTF-8" />
-        <meta name="description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
-        <meta name="author" content="<%= process.env.MATHJSLAB_APP_AUTHOR %>" />
-        <meta name="keywords" content="<%= process.env.MATHJSLAB_APP_KEYWORDS %>" />
+        <meta name="description" content="An interpreter with language syntax like MATLAB®/Octave. ISBN 978-65-00-82338-7." />
+        <meta name="author" content="Sergio Lindau" />
+        <meta name="keywords" content="MathJSLab,Mathematics,Educational,MATLAB,Octave,MathML,ANTLR,ANTLR4,math,lexer,parser,grammar,interpreter" />
         <meta name="robots" content="index,follow" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="color-scheme" content="light dark" />
-        <meta name="hostname" content="<%= process.env.MATHJSLAB_APP_HOSTNAME %>" />
-        <meta name="expected-hostname" content="<%= process.env.MATHJSLAB_APP_HOSTNAME %>" />
+        <meta name="hostname" content="mathjslab.com" />
+        <meta name="expected-hostname" content="mathjslab.com" />
         <!-- Open Graph meta tags -->
-        <meta property="og:title" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
-        <meta property="og:site_name" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
-        <meta property="og:description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
-        <meta property="og:url" content="<%= `${process.env.MATHJSLAB_APP_URL}/` %>" />
+        <meta property="og:title" content="MathJSLab" />
+        <meta property="og:site_name" content="MathJSLab" />
+        <meta property="og:description" content="An interpreter with language syntax like MATLAB®/Octave. ISBN 978-65-00-82338-7." />
+        <meta property="og:url" content="https://mathjslab.com/" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE %>" />
-        <meta property="og:image:alt" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
-        <meta property="og:image:width" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE_WIDTH %>" />
-        <meta property="og:image:height" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE_HEIGHT %>" />
+        <meta property="og:image" content="https://mathjslab.com/images/mathjslab-logo-630x630.png" />
+        <meta property="og:image:alt" content="An interpreter with language syntax like MATLAB®/Octave. ISBN 978-65-00-82338-7." />
+        <meta property="og:image:width" content="630" />
+        <meta property="og:image:height" content="630" />
         <!-- Twitter meta tags -->
-        <meta name="twitter:image" content="<%= process.env.MATHJSLAB_APP_OG_IMAGE %>" />
+        <meta name="twitter:image" content="https://mathjslab.com/images/mathjslab-logo-630x630.png" />
         <meta name="twitter:site" content="@mathjslab" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="<%= process.env.MATHJSLAB_APP_TITLE %>" />
-        <meta name="twitter:description" content="<%= process.env.MATHJSLAB_APP_DESCRIPTION_PKG_ISBN %>" />
+        <meta name="twitter:title" content="MathJSLab" />
+        <meta name="twitter:description" content="An interpreter with language syntax like MATLAB®/Octave. ISBN 978-65-00-82338-7." />
         <!-- Icons and manifest -->
         <link rel="icon" href="images/favicon.ico" />
         <link rel="icon" href="images/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
@@ -57,9 +57,9 @@
                         });
                 }
                 document.getElementById('title').innerHTML = {
-                    en: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
-                    es: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
-                    pt: '<a href="<%= process.env.MATHJSLAB_APP_REPO %>" target="_blank" rel="noopener"><%= process.env.MATHJSLAB_APP_TITLE %></a>',
+                    en: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
+                    es: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
+                    pt: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
                 }[window.lang];
                 document.getElementById('subtitle').innerHTML = {
                     en: 'An <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">interpreter</a> with language syntax like <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
@@ -76,25 +76,21 @@
                     es: '<strong>Aviso Importante:</strong> Este software, <strong><a href="https://mathjslab.com/">MathJSLab</a>, no está afiliado, patrocinado ni respaldado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> es una marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para más información sobre <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visita <a href="https://www.mathworks.com">www.mathworks.com</a>.',
                     pt: '<strong>Aviso importante:</strong> Este software, o <strong><a href="https://mathjslab.com/">MathJSLab</a>, não é afiliado, patrocinado ou endossado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> é uma marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para mais informações sobre o <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visite <a href="https://www.mathworks.com">www.mathworks.com</a>.',
                 }[window.lang];
-                document.getElementById('examples-panel').setTitle(
-                    {
-                        en: 'Examples',
-                        es: 'Ejemplos',
-                        pt: 'Exemplos',
-                    }[window.lang],
-                );
+                document.getElementById('examples-panel').title = {
+                    en: 'Examples',
+                    es: 'Ejemplos',
+                    pt: 'Exemplos',
+                }[window.lang];
                 document.getElementById('open-file').innerHTML = {
                     en: 'Open...',
                     es: 'Abrir...',
                     pt: 'Abrir...',
                 }[window.lang];
-                document.getElementById('readme-panel').setTitle(
-                    {
-                        en: 'More Info',
-                        es: 'Más información',
-                        pt: 'Mais Informações',
-                    }[window.lang],
-                );
+                document.getElementById('readme-panel').title = {
+                    en: 'More Info',
+                    es: 'Más información',
+                    pt: 'Mais Informações',
+                }[window.lang];
                 document.getElementById('github-repository').innerHTML = {
                     en: 'GitHub Repository',
                     es: 'Repositorio GitHub',
@@ -160,21 +156,17 @@
 
                 <p id="trademark-notice"></p>
 
-                <!-- Examples collapsible content panel -->
                 <collapsible-content-panel id="examples-panel">
                     <div id="mathjslab-examples" slot="content" style="display: block; text-align: center"></div>
                 </collapsible-content-panel>
-                <!-- End of Examples collapsible content panel -->
 
                 <br />
                 <div id="mathjslab-prompt"></div>
                 <br />
 
-                <!-- Notes collapsible content panel -->
                 <collapsible-content-panel id="readme-panel">
                     <div id="readme" slot="content"></div>
                 </collapsible-content-panel>
-                <!-- End of Notes collapsible content panel -->
             </main>
 
             <footer>

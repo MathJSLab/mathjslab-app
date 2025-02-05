@@ -226,6 +226,13 @@ code {
     color: var(--color-input-text-focus);
 }
 
+button.inputbutton {
+    width: 50%;
+    margin: auto;
+    height: 3rem;
+    border-radius: 3rem;
+}
+
 .cursor {
     width: 1rem;
     font-family: 1rem monospace;
@@ -256,13 +263,6 @@ code {
 .inputprompt:focus {
     background-color: var(--color-input-background-focus);
     color: var(--color-input-text-focus);
-}
-
-button.inputbutton {
-    width: 50%;
-    margin: auto;
-    height: 3rem;
-    border-radius: 3rem;
 }
 
 .output {

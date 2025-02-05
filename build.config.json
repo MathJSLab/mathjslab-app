@@ -1,0 +1,8 @@
+{
+  "production": {
+    "bundles": ["mathjslab-app"]
+  },
+  "development": {
+    "bundles": ["mathjslab-app"]
+  }
+}

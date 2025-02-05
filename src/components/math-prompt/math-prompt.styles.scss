@@ -1,0 +1,39 @@
+// @use '../../styles/abstract/variables';
+// @use '../../styles/abstract/functions';
+// @use '../../styles/abstract/mixins';
+
+.cursor {
+    width: 1rem;
+    font-family: 1rem monospace;
+    position: relative;
+    top: -0.175rem;
+}
+
+.inputprompt {
+    background-color: var(--color-input-background);
+    color: var(--color-input-text);
+    font-family: 1rem monospace;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+    white-space: nowrap;
+    height: 1rem;
+    width: 100%;
+    line-height: 1rem;
+    border-radius: 0.3rem;
+    border: 0;
+    outline: none;
+}
+
+.inputprompt:hover {
+    background-color: var(--color-input-background-hover);
+}
+
+.inputprompt:focus {
+    background-color: var(--color-input-background-focus);
+    color: var(--color-input-text-focus);
+}
+
+.output {
+    overflow-x: auto;
+}

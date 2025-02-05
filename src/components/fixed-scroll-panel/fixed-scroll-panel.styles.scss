@@ -1,0 +1,28 @@
+// @use '../../styles/abstract/variables';
+// @use '../../styles/abstract/functions';
+// @use '../../styles/abstract/mixins';
+
+.fixed-scroll-panel-wrapper {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .fixed-scroll-panel-wrapper {
+        width: 14%;
+        background-color: var(--green-backgroung);
+        border: 2px solid var(--green-border);
+        padding: 1rem;
+        border-radius: 1rem;
+        position: absolute;
+        right: 0;
+        display: block;
+    }
+}
+
+.green {
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--color-a-text);
+    transition: 0.4s;
+    padding: 0.1rem;
+}

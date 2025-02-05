@@ -2,6 +2,13 @@ import createHTMLElement from './createHTMLElement';
 import firstExample from './first-example.json';
 import { CharString, FunctionHandle, MultiArray } from 'mathjslab';
 
+import { FixedScrollPanel } from './components/components';
+
+/**
+ * Event handler.
+ */
+export type EventHandler = (event: Event) => void;
+
 /**
  * Evaluator handlers
  */
@@ -33,14 +40,6 @@ export interface ExampleEntry {
 }
 
 /**
- * External reference for instantiated class to be used when context 'this' is
- * compromised (like in event listeners).
- */
-declare global {
-    var ShellPointer: Shell;
-}
-
-/**
  * Shell class.
  */
 export class Shell {
@@ -52,6 +51,7 @@ export class Shell {
     examplesAvailable: boolean;
     container: HTMLDivElement;
     shell: HTMLDivElement;
+    // variablesPanel: FixedScrollPanel;
     variables: HTMLDivElement;
     variablesHeading: HTMLHeadingElement;
     nameTable: HTMLDivElement;
@@ -73,7 +73,6 @@ export class Shell {
     promptIndex: number;
 
     private constructor() {
-        global.ShellPointer = this;
         this.baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
         this.isFileProtocol = this.baseUrl.startsWith('file:');
         this.isTouchCapable = 'ontouchstart' in window || navigator.maxTouchPoints > 0 || (navigator as any).msMaxTouchPoints > 0;
@@ -133,29 +132,38 @@ export class Shell {
         shell.variables = createHTMLElement('div', shell.container, 'variables_' + options.containerId, 'variables');
         shell.variablesHeading = createHTMLElement('h2', shell.variables, null, 'green');
         shell.variablesHeading.setAttribute('align', 'center');
-        window.addEventListener('scroll', shell.variablesPanelResize);
+        window.addEventListener('scroll', shell.variablesPanelResize.bind(shell));
         window.addEventListener('resize', () => {
-            shell.batchResize();
-            shell.variablesPanelResize();
+            shell.batchResize.bind(shell)();
+            shell.variablesPanelResize.bind(shell)();
         });
         shell.nameTable = createHTMLElement('div', shell.variables, 'nameTable_' + options.containerId);
         shell.nameList = createHTMLElement('ul', shell.nameTable, null, 'namelist');
+
+        // shell.variablesPanel = document.createElement('fixed-scroll-panel') as FixedScrollPanel;
+        // shell.container.append(shell.variablesPanel);
+        // shell.variablesPanel.setAttribute('id', 'variables_' + options.containerId);
+
         shell.batchContainer = createHTMLElement('div', shell.shell, 'batch_' + options.containerId, 'batch');
         shell.batchBox = createHTMLElement('div', shell.batchContainer, 'batchbox_' + options.containerId, 'good');
         shell.batchBox.setAttribute('align', 'center');
         shell.batchWrapper = createHTMLElement('div', shell.batchBox, 'batchwrapper_' + options.containerId);
         shell.batchInput = createHTMLElement('textarea', shell.batchWrapper, 'batchtext_' + options.containerId, 'inputarea');
-        shell.batchInput.addEventListener('change', shell.batchResize);
-        shell.batchInput.addEventListener('cut', shell.batchDelayedResize);
-        shell.batchInput.addEventListener('paste', shell.batchDelayedResize);
-        shell.batchInput.addEventListener('drop', shell.batchDelayedResize);
-        shell.batchInput.addEventListener('keydown', shell.batchDelayedResize);
+        shell.batchInput.addEventListener('change', shell.batchResize.bind(shell));
+        shell.batchDelayedResize = function (event: Event): void {
+            window.setTimeout(shell.batchResize.bind(shell), 0);
+        };
+        shell.batchInput.addEventListener('cut', shell.batchDelayedResize.bind(shell));
+        shell.batchInput.addEventListener('paste', shell.batchDelayedResize.bind(shell));
+        shell.batchInput.addEventListener('drop', shell.batchDelayedResize.bind(shell));
+        shell.batchInput.addEventListener('keydown', shell.batchDelayedResize.bind(shell));
         shell.batchInput.focus();
         shell.batchInput.select();
         shell.batchButton = createHTMLElement('button', shell.batchBox, 'batchbutton_', 'inputbutton');
-        shell.batchButton.addEventListener('click', shell.batchExec);
-        shell.batchInput.addEventListener('focus', shell.batchFocus);
-        shell.batchInput.addEventListener('blur', shell.batchBlur);
+        shell.batchButton.addEventListener('click', shell.batchExec.bind(shell));
+        shell.batchInput.addEventListener('focus', shell.batchFocus.bind(shell));
+        shell.batchInput.addEventListener('blur', shell.batchBlur.bind(shell));
+
         shell.promptContainer = createHTMLElement('div', shell.shell, 'prompt_' + options.containerId);
         if (global.EvaluatorPointer.debug) {
             const promptFoot = createHTMLElement('p', shell.shell);
@@ -165,7 +173,7 @@ export class Shell {
         shell.promptSet = {};
         shell.promptIndex = -1;
         shell.batchInput.value = shell.input = options.input;
-        shell.batchResize();
+        shell.batchResize.bind(shell)();
         if (shell.isFileProtocol || !shell.examplesAvailable) {
             shell.openContent(firstExample.content);
         } else {
@@ -179,7 +187,7 @@ export class Shell {
                     if (!response.ok) {
                         throw new Error('Network response error.');
                     }
-                    global.ShellPointer.openContent(await response.text());
+                    shell.openContent(await response.text());
                 });
                 if (first) {
                     button.click();
@@ -225,9 +233,9 @@ export class Shell {
      */
     /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
     public batchResize(event?: Event): void {
-        global.ShellPointer.batchInput.style.height = '1em';
-        global.ShellPointer.batchInput.style.height = global.ShellPointer.batchInput.scrollHeight + 27 + 'px';
-        global.ShellPointer.variablesPanelResize();
+        this.batchInput.style.height = '1em';
+        this.batchInput.style.height = this.batchInput.scrollHeight + 27 + 'px';
+        this.variablesPanelResize();
     }
 
     /**
@@ -236,27 +244,28 @@ export class Shell {
      */
     /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
     public variablesPanelResize(event?: Event): void {
-        let Y = window.scrollY - global.ShellPointer.container.offsetTop + window.innerHeight * 0.025;
-        const maxY = global.ShellPointer.container.offsetHeight - global.ShellPointer.variables.offsetHeight;
+        let Y = window.scrollY - this.container.offsetTop + window.innerHeight * 0.025;
+        const maxY = this.container.offsetHeight - this.variables.offsetHeight;
         if (Y < 0) {
             Y = 0;
         } else if (Y > maxY) {
             Y = maxY;
         }
-        global.ShellPointer.variables.style.top = Y + 'px';
-        global.ShellPointer.variables.style.left = global.ShellPointer.shell.offsetWidth + 'px';
-        global.ShellPointer.variables.style.height = Math.min(global.ShellPointer.container.offsetHeight, window.innerHeight) * 0.9 + 'px';
+        this.variables.style.top = Y + 'px';
+        this.variables.style.left = this.shell.offsetWidth + 'px';
+        this.variables.style.height = Math.min(this.container.offsetHeight, window.innerHeight) * 0.9 + 'px';
     }
 
     /**
      * Batch input delayed resize.
      * @param event
      */
-    /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
-    public batchDelayedResize(event: Event): void {
-        window.setTimeout(global.ShellPointer.batchResize, 0);
-    }
 
+    // public batchDelayedResize(event: Event): void {
+    //     window.setTimeout(this.batchResize, 0);
+    // }
+
+    public batchDelayedResize: EventHandler;
     /**
      * Batch input focus event handler.
      * @param event
@@ -273,10 +282,10 @@ export class Shell {
      */
     /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
     public batchExec(event: Event): void {
-        global.ShellPointer.promptClean();
-        global.ShellPointer.loadInput();
-        global.ShellPointer.variablesPanelResize();
-        global.ShellPointer.batchButton.focus();
+        this.promptClean();
+        this.loadInput();
+        this.variablesPanelResize();
+        this.batchButton.focus();
     }
 
     /**
@@ -363,9 +372,9 @@ export class Shell {
     /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
     public batchBlur(event: Event): void {
         global.EvaluatorPointer.Restart();
-        global.ShellPointer.cleanNameList();
-        global.ShellPointer.promptClean();
-        global.ShellPointer.variablesPanelResize();
+        this.cleanNameList();
+        this.promptClean();
+        this.variablesPanelResize();
     }
 
     /**
@@ -374,7 +383,7 @@ export class Shell {
      */
     /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
     public promptFocus(event: Event): void {
-        global.ShellPointer.promptIndex = global.ShellPointer.promptUid.indexOf(document.activeElement?.id.substring(1) as string);
+        this.promptIndex = this.promptUid.indexOf(document.activeElement?.id.substring(1) as string);
     }
 
     /**
@@ -383,13 +392,13 @@ export class Shell {
      */
     /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
     public promptBlur(event: Event): void {
-        const onblur = global.ShellPointer.promptSet[global.ShellPointer.promptUid[global.ShellPointer.promptIndex]].input;
-        if (global.ShellPointer.isTouchCapable && onblur.value != '') {
-            global.ShellPointer.evalPrompt(
-                global.ShellPointer.promptSet[onblur.id.substring(1)].container,
-                global.ShellPointer.promptSet[onblur.id.substring(1)].box,
-                global.ShellPointer.promptSet[onblur.id.substring(1)].input,
-                global.ShellPointer.promptSet[onblur.id.substring(1)].output,
+        const onblur = this.promptSet[this.promptUid[this.promptIndex]].input;
+        if (this.isTouchCapable && onblur.value != '') {
+            this.evalPrompt(
+                this.promptSet[onblur.id.substring(1)].container,
+                this.promptSet[onblur.id.substring(1)].box,
+                this.promptSet[onblur.id.substring(1)].input,
+                this.promptSet[onblur.id.substring(1)].output,
             );
         }
     }
@@ -440,9 +449,9 @@ export class Shell {
         td.innerHTML = '&#x300B;';
         td = createHTMLElement('td', tr);
         const input = createHTMLElement('textarea', td, 'i' + uid, 'inputprompt');
-        input.addEventListener('focus', this.promptFocus);
-        input.addEventListener('blur', this.promptBlur);
-        input.addEventListener('keydown', this.promptKeydown);
+        input.addEventListener('focus', this.promptFocus.bind(this));
+        input.addEventListener('blur', this.promptBlur.bind(this));
+        input.addEventListener('keydown', this.promptKeydown.bind(this));
 
         const promptResize = () => {
             input.style.height = '1em';
@@ -489,36 +498,33 @@ export class Shell {
                     const pdiv = document.getElementById('d' + onfocus?.id.substring(1));
                     const uid = global.crypto.randomUUID();
                     const div = createHTMLElement('div', null, 'd' + uid);
-                    global.ShellPointer.promptCreate(uid, div);
-                    global.ShellPointer.promptUid.splice(global.ShellPointer.promptIndex, 0, uid);
-                    global.ShellPointer.promptIndex++;
-                    global.ShellPointer.promptContainer.insertBefore(div, pdiv);
+                    this.promptCreate(uid, div);
+                    this.promptUid.splice(this.promptIndex, 0, uid);
+                    this.promptIndex++;
+                    this.promptContainer.insertBefore(div, pdiv);
                     onfocus.style.width = '90%';
                     onfocus.style.height = '1em';
                     onfocus.style.height = onfocus.scrollHeight + 'px';
                 } else {
-                    if (global.ShellPointer.promptIndex + 1 == global.ShellPointer.promptUid.length) {
+                    if (this.promptIndex + 1 == this.promptUid.length) {
                         // Append to end.
                         const uid = global.crypto.randomUUID();
-                        const div = createHTMLElement('div', global.ShellPointer.promptContainer, 'd' + uid);
-                        global.ShellPointer.promptCreate(uid, div);
-                        global.ShellPointer.promptUid.push(uid);
-                        global.ShellPointer.promptIndex++;
+                        const div = createHTMLElement('div', this.promptContainer, 'd' + uid);
+                        this.promptCreate(uid, div);
+                        this.promptUid.push(uid);
+                        this.promptIndex++;
                     }
-                    global.ShellPointer.evalPrompt(
-                        global.ShellPointer.promptSet[onfocus.id.substring(1)].container,
-                        global.ShellPointer.promptSet[onfocus.id.substring(1)].box,
-                        global.ShellPointer.promptSet[onfocus.id.substring(1)].input,
-                        global.ShellPointer.promptSet[onfocus.id.substring(1)].output,
+                    this.evalPrompt(
+                        this.promptSet[onfocus.id.substring(1)].container,
+                        this.promptSet[onfocus.id.substring(1)].box,
+                        this.promptSet[onfocus.id.substring(1)].input,
+                        this.promptSet[onfocus.id.substring(1)].output,
                     );
                     // Go to the next prompt.
-                    onfocus =
-                        global.ShellPointer.promptSet[
-                            global.ShellPointer.promptUid[global.ShellPointer.promptUid.indexOf(onfocus.id.substring(1)) + 1]
-                        ].input;
+                    onfocus = this.promptSet[this.promptUid[this.promptUid.indexOf(onfocus.id.substring(1)) + 1]].input;
                     onfocus.focus();
                     onfocus.selectionStart = onfocus.value.length;
-                    global.ShellPointer.refreshNameList();
+                    this.refreshNameList();
                 }
                 if (!event.shiftKey) return false;
             } else if (
@@ -526,42 +532,32 @@ export class Shell {
                 event.key === 'Backspace' &&
                 onfocus.selectionStart == 0
             ) {
-                if (
-                    global.ShellPointer.promptIndex !== 0 &&
-                    global.ShellPointer.promptSet[global.ShellPointer.promptUid[global.ShellPointer.promptIndex - 1]].input.value.trim() === ''
-                ) {
+                if (this.promptIndex !== 0 && this.promptSet[this.promptUid[this.promptIndex - 1]].input.value.trim() === '') {
                     // Deletes previous prompt.
-                    global.ShellPointer.promptSet[global.ShellPointer.promptUid[global.ShellPointer.promptIndex - 1]].container.remove();
-                    delete global.ShellPointer.promptSet[global.ShellPointer.promptUid[global.ShellPointer.promptIndex - 1]];
-                    global.ShellPointer.promptUid.splice(global.ShellPointer.promptIndex - 1, 1);
-                    global.ShellPointer.promptIndex--;
+                    this.promptSet[this.promptUid[this.promptIndex - 1]].container.remove();
+                    delete this.promptSet[this.promptUid[this.promptIndex - 1]];
+                    this.promptUid.splice(this.promptIndex - 1, 1);
+                    this.promptIndex--;
                     event.preventDefault();
-                } else if (global.ShellPointer.promptSet[global.ShellPointer.promptUid[global.ShellPointer.promptIndex]].input.value.trim() === '') {
+                } else if (this.promptSet[this.promptUid[this.promptIndex]].input.value.trim() === '') {
                     // Deletes current prompt.
-                    global.ShellPointer.promptSet[global.ShellPointer.promptUid[global.ShellPointer.promptIndex]].container.remove();
-                    delete global.ShellPointer.promptSet[global.ShellPointer.promptUid[global.ShellPointer.promptIndex]];
-                    global.ShellPointer.promptUid.splice(global.ShellPointer.promptIndex, 1);
-                    global.ShellPointer.promptIndex--;
-                    global.ShellPointer.promptSet[global.ShellPointer.promptUid[global.ShellPointer.promptIndex]].input.focus();
+                    this.promptSet[this.promptUid[this.promptIndex]].container.remove();
+                    delete this.promptSet[this.promptUid[this.promptIndex]];
+                    this.promptUid.splice(this.promptIndex, 1);
+                    this.promptIndex--;
+                    this.promptSet[this.promptUid[this.promptIndex]].input.focus();
                     event.preventDefault();
                 }
             } else if (event.key === 'ArrowUp') {
-                if (global.ShellPointer.promptIndex > 0 && onfocus.selectionStart <= onfocus.value.split(/\r?\n/)[0].length) {
-                    global.ShellPointer.promptSet[
-                        global.ShellPointer.promptUid[global.ShellPointer.promptUid.indexOf(onfocus.id.substring(1)) - 1]
-                    ].input.focus();
+                if (this.promptIndex > 0 && onfocus.selectionStart <= onfocus.value.split(/\r?\n/)[0].length) {
+                    this.promptSet[this.promptUid[this.promptUid.indexOf(onfocus.id.substring(1)) - 1]].input.focus();
                     event.preventDefault();
                 }
             } else if (event.key === 'ArrowDown') {
                 const promptLines = onfocus.value.split(/\r?\n/);
                 promptLines.pop();
-                if (
-                    global.ShellPointer.promptIndex + 1 < global.ShellPointer.promptUid.length &&
-                    onfocus.selectionStart >= promptLines.join('\n').length + 1
-                ) {
-                    global.ShellPointer.promptSet[
-                        global.ShellPointer.promptUid[global.ShellPointer.promptUid.indexOf(onfocus.id.substring(1)) + 1]
-                    ].input.focus();
+                if (this.promptIndex + 1 < this.promptUid.length && onfocus.selectionStart >= promptLines.join('\n').length + 1) {
+                    this.promptSet[this.promptUid[this.promptUid.indexOf(onfocus.id.substring(1)) + 1]].input.focus();
                     event.preventDefault();
                 }
             }
