@@ -1,4 +1,4 @@
-<p style="text-align:center;">
+<p align="center">
     <a href="https://mathjslab.com/" target="_blank" rel="noopener"><img src="images/mathjslab-logo.svg" alt="logo" width="200" height="200" /></a>
 </p>
 
