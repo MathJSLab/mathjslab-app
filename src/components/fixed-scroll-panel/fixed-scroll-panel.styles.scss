@@ -1,6 +1,6 @@
-// @use '../../styles/abstract/variables';
-// @use '../../styles/abstract/functions';
-// @use '../../styles/abstract/mixins';
+@use '../../styles/component/reset';
+@use '../../styles/abstract/variables';
+@use '../../styles/component/common';
 
 .fixed-scroll-panel-wrapper {
     display: none;
@@ -8,21 +8,26 @@
 
 @media (min-width: 1024px) {
     .fixed-scroll-panel-wrapper {
-        width: 14%;
-        background-color: var(--green-backgroung);
+        display: block;
+        width: 12%;
+        background-color: var(--green-background);
         border: 2px solid var(--green-border);
         padding: 1rem;
         border-radius: 1rem;
         position: absolute;
         right: 0;
-        display: block;
     }
 }
 
-.green {
+.fixed-scroll-panel-title {
     border-radius: 0.5rem;
     text-decoration: none;
+    text-align: center;
     color: var(--color-a-text);
     transition: 0.4s;
     padding: 0.1rem;
+}
+
+.fixed-scroll-panel-content-wrapper {
+    display: block;
 }

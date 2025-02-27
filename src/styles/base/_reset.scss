@@ -1,13 +1,9 @@
-/* _reset.scss */
+/**
+ * _reset.scss - Reset/CSS baseline
+ */
+@use './common-reset';
 
-/* Define que todos os elementos usarão border-box para cálculo de dimensões */
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-/* Remove margens e paddings padrão */
+/* Removes default margins and paddings. */
 html,
 body,
 div,
@@ -97,18 +93,18 @@ video {
     vertical-align: baseline;
 }
 
-/* Remove estilos de listas */
+/* Removes styles from lists. */
 ol,
 ul {
     list-style: none;
 }
 
-/* Remove decoração padrão de links */
+/* Removes default decoration from links. */
 a {
     text-decoration: none;
 }
 
-/* Define estilos básicos para tabelas */
+/* Defines basic styles for tables. */
 table {
     border-collapse: collapse;
     border-spacing: 0;

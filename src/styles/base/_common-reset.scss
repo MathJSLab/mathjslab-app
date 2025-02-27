@@ -1,0 +1,6 @@
+/* Defines that all elements will use border-box to calculate dimensions. */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}

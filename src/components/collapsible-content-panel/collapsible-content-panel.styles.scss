@@ -1,17 +1,18 @@
-// @use '../../styles/abstract/variables';
-// @use '../../styles/abstract/functions';
-// @use '../../styles/abstract/mixins';
+@use '../../styles/component/reset';
+@use '../../styles/abstract/variables';
+@use '../../styles/component/common';
 
-.wrap-collapsible {
+.collapsible-content-panel-wrapper {
+    background: var(--green-background);
     box-shadow: 0px 10px 14px -7px var(--color-panel-box-shadow);
     border-radius: 1rem;
 }
 
-input.toggle {
+input.collapsible-content-panel-toggle {
     display: none;
 }
 
-.lbl-toggle {
+.collapsible-content-panel-title {
     display: block;
     font-weight: bold;
     font-size: 1.2rem;
@@ -19,18 +20,18 @@ input.toggle {
     text-align: center;
     padding: 1rem;
     color: var(--color-a-text);
-    background: var(--green-backgroung);
+    background: var(--green-background);
     cursor: pointer;
     border: 2px solid var(--green-border);
     border-radius: 1rem;
     transition: all 0.25s ease-out;
 }
 
-.lbl-toggle:hover {
+.collapsible-content-panel-title:hover {
     color: var(--color-a-text-hover);
 }
 
-.lbl-toggle::before {
+.collapsible-content-panel-title::before {
     content: ' ';
     display: inline-block;
     border-top: 5px solid transparent;
@@ -42,7 +43,7 @@ input.toggle {
     transition: transform 0.2s ease-out;
 }
 
-.collapsible-content .content-inner {
+.collapsible-content-panel-collapsible .collapsible-content-panel-inner-content {
     background: var(--color-background);
     border-left: 2px solid var(--green-border);
     border-right: 2px solid var(--green-border);
@@ -52,21 +53,21 @@ input.toggle {
     padding: 0.5rem;
 }
 
-.collapsible-content {
+.collapsible-content-panel-collapsible {
     max-height: 0px;
     overflow: hidden;
     transition: max-height 0.25s ease-in-out;
 }
 
-.toggle:checked + .lbl-toggle + .collapsible-content {
+.collapsible-content-panel-toggle:checked + .collapsible-content-panel-title + .collapsible-content-panel-collapsible {
     max-height: fit-content;
 }
 
-.toggle:checked + .lbl-toggle::before {
+.collapsible-content-panel-toggle:checked + .collapsible-content-panel-title::before {
     transform: rotate(90deg) translateX(-3px);
 }
 
-.toggle:checked + .lbl-toggle {
+.collapsible-content-panel-toggle:checked + .collapsible-content-panel-title {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
     border-bottom: 0;

@@ -3,6 +3,7 @@ import './showOpenFilePickerPolyfill';
 import openFileDialog from './openFileDialog';
 
 import {
+    type ElementType,
     AST,
     Decimal,
     ComplexDecimal,
@@ -15,9 +16,19 @@ import {
     bundleConfiguration,
 } from 'mathjslab';
 
-import type { ElementType } from 'mathjslab';
-
-export { Evaluator };
+export {
+    type ElementType,
+    AST,
+    Decimal,
+    ComplexDecimal,
+    MultiArray,
+    Evaluator,
+    CharString,
+    LinearAlgebra,
+    EvaluatorConfig,
+    AliasNameTable,
+    bundleConfiguration,
+};
 
 import { MathMarkdown } from './MathMarkdown';
 export { MathMarkdown };
@@ -49,22 +60,22 @@ declare global {
  * To change the language after load (to be used in a language selection menu, for example).
  * @param lang
  */
-global.setLanguage = (lang?: string): void => {
+globalThis.setLanguage = (lang?: string): void => {
     if (lang) {
-        global.lang = lang in languageAlias ? lang : (MathJSLabCalc.defaultLanguage as string);
+        globalThis.lang = lang in languageAlias ? lang : (MathJSLabCalc.defaultLanguage as string);
     }
-    document.querySelector('html')!.setAttribute('lang', global.lang);
-    global.ShellPointer.setLanguage();
-    EvaluatorConfiguration.aliasNameTable = languageAlias[global.lang];
-    global.EvaluatorPointer = new Evaluator(EvaluatorConfiguration);
-    global.EvaluatorPointer.debug = buildConfiguration.debug;
-    global.ShellPointer.batchExec(new Event('click'));
+    document.querySelector('html')!.setAttribute('lang', globalThis.lang);
+    globalThis.ShellPointer.shell.setLanguage();
+    EvaluatorConfiguration.aliasNameTable = languageAlias[globalThis.lang];
+    globalThis.EvaluatorPointer = new Evaluator(EvaluatorConfiguration);
+    globalThis.EvaluatorPointer.debug = buildConfiguration.debug;
+    globalThis.ShellPointer.shell.evaluate(new Event('click'));
 };
 
 /**
  * To open file from device.
  */
-global.openFile = (): void => {
+globalThis.openFile = (): void => {
     EvaluatorConfiguration.externalFunctionTable!.open.func();
 };
 
@@ -226,7 +237,7 @@ export const languageAlias: Record<string, AliasNameTable> = {
     },
 };
 
-declare const Chart: any;
+// declare const Chart: any;
 
 export type PlotData = {
     data: Array<number>;
@@ -268,7 +279,6 @@ export const outputFunction: { [k: string]: Function } = {
             };
 
             const data = [trace1, trace2];
-
             Plotly.newPlot(parent, data);
         });
         insertOutput.type = '';
@@ -345,7 +355,7 @@ export const outputFunction: { [k: string]: Function } = {
         });
         insertOutput.type = '';
     },
-    plot2d: function (parent: string): void {
+    plot2d: function (output: HTMLElement): void {
         DynamicModule.use('plotly', (Plotly: any) => {
             const trace = {
                 x: plotData.X,
@@ -354,8 +364,14 @@ export const outputFunction: { [k: string]: Function } = {
             };
 
             const data = [trace];
-
-            Plotly.newPlot(parent, data);
+            const layout = {};
+            const config = {
+                displayModeBar: false, // Mostra ou esconde a barra
+                responsive: true, // Faz o gráfico se ajustar ao tamanho do container
+                staticPlot: false, // Se `true`, o gráfico fica estático, sem interações
+                // scrollZoom: true, // Permite zoom com a roda do mouse
+            };
+            Plotly.newPlot(output, data, layout, config);
         });
         insertOutput.type = '';
     },
@@ -379,7 +395,7 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
     /**
      * Alias table
      */
-    aliasNameTable: languageAlias[global.lang],
+    aliasNameTable: languageAlias[globalThis.lang],
 
     /**
      * External function table
@@ -393,26 +409,26 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                 if (!start.im.eq(0)) throw new Error('complex number sum index');
                 if (!end.im.eq(0)) throw new Error('complex number sum index');
                 let result: ComplexDecimal = ComplexDecimal.zero();
-                const sum_function_name = `summation_${global.crypto.randomUUID()}`;
-                global.EvaluatorPointer.localTable[sum_function_name] = {};
+                const sum_function_name = `summation_${globalThis.crypto.randomUUID()}`;
+                globalThis.EvaluatorPointer.localTable[sum_function_name] = {};
                 for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
-                    global.EvaluatorPointer.localTable[sum_function_name][variable.id] = new ComplexDecimal(i, 0);
-                    result = ComplexDecimal.add(result, global.EvaluatorPointer.Evaluator(expr, true, sum_function_name));
+                    globalThis.EvaluatorPointer.localTable[sum_function_name][variable.id] = new ComplexDecimal(i, 0);
+                    result = ComplexDecimal.add(result, globalThis.EvaluatorPointer.Evaluator(expr, true, sum_function_name));
                 }
-                delete global.EvaluatorPointer.localTable[sum_function_name];
+                delete globalThis.EvaluatorPointer.localTable[sum_function_name];
                 return result;
             },
-            unparserMathML: (tree: any): string => {
+            unparserMathML: (tree: AST.NodeInput): string => {
                 return (
                     '<mstyle displaystyle="true"><munderover><mo>&sum;</mo><mrow>' +
-                    global.EvaluatorPointer.unparserMathML(tree.args[0]) +
+                    globalThis.EvaluatorPointer.unparserMathML(tree.args[0]) +
                     '<mo>=</mo>' +
-                    global.EvaluatorPointer.unparserMathML(tree.args[1]) +
+                    globalThis.EvaluatorPointer.unparserMathML(tree.args[1]) +
                     '</mrow><mrow>' +
-                    global.EvaluatorPointer.unparserMathML(tree.args[2]) +
+                    globalThis.EvaluatorPointer.unparserMathML(tree.args[2]) +
                     '</mrow>' +
                     '</munderover>' +
-                    global.EvaluatorPointer.unparserMathML(tree.args[3]) +
+                    globalThis.EvaluatorPointer.unparserMathML(tree.args[3]) +
                     '</mstyle>'
                 );
             },
@@ -426,26 +442,26 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                 if (!start.im.eq(0)) throw new Error('complex number prod index');
                 if (!end.im.eq(0)) throw new Error('complex number prod index');
                 let result: ComplexDecimal = ComplexDecimal.one();
-                const prod_function_name = `productory_${global.crypto.randomUUID()}`;
-                global.EvaluatorPointer.localTable[prod_function_name] = {};
+                const prod_function_name = `productory_${globalThis.crypto.randomUUID()}`;
+                globalThis.EvaluatorPointer.localTable[prod_function_name] = {};
                 for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
-                    global.EvaluatorPointer.localTable[prod_function_name][variable.id] = new ComplexDecimal(i, 0);
-                    result = ComplexDecimal.mul(result, global.EvaluatorPointer.Evaluator(expr, true, prod_function_name));
+                    globalThis.EvaluatorPointer.localTable[prod_function_name][variable.id] = new ComplexDecimal(i, 0);
+                    result = ComplexDecimal.mul(result, globalThis.EvaluatorPointer.Evaluator(expr, true, prod_function_name));
                 }
-                delete global.EvaluatorPointer.localTable[prod_function_name];
+                delete globalThis.EvaluatorPointer.localTable[prod_function_name];
                 return result;
             },
-            unparserMathML: (tree: any): string => {
+            unparserMathML: (tree: AST.NodeInput): string => {
                 return (
                     '<mstyle displaystyle="true"><munderover><mo>&prod;</mo><mrow>' +
-                    global.EvaluatorPointer.unparserMathML(tree.args[0]) +
+                    globalThis.EvaluatorPointer.unparserMathML(tree.args[0]) +
                     '<mo>=</mo>' +
-                    global.EvaluatorPointer.unparserMathML(tree.args[1]) +
+                    globalThis.EvaluatorPointer.unparserMathML(tree.args[1]) +
                     '</mrow><mrow>' +
-                    global.EvaluatorPointer.unparserMathML(tree.args[2]) +
+                    globalThis.EvaluatorPointer.unparserMathML(tree.args[2]) +
                     '</mrow>' +
                     '</munderover>' +
-                    global.EvaluatorPointer.unparserMathML(tree.args[3]) +
+                    globalThis.EvaluatorPointer.unparserMathML(tree.args[3]) +
                     '</mstyle>'
                 );
             },
@@ -498,8 +514,8 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                     plotData.MaxX = maxx.re.toNumber();
                 }
                 const deltaX = (plotData.MaxX - plotData.MinX) / plotWidth;
-                const plot_function_name = `plot2d_${global.crypto.randomUUID()}`;
-                global.EvaluatorPointer.localTable[plot_function_name] = {};
+                const plot_function_name = `plot2d_${globalThis.crypto.randomUUID()}`;
+                globalThis.EvaluatorPointer.localTable[plot_function_name] = {};
                 const save_precision = Decimal.precision;
                 Decimal.set({ precision: 20 });
                 plotData.MaxY = 0;
@@ -507,9 +523,9 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                 plotData.X = [];
                 plotData.data = [];
                 for (let i = 0; i < plotWidth; i++) {
-                    global.EvaluatorPointer.localTable[plot_function_name][variable.id] = new ComplexDecimal(plotData.MinX + deltaX * i, 0);
-                    plotData.X[i] = global.EvaluatorPointer.localTable[plot_function_name][variable.id].re.toNumber();
-                    const data_y = global.EvaluatorPointer.Evaluator(expr, true, plot_function_name);
+                    globalThis.EvaluatorPointer.localTable[plot_function_name][variable.id] = new ComplexDecimal(plotData.MinX + deltaX * i, 0);
+                    plotData.X[i] = globalThis.EvaluatorPointer.localTable[plot_function_name][variable.id].re.toNumber();
+                    const data_y = globalThis.EvaluatorPointer.Evaluator(expr, true, plot_function_name);
                     if (isFinite(data_y.re.toNumber()) && isFinite(data_y.im.toNumber()) && data_y.im.eq(0)) {
                         plotData.data[i] = data_y.re.toNumber();
                     } else {
@@ -518,7 +534,7 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                     plotData.MaxY = Math.max(plotData.MaxY, plotData.data[i]);
                     plotData.MinY = Math.min(plotData.MinY, plotData.data[i]);
                 }
-                delete global.EvaluatorPointer.localTable[plot_function_name];
+                delete globalThis.EvaluatorPointer.localTable[plot_function_name];
                 Decimal.set({ precision: save_precision });
                 return AST.nodeIndexExpr(AST.nodeIdentifier('plot2d'), AST.nodeList([expr, variable, minx, maxx]));
             },
@@ -545,7 +561,7 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                         if (DOM.array[0][i] instanceof ComplexDecimal) {
                             plotData.X[i] = (DOM.array[0][i] as ComplexDecimal).re.toNumber();
                         } else if (DOM.array[0][i] instanceof CharString) {
-                            plotData.X[i] = (DOM.array[0][i] as any).str;
+                            plotData.X[i] = (DOM.array[0][i] as CharString).str;
                         }
                     } else {
                         plotData.X[i] = i;
@@ -571,11 +587,11 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
             mapper: false,
             ev: [true],
             func: (url?: CharString): AST.NodeExpr => {
-                const promptSet = global.ShellPointer.currentPromptSet;
+                const promptEntry = globalThis.ShellPointer.shell.element.promptSet.currentPrompt;
                 if (url) {
-                    if (global.ShellPointer.isFileProtocol) {
-                        promptSet.box.className = 'bad';
-                        promptSet.output.innerHTML = 'open function unavailable <b>offline</b>.';
+                    if (globalThis.ShellPointer.isFileProtocol) {
+                        promptEntry.element.frameBox.className = 'bad';
+                        promptEntry.element.output.innerHTML = 'open function unavailable <b>offline</b>.';
                     } else {
                         global
                             .fetch(url.str)
@@ -587,18 +603,18 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                                 }
                             })
                             .then((responseFile: string) => {
-                                global.ShellPointer.openContent(responseFile);
+                                globalThis.ShellPointer.shell.load(responseFile);
                             })
                             /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
                             .catch((error) => {
-                                promptSet.box.className = 'bad';
-                                promptSet.output.innerHTML = `open: error loading ${url.str}`;
+                                promptEntry.element.frameBox.className = 'bad';
+                                promptEntry.element.output.innerHTML = `open: error loading ${url.str}`;
                             });
                     }
                     return AST.nodeIndexExpr(AST.nodeIdentifier('open'), AST.nodeList([url.str]));
                 } else {
                     openFileDialog((content: string) => {
-                        global.ShellPointer.openContent(content);
+                        globalThis.ShellPointer.shell.load(content);
                     }, openFileOptionMathJSLab);
                     return AST.nodeIndexExpr(AST.nodeIdentifier('open'), AST.nodeListFirst());
                 }
@@ -610,11 +626,11 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
             mapper: false,
             ev: [true],
             func: (url?: CharString): AST.NodeExpr => {
-                const promptSet = global.ShellPointer.currentPromptSet;
+                const promptEntry = globalThis.ShellPointer.shell.element.promptSet.currentPrompt;
                 if (url) {
-                    if (global.ShellPointer.isFileProtocol) {
-                        promptSet.box.className = 'bad';
-                        promptSet.output.innerHTML = 'markdown function unavailable <b>offline</b>.';
+                    if (globalThis.ShellPointer.isFileProtocol) {
+                        promptEntry.element.frameBox.className = 'bad';
+                        promptEntry.element.output.innerHTML = 'markdown function unavailable <b>offline</b>.';
                     } else {
                         global
                             .fetch(url.str)
@@ -626,21 +642,21 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                                 }
                             })
                             .then((responseFile: string) => {
-                                promptSet.box.className = 'doc';
-                                promptSet.output.innerHTML = MathMarkdown.md2html(responseFile);
+                                promptEntry.element.frameBox.className = 'doc';
+                                promptEntry.element.output.innerHTML = MathMarkdown.md2html(responseFile);
                                 MathMarkdown.typeset();
                             })
                             /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
                             .catch((error) => {
-                                promptSet.box.className = 'bad';
-                                promptSet.output.innerHTML = `markdown: error loading ${url.str}`;
+                                promptEntry.element.frameBox.className = 'bad';
+                                promptEntry.element.output.innerHTML = `markdown: error loading ${url.str}`;
                             });
                     }
                     return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeList([url.str]));
                 } else {
                     openFileDialog((content: string) => {
-                        promptSet.box.className = 'doc';
-                        promptSet.output.innerHTML = MathMarkdown.md2html(content);
+                        promptEntry.element.frameBox.className = 'doc';
+                        promptEntry.element.output.innerHTML = MathMarkdown.md2html(content);
                         MathMarkdown.typeset();
                     }, openFileOptionMarkdown);
                     return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeListFirst());
@@ -653,34 +669,34 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
             mapper: false,
             ev: [true],
             func: (...url: CharString[]): AST.NodeExpr => {
-                const promptSet = global.ShellPointer.currentPromptSet;
+                const promptEntry = globalThis.ShellPointer.shell.element.promptSet.currentPrompt;
                 const loadContent = (content: string, name: string) => {
                     let error: boolean = false;
                     let errorMessage: string = '';
                     insertOutput.type = '';
-                    promptSet.output.innerHTML = '';
+                    promptEntry.element.output.innerHTML = '';
                     try {
-                        const tree = global.EvaluatorPointer.Parse(content);
+                        const tree = globalThis.EvaluatorPointer.Parse(content);
                         if (tree) {
-                            global.EvaluatorPointer.Evaluate(tree);
+                            globalThis.EvaluatorPointer.Evaluate(tree);
                         }
                     } catch (e) {
                         error = true;
                         errorMessage = `load: error loading ${name}: ${e}`;
                     }
                     if (error) {
-                        promptSet.box.className = 'bad';
-                        promptSet.output.innerHTML = errorMessage;
+                        promptEntry.element.frameBox.className = 'bad';
+                        promptEntry.element.output.innerHTML = errorMessage;
                     } else {
-                        promptSet.box.className = 'good';
-                        promptSet.output.innerHTML = `Loaded script from ${name}</ br>`;
+                        promptEntry.element.frameBox.className = 'good';
+                        promptEntry.element.output.innerHTML = `Loaded script from ${name}</ br>`;
                     }
-                    global.ShellPointer.refreshNameList();
+                    globalThis.ShellPointer.shell.refreshNameList();
                 };
                 if (url.length > 0) {
-                    if (global.ShellPointer.isFileProtocol) {
-                        promptSet.box.className = 'bad';
-                        promptSet.output.innerHTML = 'load function unavailable <b>offline</b>.';
+                    if (globalThis.ShellPointer.isFileProtocol) {
+                        promptEntry.element.frameBox.className = 'bad';
+                        promptEntry.element.output.innerHTML = 'load function unavailable <b>offline</b>.';
                     } else {
                         url.forEach((file: CharString) => {
                             global
@@ -697,8 +713,8 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                                 })
                                 /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
                                 .catch((error) => {
-                                    promptSet.box.className = 'bad';
-                                    promptSet.output.innerHTML = `load: error loading ${file.str}`;
+                                    promptEntry.element.frameBox.className = 'bad';
+                                    promptEntry.element.output.innerHTML = `load: error loading ${file.str}`;
                                 });
                         });
                     }
@@ -720,7 +736,7 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
         help: {
             func: (...args: string[]): void => {
                 const encodeName = (name: string): string => {
-                    name = global.EvaluatorPointer.aliasName(name);
+                    name = globalThis.EvaluatorPointer.aliasName(name);
                     const result: string[] = [];
                     for (let i = 0; i < name.length; i++) {
                         const c = name.charCodeAt(i);
@@ -736,45 +752,45 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                     }
                     return result.join('');
                 };
-                const promptSet = global.ShellPointer.currentPromptSet;
+                const promptEntry = globalThis.ShellPointer.shell.element.promptSet.currentPrompt;
                 if (args.length == 1) {
-                    if (global.ShellPointer.isFileProtocol) {
-                        promptSet.box.className = 'bad';
-                        promptSet.output.innerHTML = 'help command unavailable <b>offline</b>.';
+                    if (globalThis.ShellPointer.isFileProtocol) {
+                        promptEntry.element.frameBox.className = 'bad';
+                        promptEntry.element.output.innerHTML = 'help command unavailable <b>offline</b>.';
                     } else {
                         global
-                            .fetch(`${global.MathJSLabCalc.helpBaseUrl}help/${global.lang}/${encodeURIComponent(encodeName(args[0]))}.md`)
+                            .fetch(`${globalThis.MathJSLabCalc.helpBaseUrl}help/${globalThis.lang}/${encodeURIComponent(encodeName(args[0]))}.md`)
                             .then((response) => {
                                 if (response.ok) {
-                                    promptSet.box.className = 'info';
+                                    promptEntry.element.frameBox.className = 'info';
                                     return response.text();
                                 } else {
-                                    promptSet.box.className = 'bad';
+                                    promptEntry.element.frameBox.className = 'bad';
                                     return `help ${args[0]} not found.`;
                                 }
                             })
                             .then((responseText) => {
-                                promptSet.output.innerHTML = MathMarkdown.md2html(responseText);
+                                promptEntry.element.output.innerHTML = MathMarkdown.md2html(responseText);
                                 MathMarkdown.typeset();
                             });
                     }
                 } else if (args.length == 0) {
-                    promptSet.box.className = 'info';
+                    promptEntry.element.frameBox.className = 'info';
                     global
-                        .fetch(`${global.MathJSLabCalc.helpBaseUrl}help/${global.lang}/help.md`)
+                        .fetch(`${globalThis.MathJSLabCalc.helpBaseUrl}help/${globalThis.lang}/help.md`)
                         .then((response) => {
                             if (response.ok) {
-                                promptSet.box.className = 'info';
+                                promptEntry.element.frameBox.className = 'info';
                                 return response.text();
                             } else {
-                                promptSet.box.className = 'bad';
+                                promptEntry.element.frameBox.className = 'bad';
                                 return `help ${args[0]} not found.`;
                             }
                         })
                         .then((responseText) => {
-                            promptSet.output.innerHTML = MathMarkdown.md2html(
+                            promptEntry.element.output.innerHTML = MathMarkdown.md2html(
                                 responseText +
-                                    global.EvaluatorPointer.builtInFunctionList
+                                    globalThis.EvaluatorPointer.builtInFunctionList
                                         .map((func) => `\`${func}\``)
                                         .sort()
                                         .join(', '),
@@ -782,8 +798,8 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
                             MathMarkdown.typeset();
                         });
                 } else {
-                    promptSet.box.className = 'bad';
-                    promptSet.output.innerHTML = `help: function called with too many inputs`;
+                    promptEntry.element.frameBox.className = 'bad';
+                    promptEntry.element.output.innerHTML = `help: function called with too many inputs`;
                 }
             },
         },
@@ -801,39 +817,39 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
  */
 function bootstrap() {
     const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
-    if (typeof global.MathJSLabCalc === 'undefined') {
-        global.MathJSLabCalc = {
+    if (typeof globalThis.MathJSLabCalc === 'undefined') {
+        globalThis.MathJSLabCalc = {
             exampleBaseUrl: baseUrl,
             helpBaseUrl: baseUrl,
             defaultLanguage: 'en',
         };
     } else {
-        if (global.MathJSLabCalc.exampleBaseUrl !== undefined || global.MathJSLabCalc.exampleBaseUrl !== null) {
-            if (global.MathJSLabCalc.exampleBaseUrl![global.MathJSLabCalc.exampleBaseUrl!.length - 1] !== '/') {
-                global.MathJSLabCalc.exampleBaseUrl += '/';
+        if (globalThis.MathJSLabCalc.exampleBaseUrl !== undefined || globalThis.MathJSLabCalc.exampleBaseUrl !== null) {
+            if (globalThis.MathJSLabCalc.exampleBaseUrl![globalThis.MathJSLabCalc.exampleBaseUrl!.length - 1] !== '/') {
+                globalThis.MathJSLabCalc.exampleBaseUrl += '/';
             }
         } else {
-            global.MathJSLabCalc.exampleBaseUrl = baseUrl;
+            globalThis.MathJSLabCalc.exampleBaseUrl = baseUrl;
         }
-        if (global.MathJSLabCalc.helpBaseUrl !== undefined || global.MathJSLabCalc.helpBaseUrl !== null) {
-            if (global.MathJSLabCalc.helpBaseUrl![global.MathJSLabCalc.helpBaseUrl!.length - 1] !== '/') {
-                global.MathJSLabCalc.helpBaseUrl += '/';
+        if (globalThis.MathJSLabCalc.helpBaseUrl !== undefined || globalThis.MathJSLabCalc.helpBaseUrl !== null) {
+            if (globalThis.MathJSLabCalc.helpBaseUrl![globalThis.MathJSLabCalc.helpBaseUrl!.length - 1] !== '/') {
+                globalThis.MathJSLabCalc.helpBaseUrl += '/';
             }
         } else {
-            global.MathJSLabCalc.helpBaseUrl = baseUrl;
+            globalThis.MathJSLabCalc.helpBaseUrl = baseUrl;
         }
-        if (global.MathJSLabCalc.defaultLanguage === undefined || global.MathJSLabCalc.defaultLanguage === null) {
-            global.MathJSLabCalc.defaultLanguage = 'en';
+        if (globalThis.MathJSLabCalc.defaultLanguage === undefined || globalThis.MathJSLabCalc.defaultLanguage === null) {
+            globalThis.MathJSLabCalc.defaultLanguage = 'en';
         }
     }
-    global.lang = navigator.language.split('-')[0];
-    if (!(global.lang in languageAlias)) {
-        global.lang = global.MathJSLabCalc.defaultLanguage as string;
+    globalThis.lang = navigator.language.split('-')[0];
+    if (!(globalThis.lang in languageAlias)) {
+        globalThis.lang = globalThis.MathJSLabCalc.defaultLanguage as string;
     }
-    EvaluatorConfiguration.aliasNameTable = languageAlias[global.lang];
-    global.EvaluatorPointer = new Evaluator(EvaluatorConfiguration);
-    global.EvaluatorPointer.debug = buildConfiguration.debug;
-    global.MathJSLabCalcBuildMessage = buildConfiguration.buildMessage + `, bundle: ${bundleConfiguration}`;
+    EvaluatorConfiguration.aliasNameTable = languageAlias[globalThis.lang];
+    globalThis.EvaluatorPointer = new Evaluator(EvaluatorConfiguration);
+    globalThis.EvaluatorPointer.debug = buildConfiguration.debug;
+    globalThis.MathJSLabCalcBuildMessage = buildConfiguration.buildMessage + `, bundle: ${bundleConfiguration}`;
     MathMarkdown.initialize();
 }
 bootstrap();

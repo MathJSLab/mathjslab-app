@@ -1,0 +1,23 @@
+@use '../abstract/variables';
+@use '../abstract/functions';
+@use '../abstract/mixins';
+
+.good {
+    @include mixins.colored-box();
+}
+
+.bad {
+    @include mixins.colored-box(var(--red-background), var(--red-border));
+}
+
+.warning {
+    @include mixins.colored-box(var(--yellow-background), var(--yellow-border));
+}
+
+.info {
+    @include mixins.colored-box(var(--blue-background), var(--blue-border));
+}
+
+.doc {
+    @include mixins.colored-box(var(--color-background), var(--color-border));
+}

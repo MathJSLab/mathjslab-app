@@ -1,6 +1,6 @@
 import importUMD from './importUMD';
 
-export type DynamicModuleConfiguration = {
+type DynamicModuleConfiguration = {
     [key: string]: {
         module: unknown;
         import: Function;
@@ -8,7 +8,7 @@ export type DynamicModuleConfiguration = {
     };
 };
 
-export default abstract class DynamicModule {
+abstract class DynamicModule {
     protected static readonly configuration: DynamicModuleConfiguration = {
         marked: {
             module: null,
@@ -25,7 +25,7 @@ export default abstract class DynamicModule {
                         script.async = false;
                         /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
                         script.addEventListener('load', (ev) => {
-                            resolve(global.MathJax);
+                            resolve(globalThis.MathJax);
                         });
                         /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
                         script.addEventListener('error', (ev) => {
@@ -93,3 +93,5 @@ export default abstract class DynamicModule {
         DynamicModule.configuration[name].module = null;
     }
 }
+export { type DynamicModuleConfiguration, DynamicModule };
+export default DynamicModule;

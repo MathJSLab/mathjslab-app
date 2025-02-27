@@ -55,13 +55,19 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                                 loader: 'css-loader',
                                 options: {
                                     modules: {
-                                        auto: true, // Enable CSS modules for files with `.module.scss`
+                                        auto: true,
                                         localIdentName: isProduction ? '[hash:base64]' : '[path][name]__[local]',
                                     },
                                 },
                             },
                             {
                                 loader: 'sass-loader',
+                                options: {
+                                    sassOptions: {
+                                        silenceDeprecations: ['global-builtin'],
+                                        outputStyle: 'compressed',
+                                    },
+                                },
                             },
                         ],
                     },
@@ -74,31 +80,13 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                                 loader: 'sass-loader',
                                 options: {
                                     sassOptions: {
+                                        silenceDeprecations: ['global-builtin'],
                                         outputStyle: 'compressed',
                                     },
                                 },
                             },
                         ],
                     },
-                    // {
-                    //     test: /\.s[ac]ss$/i,
-                    //     exclude: defaultExclude.map((dir) => typeof dir === 'string' ? path.join(__dirname, dir) : dir),
-                    //     use: [
-                    //         isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
-                    //         {
-                    //             loader: 'css-loader',
-                    //             options: {
-                    //                 modules: {
-                    //                     auto: true,
-                    //                     localIdentName: isProduction
-                    //                         ? '[hash:base64]'
-                    //                         : '[path][name]__[local]',
-                    //                 },
-                    //             },
-                    //         },
-                    //         'sass-loader'
-                    //     ],
-                    // },
                 ],
             },
             resolve: {

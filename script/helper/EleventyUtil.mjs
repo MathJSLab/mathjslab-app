@@ -74,32 +74,32 @@ Object.defineProperty(os, 'EOL', {
  * The `JSON.stringify` function is not overridden because its equivalent from
  * the `json5` package does not produce double-quoted keys.
  */
-global.JSON.backup = {
-    parse: global.JSON.parse.bind(global.JSON),
-    stringify: global.JSON.stringify.bind(global.JSON),
+globalThis.JSON.backup = {
+    parse: globalThis.JSON.parse.bind(globalThis.JSON),
+    stringify: globalThis.JSON.stringify.bind(globalThis.JSON),
 };
 /* Extending JSON object. */
-global.JSON.parseJSON5 = JSON5.parse.bind(JSON5);
-global.JSON.parseJSON = global.JSON.parse.bind(global.JSON);
-global.JSON.stringifyJSON5 = JSON5.stringify.bind(JSON5);
-global.JSON.stringifyJSON = global.JSON.stringify.bind(global.JSON);
-global.JSON.stringify = function (value, replacer, space) {
-    return global.JSON.backup.stringify(value, replacer, space).replace(/\n/g, '\r\n');
-}.bind(global.JSON);
+globalThis.JSON.parseJSON5 = JSON5.parse.bind(JSON5);
+globalThis.JSON.parseJSON = globalThis.JSON.parse.bind(globalThis.JSON);
+globalThis.JSON.stringifyJSON5 = JSON5.stringify.bind(JSON5);
+globalThis.JSON.stringifyJSON = globalThis.JSON.stringify.bind(globalThis.JSON);
+globalThis.JSON.stringify = function (value, replacer, space) {
+    return globalThis.JSON.backup.stringify(value, replacer, space).replace(/\n/g, '\r\n');
+}.bind(globalThis.JSON);
 /* Override JSON.parse function. */
-global.JSON.parse = JSON5.parse.bind(JSON5);
+globalThis.JSON.parse = JSON5.parse.bind(JSON5);
 /* Extending global JSON object to parse and save files. */
-global.JSON.parseFileSync = function (filePath, reviver = null) {
+globalThis.JSON.parseFileSync = function (filePath, reviver = null) {
     return JSON5.parse(readFileBomSync(filePath, 'utf-8'), reviver);
 };
-global.JSON.parseFile = async function (filePath, reviver = null, callback) {
+globalThis.JSON.parseFile = async function (filePath, reviver = null, callback) {
     return JSON5.parse(readFileBom(filePath, 'utf-8'), reviver, callback);
 };
-global.JSON.saveFileSync = function (value, filePath, replacer, space, options) {
-    fs.writeFileSync(filePath, global.JSON.backup.stringify(value, replacer, space).replace(/\n/g, '\r\n'), options);
+globalThis.JSON.saveFileSync = function (value, filePath, replacer, space, options) {
+    fs.writeFileSync(filePath, globalThis.JSON.backup.stringify(value, replacer, space).replace(/\n/g, '\r\n'), options);
 };
-global.JSON.saveFile = async function (value, filePath, replacer, space, options) {
-    fs.writeFile(filePath, global.JSON.backup.stringify(value, replacer, space).replace(/\n/g, '\r\n'), options);
+globalThis.JSON.saveFile = async function (value, filePath, replacer, space, options) {
+    fs.writeFile(filePath, globalThis.JSON.backup.stringify(value, replacer, space).replace(/\n/g, '\r\n'), options);
 };
 
 /**
@@ -262,14 +262,14 @@ function logFactory(options = { type: 'log', prefix: consolePrefix.colored, colo
             const t = type,
                 p = prefix,
                 c = color;
-            global.console[t](
+            globalThis.console[t](
                 p,
                 ...args.map(function (arg) {
                     return chalk[c](arg);
                 }),
             );
             return;
-        }.bind(global.console);
+        }.bind(globalThis.console);
     } else {
         throw new Error('logFactory: invalid options:\n' + util.inspect(options, { compact: false, colors: true }));
     }
@@ -284,7 +284,7 @@ const console = {
     warn: logFactory({ type: 'warn', logPrefix: 'Warning:', color: 'yellow' }),
     error: logFactory({ type: 'error', logPrefix: 'Error:', color: 'red' }),
     debug: logFactory({ type: 'debug', color: 'white' }),
-    table: global.console.table.bind(global.console),
+    table: globalThis.console.table.bind(globalThis.console),
 };
 
 /**

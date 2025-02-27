@@ -1,18 +1,59 @@
-// Spacing scale
-$base-spacing-unit: 1rem;
-$base-font-size-base: 15px;
-$spacing-unit: 8px;
+/**
+ * _sizes.scss - Size definitions.
+ */
+// The generated sizes map.
+$generated-sizes: ();
 
-// Border radius
-$border-radius-small: 4px;
-$border-radius-large: 8px;
+// Map of size names and specifications.
+$sizes-spec: (
+    spacing-unit: (
+        /* Spacing scale */ base: 1rem,
+        x-small: 0.3,
+        small: 0.5,
+        large: 2,
+        x-large: 3,
+    ),
+    /* Font sizes */
+    font-size: (
+            base: 1rem,
+            x-small: 0.65,
+            small: 0.875,
+            large: 1.25,
+            x-large: 2.5,
+        ),
+    /* Border radius */
+    border-radius: (
+            base: 4px,
+            x-small: 0.3,
+            small: 0.5,
+            large: 2,
+            x-large: 3,
+        ),
+    min-width: (
+        /* Minimal width for large visualization */ base: 1024px,
+        x-small: 0.5,
+        small: 0.75,
+        large: 1.25,
+        x-large: 1.5,
+    ),
+);
 
-// Font sizes
-$font-size-small: 0.875rem;
-$font-size-base: 1rem;
-$font-size-large: 1.25rem;
+@mixin generate-sizes($size-name, $size-spec) {
+    // Generate the colors for each variation.
+    $generated-map: (
+        '#{$size-name}': map-get($size-spec, base),
+        '#{$size-name}-base': map-get($size-spec, base),
+        '#{$size-name}-x-small': map-get($size-spec, base) * map-get($size-spec, x-small),
+        '#{$size-name}-small': map-get($size-spec, base) * map-get($size-spec, small),
+        '#{$size-name}-medium': map-get($size-spec, base),
+        '#{$size-name}-large': map-get($size-spec, base) * map-get($size-spec, large),
+        '#{$size-name}-x-large': map-get($size-spec, base) * map-get($size-spec, x-large),
+    );
+    // Store the $generated-map in the global $generated-colors map.
+    $generated-sizes: map-merge($generated-sizes, $generated-map) !global;
+}
 
-:root {
-    --spacing-unit: #{$base-spacing-unit};
-    --font-size-base: #{$base-font-size-base};
+// Iterate over the $sizes-spec map generating size values in the global $generated-sizes map.
+@each $size-name, $size-spec in $sizes-spec {
+    @include generate-sizes($size-name, $size-spec);
 }

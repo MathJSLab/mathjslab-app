@@ -1,0 +1,115 @@
+@use './mixins';
+@use './variables';
+
+html[data-theme='light'] {
+    @include mixins.define-map(variables.$theme-light);
+}
+
+html[data-theme='dark'] {
+    @include mixins.define-map(variables.$theme-dark);
+}
+
+a {
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: var(--color-a-text);
+    padding: 0.1rem;
+    transition: background-color 0.4s;
+}
+
+@media (hover: hover) {
+    a:hover {
+        background-color: var(--color-a-background-hover);
+    }
+}
+
+p {
+    margin-block: 1em;
+    margin-inline: 0;
+}
+
+b,
+strong {
+    font-weight: bold;
+}
+
+i,
+em {
+    font-style: italic;
+}
+
+u {
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: var(--font-size-x-large);
+}
+
+h2 {
+    font-size: var(--font-size-large);
+}
+
+h3 {
+    font-size: var(--font-size-medium);
+}
+
+h4 {
+    font-size: var(--font-size-small);
+}
+
+h5 {
+    font-size: var(--font-size-x-small);
+}
+
+dl,
+ol,
+ul {
+    margin-block: 1em;
+    padding-inline-start: 40px;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-inline-start: 40px;
+}
+
+li {
+    list-style: disc;
+}
+
+ol li {
+    list-style: decimal;
+}
+
+tbody {
+    vertical-align: middle;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+pre,
+mn > pre {
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--color-pre-code-background);
+    overflow-x: auto;
+}
+
+mn > pre {
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+    background-color: inherit;
+}
+
+code,
+pre > code {
+    color: var(--color-input-text);
+}

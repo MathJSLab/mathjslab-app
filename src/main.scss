@@ -1,0 +1,33 @@
+@use './styles/main.scss';
+@use './styles/element/button-select';
+@use './styles/element/text';
+
+#app {
+    margin: 0 auto;
+    display: block;
+    padding: 0;
+}
+
+.width-fit-content {
+    width: fit-content;
+}
+
+.green-panel {
+    display: block;
+    background-color: var(--green-background);
+    border: 2px solid var(--green-border);
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0px 10px 14px -7px var(--color-panel-box-shadow);
+}
+
+.right-align-panel {
+    margin: 0 auto auto auto;
+}
+
+@media (min-width: 1024px) {
+    .right-align-panel {
+        margin: auto 0 auto auto;
+    }
+}

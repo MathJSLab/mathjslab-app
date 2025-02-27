@@ -1,54 +1,119 @@
+/* Web component element type definition. */
+import type WebComponentElement from '../WebComponentElement';
+/* Web component method factories. */
+import constructorFactory from '../constructorFactory';
+import createElementFactory from '../createElementFactory';
+import defineFactory from '../defineFactory';
+import keyToPostfix from '../keyToPostfix';
+import setContainerFactory from '../setContainerFactory';
+import setIdFirstFactory from '../setIdFirstFactory';
+/* Web component styles. */
 import styles from './fixed-scroll-panel.styles.scss';
-
+/**
+ * Set of Web component elements.
+ */
+export interface FixedScrollPanelElementEntry {
+    /* Root node */
+    root: HTMLElement;
+    /* Wrapper */
+    wrapper: HTMLDivElement;
+    /* Panel title */
+    title: HTMLHeadingElement;
+    /* Content wrapper */
+    contentWrapper: HTMLDivElement;
+}
+/* Set of Web component elements. */
+export type FixedScrollPanelElement = WebComponentElement<FixedScrollPanelElementEntry>;
+/* Set of Web component element entry keys. */
+export const FixedScrollPanelElementEntryKey: (keyof FixedScrollPanelElementEntry)[] = ['wrapper', 'title', 'contentWrapper'] as const;
 /**
  * # FixedScrollPanel Web Component
  */
 export class FixedScrollPanel extends HTMLElement {
-    public parentElement: HTMLElement;
-    protected wrapperElement: HTMLDivElement;
-    /* Panel title */
-    protected titleElement: HTMLHeadingElement;
+    /* Web Component base id slug. */
+    public static readonly tagName = 'fixed-scroll-panel';
+    /* Web component HTML elements. */
+    public readonly element = {} as FixedScrollPanelElement;
+    /* Web component template HTML element field names. */
+    public static readonly elementFields: (keyof FixedScrollPanelElementEntry)[] = FixedScrollPanelElementEntryKey;
+    /* Web component template HTML element id postfix. */
+    public static readonly elementPostfix = keyToPostfix(FixedScrollPanelElementEntryKey);
+    /* Web component null value */
+    public static readonly null = null as unknown as FixedScrollPanel;
+    /* Web component undefined value */
+    public static readonly undefined = undefined as unknown as FixedScrollPanel;
     /* Web Component constructor. */
     public constructor() {
         super();
-        /* Find template in main DOM. */
-        const template = document.getElementById('fixed-scroll-panel-template') as HTMLTemplateElement;
-        if (template) {
-            /* Clone the template content. */
-            const clone = template.content.cloneNode(true) as DocumentFragment;
-            /* Creates a <style> element to include the styles. */
-            const styleElement = document.createElement('style') as HTMLStyleElement;
-            styleElement.textContent = styles;
-            this.wrapperElement = clone.getElementById('fixed-scroll-panel-wrapper') as HTMLDivElement;
-            this.titleElement = clone.getElementById('fixed-scroll-panel-title') as HTMLHeadingElement;
-            /* Attach shadow DOM and adds styles to the Shadow DOM before adding the template clone. */
-            this.attachShadow({ mode: 'open' }).append(styleElement, clone);
-        }
+        constructorFactory(FixedScrollPanel, styles).bind(this)();
     }
-    public set parent(value: HTMLElement) {
-        this.parentElement = value;
+    /**
+     * Sets the unique ID of the base class of Web component.
+     */
+    public set superId(id: string) {
+        super.id = id;
     }
-    public get parent(): HTMLElement {
-        return this.parentElement;
+    /**
+     * Gets the unique ID of the base class of Web component.
+     */
+    public get superId(): string {
+        return super.id;
     }
-    public set title(value: string) {
-        this.titleElement.innerHTML = value;
+    /**
+     * Sets the unique ID of the Web component.
+     */
+    public set id(id: string) {
+        this.setId(id);
     }
-    public get title(): string {
-        return this.titleElement.innerHTML;
+    /**
+     * Gets the unique ID of the Web component.
+     */
+    public get id(): string {
+        return super.id;
     }
-    public resize(event?: Event): void {
-        let Y = window.scrollY - this.parentElement.offsetTop + window.innerHeight * 0.025;
-        const maxY = this.parentElement.offsetHeight - this.wrapperElement.offsetHeight;
+    /**
+     * Sets the unique ID of the Web component.
+     * @param id
+     */
+    public setId: (this: FixedScrollPanel, id?: string) => void = setIdFirstFactory(FixedScrollPanel).bind(this);
+    /**
+     * Creates an element of the Web Component type.
+     * @param id Optional element id.
+     * @returns The created element.
+     */
+    public static readonly createElement = createElementFactory(FixedScrollPanel);
+    /**
+     * Web component element definition handler.
+     */
+    public static readonly define = defineFactory(FixedScrollPanel);
+    /**
+     * Container (parent node) setter.
+     */
+    public set container(element: HTMLElement) {
+        setContainerFactory().bind(this)(element);
+    }
+    /**
+     * Container (parent node) getter.
+     */
+    public get container(): HTMLElement {
+        return this.element.container;
+    }
+    /**
+     * To be called in resize events.
+     * @param _event
+     */
+    public resize(_event?: Event): void {
+        let Y = window.scrollY - this.element.container.offsetTop + window.innerHeight * 0.025;
+        const maxY = this.element.container.offsetHeight - this.element.wrapper.offsetHeight;
         if (Y < 0) {
             Y = 0;
         } else if (Y > maxY) {
             Y = maxY;
         }
-        this.wrapperElement.style.top = Y + 'px';
-        this.wrapperElement.style.left = this.parentElement.offsetWidth + 'px';
-        this.wrapperElement.style.height = Math.min(this.parentElement.offsetHeight, window.innerHeight) * 0.9 + 'px';
+        this.element.wrapper.style.top = Y + 'px';
+        this.element.wrapper.style.left = this.element.root.offsetWidth + 'px';
+        this.element.wrapper.style.height = Math.min(this.element.container.offsetHeight, window.innerHeight) * 0.9 + 'px';
     }
 }
-/* Defines the custom element. */
-customElements.define('fixed-scroll-panel', FixedScrollPanel);
+/* Defines the Web component element. */
+FixedScrollPanel.define();

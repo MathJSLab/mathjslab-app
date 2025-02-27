@@ -1,25 +1,35 @@
-function fetchPolyfill(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
+async function fetchPolyfill(input: RequestInfo | URL, init?: RequestInit): Promise<Response> {
     return new Promise((resolve: (value: Response | PromiseLike<Response>) => void) => {
         const xhttp = new XMLHttpRequest();
-        /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-        xhttp.onload = function (this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) {
-            resolve({
-                ok: true,
-                json: (): Promise<any> => Promise.resolve(JSON.parse(this.responseText)),
-                text: (): Promise<string> => Promise.resolve(this.responseText),
-            } as Response);
+        xhttp.onload = function (this: XMLHttpRequest, _ev: ProgressEvent<EventTarget>) {
+            if (typeof Response === 'function') {
+                resolve(new Response(this.responseText, { status: xhttp.status }));
+            } else {
+                resolve({
+                    ok: xhttp.status >= 200 && xhttp.status < 300,
+                    status: xhttp.status,
+                    text: async () => this.responseText,
+                    json: async () => JSON.parse(this.responseText),
+                } as Response);
+            }
         };
-        /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-        xhttp.onerror = function (this: XMLHttpRequest, ev: ProgressEvent<EventTarget>) {
-            resolve({
-                ok: false,
-            } as Response);
+        xhttp.onerror = function (this: XMLHttpRequest, _ev: ProgressEvent<EventTarget>) {
+            if (typeof Response === 'function') {
+                resolve(new Response(null, { status: xhttp.status || 500 }));
+            } else {
+                resolve({
+                    ok: false,
+                    status: xhttp.status || 500,
+                    text: async () => '',
+                    json: async () => ({}),
+                } as Response);
+            }
         };
-        xhttp.open(init ? init.method || 'GET' : 'GET', input.toString(), true);
+        xhttp.open(init?.method ?? 'GET', input.toString(), true);
         xhttp.send();
     });
 }
 
-if (typeof window.fetch !== 'function') {
+if (!window.fetch) {
     window.fetch = fetchPolyfill;
 }

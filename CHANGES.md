@@ -2,12 +2,47 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.5.3
+- All dependencies has been updated.
+- The application was completely restructured using Web components. Five Web
+components were created to generate the dynamic structure, previously created
+in the `Shell.initialize` method. The use of the `CreateHTMLElement` function
+was removed from the entire project, with its respective file. Web components
+are defined in a standardized way using method factories and generalized types
+and interfaces. Each Web component class has core definitions of properties
+and methods, static or not, based on factory functions and generalized types
+and interfaces.
+- The `src/styles` directory was populated with `.scss` template definitions in
+a structure designed to serve the style definitions in a rationalized and
+standardized way throughout the project. The `src/styles/main.scss` file
+includes all these files and gives a description of the structure of the
+styles directory, with its files. The Web component's own style files are in
+each Web component's directory in `src/components/`. These Web components
+style files use and import the files in the `src/styles` directory. Style
+definitions common to more than one Web component are in
+`src/styles/component`. All colors and sizes are defined rationally in the
+`src/styles/base/_colors.scss` and `src/styles/base/_sizes.scss` files
+respectively. The definitions in the `src/base.css` and `src/main.css` files
+have been moved to the `.scss` files and these files have been removed. The
+`src/mais.scss` file has been created to be the entry point for Webpack
+configuration.
+- A button to toogle light/dark mode colors has been created in the
+application's interface.
+- Modifications were made to the `README.md`, `LEIAME.md` and `LEAME.md` files
+to announce the structure of the Web application in terms of Web components and
+SCSS templates. Because the Web component templates are inserted at the end of
+the `body` element during the Webpack build, it became unfeasible to use the
+application bundle through the CDN. So the old instructions for loading the
+bundle this way in these files were also removed. For the same reason the
+`src/save-bundle.cjs` file and related scripts in the `package.json` has been
+removed.
+
 ## 1.5.2
 - The `collapsible-content-panel` **Web Component** has been created an used in
 the examples and readme panels. Some other components has been created in the
-`src/components/` directory but they are not yet implemented and in use.
+`src/components/` directory but they are not yet full implemented and in use.
 - All dependencies has been updated.
-- Trademark notices in documentation and after abstract.
+- Trademark notices in documentation and after abstract has been introduced.
 - The `build.env` file has been removed and the packages `dotenv`,
 `dotenv-expand`, `dotenv-webpack`, `ejs` and `@types/ejs` has been removed too.
 - The `build.config.json` file was created, which is imported by
@@ -20,10 +55,23 @@ templates to be injected into the HTML.
 The `ShellPointer` declaration has been moved to the `main.ts` file and the
 instantiation of `Shell` in the `bootstrap` function has been assigned to
 `global.ShellPointer`. The `bootstrap` function has been made asynchronous for
-this reason. The `export input` in the `main.ts` has been removed and the
-empty string is passed as option to `Shell` instantiation. The
+this reason. The `export input` in the `main.ts` has been removed. The
 `global.ShellPointer` variable has been kept as it is required in the
 `EvaluatorConfiguration.ts` file.
+- The `cross-env` package has been instaled as development dependency and the
+scripts in the `package.json` file has been made platform-independent.
+- The `src/types/scss.d.ts` file has been renamed to
+`src/types/styles.scss.d.ts`. The definitions are specialized for importing
+styles from Web components in the form of a string.
+- The `cleanNameList` method has been removed from `Shell` class. It's reduced
+to a single instruction: `this.nameList.replaceChildren()`. The
+`replaceChildren` with no arguments do the same: removes all child nodes.
+- The `CreateHTMLElement` function has been converted to an arrow function,
+making its code more concise. The arguments were renamed to be more
+significant.
+- The `fetchPolyfill` function has been changed to test if the native
+`Response` class is available using it if it is. Otherwise it creates an
+object imitating the methods of the `Response` class.
 
 ## 1.5.1
 - The MathJSLab logo has been modified. It is built on the MathJSLab

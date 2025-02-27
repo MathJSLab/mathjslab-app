@@ -10,13 +10,13 @@ declare global {
 
 let renderMermaid: boolean = false;
 
-export abstract class MathMarkdown {
+abstract class MathMarkdown {
     public static initialize() {
         if (!window.MathMLElement) {
             DynamicModule.load('mathjax');
         }
         DynamicModule.load('marked').then((module) => {
-            global.marked = module;
+            globalThis.marked = module;
             const renderer = {
                 code(token: { text: string; lang: string; escaped: boolean }) {
                     if (token.lang === 'mermaid') {
@@ -36,7 +36,7 @@ export abstract class MathMarkdown {
                     }
                 },
             };
-            global.marked.use({ renderer });
+            globalThis.marked.use({ renderer });
         });
     }
 
@@ -51,7 +51,7 @@ export abstract class MathMarkdown {
                     const reference = matched[2];
                     data =
                         data.slice(0, matched.index) +
-                        global.EvaluatorPointer.toMathML(reference, display) +
+                        globalThis.EvaluatorPointer.toMathML(reference, display) +
                         data.slice(matched.index + matched[2].length + quotelength);
                     replaced = true;
                 } else {
@@ -69,8 +69,8 @@ export abstract class MathMarkdown {
     }
 
     public static mathTypeset(): void {
-        if (global.MathJax) {
-            global.MathJax.typeset();
+        if (globalThis.MathJax) {
+            globalThis.MathJax.typeset();
         }
     }
 
@@ -90,3 +90,5 @@ export abstract class MathMarkdown {
         MathMarkdown.renderMermaid();
     }
 }
+export { MathMarkdown };
+export default MathMarkdown;

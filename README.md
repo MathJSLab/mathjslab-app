@@ -1,4 +1,4 @@
-<p align="center">
+<p style="text-align:center;">
     <a href="https://mathjslab.com/" target="_blank" rel="noopener"><img src="images/mathjslab-logo.svg" alt="logo" width="200" height="200" /></a>
 </p>
 
@@ -28,57 +28,11 @@ trademark of [The MathWorks, Inc.](https://www.mathworks.com/) For more
 information about [MATLAB](https://www.mathworks.com/products/matlab.html), visit
 [www.mathworks.com](https://www.mathworks.com/).
 
-Get a minified version from a [CDN](https://en.wikipedia.org/wiki/Content_delivery_network).
-To embed [MathJSLab Demo](https://github.com/MathJSLab/mathjslab-app) in a webpage using [jsDelivr CDN](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
-copy the following [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML) code:
+This [application](https://en.wikipedia.org/wiki/Web_application), developed as a [Progressive Web App (PWA)](https://pt.wikipedia.org/wiki/Progressive_web_app), demonstrates the capabilities of the [MathJSLab](https://www.npmjs.com/package/mathjslab) package in a modern and interactive environment. The [application](https://en.wikipedia.org/wiki/Web_application)'s interface is structured with [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), ensuring modularity, encapsulation, and efficient reuse of visual elements, which simplifies maintenance and enhances project scalability. In addition, the [application](https://en.wikipedia.org/wiki/Web_application) adopts a [responsive design](https://en.wikipedia.org/wiki/Responsive_web_design), providing a consistent experience, regardless of the device used, allowing it to adapt to different screen sizes without compromising usability.
 
-```html
-<head>
-    ...
-    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/mathjslab-app.min.js"></script>
-    ...
-</head>
+The [application](https://en.wikipedia.org/wiki/Web_application)'s logic is written in [TypeScript](https://www.typescriptlang.org/), ensuring uniform and standardized typing across all parts of the code. [Styling](https://www.w3.org/TR/css/) is managed through [SASS](https://sass-lang.com/) templates, which organize the definitions in a more rational and modular way, facilitating the customization, maintenance and code reuse easier.
 
-<body>
-    ...
-    <div id="mathjslab-examples"></div>
-    ...
-    <div id="mathjslab-prompt"></div>
-    ...
-</body>
-```
-
-For the examples and the `help` command to be available, it is necessary to
-copy the `example` and `help` directories to the root of the web page.
-
-Another option is to configure to use assets directly from
-[repository](https://github.com/MathJSLab/mathjslab-app) via
-[jsDelivr CDN](https://www.jsdelivr.com/) too before load `mathjslab-app.min.js`
-script using:
-
-```html
-<head>
-    ...
-    <script>
-        MathJSLabCalc = {
-            exampleBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/",
-            helpBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/",
-        }
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/mathjslab-app.min.js"></script>
-    ...
-</head>
-
-<body>
-    ...
-    <div id="mathjslab-examples"></div>
-    ...
-    <div id="mathjslab-prompt"></div>
-    ...
-</body>
-```
-
-This demo also uses:
+This demo application also uses:
 
 * [MathJax](https://www.mathjax.org/) for navigators without [MathML](https://www.w3.org/Math/) support.
 * [Marked](https://www.npmjs.com/package/marked) to format [Markdown](https://www.markdownguide.org/) files as [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML).

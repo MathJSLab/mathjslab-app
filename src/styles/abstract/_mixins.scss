@@ -6,7 +6,23 @@
 
 @mixin responsive-font-size($size) {
     font-size: $size;
+
     @media (max-width: 768px) {
         font-size: $size * 0.8;
+    }
+}
+
+@mixin colored-box($bg-color: var(--green-background), $bd-color: var(--green-border)) {
+    display: block;
+    background-color: $bg-color;
+    border: 2px solid $bd-color;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+@mixin define-map($map) {
+    @each $name, $value in $map {
+        --#{$name}: #{$value};
     }
 }

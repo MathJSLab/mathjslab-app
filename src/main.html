@@ -33,6 +33,8 @@
         <link rel="icon" href="images/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
         <link rel="manifest" href="manifest.json" />
         <script>
+            var colorModeLight;
+            var colorModeDark;
             function loadText() {
                 if (!document.location.href.startsWith('file:')) {
                     window
@@ -50,7 +52,7 @@
                             return response.text();
                         })
                         .then((readme) => {
-                            document.getElementById('readme').innerHTML = marked.parse(readme);
+                            document.getElementById('mathjslab-readme').innerHTML = marked.parse(readme);
                         })
                         .catch((error) => {
                             console.error(error);
@@ -74,9 +76,9 @@
                 document.getElementById('trademark-notice').innerHTML = {
                     en: '<strong>Important Notice:</strong> This software, the <strong><a href="https://mathjslab.com/">MathJSLab</a>, is not affiliated, sponsored, or endorsed by <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> is a registered trademark of <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> For more information about <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visit <a href="https://www.mathworks.com/">www.mathworks.com</a>.',
                     es: '<strong>Aviso Importante:</strong> Este software, <strong><a href="https://mathjslab.com/">MathJSLab</a>, no está afiliado, patrocinado ni respaldado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> es una marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para más información sobre <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visita <a href="https://www.mathworks.com">www.mathworks.com</a>.',
-                    pt: '<strong>Aviso importante:</strong> Este software, o <strong><a href="https://mathjslab.com/">MathJSLab</a>, não é afiliado, patrocinado ou endossado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> é uma marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para mais informações sobre o <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visite <a href="https://www.mathworks.com">www.mathworks.com</a>.',
+                    pt: '<strong>Aviso Importante:</strong> Este software, o <strong><a href="https://mathjslab.com/">MathJSLab</a>, não é afiliado, patrocinado ou endossado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> é uma marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para mais informações sobre o <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visite <a href="https://www.mathworks.com">www.mathworks.com</a>.',
                 }[window.lang];
-                document.getElementById('examples-panel').title = {
+                document.getElementById('examples').element.title.innerHTML = {
                     en: 'Examples',
                     es: 'Ejemplos',
                     pt: 'Exemplos',
@@ -86,7 +88,7 @@
                     es: 'Abrir...',
                     pt: 'Abrir...',
                 }[window.lang];
-                document.getElementById('readme-panel').title = {
+                document.getElementById('readme').element.title.innerHTML = {
                     en: 'More Info',
                     es: 'Más información',
                     pt: 'Mais Informações',
@@ -101,32 +103,60 @@
                     es: 'Currículum',
                     pt: 'Currículo Lattes',
                 }[window.lang];
+                colorModeDark = {
+                    en: 'dark',
+                    es: 'oscuro',
+                    pt: 'escuro',
+                }[window.lang];
+                colorModeLight = {
+                    en: 'light',
+                    es: 'claro',
+                    pt: 'claro',
+                }[window.lang];
+                if (document.documentElement.getAttribute('data-theme') === 'dark') {
+                    document.getElementById('theme-toggle').innerHTML = colorModeLight;
+                } else {
+                    document.getElementById('theme-toggle').innerHTML = colorModeDark;
+                }
+            }
+            function toggleTheme() {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    document.getElementById('theme-toggle').innerHTML = colorModeDark;
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    document.getElementById('theme-toggle').innerHTML = colorModeLight;
+                    localStorage.setItem('theme', 'dark');
+                }
             }
             function scrollToTop() {
                 window.setTimeout(() => {
                     window.scrollTo(0, 0);
                 }, 600);
             }
+            document.addEventListener('DOMContentLoaded', () => {
+                const savedTheme = localStorage.getItem('theme');
+                if (savedTheme) {
+                    document.documentElement.setAttribute('data-theme', savedTheme);
+                } else {
+                    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                    }
+                }
+            });
         </script>
     </head>
 
     <body onload="javascript:loadText();document.getElementById('language').value=window.lang;scrollToTop();">
-        <!-- Custom Navigation Component -->
-        <!-- <simple-nav>
-            <li slot="nav-item"><a href="#home">Home</a></li>
-            <li slot="nav-item"><a href="#about">About</a></li>
-            <li slot="nav-item"><a href="#services">Services</a></li>
-            <li slot="nav-item"><a href="#contact">Contact</a></li>
-        </simple-nav> -->
-        <!-- End of Custom Navigation Component -->
-
         <div id="app">
             <header>
                 <img alt="MathJSLab logo" class="logo" src="./images/mathjslab-logo.svg" width="125" height="125" />
-                <noscript>You need to enable JavaScript to run MathJSLab.</noscript>
+                <noscript>JavaScript must be enabled to run MathJSLab.</noscript>
                 <div class="header-wrapper">
                     <div class="header-panel">
-                        <h1 id="title" class="green"></h1>
+                        <h1 id="title" class="green-text"></h1>
                         <h3 id="subtitle"></h3>
                         <p>
                             <a href="https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1" target="_blank" rel="noopener"
@@ -135,8 +165,8 @@
                         </p>
                     </div>
                 </div>
-                <div class="right-align-panel">
-                    <div class="green-panel width-fit-content right-align-panel" align="center">
+                <div class="right-align-panel text-align-center">
+                    <div class="green-panel width-fit-content text-align-center right-align-panel">
                         <select
                             id="language"
                             onchange="javascript:window.setLanguage(document.getElementById('language').value);loadText();scrollToTop();"
@@ -146,7 +176,9 @@
                             <option value="pt">Português</option>
                         </select>
                         <br />
-                        <button id="open-file" onclick="openFile()"></button>
+                        <button id="open-file" onclick="javascript:openFile()"></button>
+                        <br />
+                        <button id="theme-toggle" onclick="javascript:toggleTheme()"></button>
                     </div>
                 </div>
             </header>
@@ -156,28 +188,28 @@
 
                 <p id="trademark-notice"></p>
 
-                <collapsible-content-panel id="examples-panel">
+                <collapsible-content-panel id="examples">
                     <div id="mathjslab-examples" slot="content" style="display: block; text-align: center"></div>
                 </collapsible-content-panel>
 
                 <br />
-                <div id="mathjslab-prompt"></div>
+                <command-shell id="mathjslab-shell"></command-shell>
                 <br />
 
-                <collapsible-content-panel id="readme-panel">
-                    <div id="readme" slot="content"></div>
+                <collapsible-content-panel id="readme">
+                    <div id="mathjslab-readme" slot="content"></div>
                 </collapsible-content-panel>
             </main>
 
             <footer>
-                <p align="center">
+                <p class="text-align-center">
                     <a href="https://github.com/MathJSLab" target="_blank" rel="noopener">
                         <img alt="GitHub Repository" src="./images/github-mark.svg" width="24" height="24" />
                         <span id="github-repository"></span>
                     </a>
                 </p>
 
-                <p align="center">
+                <p class="text-align-center">
                     &copy; 2016 &mdash;
                     <script>
                         document.write(new Date().getFullYear());

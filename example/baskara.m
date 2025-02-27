@@ -1,4 +1,4 @@
-% Solution of the quadratic equation: x^2-10*x+24=0
+% Solution of the quadratic equation: x^2-10*x+21=0
 clear
 % definition of coefficients
 a = 1

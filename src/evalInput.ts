@@ -3,15 +3,15 @@
  */
 
 /**
- *
- * @param input
- * @returns [statements[], lines[]]
+ * Evaluate multiline input.
+ * @param {string} input Multiline input.
+ * @returns {{ statements: string[]; lines: string[] }} An object containing statements and lines.
  */
-export default function evalInput(input: HTMLTextAreaElement): [string[], string[]] {
+function evalInput(input: string): { statements: string[]; lines: string[] } {
     try {
         const statements: string[] = [];
-        const lines: string[] = input.value.split(/\r?\n/);
-        const tree = global.EvaluatorPointer.Parse(input.value);
+        const lines: string[] = input.split(/\r?\n/);
+        const tree = globalThis.EvaluatorPointer.Parse(input);
         if (tree) {
             for (let i = 0; i < tree.list.length; i++) {
                 if (tree.list[i].stop.line === tree.list[i].start.line) {
@@ -42,13 +42,15 @@ export default function evalInput(input: HTMLTextAreaElement): [string[], string
                     statements[i] = result.trim();
                 }
             }
-            return [statements, lines];
+            return { statements, lines };
         } else {
-            return [[], []];
+            return { statements: [], lines: [] };
         }
     } catch (error) {
         // TODO: Better error handling.
-        global.alert(error);
-        return [[], []];
+        globalThis.alert(error);
+        return { statements: [], lines: [] };
     }
 }
+export { evalInput };
+export default evalInput;

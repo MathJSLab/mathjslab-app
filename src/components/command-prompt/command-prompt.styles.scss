@@ -1,15 +1,25 @@
-// @use '../../styles/abstract/variables';
-// @use '../../styles/abstract/functions';
-// @use '../../styles/abstract/mixins';
+@use '../../styles/component/reset';
+@use '../../styles/abstract/variables';
+@use '../../styles/abstract/mixins';
+@use '../../styles/component/common';
+@use '../../styles/component/box';
 
-.cursor {
+.command-prompt-wrapper {
+    display: block;
+}
+
+.command-prompt-frame-box {
+    @include mixins.colored-box();
+}
+
+.command-prompt-cursor {
     width: 1rem;
     font-family: 1rem monospace;
     position: relative;
     top: -0.175rem;
 }
 
-.inputprompt {
+.command-prompt-input {
     background-color: var(--color-input-background);
     color: var(--color-input-text);
     font-family: 1rem monospace;
@@ -25,15 +35,20 @@
     outline: none;
 }
 
-.inputprompt:hover {
+.command-prompt-input:hover {
     background-color: var(--color-input-background-hover);
 }
 
-.inputprompt:focus {
+.command-prompt-input:focus {
     background-color: var(--color-input-background-focus);
     color: var(--color-input-text-focus);
 }
 
-.output {
+.command-prompt-output {
+    display: block;
     overflow-x: auto;
+}
+
+.command-prompt-output td {
+    padding: 1px;
 }

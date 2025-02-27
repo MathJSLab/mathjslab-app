@@ -1,9 +1,9 @@
 <template id="collapsible-content-panel-template">
-    <div class="wrap-collapsible">
-        <input id="collapsible-content-panel-toggle" class="toggle" type="checkbox" />
-        <label id="collapsible-content-panel-title" for="collapsible-content-panel-toggle" class="lbl-toggle"></label>
-        <div class="collapsible-content">
-            <div class="content-inner">
+    <div id="collapsible-content-panel-wrapper" class="collapsible-content-panel-wrapper">
+        <input id="collapsible-content-panel-toggle" class="collapsible-content-panel-toggle" type="checkbox" />
+        <label id="collapsible-content-panel-title" class="collapsible-content-panel-title" for="collapsible-content-panel-toggle"></label>
+        <div id="collapsible-content-panel-collapsible" class="collapsible-content-panel-collapsible">
+            <div id="collapsible-content-panel-inner-content" class="collapsible-content-panel-inner-content">
                 <slot name="content"></slot>
             </div>
         </div>

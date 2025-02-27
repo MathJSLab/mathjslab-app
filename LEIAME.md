@@ -26,54 +26,9 @@ registrada de [The MathWorks, Inc.](https://www.mathworks.com/) Para mais
 informações sobre o [MATLAB](https://www.mathworks.com/products/matlab.html),
 visite [www.mathworks.com](https://www.mathworks.com).
 
-Obtenha uma versão reduzida através de [CDN](https://pt.wikipedia.org/wiki/Rede_de_fornecimento_de_conte%C3%BAdo).
-Para incorporar a [demonstração do MathJSLab](https://github.com/MathJSLab/mathjslab-app) em uma página da web usando [CDN jsDelivr](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
-copie o seguinte código [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML):
+Esta [aplicação](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_web), desenvolvida como uma [Aplicação Web Progressiva (PWA)](https://pt.wikipedia.org/wiki/Progressive_web_app), demonstra as capacidades do pacote [MathJSLab](https://www.npmjs.com/package/mathjslab) em um ambiente moderno e interativo. A interface da [aplicação](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_web) é estruturada com [Web Components](https://developer.mozilla.org/pt-BR/docs/Web/API/Web_components), garantindo modularidade, encapsulamento e reutilização eficiente dos elementos visuais, o que facilita a manutenção e a escalabilidade do projeto. Além disso, a [aplicação](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_web) adota um [design responsivo](https://pt.wikipedia.org/wiki/Web_design_responsivo), proporcionando uma experiência consistente, de forma independente do dispositivo que utilizar, permitindo que se adapte a diferentes tamanhos de tela sem comprometer a usabilidade.
 
-```html
-<head>
-    ...
-    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/mathjslab-app.min.js"></script>
-    ...
-</head>
-
-<body>
-    ...
-    <div id="mathjslab-examples"></div>
-    ...
-    <div id="mathjslab-prompt"></div>
-    ...
-</body>
-```
-
-Para que os exemplos e o comando `help` estejam disponíveis, é necessário
-copiar os diretórios `example` e `help` para a raiz da página web.
-
-Outra opção é configurar para usar diretamente do
-[repositório](https://github.com/MathJSLab/mathjslab-app) via
-[CDN jsDelivr](https://www.jsdelivr.com/) também, antes de carregar o script `mathjslab-app.min.js` usando:
-
-```html
-<head>
-    ...
-    <script>
-        MathJSLabCalc = {
-            exampleBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/",
-            helpBaseUrl: "https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/",
-        }
-    </script>
-    <script defer src="https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/mathjslab-app.min.js"></script>
-    ...
-</head>
-
-<body>
-    ...
-    <div id="mathjslab-examples"></div>
-    ...
-    <div id="mathjslab-prompt"></div>
-    ...
-</body>
-```
+A lógica da [aplicação](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_web) é escrita em [TypeScript](https://www.typescriptlang.org/), tornando a tipagem uniforme e padronizada entre as partes do código. A [estilização](https://www.w3.org/TR/css/) é organizada por meio de templates [SASS](https://sass-lang.com/), que organizam as definições de maneira mais racionalizada e modular, facilitando a personalização, manutenção e reutilização do código.
 
 Esta aplicação de demontração também usa:
 

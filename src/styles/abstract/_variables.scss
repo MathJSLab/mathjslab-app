@@ -1,16 +1,28 @@
-@use '../base/base';
+/**
+ * _variables.scss - Semantic variable definitions.
+ */
 
-// Variables for light mode
-$color-background-light: hsl(0, 0%, 100%);
-$color-text-light: hsl(0, 0%, 10%);
+@use '../base/colors';
+@use '../base/sizes';
+@use '../abstract/mixins';
 
-// Variables for dark mode
-$color-background-dark: hsl(0, 0%, 10%);
-$color-text-dark: hsl(0, 0%, 90%);
+$theme-light: colors.$theme-light;
+$theme-dark: colors.$theme-dark;
+$sizes: sizes.$generated-sizes;
 
-// Semantic variables
-$color-background: $color-background-light;
-$color-text: $color-text-light;
+:root {
+    @include mixins.define-map($theme-light);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        @include mixins.define-map($theme-dark);
+    }
+}
+
+:root {
+    @include mixins.define-map($sizes);
+}
 
 // Transitions
 $transition-default: 0.3s ease;
