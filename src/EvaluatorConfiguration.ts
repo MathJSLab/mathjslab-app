@@ -62,10 +62,10 @@ declare global {
  */
 globalThis.setLanguage = (lang?: string): void => {
     if (lang) {
-        globalThis.lang = lang in languageAlias ? lang : (MathJSLabCalc.defaultLanguage as string);
+        globalThis.lang = lang in languageAlias ? lang : MathJSLabCalc.defaultLanguage!;
     }
     document.querySelector('html')!.setAttribute('lang', globalThis.lang);
-    globalThis.ShellPointer.shell.setLanguage();
+    globalThis.ShellPointer.shell.setLanguage(globalThis.lang);
     EvaluatorConfiguration.aliasNameTable = languageAlias[globalThis.lang];
     globalThis.EvaluatorPointer = new Evaluator(EvaluatorConfiguration);
     globalThis.EvaluatorPointer.debug = buildConfiguration.debug;

@@ -4,6 +4,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.5.3
 - All dependencies has been updated.
+- OpenAIRE badges included in documentation.
 - The application was completely restructured using Web components. Five Web
 components were created to generate the dynamic structure, previously created
 in the `Shell.initialize` method. The use of the `CreateHTMLElement` function
