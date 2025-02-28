@@ -1,8 +1,14 @@
 {
   "production": {
-    "bundles": ["mathjslab-app"]
+    "bundles": ["mathjslab-app"],
+    "analyzer": {
+      "openAnalyzer": false
+    }
   },
   "development": {
-    "bundles": ["mathjslab-app"]
+    "bundles": ["mathjslab-app"],
+    "devServer": {
+      "open": false
+    }
   }
 }

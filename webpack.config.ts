@@ -8,6 +8,7 @@ import webpack from 'webpack';
 import 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import buildConfig from 'build.config.json';
 
 import { components, templates } from './src/components/component.include';
@@ -112,16 +113,40 @@ export default (env: any, argv: any): webpack.Configuration[] => {
         },
     ];
     const bundlesConfiguration = WebpackConfiguration.filter((config) => buildConfiguration.bundles.includes(config.name!));
-    if (!isProduction) {
-        Object.assign(bundlesConfiguration[0], {
-            devtool: 'inline-source-map',
-            devServer: {
-                static: path.join(__dirname, 'dist'),
-                compress: true,
-                port: 4000,
-                hot: true,
-            },
-        });
+    if (isProduction) {
+        const analyzerConfig = (buildConfiguration as any).analyzer;
+        if (typeof analyzerConfig !== 'undefined') {
+            bundlesConfiguration.forEach((config) => {
+                let options: BundleAnalyzerPlugin.Options = {
+                    analyzerMode: 'static',
+                    openAnalyzer: true,
+                    generateStatsFile: true,
+                    defaultSizes: 'stat',
+                    statsFilename: `../report/${config.name}.stats.json`,
+                    reportFilename: `../report/${config.name}.html`,
+                };
+                if (typeof analyzerConfig === 'object') {
+                    options = Object.assign(options, analyzerConfig);
+                }
+                config.plugins!.push(new BundleAnalyzerPlugin(options));
+            });
+        }
+    } else {
+        const devServerConfig = (buildConfiguration as any).devServer;
+        if (typeof devServerConfig !== 'undefined') {
+            bundlesConfiguration.forEach((config) => {
+                Object.assign(config, {
+                    devtool: 'inline-source-map',
+                    devServer: {
+                        static: path.join(__dirname, 'dist'),
+                        compress: typeof devServerConfig.compress !== 'undefined' ? devServerConfig.compress : true,
+                        port: typeof devServerConfig.port !== 'undefined' ? devServerConfig.port : 4000,
+                        hot: typeof devServerConfig.hot !== 'undefined' ? devServerConfig.hot : true,
+                        open: typeof devServerConfig.open !== 'undefined' ? devServerConfig.open : false,
+                    },
+                });
+            });
+        }
     }
     return bundlesConfiguration;
 };

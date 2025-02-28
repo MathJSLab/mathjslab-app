@@ -2,6 +2,9 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.5.4
+- The `webpack-bundle-analyzer` plugin has been installed as development dependency.
+
 ## 1.5.3
 - All dependencies has been updated.
 - OpenAIRE badges included in documentation.

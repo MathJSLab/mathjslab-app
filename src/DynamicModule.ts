@@ -1,4 +1,5 @@
 import importUMD from './importUMD';
+import type * as PlotlyType from 'plotly.js';
 
 type DynamicModuleConfiguration = {
     [key: string]: {
@@ -42,7 +43,7 @@ abstract class DynamicModule {
         },
         plotly: {
             module: null,
-            import: () => importUMD('https://unpkg.com/plotly.js-dist-min@latest/plotly.min.js'),
+            import: () => importUMD('https://unpkg.com/plotly.js-dist-min@latest/plotly.min.js') as Promise<typeof PlotlyType>,
             timeout: 10000,
         },
         mermaid: {

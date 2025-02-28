@@ -1,3 +1,4 @@
+import type * as PlotlyType from 'plotly.js';
 import type { ElementType } from 'mathjslab';
 import { AST } from 'mathjslab';
 import DynamicModule from './DynamicModule';
@@ -32,7 +33,7 @@ export const plotWidth = 100;
 
 export const outputFunction: { [k: string]: Function } = {
     plot: function (parent: string): void {
-        DynamicModule.use('plotly', (Plotly: any) => {
+        DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
             const trace1 = {
                 x: [1, 2.5, 3, 4],
                 y: [10, 15, 13, 17],
@@ -45,14 +46,14 @@ export const outputFunction: { [k: string]: Function } = {
                 type: 'scatter',
             };
 
-            const data = [trace1, trace2];
+            const data = [trace1, trace2] as Plotly.Data[];
 
-            Plotly.newPlot(parent, data);
+            (await Plotly).newPlot(parent, data);
         });
         insertOutput.type = '';
     },
     plot3: function (parent: string): void {
-        DynamicModule.use('plotly', (Plotly: any) => {
+        DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
             const line3d = {
                 x: [] as number[],
                 y: [] as number[],
@@ -75,18 +76,18 @@ export const outputFunction: { [k: string]: Function } = {
                 line3d.z.push(z);
             }
 
-            const data = [line3d];
+            const data = [line3d] as Plotly.Data[];
 
             const layout = {
                 autosize: true,
             };
-            Plotly.newPlot(parent, data, layout);
+            (await Plotly).newPlot(parent, data, layout);
         });
         insertOutput.type = '';
     },
     surf: function (parent: string): void {
         insertOutput.type = '';
-        DynamicModule.use('plotly', (Plotly: any) => {
+        DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
             function custom(x: number, y: number) {
                 return Math.sin(x / 50) * Math.cos(y / 50) * 50 + 50;
             }
@@ -113,41 +114,41 @@ export const outputFunction: { [k: string]: Function } = {
                 }
             }
 
-            const data = [surface1];
+            const data = [surface1] as Plotly.Data[];
 
             const layout = {
                 title: '3D Plot',
                 autosize: true,
             };
-            Plotly.newPlot(parent, data, layout);
+            (await Plotly).newPlot(parent, data, layout);
         });
         insertOutput.type = '';
     },
     plot2d: function (parent: string): void {
-        DynamicModule.use('plotly', (Plotly: any) => {
+        DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
             const trace = {
                 x: plotData.X,
                 y: plotData.data,
                 type: 'lines',
             };
 
-            const data = [trace];
+            const data = [trace] as Plotly.Data[];
 
-            Plotly.newPlot(parent, data);
+            (await Plotly).newPlot(parent, data);
         });
         insertOutput.type = '';
     },
     histogram: function (parent: string): void {
-        DynamicModule.use('plotly', (Plotly: any) => {
+        DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
             const histogram = {
                 x: plotData.X,
                 y: plotData.data,
                 type: 'bar',
             };
 
-            const data = [histogram];
+            const data = [histogram] as Plotly.Data[];
 
-            Plotly.newPlot(parent, data);
+            (await Plotly).newPlot(parent, data);
         });
         insertOutput.type = '';
     },
