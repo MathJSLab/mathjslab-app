@@ -3,7 +3,20 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.5.4
-- The `webpack-bundle-analyzer` plugin has been installed as development dependency.
+- The `webpack-bundle-analyzer` plugin has been installed as a development
+dependency. The bundle's build report is saved in the `report/` directory.
+Changes have been made to the `webpack.config.ts` file so that the build is
+configured with the options from the `build.config.json` file. The production
+mode bundle has the option to generate the report with
+`webpack-bundle-analyzer`. The development mode bundle has the option to
+configure the `webpack-dev-server` parameters.
+- The CSS style reset (the `src/styles/base/_reset.scss` file) has been
+enhanced to include HTML5 elements and MathML elements. The
+`src/styles/element/_math.scss` file has been created to configure MathML
+elements. Because of the addition of new elements in the CSS style reset, more
+style definitions have been added to the `src/styles/abstract/_commons.scss`
+file to configure elements in general after reset and to define semantic
+variables.
 
 ## 1.5.3
 - All dependencies has been updated.

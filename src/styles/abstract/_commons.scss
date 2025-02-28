@@ -1,5 +1,6 @@
 @use './mixins';
 @use './variables';
+@use '../element/math';
 
 html[data-theme='light'] {
     @include mixins.define-map(variables.$theme-light);

@@ -3,7 +3,7 @@
  */
 @use './common-reset';
 
-/* Removes default margins and paddings. */
+/* Removes default margins and paddings. Reset font styles. */
 html,
 body,
 div,
@@ -84,7 +84,42 @@ summary,
 time,
 mark,
 audio,
-video {
+video,
+dialog,
+meter,
+progress,
+data,
+datalist,
+template,
+slot,
+bdi,
+wbr,
+math,
+mrow,
+mi,
+mo,
+mn,
+ms,
+mfrac,
+msqrt,
+mroot,
+mtable,
+mtr,
+mtd,
+msup,
+msub,
+msubsup,
+mover,
+munder,
+munderover,
+mtext,
+merror,
+mpadded,
+mphantom,
+mspace,
+menclose,
+mfenced,
+maction {
     margin: 0;
     padding: 0;
     border: 0;
@@ -95,17 +130,77 @@ video {
 
 /* Removes styles from lists. */
 ol,
-ul {
+ul,
+menu {
     list-style: none;
 }
 
 /* Removes default decoration from links. */
 a {
     text-decoration: none;
+    color: inherit;
+}
+
+/* Normalizes button and input behavior. */
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+    outline: none;
+}
+
+/* Keeps the cursor of clickable buttons. */
+button {
+    cursor: pointer;
 }
 
 /* Defines basic styles for tables. */
 table {
     border-collapse: collapse;
     border-spacing: 0;
+}
+
+/* Removes the default style from the <dialog> element. */
+dialog {
+    all: unset;
+}
+
+/* Adjustment for interactive elements. */
+details {
+    display: block;
+}
+summary {
+    display: list-item;
+}
+
+/* Resets default styles for <progress> and <meter> elements. */
+progress,
+meter {
+    vertical-align: baseline;
+    appearance: none;
+}
+
+/* Ensures that media elements do not exceed the container boundaries. */
+img,
+video,
+canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Removes default styles from <mark>. */
+mark {
+    background: none;
+    color: inherit;
+}
+
+/* Defines predictable behavior for <form> elements. */
+input[type='search'] {
+    appearance: none;
+    border-radius: 0;
 }

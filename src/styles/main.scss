@@ -55,21 +55,3 @@ body {
     font-family: sans-serif;
     font-size: 15px;
 }
-
-math {
-    display: inline math;
-    direction: ltr;
-    text-indent: 0;
-    letter-spacing: normal;
-    line-height: normal;
-    word-spacing: normal;
-    font: normal 15px math;
-    color: var(--color-math-text);
-    math-style: normal;
-    math-shift: normal;
-    math-depth: 0;
-}
-
-math[display='block' i] {
-    display: block math;
-}

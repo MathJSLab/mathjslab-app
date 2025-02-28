@@ -1,9 +1,9 @@
 {
   "name": "mathjslab-app",
-  "hash": "c339f6084a3eabbad8a9",
+  "hash": "c055f6e65535c12b3d90",
   "version": "5.98.0",
-  "time": 13952,
-  "builtAt": 1740701715044,
+  "time": 14479,
+  "builtAt": 1740779426121,
   "publicPath": "auto",
   "outputPath": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\dist",
   "assetsByChunkName": {
@@ -16,14 +16,14 @@
     {
       "type": "asset",
       "name": "mathjslab-app.js",
-      "size": 498547,
+      "size": 503047,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
         "javascriptModule": false,
         "minimized": true,
-        "size": 498547
+        "size": 503047
       },
       "chunkNames": [
         "mathjslab-app"
@@ -60,12 +60,12 @@
     {
       "type": "asset",
       "name": "mathjslab-app.css",
-      "size": 11719,
+      "size": 12824,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
-        "size": 11719
+        "size": 12824
       },
       "chunkNames": [
         "mathjslab-app"
@@ -87,10 +87,10 @@
       "initial": true,
       "entry": true,
       "recorded": false,
-      "size": 572890,
+      "size": 578495,
       "sizes": {
-        "javascript": 560281,
-        "css/mini-extract": 11718,
+        "javascript": 564781,
+        "css/mini-extract": 12823,
         "runtime": 891
       },
       "names": [
@@ -105,7 +105,7 @@
         "mathjslab-app.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "ba5a9f0eb210f91a56d5",
+      "hash": "f898eca6027fd63c2723",
       "childrenByOrder": {},
       "id": 379,
       "siblings": [],
@@ -1563,9 +1563,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 11448,
+          "size": 12198,
           "sizes": {
-            "javascript": 11448
+            "javascript": 12198
           },
           "built": true,
           "codeGenerated": true,
@@ -1774,9 +1774,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 10808,
+          "size": 11558,
           "sizes": {
-            "javascript": 10808
+            "javascript": 11558
           },
           "built": true,
           "codeGenerated": true,
@@ -1985,9 +1985,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 9157,
+          "size": 9907,
           "sizes": {
-            "javascript": 9157
+            "javascript": 9907
           },
           "built": true,
           "codeGenerated": true,
@@ -2210,9 +2210,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 10672,
+          "size": 11422,
           "sizes": {
-            "javascript": 10672
+            "javascript": 11422
           },
           "built": true,
           "codeGenerated": true,
@@ -2421,9 +2421,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 9444,
+          "size": 10194,
           "sizes": {
-            "javascript": 9444
+            "javascript": 10194
           },
           "built": true,
           "codeGenerated": true,
@@ -3312,9 +3312,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 9561,
+          "size": 10311,
           "sizes": {
-            "javascript": 9561
+            "javascript": 10311
           },
           "built": true,
           "codeGenerated": true,
@@ -4754,9 +4754,9 @@
         {
           "type": "module",
           "moduleType": "css/mini-extract",
-          "size": 11718,
+          "size": 12823,
           "sizes": {
-            "css/mini-extract": 11718
+            "css/mini-extract": 12823
           },
           "built": true,
           "codeGenerated": true,
@@ -6381,9 +6381,9 @@
     {
       "type": "module",
       "moduleType": "css/mini-extract",
-      "size": 11718,
+      "size": 12823,
       "sizes": {
-        "css/mini-extract": 11718
+        "css/mini-extract": 12823
       },
       "built": true,
       "codeGenerated": true,
@@ -9247,9 +9247,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 10808,
+      "size": 11558,
       "sizes": {
-        "javascript": 10808
+        "javascript": 11558
       },
       "built": true,
       "codeGenerated": true,
@@ -9325,9 +9325,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 9561,
+      "size": 10311,
       "sizes": {
-        "javascript": 9561
+        "javascript": 10311
       },
       "built": true,
       "codeGenerated": true,
@@ -9403,9 +9403,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 10672,
+      "size": 11422,
       "sizes": {
-        "javascript": 10672
+        "javascript": 11422
       },
       "built": true,
       "codeGenerated": true,
@@ -9481,9 +9481,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 9157,
+      "size": 9907,
       "sizes": {
-        "javascript": 9157
+        "javascript": 9907
       },
       "built": true,
       "codeGenerated": true,
@@ -9559,9 +9559,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 11448,
+      "size": 12198,
       "sizes": {
-        "javascript": 11448
+        "javascript": 12198
       },
       "built": true,
       "codeGenerated": true,
@@ -9637,9 +9637,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 9444,
+      "size": 10194,
       "sizes": {
-        "javascript": 9444
+        "javascript": 10194
       },
       "built": true,
       "codeGenerated": true,
@@ -9803,9 +9803,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 12144,
+      "size": 13249,
       "sizes": {
-        "javascript": 12144
+        "javascript": 13249
       },
       "built": true,
       "codeGenerated": true,
@@ -10360,15 +10360,15 @@
       "assets": [
         {
           "name": "mathjslab-app.css",
-          "size": 11719
+          "size": 12824
         },
         {
           "name": "mathjslab-app.js",
-          "size": 498547
+          "size": 503047
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 510266,
+      "assetsSize": 515871,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -10386,15 +10386,15 @@
       "assets": [
         {
           "name": "mathjslab-app.css",
-          "size": 11719
+          "size": 12824
         },
         {
           "name": "mathjslab-app.js",
-          "size": 498547
+          "size": 503047
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 510266,
+      "assetsSize": 515871,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -10407,12 +10407,12 @@
   "errorsCount": 0,
   "warnings": [
     {
-      "message": "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (487 KiB)",
-      "stack": "AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (487 KiB)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:145:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1006:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:835:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
+      "message": "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (491 KiB)",
+      "stack": "AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (491 KiB)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:145:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1006:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:835:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
     },
     {
-      "message": "entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (498 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n",
-      "stack": "EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (498 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:153:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1006:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:835:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
+      "message": "entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (504 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n",
+      "stack": "EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (504 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:153:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1006:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:835:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
     },
     {
       "message": "webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/",
