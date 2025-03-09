@@ -9,6 +9,8 @@ import setContainerFactory from '../setContainerFactory';
 import setIdFirstFactory from '../setIdFirstFactory';
 /* Web component styles. */
 import styles from './command-shell.styles.scss';
+import { CharString, Evaluator, FunctionHandle, MultiArray } from 'mathjslab';
+import { appEngine } from '../../appEngine';
 /* BatchPanel Web component. */
 import { BatchPanel } from '../batch-panel/batch-panel.component';
 /* CommandPrompt Web component. */
@@ -17,7 +19,7 @@ import { CommandPrompt } from '../command-prompt/command-prompt.component';
 import { CommandPromptEvalHandler, CommandPromptSet } from '../command-prompt-set/command-prompt-set.component';
 /* FixedScrollPanel Web component. */
 import { FixedScrollPanel } from '../fixed-scroll-panel/fixed-scroll-panel.component';
-import { CharString, FunctionHandle, MultiArray } from 'mathjslab';
+
 /* Set of Web component elements. */
 export interface CommandShellElementEntry {
     /* Wrapper */
@@ -97,11 +99,6 @@ export class CommandShell extends HTMLElement {
             };
         };
         this.element.promptSet.evalPromptRefresh = this.refreshNameList.bind(this);
-        if (globalThis.EvaluatorPointer.debug) {
-            const promptFoot = document.createElement('p');
-            promptFoot.innerHTML = globalThis.MathJSLabCalcBuildMessage;
-            this.appendChild(promptFoot);
-        }
         this.resize();
         this.setLanguage();
         this.element.promptSet.promptAppend();
@@ -164,6 +161,10 @@ export class CommandShell extends HTMLElement {
         return this.element.promptSet.isTouchCapable;
     }
     /**
+     *
+     */
+    public evaluatorPointer: Evaluator;
+    /**
      * Evaluate prompt callback setter.
      * @param prompt Prompt to evaluate.
      * @param index Index of prompt to evaluate.
@@ -192,20 +193,20 @@ export class CommandShell extends HTMLElement {
      */
     public setLanguage(lang?: string) {
         if (lang) {
-            globalThis.lang = lang;
+            appEngine.lang = lang;
         } else {
-            globalThis.lang = navigator.language.replace(/\-.+/, '');
+            appEngine.lang = navigator.language.replace(/\-.+/, '');
         }
         this.element.variables.element.title.innerHTML = {
             en: 'Variables',
             es: 'Variables',
             pt: 'Variáveis',
-        }[globalThis.lang]!;
+        }[appEngine.lang]!;
         this.element.batch.element.evaluateButton.innerHTML = {
             en: 'Evaluate',
             es: 'Computar',
             pt: 'Computar',
-        }[globalThis.lang]!;
+        }[appEngine.lang]!;
     }
     /**
      * To be called in resize events.
@@ -220,7 +221,7 @@ export class CommandShell extends HTMLElement {
      * @param _event
      */
     public restart(_event: Event): void {
-        globalThis.EvaluatorPointer.Restart();
+        this.evaluatorPointer.Restart();
         /* Removes all child nodes from the this.nameList. */
         this.nameList.replaceChildren();
         this.element.promptSet.clear();
@@ -261,9 +262,9 @@ export class CommandShell extends HTMLElement {
     public refreshNameList(): void {
         /* Removes all child nodes from the this.nameList. */
         this.nameList.replaceChildren();
-        for (const name in globalThis.EvaluatorPointer.nameTable) {
-            if (!globalThis.EvaluatorPointer.nativeNameTableList.includes(name)) {
-                const nameTableEntry = globalThis.EvaluatorPointer.nameTable[name];
+        for (const name in this.evaluatorPointer.nameTable) {
+            if (!this.evaluatorPointer.nativeNameTableList.includes(name)) {
+                const nameTableEntry = this.evaluatorPointer.nameTable[name];
                 const nameListEntry = document.createElement('li');
                 nameListEntry.className = 'nameitem';
                 this.nameList.append(nameListEntry);
@@ -292,6 +293,13 @@ export class CommandShell extends HTMLElement {
                     nameListEntry.innerHTML = `${resultType} ${name}`;
                 }
             }
+        }
+    }
+    public debugMessage(message: string): void {
+        if (this.evaluatorPointer.debug) {
+            const promptFoot = document.createElement('p');
+            promptFoot.innerHTML = message;
+            this.appendChild(promptFoot);
         }
     }
 }

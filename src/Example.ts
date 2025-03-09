@@ -1,6 +1,7 @@
 /**
  * First example record entry.
  */
+import { appEngine } from './appEngine';
 import firstExample from './first-example.json';
 /**
  * Examples record entry.
@@ -47,7 +48,7 @@ class Example {
         }
         if (!this.isFileProtocol) {
             await global
-                .fetch(`${globalThis.MathJSLabCalc.exampleBaseUrl}example/example.json`)
+                .fetch(`${appEngine.config.exampleBaseUrl}example/example.json`)
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error('Examples unavailable.');
@@ -73,7 +74,7 @@ class Example {
                 button.innerHTML = this.examples[example].caption;
                 button.addEventListener('click', async (event: Event): Promise<void> => {
                     const exampleId = (event.target as HTMLButtonElement).id.substring(8);
-                    const response = await globalThis.fetch(`${globalThis.MathJSLabCalc.exampleBaseUrl}example/${this.examples[exampleId].file}`);
+                    const response = await globalThis.fetch(`${appEngine.config.exampleBaseUrl}example/${this.examples[exampleId].file}`);
                     if (!response.ok) {
                         throw new Error('Network response error.');
                     }

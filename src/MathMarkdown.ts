@@ -1,3 +1,4 @@
+import { appEngine } from './appEngine';
 import DynamicModule from './DynamicModule';
 
 declare global {
@@ -51,7 +52,7 @@ abstract class MathMarkdown {
                     const reference = matched[2];
                     data =
                         data.slice(0, matched.index) +
-                        globalThis.EvaluatorPointer.toMathML(reference, display) +
+                        appEngine.evaluator.toMathML(reference, display) +
                         data.slice(matched.index + matched[2].length + quotelength);
                     replaced = true;
                 } else {

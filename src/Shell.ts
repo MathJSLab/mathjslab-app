@@ -1,3 +1,4 @@
+import { appEngine } from './appEngine';
 import { EvalInputHandler, CommandPromptEvalHandler, CommandShell } from './components/components';
 import { Example, ExampleEntry } from './Example';
 /**
@@ -45,6 +46,8 @@ class Shell {
                 }
             }
         }
+        shell._shell.evaluatorPointer = appEngine.evaluator;
+        shell._shell.debugMessage(appEngine.buildMessage);
         if (options.evalPrompt) {
             shell._shell.evalPrompt = options.evalPrompt;
         }

@@ -19,6 +19,17 @@ style definitions have been added to the `src/styles/abstract/_commons.scss`
 file to configure elements in general after reset and to define semantic
 variables.
 - All comments in the `.scss` files has been made using slashes (///).
+- Global definitions have been changed to exports. The `appEngine.ts` file has
+been created to concentrate and export the main application definitions that
+were previously global declarations, so that they are accessible throughout
+the project. The definitions in this file are also exported in the `globalThis`
+object. The removal of global declarations was done to improve compatibility
+with ES Modules.
+- The files `externalCmdWListTable.ts`, `externalFunctionTable.ts` and
+`outputFunction.ts` were created and the respective definitions that were in
+the `EvaluatorConfiguration.ts` file were moved to them. The functions related
+to graphs were moved to the `PlotEngine.ts` file, and are referenced in the
+other files. The plot functions still need to be implemented.
 
 ## 1.5.3
 - All dependencies has been updated.

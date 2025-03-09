@@ -43,7 +43,7 @@
                                 en: 'README.md',
                                 es: 'LEAME.md',
                                 pt: 'LEIAME.md',
-                            }[window.lang],
+                            }[window.appEngine.lang],
                         )
                         .then((response) => {
                             if (!response.ok) {
@@ -62,57 +62,57 @@
                     en: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
                     es: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
                     pt: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
-                }[window.lang];
+                }[window.appEngine.lang];
                 document.getElementById('subtitle').innerHTML = {
                     en: 'An <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">interpreter</a> with language syntax like <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
                     es: 'Un <a href="https://es.wikipedia.org/wiki/Int%C3%A9rprete_(inform%C3%A1tica)" target="_blank" rel="noopener">intérprete</a> con sintaxis de lenguaje como <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
                     pt: 'Um <a href="https://pt.wikipedia.org/wiki/Interpretador" target="_blank" rel="noopener">interpretador</a> com sintaxe de linguagem como o <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-                }[window.lang];
+                }[window.appEngine.lang];
                 document.getElementById('abstract').innerHTML = {
                     en: 'This is a demo application of the <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> <a href="https://en.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">npm package</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repository</a>), an emulator of a subset of the <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> language written completely in <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. This application is intended for educational purposes. See the <a href="#notes">notes</a> below for detailed information.',
                     es: 'Esta es una aplicación de demostración del <a href="https://es.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">paquete npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositorio</a>), un emulador de un subconjunto del lenguaje <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente en <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Esta aplicación está destinada a fines educativos. Consulte las <a href="#notes">notas</a> a continuación para obtener información detallada.',
                     pt: 'Este é um aplicativo de demonstração do <a href="https://pt.wikipedia.org/wiki/Npm_(software)" target="_blank" rel="noopener">pacote npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositório</a>), um emulador de um subconjunto da linguagem <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente em <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Este aplicativo é destinado a fins educacionais. Consulte as <a href="#notes">notas</a> abaixo para obter informações detalhadas.',
-                }[window.lang];
+                }[window.appEngine.lang];
                 document.getElementById('trademark-notice').innerHTML = {
                     en: '<strong>Important Notice:</strong> This software, the <strong><a href="https://mathjslab.com/">MathJSLab</a>, is not affiliated, sponsored, or endorsed by <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> is a registered trademark of <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> For more information about <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visit <a href="https://www.mathworks.com/">www.mathworks.com</a>.',
                     es: '<strong>Aviso Importante:</strong> Este software, <strong><a href="https://mathjslab.com/">MathJSLab</a>, no está afiliado, patrocinado ni respaldado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> es una marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para más información sobre <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visita <a href="https://www.mathworks.com">www.mathworks.com</a>.',
                     pt: '<strong>Aviso Importante:</strong> Este software, o <strong><a href="https://mathjslab.com/">MathJSLab</a>, não é afiliado, patrocinado ou endossado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> é uma marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para mais informações sobre o <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visite <a href="https://www.mathworks.com">www.mathworks.com</a>.',
-                }[window.lang];
+                }[window.appEngine.lang];
                 document.getElementById('examples').element.title.innerHTML = {
                     en: 'Examples',
                     es: 'Ejemplos',
                     pt: 'Exemplos',
-                }[window.lang];
+                }[window.appEngine.lang];
                 document.getElementById('open-file').innerHTML = {
                     en: 'Open...',
                     es: 'Abrir...',
                     pt: 'Abrir...',
-                }[window.lang];
+                }[window.appEngine.lang];
                 document.getElementById('readme').element.title.innerHTML = {
                     en: 'More Info',
                     es: 'Más información',
                     pt: 'Mais Informações',
-                }[window.lang];
+                }[window.appEngine.lang];
                 document.getElementById('github-repository').innerHTML = {
                     en: 'GitHub Repository',
                     es: 'Repositorio GitHub',
                     pt: 'Repositório GitHub',
-                }[window.lang];
+                }[window.appEngine.lang];
                 document.getElementById('curriculum').innerHTML = {
                     en: 'Curriculum',
                     es: 'Currículum',
                     pt: 'Currículo Lattes',
-                }[window.lang];
+                }[window.appEngine.lang];
                 colorModeDark = {
                     en: 'dark',
                     es: 'oscuro',
                     pt: 'escuro',
-                }[window.lang];
+                }[window.appEngine.lang];
                 colorModeLight = {
                     en: 'light',
                     es: 'claro',
                     pt: 'claro',
-                }[window.lang];
+                }[window.appEngine.lang];
                 if (document.documentElement.getAttribute('data-theme') === 'dark') {
                     document.getElementById('theme-toggle').innerHTML = colorModeLight;
                 } else {
@@ -149,7 +149,7 @@
         </script>
     </head>
 
-    <body onload="javascript:loadText();document.getElementById('language').value=window.lang;scrollToTop();">
+    <body onload="javascript:loadText();document.getElementById('language').value=window.appEngine.lang;scrollToTop();">
         <div id="app">
             <header>
                 <img alt="MathJSLab logo" class="logo" src="./images/mathjslab-logo.svg" width="125" height="125" />
@@ -169,7 +169,7 @@
                     <div class="green-panel width-fit-content text-align-center right-align-panel">
                         <select
                             id="language"
-                            onchange="javascript:window.setLanguage(document.getElementById('language').value);loadText();scrollToTop();"
+                            onchange="javascript:window.appEngine.setLanguage(document.getElementById('language').value);loadText();scrollToTop();"
                         >
                             <option value="en">English</option>
                             <option value="es">Español</option>
