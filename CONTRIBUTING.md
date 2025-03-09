@@ -90,8 +90,7 @@ The MathJSLab Demo project started almost a decade ago, but it is still in its i
 Some are listed below:
 
 * Implements the choice for only prompt or only batch in Shell object.
-* Create a responsive interface to mobile devices.
-* Insert Mermaid objects in markdown files through markdown function.
+* Create a better responsive interface to mobile devices.
 
 You are welcome to contribute to this project. I will be very grateful if you participate in some way.
 

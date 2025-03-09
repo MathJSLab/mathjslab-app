@@ -1,5 +1,6 @@
 @use '../../styles/component/reset';
 @use '../../styles/abstract/variables';
+@use '../../styles/base//transitions';
 @use '../../styles/component/common';
 
 .collapsible-content-panel-wrapper {
@@ -24,7 +25,7 @@ input.collapsible-content-panel-toggle {
     cursor: pointer;
     border: 2px solid var(--green-border);
     border-radius: 1rem;
-    transition: all 0.25s ease-out;
+    transition: transitions.get(collapsible-content-panel-title);
 }
 
 .collapsible-content-panel-title:hover {
@@ -39,8 +40,8 @@ input.collapsible-content-panel-toggle {
     border-left: 5px solid currentColor;
     vertical-align: middle;
     margin-right: 0.7rem;
-    transform: translateY(-2px);
-    transition: transform 0.2s ease-out;
+    transform: transitions.get(collapsible-content-panel-title-before-transform);
+    transition: transitions.get(collapsible-content-panel-title-before);
 }
 
 .collapsible-content-panel-collapsible .collapsible-content-panel-inner-content {
@@ -56,7 +57,7 @@ input.collapsible-content-panel-toggle {
 .collapsible-content-panel-collapsible {
     max-height: 0px;
     overflow: hidden;
-    transition: max-height 0.25s ease-in-out;
+    transition: transitions.get(collapsible-content-panel-collapsible);
 }
 
 .collapsible-content-panel-toggle:checked + .collapsible-content-panel-title + .collapsible-content-panel-collapsible {
@@ -64,7 +65,7 @@ input.collapsible-content-panel-toggle {
 }
 
 .collapsible-content-panel-toggle:checked + .collapsible-content-panel-title::before {
-    transform: rotate(90deg) translateX(-3px);
+    transform: transitions.get(collapsible-content-panel-toggle-checked-title-before-transform);
 }
 
 .collapsible-content-panel-toggle:checked + .collapsible-content-panel-title {

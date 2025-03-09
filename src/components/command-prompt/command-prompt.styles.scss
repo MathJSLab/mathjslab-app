@@ -21,8 +21,6 @@
 
 .command-prompt-input {
     background-color: var(--color-input-background);
-    color: var(--color-input-text);
-    font-family: 1rem monospace;
     overflow: hidden;
     outline: none;
     resize: none;
@@ -33,6 +31,7 @@
     border-radius: 0.3rem;
     border: 0;
     outline: none;
+    @include mixins.input-font;
 }
 
 .command-prompt-input:hover {
@@ -41,7 +40,6 @@
 
 .command-prompt-input:focus {
     background-color: var(--color-input-background-focus);
-    color: var(--color-input-text-focus);
 }
 
 .command-prompt-output {

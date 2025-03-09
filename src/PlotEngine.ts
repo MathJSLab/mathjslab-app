@@ -1,6 +1,5 @@
 import type * as PlotlyType from 'plotly.js';
-import type { ElementType } from 'mathjslab';
-import { AST } from 'mathjslab';
+import { type ElementType, AST } from 'mathjslab';
 import DynamicModule from './DynamicModule';
 
 export const plotDataLayoutConfig: Plotly.PlotlyDataLayoutConfig = {

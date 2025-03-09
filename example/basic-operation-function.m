@@ -9,9 +9,13 @@ sqrt(2)
 2^(1/3)
 (-2)^(1/2)
 (-1)^(1/2)
+abs(-3)
+abs(1+i)
+log2(16)
 logb(2,-1)
 logb(0,8)
 root(64,3)
+exp(i*pi)
 e^(i*pi)
 f = @(x) sin(x).^2+cos(x).^2
 trig_cycle_20=[0,pi/6,pi/4,pi/3;pi/2,2*pi/3,3*pi/4,5*pi/6;pi,7*pi/6,5*pi/4,4*pi/3;3*pi/2,5*pi/3,7*pi/4,11*pi/6;2*pi,5*pi/2,3*pi,7*pi/2]

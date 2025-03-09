@@ -1,13 +1,18 @@
+/// _commons.scss - Common styles for elements.
+/// All selectors in this files refers to HTML elements (no class definition).
+
+@use '../base/colors';
+@use '../base/transitions';
 @use './mixins';
 @use './variables';
 @use '../element/math';
 
 html[data-theme='light'] {
-    @include mixins.define-map(variables.$theme-light);
+    @include mixins.define-map(colors.get(light));
 }
 
 html[data-theme='dark'] {
-    @include mixins.define-map(variables.$theme-dark);
+    @include mixins.define-map(colors.get(dark));
 }
 
 a {
@@ -15,7 +20,7 @@ a {
     text-decoration: none;
     color: var(--color-a-text);
     padding: 0.1rem;
-    transition: background-color 0.4s;
+    transition: transitions.get(default-a);
 }
 
 @media (hover: hover) {
@@ -61,6 +66,10 @@ h4 {
 
 h5 {
     font-size: var(--font-size-x-small);
+}
+
+h6 {
+    font-size: var(--font-size-xx-small);
 }
 
 dl,
@@ -112,5 +121,9 @@ mn > pre {
 
 code,
 pre > code {
-    color: var(--color-input-text);
+    @include mixins.input-font;
+}
+
+mn > pre > code {
+    color: inherit;
 }

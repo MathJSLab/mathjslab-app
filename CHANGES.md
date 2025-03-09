@@ -3,6 +3,7 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.5.4
+- All dependencies has been updated, including `mathjslab` (version 1.7.1).
 - The `webpack-bundle-analyzer` plugin has been installed as a development
 dependency. The bundle's build report is saved in the `report/` directory.
 Changes have been made to the `webpack.config.ts` file so that the build is
@@ -17,6 +18,7 @@ elements. Because of the addition of new elements in the CSS style reset, more
 style definitions have been added to the `src/styles/abstract/_commons.scss`
 file to configure elements in general after reset and to define semantic
 variables.
+- All comments in the `.scss` files has been made using slashes (///).
 
 ## 1.5.3
 - All dependencies has been updated.

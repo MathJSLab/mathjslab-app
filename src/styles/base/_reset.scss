@@ -1,9 +1,8 @@
-/**
- * _reset.scss - Reset/CSS baseline
- */
+/// _reset.scss - Reset/CSS baseline.
+
 @use './common-reset';
 
-/* Removes default margins and paddings. Reset font styles. */
+/// Removes default margins, paddings and resets font styles on all elements.
 html,
 body,
 div,
@@ -94,6 +93,7 @@ template,
 slot,
 bdi,
 wbr,
+/// MathML elements.
 math,
 mrow,
 mi,
@@ -128,20 +128,20 @@ maction {
     vertical-align: baseline;
 }
 
-/* Removes styles from lists. */
+/// Removes styles from lists.
 ol,
 ul,
 menu {
     list-style: none;
 }
 
-/* Removes default decoration from links. */
+/// Removes default decoration from links.
 a {
     text-decoration: none;
     color: inherit;
 }
 
-/* Normalizes button and input behavior. */
+/// Normalizes button and input behavior.
 button,
 input,
 select,
@@ -154,23 +154,23 @@ textarea {
     outline: none;
 }
 
-/* Keeps the cursor of clickable buttons. */
+/// Keeps the cursor of clickable buttons.
 button {
     cursor: pointer;
 }
 
-/* Defines basic styles for tables. */
+/// Defines basic styles for tables.
 table {
     border-collapse: collapse;
     border-spacing: 0;
 }
 
-/* Removes the default style from the <dialog> element. */
+/// Removes the default style from the <dialog> element.
 dialog {
     all: unset;
 }
 
-/* Adjustment for interactive elements. */
+/// Adjustment for interactive elements.
 details {
     display: block;
 }
@@ -178,14 +178,14 @@ summary {
     display: list-item;
 }
 
-/* Resets default styles for <progress> and <meter> elements. */
+/// Resets default styles for <progress> and <meter> elements.
 progress,
 meter {
     vertical-align: baseline;
     appearance: none;
 }
 
-/* Ensures that media elements do not exceed the container boundaries. */
+/// Ensures that media elements do not exceed the container boundaries.
 img,
 video,
 canvas {
@@ -193,14 +193,23 @@ canvas {
     height: auto;
 }
 
-/* Removes default styles from <mark>. */
+/// Removes default styles from <mark>.
 mark {
     background: none;
     color: inherit;
 }
 
-/* Defines predictable behavior for <form> elements. */
+/// Defines predictable behavior for <form> elements.
 input[type='search'] {
     appearance: none;
     border-radius: 0;
+}
+
+/// Sets direction of all editable elements from left to right.
+[contenteditable],
+input,
+textarea,
+select,
+button {
+    direction: ltr;
 }

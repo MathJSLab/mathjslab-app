@@ -1,0 +1,21 @@
+/// _transitions.scss - Transition and tranformation definitions.
+@use '../component/transition' as component-transition;
+
+$transition-spec: (
+    default: 0.3s ease,
+    main-body: color 0.5s background-color 0.5s,
+    default-a: background-color 0.4s,
+);
+
+/// MErge Web component transitions and transforms definitions to $transition-spec map.
+$transition-spec: map-merge($transition-spec, component-transition.$transition-spec);
+
+/// Gets transition definition from transition-name.
+/// @param {string | null} $transition-name - The transition name to get. If not provided, returns the default transition definition.
+/// @return {number} - The equivalent transition value for transition name, or the default transition definition if argument is null.
+@function get($transition-name: null) {
+    @if $transition-name == null {
+        @return map-get($transition-spec, default);
+    }
+    @return map-get($transition-spec, $transition-name);
+}

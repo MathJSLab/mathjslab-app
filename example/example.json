@@ -64,6 +64,11 @@
     "caption": "Linear Algebra",
     "description": "Tests LinearAlgebra class methods."
   },
+  "linear-algebra-help": {
+    "file": "linear-algebra-help.m",
+    "caption": "Linear Algebra Help",
+    "description": "Linear Algebra related functions help."
+  },
   "multidimensional": {
     "file": "multidimensional.m",
     "caption": "Multidimensional",

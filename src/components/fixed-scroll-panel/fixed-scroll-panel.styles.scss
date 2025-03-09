@@ -1,4 +1,7 @@
 @use '../../styles/component/reset';
+@use '../../styles/base/sizes';
+@use '../../styles/base/colors';
+@use '../../styles/base/transitions';
 @use '../../styles/abstract/variables';
 @use '../../styles/component/common';
 
@@ -6,7 +9,7 @@
     display: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: sizes.get(screen-width-medium)) {
     .fixed-scroll-panel-wrapper {
         display: block;
         width: 12%;
@@ -24,7 +27,7 @@
     text-decoration: none;
     text-align: center;
     color: var(--color-a-text);
-    transition: 0.4s;
+    transition: transitions.get(fixed-scroll-panel-title);
     padding: 0.1rem;
 }
 

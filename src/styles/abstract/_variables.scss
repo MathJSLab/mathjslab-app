@@ -1,28 +1,21 @@
-/**
- * _variables.scss - Semantic variable definitions.
- */
+/// _variables.scss - Semantic variable definitions.
 
 @use '../base/colors';
 @use '../base/sizes';
+@use '../base/transitions';
 @use '../abstract/mixins';
 
-$theme-light: colors.$theme-light;
-$theme-dark: colors.$theme-dark;
-$sizes: sizes.$generated-sizes;
-
 :root {
-    @include mixins.define-map($theme-light);
+    @include mixins.define-map(colors.get(light));
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        @include mixins.define-map($theme-dark);
+        @include mixins.define-map(colors.get(dark));
     }
 }
 
 :root {
-    @include mixins.define-map($sizes);
+    @include mixins.define-map(sizes.get());
+    @include mixins.define-map(transitions.get());
 }
-
-// Transitions
-$transition-default: 0.3s ease;

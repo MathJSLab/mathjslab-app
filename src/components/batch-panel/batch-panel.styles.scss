@@ -1,4 +1,5 @@
 @use '../../styles/component/reset';
+@use '../../styles/base/sizes';
 @use '../../styles/abstract/variables';
 @use '../../styles/abstract/mixins';
 @use '../../styles/component/common';
@@ -8,7 +9,7 @@
     display: none;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: sizes.get(screen-width-medium)) {
     .batch-panel-wrapper {
         display: block;
     }
@@ -25,9 +26,6 @@
 
 .batch-panel-input {
     background-color: var(--color-input-background);
-    color: var(--color-input-text);
-    font-family: monospace;
-    font-size: 1.225rem;
     border: 1px thin black;
     padding: 0.2rem;
     line-height: 1.225rem;
@@ -37,6 +35,7 @@
     width: 98%;
     margin: 1rem;
     resize: none;
+    @include mixins.input-font;
 }
 
 .batch-panel-input:hover {
@@ -45,7 +44,6 @@
 
 .batch-panel-input:focus {
     background-color: var(--color-input-background-focus);
-    color: var(--color-input-text-focus);
 }
 
 button {

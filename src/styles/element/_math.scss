@@ -1,6 +1,8 @@
+/// _math.scss - MathML style definitions.
+
 @use '../abstract/variables';
 
-/* Specific adjustments for MathML. */
+/// Specific adjustments for MathML.
 math {
     display: inline-block;
     direction: ltr;
@@ -14,25 +16,33 @@ math {
     font-size: var(--math-font-size-medium);
     font-family: math;
     color: var(--color-math-text);
-    math-style: normal;
+    math-style: compact;
     math-shift: normal;
     math-depth: 0;
 }
 
-/* Ensures that block math expressions are aligned correctly. */
+/// Ensures that block math expressions are aligned correctly.
 math[display='block' i] {
     display: block;
     margin: 1em 0;
 }
 
-/* Adjustment for mathematical tables. */
+/// Ensures that properties such as font-family, font-size, and color are inherited correctly.
+mstyle {
+    all: unset;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+}
+
+/// Adjustment for mathematical tables.
 mtable {
     border-collapse: collapse;
     border-spacing: 0;
-    width: 100%;
+    width: auto;
 }
 
-/* Ensures that mathematical elements are the same size as the default font. */
+/// Ensures that math elements have the same default font properties.
 mi,
 mo,
 mn,
@@ -44,9 +54,19 @@ mtext {
     font-weight: inherit;
 }
 
-/* Ensures that fractions and roots are rendered correctly. */
+/// Ensures that fractions and roots are rendered correctly.
 mfrac,
 msqrt,
 mroot {
     display: block math;
+}
+
+/// The numerator and denominator of fractions have their size increased in relation to the size of the parent element.
+mfrac {
+    font-size: calc(4 / 3 * 1em);
+}
+
+/// In the case of fractions contained in power exponents, the relative size is the default for mfrac.
+msup > mrow:last-child mfrac {
+    font-size: 1em;
 }

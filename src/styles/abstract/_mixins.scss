@@ -1,14 +1,10 @@
-@mixin flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/// Defines CSS custom properties from a Sass map.
 
-@mixin responsive-font-size($size) {
-    font-size: $size;
+@use '../base/sizes';
 
-    @media (max-width: 768px) {
-        font-size: $size * 0.8;
+@mixin define-map($map) {
+    @each $name, $value in $map {
+        --#{$name}: #{$value};
     }
 }
 
@@ -21,8 +17,25 @@
     border-radius: 1rem;
 }
 
-@mixin define-map($map) {
-    @each $name, $value in $map {
-        --#{$name}: #{$value};
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin responsive-font-size($size: size.get(font-size-base), $max-screen-width: screen-width-small) {
+    font-size: $size;
+    @media (max-width: sizes.get($max-screen-width)) {
+        font-size: $size * 3/4;
+    }
+}
+
+@mixin input-font {
+    font-weight: bold;
+    font-family: monospace;
+    font-size: var(--font-size-medium);
+    color: var(--color-input-text);
+    @media (max-width: sizes.get(screen-width-medium)) {
+        font-size: var(--font-size-small);
     }
 }

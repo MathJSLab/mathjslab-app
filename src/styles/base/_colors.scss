@@ -1,14 +1,12 @@
-/**
- * _colors.scss - Color definitions.
- */
+/// _colors.scss - Color definitions and function getter.
 
-// The generated color map.
+/// The generated baseline color map.
 $generated-colors: ();
 
-// List of primary color names.
+/// List of primary color names.
 $color-primary: (red, yellow, green, blue);
 
-// Color specifications map. The saturation and luminosity value is the default for the color specified by the name and hue.
+/// Color specifications map. The saturation and luminosity value is the default for the color specified by the name and hue.
 $color-spec: (
     red: (
         hue: 0,
@@ -37,7 +35,7 @@ $color-spec: (
     ),
 );
 
-// Color saturation and luminosity map for theme styles. Null values ​​specify the default saturation and luminosity in the $color-spec map.
+/// Color saturation and luminosity map for theme styles. Null values for saturation or luminosity ​​specifies the default values in the $color-spec map.
 $theme-spec: (
     light: (
         background: (
@@ -85,25 +83,21 @@ $theme-spec: (
     ),
 );
 
-// Iterates over the $color-spec and $theme-spec maps generating the color definitions in the $generated-colors map.
+/// Iterates over the $color-spec and $theme-spec maps generating the color definitions in the $generated-colors map.
 @each $color-name, $color in $color-spec {
     @each $theme-name, $theme in $theme-spec {
         @each $style-name, $style in $theme {
             $generated-colors: map-merge(
                 $generated-colors,
                 (
-                    '#{$color-name}-#{$style-name}-#{$theme-name}': hsl(
-                            map-get($color, hue),
-                            map-get($style, saturation) or map-get($color, saturation),
-                            map-get($style, luminosity) or map-get($color, luminosity)
-                        ),
+                    '#{$color-name}-#{$style-name}-#{$theme-name}': hsl(map-get($color, hue), map-get($style, saturation) or map-get($color, saturation), map-get($style, luminosity) or map-get($color, luminosity)),
                 )
             ) !global;
         }
     }
 }
 
-// Map of semantic colors.
+/// Map of semantic colors.
 $color-semantic: (
     color-background-light: hsl(0, 0%, 100%),
     color-background-soft-light: hsl(0, 0%, 96%),
@@ -157,44 +151,19 @@ $color-semantic: (
     color-button-text-shadow-dark: hsl(map-get(map-get($color-spec, olive-green), hue), 49%, 20%),
 );
 
-// Store the $color-semantic map in the $generated-colors map.
+/// Store the $color-semantic map in the $generated-colors map.
 $generated-colors: map-merge($generated-colors, $color-semantic);
 
-// Generated semantic color map of light theme.
+/// Generated semantic color map of light theme.
 $theme-light: ();
 
-// Generated semantic color map of dark theme.
+/// Generated semantic color map of dark theme.
 $theme-dark: ();
 
-// Semantic style list names.
-$style-semantic: (
-    background,
-    background-soft,
-    background-mute,
-    border-hover,
-    border,
-    heading,
-    text,
-    text-hover,
-    math-text,
-    panel-box-shadow,
-    button-text,
-    button-border,
-    button-background-to,
-    button-background-from,
-    button-box-shadow,
-    button-text-shadow,
-    pre-code-background,
-    a-text,
-    a-text-hover,
-    a-background-hover,
-    input-background,
-    input-background-hover,
-    input-background-focus,
-    input-text,
-    input-text-focus
-);
+/// Semantic style list names.
+$style-semantic: (background, background-soft, background-mute, border-hover, border, heading, text, text-hover, math-text, panel-box-shadow, button-text, button-border, button-background-to, button-background-from, button-box-shadow, button-text-shadow, pre-code-background, a-text, a-text-hover, a-background-hover, input-background, input-background-hover, input-background-focus, input-text, input-text-focus);
 
+/// Iterates over $style-semantic map producing default definitions for light and dark themes.
 @each $style-name in $style-semantic {
     $theme-light: map-merge(
         $theme-light,
@@ -210,9 +179,10 @@ $style-semantic: (
     ) !global;
 }
 
-// List of names of semantic styles associated with primary colors.
+/// List of names of semantic styles associated with primary colors.
 $color-style: (background, border, border-hover, text, text-hover);
 
+/// Iterates over $color-primary list to produce primary color patterns for themes.
 @each $color-name in $color-primary {
     @each $style-name in $color-style {
         $theme-light: map-merge(
@@ -227,5 +197,33 @@ $color-style: (background, border, border-hover, text, text-hover);
                 '#{$color-name}-#{$style-name}': map-get($generated-colors, #{$color-name}-#{$style-name}-dark),
             )
         ) !global;
+    }
+}
+
+/// Gets map or value from theme-name and color-name.
+/// @param {light | dark | null} $theme-name - The theme name to get - light or dark.
+/// @param {string | null} $color-name - The theme color name to get. If not provided, returns the full theme color map.
+/// @return {number | map} - The equivalent baseline color or theme color (or a map of one of these) for theme name. If $theme-name is null return baseline color map.
+@function get($theme-name: null, $color-name: null) {
+    @if $theme-name ==null {
+        @if $color-name ==null {
+            @return $generated-colors;
+        }
+
+        @return map-get($generated-colors, $color-name);
+    } @else if $theme-name ==light {
+        @if $color-name ==null {
+            @return $theme-light;
+        }
+
+        @return map-get($theme-light, $color-name);
+    } @else if $theme-name ==dark {
+        @if $color-name ==null {
+            @return $theme-dark;
+        }
+
+        @return map-get($theme-dark, $color-name);
+    } @else {
+        @error "The theme #{$theme-name} is invalid. Use 'light' or 'dark'.";
     }
 }

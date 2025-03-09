@@ -29,9 +29,27 @@ trademark of [The MathWorks, Inc.](https://www.mathworks.com/) For more
 information about [MATLAB](https://www.mathworks.com/products/matlab.html), visit
 [www.mathworks.com](https://www.mathworks.com/).
 
-This [application](https://en.wikipedia.org/wiki/Web_application), developed as a [Progressive Web App (PWA)](https://pt.wikipedia.org/wiki/Progressive_web_app), demonstrates the capabilities of the [MathJSLab](https://www.npmjs.com/package/mathjslab) package in a modern and interactive environment. The [application](https://en.wikipedia.org/wiki/Web_application)'s interface is structured with [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components), ensuring modularity, encapsulation, and efficient reuse of visual elements, which simplifies maintenance and enhances project scalability. In addition, the [application](https://en.wikipedia.org/wiki/Web_application) adopts a [responsive design](https://en.wikipedia.org/wiki/Responsive_web_design), providing a consistent experience, regardless of the device used, allowing it to adapt to different screen sizes without compromising usability.
+This [application](https://en.wikipedia.org/wiki/Web_application), developed
+as a [Progressive Web App (PWA)](https://pt.wikipedia.org/wiki/Progressive_web_app),
+demonstrates the capabilities of the
+[MathJSLab](https://www.npmjs.com/package/mathjslab) package in a modern and
+interactive environment. The
+[application](https://en.wikipedia.org/wiki/Web_application)'s interface is
+structured with [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components),
+ensuring modularity, encapsulation, and efficient reuse of visual elements,
+which simplifies maintenance and enhances project scalability. In addition,
+the [application](https://en.wikipedia.org/wiki/Web_application) adopts a
+[responsive design](https://en.wikipedia.org/wiki/Responsive_web_design),
+providing a consistent experience, regardless of the device used, allowing
+it to adapt to different screen sizes without compromising usability.
 
-The [application](https://en.wikipedia.org/wiki/Web_application)'s logic is written in [TypeScript](https://www.typescriptlang.org/), ensuring uniform and standardized typing across all parts of the code. [Styling](https://www.w3.org/TR/css/) is managed through [SASS](https://sass-lang.com/) templates, which organize the definitions in a more rational and modular way, facilitating the customization, maintenance and code reuse easier.
+The [application](https://en.wikipedia.org/wiki/Web_application)'s logic is
+written in [TypeScript](https://www.typescriptlang.org/), ensuring uniform and
+standardized typing across all parts of the code.
+[Styling](https://www.w3.org/TR/css/) is managed through
+[SASS](https://sass-lang.com/) templates, with definitions in a more
+rationalized and modular way, facilitating the customization, maintenance and
+code reuse easier.
 
 This demo application also uses:
 
