@@ -3,16 +3,17 @@
 
 @use '../base/colors';
 @use '../base/transitions';
+@use './define-map';
 @use './mixins';
 @use './variables';
 @use '../element/math';
 
 html[data-theme='light'] {
-    @include mixins.define-map(colors.get(light));
+    @include define-map.mixin(colors.get(light));
 }
 
 html[data-theme='dark'] {
-    @include mixins.define-map(colors.get(dark));
+    @include define-map.mixin(colors.get(dark));
 }
 
 a {

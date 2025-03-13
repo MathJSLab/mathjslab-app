@@ -1,12 +1,4 @@
-/// Defines CSS custom properties from a Sass map.
-
 @use '../base/sizes';
-
-@mixin define-map($map) {
-    @each $name, $value in $map {
-        --#{$name}: #{$value};
-    }
-}
 
 @mixin colored-box($bg-color: var(--green-background), $bd-color: var(--green-border)) {
     display: block;

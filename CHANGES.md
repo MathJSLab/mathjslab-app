@@ -19,6 +19,10 @@ style definitions have been added to the `src/styles/abstract/_commons.scss`
 file to configure elements in general after reset and to define semantic
 variables.
 - All comments in the `.scss` files has been made using slashes (///).
+- The `src/styles/base/_colors.scss` and
+`src/styles/abstract/_define-map.scss` files have been copied to the
+organization repository and included in the files listed in
+`download.config.json`.
 - Global definitions have been changed to exports. The `appEngine.ts` file has
 been created to concentrate and export the main application definitions that
 were previously global declarations, so that they are accessible throughout
@@ -30,6 +34,8 @@ with ES Modules.
 the `EvaluatorConfiguration.ts` file were moved to them. The functions related
 to graphs were moved to the `PlotEngine.ts` file, and are referenced in the
 other files. The plot functions still need to be implemented.
+- The SVG files format setup in the `.prettierrc` has been set to use the HTML
+parser.
 
 ## 1.5.3
 - All dependencies has been updated.

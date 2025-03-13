@@ -6,7 +6,12 @@
         {
             "files": "*.svg",
             "options": {
-                "parser": "xml"
+                "parser": "html",
+                "printWidth": 120,
+                "tabWidth": 2,
+                "useTabs": false,
+                "proseWrap": "preserve",
+                "htmlWhitespaceSensitivity": "strict"
             }
         }
     ]

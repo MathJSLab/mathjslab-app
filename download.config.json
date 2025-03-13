@@ -30,6 +30,14 @@
       "dest": "script/helper/git-commit.cjs"
     },
     {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/styles/base/_colors.scss",
+      "dest": "src/styles/base/_colors.scss"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/styles/abstract/_define-map.scss",
+      "dest": "src/styles/abstract/_define-map.scss"
+    },
+    {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/toIco.ts",
       "dest": "script/helper/toIco.ts"
     },

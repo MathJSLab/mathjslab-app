@@ -71,16 +71,15 @@
   "devDependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-img": "^6.0.1",
-    "@capacitor/cli": "^7.0.1",
+    "@capacitor/cli": "^7.1.0",
     "@prettier/plugin-xml": "^3.4.1",
-    "@types/dotenv-webpack": "^7.0.8",
     "@types/node": "^22.13.10",
     "@types/plotly.js": "^2.35.2",
     "@types/webpack": "^5.28.5",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@types/wicg-file-system-access": "^2023.10.5",
-    "@typescript-eslint/eslint-plugin": "^8.26.0",
-    "@typescript-eslint/parser": "^8.26.0",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
     "ajv": "^8.17.1",
     "chalk": "^5.4.1",
     "coffeescript": "^2.7.0",
@@ -94,7 +93,7 @@
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "json5": "^2.2.3",
-    "lint-staged": "^15.4.3",
+    "lint-staged": "^15.5.0",
     "mini-css-extract-plugin": "^2.9.2",
     "png-to-ico": "^2.1.8",
     "prettier": "^3.5.3",
@@ -116,8 +115,8 @@
     "yaml": "^2.7.0"
   },
   "dependencies": {
-    "@capacitor/android": "^7.0.1",
-    "@capacitor/core": "^7.0.1",
+    "@capacitor/android": "^7.1.0",
+    "@capacitor/core": "^7.1.0",
     "mathjslab": "^1.7.1"
   }
 }

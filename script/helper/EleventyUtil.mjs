@@ -537,6 +537,13 @@ const utilFilters = {
     printIfTruthy: function (test, message) {
         return test ? message : '';
     },
+    compileSCSS: function (scssPath) {
+        const result = SASS.compile(path.resolve(this.eleventy.directories.input, scssPath), {
+            silenceDeprecations: ['global-builtin'],
+            loadPaths: ['.', this.eleventy.directories.includes],
+        });
+        return result.css.toString();
+    },
 };
 /**
  * Util shortcodes.
@@ -675,6 +682,7 @@ const templateEngine = {
                 compile: function (inputContent, inputPath) {
                     let parsed = path.parse(inputPath);
                     let result = SASS.compileString(inputContent, {
+                        silenceDeprecations: ['global-builtin'],
                         loadPaths: [parsed.dir || '.', this.config.dir.includes],
                     });
                     /* Registering dependencies. */
@@ -903,7 +911,7 @@ function renderTemplateFunctionFactory(eleventyConfig, accessGlobalData = true, 
  * value. You can even use "liquid,md" to preprocess markdown with liquid. You can use
  * [custom template types](https://www.11ty.dev/docs/languages/custom/) here too.
  *
- * **INFO:** The one exception here is that `{% renderTemplate "11ty.js" %}` JavaScript string templates are not yet supported—use `renderFile` below instead.
+ * **INFO:** The one exception here is that `{% renderTemplate "11ty.js" %}` JavaScript string templates are not yet supported - use `renderFile` below instead.
  *
  * ### Pass in data
  *

@@ -3,19 +3,19 @@
 @use '../base/colors';
 @use '../base/sizes';
 @use '../base/transitions';
-@use '../abstract/mixins';
+@use './define-map';
 
 :root {
-    @include mixins.define-map(colors.get(light));
+    @include define-map.mixin(colors.get(light));
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        @include mixins.define-map(colors.get(dark));
+        @include define-map.mixin(colors.get(dark));
     }
 }
 
 :root {
-    @include mixins.define-map(sizes.get());
-    @include mixins.define-map(transitions.get());
+    @include define-map.mixin(sizes.get());
+    @include define-map.mixin(transitions.get());
 }

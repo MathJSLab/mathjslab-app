@@ -90,7 +90,11 @@ $theme-spec: (
             $generated-colors: map-merge(
                 $generated-colors,
                 (
-                    '#{$color-name}-#{$style-name}-#{$theme-name}': hsl(map-get($color, hue), map-get($style, saturation) or map-get($color, saturation), map-get($style, luminosity) or map-get($color, luminosity)),
+                    '#{$color-name}-#{$style-name}-#{$theme-name}': hsl(
+                            map-get($color, hue),
+                            map-get($style, saturation) or map-get($color, saturation),
+                            map-get($style, luminosity) or map-get($color, luminosity)
+                        ),
                 )
             ) !global;
         }
@@ -105,6 +109,10 @@ $color-semantic: (
     color-background-dark: hsl(0, 0%, 9%),
     color-background-soft-dark: hsl(0, 0%, 13%),
     color-background-mute-dark: hsl(0, 0%, 16%),
+    color-trace-stroke-light: hsl(0, 0%, 24%),
+    color-trace-fill-light: hsl(0, 0%, 24%),
+    color-trace-stroke-dark: hsl(0, 0%, 92%),
+    color-trace-fill-dark: hsl(0, 0%, 92%),
     color-border-hover-light: hsla(0, 0%, 24%, 0.3),
     color-border-light: hsla(0, 0%, 24%, 0.1),
     color-border-hover-dark: hsla(0, 0%, 33%, 0.7),
@@ -161,7 +169,35 @@ $theme-light: ();
 $theme-dark: ();
 
 /// Semantic style list names.
-$style-semantic: (background, background-soft, background-mute, border-hover, border, heading, text, text-hover, math-text, panel-box-shadow, button-text, button-border, button-background-to, button-background-from, button-box-shadow, button-text-shadow, pre-code-background, a-text, a-text-hover, a-background-hover, input-background, input-background-hover, input-background-focus, input-text, input-text-focus);
+$style-semantic: (
+    background,
+    background-soft,
+    background-mute,
+    border-hover,
+    border,
+    trace-stroke,
+    trace-fill,
+    heading,
+    text,
+    text-hover,
+    math-text,
+    panel-box-shadow,
+    button-text,
+    button-border,
+    button-background-to,
+    button-background-from,
+    button-box-shadow,
+    button-text-shadow,
+    pre-code-background,
+    a-text,
+    a-text-hover,
+    a-background-hover,
+    input-background,
+    input-background-hover,
+    input-background-focus,
+    input-text,
+    input-text-focus
+);
 
 /// Iterates over $style-semantic map producing default definitions for light and dark themes.
 @each $style-name in $style-semantic {
