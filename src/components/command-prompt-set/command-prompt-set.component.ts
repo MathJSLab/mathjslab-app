@@ -123,6 +123,12 @@ export class CommandPromptSet extends HTMLElement {
         return this.element.prompt[this.promptIndex + 1];
     }
     /**
+     * Get all prompt input value as a string[].
+     */
+    public get statements(): string[] {
+        return this.element.prompt.map((prompt) => prompt.element.input.value);
+    }
+    /**
      * Evaluate prompt callback.
      * @param prompt Prompt to evaluate.
      * @param index Index of prompt to evaluate.
@@ -139,18 +145,20 @@ export class CommandPromptSet extends HTMLElement {
      * @param prompt Prompt to refresh.
      * @param index Index of prompt to refresh.
      */
-    public evalPromptRefresh: CommandPromptEvalHandler = (prompt: CommandPrompt, index?: number) => {
-        index = typeof index === 'number' && index >= 0 ? index : this.element.prompt.map((p) => p.id).indexOf(prompt.id);
-        /* eslint-disable-next-line no-console */
-        console.log(
-            `evalPromptRefresh:\nprompt index = ${index};\nprompt id = '${prompt.id}'\nprompt value = '${this.element.prompt[index].element.input.value}'`,
-        );
+    public evalPromptRefresh = (prompt?: CommandPrompt, index?: number) => {
+        if (prompt && index) {
+            index = typeof index === 'number' && index >= 0 ? index : this.element.prompt.map((p) => p.id).indexOf(prompt.id);
+            /* eslint-disable-next-line no-console */
+            console.log(
+                `evalPromptRefresh:\nprompt index = ${index};\nprompt id = '${prompt.id}'\nprompt value = '${this.element.prompt[index].element.input.value}'`,
+            );
+        } else {
+            /* eslint-disable-next-line no-console */
+            console.log(
+                `evalPromptRefresh: invalid arguments: ${typeof prompt === 'undefined' ? 'prompt' : ''}${typeof index === 'undefined' ? 'index' : ''} undefined.`,
+            );
+        }
     };
-    /**
-     * True if device is touch capable.
-     */
-    public readonly isTouchCapable: boolean =
-        'ontouchstart' in window || (navigator.maxTouchPoints || (navigator as Navigator & { msMaxTouchPoints: number }).msMaxTouchPoints || 0) > 0;
     /**
      * Clears all prompts.
      */
@@ -168,16 +176,6 @@ export class CommandPromptSet extends HTMLElement {
         this.promptIndex = this.element.prompt.map((p) => p.id).indexOf((event.target as HTMLElement).id.substring(0, 36));
     }
     /**
-     * Command prompt 'blur' event handler.
-     * @param _event
-     */
-    public promptBlur(_event: Event): void {
-        const onblur = this.currentPrompt;
-        if (this.isTouchCapable && onblur.element.input.value !== '') {
-            this.evalPrompt(onblur, this.promptIndex);
-        }
-    }
-    /**
      * Creates a CommandPrompt instance.
      * @param text Text on prompt input.
      * @returns An object containing the new prompt and his resize handler.
@@ -191,18 +189,14 @@ export class CommandPromptSet extends HTMLElement {
         newPrompt.container = this.element.wrapper;
         newPrompt.element.input.value = text ?? '';
         newPrompt.element.input.addEventListener('focus', this.promptFocus.bind(this));
-        newPrompt.element.input.addEventListener('blur', this.promptBlur.bind(this));
         newPrompt.element.input.addEventListener('keydown', this.promptKeydown.bind(this));
-        newPrompt.element.input.addEventListener('change', newPrompt.resize.bind(newPrompt));
-        newPrompt.clickFrameBox = (_event?: Event): void => {
-            if (!this.isTouchCapable) {
-                newPrompt.element.input.focus();
-            }
+        newPrompt.element.input.addEventListener('change', newPrompt.resize);
+        newPrompt.onClickFrameBox = (_event?: Event): void => {
+            newPrompt.element.input.focus();
         };
-        const resize = newPrompt.resize.bind(newPrompt);
         return {
             newPrompt,
-            resize,
+            resize: newPrompt.resize,
         };
     }
     /**
@@ -229,11 +223,7 @@ export class CommandPromptSet extends HTMLElement {
     public promptAdd(text?: string | null): void {
         this.promptIndex++;
         const { newPrompt } = this.promptAppend(text);
-        if (this.isTouchCapable) {
-            newPrompt.element.input.blur();
-        } else {
-            this.evalPrompt(newPrompt, this.promptIndex - 1);
-        }
+        this.evalPrompt(newPrompt, this.promptIndex - 1);
     }
     /**
      *

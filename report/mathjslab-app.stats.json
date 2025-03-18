@@ -1,9 +1,9 @@
 {
   "name": "mathjslab-app",
-  "hash": "bc8e388243bd6f8a6e1f",
+  "hash": "bbb6f7161133855c975a",
   "version": "5.98.0",
-  "time": 14646,
-  "builtAt": 1741893873761,
+  "time": 14551,
+  "builtAt": 1742264097008,
   "publicPath": "auto",
   "outputPath": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\dist",
   "assetsByChunkName": {
@@ -16,14 +16,14 @@
     {
       "type": "asset",
       "name": "mathjslab-app.js",
-      "size": 517571,
+      "size": 520094,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
         "javascriptModule": false,
         "minimized": true,
-        "size": 517571
+        "size": 520094
       },
       "chunkNames": [
         "mathjslab-app"
@@ -60,12 +60,12 @@
     {
       "type": "asset",
       "name": "mathjslab-app.css",
-      "size": 13912,
+      "size": 13918,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
-        "size": 13912
+        "size": 13918
       },
       "chunkNames": [
         "mathjslab-app"
@@ -87,10 +87,10 @@
       "initial": true,
       "entry": true,
       "recorded": false,
-      "size": 595706,
+      "size": 600316,
       "sizes": {
-        "javascript": 580904,
-        "css/mini-extract": 13911,
+        "javascript": 585508,
+        "css/mini-extract": 13917,
         "runtime": 891
       },
       "names": [
@@ -105,7 +105,7 @@
         "mathjslab-app.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "1c071233fe9fd55cf3da",
+      "hash": "0a01e51e845280d16485",
       "childrenByOrder": {},
       "id": 379,
       "siblings": [],
@@ -271,9 +271,9 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             },
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -858,8 +858,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "issuerName": "./src/evalPrompt.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "issuerName": "./src/EvaluatorConfiguration.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -867,16 +867,16 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 990,
-          "issuerId": 809,
+          "issuerId": 688,
           "chunks": [
             379
           ],
@@ -1449,9 +1449,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 4429,
+          "size": 4395,
           "sizes": {
-            "javascript": 4429
+            "javascript": 4395
           },
           "built": true,
           "codeGenerated": true,
@@ -1823,9 +1823,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 3442,
+          "size": 3951,
           "sizes": {
-            "javascript": 3442
+            "javascript": 3951
           },
           "built": true,
           "codeGenerated": true,
@@ -1909,7 +1909,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "89:27-60",
+              "loc": "98:27-60",
               "moduleId": 256,
               "resolvedModuleId": 256
             },
@@ -1923,7 +1923,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "91:56-89",
+              "loc": "100:56-89",
               "moduleId": 256,
               "resolvedModuleId": 256
             },
@@ -1955,9 +1955,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 13300,
+          "size": 13306,
           "sizes": {
-            "javascript": 13300
+            "javascript": 13306
           },
           "built": true,
           "codeGenerated": true,
@@ -2166,9 +2166,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 12585,
+          "size": 12591,
           "sizes": {
-            "javascript": 12585
+            "javascript": 12591
           },
           "built": true,
           "codeGenerated": true,
@@ -2245,9 +2245,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 12474,
+          "size": 12176,
           "sizes": {
-            "javascript": 12474
+            "javascript": 12176
           },
           "built": true,
           "codeGenerated": true,
@@ -2331,7 +2331,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "293:33-72",
+              "loc": "282:33-72",
               "moduleId": 924,
               "resolvedModuleId": 924
             },
@@ -2345,7 +2345,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "295:62-101",
+              "loc": "284:62-101",
               "moduleId": 924,
               "resolvedModuleId": 924
             },
@@ -2377,9 +2377,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 10934,
+          "size": 10940,
           "sizes": {
-            "javascript": 10934
+            "javascript": 10940
           },
           "built": true,
           "codeGenerated": true,
@@ -2456,9 +2456,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 4211,
+          "size": 4792,
           "sizes": {
-            "javascript": 4211
+            "javascript": 4792
           },
           "built": true,
           "codeGenerated": true,
@@ -2556,7 +2556,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "98:30-66",
+              "loc": "108:30-66",
               "moduleId": 206,
               "resolvedModuleId": 206
             },
@@ -2570,7 +2570,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "100:59-95",
+              "loc": "110:59-95",
               "moduleId": 206,
               "resolvedModuleId": 206
             },
@@ -2602,9 +2602,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 12541,
+          "size": 12547,
           "sizes": {
-            "javascript": 12541
+            "javascript": 12547
           },
           "built": true,
           "codeGenerated": true,
@@ -2681,9 +2681,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 10209,
+          "size": 13437,
           "sizes": {
-            "javascript": 10209
+            "javascript": 13437
           },
           "built": true,
           "codeGenerated": true,
@@ -2767,7 +2767,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "252:29-64",
+              "loc": "336:29-64",
               "moduleId": 948,
               "resolvedModuleId": 948
             },
@@ -2781,7 +2781,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "254:58-93",
+              "loc": "338:58-93",
               "moduleId": 948,
               "resolvedModuleId": 948
             },
@@ -2813,9 +2813,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 11221,
+          "size": 11227,
           "sizes": {
-            "javascript": 11221
+            "javascript": 11227
           },
           "built": true,
           "codeGenerated": true,
@@ -3572,9 +3572,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 3965,
+          "size": 4510,
           "sizes": {
-            "javascript": 3965
+            "javascript": 4510
           },
           "built": true,
           "codeGenerated": true,
@@ -3672,7 +3672,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "92:33-72",
+              "loc": "101:33-72",
               "moduleId": 940,
               "resolvedModuleId": 940
             },
@@ -3686,7 +3686,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "94:62-101",
+              "loc": "103:62-101",
               "moduleId": 940,
               "resolvedModuleId": 940
             }
@@ -3704,9 +3704,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 11338,
+          "size": 11344,
           "sizes": {
-            "javascript": 11338
+            "javascript": 11344
           },
           "built": true,
           "codeGenerated": true,
@@ -4720,9 +4720,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 2421,
+          "size": 2450,
           "sizes": {
-            "javascript": 2421
+            "javascript": 2450
           },
           "built": true,
           "codeGenerated": true,
@@ -4923,9 +4923,9 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             },
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -5388,9 +5388,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 1708,
+          "size": 1716,
           "sizes": {
-            "javascript": 1708
+            "javascript": 1716
           },
           "built": true,
           "codeGenerated": true,
@@ -5486,9 +5486,9 @@
         {
           "type": "module",
           "moduleType": "css/mini-extract",
-          "size": 13911,
+          "size": 13917,
           "sizes": {
-            "css/mini-extract": 13911
+            "css/mini-extract": 13917
           },
           "built": true,
           "codeGenerated": true,
@@ -5581,9 +5581,9 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             },
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -6508,9 +6508,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 4429,
+      "size": 4395,
       "sizes": {
-        "javascript": 4429
+        "javascript": 4395
       },
       "built": true,
       "codeGenerated": true,
@@ -6662,9 +6662,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 2421,
+      "size": 2450,
       "sizes": {
-        "javascript": 2421
+        "javascript": 2450
       },
       "built": true,
       "codeGenerated": true,
@@ -6760,9 +6760,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 1708,
+      "size": 1716,
       "sizes": {
-        "javascript": 1708
+        "javascript": 1716
       },
       "built": true,
       "codeGenerated": true,
@@ -7002,8 +7002,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-      "issuerName": "./src/evalPrompt.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+      "issuerName": "./src/EvaluatorConfiguration.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -7011,16 +7011,16 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 990,
-      "issuerId": 809,
+      "issuerId": 688,
       "chunks": [
         379
       ],
@@ -7858,9 +7858,9 @@
     {
       "type": "module",
       "moduleType": "css/mini-extract",
-      "size": 13911,
+      "size": 13917,
       "sizes": {
-        "css/mini-extract": 13911
+        "css/mini-extract": 13917
       },
       "built": true,
       "codeGenerated": true,
@@ -7952,9 +7952,9 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         },
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -8834,9 +8834,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 3965,
+      "size": 4510,
       "sizes": {
-        "javascript": 3965
+        "javascript": 4510
       },
       "built": true,
       "codeGenerated": true,
@@ -8933,7 +8933,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "92:33-72",
+          "loc": "101:33-72",
           "moduleId": 940,
           "resolvedModuleId": 940
         },
@@ -8947,7 +8947,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "94:62-101",
+          "loc": "103:62-101",
           "moduleId": 940,
           "resolvedModuleId": 940
         }
@@ -8965,9 +8965,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 4211,
+      "size": 4792,
       "sizes": {
-        "javascript": 4211
+        "javascript": 4792
       },
       "built": true,
       "codeGenerated": true,
@@ -9064,7 +9064,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "98:30-66",
+          "loc": "108:30-66",
           "moduleId": 206,
           "resolvedModuleId": 206
         },
@@ -9078,7 +9078,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "100:59-95",
+          "loc": "110:59-95",
           "moduleId": 206,
           "resolvedModuleId": 206
         },
@@ -9110,9 +9110,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 12474,
+      "size": 12176,
       "sizes": {
-        "javascript": 12474
+        "javascript": 12176
       },
       "built": true,
       "codeGenerated": true,
@@ -9195,7 +9195,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "293:33-72",
+          "loc": "282:33-72",
           "moduleId": 924,
           "resolvedModuleId": 924
         },
@@ -9209,7 +9209,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "295:62-101",
+          "loc": "284:62-101",
           "moduleId": 924,
           "resolvedModuleId": 924
         },
@@ -9241,9 +9241,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 3442,
+      "size": 3951,
       "sizes": {
-        "javascript": 3442
+        "javascript": 3951
       },
       "built": true,
       "codeGenerated": true,
@@ -9326,7 +9326,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "89:27-60",
+          "loc": "98:27-60",
           "moduleId": 256,
           "resolvedModuleId": 256
         },
@@ -9340,7 +9340,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "91:56-89",
+          "loc": "100:56-89",
           "moduleId": 256,
           "resolvedModuleId": 256
         },
@@ -9372,9 +9372,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 10209,
+      "size": 13437,
       "sizes": {
-        "javascript": 10209
+        "javascript": 13437
       },
       "built": true,
       "codeGenerated": true,
@@ -9457,7 +9457,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "252:29-64",
+          "loc": "336:29-64",
           "moduleId": 948,
           "resolvedModuleId": 948
         },
@@ -9471,7 +9471,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "254:58-93",
+          "loc": "338:58-93",
           "moduleId": 948,
           "resolvedModuleId": 948
         },
@@ -9605,9 +9605,9 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         },
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -9712,9 +9712,9 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         },
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -10706,9 +10706,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 12585,
+      "size": 12591,
       "sizes": {
-        "javascript": 12585
+        "javascript": 12591
       },
       "built": true,
       "codeGenerated": true,
@@ -10784,9 +10784,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 11338,
+      "size": 11344,
       "sizes": {
-        "javascript": 11338
+        "javascript": 11344
       },
       "built": true,
       "codeGenerated": true,
@@ -10862,9 +10862,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 12541,
+      "size": 12547,
       "sizes": {
-        "javascript": 12541
+        "javascript": 12547
       },
       "built": true,
       "codeGenerated": true,
@@ -10940,9 +10940,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 10934,
+      "size": 10940,
       "sizes": {
-        "javascript": 10934
+        "javascript": 10940
       },
       "built": true,
       "codeGenerated": true,
@@ -11018,9 +11018,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 13300,
+      "size": 13306,
       "sizes": {
-        "javascript": 13300
+        "javascript": 13306
       },
       "built": true,
       "codeGenerated": true,
@@ -11096,9 +11096,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 11221,
+      "size": 11227,
       "sizes": {
-        "javascript": 11221
+        "javascript": 11227
       },
       "built": true,
       "codeGenerated": true,
@@ -11262,9 +11262,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 14337,
+      "size": 14343,
       "sizes": {
-        "javascript": 14337
+        "javascript": 14343
       },
       "built": true,
       "codeGenerated": true,
@@ -11819,15 +11819,15 @@
       "assets": [
         {
           "name": "mathjslab-app.css",
-          "size": 13912
+          "size": 13918
         },
         {
           "name": "mathjslab-app.js",
-          "size": 517571
+          "size": 520094
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 531483,
+      "assetsSize": 534012,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -11845,15 +11845,15 @@
       "assets": [
         {
           "name": "mathjslab-app.css",
-          "size": 13912
+          "size": 13918
         },
         {
           "name": "mathjslab-app.js",
-          "size": 517571
+          "size": 520094
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 531483,
+      "assetsSize": 534012,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -11866,12 +11866,12 @@
   "errorsCount": 0,
   "warnings": [
     {
-      "message": "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (505 KiB)",
-      "stack": "AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (505 KiB)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:145:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1006:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:835:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
+      "message": "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (508 KiB)",
+      "stack": "AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (508 KiB)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:145:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1006:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:835:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
     },
     {
-      "message": "entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (519 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n",
-      "stack": "EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (519 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:153:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1006:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:835:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
+      "message": "entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (521 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n",
+      "stack": "EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (521 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:153:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:18:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1006:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:33:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:835:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
     },
     {
       "message": "webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/",

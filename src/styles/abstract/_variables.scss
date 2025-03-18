@@ -1,7 +1,7 @@
 /// _variables.scss - Semantic variable definitions.
 
 @use '../base/colors';
-@use '../base/sizes';
+@use './constants';
 @use '../base/transitions';
 @use './define-map';
 
@@ -16,6 +16,5 @@
 }
 
 :root {
-    @include define-map.mixin(sizes.get());
     @include define-map.mixin(transitions.get());
 }

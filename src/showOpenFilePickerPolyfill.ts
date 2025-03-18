@@ -26,6 +26,6 @@ function showOpenFilePickerPolyfill(options?: OpenFilePickerOptions): Promise<[F
     });
 }
 
-if (typeof window.showOpenFilePicker !== 'function') {
-    window.showOpenFilePicker = showOpenFilePickerPolyfill;
+if (typeof globalThis.showOpenFilePicker !== 'function') {
+    globalThis.showOpenFilePicker = showOpenFilePickerPolyfill;
 }

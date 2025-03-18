@@ -19,10 +19,18 @@ style definitions have been added to the `src/styles/abstract/_commons.scss`
 file to configure elements in general after reset and to define semantic
 variables.
 - All comments in the `.scss` files has been made using slashes (///).
-- The `src/styles/base/_colors.scss` and
-`src/styles/abstract/_define-map.scss` files have been copied to the
+- The `src/styles/base/_colors.scss`,  `src/styles/base/_sizes.scss`,
+`src/styles/abstract/_define-map.scss` and
+`src/styles/abstract/_constants.scss` files have been copied to the
 organization repository and included in the files listed in
 `download.config.json`.
+- The `src/styles/constants.json.njk` template was created, which composes a
+JSON file, at build time, with the definitions of CSS variables that are
+immutable. This file was also copied to the organization's repository.
+- The file `src/DeviceScreen.ts` was created, which defines an abstract class
+with only static methods and properties (it should not be instantiated). This
+class provides information about the device screen, updated whenever the
+screen is resized. Its use in the project has not yet been implemented.
 - Global definitions have been changed to exports. The `appEngine.ts` file has
 been created to concentrate and export the main application definitions that
 were previously global declarations, so that they are accessible throughout

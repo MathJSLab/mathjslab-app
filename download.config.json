@@ -34,8 +34,20 @@
       "dest": "src/styles/base/_colors.scss"
     },
     {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/styles/base/_sizes.scss",
+      "dest": "src/styles/base/_sizes.scss"
+    },
+    {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/styles/abstract/_define-map.scss",
       "dest": "src/styles/abstract/_define-map.scss"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/styles/abstract/_constants.scss",
+      "dest": "src/styles/abstract/_constants.scss"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/styles/constants.json.njk",
+      "dest": "src/styles/constants.json.njk"
     },
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/toIco.ts",

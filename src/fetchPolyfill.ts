@@ -29,7 +29,6 @@ async function fetchPolyfill(input: RequestInfo | URL, init?: RequestInit): Prom
         xhttp.send();
     });
 }
-
-if (!window.fetch) {
-    window.fetch = fetchPolyfill;
+if (typeof globalThis.fetch !== 'function') {
+    globalThis.fetch = fetchPolyfill;
 }

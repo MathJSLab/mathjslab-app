@@ -44,21 +44,6 @@ export class CommandPrompt extends HTMLElement {
     public constructor() {
         super();
         constructorFactory(CommandPrompt, styles).bind(this)();
-        this.element.input.addEventListener('change', this.resize.bind(this));
-        const delayedResize = (_event: Event): void => {
-            window.setTimeout(this.resize.bind(this), 0);
-        };
-        this.element.input.addEventListener('cut', delayedResize); // ????
-        this.element.input.addEventListener('paste', delayedResize); // ????
-        this.element.input.addEventListener('drop', delayedResize); // ????
-        this.element.input.addEventListener('keydown', delayedResize);
-        const clickFrameBox = (event: Event) => {
-            if (this.clickFrameBox) {
-                this.clickFrameBox(event);
-            }
-        };
-        this.element.frameBox.addEventListener('click', clickFrameBox.bind(this));
-        this.resize();
     }
     /**
      * Sets the unique ID of the base class of Web component.
@@ -111,19 +96,44 @@ export class CommandPrompt extends HTMLElement {
     public get container(): HTMLElement {
         return this.element.container;
     }
-    /**
-     * To be called in resize events.
-     * @param _event
-     */
-    public resize(_event?: Event): void {
-        this.element.input.style.height = '1em';
-        this.element.input.style.height = this.element.input.scrollHeight + 'px';
+    public connectedCallback(): void {
+        this.element.input.addEventListener('change', this.resize);
+        this.element.input.addEventListener('cut', this.delayedResize);
+        this.element.input.addEventListener('paste', this.delayedResize);
+        this.element.input.addEventListener('drop', this.delayedResize);
+        this.element.input.addEventListener('keydown', this.delayedResize);
+        this.element.frameBox.addEventListener('click', this.clickFrameBox);
+        this.resize();
+    }
+    public disconnectedCallback(): void {
+        this.element.input.removeEventListener('change', this.resize);
+        this.element.input.removeEventListener('cut', this.delayedResize);
+        this.element.input.removeEventListener('paste', this.delayedResize);
+        this.element.input.removeEventListener('drop', this.delayedResize);
+        this.element.input.removeEventListener('keydown', this.delayedResize);
+        this.element.frameBox.removeEventListener('click', this.clickFrameBox);
     }
     /**
-     * Handler to be called in 'click' event on frameBox element.
+     * To be called in resize events.
      * @param event
      */
-    public clickFrameBox?: (event?: Event) => void;
+    public readonly resize: (event?: Event) => void = ((_event?: Event): void => {
+        this.element.input.style.height = '1em';
+        this.element.input.style.height = this.element.input.scrollHeight + 'px';
+    }).bind(this);
+    private readonly delayedResize: (event?: Event) => void = ((_event?: Event): void => {
+        globalThis.setTimeout(this.resize, 0);
+    }).bind(this);
+    /**
+     * To be called in 'click' event on frameBox element.
+     * @param event
+     */
+    public onClickFrameBox?: (event?: Event) => void;
+    public readonly clickFrameBox: (event?: Event) => void = ((event?: Event): void => {
+        if (this.onClickFrameBox) {
+            this.onClickFrameBox(event);
+        }
+    }).bind(this);
 }
 /* Defines the Web component element. */
 CommandPrompt.define();

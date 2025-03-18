@@ -46,6 +46,7 @@ export class FixedScrollPanel extends HTMLElement {
     public constructor() {
         super();
         constructorFactory(FixedScrollPanel, styles).bind(this)();
+        this.state.display = globalThis.getComputedStyle(this.element.wrapper).display === 'block';
     }
     /**
      * Sets the unique ID of the base class of Web component.
@@ -98,11 +99,22 @@ export class FixedScrollPanel extends HTMLElement {
     public get container(): HTMLElement {
         return this.element.container;
     }
+    public readonly state = {} as {
+        display: boolean;
+    };
+    public onChangeDisplay?: (event?: Event, display?: boolean) => void;
     /**
      * To be called in resize events.
-     * @param _event
+     * @param event
      */
-    public resize(_event?: Event): void {
+    public readonly resize: (event?: Event) => void = ((event?: Event): void => {
+        const display = globalThis.getComputedStyle(this.element.wrapper).display === 'block';
+        if (display !== this.state.display) {
+            this.state.display = display;
+            if (this.onChangeDisplay) {
+                this.onChangeDisplay(event, display);
+            }
+        }
         let Y = window.scrollY - this.element.container.offsetTop + window.innerHeight * 0.025;
         const maxY = this.element.container.offsetHeight - this.element.wrapper.offsetHeight;
         if (Y < 0) {
@@ -113,7 +125,7 @@ export class FixedScrollPanel extends HTMLElement {
         this.element.wrapper.style.top = Y + 'px';
         this.element.wrapper.style.left = this.element.root.offsetWidth + 'px';
         this.element.wrapper.style.height = Math.min(this.element.container.offsetHeight, window.innerHeight) * 0.9 + 'px';
-    }
+    }).bind(this);
 }
 /* Defines the Web component element. */
 FixedScrollPanel.define();

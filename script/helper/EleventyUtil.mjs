@@ -516,6 +516,16 @@ function configGetPlugin(eleventyConfig, name) {
  * Util filters.
  */
 const utilFilters = {
+    split: function (value, delimiter) {
+        return value.split(delimiter);
+    },
+    search: function (value, searchString) {
+        return value.indexOf(searchString);
+    },
+    searchRegExp: function (value, searchRegExp) {
+        const match = value.match(new RegExp(searchRegExp));
+        return !!match ? match.index : -1;
+    },
     prefix: function (value, prefix, postfix) {
         return `${typeof prefix === 'string' ? prefix : ''}${value}${typeof postfix === 'string' ? postfix : ''}`;
     },

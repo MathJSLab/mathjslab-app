@@ -66,25 +66,11 @@ export class CommandShell extends HTMLElement {
         super();
         constructorFactory(CommandShell, styles).bind(this)();
         this.element.variables.element.root = this.element.frameBox;
-        window.addEventListener('scroll', this.element.variables.resize.bind(this.element.variables));
-        window.addEventListener('resize', this.resize.bind(this));
         this.nameList = document.createElement('ul');
         this.nameList.id = `${this.element.variables.id}-namelist`;
         this.nameList.className = 'namelist';
         this.nameList.slot = 'content';
         this.element.variables.append(this.nameList);
-        this.element.batch.element.input.addEventListener('change', this.resize.bind(this));
-        const delayedResize = (_event: Event): void => {
-            window.setTimeout(this.resize.bind(this), 0);
-        };
-        this.element.batch.element.input.addEventListener('cut', delayedResize);
-        this.element.batch.element.input.addEventListener('paste', delayedResize);
-        this.element.batch.element.input.addEventListener('drop', delayedResize);
-        this.element.batch.element.input.addEventListener('keydown', delayedResize);
-        this.element.batch.element.input.addEventListener('blur', this.restart.bind(this));
-        this.element.batch.element.input.focus();
-        this.element.batch.element.input.select();
-        this.element.batch.element.evaluateButton.addEventListener('click', this.evaluate.bind(this));
         this.element.promptSet.evalPrompt = function (prompt: CommandPrompt, index?: number) {
             /* eslint-disable-next-line no-console */
             console.log(`evalPrompt(${prompt.element.input.value}, ${index})`);
@@ -98,10 +84,7 @@ export class CommandShell extends HTMLElement {
                 lines: input.split(/\r?\n/),
             };
         };
-        this.element.promptSet.evalPromptRefresh = this.refreshNameList.bind(this);
-        this.resize();
-        this.setLanguage();
-        this.element.promptSet.promptAppend();
+        this.element.promptSet.evalPromptRefresh = this.refreshNameList;
     }
     /**
      * Sets the unique ID of the base class (HTMLElement) of Web component.
@@ -155,13 +138,88 @@ export class CommandShell extends HTMLElement {
         return this.element.container;
     }
     /**
-     * Gets true if device is touch capable, false otherwise.
+     * Add event listeners associated with `batch` element.
      */
-    public get isTouchCapable(): boolean {
-        return this.element.promptSet.isTouchCapable;
+    private batchAddEventListener() {
+        window.addEventListener('resize', this.element.batch.resize);
+        this.element.batch.element.input.addEventListener('change', this.resize);
+        this.element.batch.element.input.addEventListener('cut', this.delayedResize);
+        this.element.batch.element.input.addEventListener('paste', this.delayedResize);
+        this.element.batch.element.input.addEventListener('drop', this.delayedResize);
+        this.element.batch.element.input.addEventListener('keydown', this.delayedResize);
+        this.element.batch.element.input.addEventListener('blur', this.restart);
+        this.element.batch.element.evaluateButton.addEventListener('click', this.evaluate);
+    }
+    /**
+     * Remove event listeners associated with `batch` element.
+     */
+    private batchRemoveEventListener() {
+        window.removeEventListener('resize', this.element.batch.resize);
+        this.element.batch.element.input.removeEventListener('change', this.resize);
+        this.element.batch.element.input.removeEventListener('cut', this.delayedResize);
+        this.element.batch.element.input.removeEventListener('paste', this.delayedResize);
+        this.element.batch.element.input.removeEventListener('drop', this.delayedResize);
+        this.element.batch.element.input.removeEventListener('keydown', this.delayedResize);
+        this.element.batch.element.input.removeEventListener('blur', this.restart);
+        this.element.batch.element.evaluateButton.removeEventListener('click', this.evaluate);
+    }
+    /**
+     * Add event listeners associated with `variables` element.
+     */
+    private variablesAddEventListener() {
+        window.addEventListener('scroll', this.element.variables.resize);
+        window.addEventListener('resize', this.element.variables.resize);
+    }
+    /**
+     * Remove event listeners associated with `variables` element.
+     */
+    private variablesRemoveEventListener() {
+        window.removeEventListener('scroll', this.element.variables.resize);
+        window.removeEventListener('resize', this.element.variables.resize);
     }
     /**
      *
+     */
+    protected connectedCallback(): void {
+        this.element.batch.onChangeDisplay = (_event?: Event, display?: boolean): void => {
+            if (display) {
+                this.batchAddEventListener();
+            } else {
+                this.batchRemoveEventListener();
+            }
+        };
+        if (this.element.batch.state.display) {
+            this.batchAddEventListener();
+        }
+        this.element.variables.onChangeDisplay = (_event?: Event, display?: boolean): void => {
+            if (display) {
+                this.variablesAddEventListener();
+            } else {
+                this.variablesRemoveEventListener();
+            }
+        };
+        if (this.element.variables.state.display) {
+            this.variablesAddEventListener();
+        }
+        window.addEventListener('resize', this.resize);
+        this.resize();
+        this.setLanguage();
+        this.element.promptSet.promptAppend();
+    }
+    /**
+     *
+     */
+    protected disconnectedCallback(): void {
+        window.removeEventListener('resize', this.resize);
+        if (this.element.variables.state.display) {
+            this.variablesRemoveEventListener();
+        }
+        if (this.element.batch.state.display) {
+            this.batchRemoveEventListener();
+        }
+    }
+    /**
+     * `Evaluator` instance.
      */
     public evaluatorPointer: Evaluator;
     /**
@@ -212,54 +270,39 @@ export class CommandShell extends HTMLElement {
      * To be called in resize events.
      * @param _event
      */
-    public resize(_event?: Event): void {
+    public readonly resize: (event?: Event) => void = ((event?: Event): void => {
         this.element.batch.resize();
         this.element.variables.resize();
-    }
+    }).bind(this);
+    /**
+     *
+     */
+    private readonly delayedResize: (event?: Event) => void = ((_event?: Event): void => {
+        globalThis.setTimeout(this.resize, 0);
+    }).bind(this);
     /**
      * Restart
      * @param _event
      */
-    public restart(_event: Event): void {
+    public readonly restart: (event?: Event) => void = ((_event?: Event): void => {
         this.evaluatorPointer.Restart();
         /* Removes all child nodes from the this.nameList. */
         this.nameList.replaceChildren();
         this.element.promptSet.clear();
         this.element.variables.resize();
-    }
-    /**
-     * Load text if argument is passed, else load code from batch input, separing statements, running it and creating evaluated prompts.
-     */
-    public load(text?: string): {
-        statements: string[];
-        lines: string[];
-    } {
-        if (text) {
-            this.element.batch.element.input.value = text;
-        }
-        this.nameList.replaceChildren();
-        /* Separates statements and lines. */
-        let { statements, lines } = this.evalInput(this.element.batch.element.input.value);
-        statements = this.element.promptSet.promptLoadEval(statements);
-        this.refreshNameList();
-        this.resize();
-        return {
-            statements,
-            lines,
-        };
-    }
+    }).bind(this);
     /**
      * Batch execution (button click) event handler.
      * @param _event
      */
-    public evaluate(_event: Event): void {
+    public readonly evaluate: (event?: Event) => void = ((_event?: Event): void => {
         this.element.promptSet.clear();
         this.load();
-    }
+    }).bind(this);
     /**
      * Refresh name list in variables panel.
      */
-    public refreshNameList(): void {
+    public readonly refreshNameList: () => void = ((): void => {
         /* Removes all child nodes from the this.nameList. */
         this.nameList.replaceChildren();
         for (const name in this.evaluatorPointer.nameTable) {
@@ -294,6 +337,45 @@ export class CommandShell extends HTMLElement {
                 }
             }
         }
+    }).bind(this);
+    // protected _input: string;
+    // public get input(): string {
+    //     return this._input;
+    // }
+    // protected _statements: string[];
+    // public get statements(): string[] {
+    //     return this._statements;
+    // }
+    // protected _lines: string[];
+    // public get lines(): string[] {
+    //     return this._lines;
+    // }
+    /**
+     * Load text if argument is passed, else load code from batch input, separing statements, running it and creating evaluated prompts.
+     */
+    public load(text?: string): {
+        statements: string[];
+        lines: string[];
+    } {
+        // if (text) {
+        //     this._input = text;
+        //     if (this.element.batch.state.display) {
+        //         this.element.batch.element.input.value = text;
+        //     }
+        // }
+        if (text) {
+            this.element.batch.element.input.value = text;
+        }
+        this.nameList.replaceChildren();
+        /* Separates statements and lines. */
+        let { statements, lines } = this.evalInput(this.element.batch.element.input.value);
+        statements = this.element.promptSet.promptLoadEval(statements);
+        this.refreshNameList();
+        this.resize();
+        return {
+            statements,
+            lines,
+        };
     }
     public debugMessage(message: string): void {
         if (this.evaluatorPointer.debug) {

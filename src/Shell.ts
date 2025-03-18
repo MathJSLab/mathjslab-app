@@ -62,7 +62,7 @@ class Shell {
         } else {
             shell.options.examplesId = '';
         }
-        shell._shell.element.batch.element.evaluateButton.click();
+        shell._shell.evaluate();
         return shell;
     }
     /**

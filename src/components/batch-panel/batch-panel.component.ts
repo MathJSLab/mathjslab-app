@@ -52,6 +52,7 @@ export class BatchPanel extends HTMLElement {
     public constructor() {
         super();
         constructorFactory(BatchPanel, styles).bind(this)();
+        this.state.display = globalThis.getComputedStyle(this.element.wrapper).display === 'block';
     }
     /**
      * Sets the unique ID of the base class of Web component.
@@ -104,14 +105,25 @@ export class BatchPanel extends HTMLElement {
     public get container(): HTMLElement {
         return this.element.container;
     }
+    public readonly state = {} as {
+        display: boolean;
+    };
+    public onChangeDisplay?: (event?: Event, display?: boolean) => void;
     /**
      * To be called in resize events.
-     * @param _event
+     * @param event
      */
-    public resize(_event?: Event): void {
+    public readonly resize: (event?: Event) => void = ((event?: Event): void => {
+        const display = globalThis.getComputedStyle(this.element.wrapper).display === 'block';
+        if (display !== this.state.display) {
+            this.state.display = display;
+            if (this.onChangeDisplay) {
+                this.onChangeDisplay(event, display);
+            }
+        }
         this.element.input.style.height = '1em';
         this.element.input.style.height = this.element.input.scrollHeight + 27 + 'px';
-    }
+    }).bind(this);
 }
 /* Defines the Web component element. */
 BatchPanel.define();

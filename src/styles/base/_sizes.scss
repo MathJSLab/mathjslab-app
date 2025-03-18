@@ -1,52 +1,48 @@
 /// _sizes.scss - Size definitions.
 
 /// The generated sizes map.
-$generated-sizes: ();
+$generated-sizes: (
+);
 
 /// Map of size names and specifications.
 $sizes-spec: (
     /// Spacing scale
-    spacing-unit: (
-            base: 1rem,
-            x-small: 0.3,
-            small: 0.5,
-            large: 2,
-            x-large: 3,
-        ),
+    spacing-unit: (base: 1rem,
+        x-small: 0.3,
+        small: 0.5,
+        large: 2,
+        x-large: 3,
+    ),
     /// Font sizes
-    font-size: (
-            base: 1rem,
-            x-small: 0.65,
-            small: 0.875,
-            large: 1.25,
-            x-large: 2.5,
-        ),
+    font-size: (base: 1rem,
+        x-small: 0.65,
+        small: 0.875,
+        large: 1.25,
+        x-large: 2.5,
+    ),
     /// Math font sizes
-    math-font-size: (
-            base: 1.5rem,
-            x-small: 0.65,
-            small: 0.875,
-            large: 1.25,
-            x-large: 2.5,
-        ),
+    math-font-size: (base: 1.5rem,
+        x-small: 0.65,
+        small: 0.875,
+        large: 1.25,
+        x-large: 2.5,
+    ),
     /// Border radius
-    border-radius: (
-            base: 4px,
-            x-small: 0.3,
-            small: 0.5,
-            large: 2,
-            x-large: 3,
-        ),
+    border-radius: (base: 4px,
+        x-small: 0.3,
+        small: 0.5,
+        large: 2,
+        x-large: 3,
+    ),
     /// Screen width
-    screen-width: (
-            base: 1024px,
-            xx-small: calc(1 * 5 / (4 * 4)),
-            x-small: calc(3 * 5 / (8 * 4)),
-            small: calc(3 * 1 / (1 * 4)),
-            large: calc(1 * 5 / (1 * 4)),
-            x-large: calc(9 * 5 / (8 * 4)),
-            xx-large: calc(3 * 5 / (2 * 4)),
-        )
+    screen-width: (base: 1024px,
+        xx-small: calc(1 * 5 / (4 * 4)),
+        x-small: calc(3 * 5 / (8 * 4)),
+        small: calc(3 * 1 / (1 * 4)),
+        large: calc(1 * 5 / (1 * 4)),
+        x-large: calc(9 * 5 / (8 * 4)),
+        xx-large: calc(3 * 5 / (2 * 4)),
+    )
 );
 
 /// Iterate over the $sizes-spec map generating size values in the global $generated-sizes map.
@@ -63,8 +59,8 @@ $sizes-spec: (
         '#{$size-name}-x-large': map-get($size-spec, base) * (map-get($size-spec, x-large) or map-get($size-spec, large)),
         '#{$size-name}-xx-large': map-get($size-spec, base) * (map-get($size-spec, xx-large) or map-get($size-spec, x-large) or map-get($size-spec, large)),
     );
-    /// Store the $generated-map in the global $generated-sizes map.
-    $generated-sizes: map-merge($generated-sizes, $generated-map) !global;
+/// Store the $generated-map in the global $generated-sizes map.
+$generated-sizes: map-merge($generated-sizes, $generated-map) !global;
 }
 
 /// Gets size value from size-name.
