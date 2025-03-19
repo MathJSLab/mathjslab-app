@@ -1,9 +1,9 @@
 {
   "name": "mathjslab-app",
-  "hash": "bbb6f7161133855c975a",
+  "hash": "f8645f3d7b65861a44ff",
   "version": "5.98.0",
-  "time": 14551,
-  "builtAt": 1742264097008,
+  "time": 14213,
+  "builtAt": 1742350961267,
   "publicPath": "auto",
   "outputPath": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\dist",
   "assetsByChunkName": {
@@ -16,14 +16,14 @@
     {
       "type": "asset",
       "name": "mathjslab-app.js",
-      "size": 520094,
+      "size": 520065,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
         "javascriptModule": false,
         "minimized": true,
-        "size": 520094
+        "size": 520065
       },
       "chunkNames": [
         "mathjslab-app"
@@ -41,12 +41,12 @@
     {
       "type": "asset",
       "name": "index.html",
-      "size": 16744,
+      "size": 16761,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
-        "size": 16744
+        "size": 16761
       },
       "chunkNames": [],
       "chunkIdHints": [],
@@ -87,9 +87,9 @@
       "initial": true,
       "entry": true,
       "recorded": false,
-      "size": 600316,
+      "size": 600333,
       "sizes": {
-        "javascript": 585508,
+        "javascript": 585525,
         "css/mini-extract": 13917,
         "runtime": 891
       },
@@ -105,7 +105,7 @@
         "mathjslab-app.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "0a01e51e845280d16485",
+      "hash": "5bf80ef46eac0c3588ab",
       "childrenByOrder": {},
       "id": 379,
       "siblings": [],
@@ -477,9 +477,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 9727,
+          "size": 9723,
           "sizes": {
-            "javascript": 9727
+            "javascript": 9723
           },
           "built": true,
           "codeGenerated": true,
@@ -711,9 +711,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 4425,
+          "size": 5105,
           "sizes": {
-            "javascript": 4425
+            "javascript": 5105
           },
           "built": true,
           "codeGenerated": true,
@@ -999,8 +999,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\outputFunction.ts",
-          "issuerName": "./src/outputFunction.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\externalFunctionTable.ts",
+          "issuerName": "./src/externalFunctionTable.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -1008,21 +1008,21 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\outputFunction.ts",
-              "name": "./src/outputFunction.ts",
-              "id": 684
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\externalFunctionTable.ts",
+              "name": "./src/externalFunctionTable.ts",
+              "id": 820
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 228,
-          "issuerId": 684,
+          "issuerId": 820,
           "chunks": [
             379
           ],
@@ -1449,9 +1449,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 4395,
+          "size": 3646,
           "sizes": {
-            "javascript": 4395
+            "javascript": 3646
           },
           "built": true,
           "codeGenerated": true,
@@ -4522,9 +4522,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 3990,
+          "size": 3997,
           "sizes": {
-            "javascript": 3990
+            "javascript": 3997
           },
           "built": true,
           "codeGenerated": true,
@@ -4621,9 +4621,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 11819,
+          "size": 11861,
           "sizes": {
-            "javascript": 11819
+            "javascript": 11861
           },
           "built": true,
           "codeGenerated": true,
@@ -5183,9 +5183,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 511,
+          "size": 552,
           "sizes": {
-            "javascript": 511
+            "javascript": 552
           },
           "built": true,
           "codeGenerated": true,
@@ -5249,7 +5249,8 @@
           "usedExports": true,
           "providedExports": [
             "__esModule",
-            "default"
+            "default",
+            "openFileDialog"
           ],
           "optimizationBailout": [
             "Statement (ExpressionStatement) with side effects in source code at 2:0-62",
@@ -5905,9 +5906,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 9727,
+      "size": 9723,
       "sizes": {
-        "javascript": 9727
+        "javascript": 9723
       },
       "built": true,
       "codeGenerated": true,
@@ -6508,9 +6509,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 4395,
+      "size": 3646,
       "sizes": {
-        "javascript": 4395
+        "javascript": 3646
       },
       "built": true,
       "codeGenerated": true,
@@ -7193,9 +7194,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 11819,
+      "size": 11861,
       "sizes": {
-        "javascript": 11819
+        "javascript": 11861
       },
       "built": true,
       "codeGenerated": true,
@@ -7417,9 +7418,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 3990,
+      "size": 3997,
       "sizes": {
-        "javascript": 3990
+        "javascript": 3997
       },
       "built": true,
       "codeGenerated": true,
@@ -7732,9 +7733,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 4425,
+      "size": 5105,
       "sizes": {
-        "javascript": 4425
+        "javascript": 5105
       },
       "built": true,
       "codeGenerated": true,
@@ -8176,8 +8177,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\outputFunction.ts",
-      "issuerName": "./src/outputFunction.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\externalFunctionTable.ts",
+      "issuerName": "./src/externalFunctionTable.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -8185,21 +8186,21 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\outputFunction.ts",
-          "name": "./src/outputFunction.ts",
-          "id": 684
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\externalFunctionTable.ts",
+          "name": "./src/externalFunctionTable.ts",
+          "id": 820
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 228,
-      "issuerId": 684,
+      "issuerId": 820,
       "chunks": [
         379
       ],
@@ -8626,9 +8627,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 511,
+      "size": 552,
       "sizes": {
-        "javascript": 511
+        "javascript": 552
       },
       "built": true,
       "codeGenerated": true,
@@ -8691,7 +8692,8 @@
       "usedExports": true,
       "providedExports": [
         "__esModule",
-        "default"
+        "default",
+        "openFileDialog"
       ],
       "optimizationBailout": [
         "Statement (ExpressionStatement) with side effects in source code at 2:0-62",
@@ -11823,11 +11825,11 @@
         },
         {
           "name": "mathjslab-app.js",
-          "size": 520094
+          "size": 520065
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 534012,
+      "assetsSize": 533983,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -11849,11 +11851,11 @@
         },
         {
           "name": "mathjslab-app.js",
-          "size": 520094
+          "size": 520065
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 534012,
+      "assetsSize": 533983,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,

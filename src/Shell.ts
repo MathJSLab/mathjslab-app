@@ -1,6 +1,6 @@
 import { appEngine } from './appEngine';
 import { EvalInputHandler, CommandPromptEvalHandler, CommandShell } from './components/components';
-import { Example, ExampleEntry } from './Example';
+import { Example } from './Example';
 /**
  * Shell instantiation options.
  */
@@ -18,24 +18,25 @@ interface ShellOptions {
  * properties of this class.
  */
 class Shell {
-    private readonly options: ShellOptions = {};
-    private _shell: CommandShell;
-    private example: Example;
+    public readonly options: ShellOptions = {};
+    public readonly isFileProtocol: boolean = window.location.href.startsWith('file:');
+    public commandShell: CommandShell;
+    public example: Example;
     /**
-     * ## `Shell` initialization (instantiation).
+     * `Shell` initialization (instantiation).
      * @param {ShellOptions} options Shell instantiation options.
      * @returns {Promise<Shell>} A promise for a `Shell` instance.
      */
     public static async initialize(options: ShellOptions): Promise<Shell> {
-        const shell = new Shell();
+        const newShell = new Shell();
         if (options.shellId) {
-            shell.options.shellId = options.shellId;
-            shell._shell = document.getElementById(options.shellId) as CommandShell;
+            newShell.options.shellId = options.shellId;
+            newShell.commandShell = document.getElementById(options.shellId) as CommandShell;
         } else {
-            shell.options.shellId = 'mathjslab-shell';
+            newShell.options.shellId = 'mathjslab-shell';
             const docShell = document.querySelectorAll('command-shell');
             if (docShell.length === 1 && docShell[0].tagName === CommandShell.tagName.toUpperCase()) {
-                shell._shell = docShell[0] as CommandShell;
+                newShell.commandShell = docShell[0] as CommandShell;
             } else {
                 if (docShell.length === 0) {
                     throw new Error(`cannot find 'command-shell' element with id = '${options.shellId}'.`);
@@ -46,66 +47,23 @@ class Shell {
                 }
             }
         }
-        shell._shell.evaluatorPointer = appEngine.evaluator;
-        shell._shell.debugMessage(appEngine.buildMessage);
+        newShell.commandShell.evaluatorPointer = appEngine.evaluator;
+        newShell.commandShell.debugMessage(appEngine.buildMessage);
         if (options.evalPrompt) {
-            shell._shell.evalPrompt = options.evalPrompt;
+            newShell.commandShell.evalPrompt = options.evalPrompt;
         }
-        shell.options.evalPrompt = shell._shell.evalPrompt;
+        newShell.options.evalPrompt = newShell.commandShell.evalPrompt;
         if (options.evalInput) {
-            shell._shell.evalInput = options.evalInput;
+            newShell.commandShell.evalInput = options.evalInput;
         }
-        shell.options.evalInput = shell._shell.evalInput;
+        newShell.options.evalInput = newShell.commandShell.evalInput;
         if (options.examplesId) {
-            shell.options.examplesId = options.examplesId;
-            shell.example = await Example.initialize(options.examplesId, shell._shell.load.bind(shell._shell));
+            newShell.options.examplesId = options.examplesId;
+            newShell.example = await Example.initialize(options.examplesId, newShell.commandShell.load.bind(newShell.commandShell));
         } else {
-            shell.options.examplesId = '';
+            newShell.options.examplesId = '';
         }
-        shell._shell.evaluate();
-        return shell;
-    }
-    /**
-     * ### baseUrl getter.
-     * @returns {string} baseUrl.
-     */
-    public get baseUrl(): string {
-        return this.example.baseUrl;
-    }
-    /**
-     * ### isFileProtocol getter.
-     * @returns {boolean} isFileProtocol.
-     */
-    public get isFileProtocol(): boolean {
-        return this.example.isFileProtocol;
-    }
-    /**
-     * ### shellId getter.
-     * @returns {string} shellId.
-     */
-    public get shellId(): string {
-        return this.options.shellId!;
-    }
-    /**
-     * ### shell getter.
-     * @returns {CommandShell} shell.
-     */
-    public get shell(): CommandShell {
-        return this._shell;
-    }
-    /**
-     * ### examplesId getter.
-     * @returns {string} examplesId.
-     */
-    public get examplesId(): string {
-        return this.options.examplesId!;
-    }
-    /**
-     * ### examples getter.
-     * @returns {Record<string, ExampleEntry>} examples.
-     */
-    public get examples(): Record<string, ExampleEntry> {
-        return this.example.examples;
+        return newShell;
     }
 }
 export { ShellOptions, Shell };

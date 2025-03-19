@@ -16,11 +16,11 @@ appEngine.setLanguage = (lang?: string): void => {
         appEngine.lang = lang in languageAlias ? lang : appEngine.config.defaultLanguage!;
     }
     document.querySelector('html')!.setAttribute('lang', appEngine.lang);
-    appEngine.shell.shell.setLanguage(appEngine.lang);
+    appEngine.shell.commandShell.setLanguage(appEngine.lang);
     EvaluatorConfiguration.aliasNameTable = languageAlias[appEngine.lang];
     appEngine.evaluator = new Evaluator(EvaluatorConfiguration);
     appEngine.evaluator.debug = buildConfiguration.debug;
-    appEngine.shell.shell.evaluate(new Event('click'));
+    appEngine.shell.commandShell.evaluate();
 };
 
 export const languageAlias: Record<string, AliasNameTable> = {

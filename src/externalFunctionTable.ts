@@ -101,7 +101,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
         mapper: false,
         ev: [true],
         func: (url?: CharString): AST.NodeExpr => {
-            const promptEntry = appEngine.shell.shell.element.promptSet.currentPrompt;
+            const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (url) {
                 if (appEngine.shell.isFileProtocol) {
                     promptEntry.element.frameBox.className = 'bad';
@@ -117,7 +117,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
                             }
                         })
                         .then((responseFile: string) => {
-                            appEngine.shell.shell.load(responseFile);
+                            appEngine.shell.commandShell.load(responseFile);
                         })
                         /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
                         .catch((error) => {
@@ -128,7 +128,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
                 return AST.nodeIndexExpr(AST.nodeIdentifier('open'), AST.nodeList([url.str]));
             } else {
                 openFileDialog((content: string) => {
-                    appEngine.shell.shell.load(content);
+                    appEngine.shell.commandShell.load(content);
                 }, openFileOptionMathJSLab);
                 return AST.nodeIndexExpr(AST.nodeIdentifier('open'), AST.nodeListFirst());
             }
@@ -140,7 +140,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
         mapper: false,
         ev: [true],
         func: (url?: CharString): AST.NodeExpr => {
-            const promptEntry = appEngine.shell.shell.element.promptSet.currentPrompt;
+            const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (url) {
                 if (appEngine.shell.isFileProtocol) {
                     promptEntry.element.frameBox.className = 'bad';
@@ -183,7 +183,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
         mapper: false,
         ev: [true],
         func: (...url: CharString[]): AST.NodeExpr => {
-            const promptEntry = appEngine.shell.shell.element.promptSet.currentPrompt;
+            const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             const loadContent = (content: string, name: string) => {
                 let error: boolean = false;
                 let errorMessage: string = '';
@@ -205,7 +205,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
                     promptEntry.element.frameBox.className = 'good';
                     promptEntry.element.output.innerHTML = `Loaded script from ${name}</ br>`;
                 }
-                appEngine.shell.shell.refreshNameList();
+                appEngine.shell.commandShell.refreshNameList();
             };
             if (url.length > 0) {
                 if (appEngine.shell.isFileProtocol) {

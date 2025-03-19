@@ -21,7 +21,7 @@ const externalCmdWListTable = {
                 }
                 return result.join('');
             };
-            const promptEntry = appEngine.shell.shell.element.promptSet.currentPrompt;
+            const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (args.length == 1) {
                 if (appEngine.shell.isFileProtocol) {
                     promptEntry.element.frameBox.className = 'bad';

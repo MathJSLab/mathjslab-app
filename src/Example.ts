@@ -12,23 +12,32 @@ interface ExampleEntry {
     description: string;
 }
 /**
- * Load examples handler type.
+ * Load `examplesRecord` handler type.
  */
 type LoadExampleHandler = (text?: string) => any;
 /**
- * # Example class.
- * This class has only one public static method:
- * `Example.initialize(options: ShellOptions)`.
+ * # Example class
+ *
+ * This class provides support for example files. It reads the
+ * `example/example.json` file with information about the example files, then
+ * creates buttons in the Examples panel with listeners to load each file.
+ * This class has only one public static async method:
+ *
+ * `Example.initialize(id, loadHandler)`
+ *
+ * It loads the examplesRecord, if they are available. The `id` argument is the HTML
+ * element id of the example buttons container. The `loadHandler` is the
+ * function handler that loads example content in the Shell.
  */
 class Example {
     public readonly baseUrl: string;
     public readonly isFileProtocol: boolean;
+    private examplesRecord: Record<string, ExampleEntry>;
     private readonly loadHandler: LoadExampleHandler;
-    public examples: Record<string, ExampleEntry>;
     private examplesAvailable: boolean;
     private examplesContainer: HTMLElement;
     /**
-     * ## Example constructor
+     * Example constructor
      */
     private constructor(id: string, loadHandler: LoadExampleHandler) {
         this.baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
@@ -37,7 +46,14 @@ class Example {
         this.examplesContainer = document.getElementById(id)!;
     }
     /**
-     * ## Load examples if available.
+     * `examplesRecord` getter.
+     * @returns {Record<string, ExampleEntry>} The `examplesRecord` private property.
+     */
+    public get examples(): Record<string, ExampleEntry> {
+        return this.examplesRecord;
+    }
+    /**
+     * Load `examplesRecord` if examples available.
      */
     private async load(): Promise<void> {
         if (!this.examplesContainer) {
@@ -56,7 +72,7 @@ class Example {
                     return response.json();
                 })
                 .then((data) => {
-                    this.examples = data;
+                    this.examplesRecord = data;
                     this.examplesAvailable = true;
                 })
                 .catch((_error) => {
@@ -67,14 +83,14 @@ class Example {
             this.loadHandler(firstExample.content);
         } else {
             let first = true;
-            for (const example in this.examples) {
+            for (const example in this.examplesRecord) {
                 const button = document.createElement('button');
                 this.examplesContainer.append(button);
                 button.id = 'example-' + example;
-                button.innerHTML = this.examples[example].caption;
+                button.innerHTML = this.examplesRecord[example].caption;
                 button.addEventListener('click', async (event: Event): Promise<void> => {
                     const exampleId = (event.target as HTMLButtonElement).id.substring(8);
-                    const response = await globalThis.fetch(`${appEngine.config.exampleBaseUrl}example/${this.examples[exampleId].file}`);
+                    const response = await globalThis.fetch(`${appEngine.config.exampleBaseUrl}example/${this.examplesRecord[exampleId].file}`);
                     if (!response.ok) {
                         throw new Error('Network response error.');
                     }
@@ -88,7 +104,7 @@ class Example {
         }
     }
     /**
-     * ## Example initialization (instantiation).
+     * ## Example class initialization (instantiation).
      * @param {string} id
      * @param {LoadExampleHandler} loadHandler
      * @returns {Promise<Example>} A promise for a `Example` instance.
@@ -99,5 +115,6 @@ class Example {
         return example;
     }
 }
-export { ExampleEntry, LoadExampleHandler, Example };
+export type { ExampleEntry, LoadExampleHandler };
+export { Example };
 export default Example;
