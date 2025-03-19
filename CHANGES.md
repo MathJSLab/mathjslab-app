@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.5.5
+- The `"type": "module"` field has been added to the `package.json` file and
+the command line option to ignore deprecation warnings when running Eleventy
+(`eleventy.build.mjs`) has been removed.
+
 ## 1.5.4
 - All dependencies has been updated, including `mathjslab` (version 1.7.1).
 - The `webpack-bundle-analyzer` plugin has been installed as a development

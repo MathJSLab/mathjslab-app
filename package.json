@@ -1,6 +1,6 @@
 {
   "name": "mathjslab-app",
-  "version": "1.5.4",
+  "version": "1.5.5",
   "description": "MathJSLab - An interpreter with language syntax like MATLAB®/Octave, ISBN 978-65-00-82338-7. A demo application from the mathjslab npm package, ISBN 978-65-00-84828-1.",
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
     "url": "https://github.com/MathJSLab/mathjslab-app/issues"
   },
   "homepage": "https://mathjslab.com/",
+  "type": "module",
   "scripts": {
     "initialize": "npm run update && npm run clean && npm run build:script",
     "clean:package-lock": "node script/helper/clean-package-lock.cjs",
@@ -54,7 +55,7 @@
     "build:script": "tsc -p script/tsconfig.json",
     "build-assets": "node script/build-assets.cjs",
     "build:development": "tsx --require tsconfig-paths/register ./node_modules/webpack-dev-server/bin/webpack-dev-server --mode development",
-    "prebuild:dev": "npm run build-assets && node --disable-warning=DEP0040 eleventy.build.mjs",
+    "prebuild:dev": "npm run build-assets && node eleventy.build.mjs",
     "build:dev": "npm run build:development",
     "prebuild:debug": "cross-env DEBUG=true npm run prebuild:dev",
     "build:debug": "npm run build:development",
