@@ -6,6 +6,15 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - The `"type": "module"` field has been added to the `package.json` file and
 the command line option to ignore deprecation warnings when running Eleventy
 (`eleventy.build.mjs`) has been removed.
+- All exports have been changed to be named exports and the default exports in
+each module have been enclosed in curly braces.
+- The `src/fetchPolyfill.ts` file has been removed. There is no longer any
+polyfill/fallback for the `globalThis.fetch` function.
+- The `src/showOpenFilePickerPolyfill.ts` file has been improved: it now uses
+safe fallback when accessing `options.types` and `accept`, adds
+`queryPermission` and `requestPermission` methods to mimic the real API,
+returns an array with all selected files if `options.multiple` is set, and
+uses `Object.entries(type.accept ?? {})` to ensure compatibility.
 
 ## 1.5.4
 - All dependencies has been updated, including `mathjslab` (version 1.7.1).

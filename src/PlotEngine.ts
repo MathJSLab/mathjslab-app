@@ -1,14 +1,14 @@
 import type * as PlotlyType from 'plotly.js';
 import { type ElementType, AST, BuiltInFunctionTable, CharString, ComplexDecimal, Decimal, LinearAlgebra, MultiArray } from 'mathjslab';
-import DynamicModule from './DynamicModule';
+import { DynamicModule } from './DynamicModule';
 import { insertOutput } from './outputFunction';
 import { appEngine } from './appEngine';
 
-export const plotDataLayoutConfig: Plotly.PlotlyDataLayoutConfig = {
+const plotDataLayoutConfig: Plotly.PlotlyDataLayoutConfig = {
     data: [],
 };
 
-export type PlotData = {
+type PlotData = {
     data: Array<number>;
     X: Array<number | string>;
     MinX: number;
@@ -17,7 +17,7 @@ export type PlotData = {
     MaxY: number;
 };
 
-export const plotData: PlotData = {
+const plotData: PlotData = {
     data: [],
     X: [],
     MinX: 0,
@@ -26,7 +26,7 @@ export const plotData: PlotData = {
     MaxY: 0,
 };
 
-export const plotWidth = 100;
+const plotWidth = 100;
 
 abstract class PlotEngine {
     public static readonly outputFunction: { [k: string]: Function } = {
@@ -281,5 +281,6 @@ abstract class PlotEngine {
     public static surf(...args: ElementType[]): AST.NodeExpr {}
 }
 
-export { PlotEngine };
-export default PlotEngine;
+export type { PlotData };
+export { plotDataLayoutConfig, plotData, plotWidth, PlotEngine };
+export default { plotDataLayoutConfig, plotData, plotWidth, PlotEngine };

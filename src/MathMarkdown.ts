@@ -1,5 +1,5 @@
 import { appEngine } from './appEngine';
-import DynamicModule from './DynamicModule';
+import { DynamicModule } from './DynamicModule';
 
 declare global {
     var marked: {
@@ -92,4 +92,4 @@ abstract class MathMarkdown {
     }
 }
 export { MathMarkdown };
-export default MathMarkdown;
+export default { MathMarkdown };

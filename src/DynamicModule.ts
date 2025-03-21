@@ -95,4 +95,4 @@ abstract class DynamicModule {
     }
 }
 export { type DynamicModuleConfiguration, DynamicModule };
-export default DynamicModule;
+export default { DynamicModule };

@@ -117,4 +117,4 @@ class Example {
 }
 export type { ExampleEntry, LoadExampleHandler };
 export { Example };
-export default Example;
+export default { Example };

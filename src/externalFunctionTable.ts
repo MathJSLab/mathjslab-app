@@ -1,8 +1,8 @@
 import { AST, CharString, ComplexDecimal, type BuiltInFunctionTable } from 'mathjslab';
 import { insertOutput } from './outputFunction';
 import { PlotEngine } from './PlotEngine';
-import openFileDialog from './openFileDialog';
-import MathMarkdown from './MathMarkdown';
+import { openFileDialog } from './openFileDialog';
+import { MathMarkdown } from './MathMarkdown';
 import { appEngine } from './appEngine';
 
 const openFileOptionMathJSLab: OpenFilePickerOptions & { multiple?: false | undefined } = {
@@ -243,4 +243,4 @@ const externalFunctionTable: BuiltInFunctionTable = {
     },
 };
 export { externalFunctionTable };
-export default externalFunctionTable;
+export default { externalFunctionTable };

@@ -64,4 +64,4 @@ DeviceScreen.initialize();
 /* Exports. */
 export { DeviceScreen };
 /* Default export. */
-export default DeviceScreen;
+export default { DeviceScreen };

@@ -1,4 +1,3 @@
-import './fetchPolyfill';
 import './showOpenFilePickerPolyfill';
 import { Evaluator, EvaluatorConfig, AliasNameTable, bundleConfiguration } from 'mathjslab';
 import { appEngine } from './appEngine';

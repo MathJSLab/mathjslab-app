@@ -66,5 +66,5 @@ class Shell {
         return newShell;
     }
 }
-export { ShellOptions, Shell };
-export default Shell;
+export { type ShellOptions, Shell };
+export default { Shell };

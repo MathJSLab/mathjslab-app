@@ -1,5 +1,5 @@
 import { appEngine } from './appEngine';
-import MathMarkdown from './MathMarkdown';
+import { MathMarkdown } from './MathMarkdown';
 
 const externalCmdWListTable = {
     help: {
@@ -74,4 +74,4 @@ const externalCmdWListTable = {
     },
 };
 export { externalCmdWListTable };
-export default externalCmdWListTable;
+export default { externalCmdWListTable };

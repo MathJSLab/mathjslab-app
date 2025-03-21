@@ -1,7 +1,7 @@
 import './EvaluatorConfiguration';
-import evalInput from './evalInput';
-import evalPrompt from './evalPrompt';
-import Shell from './Shell';
+import { evalInput } from './evalInput';
+import { evalPrompt } from './evalPrompt';
+import { Shell } from './Shell';
 import { appEngine } from './appEngine';
 import './main.scss';
 

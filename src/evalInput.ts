@@ -54,4 +54,4 @@ function evalInput(input: string): { statements: string[]; lines: string[] } {
     }
 }
 export { evalInput };
-export default evalInput;
+export default { evalInput };

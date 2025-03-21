@@ -1,5 +1,5 @@
 function openFileDialog(callbackfn: (content: string) => void, options?: (OpenFilePickerOptions & { multiple?: false | undefined }) | undefined) {
-    global
+    globalThis
         .showOpenFilePicker(options)
         .then(
             ([fileHandle]) => fileHandle.getFile(),
@@ -14,4 +14,4 @@ function openFileDialog(callbackfn: (content: string) => void, options?: (OpenFi
         });
 }
 export { openFileDialog };
-export default openFileDialog;
+export default { openFileDialog };
