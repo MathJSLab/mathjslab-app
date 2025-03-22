@@ -18,7 +18,7 @@ const builddata = JSON.parseFileSync(path.resolve('.', 'data', 'builddata.json')
 /**
  * Get Eleventy configuration option.
  * @param {*} s Build step.
- * @returns
+ * @returns Eleventy configuration for build step `s`.
  */
 const getStepOption = (s) => ({
     ...builddata.build.eleventy.steps[s].options,
@@ -43,7 +43,8 @@ const stepData = [
             EleventyUtil.configAddEntries(eleventyConfig, shortcodes, 'addShortcode');
             EleventyUtil.configAddRenderTemplateTools(eleventyConfig, true);
             // EleventyUtil.configAddFileContentAsGlobalData(eleventyConfig, path.resolve('./data/files'));
-            return getStepOption(0);
+            return stepData[0].options;
+            // return getStepOption(0);
         },
     },
 ];

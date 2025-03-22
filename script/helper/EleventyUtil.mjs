@@ -554,26 +554,20 @@ const utilFilters = {
         });
         return result.css.toString();
     },
+    processEnv: function (key, defaultValue = undefined) {
+        if (typeof key === 'string') {
+            return process.env[key] ?? defaultValue;
+        } else if (typeof key === 'undefined') {
+            return process.env;
+        } else {
+            throw new Error(`processEnv filter: invalid environment variable name: ${key}`);
+        }
+    },
 };
 /**
  * Util shortcodes.
  */
 const utilShortcodes = {
-    processEnv: function (name, defaultValue = '') {
-        if (typeof name === 'undefined') {
-            return process.env;
-        } else if (typeof name === 'string') {
-            if (typeof process.env[name] === 'string') {
-                return process.env[name].trim();
-            } else if (typeof process.env[name] !== 'undefined') {
-                return process.env[name];
-            } else {
-                return defaultValue;
-            }
-        } else {
-            throw new Error(`processEnv shortcode: invalid environment variable name: ${name}`);
-        }
-    },
     currentDate: function (format) {
         /* About formatting specification: https://moment.github.io/luxon/#/formatting */
         if (format === 'HTTP') {

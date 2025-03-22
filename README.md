@@ -73,15 +73,10 @@ The following build scripts are defined:
 
 1. **Before building** `mathjslab-app`, to **initialize** the project workspace, run:
 ```bash
-npm run initialize
+npm run update
 ```
 This will update the dependencies and install all of them, preparing any
 resources needed to build the project.
-
-To update the dependencies again run:
-```bash
-npm run update
-```
 
 2. **Format** and **lint** `mathjslab-app` code:
 ```bash
@@ -114,7 +109,7 @@ directory too, use:
 npm run clean:all
 ```
 After run this command you will need to do workspace setup running
-`npm run initialize` again.
+`npm run update` again.
 
 ## Community
 

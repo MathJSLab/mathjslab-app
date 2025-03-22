@@ -58,10 +58,6 @@
       "dest": "images/favicon.ico"
     },
     {
-      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/data/environment.js",
-      "dest": "data/environment.js"
-    },
-    {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/favicon-dark.ico",
       "dest": "images/favicon-dark.ico"
     },
