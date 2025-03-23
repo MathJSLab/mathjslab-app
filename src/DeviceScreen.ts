@@ -16,9 +16,7 @@ abstract class DeviceScreen {
     public static initialize(onScreenChange?: (event?: Event) => void): void {
         DeviceScreen.widthSmall = parseInt(constants['screen-width-small'].match(/([0-9]+(?:\.[0-9]*)?|[0-9]*\.[0-9]+)px/)![1], 10);
         DeviceScreen.widthMedium = parseInt(constants['screen-width-medium'].match(/([0-9]+(?:\.[0-9]*)?|[0-9]*\.[0-9]+)px/)![1], 10);
-        DeviceScreen.isTouchCapable =
-            'ontouchstart' in window ||
-            (navigator.maxTouchPoints || (navigator as Navigator & { msMaxTouchPoints: number }).msMaxTouchPoints || 0) > 0;
+        DeviceScreen.isTouchCapable = 'ontouchstart' in window || (navigator.maxTouchPoints || (navigator as Navigator & { msMaxTouchPoints: number }).msMaxTouchPoints || 0) > 0;
         DeviceScreen.innerWidth = window.innerWidth;
         DeviceScreen.innerHeight = window.innerHeight;
         DeviceScreen.isPortrait = window.matchMedia('(orientation: portrait)').matches;
@@ -43,11 +41,7 @@ abstract class DeviceScreen {
      */
     private static updateScreen(event?: Event): void {
         const isPortrait = window.matchMedia('(orientation: portrait)').matches;
-        if (
-            DeviceScreen.innerWidth !== window.innerWidth ||
-            DeviceScreen.innerHeight !== window.innerHeight ||
-            DeviceScreen.isPortrait !== isPortrait
-        ) {
+        if (DeviceScreen.innerWidth !== window.innerWidth || DeviceScreen.innerHeight !== window.innerHeight || DeviceScreen.isPortrait !== isPortrait) {
             DeviceScreen.innerWidth = window.innerWidth;
             DeviceScreen.innerHeight = window.innerHeight;
             DeviceScreen.isPortrait = isPortrait;

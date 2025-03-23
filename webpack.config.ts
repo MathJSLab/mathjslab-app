@@ -92,6 +92,9 @@ export default (env: any, argv: any): webpack.Configuration[] => {
             },
             resolve: {
                 extensions: ['.ts', '.js'],
+                // mainFields: ['import', 'module', 'main'],
+                // conditionNames: ['import', 'module', 'default'],
+                // exportsFields: ['exports'],
             },
             output: {
                 filename: 'mathjslab-app.js',

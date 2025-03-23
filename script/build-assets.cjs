@@ -41,10 +41,7 @@ try {
     const example = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'example', 'example.json')));
     let first = true;
     for (let name in example) {
-        fs.copyFileSync(
-            path.resolve(__dirname, '..', 'example', example[name].file),
-            path.resolve(__dirname, '..', 'dist', 'example', example[name].file),
-        );
+        fs.copyFileSync(path.resolve(__dirname, '..', 'example', example[name].file), path.resolve(__dirname, '..', 'dist', 'example', example[name].file));
         if (first) {
             const firstExample = {
                 name,

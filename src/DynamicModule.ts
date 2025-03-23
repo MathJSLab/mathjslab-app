@@ -13,7 +13,7 @@ abstract class DynamicModule {
     protected static readonly configuration: DynamicModuleConfiguration = {
         marked: {
             module: null,
-            import: () => importUMD('https://cdn.jsdelivr.net/npm/marked@latest/marked.min.js'),
+            import: () => importUMD('https://cdn.jsdelivr.net/npm/marked/lib/marked.umd.min.js'),
             timeout: 0,
         },
         mathjax: {
@@ -49,7 +49,7 @@ abstract class DynamicModule {
         mermaid: {
             module: null,
             /* @ts-expect-error load mermaid as a module */
-            import: () => import('https://cdn.jsdelivr.net/npm/mermaid@latest/dist/mermaid.esm.min.mjs').then((module) => module.default),
+            import: () => import('https://cdn.jsdelivr.net/npm/mermaid/+esm').then((module) => module.default),
             timeout: 10000,
         },
     };

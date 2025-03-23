@@ -46,7 +46,7 @@ import YAML from 'yaml';
 import TOML from 'smol-toml';
 import CSON from 'cson';
 import CoffeeScript from 'coffeescript';
-import * as SASS from 'sass';
+import * as sass from 'sass';
 import { DateTime } from 'luxon';
 
 /**
@@ -548,7 +548,7 @@ const utilFilters = {
         return test ? message : '';
     },
     compileSCSS: function (scssPath) {
-        const result = SASS.compile(path.resolve(this.eleventy.directories.input, scssPath), {
+        const result = sass.compile(path.resolve(this.eleventy.directories.input, scssPath), {
             silenceDeprecations: ['global-builtin'],
             loadPaths: ['.', this.eleventy.directories.includes],
         });
@@ -738,12 +738,7 @@ const templateEngine = {
 function configAddTemplateFormat(eleventyConfig, formats = ['njk', 'scss'], permalinkPrefixRemove = '\\./input/') {
     const eleventyUtil = this;
     formats.forEach((format) => {
-        templateEngine[templateFormatAlias[format]].config.bind(eleventyUtil)(
-            eleventyConfig,
-            format,
-            permalinkPrefixRemove,
-            templateEngine[templateFormatAlias[format]],
-        );
+        templateEngine[templateFormatAlias[format]].config.bind(eleventyUtil)(eleventyConfig, format, permalinkPrefixRemove, templateEngine[templateFormatAlias[format]]);
     });
 }
 /**
@@ -837,9 +832,7 @@ function renderTemplateFunctionFactory(eleventyConfig, accessGlobalData = true, 
         try {
             /* Parse and render front matter. */
             const delimiters = options.delimiters || [defaultFrontMatterDelimiter, defaultFrontMatterDelimiter];
-            let match = input.match(
-                new RegExp(`^(?:${delimiters[0]}([^\\-\\r\\n]\\w*)?\\r?\\n(?:([\\s\\S]*?)?\\r?\\n)?${delimiters[1]}(?:\\r?\\n)?)?([\\s\\S]*)$`),
-            );
+            let match = input.match(new RegExp(`^(?:${delimiters[0]}([^\\-\\r\\n]\\w*)?\\r?\\n(?:([\\s\\S]*?)?\\r?\\n)?${delimiters[1]}(?:\\r?\\n)?)?([\\s\\S]*)$`));
             parsed.language = match[1] || defaultFrontMatterLanguage;
             parsed.matter = match[2] || '';
             parsed.content = match[3] || '';
@@ -1025,11 +1018,7 @@ function configAddRenderTemplateTools(eleventyConfig, rootPath, defaultTemplateD
         defaultTemplateOptions = {};
     } else if (typeof defaultTemplateOptions === 'string') {
         defaultTemplateOptions = { templateLang: defaultTemplateOptions };
-    } else if (
-        Array.isArray(defaultTemplateOptions) &&
-        defaultTemplateOptions.length <= 2 &&
-        defaultTemplateOptions.every((lang) => typeof lang === 'string')
-    ) {
+    } else if (Array.isArray(defaultTemplateOptions) && defaultTemplateOptions.length <= 2 && defaultTemplateOptions.every((lang) => typeof lang === 'string')) {
         const result = {};
         if (defaultTemplateOptions[0]) {
             result.templateLang = defaultTemplateOptions[0];
@@ -1062,11 +1051,7 @@ function configAddRenderTemplateTools(eleventyConfig, rootPath, defaultTemplateD
     });
     eleventyConfig.addFilter('parse', eleventyConfig.javascript.functions['parse']);
     eleventyConfig.addShortcode('stringify', function (value, replacer, space, language = 'json') {
-        return engines[frontMatterOptionLanguage({ language: language || 'json' }).language || defaultFrontMatterLanguage].stringify(
-            value,
-            replacer,
-            space,
-        );
+        return engines[frontMatterOptionLanguage({ language: language || 'json' }).language || defaultFrontMatterLanguage].stringify(value, replacer, space);
     });
     eleventyConfig.addFilter('stringify', eleventyConfig.javascript.functions['stringify']);
     const renderTemplateFunction = renderTemplateFunctionFactory(eleventyConfig, accessGlobalData, defaultTemplateData, tagName);

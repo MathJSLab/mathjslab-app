@@ -6,15 +6,15 @@
 @use './define-map';
 
 :root {
-    @include define-map.mixin(colors.get(light));
+  @include define-map.mixin(colors.get(light));
 }
 
 @media (prefers-color-scheme: dark) {
-    :root {
-        @include define-map.mixin(colors.get(dark));
-    }
+  :root {
+    @include define-map.mixin(colors.get(dark));
+  }
 }
 
 :root {
-    @include define-map.mixin(transitions.get());
+  @include define-map.mixin(transitions.get());
 }

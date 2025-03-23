@@ -6,77 +6,85 @@
 @use '../../styles/component/box';
 
 .batch-panel-wrapper {
-    display: none;
+  display: none;
 }
 
 @media (min-width: sizes.get(screen-width-medium)) {
-    .batch-panel-wrapper {
-        display: block;
-    }
+  .batch-panel-wrapper {
+    display: block;
+  }
 }
 
 .batch-panel-frame-box {
-    @include mixins.colored-box();
-    text-align: center;
+  @include mixins.colored-box();
+  text-align: center;
 }
 
 .batch-panel-input-wrapper {
-    display: block;
+  display: block;
 }
 
 .batch-panel-input {
-    background-color: var(--color-input-background);
-    border: 1px thin black;
-    padding: 0.2rem;
-    line-height: 1.225rem;
-    white-space: pre-wrap;
-    overflow-wrap: normal;
-    overflow-x: auto;
-    width: 98%;
-    margin: 1rem;
-    resize: none;
-    @include mixins.input-font;
+  background-color: var(--color-input-background);
+  border: 1px thin black;
+  padding: 0.2rem;
+  line-height: 1.225rem;
+  white-space: pre-wrap;
+  overflow-wrap: normal;
+  overflow-x: auto;
+  width: 98%;
+  margin: 1rem;
+  resize: none;
+  @include mixins.input-font;
 }
 
 .batch-panel-input:hover {
-    background-color: var(--color-input-background-hover);
+  background-color: var(--color-input-background-hover);
 }
 
 .batch-panel-input:focus {
-    background-color: var(--color-input-background-focus);
+  background-color: var(--color-input-background-focus);
 }
 
 button {
-    margin: 0.5rem;
-    box-shadow: 0px 10px 14px -7px var(--color-button-box-shadow);
-    background: linear-gradient(to bottom, var(--color-button-background-to) 5%, var(--color-button-background-from) 100%);
-    background-color: var(--color-button-background-to);
-    border: 1px outset var(--color-button-border);
-    border-radius: 0.5rem;
-    display: inline-block;
-    cursor: pointer;
-    color: var(--color-button-text);
-    font-family: Arial;
-    font-size: 1rem;
-    font-weight: bold;
-    padding: 0.5rem;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px var(--color-button-text-shadow);
+  margin: 0.5rem;
+  box-shadow: 0px 10px 14px -7px var(--color-button-box-shadow);
+  background: linear-gradient(
+    to bottom,
+    var(--color-button-background-to) 5%,
+    var(--color-button-background-from) 100%
+  );
+  background-color: var(--color-button-background-to);
+  border: 1px outset var(--color-button-border);
+  border-radius: 0.5rem;
+  display: inline-block;
+  cursor: pointer;
+  color: var(--color-button-text);
+  font-family: Arial;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  text-decoration: none;
+  text-shadow: 0px 1px 0px var(--color-button-text-shadow);
 }
 
 button:hover {
-    background: linear-gradient(to bottom, var(--color-button-background-from) 5%, var(--color-button-background-to) 100%);
-    background-color: var(--color-button-background-from);
+  background: linear-gradient(
+    to bottom,
+    var(--color-button-background-from) 5%,
+    var(--color-button-background-to) 100%
+  );
+  background-color: var(--color-button-background-from);
 }
 
 button:active {
-    position: relative;
-    top: 1px;
+  position: relative;
+  top: 1px;
 }
 
 button.batch-panel-evaluate-button {
-    width: 50%;
-    margin: auto;
-    height: 3rem;
-    border-radius: 3rem;
+  width: 50%;
+  margin: auto;
+  height: 3rem;
+  border-radius: 3rem;
 }

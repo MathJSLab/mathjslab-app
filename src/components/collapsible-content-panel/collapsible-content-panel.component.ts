@@ -25,13 +25,7 @@ export interface CollapsibleContentPanelElementEntry {
 /* Set of Web component elements. */
 export type CollapsibleContentPanelElement = WebComponentElement<CollapsibleContentPanelElementEntry>;
 /* Set of Web component element entry keys. */
-export const CollapsibleContentPanelElementEntryKey: (keyof CollapsibleContentPanelElementEntry)[] = [
-    'wrapper',
-    'toggle',
-    'title',
-    'collapsible',
-    'innerContent',
-] as const;
+export const CollapsibleContentPanelElementEntryKey: (keyof CollapsibleContentPanelElementEntry)[] = ['wrapper', 'toggle', 'title', 'collapsible', 'innerContent'] as const;
 /**
  * # CollapsibleContentPanel Web Component
  */

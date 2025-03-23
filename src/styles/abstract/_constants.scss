@@ -4,5 +4,5 @@
 @use './define-map';
 
 :root {
-    @include define-map.mixin(sizes.get());
+  @include define-map.mixin(sizes.get());
 }

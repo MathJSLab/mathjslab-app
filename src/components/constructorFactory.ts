@@ -1,9 +1,6 @@
 import WebComponentInterface from './WebComponentInterface';
 import WebComponentType from './WebComponentType';
-const constructorFactory = <T extends HTMLElement & WebComponentInterface<T>>(
-    component: WebComponentType<T>,
-    styles: string,
-): ((this: T) => void) => {
+const constructorFactory = <T extends HTMLElement & WebComponentInterface<T>>(component: WebComponentType<T>, styles: string): ((this: T) => void) => {
     return function (this: T): void {
         /* Find template in main DOM. */
         const template = document.getElementById(`${component.tagName}-template`) as HTMLTemplateElement;

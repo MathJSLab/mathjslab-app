@@ -4,42 +4,42 @@
 
 /// Specific adjustments for MathML.
 math {
-    display: inline-block;
-    direction: ltr;
-    text-indent: 0;
-    letter-spacing: normal;
-    line-height: normal;
-    word-spacing: normal;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    font-size: var(--math-font-size-medium);
-    font-family: math;
-    color: var(--color-math-text);
-    math-style: compact;
-    math-shift: normal;
-    math-depth: 0;
+  display: inline-block;
+  direction: ltr;
+  text-indent: 0;
+  letter-spacing: normal;
+  line-height: normal;
+  word-spacing: normal;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: normal;
+  font-size: var(--math-font-size-medium);
+  font-family: math;
+  color: var(--color-math-text);
+  math-style: compact;
+  math-shift: normal;
+  math-depth: 0;
 }
 
 /// Ensures that block math expressions are aligned correctly.
 math[display='block' i] {
-    display: block;
-    margin: 1em 0;
+  display: block;
+  margin: 1em 0;
 }
 
 /// Ensures that properties such as font-family, font-size, and color are inherited correctly.
 mstyle {
-    all: unset;
-    font-family: inherit;
-    font-size: inherit;
-    color: inherit;
+  all: unset;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
 }
 
 /// Adjustment for mathematical tables.
 mtable {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: auto;
 }
 
 /// Ensures that math elements have the same default font properties.
@@ -48,25 +48,25 @@ mo,
 mn,
 ms,
 mtext {
-    font-size: inherit;
-    font-family: inherit;
-    font-style: inherit;
-    font-weight: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  font-style: inherit;
+  font-weight: inherit;
 }
 
 /// Ensures that fractions and roots are rendered correctly.
 mfrac,
 msqrt,
 mroot {
-    display: block math;
+  display: block math;
 }
 
 /// The numerator and denominator of fractions have their size increased in relation to the size of the parent element.
 mfrac {
-    font-size: calc(4 / 3 * 1em);
+  font-size: calc(4 / 3 * 1em);
 }
 
 /// In the case of fractions contained in power exponents, the relative size is the default for mfrac.
 msup > mrow:last-child mfrac {
-    font-size: 1em;
+  font-size: 1em;
 }

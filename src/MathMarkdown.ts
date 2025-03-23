@@ -25,14 +25,7 @@ abstract class MathMarkdown {
                         return '<div class="mermaid" align="center">' + token.text + '</div>';
                     } else {
                         return (
-                            '<pre><code>' +
-                            token.text
-                                .replace(/&/g, '&amp;')
-                                .replace(/</g, '&lt;')
-                                .replace(/>/g, '&gt;')
-                                .replace(/"/g, '&quot;')
-                                .replace(/'/g, '&#039;') +
-                            '</code></pre>'
+                            '<pre><code>' + token.text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;') + '</code></pre>'
                         );
                     }
                 },
@@ -50,10 +43,7 @@ abstract class MathMarkdown {
                 const matched = regexp.exec(data);
                 if (matched) {
                     const reference = matched[2];
-                    data =
-                        data.slice(0, matched.index) +
-                        appEngine.evaluator.toMathML(reference, display) +
-                        data.slice(matched.index + matched[2].length + quotelength);
+                    data = data.slice(0, matched.index) + appEngine.evaluator.toMathML(reference, display) + data.slice(matched.index + matched[2].length + quotelength);
                     replaced = true;
                 } else {
                     replaced = false;
@@ -78,6 +68,7 @@ abstract class MathMarkdown {
     public static renderMermaid(): void {
         if (renderMermaid) {
             DynamicModule.use('mermaid', (mermaid) => {
+                console.log(mermaid.default);
                 document.querySelectorAll('.mermaid').forEach((m) => {
                     mermaid.default.init(undefined, m);
                 });

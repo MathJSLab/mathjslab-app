@@ -23,11 +23,7 @@ function evalPrompt(prompt: CommandPrompt, _index?: number): void {
                 prompt.element.frameBox.className = 'good';
                 const unparse_eval_input = appEngine.evaluator.Unparse(eval_input);
                 if (unparse_input !== unparse_eval_input) {
-                    const evalsign =
-                        typeof tree.list[0].type === 'string' &&
-                        tree.list[0].type.substring(tree.list[0].type.length - 1, tree.list[0].type.length) === '='
-                            ? '&rArr;'
-                            : '=';
+                    const evalsign = typeof tree.list[0].type === 'string' && tree.list[0].type.substring(tree.list[0].type.length - 1, tree.list[0].type.length) === '=' ? '&rArr;' : '=';
                     prompt.element.output.innerHTML =
                         '<table><tr><td>' +
                         appEngine.evaluator.UnparseMathML(tree) +
@@ -65,9 +61,7 @@ function evalPrompt(prompt: CommandPrompt, _index?: number): void {
             '</td></tr></table><br />' +
             error +
             (appEngine.evaluator.debug
-                ? '<br /><br /><pre>Input   : ' +
-                  JSON.stringify(tree, (key: string, value: any) => (key !== 'parent' ? value : value === null ? 'root' : true), 2) +
-                  '</pre>'
+                ? '<br /><br /><pre>Input   : ' + JSON.stringify(tree, (key: string, value: any) => (key !== 'parent' ? value : value === null ? 'root' : true), 2) + '</pre>'
                 : '');
         if (appEngine.evaluator.debug) throw error;
     }

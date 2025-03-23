@@ -6,31 +6,31 @@
 @use '../../styles/component/common';
 
 .fixed-scroll-panel-wrapper {
-    display: none;
+  display: none;
 }
 
 @media (min-width: sizes.get(screen-width-medium)) {
-    .fixed-scroll-panel-wrapper {
-        display: block;
-        width: 12%;
-        background-color: var(--green-background);
-        border: 2px solid var(--green-border);
-        padding: 1rem;
-        border-radius: 1rem;
-        position: absolute;
-        right: 0;
-    }
+  .fixed-scroll-panel-wrapper {
+    display: block;
+    width: 12%;
+    background-color: var(--green-background);
+    border: 2px solid var(--green-border);
+    padding: 1rem;
+    border-radius: 1rem;
+    position: absolute;
+    right: 0;
+  }
 }
 
 .fixed-scroll-panel-title {
-    border-radius: 0.5rem;
-    text-decoration: none;
-    text-align: center;
-    color: var(--color-a-text);
-    transition: transitions.get(fixed-scroll-panel-title);
-    padding: 0.1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  text-align: center;
+  color: var(--color-a-text);
+  transition: transitions.get(fixed-scroll-panel-title);
+  padding: 0.1rem;
 }
 
 .fixed-scroll-panel-content-wrapper {
-    display: block;
+  display: block;
 }

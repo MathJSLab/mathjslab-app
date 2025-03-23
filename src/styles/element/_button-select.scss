@@ -2,29 +2,37 @@
 
 button,
 select {
-    margin: 0.5rem;
-    padding: 0.5rem;
-    display: inline-block;
-    cursor: pointer;
-    font: bold 1rem Arial;
-    color: var(--color-button-text);
-    text-decoration: none;
-    text-shadow: 0 1px 0 var(--color-button-text-shadow);
-    border: 1px outset var(--color-button-border);
-    border-radius: 0.5rem;
-    background: linear-gradient(to bottom, var(--color-button-background-to) 5%, var(--color-button-background-from) 100%);
-    background-color: var(--color-button-background-to);
-    box-shadow: 0 10px 14px -7px var(--color-button-box-shadow);
+  margin: 0.5rem;
+  padding: 0.5rem;
+  display: inline-block;
+  cursor: pointer;
+  font: bold 1rem Arial;
+  color: var(--color-button-text);
+  text-decoration: none;
+  text-shadow: 0 1px 0 var(--color-button-text-shadow);
+  border: 1px outset var(--color-button-border);
+  border-radius: 0.5rem;
+  background: linear-gradient(
+    to bottom,
+    var(--color-button-background-to) 5%,
+    var(--color-button-background-from) 100%
+  );
+  background-color: var(--color-button-background-to);
+  box-shadow: 0 10px 14px -7px var(--color-button-box-shadow);
 }
 
 button:hover,
 select:hover {
-    background: linear-gradient(to bottom, var(--color-button-background-from) 5%, var(--color-button-background-to) 100%);
-    background-color: var(--color-button-background-from);
+  background: linear-gradient(
+    to bottom,
+    var(--color-button-background-from) 5%,
+    var(--color-button-background-to) 100%
+  );
+  background-color: var(--color-button-background-from);
 }
 
 button:active,
 select:active {
-    top: 1px;
-    position: relative;
+  top: 1px;
+  position: relative;
 }

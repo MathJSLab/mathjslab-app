@@ -1,33 +1,33 @@
 @use '../base/sizes';
 
 @mixin colored-box($bg-color: var(--green-background), $bd-color: var(--green-border)) {
-    display: block;
-    background-color: $bg-color;
-    border: 2px solid $bd-color;
-    margin: 1rem;
-    padding: 1rem;
-    border-radius: 1rem;
+  display: block;
+  background-color: $bg-color;
+  border: 2px solid $bd-color;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
 }
 
 @mixin flex-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @mixin responsive-font-size($size: size.get(font-size-base), $max-screen-width: screen-width-small) {
-    font-size: $size;
-    @media (max-width: sizes.get($max-screen-width)) {
-        font-size: $size * 3/4;
-    }
+  font-size: $size;
+  @media (max-width: sizes.get($max-screen-width)) {
+    font-size: $size * 3/4;
+  }
 }
 
 @mixin input-font {
-    font-weight: bold;
-    font-family: monospace;
-    font-size: var(--font-size-medium);
-    color: var(--color-input-text);
-    @media (max-width: sizes.get(screen-width-medium)) {
-        font-size: var(--font-size-small);
-    }
+  font-weight: bold;
+  font-family: monospace;
+  font-size: var(--font-size-medium);
+  color: var(--color-input-text);
+  @media (max-width: sizes.get(screen-width-medium)) {
+    font-size: var(--font-size-small);
+  }
 }

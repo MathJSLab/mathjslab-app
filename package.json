@@ -48,7 +48,7 @@
     "git:commit": "node script/helper/git-commit.cjs",
     "git:push": "git push",
     "git:all": "npm run git:add && npm run git:commit && npm run git:push",
-    "format": "prettier --plugin=@prettier/plugin-xml --write **/*.{ts,tsx,js,jsx,cjs,mjs,css,html,htm,json,jsonc,yml,yaml,xml,svg}",
+    "format": "prettier --plugin=@prettier/plugin-xml --write **/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,html,htm,json,jsonc,yml,yaml,xml,svg}",
     "lint": "eslint --fix",
     "format:lint": "npm run format && npm run lint",
     "build:script": "tsc -p script/tsconfig.json",
@@ -117,6 +117,6 @@
   "dependencies": {
     "@capacitor/android": "^7.1.0",
     "@capacitor/core": "^7.1.0",
-    "mathjslab": "^1.7.1"
+    "mathjslab": "^1.7.2"
   }
 }

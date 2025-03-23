@@ -15,6 +15,7 @@ safe fallback when accessing `options.types` and `accept`, adds
 `queryPermission` and `requestPermission` methods to mimic the real API,
 returns an array with all selected files if `options.multiple` is set, and
 uses `Object.entries(type.accept ?? {})` to ensure compatibility.
+- All dependencies has been updated, including `mathjslab` (version 1.7.2).
 
 ## 1.5.4
 - All dependencies has been updated, including `mathjslab` (version 1.7.1).

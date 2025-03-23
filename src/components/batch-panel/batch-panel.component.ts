@@ -25,13 +25,7 @@ export interface BatchPanelElementEntry {
 /* Set of Web component elements. */
 export type BatchPanelElement = WebComponentElement<BatchPanelElementEntry>;
 /* Set of Web component element entry keys. */
-export const BatchPanelElementEntryKey: (keyof BatchPanelElementEntry)[] = [
-    'wrapper',
-    'frameBox',
-    'inputWrapper',
-    'input',
-    'evaluateButton',
-] as const;
+export const BatchPanelElementEntryKey: (keyof BatchPanelElementEntry)[] = ['wrapper', 'frameBox', 'inputWrapper', 'input', 'evaluateButton'] as const;
 /**
  * # BatchPanel Web Component
  */

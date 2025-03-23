@@ -17,10 +17,7 @@ function evalInput(input: string): { statements: string[]; lines: string[] } {
             for (let i = 0; i < tree.list.length; i++) {
                 if (tree.list[i].stop.line === tree.list[i].start.line) {
                     // if statement is single line and there's no other statement in the same line then pass entire line.
-                    if (
-                        (i === 0 || tree.list[i - 1].stop.line < tree.list[i].start.line) &&
-                        (i === tree.list.length - 1 || tree.list[i + 1].start.line > tree.list[i].start.line)
-                    ) {
+                    if ((i === 0 || tree.list[i - 1].stop.line < tree.list[i].start.line) && (i === tree.list.length - 1 || tree.list[i + 1].start.line > tree.list[i].start.line)) {
                         statements[i] = lines[tree.list[i].start.line - 1];
                     } else {
                         statements[i] = lines[tree.list[i].start.line - 1].substring(tree.list[i].start.column, tree.list[i].stop.column + 1);

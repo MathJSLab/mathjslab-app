@@ -5,48 +5,48 @@
 @use '../../styles/component/box';
 
 .command-prompt-wrapper {
-    display: block;
+  display: block;
 }
 
 .command-prompt-frame-box {
-    @include mixins.colored-box();
+  @include mixins.colored-box();
 }
 
 .command-prompt-cursor {
-    width: 1rem;
-    font-family: 1rem monospace;
-    position: relative;
-    top: -0.175rem;
+  width: 1rem;
+  font-family: 1rem monospace;
+  position: relative;
+  top: -0.175rem;
 }
 
 .command-prompt-input {
-    background-color: var(--color-input-background);
-    overflow: hidden;
-    outline: none;
-    resize: none;
-    white-space: nowrap;
-    height: 1rem;
-    width: 100%;
-    line-height: 1rem;
-    border-radius: 0.3rem;
-    border: 0;
-    outline: none;
-    @include mixins.input-font;
+  background-color: var(--color-input-background);
+  overflow: hidden;
+  outline: none;
+  resize: none;
+  white-space: nowrap;
+  height: 1rem;
+  width: 100%;
+  line-height: 1rem;
+  border-radius: 0.3rem;
+  border: 0;
+  outline: none;
+  @include mixins.input-font;
 }
 
 .command-prompt-input:hover {
-    background-color: var(--color-input-background-hover);
+  background-color: var(--color-input-background-hover);
 }
 
 .command-prompt-input:focus {
-    background-color: var(--color-input-background-focus);
+  background-color: var(--color-input-background-focus);
 }
 
 .command-prompt-output {
-    display: block;
-    overflow-x: auto;
+  display: block;
+  overflow-x: auto;
 }
 
 .command-prompt-output td {
-    padding: 1px;
+  padding: 1px;
 }

@@ -10,10 +10,7 @@ import path from 'node:path';
 import components from './component.include.json';
 /* eslint-disable-next-line  no-console */
 console.log('Loading Web components ...');
-const templates =
-    '\n' +
-    components.include.map((component) => fs.readFileSync(path.join(__dirname, component, component + '.template.html'), 'utf-8')).join('\n') +
-    '\n';
+const templates = '\n' + components.include.map((component) => fs.readFileSync(path.join(__dirname, component, component + '.template.html'), 'utf-8')).join('\n') + '\n';
 fs.writeFileSync(
     path.join(__dirname, 'components.ts'),
     `/* Web components. File generated at ${new Date().toUTCString()}. */\n` +

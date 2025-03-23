@@ -41,9 +41,7 @@ class Shell {
                 if (docShell.length === 0) {
                     throw new Error(`cannot find 'command-shell' element with id = '${options.shellId}'.`);
                 } else {
-                    throw new Error(
-                        `More than one 'command-shell' element found. Specify the id of the 'command-shell' element to be used (options.shellId);`,
-                    );
+                    throw new Error(`More than one 'command-shell' element found. Specify the id of the 'command-shell' element to be used (options.shellId);`);
                 }
             }
         }

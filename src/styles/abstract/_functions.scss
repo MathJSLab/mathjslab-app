@@ -5,7 +5,7 @@
 /// @param {Number} $base - The base font size in pixels (default: 16px).
 /// @return {Number} - The equivalent rem value.
 @function px-to-rem($px, $base: 16px) {
-    @return $px / $base * 1rem;
+  @return $px / $base * 1rem;
 }
 
 /// Darkens a color by a specified percentage.
@@ -13,7 +13,7 @@
 /// @param {Number} $percentage - The percentage to darken (0% to 100%).
 /// @return {Color} - The darkened color.
 @function darken-color($color, $percentage) {
-    @return darken($color, $percentage);
+  @return darken($color, $percentage);
 }
 
 /// Lightens a color by a specified percentage.
@@ -21,7 +21,7 @@
 /// @param {Number} $percentage - The percentage to lighten (0% to 100%).
 /// @return {Color} - The lightened color.
 @function lighten-color($color, $percentage) {
-    @return lighten($color, $percentage);
+  @return lighten($color, $percentage);
 }
 
 /// Generates a consistent spacing value based on a scale factor.
@@ -29,7 +29,7 @@
 /// @param {Number} $base - The base spacing unit (default: 8px).
 /// @return {Number} - The scaled spacing value.
 @function spacing($factor, $base: 8px) {
-    @return $factor * $base;
+  @return $factor * $base;
 }
 
 /// Combines multiple shadow values into a single property.

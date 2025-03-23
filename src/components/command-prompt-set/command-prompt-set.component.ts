@@ -136,9 +136,7 @@ export class CommandPromptSet extends HTMLElement {
     public evalPrompt: CommandPromptEvalHandler = (prompt: CommandPrompt, index?: number) => {
         index = typeof index === 'number' && index >= 0 ? index : this.element.prompt.map((p) => p.id).indexOf(prompt.id);
         /* eslint-disable-next-line no-console */
-        console.log(
-            `evalPrompt:\nprompt index = ${index};\nprompt id = '${prompt.id}'\nprompt value = '${this.element.prompt[index].element.input.value}'`,
-        );
+        console.log(`evalPrompt:\nprompt index = ${index};\nprompt id = '${prompt.id}'\nprompt value = '${this.element.prompt[index].element.input.value}'`);
     };
     /**
      * Evaluate refresh prompt callback.
@@ -149,14 +147,10 @@ export class CommandPromptSet extends HTMLElement {
         if (prompt && index) {
             index = typeof index === 'number' && index >= 0 ? index : this.element.prompt.map((p) => p.id).indexOf(prompt.id);
             /* eslint-disable-next-line no-console */
-            console.log(
-                `evalPromptRefresh:\nprompt index = ${index};\nprompt id = '${prompt.id}'\nprompt value = '${this.element.prompt[index].element.input.value}'`,
-            );
+            console.log(`evalPromptRefresh:\nprompt index = ${index};\nprompt id = '${prompt.id}'\nprompt value = '${this.element.prompt[index].element.input.value}'`);
         } else {
             /* eslint-disable-next-line no-console */
-            console.log(
-                `evalPromptRefresh: invalid arguments: ${typeof prompt === 'undefined' ? 'prompt' : ''}${typeof index === 'undefined' ? 'index' : ''} undefined.`,
-            );
+            console.log(`evalPromptRefresh: invalid arguments: ${typeof prompt === 'undefined' ? 'prompt' : ''}${typeof index === 'undefined' ? 'index' : ''} undefined.`);
         }
     };
     /**
@@ -304,10 +298,7 @@ export class CommandPromptSet extends HTMLElement {
             } else if (event.key === 'ArrowDown') {
                 const input = this.currentPrompt.element.input;
                 /* Tests if it is not the last prompt and if it is on the last line of the current prompt. */
-                if (
-                    this.promptIndex + 1 < this.element.prompt.length &&
-                    input.selectionStart >= input.value.split(/\r?\n/).slice(0, -1).join('\n').length
-                ) {
+                if (this.promptIndex + 1 < this.element.prompt.length && input.selectionStart >= input.value.split(/\r?\n/).slice(0, -1).join('\n').length) {
                     this.nextPrompt.element.input.focus();
                     event.preventDefault();
                 }
