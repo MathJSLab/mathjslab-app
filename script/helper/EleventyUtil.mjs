@@ -548,11 +548,11 @@ const utilFilters = {
         return test ? message : '';
     },
     compileSCSS: function (scssPath) {
-        const result = sass.compile(path.resolve(this.eleventy.directories.input, scssPath), {
-            silenceDeprecations: ['global-builtin'],
-            loadPaths: ['.', this.eleventy.directories.includes],
-        });
-        return result.css.toString();
+        return sass
+            .compile(path.resolve(this.eleventy.directories.input, scssPath), {
+                loadPaths: ['.', this.eleventy.directories.includes],
+            })
+            .css.toString();
     },
     processEnv: function (key, defaultValue = undefined) {
         if (typeof key === 'string') {

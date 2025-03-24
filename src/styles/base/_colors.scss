@@ -1,5 +1,7 @@
 /// _colors.scss - Color definitions and function getter.
 
+@use 'sass:map';
+
 /// The generated baseline color map.
 $generated-colors: ();
 
@@ -87,13 +89,13 @@ $theme-spec: (
 @each $color-name, $color in $color-spec {
   @each $theme-name, $theme in $theme-spec {
     @each $style-name, $style in $theme {
-      $generated-colors: map-merge(
+      $generated-colors: map.merge(
         $generated-colors,
         (
           '#{$color-name}-#{$style-name}-#{$theme-name}': hsl(
-              map-get($color, hue),
-              map-get($style, saturation) or map-get($color, saturation),
-              map-get($style, luminosity) or map-get($color, luminosity)
+              map.get($color, hue),
+              map.get($style, saturation) or map.get($color, saturation),
+              map.get($style, luminosity) or map.get($color, luminosity)
             ),
         )
       ) !global;
@@ -125,42 +127,42 @@ $color-semantic: (
   color-text-hover-dark: hsla(0, 0%, 92%, 0.6),
   color-math-text-light: hsla(0, 0%, 24%, 0.8),
   color-math-text-dark: hsla(0, 0%, 92%, 0.8),
-  color-panel-box-shadow-light: hsl(map-get(map-get($color-spec, olive-green), hue), 49%, 30%),
-  color-panel-box-shadow-dark: hsl(map-get(map-get($color-spec, olive-green), hue), 49%, 30%),
-  color-input-background-light: hsl(map-get(map-get($color-spec, green), hue), 35%, 91%),
-  color-input-background-dark: hsl(map-get(map-get($color-spec, green), hue), 35%, 91%),
+  color-panel-box-shadow-light: hsl(map.get(map.get($color-spec, olive-green), hue), 49%, 30%),
+  color-panel-box-shadow-dark: hsl(map.get(map.get($color-spec, olive-green), hue), 49%, 30%),
+  color-input-background-light: hsl(map.get(map.get($color-spec, green), hue), 35%, 91%),
+  color-input-background-dark: hsl(map.get(map.get($color-spec, green), hue), 35%, 91%),
   color-input-background-hover-light: hsl(0, 0%, 96%),
   color-input-background-hover-dark: hsl(0, 0%, 96%),
   color-input-background-focus-light: hsl(60, 100%, 87%),
   color-input-background-focus-dark: hsl(60, 100%, 87%),
-  color-input-text-light: hsl(map-get(map-get($color-spec, red), hue), 100%, 50%),
-  color-input-text-dark: hsl(map-get(map-get($color-spec, red), hue), 100%, 35%),
-  color-input-text-focus-light: hsl(map-get(map-get($color-spec, red), hue), 100%, 40%),
-  color-input-text-focus-dark: hsl(map-get(map-get($color-spec, red), hue), 100%, 25%),
-  color-a-text-light: hsl(map-get(map-get($color-spec, green), hue), 100%, 37%),
-  color-a-text-hover-light: hsl(map-get(map-get($color-spec, green), hue), 100%, 23%),
-  color-a-text-dark: hsl(map-get(map-get($color-spec, green), hue), 100%, 37%),
-  color-a-text-hover-dark: hsl(map-get(map-get($color-spec, green), hue), 100%, 23%),
-  color-a-background-hover-light: hsla(map-get(map-get($color-spec, green), hue), 100%, 37%, 0.2),
-  color-a-background-hover-dark: hsla(map-get(map-get($color-spec, green), hue), 100%, 37%, 0.2),
+  color-input-text-light: hsl(map.get(map.get($color-spec, red), hue), 100%, 50%),
+  color-input-text-dark: hsl(map.get(map.get($color-spec, red), hue), 100%, 35%),
+  color-input-text-focus-light: hsl(map.get(map.get($color-spec, red), hue), 100%, 40%),
+  color-input-text-focus-dark: hsl(map.get(map.get($color-spec, red), hue), 100%, 25%),
+  color-a-text-light: hsl(map.get(map.get($color-spec, green), hue), 100%, 37%),
+  color-a-text-hover-light: hsl(map.get(map.get($color-spec, green), hue), 100%, 23%),
+  color-a-text-dark: hsl(map.get(map.get($color-spec, green), hue), 100%, 37%),
+  color-a-text-hover-dark: hsl(map.get(map.get($color-spec, green), hue), 100%, 23%),
+  color-a-background-hover-light: hsla(map.get(map.get($color-spec, green), hue), 100%, 37%, 0.2),
+  color-a-background-hover-dark: hsla(map.get(map.get($color-spec, green), hue), 100%, 37%, 0.2),
   color-pre-code-background-light: hsl(0, 0%, 90%),
   color-pre-code-background-dark: hsl(0, 0%, 20%),
-  color-button-text-light: hsl(map-get(map-get($color-spec, green), hue), 0%, 100%),
-  color-button-border-light: hsl(map-get(map-get($color-spec, green), hue), 100%, 25%),
-  color-button-background-to-light: hsl(map-get(map-get($color-spec, green), hue), 26%, 53%),
-  color-button-background-from-light: hsl(map-get(map-get($color-spec, olive-green), hue), 30%, 43%),
-  color-button-box-shadow-light: hsl(map-get(map-get($color-spec, olive-green), hue), 49%, 30%),
-  color-button-text-shadow-light: hsl(map-get(map-get($color-spec, olive-green), hue), 49%, 30%),
-  color-button-text-dark: hsl(map-get(map-get($color-spec, green), hue), 0%, 100%),
-  color-button-border-dark: hsl(map-get(map-get($color-spec, green), hue), 100%, 25%),
-  color-button-background-to-dark: hsl(map-get(map-get($color-spec, green), hue), 26%, 43%),
-  color-button-background-from-dark: hsl(map-get(map-get($color-spec, olive-green), hue), 30%, 33%),
-  color-button-box-shadow-dark: hsl(map-get(map-get($color-spec, olive-green), hue), 49%, 20%),
-  color-button-text-shadow-dark: hsl(map-get(map-get($color-spec, olive-green), hue), 49%, 20%),
+  color-button-text-light: hsl(map.get(map.get($color-spec, green), hue), 0%, 100%),
+  color-button-border-light: hsl(map.get(map.get($color-spec, green), hue), 100%, 25%),
+  color-button-background-to-light: hsl(map.get(map.get($color-spec, green), hue), 26%, 53%),
+  color-button-background-from-light: hsl(map.get(map.get($color-spec, olive-green), hue), 30%, 43%),
+  color-button-box-shadow-light: hsl(map.get(map.get($color-spec, olive-green), hue), 49%, 30%),
+  color-button-text-shadow-light: hsl(map.get(map.get($color-spec, olive-green), hue), 49%, 30%),
+  color-button-text-dark: hsl(map.get(map.get($color-spec, green), hue), 0%, 100%),
+  color-button-border-dark: hsl(map.get(map.get($color-spec, green), hue), 100%, 25%),
+  color-button-background-to-dark: hsl(map.get(map.get($color-spec, green), hue), 26%, 43%),
+  color-button-background-from-dark: hsl(map.get(map.get($color-spec, olive-green), hue), 30%, 33%),
+  color-button-box-shadow-dark: hsl(map.get(map.get($color-spec, olive-green), hue), 49%, 20%),
+  color-button-text-shadow-dark: hsl(map.get(map.get($color-spec, olive-green), hue), 49%, 20%),
 );
 
 /// Store the $color-semantic map in the $generated-colors map.
-$generated-colors: map-merge($generated-colors, $color-semantic);
+$generated-colors: map.merge($generated-colors, $color-semantic);
 
 /// Generated semantic color map of light theme.
 $theme-light: ();
@@ -201,16 +203,16 @@ $style-semantic: (
 
 /// Iterates over $style-semantic map producing default definitions for light and dark themes.
 @each $style-name in $style-semantic {
-  $theme-light: map-merge(
+  $theme-light: map.merge(
     $theme-light,
     (
-      'color-#{$style-name}': map-get($generated-colors, color-#{$style-name}-light),
+      'color-#{$style-name}': map.get($generated-colors, color-#{$style-name}-light),
     )
   ) !global;
-  $theme-dark: map-merge(
+  $theme-dark: map.merge(
     $theme-dark,
     (
-      'color-#{$style-name}': map-get($generated-colors, color-#{$style-name}-dark),
+      'color-#{$style-name}': map.get($generated-colors, color-#{$style-name}-dark),
     )
   ) !global;
 }
@@ -221,16 +223,16 @@ $color-style: (background, border, border-hover, text, text-hover);
 /// Iterates over $color-primary list to produce primary color patterns for themes.
 @each $color-name in $color-primary {
   @each $style-name in $color-style {
-    $theme-light: map-merge(
+    $theme-light: map.merge(
       $theme-light,
       (
-        '#{$color-name}-#{$style-name}': map-get($generated-colors, #{$color-name}-#{$style-name}-light),
+        '#{$color-name}-#{$style-name}': map.get($generated-colors, #{$color-name}-#{$style-name}-light),
       )
     ) !global;
-    $theme-dark: map-merge(
+    $theme-dark: map.merge(
       $theme-dark,
       (
-        '#{$color-name}-#{$style-name}': map-get($generated-colors, #{$color-name}-#{$style-name}-dark),
+        '#{$color-name}-#{$style-name}': map.get($generated-colors, #{$color-name}-#{$style-name}-dark),
       )
     ) !global;
   }
@@ -246,19 +248,19 @@ $color-style: (background, border, border-hover, text, text-hover);
       @return $generated-colors;
     }
 
-    @return map-get($generated-colors, $color-name);
+    @return map.get($generated-colors, $color-name);
   } @else if $theme-name ==light {
     @if $color-name ==null {
       @return $theme-light;
     }
 
-    @return map-get($theme-light, $color-name);
+    @return map.get($theme-light, $color-name);
   } @else if $theme-name ==dark {
     @if $color-name ==null {
       @return $theme-dark;
     }
 
-    @return map-get($theme-dark, $color-name);
+    @return map.get($theme-dark, $color-name);
   } @else {
     @error "The theme #{$theme-name} is invalid. Use 'light' or 'dark'.";
   }

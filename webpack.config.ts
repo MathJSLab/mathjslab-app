@@ -37,6 +37,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                 rules: [
                     {
                         test: /\.ts$/i,
+                        exclude: defaultExclude.map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
                         use: [
                             {
                                 loader: 'ts-loader',
@@ -45,11 +46,10 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                                 },
                             },
                         ],
-                        exclude: defaultExclude.map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
                     },
                     {
-                        test: /\.(c|sa|sc)ss$/i,
-                        exclude: [...defaultExclude, /\.styles.scss$/].map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
+                        test: /\.module\.(c|sa|sc)ss$/i,
+                        exclude: defaultExclude.map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
                         use: [
                             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
                             {
@@ -57,7 +57,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                                 options: {
                                     modules: {
                                         auto: true,
-                                        localIdentName: isProduction ? '[hash:base64]' : '[path][name]__[local]',
+                                        localIdentName: isProduction ? '[hash:base64:6]' : '[path][name]__[local]',
                                     },
                                 },
                             },
@@ -65,7 +65,6 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                                 loader: 'sass-loader',
                                 options: {
                                     sassOptions: {
-                                        silenceDeprecations: ['global-builtin'],
                                         outputStyle: 'compressed',
                                     },
                                 },
@@ -73,15 +72,20 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                         ],
                     },
                     {
-                        test: /\.styles.scss$/,
+                        test: /\.styles\.(c|sa|sc)ss$/i,
                         exclude: defaultExclude.map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
+                        use: ['sass-to-string', 'sass-loader'],
+                    },
+                    {
+                        test: /\.(c|sa|sc)ss$/i,
+                        exclude: [...defaultExclude, /\.module\.(c|sa|sc)ss$/i, /\.styles\.(c|sa|sc)ss$/i].map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
                         use: [
-                            'sass-to-string',
+                            isProduction ? MiniCssExtractPlugin.loader : 'style-loader',
+                            'css-loader',
                             {
                                 loader: 'sass-loader',
                                 options: {
                                     sassOptions: {
-                                        silenceDeprecations: ['global-builtin'],
                                         outputStyle: 'compressed',
                                     },
                                 },
@@ -92,15 +96,12 @@ export default (env: any, argv: any): webpack.Configuration[] => {
             },
             resolve: {
                 extensions: ['.ts', '.js'],
-                // mainFields: ['import', 'module', 'main'],
-                // conditionNames: ['import', 'module', 'default'],
-                // exportsFields: ['exports'],
             },
             output: {
                 filename: 'mathjslab-app.js',
                 path: path.join(__dirname, 'dist'),
                 environment: {
-                    // module: true, // Enable CSS modules for files with `.module.scss`
+                    module: true,
                     dynamicImport: true,
                 },
             },
@@ -109,7 +110,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                     title: 'MathJSLab',
                     templateContent: (_templateParameters: { [option: string]: any }): string =>
                         fs.readFileSync(path.join(__dirname, 'src', 'main.html'), 'utf-8').replace('</body>', templates + '</body>'),
-                    inject: 'body' /* Inject the assets at the end of the body. */,
+                    inject: 'body',
                 }),
                 ...(isProduction ? [new MiniCssExtractPlugin({ filename: '[name].css' })] : []),
             ],
