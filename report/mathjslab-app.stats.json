@@ -1,9 +1,9 @@
 {
   "name": "mathjslab-app",
-  "hash": "feee6b5175bf2bcb1155",
+  "hash": "879e1bcbbe6449b7a3fc",
   "version": "5.98.0",
-  "time": 13118,
-  "builtAt": 1742859727544,
+  "time": 13052,
+  "builtAt": 1742870047949,
   "publicPath": "auto",
   "outputPath": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\dist",
   "assetsByChunkName": {
@@ -130,7 +130,7 @@
         "mathjslab-app.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "1d6010ee2391e7cf13ad",
+      "hash": "69ee4dd406d12198120e",
       "childrenByOrder": {},
       "id": 379,
       "siblings": [],
@@ -297,9 +297,9 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             },
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -884,8 +884,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "issuerName": "./src/evalPrompt.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "issuerName": "./src/EvaluatorConfiguration.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -893,16 +893,16 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 990,
-          "issuerId": 809,
+          "issuerId": 688,
           "chunks": [
             379
           ],
@@ -4399,9 +4399,9 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             },
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -5005,9 +5005,9 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             },
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -6275,8 +6275,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-      "issuerName": "./src/evalPrompt.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+      "issuerName": "./src/EvaluatorConfiguration.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -6284,16 +6284,16 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 990,
-      "issuerId": 809,
+      "issuerId": 688,
       "chunks": [
         379
       ],
@@ -7126,9 +7126,9 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         },
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -8429,9 +8429,9 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         },
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
@@ -8536,9 +8536,9 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         },
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",

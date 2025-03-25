@@ -31,7 +31,7 @@
   "scripts": {
     "clean:package-lock": "node script/helper/clean-package-lock.cjs",
     "clean:script": "rimraf script/build",
-    "clean:build": "rimraf dist report src/first-example.json src/build-configuration.json src/styles/constants.json",
+    "clean:build": "rimraf dist report sitemap.xml src/first-example.json src/build-configuration.json src/styles/constants.json",
     "clean:android": "rimraf android",
     "clean:script:build:android": "npm run clean:script && npm run clean:build && npm run clean:android",
     "clean:download-resources": "node script/helper/download-files.cjs clean && rimraf script/helper/download-files.cjs download.config.json",
@@ -54,7 +54,7 @@
     "build:script": "tsc -p script/tsconfig.json",
     "build-assets": "node script/build-assets.cjs",
     "build:development": "tsx --require tsconfig-paths/register ./node_modules/webpack-dev-server/bin/webpack-dev-server --mode development",
-    "prebuild:dev": "npm run build-assets && node eleventy.build.mjs",
+    "prebuild:dev": "node eleventy.build.mjs && npm run build-assets",
     "build:dev": "npm run build:development",
     "prebuild:debug": "cross-env DEBUG=true npm run prebuild:dev",
     "build:debug": "npm run build:development",

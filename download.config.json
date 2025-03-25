@@ -134,10 +134,6 @@
       "dest": ".prettierignore"
     },
     {
-      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/.prettierignore",
-      "dest": ".prettierignore"
-    },
-    {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/.prettierrc",
       "dest": ".prettierrc"
     }
