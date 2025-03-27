@@ -2,8 +2,8 @@
   "dataset": "mathjslab-app",
   "files": [
     {
-      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/resource/mathjslab-app/builddata.json",
-      "dest": "data/builddata.json"
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/resource/mathjslab-app/eleventy.build.json",
+      "dest": "eleventy.build.json"
     },
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/clean-package-lock.cjs",

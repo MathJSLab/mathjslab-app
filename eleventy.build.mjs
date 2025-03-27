@@ -11,9 +11,9 @@ import EleventyUtil from './script/helper/EleventyUtil.mjs';
 const scriptName = path.basename(fileURLToPath(import.meta.url));
 
 /**
- * The `data/builddata.json` data parsed.
+ * The `eleventy.build.json` data parsed.
  */
-const builddata = JSON.parseFileSync(path.resolve('.', 'data', 'builddata.json'));
+const eleventyBuild = JSON.parseFileSync(path.resolve('.', 'eleventy.build.json'));
 
 /**
  * Get Eleventy configuration option.
@@ -21,8 +21,8 @@ const builddata = JSON.parseFileSync(path.resolve('.', 'data', 'builddata.json')
  * @returns Eleventy configuration for build step `s`.
  */
 const getStepOption = (s) => ({
-    ...builddata.build.eleventy.steps[s].options,
-    ...builddata.build.eleventy.commonOptions,
+    ...eleventyBuild.build.eleventy.steps[s].options,
+    ...eleventyBuild.build.eleventy.commonOptions,
 });
 
 /**
@@ -52,11 +52,11 @@ const stepData = [
 /**
  * Run Eleventy static build.
  */
-EleventyUtil.console.log(`Building ${builddata.dataset} project repository (build script: ${scriptName}) ...`);
+EleventyUtil.console.log(`Building ${eleventyBuild.dataset} project repository (build script: ${scriptName}) ...`);
 EleventyUtil.console.log(`Running step01 ...`);
 EleventyUtil.run(stepData[0].config, stepData[0].options, () => {
     EleventyUtil.console.log(`Running step01 done.`);
-    EleventyUtil.console.log(`Building ${builddata.dataset} project repository (build script: ${scriptName}) done.`);
+    EleventyUtil.console.log(`Building ${eleventyBuild.dataset} project repository (build script: ${scriptName}) done.`);
 });
 // .then()
 // .catch();

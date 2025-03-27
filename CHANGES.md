@@ -11,6 +11,8 @@ The occurrences of `map-get` and `map-merge` have been replaced by `map.get`
 and `map.merge`. The `src/types/styles.scss.d.ts` file has been renamed to
 `src/types/scss.d.ts` and the CSS module definition (`*.module.scss`) has been
 added. The `webpack.config.ts` file has been changed to reflect these changes.
+- The `data/builddata.json` file has been moved to `eleventy.build.json` and
+references to it in the `eleventy.build.mjs` file have been updated.
 
 ## 1.5.5
 - The `"type": "module"` field has been added to the `package.json` file and

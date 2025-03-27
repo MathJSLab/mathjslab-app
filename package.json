@@ -74,7 +74,7 @@
     "@capacitor/cli": "^7.1.0",
     "@prettier/plugin-xml": "^3.4.1",
     "@types/eslint-config-prettier": "^6.11.3",
-    "@types/node": "^22.13.13",
+    "@types/node": "^22.13.14",
     "@types/plotly.js": "^2.35.2",
     "@types/webpack": "^5.28.5",
     "@types/webpack-bundle-analyzer": "^4.7.0",
@@ -90,7 +90,7 @@
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-import": "^2.31.0",
-    "eslint-plugin-prettier": "^5.2.4",
+    "eslint-plugin-prettier": "^5.2.5",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.3",
     "json5": "^2.2.3",
@@ -111,7 +111,7 @@
     "webpack": "^5.98.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.0",
+    "webpack-dev-server": "^5.2.1",
     "yaml": "^2.7.0"
   },
   "dependencies": {
