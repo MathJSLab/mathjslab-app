@@ -13,6 +13,9 @@ and `map.merge`. The `src/types/styles.scss.d.ts` file has been renamed to
 added. The `webpack.config.ts` file has been changed to reflect these changes.
 - The `data/builddata.json` file has been moved to `eleventy.build.json` and
 references to it in the `eleventy.build.mjs` file have been updated.
+- The following scripts in the `package.json`file has been renamed:
+  * `"download-resources"` to `"download"`.
+  * `"clean:download-resources"` to `"clean:download"`.
 
 ## 1.5.5
 - The `"type": "module"` field has been added to the `package.json` file and
