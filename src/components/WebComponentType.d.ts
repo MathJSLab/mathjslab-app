@@ -5,5 +5,5 @@ type WebComponentType<T extends HTMLElement> = (new (...args: any[]) => T) & {
     null: T;
     undefined: T;
 };
-export { WebComponentType };
+export { type WebComponentType };
 export default WebComponentType;

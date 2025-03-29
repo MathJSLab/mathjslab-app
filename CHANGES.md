@@ -8,9 +8,10 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 have been updated.
 - The `.scss` files have been changed to match the latest versions of SASS.
 The occurrences of `map-get` and `map-merge` have been replaced by `map.get`
-and `map.merge`. The `src/types/styles.scss.d.ts` file has been renamed to
-`src/types/scss.d.ts` and the CSS module definition (`*.module.scss`) has been
-added. The `webpack.config.ts` file has been changed to reflect these changes.
+and `map.merge`.
+- The `src/types/module.scss.d.ts` file has been created and the CSS module
+definition (`*.module.scss`) has been added. The `webpack.config.ts` file has
+been changed to reflect these changes.
 - The `data/builddata.json` file has been moved to `eleventy.build.json` and
 references to it in the `eleventy.build.mjs` file have been updated.
 - The following scripts in the `package.json`file has been renamed:

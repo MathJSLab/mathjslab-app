@@ -1,4 +1,4 @@
-import WebComponentInterface from './WebComponentInterface';
+import { type WebComponentInterface } from './WebComponentInterface';
 import WebComponentType from './WebComponentType';
 const constructorFactory = <T extends HTMLElement & WebComponentInterface<T>>(component: WebComponentType<T>, styles: string): ((this: T) => void) => {
     return function (this: T): void {
@@ -12,7 +12,6 @@ const constructorFactory = <T extends HTMLElement & WebComponentInterface<T>>(co
             this.element.style.textContent = styles;
             component.elementFields.forEach((element: string, index: number) => {
                 this.element[element] = clone.getElementById(`${component.tagName}-${component.elementPostfix[index]}`)!;
-                // console.log(this.constructor.name, element, this.element[element]);
             });
             this.setId(this.superId);
             /* Attach shadow DOM and adds styles to the Shadow DOM before adding the template clone. */

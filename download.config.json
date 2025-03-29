@@ -34,6 +34,10 @@
       "dest": "script/helper/git-commit.cjs"
     },
     {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/toIco.ts",
+      "dest": "script/helper/toIco.ts"
+    },
+    {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/styles/base/_colors.scss",
       "dest": "src/styles/base/_colors.scss"
     },
@@ -52,10 +56,6 @@
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/styles/constants.json.njk",
       "dest": "src/styles/constants.json.njk"
-    },
-    {
-      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/toIco.ts",
-      "dest": "script/helper/toIco.ts"
     },
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/img/ico/favicon.ico",
@@ -132,6 +132,58 @@
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/images/mathjslab-logo-dark.svg",
       "dest": "images/mathjslab-logo-dark.svg"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/component.include.ts",
+      "dest": "src/components/component.include.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/constructorFactory.ts",
+      "dest": "src/components/constructorFactory.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/createElementFactory.ts",
+      "dest": "src/components/createElementFactory.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/defineFactory.ts",
+      "dest": "src/components/defineFactory.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/keyToPostfix.ts",
+      "dest": "src/components/keyToPostfix.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/setContainerFactory.ts",
+      "dest": "src/components/setContainerFactory.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/setIdFactory.ts",
+      "dest": "src/components/setIdFactory.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/setIdFirstFactory.ts",
+      "dest": "src/components/setIdFirstFactory.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/WebComponentElement.d.ts",
+      "dest": "src/components/WebComponentElement.d.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/WebComponentInterface.d.ts",
+      "dest": "src/components/WebComponentInterface.d.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/WebComponentType.d.ts",
+      "dest": "src/components/WebComponentType.d.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/types/styles.scss.d.ts",
+      "dest": "types/styles.scss.d.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/types/module.scss.d.ts",
+      "dest": "types/module.scss.d.ts"
     },
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/.prettierignore",

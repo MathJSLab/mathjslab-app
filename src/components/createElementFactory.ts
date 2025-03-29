@@ -1,4 +1,4 @@
-import WebComponentInterface from './WebComponentInterface';
+import { type WebComponentInterface } from './WebComponentInterface';
 import WebComponentType from './WebComponentType';
 const createElementFactory = <T extends HTMLElement>(component: WebComponentType<T>): ((id?: string) => T & WebComponentInterface<T>) => {
     return (id?: string): T & WebComponentInterface<T> => {

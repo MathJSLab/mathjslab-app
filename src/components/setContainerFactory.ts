@@ -1,4 +1,4 @@
-import WebComponentInterface from './WebComponentInterface';
+import { type WebComponentInterface } from './WebComponentInterface';
 const setContainerFactory = <T extends HTMLElement & WebComponentInterface<T>>(): ((this: T, element: HTMLElement) => void) => {
     return function (this: T, element: HTMLElement): void {
         if (this.element.container) {

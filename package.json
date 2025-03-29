@@ -75,7 +75,7 @@
     "@prettier/plugin-xml": "^3.4.1",
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/node": "^22.13.14",
-    "@types/plotly.js": "^2.35.2",
+    "@types/plotly.js": "^2.35.4",
     "@types/webpack": "^5.28.5",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@types/wicg-file-system-access": "^2023.10.5",

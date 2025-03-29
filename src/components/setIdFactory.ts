@@ -1,4 +1,4 @@
-import WebComponentInterface from './WebComponentInterface';
+import { type WebComponentInterface } from './WebComponentInterface';
 import WebComponentType from './WebComponentType';
 const setIdFactory = <T extends HTMLElement & WebComponentInterface<T>>(component: WebComponentType<T>): ((this: T, id?: string) => void) => {
     return function (this: T, id?: string): void {

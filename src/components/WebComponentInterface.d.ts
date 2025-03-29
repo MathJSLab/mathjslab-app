@@ -5,5 +5,4 @@ interface WebComponentInterface<T> {
     setId: (id?: string) => void;
     container: HTMLElement;
 }
-export { WebComponentInterface };
-export default WebComponentInterface;
+export { type WebComponentInterface };
