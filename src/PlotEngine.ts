@@ -114,7 +114,7 @@ abstract class PlotEngine {
                 const data = [surface1] as Plotly.Data[];
 
                 const layout = {
-                    title: '3D Plot',
+                    title: { text: '3D Plot' },
                     autosize: true,
                 };
                 (await Plotly).newPlot(parent, data, layout);

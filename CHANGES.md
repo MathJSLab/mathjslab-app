@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.5.7
+- Target and module changed to ES2022 (`tsconfig.json`).
+- All dependencies has been updated, including `mathjslab` (version 1.7.3).
+
 # 1.5.6
 - The `lint-staged` package has been removed and the
 `@types/eslint-config-prettier` package has been installed. All dependencies

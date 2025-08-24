@@ -153,3 +153,15 @@ year = YEAR - (MONTH < 3)
 WEEKDAY = W(mod(year + fix(year/4) - fix(year/100) + fix(year/400) + t(MONTH) + DATE, 7) + 1)
 clear t W year
 ```
+
+A seguir, o mesmo código em linguagem C:
+```C
+/* Name: weekday.c */
+/* Author: Sergio Lindau, license MIT. */
+/* Purpose: Calculate weekday for a given date. */
+/* preconditions: variable YEAR, MONTH and  DATE defined. */
+int t[] = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
+char W[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+int year = YEAR - (MONTH < 3);
+int WEEKDAY = W(mod(year + fix(year/4) - fix(year/100) + fix(year/400) + t(MONTH) + DATE, 7) + 1)
+```
