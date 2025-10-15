@@ -1,4 +1,4 @@
-* `C = ldivide (A, B)`
+- `C = ldivide (A, B)`
 
 Devuelve la división izquierda elemento por elemento de `A` y `B`.
 
@@ -8,5 +8,5 @@ Véase también: `rdivide`, `mldivide`, `times`, `plus`.
 
 ### Referencias
 
-* https://www.mathworks.com/help/matlab/ref/ldivide.html
-* https://octave.sourceforge.io/octave/function/ldivide.html
+- https://www.mathworks.com/help/matlab/ref/ldivide.html
+- https://octave.sourceforge.io/octave/function/ldivide.html

@@ -1,4 +1,4 @@
-* `Y = sqrt (X)`
+- `Y = sqrt (X)`
 
 Compute the square root of each element of `X`.
 
@@ -10,7 +10,7 @@ See also: `realsqrt`, `nthroot`.
 
 ### References
 
-* https://www.mathworks.com/help/matlab/ref/sqrt.html
-* https://octave.sourceforge.io/octave/function/sqrt.html
-* https://mathworld.wolfram.com/SquareRoot.html
-* https://en.wikipedia.org/wiki/Square_root
+- https://www.mathworks.com/help/matlab/ref/sqrt.html
+- https://octave.sourceforge.io/octave/function/sqrt.html
+- https://mathworld.wolfram.com/SquareRoot.html
+- https://en.wikipedia.org/wiki/Square_root

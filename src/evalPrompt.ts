@@ -4,7 +4,7 @@
 
 import { appEngine } from './appEngine';
 import { CommandPrompt } from './components/components';
-import { AST } from 'mathjslab';
+import { type NodeInput } from 'mathjslab';
 import { MathMarkdown } from './MathMarkdown';
 import { outputFunction, insertOutput } from './outputFunction';
 /**
@@ -13,7 +13,7 @@ import { outputFunction, insertOutput } from './outputFunction';
  * @param {number} _index Unused.
  */
 function evalPrompt(prompt: CommandPrompt, _index?: number): void {
-    let tree: AST.NodeInput;
+    let tree: NodeInput;
     try {
         tree = appEngine.evaluator.Parse(prompt.element.input.value);
         if (tree) {

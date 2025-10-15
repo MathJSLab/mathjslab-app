@@ -1,0 +1,15 @@
+{#
+    Macro: miscBibtexEntry
+    Description: Generates a misc Bibtex entry.
+#}{% macro miscBibtexEntry(id,author,title,year,note,noteUrl,isbn,doi,url) %}{% raw %}@misc{{% endraw %}{{ id }}{% raw %},
+  author       = {{% endraw %}{{ author }}{% raw %}},
+  title        = {{% endraw %}{{ title }}{% raw %}},
+  year         = {{% endraw %}{{ year }}{% raw %}},
+  note         = {{% endraw %}{{ note }}
+{%- for url in noteUrl %}
+{% raw %}                 \url{{% endraw %}{{ url }}{% if loop.last %}{% raw %}}{% endraw %}{% endif %}{% raw %}},{% endraw %}
+{%- endfor %}{% raw %}
+  isbn         = {{% endraw %}{{ isbn | join(", ") }}{% raw %}},
+  doi          = {{% endraw %}{{ doi | join(", ") }}{% raw %}},
+  url          = {{% endraw %}{{ url }}{% raw %}}
+}{% endraw %}{% endmacro %}

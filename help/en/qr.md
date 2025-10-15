@@ -1,3 +1,3 @@
-* `qr (X)`
+- `qr (X)`
 
 Compute QR decomposition.

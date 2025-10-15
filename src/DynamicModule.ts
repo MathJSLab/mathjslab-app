@@ -1,6 +1,34 @@
 import importUMD from './importUMD';
 import type * as PlotlyType from 'plotly.js';
 
+/**
+ * Aguarda até que um objeto não seja null/undefined e então executa o callback.
+ *
+ * @param getter Função que retorna o objeto a ser testado.
+ * @param callback Função a ser executada quando o objeto existir.
+ * @param interval Tempo (ms) entre as tentativas.
+ * @param maxAttempts Número máximo de tentativas antes de lançar erro.
+ */
+export function waitFor(getter: () => unknown | null | undefined, callback: (obj: unknown) => void, interval: number, maxAttempts: number): void {
+    let attempts = 0;
+
+    const timer = setInterval(() => {
+        attempts++;
+        const obj = getter();
+
+        if (obj != null) {
+            clearInterval(timer);
+            callback(obj);
+            return;
+        }
+
+        if (attempts >= maxAttempts) {
+            clearInterval(timer);
+            throw new Error('Objeto não definido após o número máximo de tentativas.');
+        }
+    }, interval);
+}
+
 type DynamicModuleConfiguration = {
     [key: string]: {
         module: unknown;

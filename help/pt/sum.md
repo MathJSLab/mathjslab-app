@@ -1,5 +1,5 @@
-* `Y = sum (X)`
-* `Y = sum (X, DIM)`
+- `Y = sum (X)`
+- `Y = sum (X, DIM)`
 
 Soma dos elementos ao longo da dimensão `DIM`.
 
@@ -9,5 +9,5 @@ Veja também: `cumsum`, `sumsq`, `prod`.
 
 ### Referências
 
-* https://www.mathworks.com/help/matlab/ref/sum.html
-* https://octave.sourceforge.io/octave/function/um.html
+- https://www.mathworks.com/help/matlab/ref/sum.html
+- https://octave.sourceforge.io/octave/function/um.html

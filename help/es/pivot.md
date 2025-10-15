@@ -1,3 +1,3 @@
-* `pivot (X)`
+- `pivot (X)`
 
 Calcula la matriz pivote de `X`.

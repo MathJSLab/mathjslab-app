@@ -141,7 +141,7 @@ export class CommandShell extends HTMLElement {
      * Add event listeners associated with `batch` element.
      */
     private batchAddEventListener() {
-        window.addEventListener('resize', this.element.batch.resize);
+        globalThis.addEventListener('resize', this.element.batch.resize);
         this.element.batch.element.input.addEventListener('change', this.resize);
         this.element.batch.element.input.addEventListener('cut', this.delayedResize);
         this.element.batch.element.input.addEventListener('paste', this.delayedResize);
@@ -154,7 +154,7 @@ export class CommandShell extends HTMLElement {
      * Remove event listeners associated with `batch` element.
      */
     private batchRemoveEventListener() {
-        window.removeEventListener('resize', this.element.batch.resize);
+        globalThis.removeEventListener('resize', this.element.batch.resize);
         this.element.batch.element.input.removeEventListener('change', this.resize);
         this.element.batch.element.input.removeEventListener('cut', this.delayedResize);
         this.element.batch.element.input.removeEventListener('paste', this.delayedResize);
@@ -167,15 +167,15 @@ export class CommandShell extends HTMLElement {
      * Add event listeners associated with `variables` element.
      */
     private variablesAddEventListener() {
-        window.addEventListener('scroll', this.element.variables.resize);
-        window.addEventListener('resize', this.element.variables.resize);
+        globalThis.addEventListener('scroll', this.element.variables.resize);
+        globalThis.addEventListener('resize', this.element.variables.resize);
     }
     /**
      * Remove event listeners associated with `variables` element.
      */
     private variablesRemoveEventListener() {
-        window.removeEventListener('scroll', this.element.variables.resize);
-        window.removeEventListener('resize', this.element.variables.resize);
+        globalThis.removeEventListener('scroll', this.element.variables.resize);
+        globalThis.removeEventListener('resize', this.element.variables.resize);
     }
     /**
      *
@@ -201,7 +201,7 @@ export class CommandShell extends HTMLElement {
         if (this.element.variables.state.display) {
             this.variablesAddEventListener();
         }
-        window.addEventListener('resize', this.resize);
+        globalThis.addEventListener('resize', this.resize);
         this.resize();
         this.setLanguage();
         this.element.promptSet.promptAppend();
@@ -210,7 +210,7 @@ export class CommandShell extends HTMLElement {
      *
      */
     protected disconnectedCallback(): void {
-        window.removeEventListener('resize', this.resize);
+        globalThis.removeEventListener('resize', this.resize);
         if (this.element.variables.state.display) {
             this.variablesRemoveEventListener();
         }

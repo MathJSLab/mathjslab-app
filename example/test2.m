@@ -1,9 +1,7 @@
+configure('real', 'number')
 clear
-A = [1 2 3
-4 5 6
-7 8 9]
-A(2,3)
-A(2,1:end)
-A(2,1:end-1)
-B=1:2:10
-C=(1:2:10)*2
+getconfig()
+e^(i*pi)
+e^(i*pi)==-1
+sin(pi/2)
+abs(-5)

@@ -1,5 +1,5 @@
 import type * as PlotlyType from 'plotly.js';
-import { type ElementType, AST, BuiltInFunctionTable, CharString, ComplexDecimal, Decimal, LinearAlgebra, MultiArray } from 'mathjslab';
+import { type ElementType, type NodeExpr, type NodeIdentifier, AST, BuiltInFunctionTable, CharString, ComplexDecimal, Decimal, LinearAlgebra, MultiArray } from 'mathjslab';
 import { DynamicModule } from './DynamicModule';
 import { insertOutput } from './outputFunction';
 import { appEngine } from './appEngine';
@@ -162,7 +162,7 @@ abstract class PlotEngine {
             type: 'BUILTIN',
             mapper: false,
             ev: [],
-            func: (...args: ElementType[]): AST.NodeExpr => {
+            func: (...args: ElementType[]): NodeExpr => {
                 insertOutput.type = 'plot';
                 return AST.nodeIndexExpr(AST.nodeIdentifier('plot'), AST.nodeList(args));
             },
@@ -172,7 +172,7 @@ abstract class PlotEngine {
             type: 'BUILTIN',
             mapper: false,
             ev: [],
-            func: (...args: ElementType[]): AST.NodeExpr => {
+            func: (...args: ElementType[]): NodeExpr => {
                 insertOutput.type = 'plot3';
                 return AST.nodeIndexExpr(AST.nodeIdentifier('plot3'), AST.nodeList(args));
             },
@@ -182,7 +182,7 @@ abstract class PlotEngine {
             type: 'BUILTIN',
             mapper: false,
             ev: [],
-            func: (...args: ElementType[]): AST.NodeExpr => {
+            func: (...args: ElementType[]): NodeExpr => {
                 insertOutput.type = 'surf';
                 return AST.nodeIndexExpr(AST.nodeIdentifier('surf'), AST.nodeList(args));
             },
@@ -192,7 +192,7 @@ abstract class PlotEngine {
             type: 'BUILTIN',
             mapper: false,
             ev: [false, false, true, true],
-            func: (expr: AST.NodeExpr, variable: AST.NodeIdentifier, minx: ComplexDecimal, maxx: ComplexDecimal): AST.NodeExpr => {
+            func: (expr: NodeExpr, variable: NodeIdentifier, minx: ComplexDecimal, maxx: ComplexDecimal): NodeExpr => {
                 insertOutput.type = 'plot2d';
                 if (!minx.im.eq(0)) {
                     throw new Error('complex number in plot2d minimum x axis');
@@ -214,7 +214,7 @@ abstract class PlotEngine {
                 plotData.X = [];
                 plotData.data = [];
                 for (let i = 0; i < plotWidth; i++) {
-                    appEngine.evaluator.localTable[plot_function_name][variable.id] = new ComplexDecimal(plotData.MinX + deltaX * i, 0);
+                    appEngine.evaluator.localTable[plot_function_name][variable.id] = ComplexDecimal.create(plotData.MinX + deltaX * i, 0);
                     plotData.X[i] = appEngine.evaluator.localTable[plot_function_name][variable.id].re.toNumber();
                     const data_y = appEngine.evaluator.Evaluator(expr, true, plot_function_name);
                     if (isFinite(data_y.re.toNumber()) && isFinite(data_y.im.toNumber()) && data_y.im.eq(0)) {
@@ -235,7 +235,7 @@ abstract class PlotEngine {
             type: 'BUILTIN',
             mapper: false,
             ev: [true, true],
-            func: (IMAG: MultiArray, DOM?: MultiArray): AST.NodeExpr => {
+            func: (IMAG: MultiArray, DOM?: MultiArray): NodeExpr => {
                 insertOutput.type = 'histogram';
                 if (IMAG.dimension[0] !== 1) {
                     IMAG = LinearAlgebra.transpose(IMAG);
@@ -274,11 +274,11 @@ abstract class PlotEngine {
         },
     };
 
-    public static plot(...args: ElementType[]): AST.NodeExpr {}
+    public static plot(...args: ElementType[]): NodeExpr {}
 
-    public static plot3(...args: ElementType[]): AST.NodeExpr {}
+    public static plot3(...args: ElementType[]): NodeExpr {}
 
-    public static surf(...args: ElementType[]): AST.NodeExpr {}
+    public static surf(...args: ElementType[]): NodeExpr {}
 }
 
 export type { PlotData };

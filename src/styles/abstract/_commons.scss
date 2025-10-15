@@ -90,10 +90,10 @@ dd {
 
 li {
   list-style: disc;
-}
 
-ol li {
-  list-style: decimal;
+  ol & {
+    list-style: decimal;
+  }
 }
 
 tbody {
@@ -105,26 +105,29 @@ table {
   border-spacing: 2px;
 }
 
-pre,
-mn > pre {
+pre {
   padding: 1rem;
   border-radius: 1rem;
-  background-color: var(--color-pre-code-background);
   overflow-x: auto;
+  background-color: var(--color-pre-code-background);
+
+  mn > &,
+  mi > & {
+    display: inline;
+    white-space: pre;
+    padding: 0 0.2em;
+    margin: 0;
+    border-radius: 0;
+    background-color: inherit;
+    font-family: inherit;
+    vertical-align: middle;
+  }
 }
 
-mn > pre {
-  padding: 0;
-  margin: 0;
-  border-radius: 0;
-  background-color: inherit;
-}
-
-code,
-pre > code {
+code {
   @include mixins.input-font;
-}
 
-mn > pre > code {
-  color: inherit;
+  mn > pre > & {
+    color: inherit;
+  }
 }

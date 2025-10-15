@@ -178,6 +178,14 @@
       "dest": "src/components/WebComponentType.d.ts"
     },
     {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/src/components/WebComponentType.d.ts",
+      "dest": "src/components/WebComponentType.d.ts"
+    },
+    {
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/includes/miscBibtexEntry.njk",
+      "dest": "src/includes/miscBibtexEntry.njk"
+    },
+    {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/types/styles.scss.d.ts",
       "dest": "types/styles.scss.d.ts"
     },

@@ -1,9 +1,9 @@
 {
   "name": "mathjslab-app",
-  "hash": "56ca3eb3c1a4fd07ec38",
-  "version": "5.101.3",
-  "time": 15461,
-  "builtAt": 1756067848341,
+  "hash": "7ed98a7fa1b7a817458c",
+  "version": "5.102.1",
+  "time": 12560,
+  "builtAt": 1760563350613,
   "publicPath": "auto",
   "outputPath": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\dist",
   "assetsByChunkName": {
@@ -16,17 +16,14 @@
     {
       "type": "asset",
       "name": "mathjslab-app.js",
-      "size": 527031,
+      "size": 539786,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
         "javascriptModule": false,
         "minimized": true,
-        "related": {
-          "license": "mathjslab-app.js.LICENSE.txt"
-        },
-        "size": 527031
+        "size": 539786
       },
       "chunkNames": [
         "mathjslab-app"
@@ -34,29 +31,7 @@
       "chunkIdHints": [],
       "auxiliaryChunkNames": [],
       "auxiliaryChunkIdHints": [],
-      "filteredRelated": 0,
-      "related": [
-        {
-          "type": "license",
-          "name": "mathjslab-app.js.LICENSE.txt",
-          "size": 79,
-          "emitted": true,
-          "comparedForEmit": false,
-          "cached": false,
-          "info": {
-            "extractedComments": true,
-            "size": 79
-          },
-          "chunkNames": [],
-          "chunkIdHints": [],
-          "auxiliaryChunkNames": [],
-          "auxiliaryChunkIdHints": [],
-          "related": [],
-          "chunks": [],
-          "auxiliaryChunks": [],
-          "isOverSizeLimit": false
-        }
-      ],
+      "related": [],
       "chunks": [
         379
       ],
@@ -66,12 +41,12 @@
     {
       "type": "asset",
       "name": "index.html",
-      "size": 16761,
+      "size": 17123,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
-        "size": 16761
+        "size": 17123
       },
       "chunkNames": [],
       "chunkIdHints": [],
@@ -85,12 +60,12 @@
     {
       "type": "asset",
       "name": "mathjslab-app.css",
-      "size": 13918,
+      "size": 13978,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
-        "size": 13918
+        "size": 13978
       },
       "chunkNames": [
         "mathjslab-app"
@@ -112,11 +87,11 @@
       "initial": true,
       "entry": true,
       "recorded": false,
-      "size": 604843,
+      "size": 618310,
       "sizes": {
-        "javascript": 590035,
-        "css/mini-extract": 13917,
-        "runtime": 891
+        "javascript": 603663,
+        "css/mini-extract": 13977,
+        "runtime": 670
       },
       "names": [
         "mathjslab-app"
@@ -130,7 +105,7 @@
         "mathjslab-app.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "1c43e3d1547cabf30f6d",
+      "hash": "3718f24f598e2f327150",
       "childrenByOrder": {},
       "id": 379,
       "siblings": [],
@@ -141,9 +116,9 @@
           "type": "module",
           "moduleType": "javascript/esm",
           "layer": null,
-          "size": 402937,
+          "size": 415138,
           "sizes": {
-            "javascript": 402937
+            "javascript": 415138
           },
           "built": true,
           "codeGenerated": true,
@@ -245,7 +220,9 @@
           "providedExports": [
             "AST",
             "CharString",
+            "Complex",
             "ComplexDecimal",
+            "ComplexNumber",
             "Configuration",
             "CoreFunctions",
             "Decimal",
@@ -257,10 +234,12 @@
             "MultiArray",
             "Structure",
             "SymbolTable",
-            "bundleConfiguration"
+            "doubleQuoteCharacter",
+            "singleQuoteCharacter",
+            "stringClass"
           ],
           "optimizationBailout": [
-            "Statement (VariableDeclaration) with side effects in source code at 2:0-155097",
+            "Statement (VariableDeclaration) with side effects in source code at 1:0-155097",
             "ModuleConcatenation bailout: Module uses eval()"
           ],
           "depth": 2
@@ -269,9 +248,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 5716,
+          "size": 6578,
           "sizes": {
-            "javascript": 5716
+            "javascript": 6578
           },
           "built": true,
           "codeGenerated": true,
@@ -288,8 +267,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-          "issuerName": "./src/MathMarkdown.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "issuerName": "./src/EvaluatorConfiguration.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -300,18 +279,13 @@
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
               "name": "./src/EvaluatorConfiguration.ts",
               "id": 688
-            },
-            {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-              "name": "./src/MathMarkdown.ts",
-              "id": 990
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 372,
-          "issuerId": 990,
+          "issuerId": 688,
           "chunks": [
             379
           ],
@@ -458,6 +432,20 @@
               "resolvedModuleId": 372
             },
             {
+              "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "module": "./src/EvaluatorConfiguration.ts",
+              "moduleName": "./src/EvaluatorConfiguration.ts",
+              "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "resolvedModule": "./src/EvaluatorConfiguration.ts",
+              "type": "cjs require",
+              "active": true,
+              "explanation": "",
+              "userRequest": "./DynamicModule",
+              "loc": "14:24-50",
+              "moduleId": 688,
+              "resolvedModuleId": 688
+            },
+            {
               "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
               "module": "./src/MathMarkdown.ts",
               "moduleName": "./src/MathMarkdown.ts",
@@ -497,15 +485,15 @@
             "Statement (VariableDeclaration) with side effects in source code at 2:0-12:4",
             "ModuleConcatenation bailout: Module is not an ECMAScript module"
           ],
-          "depth": 3
+          "depth": 2
         },
         {
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 9695,
+          "size": 9803,
           "sizes": {
-            "javascript": 9695
+            "javascript": 9803
           },
           "built": true,
           "codeGenerated": true,
@@ -579,7 +567,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "20:45-66",
+              "loc": "21:45-66",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -593,7 +581,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "24:52-73",
+              "loc": "25:52-73",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -607,7 +595,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "25:64-94",
+              "loc": "26:64-94",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -621,7 +609,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "168:20-41",
+              "loc": "169:20-41",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -635,7 +623,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "182:4-66",
+              "loc": "183:4-66",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -649,7 +637,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "184:14-66",
+              "loc": "189:14-66",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -663,7 +651,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "187:12-74",
+              "loc": "192:12-74",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -677,7 +665,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "237:40-61",
+              "loc": "242:40-61",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -691,7 +679,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "240:52-73",
+              "loc": "245:52-73",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -705,7 +693,7 @@
               "active": true,
               "explanation": "",
               "userRequest": null,
-              "loc": "241:64-94",
+              "loc": "246:64-94",
               "moduleId": 688,
               "resolvedModuleId": 688
             },
@@ -737,9 +725,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 5109,
+          "size": 5121,
           "sizes": {
-            "javascript": 5109
+            "javascript": 5121
           },
           "built": true,
           "codeGenerated": true,
@@ -865,9 +853,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 2714,
+          "size": 2718,
           "sizes": {
-            "javascript": 2714
+            "javascript": 2718
           },
           "built": true,
           "codeGenerated": true,
@@ -981,9 +969,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 10970,
+          "size": 10973,
           "sizes": {
-            "javascript": 10970
+            "javascript": 10973
           },
           "built": true,
           "codeGenerated": true,
@@ -1099,9 +1087,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 3650,
+          "size": 3654,
           "sizes": {
-            "javascript": 3650
+            "javascript": 3654
           },
           "built": true,
           "codeGenerated": true,
@@ -1193,9 +1181,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 550,
+          "size": 574,
           "sizes": {
-            "javascript": 550
+            "javascript": 574
           },
           "built": true,
           "codeGenerated": true,
@@ -1605,9 +1593,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 13306,
+          "size": 13366,
           "sizes": {
-            "javascript": 13306
+            "javascript": 13366
           },
           "built": true,
           "codeGenerated": true,
@@ -1816,9 +1804,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 12591,
+          "size": 12651,
           "sizes": {
-            "javascript": 12591
+            "javascript": 12651
           },
           "built": true,
           "codeGenerated": true,
@@ -2027,9 +2015,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 10940,
+          "size": 11000,
           "sizes": {
-            "javascript": 10940
+            "javascript": 11000
           },
           "built": true,
           "codeGenerated": true,
@@ -2252,9 +2240,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 12547,
+          "size": 12607,
           "sizes": {
-            "javascript": 12547
+            "javascript": 12607
           },
           "built": true,
           "codeGenerated": true,
@@ -2331,9 +2319,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 13437,
+          "size": 13469,
           "sizes": {
-            "javascript": 13437
+            "javascript": 13469
           },
           "built": true,
           "codeGenerated": true,
@@ -2463,9 +2451,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 11227,
+          "size": 11287,
           "sizes": {
-            "javascript": 11227
+            "javascript": 11287
           },
           "built": true,
           "codeGenerated": true,
@@ -2779,8 +2767,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -2798,16 +2786,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-              "id": 768
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+              "name": "./src/components/command-prompt/command-prompt.component.ts",
+              "id": 206
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 770,
-          "issuerId": 768,
+          "issuerId": 206,
           "chunks": [
             379
           ],
@@ -2933,8 +2921,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -2952,16 +2940,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-              "id": 768
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+              "name": "./src/components/command-prompt/command-prompt.component.ts",
+              "id": 206
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 906,
-          "issuerId": 768,
+          "issuerId": 206,
           "chunks": [
             379
           ],
@@ -3087,8 +3075,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -3106,16 +3094,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-              "id": 768
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+              "name": "./src/components/command-prompt/command-prompt.component.ts",
+              "id": 206
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 445,
-          "issuerId": 768,
+          "issuerId": 206,
           "chunks": [
             379
           ],
@@ -3222,9 +3210,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 4510,
+          "size": 4522,
           "sizes": {
-            "javascript": 4510
+            "javascript": 4522
           },
           "built": true,
           "codeGenerated": true,
@@ -3354,9 +3342,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 11344,
+          "size": 11404,
           "sizes": {
-            "javascript": 11344
+            "javascript": 11404
           },
           "built": true,
           "codeGenerated": true,
@@ -3452,8 +3440,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -3471,16 +3459,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-              "id": 768
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+              "name": "./src/components/command-prompt/command-prompt.component.ts",
+              "id": 206
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 832,
-          "issuerId": 768,
+          "issuerId": 206,
           "chunks": [
             379
           ],
@@ -3606,8 +3594,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -3625,16 +3613,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-              "id": 768
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+              "name": "./src/components/command-prompt/command-prompt.component.ts",
+              "id": 206
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 433,
-          "issuerId": 768,
+          "issuerId": 206,
           "chunks": [
             379
           ],
@@ -3779,9 +3767,9 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-              "id": 768
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+              "name": "./src/components/command-prompt/command-prompt.component.ts",
+              "id": 206
             },
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\setIdFirstFactory.ts",
@@ -3849,8 +3837,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -3868,16 +3856,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-              "id": 768
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+              "name": "./src/components/command-prompt/command-prompt.component.ts",
+              "id": 206
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 203,
-          "issuerId": 768,
+          "issuerId": 206,
           "chunks": [
             379
           ],
@@ -4221,9 +4209,9 @@
           "type": "module",
           "moduleType": "javascript/auto",
           "layer": null,
-          "size": 11733,
+          "size": 11739,
           "sizes": {
-            "javascript": 11733
+            "javascript": 11739
           },
           "built": true,
           "codeGenerated": true,
@@ -4404,11 +4392,6 @@
               "id": 688
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-              "name": "./src/MathMarkdown.ts",
-              "id": 990
-            },
-            {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
               "name": "./src/DynamicModule.ts",
               "id": 372
@@ -4434,7 +4417,7 @@
               "active": true,
               "explanation": "",
               "userRequest": "./importUMD",
-              "loc": "49:36-58",
+              "loc": "50:36-58",
               "moduleId": 372,
               "resolvedModuleId": 372
             },
@@ -4474,7 +4457,7 @@
             "Statement (VariableDeclaration) with side effects in source code at 2:0-10:2",
             "ModuleConcatenation bailout: Module is not an ECMAScript module"
           ],
-          "depth": 4
+          "depth": 3
         },
         {
           "type": "module",
@@ -4910,9 +4893,9 @@
         {
           "type": "module",
           "moduleType": "css/mini-extract",
-          "size": 13917,
+          "size": 13977,
           "sizes": {
-            "css/mini-extract": 13917
+            "css/mini-extract": 13977
           },
           "built": true,
           "codeGenerated": true,
@@ -5010,11 +4993,6 @@
               "id": 688
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-              "name": "./src/MathMarkdown.ts",
-              "id": 990
-            },
-            {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
               "name": "./src/DynamicModule.ts",
               "id": 372
@@ -5040,7 +5018,7 @@
               "active": true,
               "explanation": "",
               "userRequest": "https://cdn.jsdelivr.net/npm/mermaid/+esm",
-              "loc": "133:64-116",
+              "loc": "158:64-116",
               "moduleId": 372,
               "resolvedModuleId": 372
             }
@@ -5050,7 +5028,7 @@
           "optimizationBailout": [
             "ModuleConcatenation bailout: Module is async"
           ],
-          "depth": 4
+          "depth": 3
         },
         {
           "type": "module",
@@ -5066,42 +5044,6 @@
           "cached": false,
           "identifier": "webpack/runtime/define property getters",
           "name": "webpack/runtime/define property getters",
-          "nameForCondition": null,
-          "index": null,
-          "preOrderIndex": null,
-          "index2": null,
-          "postOrderIndex": null,
-          "optional": false,
-          "orphan": false,
-          "dependent": false,
-          "failed": false,
-          "errors": 0,
-          "warnings": 0,
-          "id": "",
-          "chunks": [
-            379
-          ],
-          "assets": [],
-          "reasons": [],
-          "usedExports": null,
-          "providedExports": [],
-          "optimizationBailout": [],
-          "depth": null
-        },
-        {
-          "type": "module",
-          "moduleType": "runtime",
-          "layer": null,
-          "size": 221,
-          "sizes": {
-            "runtime": 221
-          },
-          "built": false,
-          "codeGenerated": true,
-          "buildTimeExecuted": false,
-          "cached": false,
-          "identifier": "webpack/runtime/global",
-          "name": "webpack/runtime/global",
           "nameForCondition": null,
           "index": null,
           "preOrderIndex": null,
@@ -5300,9 +5242,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 9695,
+      "size": 9803,
       "sizes": {
-        "javascript": 9695
+        "javascript": 9803
       },
       "built": true,
       "codeGenerated": true,
@@ -5375,7 +5317,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "20:45-66",
+          "loc": "21:45-66",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5389,7 +5331,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "24:52-73",
+          "loc": "25:52-73",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5403,7 +5345,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "25:64-94",
+          "loc": "26:64-94",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5417,7 +5359,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "168:20-41",
+          "loc": "169:20-41",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5431,7 +5373,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "182:4-66",
+          "loc": "183:4-66",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5445,7 +5387,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "184:14-66",
+          "loc": "189:14-66",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5459,7 +5401,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "187:12-74",
+          "loc": "192:12-74",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5473,7 +5415,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "237:40-61",
+          "loc": "242:40-61",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5487,7 +5429,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "240:52-73",
+          "loc": "245:52-73",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5501,7 +5443,7 @@
           "active": true,
           "explanation": "",
           "userRequest": null,
-          "loc": "241:64-94",
+          "loc": "246:64-94",
           "moduleId": 688,
           "resolvedModuleId": 688
         },
@@ -5533,9 +5475,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 550,
+      "size": 574,
       "sizes": {
-        "javascript": 550
+        "javascript": 574
       },
       "built": true,
       "codeGenerated": true,
@@ -5878,9 +5820,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 3650,
+      "size": 3654,
       "sizes": {
-        "javascript": 3650
+        "javascript": 3654
       },
       "built": true,
       "codeGenerated": true,
@@ -6130,9 +6072,9 @@
       "type": "module",
       "moduleType": "javascript/esm",
       "layer": null,
-      "size": 402937,
+      "size": 415138,
       "sizes": {
-        "javascript": 402937
+        "javascript": 415138
       },
       "built": true,
       "codeGenerated": true,
@@ -6233,7 +6175,9 @@
       "providedExports": [
         "AST",
         "CharString",
+        "Complex",
         "ComplexDecimal",
+        "ComplexNumber",
         "Configuration",
         "CoreFunctions",
         "Decimal",
@@ -6245,10 +6189,12 @@
         "MultiArray",
         "Structure",
         "SymbolTable",
-        "bundleConfiguration"
+        "doubleQuoteCharacter",
+        "singleQuoteCharacter",
+        "stringClass"
       ],
       "optimizationBailout": [
-        "Statement (VariableDeclaration) with side effects in source code at 2:0-155097",
+        "Statement (VariableDeclaration) with side effects in source code at 1:0-155097",
         "ModuleConcatenation bailout: Module uses eval()"
       ],
       "depth": 2
@@ -6257,9 +6203,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 2714,
+      "size": 2718,
       "sizes": {
-        "javascript": 2714
+        "javascript": 2718
       },
       "built": true,
       "codeGenerated": true,
@@ -6370,6 +6316,248 @@
     },
     {
       "type": "module",
+      "moduleType": "javascript/auto",
+      "layer": null,
+      "size": 6578,
+      "sizes": {
+        "javascript": 6578
+      },
+      "built": true,
+      "codeGenerated": true,
+      "buildTimeExecuted": false,
+      "cached": false,
+      "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+      "name": "./src/DynamicModule.ts",
+      "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+      "index": 6,
+      "preOrderIndex": 6,
+      "index2": 5,
+      "postOrderIndex": 5,
+      "cacheable": true,
+      "optional": false,
+      "orphan": false,
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+      "issuerName": "./src/EvaluatorConfiguration.ts",
+      "issuerPath": [
+        {
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
+          "name": "./src/main.ts",
+          "id": 600
+        },
+        {
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
+        }
+      ],
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "id": 372,
+      "issuerId": 688,
+      "chunks": [
+        379
+      ],
+      "assets": [],
+      "reasons": [
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "2:23-27",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "2:31-51",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "13:26-30",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "13:34-57",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "18:20-24",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "18:28-45",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "35:17-21",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "35:25-39",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "44:23-27",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "44:31-51",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "module": "./src/EvaluatorConfiguration.ts",
+          "moduleName": "./src/EvaluatorConfiguration.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "resolvedModule": "./src/EvaluatorConfiguration.ts",
+          "type": "cjs require",
+          "active": true,
+          "explanation": "",
+          "userRequest": "./DynamicModule",
+          "loc": "14:24-50",
+          "moduleId": 688,
+          "resolvedModuleId": 688
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
+          "module": "./src/MathMarkdown.ts",
+          "moduleName": "./src/MathMarkdown.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
+          "resolvedModule": "./src/MathMarkdown.ts",
+          "type": "cjs require",
+          "active": true,
+          "explanation": "",
+          "userRequest": "./DynamicModule",
+          "loc": "5:24-50",
+          "moduleId": 990,
+          "resolvedModuleId": 990
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\PlotEngine.ts",
+          "module": "./src/PlotEngine.ts",
+          "moduleName": "./src/PlotEngine.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\PlotEngine.ts",
+          "resolvedModule": "./src/PlotEngine.ts",
+          "type": "cjs require",
+          "active": true,
+          "explanation": "",
+          "userRequest": "./DynamicModule",
+          "loc": "14:24-50",
+          "moduleId": 228,
+          "resolvedModuleId": 228
+        }
+      ],
+      "usedExports": null,
+      "providedExports": null,
+      "optimizationBailout": [
+        "CommonJS bailout: this is used directly at 2:23-27",
+        "CommonJS bailout: this is used directly at 13:26-30",
+        "CommonJS bailout: this is used directly at 18:20-24",
+        "CommonJS bailout: this is used directly at 35:17-21",
+        "CommonJS bailout: this is used directly at 44:23-27",
+        "Statement (VariableDeclaration) with side effects in source code at 2:0-12:4",
+        "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 2
+    },
+    {
+      "type": "module",
       "moduleType": "json",
       "layer": null,
       "size": 151,
@@ -6441,9 +6629,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 11733,
+      "size": 11739,
       "sizes": {
-        "javascript": 11733
+        "javascript": 11739
       },
       "built": true,
       "codeGenerated": true,
@@ -6906,9 +7094,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 5109,
+      "size": 5121,
       "sizes": {
-        "javascript": 5109
+        "javascript": 5121
       },
       "built": true,
       "codeGenerated": true,
@@ -7032,9 +7220,9 @@
     {
       "type": "module",
       "moduleType": "css/mini-extract",
-      "size": 13917,
+      "size": 13977,
       "sizes": {
-        "css/mini-extract": 13917
+        "css/mini-extract": 13977
       },
       "built": true,
       "codeGenerated": true,
@@ -7099,26 +7287,26 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 5716,
+      "size": 1130,
       "sizes": {
-        "javascript": 5716
+        "javascript": 1130
       },
       "built": true,
       "codeGenerated": true,
       "buildTimeExecuted": false,
       "cached": false,
-      "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-      "name": "./src/DynamicModule.ts",
-      "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-      "index": 6,
-      "preOrderIndex": 6,
-      "index2": 5,
-      "postOrderIndex": 5,
+      "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
+      "name": "./src/importUMD.ts",
+      "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
+      "index": 7,
+      "preOrderIndex": 7,
+      "index2": 3,
+      "postOrderIndex": 3,
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-      "issuerName": "./src/MathMarkdown.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+      "issuerName": "./src/DynamicModule.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -7131,16 +7319,16 @@
           "id": 688
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-          "name": "./src/MathMarkdown.ts",
-          "id": 990
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "name": "./src/DynamicModule.ts",
+          "id": 372
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
-      "id": 372,
-      "issuerId": 990,
+      "id": 156,
+      "issuerId": 372,
       "chunks": [
         379
       ],
@@ -7152,179 +7340,121 @@
           "moduleName": "./src/DynamicModule.ts",
           "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
           "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "2:23-27",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "2:31-51",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "13:26-30",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "13:34-57",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "18:20-24",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "18:28-45",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "35:17-21",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "35:25-39",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "44:23-27",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "44:31-51",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-          "module": "./src/MathMarkdown.ts",
-          "moduleName": "./src/MathMarkdown.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-          "resolvedModule": "./src/MathMarkdown.ts",
           "type": "cjs require",
           "active": true,
           "explanation": "",
-          "userRequest": "./DynamicModule",
-          "loc": "5:24-50",
-          "moduleId": 990,
-          "resolvedModuleId": 990
+          "userRequest": "./importUMD",
+          "loc": "50:36-58",
+          "moduleId": 372,
+          "resolvedModuleId": 372
         },
         {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\PlotEngine.ts",
-          "module": "./src/PlotEngine.ts",
-          "moduleName": "./src/PlotEngine.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\PlotEngine.ts",
-          "resolvedModule": "./src/PlotEngine.ts",
-          "type": "cjs require",
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
+          "module": "./src/importUMD.ts",
+          "moduleName": "./src/importUMD.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
+          "resolvedModule": "./src/importUMD.ts",
+          "type": "cjs self exports reference",
           "active": true,
           "explanation": "",
-          "userRequest": "./DynamicModule",
-          "loc": "14:24-50",
-          "moduleId": 228,
-          "resolvedModuleId": 228
+          "userRequest": null,
+          "loc": "2:17-21",
+          "moduleId": 156,
+          "resolvedModuleId": 156
+        },
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
+          "module": "./src/importUMD.ts",
+          "moduleName": "./src/importUMD.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
+          "resolvedModule": "./src/importUMD.ts",
+          "type": "cjs self exports reference",
+          "active": true,
+          "explanation": "",
+          "userRequest": null,
+          "loc": "2:25-39",
+          "moduleId": 156,
+          "resolvedModuleId": 156
         }
       ],
       "usedExports": null,
       "providedExports": null,
       "optimizationBailout": [
-        "CommonJS bailout: this is used directly at 2:23-27",
-        "CommonJS bailout: this is used directly at 13:26-30",
-        "CommonJS bailout: this is used directly at 18:20-24",
-        "CommonJS bailout: this is used directly at 35:17-21",
-        "CommonJS bailout: this is used directly at 44:23-27",
-        "Statement (VariableDeclaration) with side effects in source code at 2:0-12:4",
+        "CommonJS bailout: this is used directly at 2:17-21",
+        "Statement (VariableDeclaration) with side effects in source code at 2:0-10:2",
         "ModuleConcatenation bailout: Module is not an ECMAScript module"
+      ],
+      "depth": 3
+    },
+    {
+      "type": "module",
+      "moduleType": "javascript/dynamic",
+      "layer": null,
+      "size": 42,
+      "sizes": {
+        "javascript": 42
+      },
+      "built": true,
+      "codeGenerated": true,
+      "buildTimeExecuted": false,
+      "cached": false,
+      "identifier": "external module \"https://cdn.jsdelivr.net/npm/mermaid/+esm\"",
+      "name": "external \"https://cdn.jsdelivr.net/npm/mermaid/+esm\"",
+      "nameForCondition": null,
+      "index": 8,
+      "preOrderIndex": 8,
+      "index2": 4,
+      "postOrderIndex": 4,
+      "optional": false,
+      "orphan": false,
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+      "issuerName": "./src/DynamicModule.ts",
+      "issuerPath": [
+        {
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
+          "name": "./src/main.ts",
+          "id": 600
+        },
+        {
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
+        },
+        {
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "name": "./src/DynamicModule.ts",
+          "id": 372
+        }
+      ],
+      "failed": false,
+      "errors": 0,
+      "warnings": 0,
+      "id": 543,
+      "issuerId": 372,
+      "chunks": [
+        379
+      ],
+      "assets": [],
+      "reasons": [
+        {
+          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "module": "./src/DynamicModule.ts",
+          "moduleName": "./src/DynamicModule.ts",
+          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
+          "resolvedModule": "./src/DynamicModule.ts",
+          "type": "cjs require",
+          "active": true,
+          "explanation": "",
+          "userRequest": "https://cdn.jsdelivr.net/npm/mermaid/+esm",
+          "loc": "158:64-116",
+          "moduleId": 372,
+          "resolvedModuleId": 372
+        }
+      ],
+      "usedExports": true,
+      "providedExports": null,
+      "optimizationBailout": [
+        "ModuleConcatenation bailout: Module is async"
       ],
       "depth": 3
     },
@@ -7332,9 +7462,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 10970,
+      "size": 10973,
       "sizes": {
-        "javascript": 10970
+        "javascript": 10973
       },
       "built": true,
       "codeGenerated": true,
@@ -7658,9 +7788,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 4510,
+      "size": 4522,
       "sizes": {
-        "javascript": 4510
+        "javascript": 4522
       },
       "built": true,
       "codeGenerated": true,
@@ -8196,9 +8326,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 13437,
+      "size": 13469,
       "sizes": {
-        "javascript": 13437
+        "javascript": 13469
       },
       "built": true,
       "codeGenerated": true,
@@ -8402,191 +8532,6 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 1130,
-      "sizes": {
-        "javascript": 1130
-      },
-      "built": true,
-      "codeGenerated": true,
-      "buildTimeExecuted": false,
-      "cached": false,
-      "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
-      "name": "./src/importUMD.ts",
-      "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
-      "index": 7,
-      "preOrderIndex": 7,
-      "index2": 3,
-      "postOrderIndex": 3,
-      "cacheable": true,
-      "optional": false,
-      "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-      "issuerName": "./src/DynamicModule.ts",
-      "issuerPath": [
-        {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
-          "name": "./src/main.ts",
-          "id": 600
-        },
-        {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
-          "name": "./src/EvaluatorConfiguration.ts",
-          "id": 688
-        },
-        {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-          "name": "./src/MathMarkdown.ts",
-          "id": 990
-        },
-        {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "name": "./src/DynamicModule.ts",
-          "id": 372
-        }
-      ],
-      "failed": false,
-      "errors": 0,
-      "warnings": 0,
-      "id": 156,
-      "issuerId": 372,
-      "chunks": [
-        379
-      ],
-      "assets": [],
-      "reasons": [
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs require",
-          "active": true,
-          "explanation": "",
-          "userRequest": "./importUMD",
-          "loc": "49:36-58",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
-          "module": "./src/importUMD.ts",
-          "moduleName": "./src/importUMD.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
-          "resolvedModule": "./src/importUMD.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "2:17-21",
-          "moduleId": 156,
-          "resolvedModuleId": 156
-        },
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
-          "module": "./src/importUMD.ts",
-          "moduleName": "./src/importUMD.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\importUMD.ts",
-          "resolvedModule": "./src/importUMD.ts",
-          "type": "cjs self exports reference",
-          "active": true,
-          "explanation": "",
-          "userRequest": null,
-          "loc": "2:25-39",
-          "moduleId": 156,
-          "resolvedModuleId": 156
-        }
-      ],
-      "usedExports": null,
-      "providedExports": null,
-      "optimizationBailout": [
-        "CommonJS bailout: this is used directly at 2:17-21",
-        "Statement (VariableDeclaration) with side effects in source code at 2:0-10:2",
-        "ModuleConcatenation bailout: Module is not an ECMAScript module"
-      ],
-      "depth": 4
-    },
-    {
-      "type": "module",
-      "moduleType": "javascript/dynamic",
-      "layer": null,
-      "size": 42,
-      "sizes": {
-        "javascript": 42
-      },
-      "built": true,
-      "codeGenerated": true,
-      "buildTimeExecuted": false,
-      "cached": false,
-      "identifier": "external module \"https://cdn.jsdelivr.net/npm/mermaid/+esm\"",
-      "name": "external \"https://cdn.jsdelivr.net/npm/mermaid/+esm\"",
-      "nameForCondition": null,
-      "index": 8,
-      "preOrderIndex": 8,
-      "index2": 4,
-      "postOrderIndex": 4,
-      "optional": false,
-      "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-      "issuerName": "./src/DynamicModule.ts",
-      "issuerPath": [
-        {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
-          "name": "./src/main.ts",
-          "id": 600
-        },
-        {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
-          "name": "./src/EvaluatorConfiguration.ts",
-          "id": 688
-        },
-        {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\MathMarkdown.ts",
-          "name": "./src/MathMarkdown.ts",
-          "id": 990
-        },
-        {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "name": "./src/DynamicModule.ts",
-          "id": 372
-        }
-      ],
-      "failed": false,
-      "errors": 0,
-      "warnings": 0,
-      "id": 543,
-      "issuerId": 372,
-      "chunks": [
-        379
-      ],
-      "assets": [],
-      "reasons": [
-        {
-          "moduleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "module": "./src/DynamicModule.ts",
-          "moduleName": "./src/DynamicModule.ts",
-          "resolvedModuleIdentifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\DynamicModule.ts",
-          "resolvedModule": "./src/DynamicModule.ts",
-          "type": "cjs require",
-          "active": true,
-          "explanation": "",
-          "userRequest": "https://cdn.jsdelivr.net/npm/mermaid/+esm",
-          "loc": "133:64-116",
-          "moduleId": 372,
-          "resolvedModuleId": 372
-        }
-      ],
-      "usedExports": true,
-      "providedExports": null,
-      "optimizationBailout": [
-        "ModuleConcatenation bailout: Module is async"
-      ],
-      "depth": 4
-    },
-    {
-      "type": "module",
-      "moduleType": "javascript/auto",
-      "layer": null,
       "size": 436,
       "sizes": {
         "javascript": 436
@@ -8605,8 +8550,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -8624,16 +8569,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-          "id": 768
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "name": "./src/components/command-prompt/command-prompt.component.ts",
+          "id": 206
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 906,
-      "issuerId": 768,
+      "issuerId": 206,
       "chunks": [
         379
       ],
@@ -8758,8 +8703,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -8777,16 +8722,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-          "id": 768
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "name": "./src/components/command-prompt/command-prompt.component.ts",
+          "id": 206
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 445,
-      "issuerId": 768,
+      "issuerId": 206,
       "chunks": [
         379
       ],
@@ -8911,8 +8856,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -8930,16 +8875,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-          "id": 768
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "name": "./src/components/command-prompt/command-prompt.component.ts",
+          "id": 206
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 832,
-      "issuerId": 768,
+      "issuerId": 206,
       "chunks": [
         379
       ],
@@ -9064,8 +9009,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -9083,16 +9028,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-          "id": 768
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "name": "./src/components/command-prompt/command-prompt.component.ts",
+          "id": 206
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 433,
-      "issuerId": 768,
+      "issuerId": 206,
       "chunks": [
         379
       ],
@@ -9217,8 +9162,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -9236,16 +9181,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-          "id": 768
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "name": "./src/components/command-prompt/command-prompt.component.ts",
+          "id": 206
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 203,
-      "issuerId": 768,
+      "issuerId": 206,
       "chunks": [
         379
       ],
@@ -9395,8 +9340,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -9414,16 +9359,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-          "id": 768
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "name": "./src/components/command-prompt/command-prompt.component.ts",
+          "id": 206
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 770,
-      "issuerId": 768,
+      "issuerId": 206,
       "chunks": [
         379
       ],
@@ -9530,9 +9475,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 12591,
+      "size": 12651,
       "sizes": {
-        "javascript": 12591
+        "javascript": 12651
       },
       "built": true,
       "codeGenerated": true,
@@ -9608,9 +9553,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 11344,
+      "size": 11404,
       "sizes": {
-        "javascript": 11344
+        "javascript": 11404
       },
       "built": true,
       "codeGenerated": true,
@@ -9686,9 +9631,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 12547,
+      "size": 12607,
       "sizes": {
-        "javascript": 12547
+        "javascript": 12607
       },
       "built": true,
       "codeGenerated": true,
@@ -9764,9 +9709,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 10940,
+      "size": 11000,
       "sizes": {
-        "javascript": 10940
+        "javascript": 11000
       },
       "built": true,
       "codeGenerated": true,
@@ -9842,9 +9787,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 13306,
+      "size": 13366,
       "sizes": {
-        "javascript": 13306
+        "javascript": 13366
       },
       "built": true,
       "codeGenerated": true,
@@ -9920,9 +9865,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 11227,
+      "size": 11287,
       "sizes": {
-        "javascript": 11227
+        "javascript": 11287
       },
       "built": true,
       "codeGenerated": true,
@@ -10035,9 +9980,9 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
-          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
-          "id": 768
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
+          "name": "./src/components/command-prompt/command-prompt.component.ts",
+          "id": 206
         },
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\setIdFirstFactory.ts",
@@ -10086,9 +10031,9 @@
       "type": "module",
       "moduleType": "javascript/auto",
       "layer": null,
-      "size": 14343,
+      "size": 14403,
       "sizes": {
-        "javascript": 14343
+        "javascript": 14403
       },
       "built": true,
       "codeGenerated": true,
@@ -10462,41 +10407,6 @@
       "type": "module",
       "moduleType": "runtime",
       "layer": null,
-      "size": 221,
-      "sizes": {
-        "runtime": 221
-      },
-      "built": false,
-      "codeGenerated": true,
-      "buildTimeExecuted": false,
-      "cached": false,
-      "identifier": "webpack/runtime/global",
-      "name": "webpack/runtime/global",
-      "nameForCondition": null,
-      "index": null,
-      "preOrderIndex": null,
-      "index2": null,
-      "postOrderIndex": null,
-      "optional": false,
-      "orphan": false,
-      "failed": false,
-      "errors": 0,
-      "warnings": 0,
-      "id": "",
-      "chunks": [
-        379
-      ],
-      "assets": [],
-      "reasons": [],
-      "usedExports": null,
-      "providedExports": [],
-      "optimizationBailout": [],
-      "depth": null
-    },
-    {
-      "type": "module",
-      "moduleType": "runtime",
-      "layer": null,
       "size": 88,
       "sizes": {
         "runtime": 88
@@ -10643,15 +10553,15 @@
       "assets": [
         {
           "name": "mathjslab-app.css",
-          "size": 13918
+          "size": 13978
         },
         {
           "name": "mathjslab-app.js",
-          "size": 527031
+          "size": 539786
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 540949,
+      "assetsSize": 553764,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -10669,15 +10579,15 @@
       "assets": [
         {
           "name": "mathjslab-app.css",
-          "size": 13918
+          "size": 13978
         },
         {
           "name": "mathjslab-app.js",
-          "size": 527031
+          "size": 539786
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 540949,
+      "assetsSize": 553764,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -10690,16 +10600,16 @@
   "errorsCount": 0,
   "warnings": [
     {
-      "message": "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (515 KiB)",
-      "stack": "AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (515 KiB)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:147:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:21:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1028:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:857:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
+      "message": "asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (527 KiB)",
+      "stack": "AssetsOverSizeLimitWarning: asset size limit: The following asset(s) exceed the recommended size limit (244 KiB).\nThis can impact web performance.\nAssets: \n  mathjslab-app.js (527 KiB)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:148:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:21:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1026:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:855:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
     },
     {
-      "message": "entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (528 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n",
-      "stack": "EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (528 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:155:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:21:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1028:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:857:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
+      "message": "entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (541 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n",
+      "stack": "EntrypointsOverSizeLimitWarning: entrypoint size limit: The following entrypoint(s) combined asset size exceeds the recommended limit (244 KiB). This can impact web performance.\nEntrypoints:\n  mathjslab-app (541 KiB)\n      mathjslab-app.css\n      mathjslab-app.js\n\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:156:7\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:21:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1026:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:855:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
     },
     {
       "message": "webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/",
-      "stack": "NoAsyncChunksWarning: webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:169:21\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:21:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1028:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:857:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
+      "stack": "NoAsyncChunksWarning: webpack performance recommendations: \nYou can limit the size of your bundles by using import() or require.ensure to lazy load some parts of your application.\nFor more info visit https://webpack.js.org/guides/code-splitting/\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\performance\\SizeLimitsPlugin.js:170:21\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:9:1)\n    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\Hook.js:21:14)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:1026:27\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:2818:7\n    at done (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\neo-async\\async.js:3522:9)\n    at Hook.eval [as callAsync] (eval at create (H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\tapable\\lib\\HookCodeFactory.js:31:10), <anonymous>:6:1)\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\webpack\\lib\\Compiler.js:855:33\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:143:16\n    at H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\graceful-fs\\graceful-fs.js:61:14"
     }
   ],
   "warningsCount": 3,

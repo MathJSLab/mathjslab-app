@@ -142,11 +142,14 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                 Object.assign(config, {
                     devtool: 'inline-source-map',
                     devServer: {
-                        static: path.join(__dirname, 'dist'),
+                        devMiddleware: { publicPath: '/', writeToDisk: true },
+                        static: { directory: path.join(__dirname, 'dist'), serveIndex: false, publicPath: '/' },
+                        historyApiFallback: { index: '/index.html', disableDotRule: true },
                         compress: typeof devServerConfig.compress !== 'undefined' ? devServerConfig.compress : true,
                         port: typeof devServerConfig.port !== 'undefined' ? devServerConfig.port : 4000,
                         hot: typeof devServerConfig.hot !== 'undefined' ? devServerConfig.hot : true,
                         open: typeof devServerConfig.open !== 'undefined' ? devServerConfig.open : false,
+                        server: typeof devServerConfig.server !== 'undefined' ? devServerConfig.server : {},
                     },
                 });
             });

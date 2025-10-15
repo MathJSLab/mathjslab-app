@@ -39,7 +39,8 @@ factorial(999999999999999)
 A()=2
 A
 A()
-A(1) % error
+A(1)
+A(2) % error
 %
 arg(0)
 arg(-0)

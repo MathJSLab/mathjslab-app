@@ -1,5 +1,5 @@
-* `Y = prod (X)`
-* `Y = prod (X, DIM)`
+- `Y = prod (X)`
+- `Y = prod (X, DIM)`
 
 Producto de elementos a lo largo de la dimensión `DIM`.
 
@@ -9,6 +9,6 @@ Véase también: `cumprod`, `sum`.
 
 ### Referencias
 
-* https://www.mathworks.com/help/matlab/ref/prod.html
-* https://octave.sourceforge.io/octave/function/prod.html
-* https://es.wikipedia.org/wiki/Productorio
+- https://www.mathworks.com/help/matlab/ref/prod.html
+- https://octave.sourceforge.io/octave/function/prod.html
+- https://es.wikipedia.org/wiki/Productorio

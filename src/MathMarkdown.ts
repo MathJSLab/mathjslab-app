@@ -13,7 +13,7 @@ let renderMermaid: boolean = false;
 
 abstract class MathMarkdown {
     public static initialize() {
-        if (!window.MathMLElement) {
+        if (!globalThis.MathMLElement) {
             DynamicModule.load('mathjax');
         }
         DynamicModule.load('marked').then((module) => {

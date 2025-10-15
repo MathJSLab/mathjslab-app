@@ -1,4 +1,4 @@
-* `C = rdivide (A, B)``
+- `C = rdivide (A, B)``
 
 Devuelve la división correcta de `A` y `B` elemento por elemento.
 
@@ -8,5 +8,5 @@ Véase también: `ldivide`, `mrdivide`, `times`, `plus`.
 
 ### Referencias
 
-* https://www.mathworks.com/help/matlab/ref/rdivide.html
-* https://octave.sourceforge.io/octave/function/rdivide.html
+- https://www.mathworks.com/help/matlab/ref/rdivide.html
+- https://octave.sourceforge.io/octave/function/rdivide.html

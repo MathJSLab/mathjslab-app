@@ -19,7 +19,7 @@ interface ShellOptions {
  */
 class Shell {
     public readonly options: ShellOptions = {};
-    public readonly isFileProtocol: boolean = window.location.href.startsWith('file:');
+    public readonly isFileProtocol: boolean = globalThis.location.href.startsWith('file:');
     public commandShell: CommandShell;
     public example: Example;
     /**

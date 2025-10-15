@@ -40,7 +40,7 @@ class Example {
      * Example constructor
      */
     private constructor(id: string, loadHandler: LoadExampleHandler) {
-        this.baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+        this.baseUrl = globalThis.location.href.substring(0, globalThis.location.href.lastIndexOf('/') + 1);
         this.isFileProtocol = this.baseUrl.startsWith('file:');
         this.loadHandler = loadHandler;
         this.examplesContainer = document.getElementById(id)!;
@@ -63,7 +63,7 @@ class Example {
             throw new Error(`undefined Example.loadHandler callback.`);
         }
         if (!this.isFileProtocol) {
-            await global
+            await globalThis
                 .fetch(`${appEngine.config.exampleBaseUrl}example/example.json`)
                 .then((response) => {
                     if (!response.ok) {

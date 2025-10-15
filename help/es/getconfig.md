@@ -1,9 +1,10 @@
-* `RESULT = getconfig(CONFIG)`
-* `RESULT = getconfig()`
+- `RESULT = getconfig(CONFIG)`
+- `RESULT = getconfig()`
 
 Devuelve los parámetros de configuración internos de **MathJSLab**.
 
-Si se pasa una matriz de parámetros de configuración con cadenas, devuelve los valores de los parámetros seleccionados.
+Si se pasa una matriz de parámetros de configuración con cadenas, devuelve los
+valores de los parámetros seleccionados.
 
 Si se llama sin parámetros, devuelve todos los parámetros de configuración.
 

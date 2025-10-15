@@ -16,20 +16,20 @@ abstract class DeviceScreen {
     public static initialize(onScreenChange?: (event?: Event) => void): void {
         DeviceScreen.widthSmall = parseInt(constants['screen-width-small'].match(/([0-9]+(?:\.[0-9]*)?|[0-9]*\.[0-9]+)px/)![1], 10);
         DeviceScreen.widthMedium = parseInt(constants['screen-width-medium'].match(/([0-9]+(?:\.[0-9]*)?|[0-9]*\.[0-9]+)px/)![1], 10);
-        DeviceScreen.isTouchCapable = 'ontouchstart' in window || (navigator.maxTouchPoints || (navigator as Navigator & { msMaxTouchPoints: number }).msMaxTouchPoints || 0) > 0;
-        DeviceScreen.innerWidth = window.innerWidth;
-        DeviceScreen.innerHeight = window.innerHeight;
-        DeviceScreen.isPortrait = window.matchMedia('(orientation: portrait)').matches;
+        DeviceScreen.isTouchCapable = 'ontouchstart' in globalThis || (navigator.maxTouchPoints || (navigator as Navigator & { msMaxTouchPoints: number }).msMaxTouchPoints || 0) > 0;
+        DeviceScreen.innerWidth = globalThis.innerWidth;
+        DeviceScreen.innerHeight = globalThis.innerHeight;
+        DeviceScreen.isPortrait = globalThis.matchMedia('(orientation: portrait)').matches;
         if (onScreenChange) {
             DeviceScreen.onScreenChange = onScreenChange;
         }
-        window.addEventListener('resize', DeviceScreen.updateScreen);
+        globalThis.addEventListener('resize', DeviceScreen.updateScreen);
     }
     /**
      * Finalizes DeviceScreen object (remove `'resize'` event listener).
      */
     public static finalize(): void {
-        window.removeEventListener('resize', DeviceScreen.updateScreen);
+        globalThis.removeEventListener('resize', DeviceScreen.updateScreen);
     }
     /**
      * Handler called when `DeviceScreen` properties has been changed.
@@ -40,10 +40,10 @@ abstract class DeviceScreen {
      * @param event
      */
     private static updateScreen(event?: Event): void {
-        const isPortrait = window.matchMedia('(orientation: portrait)').matches;
-        if (DeviceScreen.innerWidth !== window.innerWidth || DeviceScreen.innerHeight !== window.innerHeight || DeviceScreen.isPortrait !== isPortrait) {
-            DeviceScreen.innerWidth = window.innerWidth;
-            DeviceScreen.innerHeight = window.innerHeight;
+        const isPortrait = globalThis.matchMedia('(orientation: portrait)').matches;
+        if (DeviceScreen.innerWidth !== globalThis.innerWidth || DeviceScreen.innerHeight !== globalThis.innerHeight || DeviceScreen.isPortrait !== isPortrait) {
+            DeviceScreen.innerWidth = globalThis.innerWidth;
+            DeviceScreen.innerHeight = globalThis.innerHeight;
             DeviceScreen.isPortrait = isPortrait;
             if (DeviceScreen.onScreenChange) {
                 DeviceScreen.onScreenChange(event);

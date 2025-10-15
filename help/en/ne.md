@@ -1,4 +1,4 @@
-* `TF = ne (A, B)`
+- `TF = ne (A, B)`
 
 Return true if the two inputs are not equal.
 
@@ -8,8 +8,8 @@ See also: `eq`, `isequal`, `le`, `ge`, `lt`.
 
 ### References
 
-* https://www.mathworks.com/help/matlab/ref/ne.html
-* https://octave.sourceforge.io/octave/function/ne.html
-* https://mathworld.wolfram.com/Equal.html
-* https://mathworld.wolfram.com/Equality.html
-* https://en.wikipedia.org/wiki/Equality_(mathematics)
+- https://www.mathworks.com/help/matlab/ref/ne.html
+- https://octave.sourceforge.io/octave/function/ne.html
+- https://mathworld.wolfram.com/Equal.html
+- https://mathworld.wolfram.com/Equality.html
+- https://en.wikipedia.org/wiki/Equality_(mathematics)

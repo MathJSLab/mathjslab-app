@@ -8,7 +8,10 @@
   "development": {
     "bundles": ["mathjslab-app"],
     "devServer": {
-      "open": false
+      "open": false,
+      "server": {
+        "type": "https"
+      }
     }
   }
 }

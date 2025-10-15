@@ -12,7 +12,25 @@ const importPlugin = require('eslint-plugin-import');
 
 console.log(`Running project lint (configuration: ${path.basename(__filename)}) ...`);
 
+const basePlugins = {
+    import: importPlugin,
+    prettier: prettierPlugin,
+};
+
+const prettierRules = {
+    ...prettierPlugin.configs.recommended.rules,
+    ...eslintConfigPrettier.rules,
+};
+
+const tsPluginConfigRules = {
+    ...tsPlugin.configs['eslint-recommended'].rules,
+    ...tsPlugin.configs['recommended'].rules,
+};
+
 module.exports = [
+    {
+        ignores: ['dist/**', 'node_modules/**', 'script/build/**', '*.min.*'],
+    },
     {
         files: ['src/**/*.ts'],
         languageOptions: {
@@ -27,13 +45,11 @@ module.exports = [
             },
         },
         plugins: {
-            import: importPlugin,
+            ...basePlugins,
             '@typescript-eslint': tsPlugin,
-            prettier: prettierPlugin,
         },
         rules: {
-            ...tsPlugin.configs['eslint-recommended'].rules,
-            ...tsPlugin.configs['recommended'].rules,
+            ...tsPluginConfigRules,
             '@typescript-eslint/no-namespace': 'off',
             '@typescript-eslint/no-this-alias': 'off',
             '@typescript-eslint/interface-name-prefix': 'off',
@@ -44,13 +60,11 @@ module.exports = [
             '@typescript-eslint/ban-types': 'off',
             '@typescript-eslint/no-unsafe-function-type': 'off',
             'no-console': 'warn',
-            ...prettierPlugin.configs.recommended.rules,
-            ...eslintConfigPrettier.rules,
+            ...prettierRules,
         },
     },
     {
         files: ['**/*.js', '**/*.jsx', '**/*.cjs', '**/*.mjs'],
-        ignores: ['dist/*', 'script/build/*', '*.min.*'],
         languageOptions: {
             parserOptions: {
                 ecmaVersion: 2021,
@@ -58,14 +72,10 @@ module.exports = [
                 globals: globals.es2015,
             },
         },
-        plugins: {
-            import: importPlugin,
-            prettier: prettierPlugin,
-        },
+        plugins: basePlugins,
         rules: {
             'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
-            ...prettierPlugin.configs.recommended.rules,
-            ...eslintConfigPrettier.rules,
+            ...prettierRules,
         },
     },
     {
@@ -82,14 +92,11 @@ module.exports = [
             },
         },
         plugins: {
-            import: importPlugin,
+            ...basePlugins,
             '@typescript-eslint': tsPlugin,
-            prettier: prettierPlugin,
         },
-        ignores: ['script/build/**'],
         rules: {
-            ...tsPlugin.configs['eslint-recommended'].rules,
-            ...tsPlugin.configs['recommended'].rules,
+            ...tsPluginConfigRules,
             '@typescript-eslint/no-namespace': 'off',
             '@typescript-eslint/no-this-alias': 'off',
             '@typescript-eslint/interface-name-prefix': 'off',
@@ -100,8 +107,7 @@ module.exports = [
             '@typescript-eslint/ban-types': 'off',
             '@typescript-eslint/no-unsafe-function-type': 'off',
             'no-console': 'off',
-            ...prettierPlugin.configs.recommended.rules,
-            ...eslintConfigPrettier.rules,
+            ...prettierRules,
         },
     },
 ];

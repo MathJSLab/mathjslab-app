@@ -1,4 +1,4 @@
-* `B = squeeze (A)`
+- `B = squeeze (A)`
 
 Remove singleton dimensions from `A` and return the result.
 
@@ -9,5 +9,5 @@ See also: `reshape`.
 
 ### References
 
-* https://www.mathworks.com/help/matlab/ref/squeeze.html
-* https://octave.sourceforge.io/octave/function/squeeze.html
+- https://www.mathworks.com/help/matlab/ref/squeeze.html
+- https://octave.sourceforge.io/octave/function/squeeze.html

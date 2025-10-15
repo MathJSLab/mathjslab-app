@@ -54,9 +54,6 @@ import { DateTime } from 'luxon';
  */
 import readFileBom from '../build/helper/readFileBom.js';
 import readFileBomSync from '../build/helper/readFileBomSync.js';
-import mkDirIfNotExist from '../build/helper/mkDirIfNotExist.js';
-
-// import createIcon from '../build/helper/createIcon.js';
 import toIco from '../build/helper/toIco.js';
 
 /**
@@ -1176,7 +1173,15 @@ async function transformImage(transform, options) {
             if (typeof imageOptions.outputDir === 'undefined') {
                 imageOptions.outputDir = options.dir.output;
             }
-            mkDirIfNotExist(imageOptions.outputDir);
+            const outputDirPath = path.resolve(imageOptions.outputDir);
+            try {
+                fs.accessSync(outputDirPath, fs.constants.F_OK);
+                console.log(`Directory ${outputDirPath} already exists.`);
+            } catch {
+                console.log(`Creating directory ${outputDirPath} ...`);
+                fs.mkdirSync(outputDirPath, { recursive: true });
+                console.log(`Creating directory ${outputDirPath} done.`);
+            }
             const src = options.dir.input + '/' + image.src;
             console.log(`Building image from source: ${src} ...`);
             const icoIndex = imageOptions.formats.indexOf('ico');
@@ -1185,7 +1190,7 @@ async function transformImage(transform, options) {
                 imageOptions.formats.splice(icoIndex, 1);
                 const ico = await toIco(src, imageOptions.widths);
                 const filename = `${imageOptions.outputBasename || src.split('/').pop().split('.')[0]}.ico`;
-                outputIcoPath = path.resolve(imageOptions.outputDir, filename);
+                outputIcoPath = path.join(outputDirPath, filename);
                 fs.writeFileSync(outputIcoPath, ico);
                 console.log(`Building image format: ico, widths: ${imageOptions.widths.join(',')}, output: ${filename}`);
             }

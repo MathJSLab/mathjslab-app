@@ -1,4 +1,4 @@
-import { AST, CharString, ComplexDecimal, type BuiltInFunctionTable } from 'mathjslab';
+import { type NodeInput, type NodeExpr, type NodeIdentifier, type BuiltInFunctionTable, CharString, ComplexDecimal, AST } from 'mathjslab';
 import { insertOutput } from './outputFunction';
 import { PlotEngine } from './PlotEngine';
 import { openFileDialog } from './openFileDialog';
@@ -34,20 +34,20 @@ const externalFunctionTable: BuiltInFunctionTable = {
         type: 'BUILTIN',
         mapper: false,
         ev: [false, true, true, false],
-        func: (variable: AST.NodeIdentifier, start: ComplexDecimal, end: ComplexDecimal, expr: AST.NodeExpr): ComplexDecimal => {
+        func: (variable: NodeIdentifier, start: ComplexDecimal, end: ComplexDecimal, expr: NodeExpr): ComplexDecimal => {
             if (!start.im.eq(0)) throw new Error('complex number sum index');
             if (!end.im.eq(0)) throw new Error('complex number sum index');
             let result: ComplexDecimal = ComplexDecimal.zero();
             const sum_function_name = `summation_${globalThis.crypto.randomUUID()}`;
             appEngine.evaluator.localTable[sum_function_name] = {};
             for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
-                appEngine.evaluator.localTable[sum_function_name][variable.id] = new ComplexDecimal(i, 0);
+                appEngine.evaluator.localTable[sum_function_name][variable.id] = ComplexDecimal.create(i, 0);
                 result = ComplexDecimal.add(result, appEngine.evaluator.Evaluator(expr, true, sum_function_name));
             }
             delete appEngine.evaluator.localTable[sum_function_name];
             return result;
         },
-        unparserMathML: (tree: AST.NodeInput): string => {
+        unparserMathML: (tree: NodeInput): string => {
             return (
                 '<mstyle displaystyle="true"><munderover><mo>&sum;</mo><mrow>' +
                 appEngine.evaluator.unparserMathML(tree.args[0]) +
@@ -67,20 +67,20 @@ const externalFunctionTable: BuiltInFunctionTable = {
         type: 'BUILTIN',
         mapper: false,
         ev: [false, true, true, false],
-        func: (variable: AST.NodeIdentifier, start: ComplexDecimal, end: ComplexDecimal, expr: AST.NodeExpr): ComplexDecimal => {
+        func: (variable: NodeIdentifier, start: ComplexDecimal, end: ComplexDecimal, expr: NodeExpr): ComplexDecimal => {
             if (!start.im.eq(0)) throw new Error('complex number prod index');
             if (!end.im.eq(0)) throw new Error('complex number prod index');
             let result: ComplexDecimal = ComplexDecimal.one();
             const prod_function_name = `productory_${globalThis.crypto.randomUUID()}`;
             appEngine.evaluator.localTable[prod_function_name] = {};
             for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
-                appEngine.evaluator.localTable[prod_function_name][variable.id] = new ComplexDecimal(i, 0);
+                appEngine.evaluator.localTable[prod_function_name][variable.id] = ComplexDecimal.create(i, 0);
                 result = ComplexDecimal.mul(result, appEngine.evaluator.Evaluator(expr, true, prod_function_name));
             }
             delete appEngine.evaluator.localTable[prod_function_name];
             return result;
         },
-        unparserMathML: (tree: AST.NodeInput): string => {
+        unparserMathML: (tree: NodeInput): string => {
             return (
                 '<mstyle displaystyle="true"><munderover><mo>&prod;</mo><mrow>' +
                 appEngine.evaluator.unparserMathML(tree.args[0]) +
@@ -100,7 +100,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
         type: 'BUILTIN',
         mapper: false,
         ev: [true],
-        func: (url?: CharString): AST.NodeExpr => {
+        func: (url?: CharString): NodeExpr => {
             const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (url) {
                 if (appEngine.shell.isFileProtocol) {
@@ -139,7 +139,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
         type: 'BUILTIN',
         mapper: false,
         ev: [true],
-        func: (url?: CharString): AST.NodeExpr => {
+        func: (url?: CharString): NodeExpr => {
             const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (url) {
                 if (appEngine.shell.isFileProtocol) {
@@ -182,7 +182,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
         type: 'BUILTIN',
         mapper: false,
         ev: [true],
-        func: (...url: CharString[]): AST.NodeExpr => {
+        func: (...url: CharString[]): NodeExpr => {
             const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             const loadContent = (content: string, name: string) => {
                 let error: boolean = false;

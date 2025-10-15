@@ -115,7 +115,7 @@ export class FixedScrollPanel extends HTMLElement {
                 this.onChangeDisplay(event, display);
             }
         }
-        let Y = window.scrollY - this.element.container.offsetTop + window.innerHeight * 0.025;
+        let Y = globalThis.scrollY - this.element.container.offsetTop + globalThis.innerHeight * 0.025;
         const maxY = this.element.container.offsetHeight - this.element.wrapper.offsetHeight;
         if (Y < 0) {
             Y = 0;
@@ -124,7 +124,7 @@ export class FixedScrollPanel extends HTMLElement {
         }
         this.element.wrapper.style.top = Y + 'px';
         this.element.wrapper.style.left = this.element.root.offsetWidth + 'px';
-        this.element.wrapper.style.height = Math.min(this.element.container.offsetHeight, window.innerHeight) * 0.9 + 'px';
+        this.element.wrapper.style.height = Math.min(this.element.container.offsetHeight, globalThis.innerHeight) * 0.9 + 'px';
     }).bind(this);
 }
 /* Defines the Web component element. */
