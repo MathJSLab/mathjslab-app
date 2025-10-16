@@ -1,9 +1,9 @@
 {
   "name": "mathjslab-app",
-  "hash": "d6de457d809243b8c25a",
+  "hash": "833ce1b0d8dd69793479",
   "version": "5.102.1",
-  "time": 16574,
-  "builtAt": 1760642652549,
+  "time": 13191,
+  "builtAt": 1760643128046,
   "publicPath": "auto",
   "outputPath": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\dist",
   "assetsByChunkName": {
@@ -16,14 +16,14 @@
     {
       "type": "asset",
       "name": "mathjslab-app.js",
-      "size": 539781,
+      "size": 539786,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
         "javascriptModule": false,
         "minimized": true,
-        "size": 539781
+        "size": 539786
       },
       "chunkNames": [
         "mathjslab-app"
@@ -105,7 +105,7 @@
         "mathjslab-app.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "d60e551977654990963e",
+      "hash": "ce84b7d2c9a02da41e99",
       "childrenByOrder": {},
       "id": 379,
       "siblings": [],
@@ -124,9 +124,9 @@
           "codeGenerated": true,
           "buildTimeExecuted": false,
           "cached": false,
-          "identifier": "javascript/esm|H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab\\lib\\mathjslab.web.esm2022.js",
-          "name": "../mathjslab/lib/mathjslab.web.esm2022.js",
-          "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab\\lib\\mathjslab.web.esm2022.js",
+          "identifier": "javascript/esm|H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\mathjslab\\lib\\mathjslab.web.esm2022.js",
+          "name": "./node_modules/mathjslab/lib/mathjslab.web.esm2022.js",
+          "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\mathjslab\\lib\\mathjslab.web.esm2022.js",
           "index": 3,
           "preOrderIndex": 3,
           "index2": 1,
@@ -152,7 +152,7 @@
           "failed": false,
           "errors": 0,
           "warnings": 0,
-          "id": 66,
+          "id": 451,
           "issuerId": 688,
           "chunks": [
             379
@@ -3467,7 +3467,7 @@
           "failed": false,
           "errors": 0,
           "warnings": 0,
-          "id": 451,
+          "id": 832,
           "issuerId": 768,
           "chunks": [
             379
@@ -6080,9 +6080,9 @@
       "codeGenerated": true,
       "buildTimeExecuted": false,
       "cached": false,
-      "identifier": "javascript/esm|H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab\\lib\\mathjslab.web.esm2022.js",
-      "name": "../mathjslab/lib/mathjslab.web.esm2022.js",
-      "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab\\lib\\mathjslab.web.esm2022.js",
+      "identifier": "javascript/esm|H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\mathjslab\\lib\\mathjslab.web.esm2022.js",
+      "name": "./node_modules/mathjslab/lib/mathjslab.web.esm2022.js",
+      "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\mathjslab\\lib\\mathjslab.web.esm2022.js",
       "index": 3,
       "preOrderIndex": 3,
       "index2": 1,
@@ -6107,7 +6107,7 @@
       "failed": false,
       "errors": 0,
       "warnings": 0,
-      "id": 66,
+      "id": 451,
       "issuerId": 688,
       "chunks": [
         379
@@ -8883,7 +8883,7 @@
       "failed": false,
       "errors": 0,
       "warnings": 0,
-      "id": 451,
+      "id": 832,
       "issuerId": 768,
       "chunks": [
         379
@@ -10557,11 +10557,11 @@
         },
         {
           "name": "mathjslab-app.js",
-          "size": 539781
+          "size": 539786
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 553759,
+      "assetsSize": 553764,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -10583,11 +10583,11 @@
         },
         {
           "name": "mathjslab-app.js",
-          "size": 539781
+          "size": 539786
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 553759,
+      "assetsSize": 553764,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
