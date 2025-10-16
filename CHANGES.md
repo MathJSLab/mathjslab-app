@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.6.1
+
+- The `rimraf` package has been removed from development dependencies and the
+  `shx` package has been added. The scripts in the `package.json` file have
+  been changed to use `shx rm -rf` instead of `rimraf`. The `ts-node` package
+  has been installed and the `"tsx"` script in the `package.json` file was
+  created.
+- The `script/helper/prettier-unescape-math.ts` script file was created and
+  then moved to the organization repository. The `"postformat"` script in the
+  `package.json` was created.
+
 # 1.6.0
 
 - The second release of 2025 (`reia`) has been launch.

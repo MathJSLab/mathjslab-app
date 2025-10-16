@@ -39,7 +39,8 @@
         "singleQuote": false,
         "trailingComma": "all",
         "semi": true,
-        "arrowParens": "always"
+        "arrowParens": "always",
+        "parser": "markdown"
       }
     }
   ]

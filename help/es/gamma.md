@@ -4,7 +4,7 @@ Calcula la función Gamma.
 
 La función Gamma se define como
 
-%%gamma (z) = integral (t ^ (z-1) \* exp (-t), t, 0, Inf)%%
+%%gamma (z) = integral (t ^ (z-1) * exp (-t), t, 0, Inf)%%
 
 Nota: La función `gamma` puede crecer bastante, incluso para valores de entrada
 pequeños. En muchos casos, puede ser preferible utilizar el logaritmo natural

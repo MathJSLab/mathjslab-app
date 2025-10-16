@@ -3,7 +3,7 @@
 Devuelve el número entero más grande no mayor que `X`.
 
 Esto equivale a redondear al infinito negativo. Si `X` es complejo, devuelve
-%%floor (real (X)) + floor (imag (X)) \* I%%.
+%%floor (real (X)) + floor (imag (X)) * I%%.
 
 > > `floor ([-2.7, 2.7])`
 

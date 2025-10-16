@@ -1,9 +1,9 @@
 {
   "name": "mathjslab-app",
-  "hash": "7ed98a7fa1b7a817458c",
+  "hash": "d6de457d809243b8c25a",
   "version": "5.102.1",
-  "time": 12560,
-  "builtAt": 1760563350613,
+  "time": 16574,
+  "builtAt": 1760642652549,
   "publicPath": "auto",
   "outputPath": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\dist",
   "assetsByChunkName": {
@@ -16,14 +16,14 @@
     {
       "type": "asset",
       "name": "mathjslab-app.js",
-      "size": 539786,
+      "size": 539781,
       "emitted": true,
       "comparedForEmit": false,
       "cached": false,
       "info": {
         "javascriptModule": false,
         "minimized": true,
-        "size": 539786
+        "size": 539781
       },
       "chunkNames": [
         "mathjslab-app"
@@ -105,7 +105,7 @@
         "mathjslab-app.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "3718f24f598e2f327150",
+      "hash": "d60e551977654990963e",
       "childrenByOrder": {},
       "id": 379,
       "siblings": [],
@@ -124,9 +124,9 @@
           "codeGenerated": true,
           "buildTimeExecuted": false,
           "cached": false,
-          "identifier": "javascript/esm|H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\mathjslab\\lib\\mathjslab.web.esm2022.js",
-          "name": "./node_modules/mathjslab/lib/mathjslab.web.esm2022.js",
-          "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\mathjslab\\lib\\mathjslab.web.esm2022.js",
+          "identifier": "javascript/esm|H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab\\lib\\mathjslab.web.esm2022.js",
+          "name": "../mathjslab/lib/mathjslab.web.esm2022.js",
+          "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab\\lib\\mathjslab.web.esm2022.js",
           "index": 3,
           "preOrderIndex": 3,
           "index2": 1,
@@ -152,7 +152,7 @@
           "failed": false,
           "errors": 0,
           "warnings": 0,
-          "id": 451,
+          "id": 66,
           "issuerId": 688,
           "chunks": [
             379
@@ -988,8 +988,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\outputFunction.ts",
-          "issuerName": "./src/outputFunction.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\externalFunctionTable.ts",
+          "issuerName": "./src/externalFunctionTable.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -997,21 +997,21 @@
               "id": 600
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-              "name": "./src/evalPrompt.ts",
-              "id": 809
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+              "name": "./src/EvaluatorConfiguration.ts",
+              "id": 688
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\outputFunction.ts",
-              "name": "./src/outputFunction.ts",
-              "id": 684
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\externalFunctionTable.ts",
+              "name": "./src/externalFunctionTable.ts",
+              "id": 820
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 228,
-          "issuerId": 684,
+          "issuerId": 820,
           "chunks": [
             379
           ],
@@ -2767,8 +2767,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -2786,16 +2786,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-              "name": "./src/components/command-prompt/command-prompt.component.ts",
-              "id": 206
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+              "id": 768
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 770,
-          "issuerId": 206,
+          "issuerId": 768,
           "chunks": [
             379
           ],
@@ -2921,8 +2921,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -2940,16 +2940,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-              "name": "./src/components/command-prompt/command-prompt.component.ts",
-              "id": 206
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+              "id": 768
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 906,
-          "issuerId": 206,
+          "issuerId": 768,
           "chunks": [
             379
           ],
@@ -3075,8 +3075,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -3094,16 +3094,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-              "name": "./src/components/command-prompt/command-prompt.component.ts",
-              "id": 206
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+              "id": 768
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 445,
-          "issuerId": 206,
+          "issuerId": 768,
           "chunks": [
             379
           ],
@@ -3440,8 +3440,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -3459,16 +3459,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-              "name": "./src/components/command-prompt/command-prompt.component.ts",
-              "id": 206
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+              "id": 768
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
-          "id": 832,
-          "issuerId": 206,
+          "id": 451,
+          "issuerId": 768,
           "chunks": [
             379
           ],
@@ -3594,8 +3594,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -3613,16 +3613,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-              "name": "./src/components/command-prompt/command-prompt.component.ts",
-              "id": 206
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+              "id": 768
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 433,
-          "issuerId": 206,
+          "issuerId": 768,
           "chunks": [
             379
           ],
@@ -3767,9 +3767,9 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-              "name": "./src/components/command-prompt/command-prompt.component.ts",
-              "id": 206
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+              "id": 768
             },
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\setIdFirstFactory.ts",
@@ -3837,8 +3837,8 @@
           "optional": false,
           "orphan": false,
           "dependent": true,
-          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+          "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
           "issuerPath": [
             {
               "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -3856,16 +3856,16 @@
               "id": 680
             },
             {
-              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-              "name": "./src/components/command-prompt/command-prompt.component.ts",
-              "id": 206
+              "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+              "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+              "id": 768
             }
           ],
           "failed": false,
           "errors": 0,
           "warnings": 0,
           "id": 203,
-          "issuerId": 206,
+          "issuerId": 768,
           "chunks": [
             379
           ],
@@ -6080,9 +6080,9 @@
       "codeGenerated": true,
       "buildTimeExecuted": false,
       "cached": false,
-      "identifier": "javascript/esm|H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\mathjslab\\lib\\mathjslab.web.esm2022.js",
-      "name": "./node_modules/mathjslab/lib/mathjslab.web.esm2022.js",
-      "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\mathjslab\\lib\\mathjslab.web.esm2022.js",
+      "identifier": "javascript/esm|H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab\\lib\\mathjslab.web.esm2022.js",
+      "name": "../mathjslab/lib/mathjslab.web.esm2022.js",
+      "nameForCondition": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab\\lib\\mathjslab.web.esm2022.js",
       "index": 3,
       "preOrderIndex": 3,
       "index2": 1,
@@ -6107,7 +6107,7 @@
       "failed": false,
       "errors": 0,
       "warnings": 0,
-      "id": 451,
+      "id": 66,
       "issuerId": 688,
       "chunks": [
         379
@@ -7480,8 +7480,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\outputFunction.ts",
-      "issuerName": "./src/outputFunction.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\externalFunctionTable.ts",
+      "issuerName": "./src/externalFunctionTable.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -7489,21 +7489,21 @@
           "id": 600
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\evalPrompt.ts",
-          "name": "./src/evalPrompt.ts",
-          "id": 809
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\EvaluatorConfiguration.ts",
+          "name": "./src/EvaluatorConfiguration.ts",
+          "id": 688
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\outputFunction.ts",
-          "name": "./src/outputFunction.ts",
-          "id": 684
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\externalFunctionTable.ts",
+          "name": "./src/externalFunctionTable.ts",
+          "id": 820
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 228,
-      "issuerId": 684,
+      "issuerId": 820,
       "chunks": [
         379
       ],
@@ -8550,8 +8550,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -8569,16 +8569,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "name": "./src/components/command-prompt/command-prompt.component.ts",
-          "id": 206
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "id": 768
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 906,
-      "issuerId": 206,
+      "issuerId": 768,
       "chunks": [
         379
       ],
@@ -8703,8 +8703,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -8722,16 +8722,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "name": "./src/components/command-prompt/command-prompt.component.ts",
-          "id": 206
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "id": 768
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 445,
-      "issuerId": 206,
+      "issuerId": 768,
       "chunks": [
         379
       ],
@@ -8856,8 +8856,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -8875,16 +8875,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "name": "./src/components/command-prompt/command-prompt.component.ts",
-          "id": 206
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "id": 768
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
-      "id": 832,
-      "issuerId": 206,
+      "id": 451,
+      "issuerId": 768,
       "chunks": [
         379
       ],
@@ -9009,8 +9009,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -9028,16 +9028,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "name": "./src/components/command-prompt/command-prompt.component.ts",
-          "id": 206
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "id": 768
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 433,
-      "issuerId": 206,
+      "issuerId": 768,
       "chunks": [
         379
       ],
@@ -9162,8 +9162,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -9181,16 +9181,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "name": "./src/components/command-prompt/command-prompt.component.ts",
-          "id": 206
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "id": 768
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 203,
-      "issuerId": 206,
+      "issuerId": 768,
       "chunks": [
         379
       ],
@@ -9340,8 +9340,8 @@
       "cacheable": true,
       "optional": false,
       "orphan": false,
-      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-      "issuerName": "./src/components/command-prompt/command-prompt.component.ts",
+      "issuer": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+      "issuerName": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
       "issuerPath": [
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\main.ts",
@@ -9359,16 +9359,16 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "name": "./src/components/command-prompt/command-prompt.component.ts",
-          "id": 206
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "id": 768
         }
       ],
       "failed": false,
       "errors": 0,
       "warnings": 0,
       "id": 770,
-      "issuerId": 206,
+      "issuerId": 768,
       "chunks": [
         379
       ],
@@ -9980,9 +9980,9 @@
           "id": 680
         },
         {
-          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\command-prompt\\command-prompt.component.ts",
-          "name": "./src/components/command-prompt/command-prompt.component.ts",
-          "id": 206
+          "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\collapsible-content-panel\\collapsible-content-panel.component.ts",
+          "name": "./src/components/collapsible-content-panel/collapsible-content-panel.component.ts",
+          "id": 768
         },
         {
           "identifier": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\node_modules\\ts-loader\\index.js??ruleSet[1].rules[0].use[0]!H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\src\\components\\setIdFirstFactory.ts",
@@ -10557,11 +10557,11 @@
         },
         {
           "name": "mathjslab-app.js",
-          "size": 539786
+          "size": 539781
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 553764,
+      "assetsSize": 553759,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,
@@ -10583,11 +10583,11 @@
         },
         {
           "name": "mathjslab-app.js",
-          "size": 539786
+          "size": 539781
         }
       ],
       "filteredAssets": 0,
-      "assetsSize": 553764,
+      "assetsSize": 553759,
       "auxiliaryAssets": [],
       "filteredAuxiliaryAssets": 0,
       "auxiliaryAssetsSize": 0,

@@ -3,7 +3,7 @@
 Trunca a parte fracionária de `X` e retorna a parte inteira.
 
 Isso equivale a arredondar para zero. Se `X` for complexo, retorna %%fix (real
-(X)) + fix (imag (X)) \* I%%.
+(X)) + fix (imag (X)) * I%%.
 
 > > `fix ([-2.7, 2.7])`
 

@@ -3,7 +3,7 @@
 Retorna o maior número inteiro não maior que `X`.
 
 Isso equivale a arredondar para o infinito negativo. Se `X` for complexo,
-retorna %%floor (real (X)) + floor (imag (X)) \* I%%.
+retorna %%floor (real (X)) + floor (imag (X)) * I%%.
 
 > > `floor ([-2.7, 2.7])`
 
