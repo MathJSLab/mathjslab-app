@@ -30,8 +30,8 @@
       "dest": "script/helper/mkDirIfNotExist.ts"
     },
     {
-      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/prettier-unescape-math.ts",
-      "dest": "script/helper/prettier-unescape-math.ts"
+      "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/prettier-math-protect.ts",
+      "dest": "script/helper/prettier-math-protect.ts"
     },
     {
       "src": "https://raw.githubusercontent.com/MathJSLab/.github/refs/heads/main/script/helper/git-commit.cjs",

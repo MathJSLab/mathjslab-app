@@ -1,9 +1,9 @@
 {
   "name": "mathjslab-app",
-  "hash": "833ce1b0d8dd69793479",
+  "hash": "ea4fda834730935b689f",
   "version": "5.102.1",
-  "time": 13191,
-  "builtAt": 1760643128046,
+  "time": 13323,
+  "builtAt": 1760662492513,
   "publicPath": "auto",
   "outputPath": "H:\\workarea\\mathjslab-project\\mathjslab-repositories\\mathjslab-app\\dist",
   "assetsByChunkName": {
@@ -105,7 +105,7 @@
         "mathjslab-app.js"
       ],
       "auxiliaryFiles": [],
-      "hash": "ce84b7d2c9a02da41e99",
+      "hash": "343bef19df948cf76a65",
       "childrenByOrder": {},
       "id": 379,
       "siblings": [],

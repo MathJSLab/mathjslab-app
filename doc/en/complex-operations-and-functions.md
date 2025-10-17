@@ -2,8 +2,8 @@
 
 ## Sum
 
-> > %%(a + b _ i) + (c + d _ i) = (a + c) + (b + d) * i%%
+> > %%(a + b * i) + (c + d * i) = (a + c) + (b + d) * i%%
 
 ## Subtraction
 
-> > %%(a + b _ i) - (c + d _ i) = (a - c) + (b - d) * i%%
+> > %%(a + b * i) - (c + d * i) = (a - c) + (b - d) * i%%
