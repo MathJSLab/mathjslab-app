@@ -1,6 +1,6 @@
 {
   "name": "mathjslab-app",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "MathJSLab - An interpreter with language syntax like MATLAB®/Octave, ISBN 978-65-00-82338-7. A demo application from the mathjslab npm package, ISBN 978-65-00-84828-1.",
   "repository": {
     "type": "git",
@@ -55,9 +55,7 @@
     "git:push": "git push",
     "git:all": "npm run git:add && npm run git:commit && npm run git:push",
     "tsx": "tsx --require tsconfig-paths/register",
-    "preformat": "npm run tsx script/helper/prettier-math-protect.ts -- --protect . --ignore **/node_modules/** dist/**",
     "format": "prettier --plugin=@prettier/plugin-xml --write **/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,html,htm,json,jsonc,yml,yaml,xml,svg,md}",
-    "postformat": "npm run tsx script/helper/prettier-math-protect.ts -- --restore . --ignore **/node_modules/** dist/**",
     "lint": "eslint --fix",
     "format:lint": "npm run format && npm run lint",
     "build:script": "tsc -p script/tsconfig.json",
@@ -86,9 +84,8 @@
     "@prettier/plugin-xml": "^3.4.2",
     "@resvg/resvg-js": "^2.6.2",
     "@types/eslint-config-prettier": "^6.11.3",
-    "@types/micromatch": "^4.0.9",
-    "@types/node": "^24.8.0",
-    "@types/plotly.js": "^3.0.7",
+    "@types/node": "^24.8.1",
+    "@types/plotly.js-dist-min": "^2.3.4",
     "@types/webpack": "^5.28.5",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@types/wicg-file-system-access": "^2023.10.7",
@@ -96,18 +93,18 @@
     "@typescript-eslint/parser": "^8.46.1",
     "ajv": "^8.17.1",
     "chalk": "^5.6.2",
+    "chevrotain": "^11.0.3",
     "coffeescript": "^2.7.0",
     "cross-env": "^10.1.0",
     "cson": "^8.4.0",
     "css-loader": "^7.1.2",
-    "eslint": "^9.37.0",
+    "eslint": "^9.38.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-prettier": "^5.5.4",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.4",
     "json5": "^2.2.3",
-    "micromatch": "^4.0.8",
     "mini-css-extract-plugin": "^2.9.4",
     "png-to-ico": "^3.0.1",
     "prettier": "^3.6.2",
@@ -130,6 +127,14 @@
     "yaml": "^2.8.1"
   },
   "dependencies": {
-    "mathjslab": "^1.8.0"
+    "marked": "^16.4.1",
+    "mathjslab": "^1.8.0",
+    "mermaid": "^11.12.0",
+    "plotly.js-dist-min": "^3.1.2"
+  },
+  "overrides": {
+    "mermaid": {
+      "chevrotain": "$chevrotain"
+    }
   }
 }

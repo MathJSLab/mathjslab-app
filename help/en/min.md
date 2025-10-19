@@ -24,7 +24,7 @@ returns the smallest element of the 2-D matrix `X`, and
 
 > > `min (2:5, pi)`
 
-> > %%[2, 3, 3.1416, 3.1416]%%
+> > `%[2, 3, 3.1416, 3.1416]%`
 
 compares each element of the range `2:5` with `pi`, and returns a row vector of
 the minimum values.
@@ -35,7 +35,7 @@ the range (-pi, pi]. Hence,
 
 > > `min ([-1 i 1 -i])`
 
-> > %%-i%%
+> > `%-i%`
 
 because all entries have magnitude 1, but -i has the smallest phase angle with
 value -pi/2.
@@ -45,9 +45,9 @@ index of the minimum value(s). Thus,
 
 > > `[x, ix] = min ([1, 3, 0, 2, 0])`
 
-> > %%x = 0%%
+> > `%x = 0%`
 
-> > %%ix = 3%%
+> > `%ix = 3%`
 
 See also: `max`, `cummin`, `cummax`.
 

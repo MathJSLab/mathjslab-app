@@ -7,7 +7,7 @@ Se `DIM` for omitido, o padrão é a primeira dimensão não-singular. Por exemp
 
 > > `cumsum ([1, 2; 3, 4; 5, 6])`
 
-> > %%[1, 2; 4, 6; 9, 12]%%
+> > `%[1, 2; 4, 6; 9, 12]%`
 
 Veja também: `sum`, `cumprod`.
 

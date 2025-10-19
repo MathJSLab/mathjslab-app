@@ -17,9 +17,9 @@ O índice linear atravessa a dimensão 1 (linhas) e depois a dimensão 2
 (colunas), depois dimensão 3 (páginas), etc. até numerar todos dos elementos.
 Considere as seguintes matrizes 3 por 3:
 
-> > %%[1,4,7;2,5,8;3,6,9]%%
+> > `%[1,4,7;2,5,8;3,6,9]%`
 
-> > %%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3']%%
+> > `%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3']%`
 
 A primeira matriz contém os índices lineares para cada elemento da matriz. A
 segunda matriz mostra as tuplas subscritas para a mesma matriz.
@@ -31,9 +31,9 @@ subscritos apropriados de uma matriz 3 por 3.
 
 > > `[r, c] = ind2sub ([3, 3], ind)`
 
-> > %%r = [2, 2]%%
+> > `%r = [2, 2]%`
 
-> > %%c = [1, 3]%%
+> > `%c = [1, 3]%`
 
 Se o número de subscritos de saída exceder o número de dimensões, as dimensões
 excedidas são definidas como '1'. Por outro lado, se menos subscritos do que
@@ -48,17 +48,17 @@ final solicitada. Para maior clareza, considere os seguintes exemplos:
 
 > > `[r, c, s] = ind2sub (dims, ind)`
 
-> > %%r = [2, 2]%%
+> > `%r = [2, 2]%`
 
-> > %%c = [1, 3]%%
+> > `%c = [1, 3]%`
 
-> > %%s = [1, 1]%%
+> > `%s = [1, 1]%`
 
 > > `# same as dims = [9]`
 
 > > `r = ind2sub (dims, ind)`
 
-> > %%r = [2, 8]%%
+> > `%r = [2, 8]%`
 
 Veja também: `sub2ind`, `size`.
 

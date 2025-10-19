@@ -4,7 +4,7 @@ Calcula el seno inverso en grados para cada elemento de `X`.
 
 El seno inverso en grados se define por
 
-> > %%asind(z) = rad2deg(asin(z))%%
+> > `%asind(z) = rad2deg(asin(z))%`
 
 Véase también: `sind`, `asin`.
 

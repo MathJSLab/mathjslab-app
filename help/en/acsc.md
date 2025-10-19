@@ -4,7 +4,7 @@ Compute the inverse cosecant in radians for each element of `X`.
 
 This is defined as
 
-> > %%acsc(z) = asin(1/z)%%
+> > `%acsc(z) = asin(1/z)%`
 
 See also: `csc`, `acscd`.
 

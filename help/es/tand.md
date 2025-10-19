@@ -4,7 +4,7 @@ Calcula la tangente de cada elemento de `X` en grados.
 
 La tangente en grados se define por
 
-> > %%tand(z) = rad2deg(tan(z))%%
+> > `%tand(z) = rad2deg(tan(z))%`
 
 Devuelve cero para elementos donde `X/180` es un número entero e `Inf` para
 elementos donde `(X-90)/180` es un número entero.

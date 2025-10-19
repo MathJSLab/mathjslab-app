@@ -4,7 +4,7 @@ Compute the cotangent for each element of `X` in radians.
 
 This is defined as
 
-> > %%cot(z) = cos(z)/sin(z)%%
+> > `%cot(z) = cos(z)/sin(z)%`
 
 See also: `acot`, `cotd`, `coth`.
 

@@ -4,7 +4,7 @@ Calcula la tangente hiperbólica inversa para cada elemento de `X`.
 
 La tangente hiperbólica inversa está definida por
 
-> > %%atanh(z) = 1/2*ln((1+z)/(1-z))%%
+> > `%atanh(z) = 1/2*ln((1+z)/(1-z))%`
 
 Véase también: `tanh`.
 

@@ -6,7 +6,7 @@ Se `X` for complexo, retorna `round (real (X)) + round (imag (X)) * I`. Se
 houver dois números inteiros mais próximos, retorna aquele que estiver mais
 distante zero.
 
-> > `round ([-2.7, 2.7])` %% [-3, 3]%%
+> > `round ([-2.7, 2.7])` `% [-3, 3]%`
 
 Veja também: `ceil`, `floor`, `fix`, `roundb`.
 

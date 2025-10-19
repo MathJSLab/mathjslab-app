@@ -4,7 +4,7 @@ Calcula la secante hiperbólica de cada elemento de `X`.
 
 La secante hiperbólica está definida por
 
-> > %%sech(z) = 1/cosh(z)%%
+> > `%sech(z) = 1/cosh(z)%`
 
 Véase también: `asech`.
 

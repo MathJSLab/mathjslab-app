@@ -4,7 +4,7 @@ Compute the inverse cosine in degrees for each element of `X`.
 
 This is defined as
 
-> > %%acosd(z) = rad2deg(acos(z))%%
+> > `%acosd(z) = rad2deg(acos(z))%`
 
 See also: `cosd`, `acos`.
 

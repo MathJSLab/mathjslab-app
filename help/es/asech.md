@@ -4,7 +4,7 @@ Calcula la secante hiperbólica inversa de cada elemento de `X`.
 
 La secante hiperbólica inversa se define por
 
-> > %%asech(z) = acosh(1/z)%%
+> > `%asech(z) = acosh(1/z)%`
 
 Véase también: `sech`.
 

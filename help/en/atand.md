@@ -4,7 +4,7 @@ Compute the inverse tangent in degrees for each element of `X`.
 
 This is defined as
 
-> > %%atand(z) = rad2deg(atan(z))%%
+> > `%atand(z) = rad2deg(atan(z))%`
 
 See also: `tand`, `atan`.
 

@@ -1,6 +1,6 @@
 - `Y = exp (X)`
 
-Calcula %%e^x%% para cada elemento de `X`.
+Calcula `%e^x%` para cada elemento de `X`.
 
 Veja também: `log`.
 

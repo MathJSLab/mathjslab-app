@@ -4,7 +4,7 @@ Calcula la función signo.
 
 La función signo está definida por
 
-> > %%sign (x) = x ./ abs (X)%%
+> > `%sign (x) = x ./ abs (X)%`
 
 Véase también: `signbit`.
 

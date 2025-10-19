@@ -4,7 +4,7 @@ Compute the sine for each element of `X` in degrees.
 
 This is defined as
 
-> > %%sind(z) = rad2deg(sin(z))%%
+> > `%sind(z) = rad2deg(sin(z))%`
 
 The function is more accurate than `sin` for large values of `X` and for
 multiples of 180 degrees (`X/180` is an integer) where `sind` returns `0`

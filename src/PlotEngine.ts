@@ -1,6 +1,5 @@
-import type * as PlotlyType from 'plotly.js';
+import Plotly from 'plotly.js-dist-min';
 import { type ElementType, type NodeExpr, type NodeIdentifier, AST, BuiltInFunctionTable, CharString, ComplexDecimal, Decimal, LinearAlgebra, MultiArray } from 'mathjslab';
-import { DynamicModule } from './DynamicModule';
 import { insertOutput } from './outputFunction';
 import { appEngine } from './appEngine';
 
@@ -31,7 +30,7 @@ const plotWidth = 100;
 abstract class PlotEngine {
     public static readonly outputFunction: { [k: string]: Function } = {
         plot: function (parent: string): void {
-            DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
+            (async () => {
                 const trace1 = {
                     x: [1, 2.5, 3, 4],
                     y: [10, 15, 13, 17],
@@ -45,12 +44,12 @@ abstract class PlotEngine {
                 };
 
                 const data = [trace1, trace2] as Plotly.Data[];
-                (await Plotly).newPlot(parent, data);
-            });
+                await Plotly.newPlot(parent, data);
+            })();
             insertOutput.type = '';
         },
         plot3: function (parent: string): void {
-            DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
+            (async () => {
                 const line3d = {
                     x: [] as number[],
                     y: [] as number[],
@@ -73,18 +72,18 @@ abstract class PlotEngine {
                     line3d.z.push(z);
                 }
 
-                const data = [line3d] as Plotly.Data[];
-
                 const layout = {
                     autosize: true,
                 };
-                (await Plotly).newPlot(parent, data, layout);
-            });
+
+                const data = [line3d] as Plotly.Data[];
+                await Plotly.newPlot(parent, data, layout);
+            })();
             insertOutput.type = '';
         },
         surf: function (parent: string): void {
             insertOutput.type = '';
-            DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
+            (async () => {
                 function custom(x: number, y: number) {
                     return Math.sin(x / 50) * Math.cos(y / 50) * 50 + 50;
                 }
@@ -111,25 +110,24 @@ abstract class PlotEngine {
                     }
                 }
 
-                const data = [surface1] as Plotly.Data[];
-
                 const layout = {
                     title: { text: '3D Plot' },
                     autosize: true,
                 };
-                (await Plotly).newPlot(parent, data, layout);
-            });
+
+                const data = [surface1] as Plotly.Data[];
+                await Plotly.newPlot(parent, data, layout);
+            })();
             insertOutput.type = '';
         },
         plot2d: function (output: HTMLElement): void {
-            DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
+            (async () => {
                 const trace = {
                     x: plotData.X,
                     y: plotData.data,
                     type: 'lines',
                 };
 
-                const data = [trace] as Plotly.Data[];
                 const layout = {};
                 const config = {
                     displayModeBar: false, // Mostra ou esconde a barra
@@ -137,12 +135,13 @@ abstract class PlotEngine {
                     staticPlot: false, // Se `true`, o gráfico fica estático, sem interações
                     // scrollZoom: true, // Permite zoom com a roda do mouse
                 };
-                (await Plotly).newPlot(output, data, layout, config);
-            });
+                const data = [trace] as Plotly.Data[];
+                await Plotly.newPlot(output, data, layout, config);
+            })();
             insertOutput.type = '';
         },
         histogram: function (parent: string): void {
-            DynamicModule.use('plotly', async (Plotly: Promise<typeof PlotlyType>) => {
+            (async () => {
                 const histogram = {
                     x: plotData.X,
                     y: plotData.data,
@@ -150,9 +149,8 @@ abstract class PlotEngine {
                 };
 
                 const data = [histogram] as Plotly.Data[];
-
-                (await Plotly).newPlot(parent, data);
-            });
+                await Plotly.newPlot(parent, data);
+            })();
             insertOutput.type = '';
         },
     };

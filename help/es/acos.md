@@ -4,7 +4,7 @@ Calcula el coseno inverso en radianes para cada elemento de `X`.
 
 El coseno inverso está definido por
 
-> > %%acos(z) = pi/2-asin(z)%%
+> > `%acos(z) = pi/2-asin(z)%`
 
 Véase también: `cos`, `acosd`.
 

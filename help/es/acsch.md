@@ -4,7 +4,7 @@ Calcula la cosecante hiperbólica inversa de cada elemento de `X`.
 
 La cosecante hiperbólica inversa se define por
 
-> > %%acsch(z) = asinh(1/z)%%
+> > `%acsch(z) = asinh(1/z)%`
 
 Véase también: `csch`.
 

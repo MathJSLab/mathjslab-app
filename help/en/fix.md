@@ -2,12 +2,12 @@
 
 Truncate fractional portion of `X` and return the integer portion.
 
-This is equivalent to rounding towards zero. If `X` is complex, return %%fix
-(real (X)) + fix (imag (X)) * I%%.
+This is equivalent to rounding towards zero. If `X` is complex, return
+`%fix(real (X)) + fix (imag (X)) * I%`.
 
 > > `fix ([-2.7, 2.7])`
 
-> > %%fix ([-2.7, 2.7]) = [-2, 2]%%
+> > `%fix ([-2.7, 2.7]) = [-2, 2]%`
 
 See also: `ceil`, `floor`, `round`.
 

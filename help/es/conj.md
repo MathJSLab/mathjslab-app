@@ -2,7 +2,7 @@
 
 Devuelve el conjugado complejo de `Z`.
 
-El conjugado complejo se define por %%conj (Z)' = X - IY%%.
+El conjugado complejo se define por `%conj (Z)' = X - IY%`.
 
 Véase también: `real`, `imag`.
 

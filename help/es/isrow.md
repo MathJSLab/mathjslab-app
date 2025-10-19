@@ -2,8 +2,8 @@
 
 Devuelve `true` si `X` es un vector de fila.
 
-Un vector de fila es una matriz 2-D para la cual `size(X)` devuelve %%[1, N]%%
-con %%N%% no negativo.
+Un vector de fila es una matriz 2-D para la cual `size(X)` devuelve `%[1, N]%`
+con `%N%` no negativo.
 
 Véase tambiém: `iscolumn`, `isscalar`, `isvector`, `ismatrix`, `size`.
 

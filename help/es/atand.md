@@ -4,7 +4,7 @@ Calcula la tangente inversa en grados para cada elemento de `X`.
 
 La tangente inversa en grados se define por
 
-> > %%atand(z) = rad2deg(atan(z))%%
+> > `%atand(z) = rad2deg(atan(z))%`
 
 Véase también: `tand`, `atan`.
 

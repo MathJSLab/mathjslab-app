@@ -4,7 +4,7 @@ Calcula a cossecante hiperbólica de cada elemento de `X`.
 
 A cossecante hiperbólica é definida por
 
-> > %%csch(z) = 1/sinh(z)%%
+> > `%csch(z) = 1/sinh(z)%`
 
 Veja também: `acsch`.
 

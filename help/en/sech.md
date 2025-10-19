@@ -4,7 +4,7 @@ Compute the hyperbolic secant of each element of `X`.
 
 This is defined as
 
-> > %%sech(z) = 1/cosh(z)%%
+> > `%sech(z) = 1/cosh(z)%`
 
 See also: `asech`.
 

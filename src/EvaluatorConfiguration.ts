@@ -1,11 +1,10 @@
 import './showOpenFilePickerPolyfill';
 import { Evaluator, EvaluatorConfig, AliasNameTable } from 'mathjslab';
 import { appEngine } from './appEngine';
-import { MathMarkdown } from './MathMarkdown';
+import { Markdown } from './Markdown';
 import buildConfiguration from './build-configuration.json';
 import { externalFunctionTable } from './externalFunctionTable';
 import { externalCmdWListTable } from './externalCmdWListTable';
-import { waitFor } from './DynamicModule';
 
 /**
  * To change the language after load (to be used in a language selection menu, for example).
@@ -183,11 +182,6 @@ appEngine.openFile = (): void => {
     EvaluatorConfiguration.externalFunctionTable!.open.func();
 };
 
-/**
- * To test if module is loaded.
- */
-appEngine.waitFor = waitFor;
-
 Object.assign(EvaluatorConfiguration.externalCmdWListTable!, {
     open: {
         func: (...args: string[]): void => {
@@ -197,7 +191,7 @@ Object.assign(EvaluatorConfiguration.externalCmdWListTable!, {
 });
 
 /**
- * Evaluator and MathMarkdown initialization.
+ * Evaluator and Markdown initialization.
  */
 function bootstrap() {
     const baseUrl = globalThis.location.href.substring(0, globalThis.location.href.lastIndexOf('/') + 1);
@@ -244,6 +238,6 @@ function bootstrap() {
     appEngine.evaluator = new Evaluator(EvaluatorConfiguration);
     appEngine.evaluator.debug = buildConfiguration.debug;
     appEngine.buildMessage = buildConfiguration.buildMessage;
-    MathMarkdown.initialize();
+    Markdown.initialize();
 }
 bootstrap();

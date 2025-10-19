@@ -4,7 +4,7 @@ Calcula a cossecante inversa em radianos para cada elemento de `X`.
 
 A cossecante inversa é definida por
 
-> > %%acsc(z) = asin(1/z)%%
+> > `%acsc(z) = asin(1/z)%`
 
 Veja também: `csc`, `acscd`.
 

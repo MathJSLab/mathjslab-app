@@ -4,7 +4,7 @@ Compute the inverse sine in degrees for each element of `X`.
 
 This is defined as
 
-> > %%asind(z) = rad2deg(asin(z))%%
+> > `%asind(z) = rad2deg(asin(z))%`
 
 See also: `sind`, `asin`.
 

@@ -4,7 +4,7 @@ Calcula a secante inversa em graus para cada elemento de `X`.
 
 A secante inversa em graus é definida por
 
-> > %%asecd(z) = rad2deg(asec(z))%%
+> > `%asecd(z) = rad2deg(asec(z))%`
 
 Veja também: `secd`, `asec`.
 

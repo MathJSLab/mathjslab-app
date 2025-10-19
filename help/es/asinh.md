@@ -4,7 +4,7 @@ Calcula el seno hiperbólico inverso para cada elemento de `X`.
 
 El seno hiperbólico inverso está definido por
 
-> > %%asinh(z) = ln(sqrt(1+z^2)+z)%%
+> > `%asinh(z) = ln(sqrt(1+z^2)+z)%`
 
 Véase también: `sinh`.
 

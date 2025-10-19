@@ -4,7 +4,7 @@ Calcula a cotangente inversa em graus para cada elemento de `X`.
 
 A cotangente inversa em graus é definida por
 
-> > %%acotd(z) = rad2deg(acot(z))%%
+> > `%acotd(z) = rad2deg(acot(z))%`
 
 Veja também: `cotd`, `acot`.
 

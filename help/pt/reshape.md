@@ -14,7 +14,7 @@ Matriz quadrada 2x2.
 
 > > `reshape ([1, 2, 3, 4], 2, 2)`
 
-> > %%[1, 3; 2, 4]%%
+> > `%[1, 3; 2, 4]%`
 
 Observe que o número total de elementos na matriz original ('prod (size (A))')
 deve corresponder ao número total de elementos na nova matriz ('prod ([M N

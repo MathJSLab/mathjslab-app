@@ -3,7 +3,7 @@
 Devuelve `true` si `X` es una matriz bidimensional.
 
 Una matriz es un objeto con dos dimensiones (`ndims (X) == 2`) para el cual
-`size (X)` devuelve %%[M, N]%% con %%M%% y %%N%% no negativo.
+`size (X)` devuelve `%[M, N]%` con `%M%` y `%N%` no negativo.
 
 Véase tambiém: `isscalar`, `isvector`, `iscell`, `isstruct`, `issparse`, `isa`.
 

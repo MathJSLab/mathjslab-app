@@ -1,6 +1,6 @@
 - `Y = log (X)`
 
-Calcula o logaritmo natural, %%ln (X)%%, para cada elemento de `X`.
+Calcula o logaritmo natural, `%ln (X)%`, para cada elemento de `X`.
 
 Veja também: `exp`, `log1p`, `log2`, `log10`, `logspace`.
 

@@ -4,7 +4,7 @@ Calcula a tangente inversa em radianos para cada elemento de `X`.
 
 A tangente inversa em radianos é definida por
 
-> > %%atan(z) = -i/2*ln((i-z)/(i+z))%%
+> > `%atan(z) = -i/2*ln((i-z)/(i+z))%`
 
 Veja também: `tan`, `atand`.
 

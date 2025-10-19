@@ -15,7 +15,7 @@ to column vectors and returns a matrix where each row is an independent
 sequence between `START(ROW_N), END(ROW_N)`.
 
 Programming Notes: For compatibility with MATLAB&reg;/Octave, return the second
-argument (`END`) when a single value (%%N = 1%%) is requested. If `N` is not an
+argument (`END`) when a single value (`%N = 1%`) is requested. If `N` is not an
 integer then `floor (N)` is used to round the number of elements. If `N` is
 zero or negative then an empty 1x0 matrix is returned.
 

@@ -5,7 +5,7 @@
 import { appEngine } from './appEngine';
 import { CommandPrompt } from './components/components';
 import { type NodeInput } from 'mathjslab';
-import { MathMarkdown } from './MathMarkdown';
+import { Markdown } from './Markdown';
 import { outputFunction, insertOutput } from './outputFunction';
 /**
  * Evaluate prompt.
@@ -65,7 +65,7 @@ function evalPrompt(prompt: CommandPrompt, _index?: number): void {
                 : '');
         if (appEngine.evaluator.debug) throw error;
     }
-    MathMarkdown.mathTypeset();
+    // Markdown.mathTypeset();
 }
 export { evalPrompt };
 export default { evalPrompt };

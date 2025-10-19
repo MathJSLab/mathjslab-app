@@ -7,7 +7,7 @@ For example, after the expression
 
 > > `3^2 + 4^2`
 
-is evaluated, the value returned by `ans` is %%25%%.
+is evaluated, the value returned by `ans` is `%25%`.
 
 ### References
 

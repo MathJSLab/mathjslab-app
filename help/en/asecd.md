@@ -4,7 +4,7 @@ Compute the inverse secant in degrees for each element of `X`.
 
 This is defined as
 
-> > %%asecd(z) = rad2deg(asec(z))%%
+> > `%asecd(z) = rad2deg(asec(z))%`
 
 See also: `secd`, `asec`.
 

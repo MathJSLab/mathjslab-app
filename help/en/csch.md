@@ -4,7 +4,7 @@ Compute the hyperbolic cosecant of each element of `X`.
 
 This is defined as
 
-> > %%csch(z) = 1/sinh(z)%%
+> > `%csch(z) = 1/sinh(z)%`
 
 See also: `acsch`.
 

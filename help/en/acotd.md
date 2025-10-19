@@ -4,7 +4,7 @@ Compute the inverse cotangent in degrees for each element of `X`.
 
 This is defined as
 
-> > %%acotd(z) = rad2deg(acot(z))%%
+> > `%acotd(z) = rad2deg(acot(z))%`
 
 See also: `cotd`, `acot`.
 

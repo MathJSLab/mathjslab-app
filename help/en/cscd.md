@@ -4,7 +4,7 @@ Compute the cosecant for each element of `X` in degrees.
 
 This is defined as
 
-> > %%cscd(z) = rad2deg(csc(z))%%
+> > `%cscd(z) = rad2deg(csc(z))%`
 
 See also: `acscd`, `csc`.
 

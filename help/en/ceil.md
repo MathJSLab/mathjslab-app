@@ -8,7 +8,7 @@ If `X` is complex, return `ceil (real (X)) + ceil (imag (X)) * I`.
 
 > > `ceil ([-2.7, 2.7])`
 
-> > %%ceil ([-2.7, 2.7]) = [-2, 3]%%
+> > `%ceil ([-2.7, 2.7]) = [-2, 3]%`
 
 See also: `floor`, `round`, `fix`.
 

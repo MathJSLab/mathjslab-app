@@ -7,7 +7,7 @@ complex in which case the real and imaginary components are converted
 separately.
 
 The output `RAD` is the same size and shape as `DEG` with degrees converted to
-radians using the conversion constant %%pi/180%%.
+radians using the conversion constant `%pi/180%`.
 
 Example:
 

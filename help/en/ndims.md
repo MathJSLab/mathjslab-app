@@ -8,7 +8,7 @@ singleton dimensions are not counted, i.e., trailing dimensions D greater than
 
 > > `ndims (ones (4, 1, 2, 1))`
 
-> > %%3%%
+> > `%3%`
 
 See also: `size`.
 

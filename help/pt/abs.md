@@ -4,13 +4,13 @@ Calcula o módulo de `X`.
 
 O módulo é definido por
 
-> > %%abs(Z) = sqrt(x^2 + y^2)%%.
+> > `%abs(Z) = sqrt(x^2 + y^2)%`.
 
 Por exemplo:
 
 > > `abs(3 + 4i)`
 
-> > %%abs(3+4i)=5%%
+> > `%abs(3+4i)=5%`
 
 Veja também: `arg`.
 

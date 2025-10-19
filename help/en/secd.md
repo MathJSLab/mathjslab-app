@@ -4,7 +4,7 @@ Compute the secant for each element of `X` in degrees.
 
 This is defined as
 
-> > %%secd(z) = rad2deg(sec(z))%%
+> > `%secd(z) = rad2deg(sec(z))%`
 
 See also: `asecd`, `sec`.
 

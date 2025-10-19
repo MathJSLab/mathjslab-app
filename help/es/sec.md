@@ -4,7 +4,7 @@ Calcula la secante para cada elemento de `X` en radianes.
 
 La secante está definida por
 
-> > %%sec(z) = 1/cos(z)%%
+> > `%sec(z) = 1/cos(z)%`
 
 Véase también: `asec`, `secd`, `sech`.
 

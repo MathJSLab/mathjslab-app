@@ -4,7 +4,7 @@ Calcula la cotangente de cada elemento de `X` en radianes.
 
 La cotangente está definida por
 
-> > %%cot(z) = cos(z)/sin(z)%%
+> > `%cot(z) = cos(z)/sin(z)%`
 
 Véase también: `acot`, `cotd`, `coth`.
 

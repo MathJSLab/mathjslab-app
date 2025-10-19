@@ -1,5 +1,6 @@
 import { Evaluator } from 'mathjslab';
 import { Shell } from './Shell';
+import { Markdown } from './Markdown';
 
 type AppConfiguration = {
     exampleBaseUrl?: string;
@@ -15,7 +16,7 @@ type AppEngine = {
     evaluator: Evaluator;
     shell: Shell;
     openFile: () => void;
-    waitFor: (getter: () => unknown | null | undefined, callback: (obj: unknown) => void, interval: number, maxAttempts: number) => void;
+    Markdown: typeof Markdown;
 };
 
 const appConfiguration: AppConfiguration = {};
@@ -28,7 +29,7 @@ const appEngine: AppEngine = {
     evaluator: null as unknown as Evaluator,
     shell: null as unknown as Shell,
     openFile: () => {},
-    waitFor: () => {},
+    Markdown,
 };
 
 (globalThis as any).appEngine = appEngine;

@@ -8,7 +8,7 @@ D mayor que 2 para lo cual 'size (A, D) = 1'.
 
 > > `ndims (ones (4, 1, 2, 1))`
 
-> > %%3%%
+> > `%3%`
 
 Véase también: `size`.
 

@@ -4,7 +4,7 @@ Calcula o cosseno para cada elemento de `X` em graus.
 
 O cosseno em graus é definido por
 
-> > %%cosd(z) = rad2deg(cos(z))%%
+> > `%cosd(z) = rad2deg(cos(z))%`
 
 Veja também: `acosd`, `cos`.
 

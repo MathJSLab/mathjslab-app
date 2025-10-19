@@ -4,7 +4,7 @@ Calcula a cotangente em graus para cada elemento de `X`.
 
 A cotangente em graus é definida por
 
-> > %%cotd(z) = rad2deg(cot(z))%%
+> > `%cotd(z) = rad2deg(cot(z))%`
 
 Veja também: `acotd`, `cot`.
 

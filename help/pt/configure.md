@@ -20,13 +20,13 @@ Os parâmetros de configuração disponíveis são:
 | parâmetro            | significado                                                                                                                | tipo                                                                                | valor padrão  |
 | :------------------- | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- | :------------ |
 | `'real'`             | O tipo de dado usado como número real.                                                                                     | `'decimal'` ou `'number'`                                                           | `'decimal'`   |
-| `'precision'`        | O número máximo de dígitos significativos do resultado de uma operação.                                                    | inteiro, %%1%% a %%10^9%% inclusive                                                 | %%336%%       |
-| `'precisionCompare'` | O número de dígitos significativos para reduzir a precisão antes das operações de comparação e unparse.                    | inteiro, %%0%% a %%10^9%% inclusive (deve ser menor que o parâmetro `'precision'`). | %%7%%         |
+| `'precision'`        | O número máximo de dígitos significativos do resultado de uma operação.                                                    | inteiro, `%1%` a `%10^9%` inclusive                                                 | `%336%`       |
+| `'precisionCompare'` | O número de dígitos significativos para reduzir a precisão antes das operações de comparação e unparse.                    | inteiro, `%0%` a `%10^9%` inclusive (deve ser menor que o parâmetro `'precision'`). | `%7%`         |
 | `'rounding'`         | O modo de arredondamento padrão usado ao arredondar o resultado de uma operação para `'precision'` dígitos significativos. | string (veja o significado abaixo)                                                  | `'half_down'` |
-| `'toExpPos'`         | O valor do expoente positivo no qual e acima do qual unparse retorna a notação exponencial.                                | inteiro, %%0%% a %%9^15%% inclusive                                                 | %%20%%        |
-| `'toExpNeg'`         | O valor do expoente negativo no qual e abaixo do qual unparse retorna a notação exponencial.                               | inteiro, %%-9^15%% a %%0%% inclusive                                                | %%-7%%        |
-| `'minE'`             | O limite do expoente negativo, ou seja, o valor do expoente abaixo do qual ocorre o underflow para zero.                   | inteiro, %%-9^15%% a %%0%% inclusive                                                | %%-9^15%%     |
-| `'maxE'`             | O limite do expoente positivo, ou seja, o valor do expoente acima do qual ocorre o overflow para %%Inf%%.                  | inteiro, %%0%% a %%9^15%% inclusive                                                 | %%9^15%%      |
+| `'toExpPos'`         | O valor do expoente positivo no qual e acima do qual unparse retorna a notação exponencial.                                | inteiro, `%0%` a `%9^15%` inclusive                                                 | `%20%`        |
+| `'toExpNeg'`         | O valor do expoente negativo no qual e abaixo do qual unparse retorna a notação exponencial.                               | inteiro, `%-9^15%` a `%0%` inclusive                                                | `%-7%`        |
+| `'minE'`             | O limite do expoente negativo, ou seja, o valor do expoente abaixo do qual ocorre o underflow para zero.                   | inteiro, `%-9^15%` a `%0%` inclusive                                                | `%-9^15%`     |
+| `'maxE'`             | O limite do expoente positivo, ou seja, o valor do expoente acima do qual ocorre o overflow para `%Inf%`.                  | inteiro, `%0%` a `%9^15%` inclusive                                                 | `%9^15%`      |
 | `'modulo'`           | O modo usado ao calcular o módulo: a mod n.                                                                                | string (veja o significado abaixo)                                                  | `'down'`      |
 | `'crypto'`           | O valor que determina se a geração de números pseudoaleatórios criptograficamente seguros será usada.                      | lógico                                                                              | `'false'`     |
 
@@ -37,15 +37,15 @@ seguida.
 
 | valor          | significado                                                                                  |
 | :------------- | :------------------------------------------------------------------------------------------- |
-| `'up'`         | Arredonda afastando de %%0%%.                                                                |
-| `'down'`       | Arredonda em direção a %%0%%.                                                                |
-| `'ceil'`       | Arredonda em direção a %%Inf%%.                                                              |
-| `'floor'`      | Arredonda em direção a %%-Inf%%.                                                             |
-| `'half_up'`    | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda afastando de %%0%%.        |
-| `'half_down'`  | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda em direção a %%0%%.        |
+| `'up'`         | Arredonda afastando de `%0%`.                                                                |
+| `'down'`       | Arredonda em direção a `%0%`.                                                                |
+| `'ceil'`       | Arredonda em direção a `%Inf%`.                                                              |
+| `'floor'`      | Arredonda em direção a `%-Inf%`.                                                             |
+| `'half_up'`    | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda afastando de `%0%`.        |
+| `'half_down'`  | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda em direção a `%0%`.        |
 | `'half_even'`  | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda em direção ao vizinho par. |
-| `'half_ceil'`  | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda em direção a %%Inf%%.      |
-| `'half_floor'` | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda em direção a %%-Inf%%.     |
+| `'half_ceil'`  | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda em direção a `%Inf%`.      |
+| `'half_floor'` | Arredonda ao vizinho mais próximo. Se for equidistante, arredonda em direção a `%-Inf%`.     |
 
 #### opções de `modulo`
 

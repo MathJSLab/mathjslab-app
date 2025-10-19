@@ -8,16 +8,16 @@ Se `DIM` não for especificado, o padrão é a operação em colunas. Por exempl
 
 > > `cummax ([1, 3, 2, 6, 4, 5])`
 
-> > %%[1, 3, 3, 6, 6, 6]%%
+> > `%[1, 3, 3, 6, 6, 6]%`
 
 Se chamado com dois argumentos de saída, o índice do valor máximo também é
 retornado.
 
 > > `[w, iw] = cummax ([1, 3, 2, 6, 4, 5])`
 
-> > %%M = [1, 3, 3, 6, 6, 6]%%
+> > `%M = [1, 3, 3, 6, 6, 6]%`
 
-> > %%IM = [1, 2, 2, 4, 4, 4]%%
+> > `%IM = [1, 2, 2, 4, 4, 4]%`
 
 Veja também: `cummin`, `max`, `min`.
 

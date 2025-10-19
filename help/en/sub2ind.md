@@ -18,9 +18,7 @@ The linear index traverses dimension 1 (rows), then dimension 2 (columns), then
 dimension 3 (pages), etc. until it has numbered all of the elements. Consider
 the following 3-by-3 matrix:
 
-> > %%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3'] = [1, 4,
-> >
-> > > > 7; 2, 5, 8; 3, 6, 9]%%
+> > `%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3'] = [1, 4, 7; 2, 5, 8; 3, 6, 9]%`
 
 The left matrix contains the subscript tuples for each matrix element. The
 right matrix shows the linear indices for the same matrix.
@@ -35,7 +33,7 @@ and `(2,3)` of a 3-by-3 matrix to linear indices with a single call to
 
 > > `ind = sub2ind ([3, 3], s1, s2)`
 
-> > %%ind = [2, 8]%%
+> > `%ind = [2, 8]%`
 
 See also: `ind2sub`, `size`.
 

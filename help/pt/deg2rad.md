@@ -6,7 +6,7 @@ A entrada `DEG` deve ser escalar ou matriz. `DEG` pode ser complexo, caso em
 que os componentes reais e imaginários serão convertidos separadamente.
 
 A saída `RAD` tem as mesmas dimensões que `DEG` com graus convertidos em
-radianos usando a constante de conversão %%pi/180%%.
+radianos usando a constante de conversão `%pi/180%`.
 
 Exemplo:
 

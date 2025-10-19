@@ -18,6 +18,6 @@ The six trigonometric functions can be defined as coordinate values of points
 on the Euclidean plane that are related to the unit circle, which is the circle
 of radius one centered at the origin 0 of this coordinate system. While
 right-angled triangle definitions allow for the definition of the trigonometric
-functions for angles between 0 and %%pi/2%% radians (90º), the unit circle
+functions for angles between 0 and `%pi/2%` radians (90º), the unit circle
 definitions allow the domain of trigonometric functions to be extended to all
 positive and negative real numbers.

@@ -4,7 +4,7 @@ Calcula el coseno de cada elemento de `X` en grados.
 
 El coseno en grados se define por
 
-> > %%cosd(z) = rad2deg(cos(z))%%
+> > `%cosd(z) = rad2deg(cos(z))%`
 
 Véase también: `acosd`, `cos`.
 

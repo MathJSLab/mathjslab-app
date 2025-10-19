@@ -4,7 +4,7 @@ Compute the inverse cosine in radians for each element of `X`.
 
 This is defined as
 
-> > %%acos(z) = pi/2-asin(z)%%
+> > `%acos(z) = pi/2-asin(z)%`
 
 See also: `cos`, `acosd`.
 

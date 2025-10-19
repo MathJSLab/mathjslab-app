@@ -4,7 +4,7 @@ Calcula la secante para cada elemento de `X` en grados.
 
 La secante en grados se define por
 
-> > %%secd(z) = rad2deg(sec(z))%%
+> > `%secd(z) = rad2deg(sec(z))%`
 
 Véase también: `asecd`, `sec`.
 

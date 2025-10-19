@@ -7,7 +7,7 @@ Por ejemplo, después de la expresión
 
 > > `3^2+4^2`
 
-ser calculado, el valor devuelto por `ans` es %%25%%.
+ser calculado, el valor devuelto por `ans` es `%25%`.
 
 ### Referencias
 

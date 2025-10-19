@@ -15,7 +15,7 @@ convierte en vectores de columna y devuelve una matriz donde cada línea es una
 secuencia independiente entre `START(ROW_N),END(ROW_N)`.
 
 Notas de programación: Para compatibilidad con MATLAB&reg;/Octave, devuelve el
-segundo argumento (`END`) cuando se solicita un valor único (%%N = 1%%). Si `N`
+segundo argumento (`END`) cuando se solicita un valor único (`%N = 1%`). Si `N`
 es un número no entero, entonces se usa `floor(N)` para redondear el número de
 elementos. Si `N` es cero o negativo, entonces se devuelve una matriz vacía de
 1x0.

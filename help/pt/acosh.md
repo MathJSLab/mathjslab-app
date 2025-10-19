@@ -4,7 +4,7 @@ Calcula o cosseno hiperbólico inverso para cada elemento de `X`.
 
 O cosseno hiperbólico inverso é definido por
 
-> > %%acosh(z) = ln(sqrt(-1+z^2)+z)%%
+> > `%acosh(z) = ln(sqrt(-1+z^2)+z)%`
 
 Veja também: `cosh`.
 

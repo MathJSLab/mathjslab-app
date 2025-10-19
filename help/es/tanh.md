@@ -4,7 +4,7 @@ Calcula la tangente hiperbólica para cada elemento de `X`.
 
 La tangente hiperbólica está definida por
 
-> > %%tanh(z) = sinh(z)/cosh(z)%%
+> > `%tanh(z) = sinh(z)/cosh(z)%`
 
 Véase también: `atanh`, `sinh`, `cosh`.
 

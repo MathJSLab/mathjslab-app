@@ -19,9 +19,7 @@ El índice lineal atraviesa la dimensión 1 (filas) y luego la dimensión 2
 (columnas), luego dimensión 3 (páginas), etc. hasta numerar todos los
 elementos. Considere la siguiente matriz 3 por 3:
 
-> > %%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3'] = [1, 4,
-> >
-> > > > 7; 2, 5, 8; 3, 6, 9]%%
+> > `%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3'] = [1, 4, 7; 2, 5, 8; 3, 6, 9]%`
 
 La matriz de la izquierda contiene las tuplas de subíndices para cada matriz de
 elementos. La matriz de la derecha muestra los índices lineales para el mismo
@@ -37,7 +35,7 @@ y `(2,3)` de una matriz de 3 por 3 en índices lineales con una sola llamada a
 
 > > `ind = sub2ind ([3, 3], s1, s2)`
 
-> > %%ind = [2, 8]%%
+> > `%ind = [2, 8]%`
 
 Véase también: `ind2sub`, `size`.
 

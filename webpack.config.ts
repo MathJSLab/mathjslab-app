@@ -148,8 +148,14 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                         compress: typeof devServerConfig.compress !== 'undefined' ? devServerConfig.compress : true,
                         port: typeof devServerConfig.port !== 'undefined' ? devServerConfig.port : 4000,
                         hot: typeof devServerConfig.hot !== 'undefined' ? devServerConfig.hot : true,
+                        liveReload: typeof devServerConfig.liveReload !== 'undefined' ? devServerConfig.liveReload : true,
                         open: typeof devServerConfig.open !== 'undefined' ? devServerConfig.open : false,
-                        server: typeof devServerConfig.server !== 'undefined' ? devServerConfig.server : {},
+                        server:
+                            typeof devServerConfig.server !== 'undefined'
+                                ? devServerConfig.server
+                                : {
+                                      type: typeof devServerConfig.server.type !== 'undefined' ? devServerConfig.server.type : 'https',
+                                  },
                     },
                 });
             });

@@ -25,7 +25,7 @@ retorna o menor elemento da matriz 2-D `X` e
 
 > > `min (2:5, pi)`
 
-> > %%[2, 3, 3.1416, 3.1416]%%
+> > `%[2, 3, 3.1416, 3.1416]%`
 
 compara cada elemento do intervalo `2:5` com `pi` e retorna um vetor linha dos
 valores mínimos.
@@ -36,7 +36,7 @@ de fase no intervalo (-pi, pi]. Portanto,
 
 > > `min ([-1 i 1 -i])`
 
-> > %%-i%%
+> > `%-i%`
 
 porque todas as entradas têm magnitude 1, mas -i tem a menor fase ângulo com
 valor -pi/2.
@@ -46,9 +46,9 @@ retorna o primeiro índice do(s) valor(es) mínimo(s). Por isso,
 
 > > `[x, ix] = min ([1, 3, 0, 2, 0])`
 
-> > %%x = 0%%
+> > `%x = 0%`
 
-> > %%ix = 3%%
+> > `%ix = 3%`
 
 Veja também: `max`, `cummin`, `cummax`.
 

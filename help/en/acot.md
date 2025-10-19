@@ -4,7 +4,7 @@ Compute the inverse cotangent in radians for each element of `X`.
 
 This is defined as
 
-> > %%acot(z) = atan(1/z)%%
+> > `%acot(z) = atan(1/z)%`
 
 See also: `cot`, `acotd`.
 

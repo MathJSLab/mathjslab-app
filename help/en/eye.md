@@ -13,7 +13,7 @@ the elements as the number of rows and columns, respectively. For example:
 
 > > `eye (3)`
 
-> > %%eye (3) = [1,0,0;0,1,0;0,0,1]%%
+> > `%eye (3) = [1,0,0;0,1,0;0,0,1]%`
 
 The following expressions all produce the same result:
 

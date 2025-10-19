@@ -4,13 +4,13 @@ Calcula el valor absoluto de `X`.
 
 El valor absoluto está definido por
 
-> > %%abs(Z) = sqrt(x^2 + y^2)%%.
+> > `%abs(Z) = sqrt(x^2 + y^2)%`.
 
 Por ejemplo:
 
 > > `abs(3 + 4i)`
 
-> > %%abs(3+4i)=5%%
+> > `%abs(3+4i)=5%`
 
 Véase también: `arg`.
 

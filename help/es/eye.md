@@ -14,7 +14,7 @@ ejemplo:
 
 > > `eye (3)`
 
-> > %%eye (3) = [1,0,0;0,1,0;0,0,1]%%
+> > `%eye (3) = [1,0,0;0,1,0;0,0,1]%`
 
 Todas las siguientes expresiones producen el mismo resultado:
 

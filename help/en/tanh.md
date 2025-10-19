@@ -4,7 +4,7 @@ Compute hyperbolic tangent for each element of `X`.
 
 This is defined as
 
-> > %%tanh(z) = sinh(z)/cosh(z)%%
+> > `%tanh(z) = sinh(z)/cosh(z)%`
 
 See also: `atanh`, `sinh`, `cosh`.
 

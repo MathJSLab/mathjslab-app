@@ -4,7 +4,7 @@ Calcula a função sinal.
 
 A função sinal é definida por
 
-> > %%sign (x) = x ./ abs (X)%%
+> > `%sign (x) = x ./ abs (X)%`
 
 Veja também: `signbit`.
 

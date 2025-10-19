@@ -4,7 +4,7 @@ Calcula a cossecante inversa em graus para cada elemento de `X`.
 
 A cossecante inversa em graus é definida por
 
-> > %%acscd(z) = rad2deg(acsc(z))%%
+> > `%acscd(z) = rad2deg(acsc(z))%`
 
 Veja também: `cscd`, `acsc`.
 

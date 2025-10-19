@@ -23,29 +23,29 @@ Exemplo 1: saída vetorial de linha única
 
 > > `size ([1, 2; 3, 4; 5, 6])`
 
-> > %%[ 3, 2 ]%%
+> > `%[ 3, 2 ]%`
 
 Exemplo 2: número de elementos na 2ª dimensão (colunas)
 
 > > `size ([1, 2; 3, 4; 5, 6], 2)`
 
-> > %%2%%
+> > `%2%`
 
 Exemplo 3: número de argumentos de saída `==` número de dimensões
 
 > > `[nr, nc] = size ([1, 2; 3, 4; 5, 6])`
 
-> > %%nr = 3%%
+> > `%nr = 3%`
 
-> > %%nc = 2%%
+> > `%nc = 2%`
 
 Exemplo 4: número de argumentos de saída `<` número de dimensões
 
 > > `[nr, remainder] = size (ones (2, 3, 4, 5))`
 
-> > %%nr = 2%%
+> > `%nr = 2%`
 
-> > %%remainder = 60%%
+> > `%remainder = 60%`
 
 Veja também: `numel`, `ndims`, `length`, `rows`, `columns`, `size_equal`,
 `common_size`.

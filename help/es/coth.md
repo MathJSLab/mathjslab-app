@@ -4,7 +4,7 @@ Calcula la cotangente hiperbólica de cada elemento de `X`.
 
 La cotangente hiperbólica se define por
 
-> > %%coth(z) = cosh(z)/sinh(z)%%
+> > `%coth(z) = cosh(z)/sinh(z)%`
 
 Véase también: `acoth`.
 

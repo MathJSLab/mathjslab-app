@@ -2,8 +2,8 @@
 
 Retorna `true` se `X` for um vetor linha.
 
-Um vetor de linha é uma matriz 2-D para a qual `size (X)` retorna %%[1, N]%%
-com %%N%% não negativo.
+Um vetor de linha é uma matriz 2-D para a qual `size (X)` retorna `%[1, N]%`
+com `%N%` não negativo.
 
 Veja também: `iscolumn`, `isscalar`, `isvector`, `ismatrix`, `size`.
 

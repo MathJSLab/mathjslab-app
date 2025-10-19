@@ -9,6 +9,7 @@
     "bundles": ["mathjslab-app"],
     "devServer": {
       "open": false,
+      "liveReload": false,
       "server": {
         "type": "https"
       }

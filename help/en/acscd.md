@@ -4,7 +4,7 @@ Compute the inverse cosecant in degrees for each element of `X`.
 
 This is defined as
 
-> > %%acscd(z) = rad2deg(acsc(z))%%
+> > `%acscd(z) = rad2deg(acsc(z))%`
 
 See also: `cscd`, `acsc`.
 

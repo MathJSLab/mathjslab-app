@@ -8,7 +8,7 @@ que 2 para as quais 'size (A, D) = 1'.
 
 > > `ndims (ones (4, 1, 2, 1))`
 
-> > %%3%%
+> > `%3%`
 
 Veja também: `size`.
 

@@ -52,14 +52,7 @@
                             return response.text();
                         })
                         .then((readme) => {
-                            appEngine.waitFor(
-                                () => marked,
-                                () => {
-                                    document.getElementById('mathjslab-readme').innerHTML = marked.parse(readme);
-                                },
-                                500,
-                                5,
-                            );
+                            document.getElementById('mathjslab-readme').innerHTML = globalThis.appEngine.Markdown.parse(readme);
                         })
                         .catch((error) => {
                             console.error(error);

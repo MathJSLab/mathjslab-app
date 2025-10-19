@@ -4,7 +4,7 @@ Calcula la cotangente hiperbólica inversa de cada elemento de `X`.
 
 La cotangente hiperbólica inversa se define por
 
-> > %%acoth(z) = atanh(1/z)%%
+> > `%acoth(z) = atanh(1/z)%`
 
 Véase también: `coth`.
 

@@ -4,7 +4,7 @@ Calcula a tangente para cada elemento de `X` em radianos.
 
 A tangente é definida por
 
-> > %%tan(z) = sin(z)/cos(z)%%
+> > `%tan(z) = sin(z)/cos(z)%`
 
 Veja também: `atan`, `tand`, `tanh`.
 

@@ -54,7 +54,7 @@ calendário gregoriano.
 Para calcular o número de dias bissextos incrementados desde o ano 0,
 considerando que as divisões são com resultado inteiro, fazemos:
 
-> %%ano/4 - ano/100 + ano/400%%
+> `%ano/4 - ano/100 + ano/400%`
 
 Assim, um algoritmo que calcule o dia da semana no calendário gregoriano deve
 considerar os dias acrescidos devido aos anos bissextos.

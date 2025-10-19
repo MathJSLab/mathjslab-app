@@ -9,16 +9,16 @@ Por ejemplo:
 
 > > `cummin ([5, 4, 6, 2, 3, 1])`
 
-> > %%[5, 4, 4, 2, 2, 1]%%
+> > `%[5, 4, 4, 2, 2, 1]%`
 
 Si se llama con dos argumentos de salida, el índice del valor mínimo también se
 devuelve.
 
 > > `[M, IM] = cummin ([5, 4, 6, 2, 3, 1])`
 
-> > %%M = [5, 4, 4, 2, 2, 1]%%
+> > `%M = [5, 4, 4, 2, 2, 1]%`
 
-> > %%IM = [1, 2, 2, 4, 4, 6]%%
+> > `%IM = [1, 2, 2, 4, 4, 6]%`
 
 Véase también: `cummax`, `min`, `max`.
 

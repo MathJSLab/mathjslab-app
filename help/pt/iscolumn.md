@@ -2,8 +2,8 @@
 
 Retorna `true` se `X` for um vetor coluna.
 
-Um vetor de coluna é uma matriz 2-D para a qual `size (X)` retorna %%[N, 1]%%
-com %%N%% não negativo.
+Um vetor de coluna é uma matriz 2-D para a qual `size (X)` retorna `%[N, 1]%`
+com `%N%` não negativo.
 
 Veja também: `isrow`, `isscalar`, `isvector`, `ismatrix`, `size`.
 

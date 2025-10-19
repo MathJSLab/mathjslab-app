@@ -14,7 +14,7 @@ matrix.
 
 > > `reshape ([1, 2, 3, 4], 2, 2)`
 
-> > %%[1, 3; 2, 4]%%
+> > `%[1, 3; 2, 4]%`
 
 Note that the total number of elements in the original matrix ('prod (size
 (A))') must match the total number of elements in the new matrix ('prod ([M N

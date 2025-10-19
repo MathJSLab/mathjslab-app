@@ -25,12 +25,14 @@ software.
 
 #### Table Of Contents
 
-- [Code of Conduct](#code-of-conduct)
-- [How to Contribute](#how-to-contribute)
-- [Community](#community)
-- [Code conventions](#code-conventions)
-- [Work fronts](#work-fronts)
-- [References](#references)
+- [Contributing to MathJSLab Demo](#contributing-to-mathjslab-demo) -
+  [Table Of Contents](#table-of-contents)
+    - [Code of Conduct](#code-of-conduct)
+    - [How to Contribute](#how-to-contribute)
+    - [Community](#community)
+    - [Code Conventions](#code-conventions)
+    - [Work fronts](#work-fronts)
+    - [References](#references)
 
 ## Code of Conduct
 
@@ -118,3 +120,5 @@ Here are some references consulted to carry out this project.
 - [Mermaid: Diagramming and charting tool](https://mermaid.js.org/)
 - [highlight.js](https://highlightjs.org/)
 - [tangle](http://worrydream.com/Tangle/)
+- [Android Developers](https://developer.android.com/)
+- [`capacitor`](https://capacitorjs.com/)

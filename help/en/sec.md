@@ -4,7 +4,7 @@ Compute the secant for each element of `X` in radians.
 
 This is defined as
 
-> > %%sec(z) = 1/cos(z)%%
+> > `%sec(z) = 1/cos(z)%`
 
 See also: `asec`, `secd`, `sech`.
 

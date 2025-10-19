@@ -4,7 +4,7 @@ Compute the cosecant for each element of `X` in radians.
 
 This is defined as
 
-> > %%csc(z)=1/sin(z)%%
+> > `%csc(z)=1/sin(z)%`
 
 See also: `acsc`, `cscd`, `csch`.
 

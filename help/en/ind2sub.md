@@ -17,9 +17,9 @@ The linear index traverses dimension 1 (rows), then dimension 2 (columns), then
 dimension 3 (pages), etc. until it has numbered all of the elements. Consider
 the following 3-by-3 matrices:
 
-> > %%[1,4,7;2,5,8;3,6,9]%%
+> > `%[1,4,7;2,5,8;3,6,9]%`
 
-> > %%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3']%%
+> > `%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3']%`
 
 The first matrix contains the linear indices for each matrix element. The
 second matrix shows the subscript tuples for the same matrix.
@@ -31,9 +31,9 @@ appropriate subscripts of a 3-by-3 matrix.
 
 > > `[r, c] = ind2sub ([3, 3], ind)`
 
-> > %%r = [2, 2]%%
+> > `%r = [2, 2]%`
 
-> > %%c = [1, 3]%%
+> > `%c = [1, 3]%`
 
 If the number of output subscripts exceeds the number of dimensions, the
 exceeded dimensions are set to '1'. On the other hand, if fewer subscripts than
@@ -48,17 +48,17 @@ requested dimension. For clarity, consider the following examples:
 
 > > `[r, c, s] = ind2sub (dims, ind)`
 
-> > %%r = [2, 2]%%
+> > `%r = [2, 2]%`
 
-> > %%c = [1, 3]%%
+> > `%c = [1, 3]%`
 
-> > %%s = [1, 1]%%
+> > `%s = [1, 1]%`
 
 > > `# same as dims = [9]`
 
 > > `r = ind2sub (dims, ind)`
 
-> > %%r = [2, 8]%%
+> > `%r = [2, 8]%`
 
 See also: `sub2ind`, `size`.
 

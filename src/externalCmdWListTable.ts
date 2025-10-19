@@ -1,5 +1,5 @@
 import { appEngine } from './appEngine';
-import { MathMarkdown } from './MathMarkdown';
+import { Markdown } from './Markdown';
 
 const externalCmdWListTable = {
     help: {
@@ -39,8 +39,8 @@ const externalCmdWListTable = {
                             }
                         })
                         .then((responseText) => {
-                            promptEntry.element.output.innerHTML = MathMarkdown.md2html(responseText);
-                            MathMarkdown.typeset();
+                            promptEntry.element.output.innerHTML = Markdown.parse(responseText);
+                            Markdown.typeset(promptEntry.element.output);
                         });
                 }
             } else if (args.length == 0) {
@@ -57,14 +57,14 @@ const externalCmdWListTable = {
                         }
                     })
                     .then((responseText) => {
-                        promptEntry.element.output.innerHTML = MathMarkdown.md2html(
+                        promptEntry.element.output.innerHTML = Markdown.parse(
                             responseText +
                                 appEngine.evaluator.builtInFunctionList
                                     .map((func) => `\`${func}\``)
                                     .sort()
                                     .join(', '),
                         );
-                        MathMarkdown.typeset();
+                        Markdown.typeset(promptEntry.element.output);
                     });
             } else {
                 promptEntry.element.frameBox.className = 'bad';

@@ -7,7 +7,7 @@ Por exemplo, após a expressão
 
 > > `3 ^ 2 + 4 ^ 2`
 
-ser computada, o valor retornado por `ans` é %%25%%.
+ser computada, o valor retornado por `ans` é `%25%`.
 
 ### Referências
 

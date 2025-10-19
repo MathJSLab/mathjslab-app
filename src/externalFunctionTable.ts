@@ -2,7 +2,7 @@ import { type NodeInput, type NodeExpr, type NodeIdentifier, type BuiltInFunctio
 import { insertOutput } from './outputFunction';
 import { PlotEngine } from './PlotEngine';
 import { openFileDialog } from './openFileDialog';
-import { MathMarkdown } from './MathMarkdown';
+import { Markdown } from './Markdown';
 import { appEngine } from './appEngine';
 
 const openFileOptionMathJSLab: OpenFilePickerOptions & { multiple?: false | undefined } = {
@@ -157,8 +157,8 @@ const externalFunctionTable: BuiltInFunctionTable = {
                         })
                         .then((responseFile: string) => {
                             promptEntry.element.frameBox.className = 'doc';
-                            promptEntry.element.output.innerHTML = MathMarkdown.md2html(responseFile);
-                            MathMarkdown.typeset();
+                            promptEntry.element.output.innerHTML = Markdown.parse(responseFile);
+                            Markdown.typeset(promptEntry.element.output);
                         })
                         /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
                         .catch((error) => {
@@ -170,8 +170,8 @@ const externalFunctionTable: BuiltInFunctionTable = {
             } else {
                 openFileDialog((content: string) => {
                     promptEntry.element.frameBox.className = 'doc';
-                    promptEntry.element.output.innerHTML = MathMarkdown.md2html(content);
-                    MathMarkdown.typeset();
+                    promptEntry.element.output.innerHTML = Markdown.parse(content);
+                    Markdown.typeset(promptEntry.element.output);
                 }, openFileOptionMarkdown);
                 return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeListFirst());
             }

@@ -15,7 +15,7 @@ transforma em vetores de coluna e retorna uma matriz onde cada linha é uma
 sequência independente entre `START(ROW_N),END(ROW_N)`.
 
 Notas de programação: Para compatibilidade com MATLAB&reg;/Octave, retorna o
-segundo argumento (`END`) quando um único valor (%%N = 1%%) é solicitado. Se
+segundo argumento (`END`) quando um único valor (`%N = 1%`) é solicitado. Se
 `N` for um número não inteiro, então `floor (N)` é usado para arredondar o
 número de elementos. Se `N` for zero ou negativo, então uma matriz 1x0 vazia é
 retornada.

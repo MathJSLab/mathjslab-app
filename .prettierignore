@@ -1,7 +1,8 @@
-
+# dependencies directory.
 node_modules/
+# Advertising directory (there are Inkscape .svg files that cannot be changed).
+advertising/
+# Minifyed javascript.
 *.min.js
 # Scripts build directory.
 script/build/
-# Advertising directory (there are Inkscape .svg files that cannot be changed).
-advertising/

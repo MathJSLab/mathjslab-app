@@ -4,7 +4,7 @@ Compute the inverse hyperbolic secant of each element of `X`.
 
 This is defined as
 
-> > %%asech(z) = acosh(1/z)%%
+> > `%asech(z) = acosh(1/z)%`
 
 See also: `sech`.
 

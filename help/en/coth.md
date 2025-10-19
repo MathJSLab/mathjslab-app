@@ -4,7 +4,7 @@ Compute the hyperbolic cotangent of each element of `X`.
 
 This is defined as
 
-> > %%coth(z) = cosh(z)/sinh(z)%%
+> > `%coth(z) = cosh(z)/sinh(z)%`
 
 See also: `acoth`.
 

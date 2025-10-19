@@ -4,7 +4,7 @@ Calcula a cossecante hiperbólica inversa de cada elemento de `X`.
 
 A cossecante hiperbólica inversa é definida por
 
-> > %%acsch(z) = asinh(1/z)%%
+> > `%acsch(z) = asinh(1/z)%`
 
 Veja também: `csch`.
 

@@ -4,7 +4,7 @@ Compute the cosine for each element of `X` in degrees.
 
 This is defined as
 
-> > %%cosd(z) = rad2deg(dos(z))%%
+> > `%cosd(z) = rad2deg(dos(z))%`
 
 See also: `acosd`, `cos`.
 

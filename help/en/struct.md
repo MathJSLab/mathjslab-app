@@ -28,13 +28,13 @@ following examples:
 
 > > `struct ("foo", {})`
 
-> > %%[]%%
+> > `%[]%`
 
 > > `struct ("foo", { {} })`
 
 > > `struct {`
 
-> > `   foo:`%%{}%%
+> > `   foo:``%{}%`
 
 > > `}`
 

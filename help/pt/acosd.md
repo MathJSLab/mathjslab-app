@@ -4,7 +4,7 @@ Calcula o cosseno inverso em graus para cada elemento de `X`.
 
 O cosseno inverso em graus é definido por
 
-> > %%acosd(z) = rad2deg(acos(z))%%
+> > `%acosd(z) = rad2deg(acos(z))%`
 
 Veja também: `cosd`, `acos`.
 

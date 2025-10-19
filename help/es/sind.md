@@ -4,7 +4,7 @@ Calcula el seno de cada elemento de `X` en grados.
 
 El seno en grados está definido por
 
-> > %%sind(z) = rad2deg(sin(z))%%
+> > `%sind(z) = rad2deg(sin(z))%`
 
 La función es más precisa que `sin` para valores grandes de `X` y para
 múltiplos de 180 grados (`X/180` es un número entero) donde `sind` devuelve `0`

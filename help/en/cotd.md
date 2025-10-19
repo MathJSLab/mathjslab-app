@@ -4,7 +4,7 @@ Compute the cotangent for each element of `X` in degrees.
 
 This is defined as
 
-> > %%cotd(z) = rad2deg(cot(z))%%
+> > `%cotd(z) = rad2deg(cot(z))%`
 
 See also: `acotd`, `cot`.
 

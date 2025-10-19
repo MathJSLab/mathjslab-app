@@ -4,7 +4,7 @@ Calcula la secante inversa en radianes para cada elemento de `X`.
 
 La secante inversa está definida por
 
-> > %%asec(z) = acos(1/z)%%
+> > `%asec(z) = acos(1/z)%`
 
 Véase también: `sec`, `asecd`.
 

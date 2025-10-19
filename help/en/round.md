@@ -5,7 +5,7 @@ Return the integer nearest to `X`.
 If `X` is complex, return `round (real (X)) + round (imag (X)) * I`. If there
 are two nearest integers, return the one further away from zero.
 
-> > `round ([-2.7, 2.7])` %%[-3, 3]%%
+> > `round ([-2.7, 2.7])` `%[-3, 3]%`
 
 See also: `ceil`, `floor`, `fix`, `roundb`.
 

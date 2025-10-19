@@ -4,7 +4,7 @@ Calcula a cossecante para cada elemento de `X` em radianos.
 
 A cossecante é definida por
 
-> > %%csc(z)=1/sin(z)%%
+> > `%csc(z)=1/sin(z)%`
 
 Veja também: `acsc`, `cscd`, `csch`.
 

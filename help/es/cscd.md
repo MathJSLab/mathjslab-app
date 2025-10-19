@@ -4,7 +4,7 @@ Calcula la cosecante en grados para cada elemento de `X`.
 
 La cosecante en grados se define por
 
-> > %%cscd(z) = rad2deg(csc(z))%%
+> > `%cscd(z) = rad2deg(csc(z))%`
 
 Véase también: `acscd`, `csc`.
 

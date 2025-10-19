@@ -8,7 +8,7 @@ Por ejemplo:
 
 > > `cumplir([1, 2; 3, 4; 5, 6])`
 
-> > %%[1, 2; 3, 8; 15, 48]%%
+> > `%[1, 2; 3, 8; 15, 48]%`
 
 Véase también: `prod`, `cumsum`.
 

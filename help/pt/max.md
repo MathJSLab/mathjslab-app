@@ -25,7 +25,7 @@ retorna o maior elemento da matriz 2-D `X` e
 
 > > `max (2:5, pi)`
 
-> > %%[3.1416, 3.1416, 4, 5]%%
+> > `%[3.1416, 3.1416, 4, 5]%`
 
 compara cada elemento do intervalo `2:5` com `pi` e retorna um vetor linha dos
 valores máximos.
@@ -36,7 +36,7 @@ de fase no intervalo (-pi, pi). Portanto,
 
 > > `max ([-1 i 1 -i])`
 
-> > %%-1%%
+> > `%-1%`
 
 porque todas as entradas têm magnitude 1, mas -1 tem o maior ângulo de fase com
 valor pi.
@@ -46,9 +46,9 @@ retorna o primeiro índice do(s) valor(es) máximo(s). Por isso,
 
 > > `[x, ix] = max ([1, 3, 5, 2, 5])`
 
-> > %%x = 5%%
+> > `%x = 5%`
 
-> > %%ix = 3%%
+> > `%ix = 3%`
 
 Veja também: `min`, `cummax`, `cummin`.
 

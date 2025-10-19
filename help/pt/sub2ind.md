@@ -18,9 +18,7 @@ O índice linear atravessa a dimensão 1 (linhas) e depois a dimensão 2
 (colunas), depois dimensão 3 (páginas), etc. até numerar todos os elementos.
 Considere a seguinte matriz 3 por 3:
 
-> > %%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3'] = [1, 4,
-> >
-> > > > 7; 2, 5, 8; 3, 6, 9]%%
+> > `%['1,1', '1,2', '1,3'; '2,1', '2,2', '2,3'; '3,1', '3,2', '3,3'] = [1, 4, 7; 2, 5, 8; 3, 6, 9]%`
 
 A matriz esquerda contém as tuplas subscritas para cada matriz elemento. A
 matriz direita mostra os índices lineares para o mesmo matriz.
@@ -35,7 +33,7 @@ O exemplo a seguir mostra como converter os índices bidimensionais `(2,1)` e
 
 > > `ind = sub2ind ([3, 3], s1, s2)`
 
-> > %%ind = [2, 8]%%
+> > `%ind = [2, 8]%`
 
 Veja também: `ind2sub`, `size`.
 

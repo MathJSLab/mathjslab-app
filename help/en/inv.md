@@ -4,7 +4,7 @@ Compute the inverse of the square matrix `A`.
 
 In general it is best to avoid calculating the inverse of a matrix directly.
 For example, it is both faster and more accurate to solve systems of equations
-%%A*x = b%% with `Y = A \ b`, rather than `Y = inv (A) * b`.
+`%A*x = b%` with `Y = A \ b`, rather than `Y = inv (A) * b`.
 
 See also: `ldivide`, `rdivide`, `pinv`.
 

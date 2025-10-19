@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.7.0
+
+- The `webpack.config.ts` file has been changed to include the
+  `devServer.liveReload` and `devServer.server.type` options in the
+  `webpack-dev-server` configuration.
+- The `.gitignore` and `.prettierignore` files have been changed to ignore the
+  `report` directory.
+- The following modifications were made due to comply this application to be
+  published as a Android Application in the
+  [Google Play Store](https://play.google.com/) using
+  [`capacitor`](https://capacitorjs.com/):
+    - The `marked` and `mermaid` packages were installed as regular
+      dependencies. The `MathMarkdown` class was renamed to `Markdown` (and its
+      `MathMarkdown.ts` file to `Markdown.ts`). The default values for
+      including mathematical code to be converted to MathML text are now
+      `%...%` (`'inline'`) and `%%...%%` (`'block'`). The MathML encoding was
+      implemented in the `renderer.codespan` function of `marked`. Due to
+      incompatibilities in the dependencies of the `mermaid` package, the
+      `chevrotain` package version 11.0.3 was installed as a development
+      dependency and the "overrides" field was configured in the `package.json`
+      file so that the `mermaid` dependencies use `chevrotain` version 11.0.3.
+    - The `plotly.js-dist-min` package was installed as a regular dependency
+      and the `@types/plotly.js-dist-min` package was installed as a
+      development dependency. The `PlotEngine.ts` file was modified to use the
+      dependencies.
+    - The `src/DynamicModule.ts` and `importUMD.ts` files have been deprecated.
+      The `DynamicModule.ts` file has been deleted and the `importUMD.ts` file
+      has been moved to the `script/helper/` directory of the (MathJSLab
+      organization repository)[https://github.com/MathJSLab/.github].
+
 # 1.6.1
 
 - The `rimraf` package has been removed from development dependencies and the

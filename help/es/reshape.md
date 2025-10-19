@@ -14,7 +14,7 @@ Matriz cuadrada de 2x2.
 
 > > `reformar([1, 2, 3, 4], 2, 2)`
 
-> > %%[1, 3; 2, 4]%%
+> > `%[1, 3; 2, 4]%`
 
 Tenga en cuenta que el número total de elementos en la matriz original ('prod
 (tamaño (A))') debe coincidir con el número total de elementos en el nueva
