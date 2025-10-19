@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.7.1
+
+- The `.circleci/config.yml` file was created to adjust the CircleCI tests that
+  were failing since the 1.6.0 update.
+
 # 1.7.0
 
 - The `webpack.config.ts` file has been changed to include the
