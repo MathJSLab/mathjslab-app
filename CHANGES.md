@@ -7,6 +7,12 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 - The `.circleci/config.yml` file was created to adjust the CircleCI tests that
   were failing since the 1.6.0 update.
+- The `.editorconfig` file has been changed to include formatting configuration
+  for YAML files. Formatting options for YAML files have been added to the
+  `prettierrc` file. Changes in `.prettierignore` file.
+- The `replace-in-file` package was installed as a development dependency and
+  the `replace.fix-endnl.json` file was created to format line breaks with CRLF
+  before git add.
 
 # 1.7.0
 
