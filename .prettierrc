@@ -42,6 +42,16 @@
         "arrowParens": "always",
         "parser": "markdown"
       }
+    },
+    {
+      "files": "*.y{,a}ml",
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false,
+        "proseWrap": "preserve",
+        "bracketSpacing": true,
+        "yamlBracketSpacing": true
+      }
     }
   ]
 }

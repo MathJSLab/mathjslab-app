@@ -1,3 +1,3 @@
 {
-  "include": ["collapsible-content-panel", "fixed-scroll-panel", "command-prompt", "command-prompt-set", "batch-panel", "command-shell"]
+    "include": ["collapsible-content-panel", "fixed-scroll-panel", "command-prompt", "command-prompt-set", "batch-panel", "command-shell"]
 }

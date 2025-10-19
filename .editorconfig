@@ -13,7 +13,7 @@ indent_style = space
 indent_size = 4
 
 # Matches the exact files either *.json or *.yml
-[*.{json,yml}]
+[*.{json}]
 end_of_line = crlf
 insert_final_newline = true
 trim_trailing_whitespace = true
@@ -28,3 +28,11 @@ trim_trailing_whitespace = true
 charset = utf-8
 indent_style = space
 indent_size = 0
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true

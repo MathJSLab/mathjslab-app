@@ -14,23 +14,23 @@ jobs:
             npm -v
 
       - run:
-          name: Install dependencies
+          name: Install dependencies and download artifacts from MathJSLab organization repository
           command: |
             npm install
             npm run download
             npm run build:script
 
       - run:
-          name: Code Lint (ESLint)
+          name: Code Lint
           command: npm run lint
 
       - run:
-          name: Production build (Webpack)
+          name: Production build
           command: npm run build:prod
 
       - run:
           name: Check output directory
-          command: du -sh dist || echo "⚠️ Diretório dist não encontrado."
+          command: du -sh dist || echo "⚠️ dist directory not found."
 
 workflows:
   version: 2

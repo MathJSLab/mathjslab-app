@@ -1,172 +1,172 @@
 {
-  "baskara": {
-    "file": "baskara.m",
-    "caption": "Baskara",
-    "description": "Solution of the 2nd degree equation by Bhaskara's formula."
-  },
-  "basic-operation-function": {
-    "file": "basic-operation-function.m",
-    "caption": "Basic operations and functions",
-    "description": "Tests basic operations and functions."
-  },
-  "logical": {
-    "file": "logical.m",
-    "caption": "Logical",
-    "description": "Test logical operators."
-  },
-  "array-operation": {
-    "file": "array-operation.m",
-    "caption": "Array operations",
-    "description": "Tests array operations."
-  },
-  "array-concatenation": {
-    "file": "array-concatenation.m",
-    "caption": "Concatenation",
-    "description": "Tests array concatenation."
-  },
-  "array-function": {
-    "file": "array-function.m",
-    "caption": "Array functions",
-    "description": "Tests array functions."
-  },
-  "array-shape": {
-    "file": "array-shape.m",
-    "caption": "Array shape functions",
-    "description": "Tests array shape functions."
-  },
-  "indexing-right": {
-    "file": "indexing-right.m",
-    "caption": "Indexing right",
-    "description": "Tests indexing at right side."
-  },
-  "indexing-left": {
-    "file": "indexing-left.m",
-    "caption": "Indexing left",
-    "description": "Tests indexing at left side."
-  },
-  "indexing-function": {
-    "file": "indexing-function.m",
-    "caption": "Indexing function",
-    "description": "Tests indexing functions."
-  },
-  "multiple-assignment": {
-    "file": "multiple-assignment.m",
-    "caption": "Multiple assignment",
-    "description": "Tests multiple assignment."
-  },
-  "cell-array": {
-    "file": "cell-array.m",
-    "caption": "Cell array",
-    "description": "Tests cell arrays."
-  },
-  "linear-algebra": {
-    "file": "linear-algebra.m",
-    "caption": "Linear Algebra",
-    "description": "Tests LinearAlgebra class methods."
-  },
-  "linear-algebra-help": {
-    "file": "linear-algebra-help.m",
-    "caption": "Linear Algebra Help",
-    "description": "Linear Algebra related functions help."
-  },
-  "multidimensional": {
-    "file": "multidimensional.m",
-    "caption": "Multidimensional",
-    "description": "Tests multidimensional arrays."
-  },
-  "broadcasting": {
-    "file": "broadcasting.m",
-    "caption": "Broadcasting",
-    "description": "Test broadcasting rules."
-  },
-  "reduce-functions": {
-    "file": "reduce-functions.m",
-    "caption": "Reduce",
-    "description": "Test reduce functions."
-  },
-  "map-dimension-functions": {
-    "file": "map-dimension-functions.m",
-    "caption": "Map dimension",
-    "description": "Test map dimension functions."
-  },
-  "min-max": {
-    "file": "min-max.m",
-    "caption": "MinMax",
-    "description": "Test min and max functions."
-  },
-  "greek": {
-    "file": "greek.m",
-    "caption": "Greek letters",
-    "description": "Tests Greek letters."
-  },
-  "singularity": {
-    "file": "singularity.m",
-    "caption": "Singularities",
-    "description": "Tests singularities."
-  },
-  "help": {
-    "file": "help.m",
-    "caption": "Help",
-    "description": "Test help command."
-  },
-  "histogram": {
-    "file": "histogram.m",
-    "caption": "Histogram",
-    "description": "Test histogram command."
-  },
-  "load": {
-    "file": "load.m",
-    "caption": "Load",
-    "description": "Test load function."
-  },
-  "markdown": {
-    "file": "markdown.m",
-    "caption": "Markdown",
-    "description": "Test markdown function."
-  },
-  "configuration": {
-    "file": "configuration.m",
-    "caption": "Configuration",
-    "description": "Test configure function."
-  },
-  "string": {
-    "file": "string.m",
-    "caption": "Strings",
-    "description": "Test strings."
-  },
-  "structure": {
-    "file": "structure.m",
-    "caption": "Structure",
-    "description": "Test structures."
-  },
-  "statements": {
-    "file": "statements.m",
-    "caption": "Statements",
-    "description": "Test statements, block comments..."
-  },
-  "debug": {
-    "file": "debug.m",
-    "caption": "Debug",
-    "description": "Debug related commands and functions."
-  },
-  "plot": {
-    "file": "plot.m",
-    "caption": "Plot",
-    "description": "Test plot related functions."
-  },
-  "test1": {
-    "file": "test1.m",
-    "caption": "Test 1",
-    "description": "Test 1."
-  },
-  "test2": {
-    "file": "test2.m",
-    "caption": "Test 2",
-    "description": "Test 2."
-  },
-  "test3": {
-    "file": "test3.m",
-    "caption": "Test 3",
-    "description": "Test 3."
-  }
+    "baskara": {
+        "file": "baskara.m",
+        "caption": "Baskara",
+        "description": "Solution of the 2nd degree equation by Bhaskara's formula."
+    },
+    "basic-operation-function": {
+        "file": "basic-operation-function.m",
+        "caption": "Basic operations and functions",
+        "description": "Tests basic operations and functions."
+    },
+    "logical": {
+        "file": "logical.m",
+        "caption": "Logical",
+        "description": "Test logical operators."
+    },
+    "array-operation": {
+        "file": "array-operation.m",
+        "caption": "Array operations",
+        "description": "Tests array operations."
+    },
+    "array-concatenation": {
+        "file": "array-concatenation.m",
+        "caption": "Concatenation",
+        "description": "Tests array concatenation."
+    },
+    "array-function": {
+        "file": "array-function.m",
+        "caption": "Array functions",
+        "description": "Tests array functions."
+    },
+    "array-shape": {
+        "file": "array-shape.m",
+        "caption": "Array shape functions",
+        "description": "Tests array shape functions."
+    },
+    "indexing-right": {
+        "file": "indexing-right.m",
+        "caption": "Indexing right",
+        "description": "Tests indexing at right side."
+    },
+    "indexing-left": {
+        "file": "indexing-left.m",
+        "caption": "Indexing left",
+        "description": "Tests indexing at left side."
+    },
+    "indexing-function": {
+        "file": "indexing-function.m",
+        "caption": "Indexing function",
+        "description": "Tests indexing functions."
+    },
+    "multiple-assignment": {
+        "file": "multiple-assignment.m",
+        "caption": "Multiple assignment",
+        "description": "Tests multiple assignment."
+    },
+    "cell-array": {
+        "file": "cell-array.m",
+        "caption": "Cell array",
+        "description": "Tests cell arrays."
+    },
+    "linear-algebra": {
+        "file": "linear-algebra.m",
+        "caption": "Linear Algebra",
+        "description": "Tests LinearAlgebra class methods."
+    },
+    "linear-algebra-help": {
+        "file": "linear-algebra-help.m",
+        "caption": "Linear Algebra Help",
+        "description": "Linear Algebra related functions help."
+    },
+    "multidimensional": {
+        "file": "multidimensional.m",
+        "caption": "Multidimensional",
+        "description": "Tests multidimensional arrays."
+    },
+    "broadcasting": {
+        "file": "broadcasting.m",
+        "caption": "Broadcasting",
+        "description": "Test broadcasting rules."
+    },
+    "reduce-functions": {
+        "file": "reduce-functions.m",
+        "caption": "Reduce",
+        "description": "Test reduce functions."
+    },
+    "map-dimension-functions": {
+        "file": "map-dimension-functions.m",
+        "caption": "Map dimension",
+        "description": "Test map dimension functions."
+    },
+    "min-max": {
+        "file": "min-max.m",
+        "caption": "MinMax",
+        "description": "Test min and max functions."
+    },
+    "greek": {
+        "file": "greek.m",
+        "caption": "Greek letters",
+        "description": "Tests Greek letters."
+    },
+    "singularity": {
+        "file": "singularity.m",
+        "caption": "Singularities",
+        "description": "Tests singularities."
+    },
+    "help": {
+        "file": "help.m",
+        "caption": "Help",
+        "description": "Test help command."
+    },
+    "histogram": {
+        "file": "histogram.m",
+        "caption": "Histogram",
+        "description": "Test histogram command."
+    },
+    "load": {
+        "file": "load.m",
+        "caption": "Load",
+        "description": "Test load function."
+    },
+    "markdown": {
+        "file": "markdown.m",
+        "caption": "Markdown",
+        "description": "Test markdown function."
+    },
+    "configuration": {
+        "file": "configuration.m",
+        "caption": "Configuration",
+        "description": "Test configure function."
+    },
+    "string": {
+        "file": "string.m",
+        "caption": "Strings",
+        "description": "Test strings."
+    },
+    "structure": {
+        "file": "structure.m",
+        "caption": "Structure",
+        "description": "Test structures."
+    },
+    "statements": {
+        "file": "statements.m",
+        "caption": "Statements",
+        "description": "Test statements, block comments..."
+    },
+    "debug": {
+        "file": "debug.m",
+        "caption": "Debug",
+        "description": "Debug related commands and functions."
+    },
+    "plot": {
+        "file": "plot.m",
+        "caption": "Plot",
+        "description": "Test plot related functions."
+    },
+    "test1": {
+        "file": "test1.m",
+        "caption": "Test 1",
+        "description": "Test 1."
+    },
+    "test2": {
+        "file": "test2.m",
+        "caption": "Test 2",
+        "description": "Test 2."
+    },
+    "test3": {
+        "file": "test3.m",
+        "caption": "Test 3",
+        "description": "Test 3."
+    }
 }
