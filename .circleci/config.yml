@@ -17,7 +17,7 @@ jobs:
           name: Install dependencies and download artifacts from MathJSLab organization repository
           command: |
             npm install
-            npm run download
+            npm run clone:copy:clean:repository
             npm run build:script
 
       - run:

@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.7.2
+
+- The system of downloading raw files from the repository on GitHub has been
+  replaced by cloning the repository and copying selected files.
+- Dependecies updated (`mathjslab` 1.8.2).
+
 # 1.7.1
 
 - The `.circleci/config.yml` file was created to adjust the CircleCI tests that
@@ -13,6 +19,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - The `replace-in-file` package was installed as a development dependency and
   the `replace.fix-endnl.json` file was created to format line breaks with CRLF
   before git add.
+- The MathJSLab logo in the .md files has been modified to use logo image in
+  the website (mathjslab-www repository).
 
 # 1.7.0
 

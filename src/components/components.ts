@@ -1,4 +1,4 @@
-/* Web components. File generated at Sun, 19 Oct 2025 19:03:07 GMT. */
+/* Web components. File generated at Sun, 26 Oct 2025 23:58:05 GMT. */
 export * from './collapsible-content-panel/collapsible-content-panel.component';
 export * from './fixed-scroll-panel/fixed-scroll-panel.component';
 export * from './command-prompt/command-prompt.component';
