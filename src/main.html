@@ -149,7 +149,13 @@
         </script>
     </head>
 
-    <body onload="javascript:loadText();document.getElementById('language').value=globalThis.appEngine.lang;scrollToTop();">
+    <body
+        onload="
+            javascript: loadText();
+            document.getElementById('language').value = globalThis.appEngine.lang;
+            scrollToTop();
+        "
+    >
         <div id="app">
             <header>
                 <img alt="MathJSLab logo" class="logo" src="./images/mathjslab-logo.svg" width="125" height="125" />
@@ -165,15 +171,22 @@
                 </div>
                 <div class="right-align-panel text-align-center">
                     <div class="green-panel width-fit-content text-align-center right-align-panel">
-                        <select id="language" onchange="javascript:globalThis.appEngine.setLanguage(document.getElementById('language').value);loadText();scrollToTop();">
+                        <select
+                            id="language"
+                            onchange="
+                                javascript: globalThis.appEngine.setLanguage(document.getElementById('language').value);
+                                loadText();
+                                scrollToTop();
+                            "
+                        >
                             <option value="en">English</option>
                             <option value="es">Español</option>
                             <option value="pt">Português</option>
                         </select>
                         <br />
-                        <button id="open-file" onclick="javascript:globalThis.appEngine.openFile()"></button>
+                        <button id="open-file" onclick="javascript: globalThis.appEngine.openFile();"></button>
                         <br />
-                        <button id="theme-toggle" onclick="javascript:toggleTheme()"></button>
+                        <button id="theme-toggle" onclick="javascript: toggleTheme();"></button>
                     </div>
                 </div>
             </header>
@@ -215,5 +228,11 @@
                 </p>
             </footer>
         </div>
+        <script>
+            const app = document.querySelector('div#app');
+            if (app) {
+                app.style.marginBottom = '100%';
+            }
+        </script>
     </body>
 </html>

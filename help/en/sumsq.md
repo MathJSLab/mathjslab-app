@@ -15,5 +15,4 @@ See also: `sum`, `prod`.
 
 ### References
 
-- https://www.mathworks.com/help/matlab/ref/sumsq.html
 - https://octave.sourceforge.io/octave/function/sumsq.html

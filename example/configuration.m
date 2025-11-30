@@ -1,4 +1,6 @@
 clear
+help getconfig
+help configure
 getconfig('precision')
 configure('precision', 20)
 getconfig('precision')

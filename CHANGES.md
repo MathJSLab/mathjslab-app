@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.7.3
+
+- The `help/**/all.md`, `help/**/any.md`, `help/**/var.md`, `help/**/std.md`
+  and `help/**/qr.md` files have been created.
+- The `help/**/dot.md` and `help/**/cross.md` files have been updated.
+- The contents of the file `example/linear-algebra-help.m` were removed after
+  their contents were moved to `example/linear-algebra.m`. It was updated with
+  extensive tests for the `det`, `inv`, `qr`, `lu`, `mtimes`, `cross`, and
+  `dot` functions.
+- The `help/**/configure.md` files have been updated.
+- The `example/element-wise.m` file has been created with tests for
+  element-wise operations. The contents of the file `example/broadcasting.m`
+  have been moved to it.
+- The `example/reduce-functions.m` file has been updated with extensive tests
+  for functions based on MathJSLab `MultiArray.reduce` function.
+- Dependecies updated (`mathjslab` 1.9.0).
+
 # 1.7.2
 
 - The system of downloading raw files from the repository on GitHub has been

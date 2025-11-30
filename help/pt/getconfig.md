@@ -1,7 +1,7 @@
 - `RESULT = getconfig(CONFIG)`
 - `RESULT = getconfig()`
 
-Retorna parâmetros de configuração internos do **MathJSLab**.
+Retorna parâmetros de configuração internos do engine **MathJSLab**.
 
 Se um array de parâmetros de configuração com strings for passado, retorna os
 valores dos parâmetros selecionados.

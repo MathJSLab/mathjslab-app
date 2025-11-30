@@ -39,8 +39,11 @@ help acoth
 help acsc
 help acscd
 help acsch
+help all
 help and
 help angle
+help ans
+help any
 help arg
 help asec
 help asecd
@@ -60,6 +63,7 @@ help cosh
 help cot
 help cotd
 help coth
+help cross
 help csc
 help cscd
 help csch
@@ -70,6 +74,7 @@ help cumprod
 help cumsum
 help deg2rad
 help det
+help dot
 help eq
 help exp
 help eye
@@ -151,6 +156,7 @@ help sinh
 help size
 help sqrt
 help squeeze
+help std
 help struct
 help sub2ind
 help sum
@@ -164,5 +170,6 @@ help trace
 help transpose
 help uminus
 help uplus
+help var
 help vertcat
 help zeros

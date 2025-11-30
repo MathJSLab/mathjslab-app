@@ -2,7 +2,7 @@
 - `RESULT = configure(config, value)`
 - `RESULT = configure()`
 
-Configure internal parameters of **MathJSLab**.
+Configure internal parameters of **MathJSLab** engine.
 
 If a configuration array `CONFIG` is passed, it must be an array with two
 columns where the first column must contain a string with the name of the
@@ -17,7 +17,10 @@ The available configuration parameters are:
 
 | parameter            | meaning                                                                                                    | type                                                                              | default value |
 | :------------------- | :--------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------- | :------------ |
-| `'real'`             | O tipo de dado usado como número real.                                                                     | `'decimal'` or `'number'`                                                         | `'decimal'`   |
+| `'blockThreshold'`   | Maximum matrix size for performing multiplication (`mtimes`) using the simple algorithm.                   | integer, `%10^2%` to `...`                                                        | `%10^5%`      |
+| `'blockSize'`        | Block size for performing multiplication (`mtimes`) using the block algorithm.                             | integer, `%8%` to `%512%`                                                         | `%64%`        |
+| `'wasteLU'`          | Maximum residual value, below which the value is considered zero in the LU decomposition.                  | decimal, `%10^(-30)%` a `%1%`                                                     | `%10^(-15)%`  |
+| `'real'`             | The data type used is a real number.                                                                       | `'decimal'` or `'number'`                                                         | `'decimal'`   |
 | `'precision'`        | The maximum number of significant digits of the result of an operation.                                    | integer, `%1%` to `%10^9%` inclusive                                              | `%336%`       |
 | `'precisionCompare'` | The number of significant digits to reduce precision before compare operations and unparse.                | integer, `%0%` to `%10^9%` inclusive (must be less than `'precision'` parameter). | `%7%`         |
 | `'rounding'`         | The default rounding mode used when rounding the result of an operation to `precision` significant digits. | string (see the meaning below)                                                    | `'half_down'` |

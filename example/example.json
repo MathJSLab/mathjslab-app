@@ -49,6 +49,21 @@
         "caption": "Indexing function",
         "description": "Tests indexing functions."
     },
+    "element-wise": {
+        "file": "element-wise.m",
+        "caption": "Element-wise Operations",
+        "description": "Test Element-wise Operations."
+    },
+    "reduce-functions": {
+        "file": "reduce-functions.m",
+        "caption": "Reduce",
+        "description": "Test reduce functions."
+    },
+    "linear-algebra": {
+        "file": "linear-algebra.m",
+        "caption": "Linear Algebra",
+        "description": "Linear Algebra related functions test."
+    },
     "multiple-assignment": {
         "file": "multiple-assignment.m",
         "caption": "Multiple assignment",
@@ -59,30 +74,10 @@
         "caption": "Cell array",
         "description": "Tests cell arrays."
     },
-    "linear-algebra": {
-        "file": "linear-algebra.m",
-        "caption": "Linear Algebra",
-        "description": "Tests LinearAlgebra class methods."
-    },
-    "linear-algebra-help": {
-        "file": "linear-algebra-help.m",
-        "caption": "Linear Algebra Help",
-        "description": "Linear Algebra related functions help."
-    },
     "multidimensional": {
         "file": "multidimensional.m",
         "caption": "Multidimensional",
         "description": "Tests multidimensional arrays."
-    },
-    "broadcasting": {
-        "file": "broadcasting.m",
-        "caption": "Broadcasting",
-        "description": "Test broadcasting rules."
-    },
-    "reduce-functions": {
-        "file": "reduce-functions.m",
-        "caption": "Reduce",
-        "description": "Test reduce functions."
     },
     "map-dimension-functions": {
         "file": "map-dimension-functions.m",
@@ -168,5 +163,10 @@
         "file": "test3.m",
         "caption": "Test 3",
         "description": "Test 3."
+    },
+    "test4": {
+        "file": "test4.m",
+        "caption": "Test 4",
+        "description": "Test 4."
     }
 }

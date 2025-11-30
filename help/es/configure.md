@@ -2,7 +2,7 @@
 - `RESULT = configure(config, value)`
 - `RESULT = configure()`
 
-Configura los parámetros internos de **MathJSLab**.
+Configura los parámetros internos del motor **MathJSLab**.
 
 Si se pasa un array de configuración `CONFIG`, debe ser una matriz con dos
 columnas donde la primera columna debe contener una string con el nombre del
@@ -19,7 +19,10 @@ Los parámetros de configuración disponibles son:
 
 | parámetro            | significado                                                                                                                             | tipo                                                                                | valor predeterminado |
 | :------------------- | :-------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- | :------------------- |
-| `'real'`             | El tipo de dato utilizado como número real.                                                                                             | `'decimal'` ou `'number'`                                                           | `'decimal'`          |
+| `'blockThreshold'`   | Tamaño máximo de matriz para realizar la multiplicación (`mtimes`) utilizando el algoritmo simple.                                      | entero, `%10^2%` a `...`                                                            | `%10^5%`             |
+| `'blockSize'`        | Tamaño del bloque para realizar la multiplicación (`mtimes`) utilizando el algoritmo de bloques.                                        | entero, `%8%` a `%512%`                                                             | `%64%`               |
+| `'wasteLU'`          | Valor residual máximo, por debajo del cual el valor se considera cero en la descomposición LU.                                          | decimal, `%10^(-30)%` a `%1%`                                                       | `%10^(-15)%`         |
+| `'real'`             | El tipo de dato utilizado como número real.                                                                                             | `'decimal'` o `'number'`                                                            | `'decimal'`          |
 | `'precision'`        | El número máximo de dígitos significativos del resultado de una operación.                                                              | entero, `%1%` a `%10^9%` inclusive                                                  | `%336%`              |
 | `'precisionCompare'` | El número de dígitos significativos para reducir la precisión antes de las operaciones de comparación y unparse.                        | entero, `%0%` a `%10^9%` inclusive (debe ser menor que el parámetro `'precision'`). | `%7%`                |
 | `'rounding'`         | El modo de redondeo predeterminado que se utiliza al redondear el resultado de una operación a dígitos significativos de `'precision'`. | string (ver significado más abajo)                                                  | `'half_down'`        |

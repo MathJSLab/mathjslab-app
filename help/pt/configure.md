@@ -2,7 +2,7 @@
 - `RESULT = configure(config, value)`
 - `RESULT = configure()`
 
-Configura parâmetros internos do **MathJSLab**.
+Configura parâmetros internos do engine **MathJSLab**.
 
 Se um array de configuração `CONFIG` for passado, ele deve ser um array com
 duas colunas onde a primeira coluna deve conter uma string com o nome do
@@ -19,6 +19,9 @@ Os parâmetros de configuração disponíveis são:
 
 | parâmetro            | significado                                                                                                                | tipo                                                                                | valor padrão  |
 | :------------------- | :------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------- | :------------ |
+| `'blockThreshold'`   | Tamanho máximo das matrizes para operar a multiplicação (`mtimes`) usando o algoritmo simples.                             | inteiro, `%10^2%` a `...`                                                           | `%10^5%`      |
+| `'blockSize'`        | Tamanho do bloco para operar a multiplicação (`mtimes`) usando o algoritmo em bloco.                                       | inteiro, `%8%` a `%512%`                                                            | `%64%`        |
+| `'wasteLU'`          | Valor residual máximo, abaixo do qual o valor é considerado zero na decomposição LU.                                       | decimal, `%10^(-30)%` a `%1%`                                                       | `%10^(-15)%`  |
 | `'real'`             | O tipo de dado usado como número real.                                                                                     | `'decimal'` ou `'number'`                                                           | `'decimal'`   |
 | `'precision'`        | O número máximo de dígitos significativos do resultado de uma operação.                                                    | inteiro, `%1%` a `%10^9%` inclusive                                                 | `%336%`       |
 | `'precisionCompare'` | O número de dígitos significativos para reduzir a precisão antes das operações de comparação e unparse.                    | inteiro, `%0%` a `%10^9%` inclusive (deve ser menor que o parâmetro `'precision'`). | `%7%`         |
