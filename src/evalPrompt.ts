@@ -2,7 +2,7 @@
  * Prompt Evaluator
  */
 
-import { appEngine } from './appEngine';
+import { Evaluator, appEngine } from './appEngine';
 import { CommandPrompt } from './components/components';
 import { type NodeInput } from 'mathjslab';
 import { Markdown } from './Markdown';
@@ -19,7 +19,7 @@ function evalPrompt(prompt: CommandPrompt, _index?: number): void {
         if (tree) {
             const unparse_input = appEngine.evaluator.Unparse(tree);
             const eval_input = appEngine.evaluator.Evaluate(tree);
-            if (appEngine.evaluator.exitStatus === appEngine.evaluator.response.OK) {
+            if (appEngine.evaluator.exitStatus === Evaluator.response.OK) {
                 prompt.element.frameBox.className = 'good';
                 const unparse_eval_input = appEngine.evaluator.Unparse(eval_input);
                 if (unparse_input !== unparse_eval_input) {

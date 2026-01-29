@@ -10,9 +10,9 @@ avoids overflows for large values of X or Y.
 `hypot` can also be called with more than 2 arguments; in this case, the
 arguments are accumulated from left to right:
 
-> > `hypot (hypot (X, Y), Z)` `hypot (hypot (hypot (X, Y), Z), W)`
+> > `hypot (hypot (X, Y), Z)`
 
-, etc.
+> > `hypot (hypot (hypot (X, Y), Z), W)`, etc.
 
 ### References
 

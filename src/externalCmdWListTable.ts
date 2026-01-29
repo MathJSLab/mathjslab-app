@@ -5,7 +5,7 @@ const externalCmdWListTable = {
     help: {
         func: (...args: string[]): void => {
             const encodeName = (name: string): string => {
-                name = appEngine.evaluator.aliasName(name);
+                name = appEngine.evaluator.aliasNameFunction(name);
                 const result: string[] = [];
                 for (let i = 0; i < name.length; i++) {
                     const c = name.charCodeAt(i);

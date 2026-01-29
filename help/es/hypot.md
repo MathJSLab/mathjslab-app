@@ -9,9 +9,9 @@ que evita desbordamientos para valores grandes de X o Y.
 `hypot` también se puede llamar con más de 2 argumentos; en este caso, los
 argumentos se aplican acumulativamente de izquierda a derecha:
 
-> > `hypot (hypot (X, Y), Z)` `hypot (hypot (hypot (X, Y), Z), W)`
+> > `hypot (hypot (X, Y), Z)`
 
-, etc.
+> > `hypot (hypot (hypot (X, Y), Z), W)`, etc.
 
 ### Referencias
 

@@ -25,7 +25,7 @@
  * npm install --save-dev uuid chalk @11ty/eleventy @11ty/eleventy-img yaml json5 smol-toml sass coffeescript cson png-to-ico
  * ```
  *
- * MIT License, Copyright (c) 2016-2025 Sergio Lindau, mathjslab.com
+ * MIT License, Copyright (c) 2016-2026 Sergio Lindau, mathjslab.com
  */
 
 /**

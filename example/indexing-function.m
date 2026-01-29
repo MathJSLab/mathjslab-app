@@ -1,4 +1,5 @@
-clear
+clear % clear all variables
+
 % Test indexing function.
 [A,B,C,D]=ind2sub([4, 3], [1, 2; 3, 4; 5, 6])
 [a,b,c,d,E,f]=ind2sub([4, 3], 1)

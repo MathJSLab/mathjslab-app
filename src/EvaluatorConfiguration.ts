@@ -17,7 +17,7 @@ appEngine.setLanguage = (lang?: string): void => {
     document.querySelector('html')!.setAttribute('lang', appEngine.lang);
     appEngine.shell.commandShell.setLanguage(appEngine.lang);
     EvaluatorConfiguration.aliasNameTable = languageAlias[appEngine.lang];
-    appEngine.evaluator = new Evaluator(EvaluatorConfiguration);
+    appEngine.evaluator = Evaluator.Create(EvaluatorConfiguration);
     appEngine.evaluator.debug = buildConfiguration.debug;
     appEngine.shell.commandShell.evaluate();
 };
@@ -235,7 +235,7 @@ function bootstrap() {
         appEngine.lang = appEngine.config.defaultLanguage!;
     }
     EvaluatorConfiguration.aliasNameTable = languageAlias[appEngine.lang];
-    appEngine.evaluator = new Evaluator(EvaluatorConfiguration);
+    appEngine.evaluator = Evaluator.Create(EvaluatorConfiguration);
     appEngine.evaluator.debug = buildConfiguration.debug;
     appEngine.buildMessage = buildConfiguration.buildMessage;
     Markdown.initialize();

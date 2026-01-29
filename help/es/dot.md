@@ -17,7 +17,7 @@ esperado debido al rango limitado de objetos enteros.
 
 Véase también: `cross`, `divergence`, `tensorprod`.
 
-### References
+### Referencias
 
 - https://www.mathworks.com/help/matlab/ref/dot.html
 - https://octave.sourceforge.io/octave/function/dot.html

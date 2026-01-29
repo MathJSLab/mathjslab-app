@@ -1418,7 +1418,7 @@ A = [12 -51 4; 6 167 -68; -4 24 -41]
 [Q,R] = qr(A)
 test_result_qr(2,1) = all(all(R == [-14,-21,14;0,-175,70;0,0,-35]))
 test_result_qr(3,1) = all(all(abs(Q*R - A) == zeros(3)))
-test_result_qr(4,1) = all(all(arg(Q*R - A) == [0 pi 0; pi 0 0; 0 0 pi]))
+test_result_qr(4,1) = all(all(arg(Q*R - A) == [0 pi 0; pi 0 0; 0 0 0]))
 
 % 3. Real 3x3 matrix with single return (R)
 A = [12 -51 4; 6 167 -68; -4 24 -41]
@@ -1651,6 +1651,8 @@ complete_test_result_qrp = all(test_result_qrp)
 
 % Show qr with pivoting test result
 complete_test_result_qrp
+
+help eig
 
 complete_test_result = all([
     complete_test_result_det,

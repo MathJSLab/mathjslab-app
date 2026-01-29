@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+# 1.7.4
+
+- The script `"code:stats"`, which displays detailed statistics in terms of the
+  number of lines of code in the project, and `"code:stats:summary"`, which
+  stores this information in the `report/code.stats.json` file and executes
+  `script/helper/code-stats.ts` to display this information, were added to the
+  `package.json` file. However, this was reverted in the web application
+  project, as it still has flaws (it doesn't ignore selected files), and after
+  being adjusted, it will be configured again.
+- Dependecies updated (`mathjslab` 1.9.1).
+
 # 1.7.3
 
 - The `help/**/all.md`, `help/**/any.md`, `help/**/var.md`, `help/**/std.md`

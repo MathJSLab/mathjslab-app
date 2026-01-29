@@ -75,6 +75,7 @@ help cumsum
 help deg2rad
 help det
 help dot
+help eig
 help eq
 help exp
 help eye

@@ -315,7 +315,7 @@ export class CommandShell extends HTMLElement {
                     nameListEntry.innerHTML = `&commat; ${name}(${nameTableEntry.parameter.map((arg: { id: any }) => arg.id).join(',')})`;
                 } else {
                     let resultType: string = '';
-                    if (nameTableEntry.type !== undefined) {
+                    if (nameTableEntry.node.type !== undefined) {
                         if (nameTableEntry instanceof MultiArray) {
                             resultType = '[' + nameTableEntry.dimension.join('x') + ']';
                         } else if (nameTableEntry instanceof CharString) {
@@ -323,13 +323,13 @@ export class CommandShell extends HTMLElement {
                         } else {
                             resultType = '#';
                         }
-                        if (nameTableEntry.type === 0) {
+                        if (nameTableEntry.node.type === 0) {
                             if (resultType[0] === '[') {
                                 resultType += '&not;';
                             } else {
                                 resultType = '&not;';
                             }
-                        } else if (nameTableEntry.type === 2) {
+                        } else if (nameTableEntry.node.type === 2) {
                             resultType += '*';
                         }
                     }

@@ -21,9 +21,9 @@ abstract class Markdown {
                 const singleMatch = text.match(/^%([\s\S]*?)%$/);
                 const doubleMatch = text.match(/^%%([\s\S]*?)%%$/);
                 if (doubleMatch) {
-                    return appEngine.evaluator.toMathML(doubleMatch[1], 'block');
+                    return appEngine.evaluator.ToMathML(doubleMatch[1], 'block');
                 } else if (singleMatch) {
-                    return appEngine.evaluator.toMathML(singleMatch[1], 'inline');
+                    return appEngine.evaluator.ToMathML(singleMatch[1], 'inline');
                 } else {
                     return `<code>${token.text}</code>`;
                 }

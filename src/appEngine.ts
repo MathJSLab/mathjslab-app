@@ -36,5 +36,5 @@ const appEngine: AppEngine = {
 (globalThis as any).appConfiguration = appConfiguration;
 
 export type { AppConfiguration, AppEngine };
-export { appConfiguration, appEngine };
-export default { appConfiguration, appEngine };
+export { Evaluator, appConfiguration, appEngine };
+export default { Evaluator, appConfiguration, appEngine };

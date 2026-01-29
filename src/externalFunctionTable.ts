@@ -47,17 +47,17 @@ const externalFunctionTable: BuiltInFunctionTable = {
             delete appEngine.evaluator.localTable[sum_function_name];
             return result;
         },
-        unparserMathML: (tree: NodeInput): string => {
+        UnparserMathML: (tree: NodeInput): string => {
             return (
                 '<mstyle displaystyle="true"><munderover><mo>&sum;</mo><mrow>' +
-                appEngine.evaluator.unparserMathML(tree.args[0]) +
+                appEngine.evaluator.UnparserMathML(tree.args[0]) +
                 '<mo>=</mo>' +
-                appEngine.evaluator.unparserMathML(tree.args[1]) +
+                appEngine.evaluator.UnparserMathML(tree.args[1]) +
                 '</mrow><mrow>' +
-                appEngine.evaluator.unparserMathML(tree.args[2]) +
+                appEngine.evaluator.UnparserMathML(tree.args[2]) +
                 '</mrow>' +
                 '</munderover>' +
-                appEngine.evaluator.unparserMathML(tree.args[3]) +
+                appEngine.evaluator.UnparserMathML(tree.args[3]) +
                 '</mstyle>'
             );
         },
@@ -80,17 +80,17 @@ const externalFunctionTable: BuiltInFunctionTable = {
             delete appEngine.evaluator.localTable[prod_function_name];
             return result;
         },
-        unparserMathML: (tree: NodeInput): string => {
+        UnparserMathML: (tree: NodeInput): string => {
             return (
                 '<mstyle displaystyle="true"><munderover><mo>&prod;</mo><mrow>' +
-                appEngine.evaluator.unparserMathML(tree.args[0]) +
+                appEngine.evaluator.UnparserMathML(tree.args[0]) +
                 '<mo>=</mo>' +
-                appEngine.evaluator.unparserMathML(tree.args[1]) +
+                appEngine.evaluator.UnparserMathML(tree.args[1]) +
                 '</mrow><mrow>' +
-                appEngine.evaluator.unparserMathML(tree.args[2]) +
+                appEngine.evaluator.UnparserMathML(tree.args[2]) +
                 '</mrow>' +
                 '</munderover>' +
-                appEngine.evaluator.unparserMathML(tree.args[3]) +
+                appEngine.evaluator.UnparserMathML(tree.args[3]) +
                 '</mstyle>'
             );
         },

@@ -59,6 +59,11 @@
         "caption": "Reduce",
         "description": "Test reduce functions."
     },
+    "left-division": {
+        "file": "left-division.m",
+        "caption": "Left division",
+        "description": "Left division related functions test."
+    },
     "linear-algebra": {
         "file": "linear-algebra.m",
         "caption": "Linear Algebra",
@@ -149,6 +154,11 @@
         "caption": "Plot",
         "description": "Test plot related functions."
     },
+    "undefined-reference": {
+        "file": "undefined-reference.m",
+        "caption": "Undefined",
+        "description": "Test undefined reference resolution."
+    },
     "test1": {
         "file": "test1.m",
         "caption": "Test 1",
@@ -168,5 +178,35 @@
         "file": "test4.m",
         "caption": "Test 4",
         "description": "Test 4."
+    },
+    "test5": {
+        "file": "test5.m",
+        "caption": "Test 5",
+        "description": "Test 5."
+    },
+    "test6": {
+        "file": "test6.m",
+        "caption": "Test 6",
+        "description": "Test 6."
+    },
+    "test7": {
+        "file": "test7.m",
+        "caption": "Test 7",
+        "description": "Test 7."
+    },
+    "test8": {
+        "file": "test8.m",
+        "caption": "Test 8",
+        "description": "Test 8."
+    },
+    "test9": {
+        "file": "test9.m",
+        "caption": "Test 9",
+        "description": "Test 9."
+    },
+    "test10": {
+        "file": "test10.m",
+        "caption": "Test 10",
+        "description": "Test 10."
     }
 }
