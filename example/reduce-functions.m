@@ -22,7 +22,7 @@ M = [1 3 5 7] % M is a 1x4 matrix
 % 1.1 all / any
 test0010(1,1) = all(all(all([1 1 0; 1 0 1] ) == [1 0 0])) % example
 test0010(1,2) = all(any([0 1; 0 0]) == [0 1]) % example
-test0010(1,3) = all(all(A > 0)) % true for check; then any / all usage
+test0010(1,3) = all(all(all(A > 0))) % true for check; then any / all usage
 test0010(1,4) = all(any([0 0; 1 0]) == [1 0]) % example for any
 test_result(1,1) = all(test0010) % true
 
@@ -32,7 +32,7 @@ test0020(1,2) = all(all(sum(B,2) == B(:,1,:) + B(:,2,:) + B(:,3,:)))
 test0020(1,3) = all(all(sum(B,3) == B(:,:,1) + B(:,:,2)))
 test0020(1,4) = all(sum(A) == [12 15 18]) % true
 test0020(1,5) = all(prod(A) == [28 80 162]) % true (product of columns)
-test0020(1,6) = all(sumsq(A) == [66 93 126]) % true (sum of squares of columns)
+test0020(1,6) = all(all(sumsq(A) == [66 93 126])) % true (sum of squares of columns)
 test_result(2,1) = all(test0020) % true
 
 % 1.3. cumsum / cumprod (accumulative)

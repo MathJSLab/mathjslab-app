@@ -3,7 +3,25 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
-# 1.7.4
+## 1.7.6
+
+- The `formatErrorForHTML.ts` file with a helper for format error messages in
+  HTML has been created.
+- Dependecies updated (`mathjslab` 1.9.2).
+
+## 1.7.5
+
+- Bug fix and build stabilization: resolved multiple compilation errors after
+  dependency upgrades by aligning the TypeScript and Webpack configurations.
+  Updated `tsconfig.json` to include proper `lib` definitions (`ES2022`, `DOM`,
+  `DOM.Iterable`), switched module output to `ESNext` to match the ESM setup,
+  and explicitly enabled `node` and `wicg-file-system-access` type definitions.
+  Added a global module declaration for SCSS files to support side-effect
+  imports, and ensured compatibility with modern Webpack behavior. These
+  changes restored a successful build process and improved consistency between
+  runtime environments and type checking.
+
+## 1.7.4
 
 - The script `"code:stats"`, which displays detailed statistics in terms of the
   number of lines of code in the project, and `"code:stats:summary"`, which
@@ -14,7 +32,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
   being adjusted, it will be configured again.
 - Dependecies updated (`mathjslab` 1.9.1).
 
-# 1.7.3
+## 1.7.3
 
 - The `help/**/all.md`, `help/**/any.md`, `help/**/var.md`, `help/**/std.md`
   and `help/**/qr.md` files have been created.
@@ -31,13 +49,13 @@ project adheres to [Semantic Versioning](http://semver.org/).
   for functions based on MathJSLab `MultiArray.reduce` function.
 - Dependecies updated (`mathjslab` 1.9.0).
 
-# 1.7.2
+## 1.7.2
 
 - The system of downloading raw files from the repository on GitHub has been
   replaced by cloning the repository and copying selected files.
 - Dependecies updated (`mathjslab` 1.8.2).
 
-# 1.7.1
+## 1.7.1
 
 - The `.circleci/config.yml` file was created to adjust the CircleCI tests that
   were failing since the 1.6.0 update.
@@ -50,7 +68,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - The MathJSLab logo in the .md files has been modified to use logo image in
   the website (mathjslab-www repository).
 
-# 1.7.0
+## 1.7.0
 
 - The `webpack.config.ts` file has been changed to include the
   `devServer.liveReload` and `devServer.server.type` options in the
@@ -80,7 +98,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
       has been moved to the `script/helper/` directory of the (MathJSLab
       organization repository)[https://github.com/MathJSLab/.github].
 
-# 1.6.1
+## 1.6.1
 
 - The `rimraf` package has been removed from development dependencies and the
   `shx` package has been added. The scripts in the `package.json` file have
@@ -91,7 +109,7 @@ project adheres to [Semantic Versioning](http://semver.org/).
   then moved to the organization repository. The `"postformat"` script in the
   `package.json` was created.
 
-# 1.6.0
+## 1.6.0
 
 - The second release of 2025 (`reia`) has been launch.
 - After the changes in MathJSLab version 1.7.3, all references to `window` and
@@ -116,12 +134,12 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - A setting for formatting `.md` files has been added to the `.prettierrc`
   file.
 
-# 1.5.7
+## 1.5.7
 
 - Target and module changed to ES2022 (`tsconfig.json`).
 - All dependencies has been updated, including `mathjslab` (version 1.7.3).
 
-# 1.5.6
+## 1.5.6
 
 - The `lint-staged` package has been removed and the
   `@types/eslint-config-prettier` package has been installed. All dependencies
@@ -438,6 +456,3 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - `markdown` function.
 - Bug fix in aliasTable (remove some overlaps).
 - doc folder created with some markdown files for tests.
-
-<a href="https://www.flaticon.com/free-icons/maths" title="maths icons">Maths
-icons created by Prosymbols - Flaticon</a>

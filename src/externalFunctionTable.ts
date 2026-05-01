@@ -1,4 +1,4 @@
-import { type NodeInput, type NodeExpr, type NodeIdentifier, type BuiltInFunctionTable, CharString, ComplexDecimal, AST } from 'mathjslab';
+import { type NodeInput, type NodeExpr, type NodeIdentifier, type BuiltInFunctionTable, CharString, ComplexDecimal, AST, Scope, CallFrame } from 'mathjslab';
 import { insertOutput } from './outputFunction';
 import { PlotEngine } from './PlotEngine';
 import { openFileDialog } from './openFileDialog';
@@ -32,19 +32,25 @@ const externalFunctionTable: BuiltInFunctionTable = {
 
     summation: {
         type: 'BUILTIN',
+        id: 'summation',
         mapper: false,
         ev: [false, true, true, false],
         func: (variable: NodeIdentifier, start: ComplexDecimal, end: ComplexDecimal, expr: NodeExpr): ComplexDecimal => {
             if (!start.im.eq(0)) throw new Error('complex number sum index');
             if (!end.im.eq(0)) throw new Error('complex number sum index');
             let result: ComplexDecimal = ComplexDecimal.zero();
-            const sum_function_name = `summation_${globalThis.crypto.randomUUID()}`;
-            appEngine.evaluator.localTable[sum_function_name] = {};
+            /* create scope for the sum */
+            const sumScope = Scope.create(appEngine.evaluator.workspace.currentScope);
+            /* push scope to call stack */
+            appEngine.evaluator.workspace.callStack!.push(new CallFrame(sumScope));
             for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
-                appEngine.evaluator.localTable[sum_function_name][variable.id] = ComplexDecimal.create(i, 0);
-                result = ComplexDecimal.add(result, appEngine.evaluator.Evaluator(expr, true, sum_function_name));
+                const value = ComplexDecimal.create(i, 0);
+                sumScope.defineName(variable.id, value);
+                const evalResult = appEngine.evaluator.Evaluator(expr, sumScope) as ComplexDecimal;
+                result = ComplexDecimal.add(result, evalResult);
             }
-            delete appEngine.evaluator.localTable[sum_function_name];
+            /* pop scope from call stack */
+            appEngine.evaluator.workspace.callStack!.pop();
             return result;
         },
         UnparserMathML: (tree: NodeInput): string => {
@@ -65,19 +71,30 @@ const externalFunctionTable: BuiltInFunctionTable = {
 
     productory: {
         type: 'BUILTIN',
+        id: 'productory',
         mapper: false,
         ev: [false, true, true, false],
         func: (variable: NodeIdentifier, start: ComplexDecimal, end: ComplexDecimal, expr: NodeExpr): ComplexDecimal => {
             if (!start.im.eq(0)) throw new Error('complex number prod index');
             if (!end.im.eq(0)) throw new Error('complex number prod index');
             let result: ComplexDecimal = ComplexDecimal.one();
-            const prod_function_name = `productory_${globalThis.crypto.randomUUID()}`;
-            appEngine.evaluator.localTable[prod_function_name] = {};
-            for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
-                appEngine.evaluator.localTable[prod_function_name][variable.id] = ComplexDecimal.create(i, 0);
-                result = ComplexDecimal.mul(result, appEngine.evaluator.Evaluator(expr, true, prod_function_name));
+            const workspace = appEngine.evaluator.workspace;
+            /* create local scope */
+            const localScope = Scope.create(workspace.currentScope);
+            /* push to call stack */
+            workspace.callStack!.push(new CallFrame(localScope));
+            try {
+                for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
+                    /* assigns variable in scope */
+                    localScope.defineName(variable.id, ComplexDecimal.create(i, 0));
+                    /* evaluates expression within the current scope */
+                    const value = appEngine.evaluator.Evaluator(expr) as ComplexDecimal;
+                    result = ComplexDecimal.mul(result, value);
+                }
+            } finally {
+                /* Ensures unstacking even with errors. */
+                workspace.callStack!.pop();
             }
-            delete appEngine.evaluator.localTable[prod_function_name];
             return result;
         },
         UnparserMathML: (tree: NodeInput): string => {
@@ -98,6 +115,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
 
     open: {
         type: 'BUILTIN',
+        id: 'open',
         mapper: false,
         ev: [true],
         func: (url?: CharString): NodeExpr => {
@@ -137,6 +155,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
 
     markdown: {
         type: 'BUILTIN',
+        id: 'markdown',
         mapper: false,
         ev: [true],
         func: (url?: CharString): NodeExpr => {
@@ -180,6 +199,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
 
     load: {
         type: 'BUILTIN',
+        id: 'load',
         mapper: false,
         ev: [true],
         func: (...url: CharString[]): NodeExpr => {

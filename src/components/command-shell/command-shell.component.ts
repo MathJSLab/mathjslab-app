@@ -305,9 +305,9 @@ export class CommandShell extends HTMLElement {
     public readonly refreshNameList: () => void = ((): void => {
         /* Removes all child nodes from the this.nameList. */
         this.nameList.replaceChildren();
-        for (const name in this.evaluatorPointer.nameTable) {
-            if (!this.evaluatorPointer.nativeNameTableList.includes(name)) {
-                const nameTableEntry = this.evaluatorPointer.nameTable[name];
+        for (const name in this.evaluatorPointer.workspace.currentScope.nameTable) {
+            if (!this.evaluatorPointer.workspace.nativeNameTableList.includes(name)) {
+                const nameTableEntry = this.evaluatorPointer.workspace.currentScope.nameTable[name];
                 const nameListEntry = document.createElement('li');
                 nameListEntry.className = 'nameitem';
                 this.nameList.append(nameListEntry);

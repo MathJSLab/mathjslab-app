@@ -34,10 +34,30 @@
         "caption": "Array shape functions",
         "description": "Tests array shape functions."
     },
+    "late-linking": {
+        "file": "forward-reference.m",
+        "caption": "Forward Reference",
+        "description": "General forward reference test suite."
+    },
+    "indexing": {
+        "file": "indexing.m",
+        "caption": "Indexing",
+        "description": "General indexing test suite."
+    },
+    "indexing-rhs": {
+        "file": "indexing-rhs.m",
+        "caption": "Indexing right-hand side",
+        "description": "Tests indexing at right-hand side."
+    },
     "indexing-right": {
         "file": "indexing-right.m",
         "caption": "Indexing right",
         "description": "Tests indexing at right side."
+    },
+    "indexing-lhs": {
+        "file": "indexing-lhs.m",
+        "caption": "Indexing left-hand side",
+        "description": "Tests indexing at left-hand side."
     },
     "indexing-left": {
         "file": "indexing-left.m",
@@ -144,6 +164,11 @@
         "caption": "Statements",
         "description": "Test statements, block comments..."
     },
+    "incdec": {
+        "file": "incdec.m",
+        "caption": "Inc / Dec",
+        "description": "Test increment and decrement..."
+    },
     "debug": {
         "file": "debug.m",
         "caption": "Debug",
@@ -153,11 +178,6 @@
         "file": "plot.m",
         "caption": "Plot",
         "description": "Test plot related functions."
-    },
-    "undefined-reference": {
-        "file": "undefined-reference.m",
-        "caption": "Undefined",
-        "description": "Test undefined reference resolution."
     },
     "test1": {
         "file": "test1.m",
@@ -208,5 +228,20 @@
         "file": "test10.m",
         "caption": "Test 10",
         "description": "Test 10."
+    },
+    "test11": {
+        "file": "test11.m",
+        "caption": "Test 11",
+        "description": "Test 11."
+    },
+    "test12": {
+        "file": "test12.m",
+        "caption": "Test 12",
+        "description": "Test 12."
+    },
+    "test13": {
+        "file": "test13.m",
+        "caption": "Test 13",
+        "description": "Test 13."
     }
 }

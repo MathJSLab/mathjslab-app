@@ -4,9 +4,9 @@
 
 import { Evaluator, appEngine } from './appEngine';
 import { CommandPrompt } from './components/components';
-import { type NodeInput } from 'mathjslab';
-import { Markdown } from './Markdown';
+import { EvaluatorError, type NodeInput } from 'mathjslab';
 import { outputFunction, insertOutput } from './outputFunction';
+import { formatErrorForHTML } from './formatErrorForHTML';
 /**
  * Evaluate prompt.
  * @param {CommandPrompt} prompt Command prompt to evaluate.
@@ -59,13 +59,12 @@ function evalPrompt(prompt: CommandPrompt, _index?: number): void {
             "<table><tr><td align='left'>" +
             appEngine.evaluator.UnparseMathML(tree) +
             '</td></tr></table><br />' +
-            error +
+            formatErrorForHTML(error as EvaluatorError) +
             (appEngine.evaluator.debug
                 ? '<br /><br /><pre>Input   : ' + JSON.stringify(tree, (key: string, value: any) => (key !== 'parent' ? value : value === null ? 'root' : true), 2) + '</pre>'
                 : '');
         if (appEngine.evaluator.debug) throw error;
     }
-    // Markdown.mathTypeset();
 }
 export { evalPrompt };
 export default { evalPrompt };

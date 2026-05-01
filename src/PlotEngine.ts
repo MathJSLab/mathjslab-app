@@ -1,5 +1,5 @@
 import Plotly from 'plotly.js-dist-min';
-import { type ElementType, type NodeExpr, type NodeIdentifier, AST, BuiltInFunctionTable, CharString, ComplexDecimal, Decimal, LinearAlgebra, MultiArray } from 'mathjslab';
+import { type ElementType, type NodeExpr, type NodeIdentifier, AST, BuiltInFunctionTable, CallFrame, CharString, ComplexDecimal, Decimal, LinearAlgebra, MultiArray, Scope } from 'mathjslab';
 import { insertOutput } from './outputFunction';
 import { appEngine } from './appEngine';
 
@@ -158,6 +158,7 @@ abstract class PlotEngine {
     public static readonly externalFunctionTable: BuiltInFunctionTable = {
         plot: {
             type: 'BUILTIN',
+            id: 'plot',
             mapper: false,
             ev: [],
             func: (...args: ElementType[]): NodeExpr => {
@@ -168,6 +169,7 @@ abstract class PlotEngine {
 
         plot3: {
             type: 'BUILTIN',
+            id: 'plot3',
             mapper: false,
             ev: [],
             func: (...args: ElementType[]): NodeExpr => {
@@ -178,6 +180,7 @@ abstract class PlotEngine {
 
         surf: {
             type: 'BUILTIN',
+            id: 'surf',
             mapper: false,
             ev: [],
             func: (...args: ElementType[]): NodeExpr => {
@@ -188,6 +191,7 @@ abstract class PlotEngine {
 
         plot2d: {
             type: 'BUILTIN',
+            id: 'plot2d',
             mapper: false,
             ev: [false, false, true, true],
             func: (expr: NodeExpr, variable: NodeIdentifier, minx: ComplexDecimal, maxx: ComplexDecimal): NodeExpr => {
@@ -203,18 +207,21 @@ abstract class PlotEngine {
                     plotData.MaxX = maxx.re.toNumber();
                 }
                 const deltaX = (plotData.MaxX - plotData.MinX) / plotWidth;
-                const plot_function_name = `plot2d_${globalThis.crypto.randomUUID()}`;
-                appEngine.evaluator.localTable[plot_function_name] = {};
                 const save_precision = Decimal.precision;
                 Decimal.set({ precision: 20 });
                 plotData.MaxY = 0;
                 plotData.MinY = 0;
                 plotData.X = [];
                 plotData.data = [];
+                /* create a single scope for the loop */
+                const plotScope = Scope.create(appEngine.evaluator.workspace.currentScope);
+                /* push scope to call stack */
+                appEngine.evaluator.workspace.callStack!.push(new CallFrame(plotScope));
                 for (let i = 0; i < plotWidth; i++) {
-                    appEngine.evaluator.localTable[plot_function_name][variable.id] = ComplexDecimal.create(plotData.MinX + deltaX * i, 0);
-                    plotData.X[i] = appEngine.evaluator.localTable[plot_function_name][variable.id].re.toNumber();
-                    const data_y = appEngine.evaluator.Evaluator(expr, true, plot_function_name);
+                    const xValue = ComplexDecimal.create(plotData.MinX + deltaX * i, 0);
+                    plotScope.defineName(variable.id, xValue);
+                    plotData.X[i] = xValue.re.toNumber();
+                    const data_y = appEngine.evaluator.Evaluator(expr, plotScope);
                     if (isFinite(data_y.re.toNumber()) && isFinite(data_y.im.toNumber()) && data_y.im.eq(0)) {
                         plotData.data[i] = data_y.re.toNumber();
                     } else {
@@ -223,7 +230,8 @@ abstract class PlotEngine {
                     plotData.MaxY = Math.max(plotData.MaxY, plotData.data[i]);
                     plotData.MinY = Math.min(plotData.MinY, plotData.data[i]);
                 }
-                delete appEngine.evaluator.localTable[plot_function_name];
+                /* pop scope from call stack */
+                appEngine.evaluator.workspace.callStack!.pop();
                 Decimal.set({ precision: save_precision });
                 return AST.nodeIndexExpr(AST.nodeIdentifier('plot2d'), AST.nodeList([expr, variable, minx, maxx]));
             },
@@ -231,6 +239,7 @@ abstract class PlotEngine {
 
         histogram: {
             type: 'BUILTIN',
+            id: 'histogram',
             mapper: false,
             ev: [true, true],
             func: (IMAG: MultiArray, DOM?: MultiArray): NodeExpr => {
