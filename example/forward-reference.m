@@ -35,3 +35,12 @@ clear % clear all variables
 % circular dependecy
 A = B + 1
 B = A + 1
+
+A = B + 1
+B = C + 1
+C = A + 1
+
+X = A + B + 1
+B = 5
+A = 4
+X == 10

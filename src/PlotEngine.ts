@@ -214,14 +214,14 @@ abstract class PlotEngine {
                 plotData.X = [];
                 plotData.data = [];
                 /* create a single scope for the loop */
-                const plotScope = Scope.create(appEngine.evaluator.workspace.currentScope);
+                const plotScope = Scope.create(appEngine.interpreter.context.currentScope);
                 /* push scope to call stack */
-                appEngine.evaluator.workspace.callStack!.push(new CallFrame(plotScope));
+                appEngine.interpreter.context.callStack!.push(new CallFrame(plotScope));
                 for (let i = 0; i < plotWidth; i++) {
                     const xValue = ComplexDecimal.create(plotData.MinX + deltaX * i, 0);
                     plotScope.defineName(variable.id, xValue);
                     plotData.X[i] = xValue.re.toNumber();
-                    const data_y = appEngine.evaluator.Evaluator(expr, plotScope);
+                    const data_y = appEngine.interpreter.Evaluator(expr, plotScope);
                     if (isFinite(data_y.re.toNumber()) && isFinite(data_y.im.toNumber()) && data_y.im.eq(0)) {
                         plotData.data[i] = data_y.re.toNumber();
                     } else {
@@ -231,7 +231,7 @@ abstract class PlotEngine {
                     plotData.MinY = Math.min(plotData.MinY, plotData.data[i]);
                 }
                 /* pop scope from call stack */
-                appEngine.evaluator.workspace.callStack!.pop();
+                appEngine.interpreter.context.callStack!.pop();
                 Decimal.set({ precision: save_precision });
                 return AST.nodeIndexExpr(AST.nodeIdentifier('plot2d'), AST.nodeList([expr, variable, minx, maxx]));
             },

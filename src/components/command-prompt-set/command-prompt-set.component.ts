@@ -23,7 +23,7 @@ export type CommandPromptSetElement = WebComponentElement<CommandPromptSetElemen
 /* Set of Web component element entry keys. */
 export const CommandPromptSetElementEntryKey: (keyof CommandPromptSetElementEntry)[] = ['wrapper'] as const;
 /**
- * Command prompt evaluator handler.
+ * Command prompt interpreter handler.
  */
 export type CommandPromptEvalHandler<T = void> = (prompt: CommandPrompt, index?: number) => T;
 /**

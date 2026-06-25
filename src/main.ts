@@ -1,4 +1,4 @@
-import './EvaluatorConfiguration';
+import './InterpreterConfiguration';
 import { evalInput } from './evalInput';
 import { evalPrompt } from './evalPrompt';
 import { Shell } from './Shell';

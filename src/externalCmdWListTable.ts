@@ -5,7 +5,7 @@ const externalCmdWListTable = {
     help: {
         func: (...args: string[]): void => {
             const encodeName = (name: string): string => {
-                name = appEngine.evaluator.workspace.aliasNameFunction(name);
+                name = appEngine.interpreter.context.aliasNameFunction(name);
                 const result: string[] = [];
                 for (let i = 0; i < name.length; i++) {
                     const c = name.charCodeAt(i);
@@ -59,7 +59,7 @@ const externalCmdWListTable = {
                     .then((responseText) => {
                         promptEntry.element.output.innerHTML = Markdown.parse(
                             responseText +
-                                appEngine.evaluator.workspace.builtInFunctionList
+                                appEngine.interpreter.context.builtInFunctionList
                                     .map((func) => `\`${func}\``)
                                     .sort()
                                     .join(', '),

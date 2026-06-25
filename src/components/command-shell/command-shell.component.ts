@@ -9,7 +9,7 @@ import setContainerFactory from '../setContainerFactory';
 import setIdFirstFactory from '../setIdFirstFactory';
 /* Web component styles. */
 import styles from './command-shell.styles.scss';
-import { CharString, Evaluator, FunctionHandle, MultiArray } from 'mathjslab';
+import { CharString, Interpreter, FunctionHandle, MultiArray } from 'mathjslab';
 import { appEngine } from '../../appEngine';
 /* BatchPanel Web component. */
 import { BatchPanel } from '../batch-panel/batch-panel.component';
@@ -42,7 +42,7 @@ export const CommandShellElementEntryKey: (keyof CommandShellElementEntry)[] = [
  */
 export type EventHandler = (event: Event) => void;
 /**
- * Input evaluator handler.
+ * Input interpreter handler.
  */
 export type EvalInputHandler = (input: string) => { statements: string[]; lines: string[] };
 /**
@@ -219,9 +219,9 @@ export class CommandShell extends HTMLElement {
         }
     }
     /**
-     * `Evaluator` instance.
+     * `Interpreter` instance.
      */
-    public evaluatorPointer: Evaluator;
+    public interpreterPointer: Interpreter;
     /**
      * Evaluate prompt callback setter.
      * @param prompt Prompt to evaluate.
@@ -285,7 +285,7 @@ export class CommandShell extends HTMLElement {
      * @param _event
      */
     public readonly restart: (event?: Event) => void = ((_event?: Event): void => {
-        this.evaluatorPointer.Restart();
+        this.interpreterPointer.Restart();
         /* Removes all child nodes from the this.nameList. */
         this.nameList.replaceChildren();
         this.element.promptSet.clear();
@@ -305,9 +305,9 @@ export class CommandShell extends HTMLElement {
     public readonly refreshNameList: () => void = ((): void => {
         /* Removes all child nodes from the this.nameList. */
         this.nameList.replaceChildren();
-        for (const name in this.evaluatorPointer.workspace.currentScope.nameTable) {
-            if (!this.evaluatorPointer.workspace.nativeNameTableList.includes(name)) {
-                const nameTableEntry = this.evaluatorPointer.workspace.currentScope.nameTable[name];
+        for (const name in this.interpreterPointer.context.currentScope.nameTable) {
+            if (!this.interpreterPointer.context.nativeNameTableList.includes(name)) {
+                const nameTableEntry = this.interpreterPointer.context.currentScope.nameTable[name];
                 const nameListEntry = document.createElement('li');
                 nameListEntry.className = 'nameitem';
                 this.nameList.append(nameListEntry);
@@ -378,7 +378,7 @@ export class CommandShell extends HTMLElement {
         };
     }
     public debugMessage(message: string): void {
-        if (this.evaluatorPointer.debug) {
+        if (this.interpreterPointer.debug) {
             const promptFoot = document.createElement('p');
             promptFoot.innerHTML = message;
             this.appendChild(promptFoot);

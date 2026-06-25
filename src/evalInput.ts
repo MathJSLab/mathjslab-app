@@ -1,5 +1,5 @@
 /**
- * Input Evaluator
+ * Input Interpreter
  */
 import { appEngine } from './appEngine';
 
@@ -12,7 +12,7 @@ function evalInput(input: string): { statements: string[]; lines: string[] } {
     try {
         const statements: string[] = [];
         const lines: string[] = input.split(/\r?\n/);
-        const tree = appEngine.evaluator.Parse(input);
+        const tree = appEngine.interpreter.Parse(input);
         if (tree) {
             for (let i = 0; i < tree.list.length; i++) {
                 if (tree.list[i].stop.line === tree.list[i].start.line) {

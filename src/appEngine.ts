@@ -1,4 +1,4 @@
-import { Evaluator } from 'mathjslab';
+import { Interpreter } from 'mathjslab';
 import { Shell } from './Shell';
 import { Markdown } from './Markdown';
 
@@ -13,7 +13,7 @@ type AppEngine = {
     lang: string;
     setLanguage: (lang?: string) => void;
     buildMessage: string;
-    evaluator: Evaluator;
+    interpreter: Interpreter;
     shell: Shell;
     openFile: () => void;
     Markdown: typeof Markdown;
@@ -26,7 +26,7 @@ const appEngine: AppEngine = {
     lang: '',
     setLanguage: () => {},
     buildMessage: '',
-    evaluator: null as unknown as Evaluator,
+    interpreter: null as unknown as Interpreter,
     shell: null as unknown as Shell,
     openFile: () => {},
     Markdown,
@@ -36,5 +36,5 @@ const appEngine: AppEngine = {
 (globalThis as any).appConfiguration = appConfiguration;
 
 export type { AppConfiguration, AppEngine };
-export { Evaluator, appConfiguration, appEngine };
-export default { Evaluator, appConfiguration, appEngine };
+export { Interpreter, appConfiguration, appEngine };
+export default { Interpreter, appConfiguration, appEngine };

@@ -45,7 +45,7 @@ class Shell {
                 }
             }
         }
-        newShell.commandShell.evaluatorPointer = appEngine.evaluator;
+        newShell.commandShell.interpreterPointer = appEngine.interpreter;
         newShell.commandShell.debugMessage(appEngine.buildMessage);
         if (options.evalPrompt) {
             newShell.commandShell.evalPrompt = options.evalPrompt;

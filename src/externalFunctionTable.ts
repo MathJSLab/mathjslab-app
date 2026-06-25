@@ -40,30 +40,30 @@ const externalFunctionTable: BuiltInFunctionTable = {
             if (!end.im.eq(0)) throw new Error('complex number sum index');
             let result: ComplexDecimal = ComplexDecimal.zero();
             /* create scope for the sum */
-            const sumScope = Scope.create(appEngine.evaluator.workspace.currentScope);
+            const sumScope = Scope.create(appEngine.interpreter.context.currentScope);
             /* push scope to call stack */
-            appEngine.evaluator.workspace.callStack!.push(new CallFrame(sumScope));
+            appEngine.interpreter.context.callStack!.push(new CallFrame(sumScope));
             for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
                 const value = ComplexDecimal.create(i, 0);
                 sumScope.defineName(variable.id, value);
-                const evalResult = appEngine.evaluator.Evaluator(expr, sumScope) as ComplexDecimal;
+                const evalResult = appEngine.interpreter.Evaluator(expr, sumScope) as ComplexDecimal;
                 result = ComplexDecimal.add(result, evalResult);
             }
             /* pop scope from call stack */
-            appEngine.evaluator.workspace.callStack!.pop();
+            appEngine.interpreter.context.callStack!.pop();
             return result;
         },
         UnparserMathML: (tree: NodeInput): string => {
             return (
                 '<mstyle displaystyle="true"><munderover><mo>&sum;</mo><mrow>' +
-                appEngine.evaluator.UnparserMathML(tree.args[0]) +
+                appEngine.interpreter.UnparserMathML(tree.args[0]) +
                 '<mo>=</mo>' +
-                appEngine.evaluator.UnparserMathML(tree.args[1]) +
+                appEngine.interpreter.UnparserMathML(tree.args[1]) +
                 '</mrow><mrow>' +
-                appEngine.evaluator.UnparserMathML(tree.args[2]) +
+                appEngine.interpreter.UnparserMathML(tree.args[2]) +
                 '</mrow>' +
                 '</munderover>' +
-                appEngine.evaluator.UnparserMathML(tree.args[3]) +
+                appEngine.interpreter.UnparserMathML(tree.args[3]) +
                 '</mstyle>'
             );
         },
@@ -78,36 +78,36 @@ const externalFunctionTable: BuiltInFunctionTable = {
             if (!start.im.eq(0)) throw new Error('complex number prod index');
             if (!end.im.eq(0)) throw new Error('complex number prod index');
             let result: ComplexDecimal = ComplexDecimal.one();
-            const workspace = appEngine.evaluator.workspace;
+            const context = appEngine.interpreter.context;
             /* create local scope */
-            const localScope = Scope.create(workspace.currentScope);
+            const localScope = Scope.create(context.currentScope);
             /* push to call stack */
-            workspace.callStack!.push(new CallFrame(localScope));
+            context.callStack!.push(new CallFrame(localScope));
             try {
                 for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
                     /* assigns variable in scope */
                     localScope.defineName(variable.id, ComplexDecimal.create(i, 0));
                     /* evaluates expression within the current scope */
-                    const value = appEngine.evaluator.Evaluator(expr) as ComplexDecimal;
+                    const value = appEngine.interpreter.Evaluator(expr) as ComplexDecimal;
                     result = ComplexDecimal.mul(result, value);
                 }
             } finally {
                 /* Ensures unstacking even with errors. */
-                workspace.callStack!.pop();
+                context.callStack!.pop();
             }
             return result;
         },
         UnparserMathML: (tree: NodeInput): string => {
             return (
                 '<mstyle displaystyle="true"><munderover><mo>&prod;</mo><mrow>' +
-                appEngine.evaluator.UnparserMathML(tree.args[0]) +
+                appEngine.interpreter.UnparserMathML(tree.args[0]) +
                 '<mo>=</mo>' +
-                appEngine.evaluator.UnparserMathML(tree.args[1]) +
+                appEngine.interpreter.UnparserMathML(tree.args[1]) +
                 '</mrow><mrow>' +
-                appEngine.evaluator.UnparserMathML(tree.args[2]) +
+                appEngine.interpreter.UnparserMathML(tree.args[2]) +
                 '</mrow>' +
                 '</munderover>' +
-                appEngine.evaluator.UnparserMathML(tree.args[3]) +
+                appEngine.interpreter.UnparserMathML(tree.args[3]) +
                 '</mstyle>'
             );
         },
@@ -210,9 +210,9 @@ const externalFunctionTable: BuiltInFunctionTable = {
                 insertOutput.type = '';
                 promptEntry.element.output.innerHTML = '';
                 try {
-                    const tree = appEngine.evaluator.Parse(content);
+                    const tree = appEngine.interpreter.Parse(content);
                     if (tree) {
-                        appEngine.evaluator.Evaluate(tree);
+                        appEngine.interpreter.Evaluate(tree);
                     }
                 } catch (e) {
                     error = true;

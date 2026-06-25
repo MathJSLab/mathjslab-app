@@ -1,5 +1,5 @@
 import './showOpenFilePickerPolyfill';
-import { Evaluator, EvaluatorConfig, AliasNameTable } from 'mathjslab';
+import { Interpreter, InterpreterConfig, AliasNameTable } from 'mathjslab';
 import { appEngine } from './appEngine';
 import { Markdown } from './Markdown';
 import buildConfiguration from './build-configuration.json';
@@ -16,9 +16,9 @@ appEngine.setLanguage = (lang?: string): void => {
     }
     document.querySelector('html')!.setAttribute('lang', appEngine.lang);
     appEngine.shell.commandShell.setLanguage(appEngine.lang);
-    EvaluatorConfiguration.aliasNameTable = languageAlias[appEngine.lang];
-    appEngine.evaluator = Evaluator.Create(EvaluatorConfiguration);
-    appEngine.evaluator.debug = buildConfiguration.debug;
+    InterpreterConfiguration.aliasNameTable = languageAlias[appEngine.lang];
+    appEngine.interpreter = Interpreter.Create(InterpreterConfiguration);
+    appEngine.interpreter.debug = buildConfiguration.debug;
     appEngine.shell.commandShell.evaluate();
 };
 
@@ -158,7 +158,7 @@ export const languageAlias: Record<string, AliasNameTable> = {
     },
 };
 
-export const EvaluatorConfiguration: EvaluatorConfig = {
+export const InterpreterConfiguration: InterpreterConfig = {
     /**
      * Alias table
      */
@@ -179,19 +179,19 @@ export const EvaluatorConfiguration: EvaluatorConfig = {
  * To open file from device.
  */
 appEngine.openFile = (): void => {
-    EvaluatorConfiguration.externalFunctionTable!.open.func();
+    InterpreterConfiguration.externalFunctionTable!.open.func();
 };
 
-Object.assign(EvaluatorConfiguration.externalCmdWListTable!, {
+Object.assign(InterpreterConfiguration.externalCmdWListTable!, {
     open: {
         func: (...args: string[]): void => {
-            EvaluatorConfiguration.externalFunctionTable!.open.func(...args);
+            InterpreterConfiguration.externalFunctionTable!.open.func(...args);
         },
     },
 });
 
 /**
- * Evaluator and Markdown initialization.
+ * Interpreter and Markdown initialization.
  */
 function bootstrap() {
     const baseUrl = globalThis.location.href.substring(0, globalThis.location.href.lastIndexOf('/') + 1);
@@ -234,9 +234,9 @@ function bootstrap() {
     if (!(appEngine.lang in languageAlias)) {
         appEngine.lang = appEngine.config.defaultLanguage!;
     }
-    EvaluatorConfiguration.aliasNameTable = languageAlias[appEngine.lang];
-    appEngine.evaluator = Evaluator.Create(EvaluatorConfiguration);
-    appEngine.evaluator.debug = buildConfiguration.debug;
+    InterpreterConfiguration.aliasNameTable = languageAlias[appEngine.lang];
+    appEngine.interpreter = Interpreter.Create(InterpreterConfiguration);
+    appEngine.interpreter.debug = buildConfiguration.debug;
     appEngine.buildMessage = buildConfiguration.buildMessage;
     Markdown.initialize();
 }
