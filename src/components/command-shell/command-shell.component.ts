@@ -315,7 +315,7 @@ export class CommandShell extends HTMLElement {
                     nameListEntry.innerHTML = `&commat; ${name}(${nameTableEntry.parameter.map((arg: { id: any }) => arg.id).join(',')})`;
                 } else {
                     let resultType: string = '';
-                    if (nameTableEntry.node.type !== undefined) {
+                    if (nameTableEntry.node && nameTableEntry.node.type !== undefined) {
                         if (nameTableEntry instanceof MultiArray) {
                             resultType = '[' + nameTableEntry.dimension.join('x') + ']';
                         } else if (nameTableEntry instanceof CharString) {

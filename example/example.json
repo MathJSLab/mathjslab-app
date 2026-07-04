@@ -34,10 +34,120 @@
         "caption": "Array shape functions",
         "description": "Tests array shape functions."
     },
-    "late-linking": {
+    "forward-reference": {
         "file": "forward-reference.m",
         "caption": "Forward Reference",
         "description": "General forward reference test suite."
+    },
+    "function-definition": {
+        "file": "function-definition.m",
+        "caption": "Function Definition",
+        "description": "General function definition test suite."
+    },
+    "persistent": {
+        "file": "persistent.m",
+        "caption": "Persistent variables",
+        "description": "General persistent test suite."
+    },
+    "global": {
+        "file": "global.m",
+        "caption": "Global variables",
+        "description": "General global test suite."
+    },
+    "arg-ret": {
+        "file": "arg-ret.m",
+        "caption": "Function arguments and returns",
+        "description": "General function arguments and returns test suite."
+    },
+    "arg-validation": {
+        "file": "arg-validation.m",
+        "caption": "Function arguments validation",
+        "description": "General function arguments validation test suite."
+    },
+    "inner-function": {
+        "file": "inner-function.m",
+        "caption": "Inner Function",
+        "description": "General inner function test suite."
+    },
+    "function-feval": {
+        "file": "function-feval.m",
+        "caption": "feval Function",
+        "description": "General feval function test suite."
+    },
+    "exist": {
+        "file": "exist.m",
+        "caption": "exist",
+        "description": "General exist test suite."
+    },
+    "which": {
+        "file": "which.m",
+        "caption": "which",
+        "description": "General which test suite."
+    },
+    "class": {
+        "file": "class.m",
+        "caption": "class",
+        "description": "General class test suite."
+    },
+    "mfilename": {
+        "file": "mfilename.m",
+        "caption": "mfilename",
+        "description": "General mfilename test suite."
+    },
+    "localfunctions": {
+        "file": "localfunctions.m",
+        "caption": "localfunctions",
+        "description": "General localfunctions test suite."
+    },
+    "dbstack": {
+        "file": "dbstack.m",
+        "caption": "dbstack",
+        "description": "General dbstack test suite."
+    },
+    "inputname": {
+        "file": "inputname.m",
+        "caption": "inputname",
+        "description": "General inputname test suite."
+    },
+    "evalin-assignin": {
+        "file": "evalin-assignin.m",
+        "caption": "evalin & assignin",
+        "description": "General evalin and assignin test suite."
+    },
+    "eval": {
+        "file": "eval.m",
+        "caption": "eval",
+        "description": "General eval test suite."
+    },
+    "eval-evalin-catch": {
+        "file": "eval-evalin-catch.m",
+        "caption": "eval/evalin with catch",
+        "description": "General eval/evalin with catch test suite."
+    },
+    "clear": {
+        "file": "clear.m",
+        "caption": "clear",
+        "description": "General clear test suite."
+    },
+    "builtin-signature-introspection": {
+        "file": "builtin-signature-introspection.m",
+        "caption": "Built-in signature introspection",
+        "description": "General built-in signature introspection test suite."
+    },
+    "builtin-signature-arity-validation": {
+        "file": "builtin-signature-arity-validation.m",
+        "caption": "Built-in signature - arity validation",
+        "description": "General built-in signature - arity validation test suite."
+    },
+    "builtin-signature-parameter-validation": {
+        "file": "builtin-signature-parameter-validation.m",
+        "caption": "Built-in signature - parameter validation",
+        "description": "General built-in signature - parameter validation test suite."
+    },
+    "builtin-meshgrid-ndgrid": {
+        "file": "builtin-meshgrid-ndgrid.m",
+        "caption": "Built-in: meshgrid and ndgrid",
+        "description": "General built-in meshgrid and ndgrid test suite."
     },
     "indexing": {
         "file": "indexing.m",
@@ -238,10 +348,5 @@
         "file": "test12.m",
         "caption": "Test 12",
         "description": "Test 12."
-    },
-    "test13": {
-        "file": "test13.m",
-        "caption": "Test 13",
-        "description": "Test 13."
     }
 }
