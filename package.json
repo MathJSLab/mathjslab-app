@@ -1,6 +1,6 @@
 {
     "name": "mathjslab-app",
-    "version": "1.7.8",
+    "version": "1.7.9",
     "description": "MathJSLab - An interpreter with language syntax like MATLAB®/Octave, ISBN 978-65-00-82338-7. A demo application from the mathjslab npm package, ISBN 978-65-00-84828-1.",
     "repository": {
         "type": "git",
@@ -51,8 +51,9 @@
         "remove:android": "npm remove @capacitor/android",
         "install:webapp": "npm run install:capacitor && npm run install:android",
         "remove:webapp": "npm run remove:android && npm run remove:capacitor",
+        "install:approve:all": "npm install-scripts approve --all && npm install",
         "install:all": "npm install && npm run clone:copy:clean:repository && npm run clean && npm run build:script",
-        "update": "npx npm-check-updates -u && npm run install:all",
+        "update": "npx npm-check-updates -u -x typescript && npm run install:all",
         "pregit:add": "replace-in-file --verbose --configFile=replace.fix-linebreak.json",
         "git:add": "git add .",
         "git:commit": "node script/helper/git-commit.cjs",
@@ -60,6 +61,9 @@
         "git:all": "npm run git:add && npm run git:commit && npm run git:push",
         "tsx": "tsx --require tsconfig-paths/register",
         "npx:tsx": "npx tsx",
+        "crono:start": "npm run tsx script/helper/mark-crono.ts -- start",
+        "crono:mark": "npm run tsx script/helper/mark-crono.ts -- mark",
+        "crono:stop": "npm run tsx script/helper/mark-crono.ts -- stop",
         "format": "prettier --plugin=@prettier/plugin-xml --write **/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,html,htm,json,jsonc,yml,yaml,xml,svg,md,yml,yaml}",
         "lint": "eslint --fix",
         "format:lint": "npm run format && npm run lint",
@@ -83,7 +87,7 @@
         "build:add:open:android": "npm run build:add:android && npm run open:android",
         "build:sync:open:android": "npm run build:sync:android && npm run open:android",
         "build:all": "npm run clean && npm run update && npm run build:add:android",
-        "do:all": "npm run clean:all && npm run update && npm run format:lint && npm run build && npm run git:all && echo script \"do:all\" finished."
+        "do:all": "npm run crono:start && npm run clean:all && npm run update && npm run format:lint && npm run build && npm run git:all && echo script \"do:all\" finished. && npm run crono:stop"
     },
     "devDependencies": {
         "@11ty/eleventy": "^3.1.6",
@@ -91,13 +95,13 @@
         "@prettier/plugin-xml": "^3.4.2",
         "@resvg/resvg-js": "^2.6.2",
         "@types/eslint-config-prettier": "^6.11.3",
-        "@types/node": "^26.1.0",
+        "@types/node": "^26.1.1",
         "@types/plotly.js-dist-min": "^2.3.4",
         "@types/webpack": "^5.28.5",
         "@types/webpack-bundle-analyzer": "^4.7.0",
         "@types/wicg-file-system-access": "^2023.10.7",
-        "@typescript-eslint/eslint-plugin": "^8.62.1",
-        "@typescript-eslint/parser": "^8.62.1",
+        "@typescript-eslint/eslint-plugin": "^8.63.0",
+        "@typescript-eslint/parser": "^8.63.0",
         "ajv": "^8.20.0",
         "chalk": "^5.6.2",
         "chevrotain": "^12.0.0",
@@ -105,18 +109,19 @@
         "cross-env": "^10.1.0",
         "cson": "^8.4.0",
         "css-loader": "^7.1.4",
-        "eslint": "^10.6.0",
+        "eslint": "^10.7.0",
         "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-import": "^2.32.0",
         "eslint-plugin-prettier": "^5.5.6",
         "globals": "^17.7.0",
         "html-loader": "^5.1.0",
         "html-webpack-plugin": "^5.6.7",
+        "jimp": "^1.6.1",
         "json5": "^2.2.3",
         "mini-css-extract-plugin": "^2.10.2",
-        "node-html-parser": "^8.0.4",
-        "png-to-ico": "^3.0.1",
-        "prettier": "^3.9.4",
+        "node-html-parser": "^9.0.0",
+        "png-to-ico": "^3.0.2",
+        "prettier": "^3.9.5",
         "replace-in-file": "^8.4.0",
         "sass": "^1.101.0",
         "sass-loader": "^17.0.0",
@@ -127,18 +132,18 @@
         "ts-loader": "^9.6.2",
         "ts-node": "^10.9.2",
         "tsconfig-paths": "^4.2.0",
-        "tsx": "^4.23.0",
+        "tsx": "^4.23.1",
         "typescript": "^6.0.3",
         "uuid": "^14.0.1",
         "webpack": "^5.108.4",
         "webpack-bundle-analyzer": "^5.3.0",
-        "webpack-cli": "^7.2.0",
+        "webpack-cli": "^7.2.1",
         "webpack-dev-server": "^6.0.0",
         "yaml": "^2.9.0"
     },
     "dependencies": {
-        "marked": "^18.0.5",
-        "mathjslab": "^2.1.1",
+        "marked": "^18.0.6",
+        "mathjslab": "^2.1.2",
         "mermaid": "^11.16.0",
         "plotly.js-dist-min": "^3.7.0"
     },
@@ -146,5 +151,11 @@
         "mermaid": {
             "chevrotain": "$chevrotain"
         }
+    },
+    "allowScripts": {
+        "esbuild": true,
+        "sharp@0.33.5": true,
+        "@parcel/watcher@2.5.6": true,
+        "unrs-resolver": true
     }
 }

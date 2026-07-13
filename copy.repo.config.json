@@ -10,6 +10,7 @@
         "script/helper/EleventyUtil.mjs",
         "script/helper/readFileBom.ts",
         "script/helper/readFileBomSync.ts",
+        "script/helper/mark-crono.ts",
         "script/helper/mkDirIfNotExist.ts",
         "script/helper/git-commit.cjs",
         "script/helper/toIco.ts",

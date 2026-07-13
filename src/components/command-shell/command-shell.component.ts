@@ -306,7 +306,7 @@ export class CommandShell extends HTMLElement {
         /* Removes all child nodes from the this.nameList. */
         this.nameList.replaceChildren();
         for (const name in this.interpreterPointer.context.currentScope.nameTable) {
-            if (!this.interpreterPointer.context.nativeNameTableList.includes(name)) {
+            if (!this.interpreterPointer.context.nativeNameSet.has(name)) {
                 const nameTableEntry = this.interpreterPointer.context.currentScope.nameTable[name];
                 const nameListEntry = document.createElement('li');
                 nameListEntry.className = 'nameitem';
