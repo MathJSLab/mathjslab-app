@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Exponential population growth",
+            "es": "Crecimiento poblacional exponencial",
+            "pt": "Crescimento populacional exponencial"
+        },
+        "parameters": {
+            "en": "initial population, growth rate, and years",
+            "es": "población inicial, tasa de crecimiento y años",
+            "pt": "população inicial, taxa de crescimento e anos"
+        },
+        "model": {
+            "en": "evaluate the model at selected years",
+            "es": "evaluar el modelo en años seleccionados",
+            "pt": "avaliar o modelo em anos selecionados"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.parameters[lang] }}
+initial_population = 5000
+growth_rate = 0.035
+years = 0:5
+% {{ comments.model[lang] }}
+population = initial_population*(1 + growth_rate).^years
+final_population = population(6)
+growth_factor = final_population/initial_population

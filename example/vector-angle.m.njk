@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Angle between two vectors",
+            "es": "Ángulo entre dos vectores",
+            "pt": "Ângulo entre dois vetores"
+        },
+        "vectors": {
+            "en": "define two vectors",
+            "es": "definir dos vectores",
+            "pt": "definir dois vetores"
+        },
+        "angle": {
+            "en": "use dot product and vector norms",
+            "es": "usar producto punto y normas vectoriales",
+            "pt": "usar produto escalar e normas vetoriais"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.vectors[lang] }}
+u = [2, 1, 3]
+v = [1, 4, 2]
+% {{ comments.angle[lang] }}
+dot_product = dot(u, v)
+norm_u = sqrt(dot(u, u))
+norm_v = sqrt(dot(v, v))
+angle_radians = acos(dot_product/(norm_u*norm_v))
+angle_degrees = rad2deg(angle_radians)

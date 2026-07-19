@@ -1,1 +1,0 @@
-clear % clear all variables

@@ -1,0 +1,29 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Convert Celsius temperatures to Fahrenheit",
+            "es": "Convertir temperaturas Celsius a Fahrenheit",
+            "pt": "Converter temperaturas Celsius para Fahrenheit"
+        },
+        "data": {
+            "en": "temperatures measured in Celsius",
+            "es": "temperaturas medidas en Celsius",
+            "pt": "temperaturas medidas em Celsius"
+        },
+        "conversion": {
+            "en": "convert and summarize",
+            "es": "convertir y resumir",
+            "pt": "converter e resumir"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.data[lang] }}
+celsius = [-5, 0, 12, 20, 28, 35]
+% {{ comments.conversion[lang] }}
+fahrenheit = celsius*9/5 + 32
+average_celsius = mean(celsius)
+average_fahrenheit = mean(fahrenheit)

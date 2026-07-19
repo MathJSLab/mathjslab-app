@@ -9,12 +9,7 @@ console.warn('Copying assets to /dist directory...');
 try {
     // Create dist directory.
     let directory = path.resolve(__dirname, '..', 'dist');
-    if (fs.existsSync(directory)) {
-        fs.rmSync(directory, { recursive: true });
-        fs.mkdirSync(directory);
-    } else {
-        fs.mkdirSync(directory);
-    }
+    fs.mkdirSync(directory, { recursive: true });
     // Copy manifest.json
     fs.copyFileSync(path.resolve(__dirname, '..', 'manifest.json'), path.resolve(__dirname, '..', 'dist', 'manifest.json'));
     // Copy robots.txt
@@ -39,17 +34,55 @@ try {
     fs.copyFileSync(path.resolve(__dirname, '..', 'example', 'example.json'), path.resolve(__dirname, '..', 'dist', 'example', 'example.json'));
     // Copy files in example directory to dist/example. Create first-example.json.
     const example = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'example', 'example.json')));
+    const exampleFiles = new Set();
+    for (let name in example) {
+        if (typeof example[name].caption === 'object') {
+            Object.keys(example[name].caption).forEach((lang) => {
+                exampleFiles.add(path.resolve(__dirname, '..', 'dist', 'example', lang, example[name].file));
+            });
+        } else {
+            exampleFiles.add(path.resolve(__dirname, '..', 'dist', 'example', example[name].file));
+        }
+    }
+    const removeStaleExampleFiles = (dir) => {
+        fs.readdirSync(dir, { withFileTypes: true }).forEach((entry) => {
+            const entryPath = path.resolve(dir, entry.name);
+            if (entry.isDirectory()) {
+                removeStaleExampleFiles(entryPath);
+            } else if (path.extname(entry.name) === '.m' && !exampleFiles.has(entryPath)) {
+                fs.rmSync(entryPath);
+            }
+        });
+    };
+    removeStaleExampleFiles(path.resolve(__dirname, '..', 'dist', 'example'));
     let first = true;
     for (let name in example) {
-        fs.copyFileSync(path.resolve(__dirname, '..', 'example', example[name].file), path.resolve(__dirname, '..', 'dist', 'example', example[name].file));
-        if (first) {
-            const firstExample = {
-                name,
-                description: example[name].description,
-                content: fs.readFileSync(path.resolve(__dirname, '..', 'example', example[name].file)).toString(),
-            };
-            fs.writeFileSync(path.resolve(__dirname, '..', 'src', 'first-example.json'), JSON.stringify(firstExample, null, 2));
-            first = false;
+        if (typeof example[name].caption === 'object') {
+            if (first) {
+                const content = {};
+                const languages = Object.keys(example[name].caption);
+                languages.forEach((lang) => {
+                    content[lang] = fs.readFileSync(path.resolve(__dirname, '..', 'dist', 'example', lang, example[name].file)).toString();
+                });
+                const firstExample = {
+                    name,
+                    description: example[name].description,
+                    content,
+                };
+                fs.writeFileSync(path.resolve(__dirname, '..', 'src', 'first-example.json'), JSON.stringify(firstExample, null, 2));
+                first = false;
+            }
+        } else {
+            fs.copyFileSync(path.resolve(__dirname, '..', 'example', example[name].file), path.resolve(__dirname, '..', 'dist', 'example', example[name].file));
+            if (first) {
+                const firstExample = {
+                    name,
+                    description: example[name].description,
+                    content: fs.readFileSync(path.resolve(__dirname, '..', 'example', example[name].file)).toString(),
+                };
+                fs.writeFileSync(path.resolve(__dirname, '..', 'src', 'first-example.json'), JSON.stringify(firstExample, null, 2));
+                first = false;
+            }
         }
     }
     // Create dist/help directory.

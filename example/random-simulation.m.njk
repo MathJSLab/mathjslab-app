@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Random simulation with dice rolls",
+            "es": "Simulación aleatoria con lanzamientos de dados",
+            "pt": "Simulação aleatória com lançamentos de dados"
+        },
+        "rolls": {
+            "en": "simulate two dice",
+            "es": "simular dos dados",
+            "pt": "simular dois dados"
+        },
+        "summary": {
+            "en": "summarize the outcomes",
+            "es": "resumir los resultados",
+            "pt": "resumir os resultados"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.rolls[lang] }}
+die1 = randi(6, 1, 20)
+die2 = randi(6, 1, 20)
+total = die1 + die2
+% {{ comments.summary[lang] }}
+average_total = mean(total)
+lowest_total = min(total)
+highest_total = max(total)
+running_total = cumsum(total)

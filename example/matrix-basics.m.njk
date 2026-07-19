@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Matrix basics",
+            "es": "Matrices básicas",
+            "pt": "Matrizes básicas"
+        },
+        "create": {
+            "en": "create two matrices",
+            "es": "crear dos matrices",
+            "pt": "criar duas matrizes"
+        },
+        "operations": {
+            "en": "transpose, multiply, and inspect dimensions",
+            "es": "transponer, multiplicar e inspeccionar dimensiones",
+            "pt": "transpor, multiplicar e inspecionar dimensões"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.create[lang] }}
+A = [1, 2, 3; 4, 5, 6]
+B = [2, 0; 1, 3; 4, 1]
+% {{ comments.operations[lang] }}
+A_transposed = A'
+product = A*B
+dimensions_of_product = size(product)
+number_of_elements = numel(product)

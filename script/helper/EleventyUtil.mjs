@@ -40,6 +40,7 @@ import { v4 as uuid } from 'uuid';
 import chalk from 'chalk';
 import Eleventy, { EleventyRenderPlugin } from '@11ty/eleventy';
 import Image from '@11ty/eleventy-img';
+import Nunjucks from 'nunjucks';
 // import markdownIt from 'markdown-it';
 import JSON5 from 'json5';
 import YAML from 'yaml';
@@ -642,14 +643,79 @@ function configAddFileContentAsGlobalData(eleventyConfig, dataPath, slugify, ext
     eleventyConfig.addGlobalData(path.basename(dataPath, path.extname(dataPath)), result);
 }
 /**
- * Factory for function that removes a prefix and extension for inputPath (to be used in permalink).
- * @param {*} prefix
- * @param {*} extension
- * @returns
+ * Nunjucks environment used to render explicit permalinks.
+ */
+const permalinkNunjucksEnvironment = new Nunjucks.Environment(null, {
+    autoescape: false,
+    throwOnUndefined: true,
+});
+for (const [name, filter] of Object.entries(utilFilters)) {
+    permalinkNunjucksEnvironment.addFilter(name, filter);
+}
+/**
+ * Factory for a permalink compiler that preserves the historical output
+ * path behavior while allowing explicit Eleventy permalinks to override it.
+ *
+ * Explicit permalinks may be:
+ *
+ * - a string;
+ * - a function that receives the data cascade;
+ * - false, to disable output;
+ * - null or undefined, to use the historical default permalink.
+ *
+ * @param {string} prefix Input path prefix expressed as a regular expression.
+ * @param {string} extension Template extension without the leading dot.
+ * @returns {Function} Eleventy permalink compiler.
  */
 function prefixExtensionRemoveFactory(prefix, extension) {
-    const regex = new RegExp(`^${prefix}(.*)\.${extension}$`);
-    return (_inputContent, inputPath) => inputPath.replace(regex, '$1');
+    const regex = new RegExp(`^${prefix}(.*)\\.${extension}$`);
+    return function (_inputContent, inputPath) {
+        const defaultPermalink = inputPath.replace(regex, '$1');
+        return async function (data) {
+            let explicitPermalink = data?.permalink;
+            /*
+             * Permalinks declared in JavaScript data files may be functions.
+             */
+            if (typeof explicitPermalink === 'function') {
+                try {
+                    explicitPermalink = await explicitPermalink(data);
+                } catch (error) {
+                    throw new Error(`Cannot evaluate permalink function for ` + `"${inputPath}": ${error.message}`, {
+                        cause: error,
+                    });
+                }
+            }
+            /*
+             * Explicitly disables output.
+             */
+            if (explicitPermalink === false) {
+                return false;
+            }
+            /*
+             * Preserves the historical EleventyUtil behavior.
+             */
+            if (explicitPermalink === undefined || explicitPermalink === null) {
+                return defaultPermalink;
+            }
+            if (typeof explicitPermalink !== 'string') {
+                throw new TypeError(
+                    `Invalid permalink for "${inputPath}": ` + 'expected a string, function, false, null, ' + `or undefined, but received ` + `"${typeof explicitPermalink}".`,
+                );
+            }
+            /*
+             * A permalink returned by a JavaScript function will normally
+             * already be resolved. Rendering it again also permits the
+             * function to return a Nunjucks permalink string.
+             */
+            try {
+                return permalinkNunjucksEnvironment.renderString(explicitPermalink, data);
+            } catch (error) {
+                throw new Error(`Cannot render permalink for "${inputPath}": ` + `${error.message}`, {
+                    cause: error,
+                });
+            }
+        };
+    };
 }
 /**
  * Template engines configuration.

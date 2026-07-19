@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Complex number properties",
+            "es": "Propiedades de números complejos",
+            "pt": "Propriedades de números complexos"
+        },
+        "number": {
+            "en": "define a complex number",
+            "es": "definir un número complejo",
+            "pt": "definir um número complexo"
+        },
+        "parts": {
+            "en": "real part, imaginary part, magnitude, angle, and conjugate",
+            "es": "parte real, parte imaginaria, magnitud, ángulo y conjugado",
+            "pt": "parte real, parte imaginária, módulo, ângulo e conjugado"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.number[lang] }}
+z = 3 + 4i
+% {{ comments.parts[lang] }}
+real_part = real(z)
+imaginary_part = imag(z)
+magnitude = abs(z)
+phase = angle(z)
+conjugate_z = conj(z)

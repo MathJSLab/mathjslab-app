@@ -1,0 +1,29 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Reshape a sequence into a matrix",
+            "es": "Reorganizar una secuencia como matriz",
+            "pt": "Reorganizar uma sequência como matriz"
+        },
+        "sequence": {
+            "en": "create a row vector",
+            "es": "crear un vector fila",
+            "pt": "criar um vetor linha"
+        },
+        "reshape": {
+            "en": "reshape it into a 3-by-4 matrix",
+            "es": "reorganizarlo como matriz de 3 por 4",
+            "pt": "reorganizá-lo como matriz 3 por 4"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.sequence[lang] }}
+values = 1:12
+% {{ comments.reshape[lang] }}
+table = reshape(values, 3, 4)
+table_size = size(table)
+same_number_of_elements = numel(values) == numel(table)

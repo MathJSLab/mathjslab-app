@@ -1,0 +1,29 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Evaluate a polynomial",
+            "es": "Evaluar un polinomio",
+            "pt": "Avaliar um polinômio"
+        },
+        "points": {
+            "en": "points where the polynomial is evaluated",
+            "es": "puntos donde se evalúa el polinomio",
+            "pt": "pontos onde o polinômio é avaliado"
+        },
+        "values": {
+            "en": "p(x) = x^3 - 4*x + 1",
+            "es": "p(x) = x^3 - 4*x + 1",
+            "pt": "p(x) = x^3 - 4*x + 1"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.points[lang] }}
+x = -3:3
+% {{ comments.values[lang] }}
+p = x.^3 - 4*x + 1
+minimum_value = min(p)
+maximum_value = max(p)

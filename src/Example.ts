@@ -6,10 +6,11 @@ import firstExample from './first-example.json';
 /**
  * Examples record entry.
  */
+type LocalizedText = string | Record<string, string>;
 interface ExampleEntry {
     file: string;
-    caption: string;
-    description: string;
+    caption: LocalizedText;
+    description: LocalizedText;
 }
 /**
  * Load `examplesRecord` handler type.
@@ -36,6 +37,8 @@ class Example {
     private readonly loadHandler: LoadExampleHandler;
     private examplesAvailable: boolean;
     private examplesContainer: HTMLElement;
+    private buttons: HTMLButtonElement[] = [];
+    private currentExampleId: string = '';
     /**
      * Example constructor
      */
@@ -51,6 +54,73 @@ class Example {
      */
     public get examples(): Record<string, ExampleEntry> {
         return this.examplesRecord;
+    }
+    /**
+     * Get localized text with fallback.
+     */
+    private localizedText(text: LocalizedText, lang = appEngine.lang): string {
+        if (typeof text === 'string') {
+            return text;
+        }
+        return text[lang] ?? text[appEngine.config.defaultLanguage!] ?? Object.values(text)[0] ?? '';
+    }
+    /**
+     * Test whether an example entry has localized generated files.
+     */
+    private hasLocalizedFile(exampleId: string): boolean {
+        return typeof this.examplesRecord[exampleId].caption === 'object';
+    }
+    /**
+     * Update one example button caption.
+     */
+    private setButtonCaption(button: HTMLButtonElement): void {
+        const exampleId = button.id.substring(8);
+        const example = this.examplesRecord[exampleId];
+        button.innerHTML = this.localizedText(example.caption);
+        button.title = this.localizedText(example.description);
+    }
+    /**
+     * Update all example button captions.
+     */
+    private setButtonCaptions(): void {
+        this.buttons.forEach((button) => {
+            this.setButtonCaption(button);
+        });
+    }
+    /**
+     * Get the URL for the example source file.
+     */
+    private exampleUrl(exampleId: string): string {
+        const example = this.examplesRecord[exampleId];
+        const languagePath = this.hasLocalizedFile(exampleId) ? `${appEngine.lang}/` : '';
+        return `${appEngine.config.exampleBaseUrl}example/${languagePath}${example.file}`;
+    }
+    /**
+     * Load an example file into the command shell.
+     */
+    private async loadExample(exampleId: string): Promise<void> {
+        this.currentExampleId = exampleId;
+        const response = await globalThis.fetch(this.exampleUrl(exampleId));
+        if (!response.ok) {
+            throw new Error('Network response error.');
+        }
+        this.loadHandler(await response.text());
+    }
+    /**
+     * Change example button captions and reload the current localized example.
+     */
+    public setLanguage(lang?: string): void {
+        if (lang) {
+            appEngine.lang = lang;
+        }
+        if (this.isFileProtocol || !this.examplesAvailable) {
+            this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
+            return;
+        }
+        this.setButtonCaptions();
+        if (this.currentExampleId && this.hasLocalizedFile(this.currentExampleId)) {
+            void this.loadExample(this.currentExampleId);
+        }
     }
     /**
      * Load `examplesRecord` if examples available.
@@ -80,24 +150,20 @@ class Example {
                 });
         }
         if (this.isFileProtocol || !this.examplesAvailable) {
-            this.loadHandler(firstExample.content);
+            this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
         } else {
             let first = true;
             for (const example in this.examplesRecord) {
                 const button = document.createElement('button');
+                this.buttons.push(button);
                 this.examplesContainer.append(button);
                 button.id = 'example-' + example;
-                button.innerHTML = this.examplesRecord[example].caption;
+                this.setButtonCaption(button);
                 button.addEventListener('click', async (event: Event): Promise<void> => {
-                    const exampleId = (event.target as HTMLButtonElement).id.substring(8);
-                    const response = await globalThis.fetch(`${appEngine.config.exampleBaseUrl}example/${this.examplesRecord[exampleId].file}`);
-                    if (!response.ok) {
-                        throw new Error('Network response error.');
-                    }
-                    this.loadHandler(await response.text());
+                    await this.loadExample((event.currentTarget as HTMLButtonElement).id.substring(8));
                 });
                 if (first) {
-                    button.click();
+                    await this.loadExample(example);
                     first = false;
                 }
             }

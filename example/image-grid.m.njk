@@ -1,0 +1,29 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Small numeric image",
+            "es": "Pequeña imagen numérica",
+            "pt": "Pequena imagem numérica"
+        },
+        "image": {
+            "en": "each entry is a pixel intensity",
+            "es": "cada entrada es una intensidad de píxel",
+            "pt": "cada entrada é uma intensidade de pixel"
+        },
+        "summary": {
+            "en": "row, column, and total intensities",
+            "es": "intensidades por fila, columna y total",
+            "pt": "intensidades por linha, coluna e total"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.image[lang] }}
+image = [0, 2, 4; 1, 5, 7; 3, 6, 9]
+% {{ comments.summary[lang] }}
+row_intensity = sum(image, 2)
+column_intensity = sum(image)
+total_intensity = sum(column_intensity)

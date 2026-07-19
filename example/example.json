@@ -1,352 +1,327 @@
 {
-    "baskara": {
-        "file": "baskara.m",
-        "caption": "Baskara",
-        "description": "Solution of the 2nd degree equation by Bhaskara's formula."
-    },
-    "basic-operation-function": {
-        "file": "basic-operation-function.m",
-        "caption": "Basic operations and functions",
-        "description": "Tests basic operations and functions."
-    },
-    "logical": {
-        "file": "logical.m",
-        "caption": "Logical",
-        "description": "Test logical operators."
-    },
-    "array-operation": {
-        "file": "array-operation.m",
-        "caption": "Array operations",
-        "description": "Tests array operations."
-    },
-    "array-concatenation": {
-        "file": "array-concatenation.m",
-        "caption": "Concatenation",
-        "description": "Tests array concatenation."
-    },
-    "array-function": {
-        "file": "array-function.m",
-        "caption": "Array functions",
-        "description": "Tests array functions."
-    },
-    "array-shape": {
-        "file": "array-shape.m",
-        "caption": "Array shape functions",
-        "description": "Tests array shape functions."
-    },
-    "forward-reference": {
-        "file": "forward-reference.m",
-        "caption": "Forward Reference",
-        "description": "General forward reference test suite."
-    },
-    "function-definition": {
-        "file": "function-definition.m",
-        "caption": "Function Definition",
-        "description": "General function definition test suite."
-    },
-    "persistent": {
-        "file": "persistent.m",
-        "caption": "Persistent variables",
-        "description": "General persistent test suite."
-    },
-    "global": {
-        "file": "global.m",
-        "caption": "Global variables",
-        "description": "General global test suite."
-    },
-    "arg-ret": {
-        "file": "arg-ret.m",
-        "caption": "Function arguments and returns",
-        "description": "General function arguments and returns test suite."
-    },
-    "arg-validation": {
-        "file": "arg-validation.m",
-        "caption": "Function arguments validation",
-        "description": "General function arguments validation test suite."
-    },
-    "inner-function": {
-        "file": "inner-function.m",
-        "caption": "Inner Function",
-        "description": "General inner function test suite."
-    },
-    "function-feval": {
-        "file": "function-feval.m",
-        "caption": "feval Function",
-        "description": "General feval function test suite."
-    },
-    "exist": {
-        "file": "exist.m",
-        "caption": "exist",
-        "description": "General exist test suite."
-    },
-    "which": {
-        "file": "which.m",
-        "caption": "which",
-        "description": "General which test suite."
-    },
-    "class": {
-        "file": "class.m",
-        "caption": "class",
-        "description": "General class test suite."
-    },
-    "mfilename": {
-        "file": "mfilename.m",
-        "caption": "mfilename",
-        "description": "General mfilename test suite."
-    },
-    "localfunctions": {
-        "file": "localfunctions.m",
-        "caption": "localfunctions",
-        "description": "General localfunctions test suite."
-    },
-    "dbstack": {
-        "file": "dbstack.m",
-        "caption": "dbstack",
-        "description": "General dbstack test suite."
-    },
-    "inputname": {
-        "file": "inputname.m",
-        "caption": "inputname",
-        "description": "General inputname test suite."
-    },
-    "evalin-assignin": {
-        "file": "evalin-assignin.m",
-        "caption": "evalin & assignin",
-        "description": "General evalin and assignin test suite."
-    },
-    "eval": {
-        "file": "eval.m",
-        "caption": "eval",
-        "description": "General eval test suite."
-    },
-    "eval-evalin-catch": {
-        "file": "eval-evalin-catch.m",
-        "caption": "eval/evalin with catch",
-        "description": "General eval/evalin with catch test suite."
-    },
-    "clear": {
-        "file": "clear.m",
-        "caption": "clear",
-        "description": "General clear test suite."
-    },
-    "builtin-signature-introspection": {
-        "file": "builtin-signature-introspection.m",
-        "caption": "Built-in signature introspection",
-        "description": "General built-in signature introspection test suite."
-    },
-    "builtin-signature-arity-validation": {
-        "file": "builtin-signature-arity-validation.m",
-        "caption": "Built-in signature - arity validation",
-        "description": "General built-in signature - arity validation test suite."
-    },
-    "builtin-signature-parameter-validation": {
-        "file": "builtin-signature-parameter-validation.m",
-        "caption": "Built-in signature - parameter validation",
-        "description": "General built-in signature - parameter validation test suite."
-    },
-    "builtin-meshgrid-ndgrid": {
-        "file": "builtin-meshgrid-ndgrid.m",
-        "caption": "Built-in: meshgrid and ndgrid",
-        "description": "General built-in meshgrid and ndgrid test suite."
-    },
-    "indexing": {
-        "file": "indexing.m",
-        "caption": "Indexing",
-        "description": "General indexing test suite."
-    },
-    "indexing-rhs": {
-        "file": "indexing-rhs.m",
-        "caption": "Indexing right-hand side",
-        "description": "Tests indexing at right-hand side."
-    },
-    "indexing-right": {
-        "file": "indexing-right.m",
-        "caption": "Indexing right",
-        "description": "Tests indexing at right side."
-    },
-    "indexing-lhs": {
-        "file": "indexing-lhs.m",
-        "caption": "Indexing left-hand side",
-        "description": "Tests indexing at left-hand side."
-    },
-    "indexing-left": {
-        "file": "indexing-left.m",
-        "caption": "Indexing left",
-        "description": "Tests indexing at left side."
-    },
-    "indexing-function": {
-        "file": "indexing-function.m",
-        "caption": "Indexing function",
-        "description": "Tests indexing functions."
-    },
-    "element-wise": {
-        "file": "element-wise.m",
-        "caption": "Element-wise Operations",
-        "description": "Test Element-wise Operations."
-    },
-    "reduce-functions": {
-        "file": "reduce-functions.m",
-        "caption": "Reduce",
-        "description": "Test reduce functions."
-    },
-    "left-division": {
-        "file": "left-division.m",
-        "caption": "Left division",
-        "description": "Left division related functions test."
-    },
-    "linear-algebra": {
-        "file": "linear-algebra.m",
-        "caption": "Linear Algebra",
-        "description": "Linear Algebra related functions test."
-    },
-    "multiple-assignment": {
-        "file": "multiple-assignment.m",
-        "caption": "Multiple assignment",
-        "description": "Tests multiple assignment."
-    },
-    "cell-array": {
-        "file": "cell-array.m",
-        "caption": "Cell array",
-        "description": "Tests cell arrays."
-    },
-    "multidimensional": {
-        "file": "multidimensional.m",
-        "caption": "Multidimensional",
-        "description": "Tests multidimensional arrays."
-    },
-    "map-dimension-functions": {
-        "file": "map-dimension-functions.m",
-        "caption": "Map dimension",
-        "description": "Test map dimension functions."
-    },
-    "min-max": {
-        "file": "min-max.m",
-        "caption": "MinMax",
-        "description": "Test min and max functions."
-    },
-    "greek": {
-        "file": "greek.m",
-        "caption": "Greek letters",
-        "description": "Tests Greek letters."
-    },
-    "singularity": {
-        "file": "singularity.m",
-        "caption": "Singularities",
-        "description": "Tests singularities."
-    },
-    "help": {
-        "file": "help.m",
-        "caption": "Help",
-        "description": "Test help command."
-    },
-    "histogram": {
-        "file": "histogram.m",
-        "caption": "Histogram",
-        "description": "Test histogram command."
-    },
-    "load": {
-        "file": "load.m",
-        "caption": "Load",
-        "description": "Test load function."
-    },
-    "markdown": {
-        "file": "markdown.m",
-        "caption": "Markdown",
-        "description": "Test markdown function."
-    },
-    "configuration": {
-        "file": "configuration.m",
-        "caption": "Configuration",
-        "description": "Test configure function."
-    },
-    "string": {
-        "file": "string.m",
-        "caption": "Strings",
-        "description": "Test strings."
-    },
-    "structure": {
-        "file": "structure.m",
-        "caption": "Structure",
-        "description": "Test structures."
-    },
-    "statements": {
-        "file": "statements.m",
-        "caption": "Statements",
-        "description": "Test statements, block comments..."
-    },
-    "incdec": {
-        "file": "incdec.m",
-        "caption": "Inc / Dec",
-        "description": "Test increment and decrement..."
-    },
-    "debug": {
-        "file": "debug.m",
-        "caption": "Debug",
-        "description": "Debug related commands and functions."
-    },
-    "plot": {
-        "file": "plot.m",
-        "caption": "Plot",
-        "description": "Test plot related functions."
-    },
-    "test1": {
-        "file": "test1.m",
-        "caption": "Test 1",
-        "description": "Test 1."
-    },
-    "test2": {
-        "file": "test2.m",
-        "caption": "Test 2",
-        "description": "Test 2."
-    },
-    "test3": {
-        "file": "test3.m",
-        "caption": "Test 3",
-        "description": "Test 3."
-    },
-    "test4": {
-        "file": "test4.m",
-        "caption": "Test 4",
-        "description": "Test 4."
-    },
-    "test5": {
-        "file": "test5.m",
-        "caption": "Test 5",
-        "description": "Test 5."
-    },
-    "test6": {
-        "file": "test6.m",
-        "caption": "Test 6",
-        "description": "Test 6."
-    },
-    "test7": {
-        "file": "test7.m",
-        "caption": "Test 7",
-        "description": "Test 7."
-    },
-    "test8": {
-        "file": "test8.m",
-        "caption": "Test 8",
-        "description": "Test 8."
-    },
-    "test9": {
-        "file": "test9.m",
-        "caption": "Test 9",
-        "description": "Test 9."
-    },
-    "test10": {
-        "file": "test10.m",
-        "caption": "Test 10",
-        "description": "Test 10."
-    },
-    "test11": {
-        "file": "test11.m",
-        "caption": "Test 11",
-        "description": "Test 11."
-    },
-    "test12": {
-        "file": "test12.m",
-        "caption": "Test 12",
-        "description": "Test 12."
+    "bhaskara": {
+        "file": "bhaskara.m",
+        "caption": {
+            "en": "Quadratic equation",
+            "es": "Ecuación cuadrática",
+            "pt": "Equação quadrática"
+        },
+        "description": {
+            "en": "Solve a quadratic equation and plot the function near its roots.",
+            "es": "Resolver una ecuación cuadrática y graficar la función cerca de sus raíces.",
+            "pt": "Resolver uma equação quadrática e traçar o gráfico da função perto das raízes."
+        }
+    },
+    "compound-interest": {
+        "file": "compound-interest.m",
+        "caption": {
+            "en": "Compound interest",
+            "es": "Interés compuesto",
+            "pt": "Juros compostos"
+        },
+        "description": {
+            "en": "Compare simple and compound growth for a small investment.",
+            "es": "Comparar crecimiento simple y compuesto para una pequeña inversión.",
+            "pt": "Comparar crescimento simples e composto para um pequeno investimento."
+        }
+    },
+    "matrix-basics": {
+        "file": "matrix-basics.m",
+        "caption": {
+            "en": "Matrix basics",
+            "es": "Matrices básicas",
+            "pt": "Matrizes básicas"
+        },
+        "description": {
+            "en": "Create matrices, transpose them, multiply them, and inspect their dimensions.",
+            "es": "Crear matrices, transponerlas, multiplicarlas e inspeccionar sus dimensiones.",
+            "pt": "Criar matrizes, transpor, multiplicar e inspecionar suas dimensões."
+        }
+    },
+    "linear-system": {
+        "file": "linear-system.m",
+        "caption": {
+            "en": "Linear system",
+            "es": "Sistema lineal",
+            "pt": "Sistema linear"
+        },
+        "description": {
+            "en": "Solve a 3-by-3 linear system and verify the residual.",
+            "es": "Resolver un sistema lineal de 3 por 3 y verificar el residuo.",
+            "pt": "Resolver um sistema linear 3 por 3 e verificar o resíduo."
+        }
+    },
+    "statistics-summary": {
+        "file": "statistics-summary.m",
+        "caption": {
+            "en": "Statistics summary",
+            "es": "Resumen estadístico",
+            "pt": "Resumo estatístico"
+        },
+        "description": {
+            "en": "Compute mean, variance, standard deviation, and cumulative sums for a data set.",
+            "es": "Calcular media, varianza, desviación estándar y sumas acumuladas de un conjunto de datos.",
+            "pt": "Calcular média, variância, desvio padrão e somas acumuladas de um conjunto de dados."
+        }
+    },
+    "plot-trig": {
+        "file": "plot-trig.m",
+        "caption": {
+            "en": "Plot a function",
+            "es": "Graficar una función",
+            "pt": "Traçar uma função"
+        },
+        "description": {
+            "en": "Plot a trigonometric function over a selected interval.",
+            "es": "Graficar una función trigonométrica en un intervalo seleccionado.",
+            "pt": "Traçar uma função trigonométrica em um intervalo escolhido."
+        }
+    },
+    "random-simulation": {
+        "file": "random-simulation.m",
+        "caption": {
+            "en": "Random simulation",
+            "es": "Simulación aleatoria",
+            "pt": "Simulação aleatória"
+        },
+        "description": {
+            "en": "Simulate dice rolls and summarize the observed frequencies.",
+            "es": "Simular lanzamientos de dados y resumir las frecuencias observadas.",
+            "pt": "Simular lançamentos de dados e resumir as frequências observadas."
+        }
+    },
+    "sampled-sine": {
+        "file": "sampled-sine.m",
+        "caption": {
+            "en": "Sample a sine wave",
+            "es": "Muestrear una onda seno",
+            "pt": "Amostrar uma onda seno"
+        },
+        "description": {
+            "en": "Use linearly spaced points to evaluate and plot a sine wave.",
+            "es": "Usar puntos espaciados linealmente para evaluar y graficar una onda seno.",
+            "pt": "Usar pontos linearmente espaçados para avaliar e traçar uma onda seno."
+        }
+    },
+    "logarithmic-scale": {
+        "file": "logarithmic-scale.m",
+        "caption": {
+            "en": "Logarithmic scale",
+            "es": "Escala logarítmica",
+            "pt": "Escala logarítmica"
+        },
+        "description": {
+            "en": "Generate logarithmically spaced values and inspect their base-10 logarithms.",
+            "es": "Generar valores espaciados logarítmicamente e inspeccionar sus logaritmos en base 10.",
+            "pt": "Gerar valores espaçados logaritmicamente e inspecionar seus logaritmos na base 10."
+        }
+    },
+    "matrix-sums": {
+        "file": "matrix-sums.m",
+        "caption": {
+            "en": "Matrix sums",
+            "es": "Sumas de matriz",
+            "pt": "Somas de matriz"
+        },
+        "description": {
+            "en": "Compute column sums, row sums, and the total of all elements in a matrix.",
+            "es": "Calcular sumas por columna, sumas por fila y el total de todos los elementos de una matriz.",
+            "pt": "Calcular somas por coluna, somas por linha e o total de todos os elementos de uma matriz."
+        }
+    },
+    "reshape-sequence": {
+        "file": "reshape-sequence.m",
+        "caption": {
+            "en": "Reshape a sequence",
+            "es": "Reorganizar una secuencia",
+            "pt": "Reorganizar uma sequência"
+        },
+        "description": {
+            "en": "Turn a vector into a matrix and verify that the number of elements is preserved.",
+            "es": "Convertir un vector en una matriz y verificar que se conserve el número de elementos.",
+            "pt": "Transformar um vetor em matriz e verificar que o número de elementos é preservado."
+        }
+    },
+    "distance-between-points": {
+        "file": "distance-between-points.m",
+        "caption": {
+            "en": "Distance between points",
+            "es": "Distancia entre puntos",
+            "pt": "Distância entre pontos"
+        },
+        "description": {
+            "en": "Compute the Euclidean distance between two points using vector operations.",
+            "es": "Calcular la distancia euclidiana entre dos puntos usando operaciones vectoriales.",
+            "pt": "Calcular a distância euclidiana entre dois pontos usando operações vetoriais."
+        }
+    },
+    "temperature-conversion": {
+        "file": "temperature-conversion.m",
+        "caption": {
+            "en": "Temperature conversion",
+            "es": "Conversión de temperatura",
+            "pt": "Conversão de temperatura"
+        },
+        "description": {
+            "en": "Convert temperatures from Celsius to Fahrenheit and summarize the values.",
+            "es": "Convertir temperaturas de Celsius a Fahrenheit y resumir los valores.",
+            "pt": "Converter temperaturas de Celsius para Fahrenheit e resumir os valores."
+        }
+    },
+    "population-growth": {
+        "file": "population-growth.m",
+        "caption": {
+            "en": "Population growth",
+            "es": "Crecimiento poblacional",
+            "pt": "Crescimento populacional"
+        },
+        "description": {
+            "en": "Model exponential growth over time and evaluate the final population.",
+            "es": "Modelar crecimiento exponencial a lo largo del tiempo y evaluar la población final.",
+            "pt": "Modelar crescimento exponencial ao longo do tempo e avaliar a população final."
+        }
+    },
+    "meshgrid-distance": {
+        "file": "meshgrid-distance.m",
+        "caption": {
+            "en": "Grid distance",
+            "es": "Distancia en una cuadrícula",
+            "pt": "Distância em uma grade"
+        },
+        "description": {
+            "en": "Create a rectangular grid and compute distance from the origin at each point.",
+            "es": "Crear una cuadrícula rectangular y calcular la distancia al origen en cada punto.",
+            "pt": "Criar uma grade retangular e calcular a distância até a origem em cada ponto."
+        }
+    },
+    "inventory-summary": {
+        "file": "inventory-summary.m",
+        "caption": {
+            "en": "Inventory summary",
+            "es": "Resumen de inventario",
+            "pt": "Resumo de estoque"
+        },
+        "description": {
+            "en": "Use matrix columns to summarize quantities, prices, and inventory value.",
+            "es": "Usar columnas de matriz para resumir cantidades, precios y valor de inventario.",
+            "pt": "Usar colunas de matriz para resumir quantidades, preços e valor em estoque."
+        }
+    },
+    "histogram-demo": {
+        "file": "histogram-demo.m",
+        "caption": {
+            "en": "Histogram",
+            "es": "Histograma",
+            "pt": "Histograma"
+        },
+        "description": {
+            "en": "Display a bar-style histogram for a small frequency table.",
+            "es": "Mostrar un histograma de barras para una pequeña tabla de frecuencias.",
+            "pt": "Mostrar um histograma de barras para uma pequena tabela de frequências."
+        }
+    },
+    "unit-circle": {
+        "file": "unit-circle.m",
+        "caption": {
+            "en": "Unit circle",
+            "es": "Circunferencia unitaria",
+            "pt": "Circunferência unitária"
+        },
+        "description": {
+            "en": "Sample points on the unit circle and verify that their radius is one.",
+            "es": "Muestrear puntos en la circunferencia unitaria y verificar que su radio es uno.",
+            "pt": "Amostrar pontos na circunferência unitária e verificar que o raio é um."
+        }
+    },
+    "polynomial-values": {
+        "file": "polynomial-values.m",
+        "caption": {
+            "en": "Polynomial values",
+            "es": "Valores polinomiales",
+            "pt": "Valores polinomiais"
+        },
+        "description": {
+            "en": "Evaluate a polynomial at several points using element-wise operations.",
+            "es": "Evaluar un polinomio en varios puntos usando operaciones elemento a elemento.",
+            "pt": "Avaliar um polinômio em vários pontos usando operações elemento a elemento."
+        }
+    },
+    "normalization": {
+        "file": "normalization.m",
+        "caption": {
+            "en": "Normalize data",
+            "es": "Normalizar datos",
+            "pt": "Normalizar dados"
+        },
+        "description": {
+            "en": "Scale measurements to the interval from 0 to 1.",
+            "es": "Escalar mediciones al intervalo de 0 a 1.",
+            "pt": "Escalar medições para o intervalo de 0 a 1."
+        }
+    },
+    "moving-average": {
+        "file": "moving-average.m",
+        "caption": {
+            "en": "Moving average",
+            "es": "Media móvil",
+            "pt": "Média móvel"
+        },
+        "description": {
+            "en": "Compute a simple three-point moving average for a short signal.",
+            "es": "Calcular una media móvil simple de tres puntos para una señal corta.",
+            "pt": "Calcular uma média móvel simples de três pontos para um sinal curto."
+        }
+    },
+    "projectile-height": {
+        "file": "projectile-height.m",
+        "caption": {
+            "en": "Projectile height",
+            "es": "Altura de un proyectil",
+            "pt": "Altura de um projétil"
+        },
+        "description": {
+            "en": "Model vertical projectile motion with a quadratic equation.",
+            "es": "Modelar el movimiento vertical de un proyectil con una ecuación cuadrática.",
+            "pt": "Modelar o movimento vertical de um projétil com uma equação quadrática."
+        }
+    },
+    "vector-angle": {
+        "file": "vector-angle.m",
+        "caption": {
+            "en": "Angle between vectors",
+            "es": "Ángulo entre vectores",
+            "pt": "Ângulo entre vetores"
+        },
+        "description": {
+            "en": "Use dot products and vector norms to compute the angle between two vectors.",
+            "es": "Usar productos punto y normas vectoriales para calcular el ángulo entre dos vectores.",
+            "pt": "Usar produtos escalares e normas vetoriais para calcular o ângulo entre dois vetores."
+        }
+    },
+    "complex-numbers": {
+        "file": "complex-numbers.m",
+        "caption": {
+            "en": "Complex numbers",
+            "es": "Números complejos",
+            "pt": "Números complexos"
+        },
+        "description": {
+            "en": "Compute magnitude, angle, real part, imaginary part, and conjugate of a complex number.",
+            "es": "Calcular magnitud, ángulo, parte real, parte imaginaria y conjugado de un número complejo.",
+            "pt": "Calcular módulo, ângulo, parte real, parte imaginária e conjugado de um número complexo."
+        }
+    },
+    "image-grid": {
+        "file": "image-grid.m",
+        "caption": {
+            "en": "Image grid",
+            "es": "Cuadrícula de imagen",
+            "pt": "Grade de imagem"
+        },
+        "description": {
+            "en": "Create a small numeric image and compute row, column, and total intensities.",
+            "es": "Crear una pequeña imagen numérica y calcular intensidades por fila, columna y totales.",
+            "pt": "Criar uma pequena imagem numérica e calcular intensidades por linha, coluna e totais."
+        }
     }
 }

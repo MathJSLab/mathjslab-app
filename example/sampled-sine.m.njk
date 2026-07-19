@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sample and plot a sine wave",
+            "es": "Muestrear y graficar una onda seno",
+            "pt": "Amostrar e traçar uma onda seno"
+        },
+        "points": {
+            "en": "create linearly spaced sample points",
+            "es": "crear puntos de muestra espaciados linealmente",
+            "pt": "criar pontos de amostra linearmente espaçados"
+        },
+        "values": {
+            "en": "evaluate sine at the sample points",
+            "es": "evaluar el seno en los puntos de muestra",
+            "pt": "avaliar o seno nos pontos de amostra"
+        },
+        "plot": {
+            "en": "plot the same function over the interval",
+            "es": "graficar la misma función en el intervalo",
+            "pt": "traçar a mesma função no intervalo"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.points[lang] }}
+x = linspace(0, 2*pi, 9)
+% {{ comments.values[lang] }}
+y = sin(x)
+% {{ comments.plot[lang] }}
+f = @(t) sin(t)
+plot2d(f(t), t, 0, 2*pi)

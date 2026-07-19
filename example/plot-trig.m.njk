@@ -1,0 +1,27 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Plot a trigonometric function",
+            "es": "Graficar una función trigonométrica",
+            "pt": "Traçar uma função trigonométrica"
+        },
+        "function": {
+            "en": "define the function to plot",
+            "es": "definir la función que se va a graficar",
+            "pt": "definir a função que será traçada"
+        },
+        "plot": {
+            "en": "plot the function over the interval",
+            "es": "graficar la función en el intervalo",
+            "pt": "traçar a função no intervalo"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.function[lang] }}
+f = @(x) sin(x) + 0.5*cos(2*x)
+% {{ comments.plot[lang] }}
+plot2d(f(t), t, 0, 2*pi)

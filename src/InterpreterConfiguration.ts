@@ -20,6 +20,7 @@ appEngine.setLanguage = (lang?: string): void => {
     appEngine.interpreter = Interpreter.Create(InterpreterConfiguration);
     appEngine.interpreter.debug = buildConfiguration.debug;
     appEngine.shell.commandShell.evaluate();
+    appEngine.shell.example.setLanguage(appEngine.lang);
 };
 
 export const languageAlias: Record<string, AliasNameTable> = {

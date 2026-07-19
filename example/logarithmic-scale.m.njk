@@ -1,0 +1,28 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Logarithmic scale values",
+            "es": "Valores en escala logarítmica",
+            "pt": "Valores em escala logarítmica"
+        },
+        "values": {
+            "en": "values from 10^0 to 10^4",
+            "es": "valores desde 10^0 hasta 10^4",
+            "pt": "valores de 10^0 até 10^4"
+        },
+        "logs": {
+            "en": "base-10 logarithms recover the exponents",
+            "es": "los logaritmos en base 10 recuperan los exponentes",
+            "pt": "os logaritmos na base 10 recuperam os expoentes"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.values[lang] }}
+x = logspace(0, 4, 5)
+% {{ comments.logs[lang] }}
+exponents = log10(x)
+ratio = x(2)/x(1)

@@ -1,0 +1,28 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Histogram from a frequency table",
+            "es": "Histograma desde una tabla de frecuencias",
+            "pt": "Histograma a partir de uma tabela de frequências"
+        },
+        "data": {
+            "en": "scores and observed frequencies",
+            "es": "puntuaciones y frecuencias observadas",
+            "pt": "pontuações e frequências observadas"
+        },
+        "plot": {
+            "en": "show the frequencies as bars",
+            "es": "mostrar las frecuencias como barras",
+            "pt": "mostrar as frequências como barras"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.data[lang] }}
+scores = [1, 2, 3, 4, 5]
+frequency = [2, 5, 9, 6, 3]
+% {{ comments.plot[lang] }}
+histogram(frequency, scores)

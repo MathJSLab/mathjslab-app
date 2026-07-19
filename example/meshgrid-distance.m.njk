@@ -1,0 +1,29 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Distance on a rectangular grid",
+            "es": "Distancia en una cuadrícula rectangular",
+            "pt": "Distância em uma grade retangular"
+        },
+        "grid": {
+            "en": "create x-y coordinate matrices",
+            "es": "crear matrices de coordenadas x-y",
+            "pt": "criar matrizes de coordenadas x-y"
+        },
+        "distance": {
+            "en": "distance from the origin at each grid point",
+            "es": "distancia al origen en cada punto de la cuadrícula",
+            "pt": "distância até a origem em cada ponto da grade"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.grid[lang] }}
+x = -2:2
+y = -1:1
+[X, Y] = meshgrid(x, y)
+% {{ comments.distance[lang] }}
+R = sqrt(X.^2 + Y.^2)

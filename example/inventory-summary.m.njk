@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Inventory value summary",
+            "es": "Resumen del valor de inventario",
+            "pt": "Resumo do valor em estoque"
+        },
+        "data": {
+            "en": "rows are products: quantity and unit price",
+            "es": "las filas son productos: cantidad y precio unitario",
+            "pt": "as linhas são produtos: quantidade e preço unitário"
+        },
+        "summary": {
+            "en": "value per product and total value",
+            "es": "valor por producto y valor total",
+            "pt": "valor por produto e valor total"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.data[lang] }}
+inventory = [12, 4.50; 8, 12.00; 20, 2.75; 5, 30.00]
+quantity = inventory(:, 1)
+unit_price = inventory(:, 2)
+% {{ comments.summary[lang] }}
+value = quantity.*unit_price
+total_value = sum(value)
+average_unit_price = mean(unit_price)

@@ -1,0 +1,29 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Euclidean distance between two points",
+            "es": "Distancia euclidiana entre dos puntos",
+            "pt": "Distância euclidiana entre dois pontos"
+        },
+        "points": {
+            "en": "two points in three-dimensional space",
+            "es": "dos puntos en el espacio tridimensional",
+            "pt": "dois pontos no espaço tridimensional"
+        },
+        "distance": {
+            "en": "distance from p to q",
+            "es": "distancia de p a q",
+            "pt": "distância de p até q"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.points[lang] }}
+p = [1, 2, 3]
+q = [4, 6, 8]
+% {{ comments.distance[lang] }}
+difference = q - p
+distance = sqrt(sumsq(difference))

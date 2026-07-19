@@ -1,0 +1,30 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Solve a linear system A*x = b",
+            "es": "Resolver un sistema lineal A*x = b",
+            "pt": "Resolver um sistema linear A*x = b"
+        },
+        "system": {
+            "en": "coefficient matrix and right-hand side",
+            "es": "matriz de coeficientes y lado derecho",
+            "pt": "matriz de coeficientes e lado direito"
+        },
+        "solution": {
+            "en": "solve and verify the residual",
+            "es": "resolver y verificar el residuo",
+            "pt": "resolver e verificar o resíduo"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.system[lang] }}
+A = [3, 2, -1; 2, -2, 4; -1, 0.5, -1]
+b = [1; -2; 0]
+% {{ comments.solution[lang] }}
+x = A\b
+residual = A*x - b
+residual_norm = sumsq(residual)

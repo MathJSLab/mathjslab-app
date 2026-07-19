@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Points on the unit circle",
+            "es": "Puntos en la circunferencia unitaria",
+            "pt": "Pontos na circunferência unitária"
+        },
+        "angles": {
+            "en": "sample angles from 0 to 2*pi",
+            "es": "muestrear ángulos de 0 a 2*pi",
+            "pt": "amostrar ângulos de 0 a 2*pi"
+        },
+        "coordinates": {
+            "en": "compute x-y coordinates",
+            "es": "calcular coordenadas x-y",
+            "pt": "calcular coordenadas x-y"
+        },
+        "check": {
+            "en": "radius should be close to one",
+            "es": "el radio debe estar cerca de uno",
+            "pt": "o raio deve estar próximo de um"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.angles[lang] }}
+theta = linspace(0, 2*pi, 9)
+% {{ comments.coordinates[lang] }}
+x = cos(theta)
+y = sin(theta)
+% {{ comments.check[lang] }}
+radius = sqrt(x.^2 + y.^2)

@@ -1,0 +1,27 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Three-point moving average",
+            "es": "Media móvil de tres puntos",
+            "pt": "Média móvel de três pontos"
+        },
+        "signal": {
+            "en": "short noisy signal",
+            "es": "señal corta con ruido",
+            "pt": "sinal curto com ruído"
+        },
+        "average": {
+            "en": "average each group of three consecutive values",
+            "es": "promediar cada grupo de tres valores consecutivos",
+            "pt": "calcular a média de cada grupo de três valores consecutivos"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.signal[lang] }}
+signal = [3, 4, 8, 6, 5, 7, 9]
+% {{ comments.average[lang] }}
+moving_average = (signal(1:5) + signal(2:6) + signal(3:7))/3

@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Statistics summary for a data set",
+            "es": "Resumen estadístico de un conjunto de datos",
+            "pt": "Resumo estatístico de um conjunto de dados"
+        },
+        "data": {
+            "en": "daily measurements",
+            "es": "mediciones diarias",
+            "pt": "medições diárias"
+        },
+        "summary": {
+            "en": "central tendency and dispersion",
+            "es": "tendencia central y dispersión",
+            "pt": "tendência central e dispersão"
+        },
+        "cumulative": {
+            "en": "cumulative totals",
+            "es": "totales acumulados",
+            "pt": "totais acumulados"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.data[lang] }}
+data = [12, 15, 14, 18, 21, 19, 17]
+% {{ comments.summary[lang] }}
+average = mean(data)
+variance = var(data)
+standard_deviation = std(data)
+minimum_value = min(data)
+maximum_value = max(data)
+% {{ comments.cumulative[lang] }}
+cumulative_total = cumsum(data)

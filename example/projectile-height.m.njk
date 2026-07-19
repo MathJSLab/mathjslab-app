@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Projectile height over time",
+            "es": "Altura de un proyectil con el tiempo",
+            "pt": "Altura de um projétil ao longo do tempo"
+        },
+        "parameters": {
+            "en": "initial height, velocity, and gravity",
+            "es": "altura inicial, velocidad y gravedad",
+            "pt": "altura inicial, velocidade e gravidade"
+        },
+        "model": {
+            "en": "height h(t) = h0 + v0*t - g*t^2/2",
+            "es": "altura h(t) = h0 + v0*t - g*t^2/2",
+            "pt": "altura h(t) = h0 + v0*t - g*t^2/2"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.parameters[lang] }}
+h0 = 1.5
+v0 = 18
+g = 9.8
+t = linspace(0, 4, 9)
+% {{ comments.model[lang] }}
+h = h0 + v0*t - g*t.^2/2
+maximum_height = max(h)

@@ -312,7 +312,7 @@ export class CommandShell extends HTMLElement {
                 nameListEntry.className = 'nameitem';
                 this.nameList.append(nameListEntry);
                 if (nameTableEntry instanceof FunctionHandle) {
-                    nameListEntry.innerHTML = `&commat; ${name}(${nameTableEntry.parameter.map((arg: { id: any }) => arg.id).join(',')})`;
+                    nameListEntry.innerHTML = `&commat; ${name}(${nameTableEntry.parameter.map((arg) => this.interpreterPointer.Unparse(arg)).join(',')})`;
                 } else {
                     let resultType: string = '';
                     if (nameTableEntry.node && nameTableEntry.node.type !== undefined) {
@@ -338,18 +338,6 @@ export class CommandShell extends HTMLElement {
             }
         }
     }).bind(this);
-    // protected _input: string;
-    // public get input(): string {
-    //     return this._input;
-    // }
-    // protected _statements: string[];
-    // public get statements(): string[] {
-    //     return this._statements;
-    // }
-    // protected _lines: string[];
-    // public get lines(): string[] {
-    //     return this._lines;
-    // }
     /**
      * Load text if argument is passed, else load code from batch input, separing statements, running it and creating evaluated prompts.
      */
@@ -357,12 +345,6 @@ export class CommandShell extends HTMLElement {
         statements: string[];
         lines: string[];
     } {
-        // if (text) {
-        //     this._input = text;
-        //     if (this.element.batch.state.display) {
-        //         this.element.batch.element.input.value = text;
-        //     }
-        // }
         if (text) {
             this.element.batch.element.input.value = text;
         }

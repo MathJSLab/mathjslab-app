@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.7.10
+
+- The `help/**/addlistener.md`, `help/**/assignin.md`, `help/**/builtin.md`,
+  `help/**/cat.md`, `help/**/class.md`, `help/**/cond.md`,
+  `help/**/dbstack.md`, `help/**/enumeration.md`, `help/**/error.md`,
+  `help/**/eval.md`, `help/**/evalin.md`, `help/**/events.md`,
+  `help/**/exist.md`, `help/**/feval.md`, `help/**/fieldnames.md`,
+  `help/**/find.md`, `help/**/func2str.md`, `help/**/functions.md`,
+  `help/**/inputname.md`, `help/**/isa.md`, `help/**/ischar.md`,
+  `help/**/isclass.md`, `help/**/isequal.md`, `help/**/isfield.md`,
+  `help/**/islogical.md`, `help/**/ismethod.md`, `help/**/isnumeric.md`,
+  `help/**/isobject.md`, `help/**/isprop.md`, `help/**/isreal.md`,
+  `help/**/isvalid.md`, `help/**/lasterror.md`, `help/**/lastwarn.md`,
+  `help/**/localfunctions.md`, `help/**/metaclass.md`, `help/**/methods.md`,
+  `help/**/mfilename.md`, `help/**/nargin.md`, `help/**/narginchk.md`,
+  `help/**/nargout.md`, `help/**/nargoutchk.md`, `help/**/notify.md`,
+  `help/**/properties.md`, `help/**/rank.md`, `help/**/repmat.md`,
+  `help/**/rethrow.md`, `help/**/run.md`, `help/**/sort.md`,
+  `help/**/source.md`, `help/**/str2func.md`, `help/**/superclasses.md`,
+  `help/**/warning.md`, and `help/**/which.md` files have been created in
+  English, Portuguese, and Spanish, with MATLAB and Octave references.
+- The command shell variable list has been updated to render function handle
+  parameters with the interpreter unparser instead of reading the parameter
+  `id` directly, keeping the application compatible with the latest `mathjslab`
+  function handle node types.
+- The examples panel now supports optional localized example records. Example
+  buttons update their captions and description tooltips when the application
+  language changes, and the currently selected localized example is reloaded
+  from `example/{en,es,pt}/`.
+- The old internal engine test files in `example/*.m` have been removed from
+  the application examples. The examples catalog now contains localized
+  user-facing Nunjucks templates demonstrating common MathJSLab workflows:
+  quadratic equations, compound interest, matrix operations, linear systems,
+  descriptive statistics, plotting, random simulation, sampled functions,
+  logarithmic scales, matrix sums, reshaping, Euclidean distances, temperature
+  conversion, population growth, coordinate grids, inventory summaries,
+  histograms, unit circles, polynomial evaluation, data normalization, moving
+  averages, projectile motion, vector angles, complex numbers, and numeric
+  image grids.
+- The asset build now removes stale generated `.m` files from `dist/example`
+  when they are no longer present in `example/example.json`.
+
 ## 1.7.9
 
 - Dependecies updated (`mathjslab` 2.1.2).

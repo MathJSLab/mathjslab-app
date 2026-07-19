@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Compound interest: compare simple and compound growth",
+            "es": "Interés compuesto: comparar crecimiento simple y compuesto",
+            "pt": "Juros compostos: comparar crescimento simples e composto"
+        },
+        "parameters": {
+            "en": "initial amount, annual rate, and time in years",
+            "es": "importe inicial, tasa anual y tiempo en años",
+            "pt": "valor inicial, taxa anual e tempo em anos"
+        },
+        "models": {
+            "en": "simple interest and compound interest models",
+            "es": "modelos de interés simple e interés compuesto",
+            "pt": "modelos de juros simples e juros compostos"
+        },
+        "difference": {
+            "en": "extra amount earned by compounding",
+            "es": "importe adicional obtenido por capitalización",
+            "pt": "valor adicional obtido pela capitalização"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.parameters[lang] }}
+principal = 1000
+annual_rate = 0.08
+years = 5
+% {{ comments.models[lang] }}
+simple_amount = principal*(1 + annual_rate*years)
+compound_amount = principal*(1 + annual_rate)^years
+% {{ comments.difference[lang] }}
+gain = compound_amount - simple_amount

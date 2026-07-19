@@ -1,0 +1,29 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Normalize data to the interval [0, 1]",
+            "es": "Normalizar datos al intervalo [0, 1]",
+            "pt": "Normalizar dados para o intervalo [0, 1]"
+        },
+        "data": {
+            "en": "raw measurements",
+            "es": "mediciones sin procesar",
+            "pt": "medições brutas"
+        },
+        "scale": {
+            "en": "subtract the minimum and divide by the range",
+            "es": "restar el mínimo y dividir por el rango",
+            "pt": "subtrair o mínimo e dividir pela amplitude"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+% {{ comments.data[lang] }}
+data = [18, 25, 21, 30, 27, 24]
+% {{ comments.scale[lang] }}
+data_min = min(data)
+data_max = max(data)
+normalized = (data - data_min)/(data_max - data_min)
