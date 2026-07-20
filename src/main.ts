@@ -5,6 +5,10 @@ import { Shell } from './Shell';
 import { appEngine } from './appEngine';
 import './main.scss';
 
+/**
+ * Initialize the application shell and connect the interpreter callbacks used
+ * by the command prompt and examples panel.
+ */
 async function bootstrap(): Promise<void> {
     appEngine.shell = await Shell.initialize({
         shellId: 'mathjslab-shell',

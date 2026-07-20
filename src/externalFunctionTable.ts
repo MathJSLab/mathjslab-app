@@ -27,6 +27,10 @@ const openFileOptionMarkdown: OpenFilePickerOptions & { multiple?: false | undef
     excludeAcceptAllOption: true,
 };
 
+/**
+ * Browser-facing built-ins registered in addition to the core MathJSLab
+ * function table.
+ */
 const externalFunctionTable: BuiltInFunctionTable = {
     ...PlotEngine.externalFunctionTable,
 
@@ -39,9 +43,9 @@ const externalFunctionTable: BuiltInFunctionTable = {
             if (!start.im.eq(0)) throw new Error('complex number sum index');
             if (!end.im.eq(0)) throw new Error('complex number sum index');
             let result: ComplexDecimal = ComplexDecimal.zero();
-            /* create scope for the sum */
+            /* Create a local scope for the summation variable. */
             const sumScope = Scope.create(appEngine.interpreter.context.currentScope);
-            /* push scope to call stack */
+            /* Push the summation scope while evaluating the expression. */
             appEngine.interpreter.context.callStack!.push(new CallFrame(sumScope));
             for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
                 const value = ComplexDecimal.create(i, 0);
@@ -49,7 +53,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
                 const evalResult = appEngine.interpreter.Evaluator(expr, sumScope) as ComplexDecimal;
                 result = ComplexDecimal.add(result, evalResult);
             }
-            /* pop scope from call stack */
+            /* Restore the call stack after evaluating the summation. */
             appEngine.interpreter.context.callStack!.pop();
             return result;
         },
@@ -79,20 +83,20 @@ const externalFunctionTable: BuiltInFunctionTable = {
             if (!end.im.eq(0)) throw new Error('complex number prod index');
             let result: ComplexDecimal = ComplexDecimal.one();
             const context = appEngine.interpreter.context;
-            /* create local scope */
+            /* Create a local scope for the product variable. */
             const localScope = Scope.create(context.currentScope);
-            /* push to call stack */
+            /* Push the product scope while evaluating the expression. */
             context.callStack!.push(new CallFrame(localScope));
             try {
                 for (let i = start.re.toNumber(); i <= end.re.toNumber(); i++) {
-                    /* assigns variable in scope */
+                    /* Assign the iteration value inside the local scope. */
                     localScope.defineName(variable.id, ComplexDecimal.create(i, 0));
-                    /* evaluates expression within the current scope */
+                    /* Evaluate the expression with the product scope active. */
                     const value = appEngine.interpreter.Evaluator(expr) as ComplexDecimal;
                     result = ComplexDecimal.mul(result, value);
                 }
             } finally {
-                /* Ensures unstacking even with errors. */
+                /* Always restore the call stack, including error paths. */
                 context.callStack!.pop();
             }
             return result;

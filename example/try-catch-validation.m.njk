@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Handle errors with try and catch",
+            "es": "Manejar errores con try y catch",
+            "pt": "Tratar erros com try e catch"
+        },
+        "safe": {
+            "en": "return NaN when the input is invalid",
+            "es": "devolver NaN cuando la entrada no es válida",
+            "pt": "retornar NaN quando a entrada é inválida"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+function y = safe_inverse(x)
+  try
+    if x == 0
+      error("division by zero");
+    end
+    y = 1/x;
+  catch
+    y = NaN;
+  end
+end
+
+% {{ comments.safe[lang] }}
+a = safe_inverse(4)
+b = safe_inverse(0)

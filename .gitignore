@@ -54,3 +54,10 @@ package-lock.json
 
 # Output of 'npm pack'
 *.tgz
+
+# vscode settings
+.vscode
+
+# OpenAI Codex Agent
+.agents/
+.codex/

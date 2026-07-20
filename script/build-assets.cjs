@@ -44,6 +44,12 @@ try {
             exampleFiles.add(path.resolve(__dirname, '..', 'dist', 'example', example[name].file));
         }
     }
+    /**
+     * Remove generated example files that are no longer present in
+     * example/example.json.
+     *
+     * @param {string} dir Directory to scan recursively.
+     */
     const removeStaleExampleFiles = (dir) => {
         fs.readdirSync(dir, { withFileTypes: true }).forEach((entry) => {
             const entryPath = path.resolve(dir, entry.name);

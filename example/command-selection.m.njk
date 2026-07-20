@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Select a command with if and elseif",
+            "es": "Seleccionar un comando con if y elseif",
+            "pt": "Selecionar um comando com if e elseif"
+        },
+        "choice": {
+            "en": "choose a calculation from a simple numeric menu",
+            "es": "elegir un cálculo desde un menú numérico simple",
+            "pt": "escolher um cálculo a partir de um menu numérico simples"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+command = 2
+data = [4, 7, 9, 10]
+
+% {{ comments.choice[lang] }}
+if command == 1
+  result = sum(data);
+elseif command == 2
+  result = sum(data) / numel(data);
+elseif command == 3
+  result = max(data);
+else
+  result = NaN;
+end
+
+result

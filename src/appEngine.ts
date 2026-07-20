@@ -2,12 +2,19 @@ import { Interpreter } from 'mathjslab';
 import { Shell } from './Shell';
 import { Markdown } from './Markdown';
 
+/**
+ * Runtime configuration values injected by the page or build output.
+ */
 type AppConfiguration = {
     exampleBaseUrl?: string;
     helpBaseUrl?: string;
     defaultLanguage?: string;
 };
 
+/**
+ * Shared application state used by UI components and external MathJSLab
+ * commands.
+ */
 type AppEngine = {
     config: AppConfiguration;
     lang: string;
@@ -21,6 +28,10 @@ type AppEngine = {
 
 const appConfiguration: AppConfiguration = {};
 
+/**
+ * Global application engine instance exposed for browser integrations and
+ * interactive commands.
+ */
 const appEngine: AppEngine = {
     config: appConfiguration,
     lang: '',

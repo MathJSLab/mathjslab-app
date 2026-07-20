@@ -1,0 +1,28 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Accumulate values with a for loop",
+            "es": "Acumular valores con un bucle for",
+            "pt": "Acumular valores com um laço for"
+        },
+        "loop": {
+            "en": "sum the squares one item at a time",
+            "es": "sumar los cuadrados un elemento a la vez",
+            "pt": "somar os quadrados um item por vez"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+
+values = 1:5
+square_total = 0
+
+% {{ comments.loop[lang] }}
+for k = values
+  square_total = square_total + k^2;
+end
+
+square_total

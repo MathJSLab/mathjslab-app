@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Search with a while loop",
+            "es": "Buscar con un bucle while",
+            "pt": "Buscar com um laço while"
+        },
+        "search": {
+            "en": "keep adding terms until the target is reached",
+            "es": "seguir agregando términos hasta alcanzar el objetivo",
+            "pt": "continuar somando termos até alcançar o alvo"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+
+target = 40
+term = 1
+running_total = 0
+
+% {{ comments.search[lang] }}
+while running_total < target
+  running_total = running_total + term;
+  term = term + 1;
+end
+
+last_term_used = term - 1
+running_total

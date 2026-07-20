@@ -1,3 +1,10 @@
+/**
+ * Open a file through the browser File System Access API and pass its text
+ * content to the supplied callback.
+ *
+ * @param callbackfn Callback invoked with the selected file content.
+ * @param options Options forwarded to `showOpenFilePicker`.
+ */
 function openFileDialog(callbackfn: (content: string) => void, options?: (OpenFilePickerOptions & { multiple?: false | undefined }) | undefined) {
     globalThis
         .showOpenFilePicker(options)

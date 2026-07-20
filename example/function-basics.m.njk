@@ -1,0 +1,24 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Define and call a function",
+            "es": "Definir y llamar una función",
+            "pt": "Definir e chamar uma função"
+        },
+        "call": {
+            "en": "call the function with different arguments",
+            "es": "llamar la función con argumentos diferentes",
+            "pt": "chamar a função com argumentos diferentes"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+function y = discount(price, rate)
+  y = price * (1 - rate);
+end
+
+% {{ comments.call[lang] }}
+notebook = discount(2500, 0.15)
+monitor = discount(1200, 0.10)

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.7.11
+
+- The examples catalog now includes localized programming-oriented examples for
+  function definitions, multiple return values, anonymous functions,
+  `if`/`elseif` branching, `for` loops, `while` loops, command selection,
+  `try`/`catch` error handling, structures, and `classdef` class definitions.
+- A localized `switch`/`case` example has been added to demonstrate command
+  selection with MATLAB/Octave-style control flow.
+- A localized object-oriented programming example has been added to demonstrate
+  class inheritance with `vehicle`, `car`, and `truck` classes.
+- Source comments and JSDoc have been reviewed, translated to English where
+  needed, and expanded for shared application and Web Component helpers.
+
 ## 1.7.10
 
 - The `help/**/addlistener.md`, `help/**/assignin.md`, `help/**/builtin.md`,

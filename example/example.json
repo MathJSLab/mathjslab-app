@@ -323,5 +323,161 @@
             "es": "Crear una pequeña imagen numérica y calcular intensidades por fila, columna y totales.",
             "pt": "Criar uma pequena imagem numérica e calcular intensidades por linha, coluna e totais."
         }
+    },
+    "function-basics": {
+        "file": "function-basics.m",
+        "caption": {
+            "en": "Function basics",
+            "es": "Funciones básicas",
+            "pt": "Funções básicas"
+        },
+        "description": {
+            "en": "Define a function, call it with arguments, and reuse it.",
+            "es": "Definir una función, llamarla con argumentos y reutilizarla.",
+            "pt": "Definir uma função, chamá-la com argumentos e reutilizá-la."
+        }
+    },
+    "multiple-returns": {
+        "file": "multiple-returns.m",
+        "caption": {
+            "en": "Multiple returns",
+            "es": "Múltiples retornos",
+            "pt": "Múltiplos retornos"
+        },
+        "description": {
+            "en": "Create a function that returns two values from the same input.",
+            "es": "Crear una función que devuelve dos valores a partir de la misma entrada.",
+            "pt": "Criar uma função que retorna dois valores a partir da mesma entrada."
+        }
+    },
+    "anonymous-functions": {
+        "file": "anonymous-functions.m",
+        "caption": {
+            "en": "Anonymous functions",
+            "es": "Funciones anónimas",
+            "pt": "Funções anônimas"
+        },
+        "description": {
+            "en": "Build compact function handles and apply them to vectors.",
+            "es": "Crear manejadores de función compactos y aplicarlos a vectores.",
+            "pt": "Criar function handles compactos e aplicá-los a vetores."
+        }
+    },
+    "if-else-grading": {
+        "file": "if-else-grading.m",
+        "caption": {
+            "en": "If and elseif",
+            "es": "If y elseif",
+            "pt": "If e elseif"
+        },
+        "description": {
+            "en": "Classify a value by choosing one branch from several conditions.",
+            "es": "Clasificar un valor eligiendo una rama entre varias condiciones.",
+            "pt": "Classificar um valor escolhendo um ramo entre várias condições."
+        }
+    },
+    "for-loop-accumulator": {
+        "file": "for-loop-accumulator.m",
+        "caption": {
+            "en": "For loop",
+            "es": "Bucle for",
+            "pt": "Laço for"
+        },
+        "description": {
+            "en": "Use a loop and an accumulator to sum selected values.",
+            "es": "Usar un bucle y un acumulador para sumar valores seleccionados.",
+            "pt": "Usar um laço e um acumulador para somar valores selecionados."
+        }
+    },
+    "while-loop-search": {
+        "file": "while-loop-search.m",
+        "caption": {
+            "en": "While loop",
+            "es": "Bucle while",
+            "pt": "Laço while"
+        },
+        "description": {
+            "en": "Advance through a vector until a search condition is satisfied.",
+            "es": "Avanzar por un vector hasta satisfacer una condición de búsqueda.",
+            "pt": "Avançar por um vetor até satisfazer uma condição de busca."
+        }
+    },
+    "command-selection": {
+        "file": "command-selection.m",
+        "caption": {
+            "en": "Command selection",
+            "es": "Selección de comando",
+            "pt": "Seleção de comando"
+        },
+        "description": {
+            "en": "Select one calculation from a simple numeric command menu.",
+            "es": "Seleccionar un cálculo desde un menú numérico simple de comandos.",
+            "pt": "Selecionar um cálculo a partir de um menu numérico simples de comandos."
+        }
+    },
+    "switch-menu": {
+        "file": "switch-menu.m",
+        "caption": {
+            "en": "Switch menu",
+            "es": "Menú switch",
+            "pt": "Menu switch"
+        },
+        "description": {
+            "en": "Select one calculation with a switch and case command menu.",
+            "es": "Seleccionar un cálculo con un menú de comandos switch y case.",
+            "pt": "Selecionar um cálculo com um menu de comandos switch e case."
+        }
+    },
+    "try-catch-validation": {
+        "file": "try-catch-validation.m",
+        "caption": {
+            "en": "Try and catch",
+            "es": "Try y catch",
+            "pt": "Try e catch"
+        },
+        "description": {
+            "en": "Handle invalid input and return a fallback value.",
+            "es": "Manejar una entrada inválida y devolver un valor alternativo.",
+            "pt": "Tratar uma entrada inválida e retornar um valor alternativo."
+        }
+    },
+    "structure-records": {
+        "file": "structure-records.m",
+        "caption": {
+            "en": "Structure records",
+            "es": "Registros estructurados",
+            "pt": "Registros com struct"
+        },
+        "description": {
+            "en": "Use structure fields to represent a simple record.",
+            "es": "Usar campos de estructura para representar un registro simple.",
+            "pt": "Usar campos de estrutura para representar um registro simples."
+        }
+    },
+    "classdef-account": {
+        "file": "classdef-account.m",
+        "caption": {
+            "en": "Class definition",
+            "es": "Definición de clase",
+            "pt": "Definição de classe"
+        },
+        "description": {
+            "en": "Describe object state with properties and behavior with methods.",
+            "es": "Describir el estado del objeto con propiedades y el comportamiento con métodos.",
+            "pt": "Descrever o estado do objeto com propriedades e o comportamento com métodos."
+        }
+    },
+    "vehicle-inheritance": {
+        "file": "vehicle-inheritance.m",
+        "caption": {
+            "en": "Class inheritance",
+            "es": "Herencia de clases",
+            "pt": "Herança de classes"
+        },
+        "description": {
+            "en": "Define vehicle, car, and truck classes to demonstrate inheritance.",
+            "es": "Definir las clases vehicle, car y truck para demostrar herencia.",
+            "pt": "Definir as classes vehicle, car e truck para demonstrar herança."
+        }
     }
 }

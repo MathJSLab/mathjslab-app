@@ -7,6 +7,10 @@ const plotDataLayoutConfig: Plotly.PlotlyDataLayoutConfig = {
     data: [],
 };
 
+/**
+ * Cached data used by MathJSLab plotting built-ins before Plotly renders the
+ * output element.
+ */
 type PlotData = {
     data: Array<number>;
     X: Array<number | string>;
@@ -27,6 +31,10 @@ const plotData: PlotData = {
 
 const plotWidth = 100;
 
+/**
+ * Bridges MathJSLab plotting built-ins to Plotly renderers used by the web
+ * application.
+ */
 abstract class PlotEngine {
     public static readonly outputFunction: { [k: string]: Function } = {
         plot: function (parent: string): void {
@@ -57,11 +65,9 @@ abstract class PlotEngine {
                     type: 'scatter3d',
                     mode: 'lines',
                 };
-                // create some nice looking data with sin/cos
+                // Create sample sinusoidal data for the demonstration plot.
                 const steps = 500;
-                const axisMax = 314;
                 const tmax = 4 * 2 * Math.PI;
-                const axisStep = axisMax / steps;
                 for (let t = 0; t < tmax; t += tmax / steps) {
                     const r = 1;
                     const x = r * Math.sin(t);
@@ -88,7 +94,7 @@ abstract class PlotEngine {
                     return Math.sin(x / 50) * Math.cos(y / 50) * 50 + 50;
                 }
 
-                const steps = 50; // number of datapoints will be steps*steps
+                const steps = 50; // The number of data points is steps * steps.
                 const axisMax = 314;
                 const axisStep = axisMax / steps;
 
@@ -130,10 +136,10 @@ abstract class PlotEngine {
 
                 const layout = {};
                 const config = {
-                    displayModeBar: false, // Mostra ou esconde a barra
-                    responsive: true, // Faz o gráfico se ajustar ao tamanho do container
-                    staticPlot: false, // Se `true`, o gráfico fica estático, sem interações
-                    // scrollZoom: true, // Permite zoom com a roda do mouse
+                    displayModeBar: false, // Show or hide the Plotly mode bar.
+                    responsive: true, // Resize the plot with its container.
+                    staticPlot: false, // When true, disables plot interactions.
+                    // scrollZoom: true, // Allow mouse-wheel zoom.
                 };
                 const data = [trace] as Plotly.Data[];
                 await Plotly.newPlot(output, data, layout, config);
@@ -213,9 +219,9 @@ abstract class PlotEngine {
                 plotData.MinY = 0;
                 plotData.X = [];
                 plotData.data = [];
-                /* create a single scope for the loop */
+                /* Create a single scope for evaluating the sampled expression. */
                 const plotScope = Scope.create(appEngine.interpreter.context.currentScope);
-                /* push scope to call stack */
+                /* Push the plotting scope onto the call stack while sampling. */
                 appEngine.interpreter.context.callStack!.push(new CallFrame(plotScope));
                 for (let i = 0; i < plotWidth; i++) {
                     const xValue = ComplexDecimal.create(plotData.MinX + deltaX * i, 0);
@@ -230,7 +236,7 @@ abstract class PlotEngine {
                     plotData.MaxY = Math.max(plotData.MaxY, plotData.data[i]);
                     plotData.MinY = Math.min(plotData.MinY, plotData.data[i]);
                 }
-                /* pop scope from call stack */
+                /* Restore the call stack after sampling the expression. */
                 appEngine.interpreter.context.callStack!.pop();
                 Decimal.set({ precision: save_precision });
                 return AST.nodeIndexExpr(AST.nodeIdentifier('plot2d'), AST.nodeList([expr, variable, minx, maxx]));
@@ -281,11 +287,11 @@ abstract class PlotEngine {
         },
     };
 
-    public static plot(...args: ElementType[]): NodeExpr {}
+    public static plot(..._args: ElementType[]): NodeExpr {}
 
-    public static plot3(...args: ElementType[]): NodeExpr {}
+    public static plot3(..._args: ElementType[]): NodeExpr {}
 
-    public static surf(...args: ElementType[]): NodeExpr {}
+    public static surf(..._args: ElementType[]): NodeExpr {}
 }
 
 export type { PlotData };

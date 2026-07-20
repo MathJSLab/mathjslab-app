@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Describe a class with classdef",
+            "es": "Describir una clase con classdef",
+            "pt": "Descrever uma classe com classdef"
+        },
+        "note": {
+            "en": "classdef groups state in properties and behavior in methods",
+            "es": "classdef agrupa estado en propiedades y comportamiento en métodos",
+            "pt": "classdef agrupa estado em propriedades e comportamento em métodos"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.note[lang] }}
+classdef Account
+  properties
+    Owner = "Ana";
+    Balance = 0;
+  end
+
+  methods
+    function obj = deposit(obj, amount)
+      obj.Balance = obj.Balance + amount;
+    end
+
+    function value = currentBalance(obj)
+      value = obj.Balance;
+    end
+  end
+end
+

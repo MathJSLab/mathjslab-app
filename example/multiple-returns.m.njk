@@ -1,0 +1,25 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Return more than one value",
+            "es": "Devolver más de un valor",
+            "pt": "Retornar mais de um valor"
+        },
+        "call": {
+            "en": "capture both outputs from the function",
+            "es": "capturar ambas salidas de la función",
+            "pt": "capturar as duas saídas da função"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+function [total, average] = summarize(values)
+  total = sum(values);
+  average = total / numel(values);
+end
+
+% {{ comments.call[lang] }}
+grades = [8.5, 7.0, 9.5, 8.0]
+[total_grade, average_grade] = summarize(grades)

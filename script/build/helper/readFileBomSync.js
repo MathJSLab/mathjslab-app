@@ -1,4 +1,12 @@
 import fs from 'node:fs';
+/**
+ * Read a file synchronously using the encoding declared by its byte order mark
+ * when one is present.
+ *
+ * @param filePath File path to read.
+ * @param options Options forwarded to `fs.readFileSync`; defaults to UTF-8.
+ * @returns File contents decoded with the selected encoding.
+ */
 export default function (filePath, options) {
     if (options) {
         if (typeof options === 'string') {
@@ -22,7 +30,7 @@ export default function (filePath, options) {
         options = { encoding: 'utf-8' };
     }
     const fd = fs.openSync(filePath, 'r');
-    let bom = Buffer.alloc(3);
+    const bom = Buffer.alloc(3);
     fs.readSync(fd, bom, 0, 3, 0);
     fs.closeSync(fd);
     if (bom[0] === 0xef && bom[1] === 0xbb && bom[2] === 0xbf) {

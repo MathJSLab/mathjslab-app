@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Choose a branch with if and elseif",
+            "es": "Elegir una rama con if y elseif",
+            "pt": "Escolher um ramo com if e elseif"
+        },
+        "result": {
+            "en": "classify a grade",
+            "es": "clasificar una nota",
+            "pt": "classificar uma nota"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+
+grade = 8.2
+
+if grade >= 9
+  status = "excellent";
+elseif grade >= 7
+  status = "approved";
+elseif grade >= 5
+  status = "recovery";
+else
+  status = "failed";
+end
+
+% {{ comments.result[lang] }}
+status
+

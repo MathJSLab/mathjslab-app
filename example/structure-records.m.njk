@@ -1,0 +1,29 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Represent records with structures",
+            "es": "Representar registros con estructuras",
+            "pt": "Representar registros com estruturas"
+        },
+        "fields": {
+            "en": "read and update fields",
+            "es": "leer y actualizar campos",
+            "pt": "ler e atualizar campos"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+
+student.name = "Ana"
+student.grade = 8.7
+student.approved = student.grade >= 7
+
+% {{ comments.fields[lang] }}
+student.grade = student.grade + 0.3
+student.name
+student.grade
+student.approved
+student

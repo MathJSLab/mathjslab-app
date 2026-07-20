@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Select behavior with switch",
+            "es": "Seleccionar comportamiento con switch",
+            "pt": "Selecionar comportamento com switch"
+        },
+        "choice": {
+            "en": "choose one branch from a command value",
+            "es": "elegir una rama a partir de un valor de comando",
+            "pt": "escolher um ramo a partir de um valor de comando"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+command = 2
+data = [4, 7, 9, 10]
+
+% {{ comments.choice[lang] }}
+switch command
+  case 1
+    result = sum(data);
+  case 2
+    result = sum(data) / numel(data);
+  case 3
+    result = max(data);
+  otherwise
+    result = NaN;
+end
+
+result

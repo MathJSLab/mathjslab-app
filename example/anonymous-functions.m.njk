@@ -1,0 +1,26 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Use anonymous functions",
+            "es": "Usar funciones anónimas",
+            "pt": "Usar funções anônimas"
+        },
+        "evaluate": {
+            "en": "compose function handles and reuse them",
+            "es": "componer manejadores de función y reutilizarlos",
+            "pt": "compor function handles e reutilizá-los"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+
+tax = @(amount) amount * 0.08
+final_price = @(amount) amount + tax(amount)
+
+% {{ comments.evaluate[lang] }}
+book_total = final_price(40)
+course_total = final_price(120)
+combined_total = book_total + course_total

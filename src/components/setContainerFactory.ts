@@ -1,4 +1,11 @@
 import { type WebComponentInterface } from './WebComponentInterface';
+
+/**
+ * Create a method that attaches or replaces the external container tracked by a
+ * Web Component instance.
+ *
+ * @returns Method that updates the component container element.
+ */
 const setContainerFactory = <T extends HTMLElement & WebComponentInterface<T>>(): ((this: T, element: HTMLElement) => void) => {
     return function (this: T, element: HTMLElement): void {
         if (this.element.container) {

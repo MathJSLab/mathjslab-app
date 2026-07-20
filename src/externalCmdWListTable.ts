@@ -1,6 +1,10 @@
 import { appEngine } from './appEngine';
 import { Markdown } from './Markdown';
 
+/**
+ * External command-form functions that receive the raw command word list from
+ * the MathJSLab interpreter.
+ */
 const externalCmdWListTable = {
     help: {
         func: (...args: string[]): void => {

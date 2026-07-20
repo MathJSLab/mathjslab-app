@@ -1,0 +1,88 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Class inheritance with vehicles",
+            "es": "Herencia de clases con vehículos",
+            "pt": "Herança de classes com veículos"
+        },
+        "base": {
+            "en": "base class: state and behavior common to any vehicle",
+            "es": "clase base: estado y comportamiento comunes a cualquier vehículo",
+            "pt": "classe base: estado e comportamento comuns a qualquer veículo"
+        },
+        "car": {
+            "en": "car inherits vehicle and adds passenger-oriented behavior",
+            "es": "car hereda vehicle y agrega comportamiento orientado a pasajeros",
+            "pt": "car herda vehicle e acrescenta comportamento orientado a passageiros"
+        },
+        "truck": {
+            "en": "truck inherits vehicle and adds cargo-oriented behavior",
+            "es": "truck hereda vehicle y agrega comportamiento orientado a carga",
+            "pt": "truck herda vehicle e acrescenta comportamento orientado a carga"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+
+% {{ comments.base[lang] }}
+classdef vehicle
+  properties
+    Make = "generic";
+    Model = "standard";
+    Year = 2026;
+    Speed = 0;
+  end
+
+  methods
+    function obj = accelerate(obj, amount)
+      obj.Speed = obj.Speed + amount;
+    end
+
+    function obj = brake(obj, amount)
+      obj.Speed = max([0, obj.Speed - amount]);
+    end
+
+    function text = description(obj)
+      text = [obj.Make, " ", obj.Model];
+    end
+  end
+end
+
+% {{ comments.car[lang] }}
+classdef car < vehicle
+  properties
+    Doors = 4;
+    Seats = 5;
+  end
+
+  methods
+    function capacity = passengerCapacity(obj)
+      capacity = obj.Seats;
+    end
+
+    function compact = isCompact(obj)
+      compact = obj.Doors <= 2;
+    end
+  end
+end
+
+% {{ comments.truck[lang] }}
+classdef truck < vehicle
+  properties
+    PayloadKg = 1200;
+    Axles = 2;
+  end
+
+  methods
+    function ok = canCarry(obj, weightKg)
+      ok = weightKg <= obj.PayloadKg;
+    end
+
+    function rating = cargoRating(obj)
+      rating = obj.PayloadKg / obj.Axles;
+    end
+  end
+end
+
