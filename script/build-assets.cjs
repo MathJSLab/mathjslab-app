@@ -96,16 +96,32 @@ try {
     if (!fs.existsSync(directory)) {
         fs.mkdirSync(directory);
     }
-    // Copy help/[languages]/*.* to dist/help/[languages]/*.*
-    const languages = fs.readdirSync(path.resolve(__dirname, '..', 'help'));
-    languages.forEach((language) => {
-        directory = path.resolve(__dirname, '..', 'dist', 'help', language);
+    // Copy root help files and help/[languages]/*.* to dist/help.
+    const helpDirectory = path.resolve(__dirname, '..', 'help');
+    const helpEntries = fs.readdirSync(helpDirectory, { withFileTypes: true });
+    helpEntries.forEach((entry) => {
+        const sourcePath = path.resolve(helpDirectory, entry.name);
+        const targetPath = path.resolve(__dirname, '..', 'dist', 'help', entry.name);
+        if (entry.isFile()) {
+            if (fs.existsSync(targetPath) && fs.statSync(targetPath).isDirectory()) {
+                fs.rmSync(targetPath, { recursive: true, force: true });
+            }
+            fs.copyFileSync(sourcePath, targetPath);
+            return;
+        }
+        if (!entry.isDirectory()) {
+            return;
+        }
+        directory = targetPath;
+        if (fs.existsSync(directory) && fs.statSync(directory).isFile()) {
+            fs.rmSync(directory);
+        }
         if (!fs.existsSync(directory)) {
             fs.mkdirSync(directory);
         }
-        const files = fs.readdirSync(path.resolve(__dirname, '..', 'help', language));
+        const files = fs.readdirSync(sourcePath);
         files.forEach((file) => {
-            fs.copyFileSync(path.resolve(__dirname, '..', 'help', language, file), path.resolve(__dirname, '..', 'dist', 'help', language, file));
+            fs.copyFileSync(path.resolve(sourcePath, file), path.resolve(directory, file));
         });
     });
     // Copy README.md, LEIAME.MD and LEAME.md to dist/

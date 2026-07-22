@@ -1,0 +1,25 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Point plot",
+            "es": "Gráfico de puntos",
+            "pt": "Gráfico de pontos"
+        },
+        "points": {
+            "en": "two point series, based on the previous hard-coded plot demo",
+            "es": "dos series de puntos, basadas en la demostración anterior fija de plot",
+            "pt": "duas séries de pontos, baseadas na demonstração fixa anterior de plot"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+
+% {{ comments.points[lang] }}
+x1 = [1, 2.5, 3, 4]
+y1 = [10, 15, 13, 17]
+x2 = [1, 2, 3, 4]
+y2 = [16, 5, 11, 9]
+plot(x1, y1, 'bo', x2, y2, 'r--s')

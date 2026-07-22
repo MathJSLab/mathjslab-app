@@ -51,12 +51,12 @@
             "pt": "Resolver um sistema linear 3 por 3 e verificar o resíduo."
         }
     },
-    "statistics-summary": {
-        "file": "statistics-summary.m",
+    "statistics": {
+        "file": "statistics.m",
         "caption": {
-            "en": "Statistics summary",
-            "es": "Resumen estadístico",
-            "pt": "Resumo estatístico"
+            "en": "Statistics",
+            "es": "Estadística",
+            "pt": "Estatística"
         },
         "description": {
             "en": "Compute mean, variance, standard deviation, and cumulative sums for a data set.",
@@ -64,30 +64,43 @@
             "pt": "Calcular média, variância, desvio padrão e somas acumuladas de um conjunto de dados."
         }
     },
+    "plot-points": {
+        "file": "plot-points.m",
+        "caption": {
+            "en": "Point plot",
+            "es": "Gráfico de puntos",
+            "pt": "Gráfico de pontos"
+        },
+        "description": {
+            "en": "Display two point series with Plotly-backed graphics.",
+            "es": "Mostrar dos series de puntos con gráficos basados en Plotly.",
+            "pt": "Mostrar duas séries de pontos com gráficos baseados em Plotly."
+        }
+    },
+    "histogram": {
+        "file": "histogram.m",
+        "caption": {
+            "en": "Histogram",
+            "es": "Histograma",
+            "pt": "Histograma"
+        },
+        "description": {
+            "en": "Display a bar-style histogram for a small frequency table.",
+            "es": "Mostrar un histograma de barras para una pequeña tabla de frecuencias.",
+            "pt": "Mostrar um histograma de barras para uma pequena tabela de frequências."
+        }
+    },
     "plot-trig": {
         "file": "plot-trig.m",
         "caption": {
             "en": "Plot a function",
             "es": "Graficar una función",
-            "pt": "Traçar uma função"
+            "pt": "Graficar uma função"
         },
         "description": {
             "en": "Plot a trigonometric function over a selected interval.",
             "es": "Graficar una función trigonométrica en un intervalo seleccionado.",
-            "pt": "Traçar uma função trigonométrica em um intervalo escolhido."
-        }
-    },
-    "random-simulation": {
-        "file": "random-simulation.m",
-        "caption": {
-            "en": "Random simulation",
-            "es": "Simulación aleatoria",
-            "pt": "Simulação aleatória"
-        },
-        "description": {
-            "en": "Simulate dice rolls and summarize the observed frequencies.",
-            "es": "Simular lanzamientos de dados y resumir las frecuencias observadas.",
-            "pt": "Simular lançamentos de dados e resumir as frequências observadas."
+            "pt": "Graficar uma função trigonométrica em um intervalo escolhido."
         }
     },
     "sampled-sine": {
@@ -101,6 +114,32 @@
             "en": "Use linearly spaced points to evaluate and plot a sine wave.",
             "es": "Usar puntos espaciados linealmente para evaluar y graficar una onda seno.",
             "pt": "Usar pontos linearmente espaçados para avaliar e traçar uma onda seno."
+        }
+    },
+    "plot-3d": {
+        "file": "plot-3d.m",
+        "caption": {
+            "en": "Plot 3D",
+            "es": "Plot 3D",
+            "pt": "Plot 3D"
+        },
+        "description": {
+            "en": "Display a 3D spiral and a sinusoidal surface with Plotly-backed graphics.",
+            "es": "Mostrar una espiral 3D y una superficie sinusoidal con gráficos basados en Plotly.",
+            "pt": "Mostrar uma espiral 3D e uma superfície senoidal com gráficos baseados em Plotly."
+        }
+    },
+    "random-simulation": {
+        "file": "random-simulation.m",
+        "caption": {
+            "en": "Random simulation",
+            "es": "Simulación aleatoria",
+            "pt": "Simulação aleatória"
+        },
+        "description": {
+            "en": "Simulate dice rolls and summarize the observed frequencies.",
+            "es": "Simular lanzamientos de dados y resumir las frecuencias observadas.",
+            "pt": "Simular lançamentos de dados e resumir as frequências observadas."
         }
     },
     "logarithmic-scale": {
@@ -205,19 +244,6 @@
             "en": "Use matrix columns to summarize quantities, prices, and inventory value.",
             "es": "Usar columnas de matriz para resumir cantidades, precios y valor de inventario.",
             "pt": "Usar colunas de matriz para resumir quantidades, preços e valor em estoque."
-        }
-    },
-    "histogram-demo": {
-        "file": "histogram-demo.m",
-        "caption": {
-            "en": "Histogram",
-            "es": "Histograma",
-            "pt": "Histograma"
-        },
-        "description": {
-            "en": "Display a bar-style histogram for a small frequency table.",
-            "es": "Mostrar un histograma de barras para una pequeña tabla de frecuencias.",
-            "pt": "Mostrar um histograma de barras para uma pequena tabela de frequências."
         }
     },
     "unit-circle": {

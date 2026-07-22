@@ -146,7 +146,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                         static: { directory: path.join(__dirname, 'dist'), serveIndex: false, publicPath: '/' },
                         historyApiFallback: { index: '/index.html', disableDotRule: true },
                         compress: typeof devServerConfig.compress !== 'undefined' ? devServerConfig.compress : true,
-                        port: typeof devServerConfig.port !== 'undefined' ? devServerConfig.port : 4000,
+                        port: typeof devServerConfig.port !== 'undefined' ? devServerConfig.port : 8080,
                         hot: typeof devServerConfig.hot !== 'undefined' ? devServerConfig.hot : true,
                         liveReload: typeof devServerConfig.liveReload !== 'undefined' ? devServerConfig.liveReload : true,
                         open: typeof devServerConfig.open !== 'undefined' ? devServerConfig.open : false,

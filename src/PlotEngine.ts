@@ -31,98 +31,519 @@ const plotData: PlotData = {
 
 const plotWidth = 100;
 
+type NumericMatrix = number[][];
+
+type ComplexPoint = {
+    re: number;
+    im: number;
+};
+
+type LineStyle = Partial<Plotly.ScatterLine>;
+
+type MarkerStyle = Partial<Plotly.ScatterMarker>;
+
+type TraceStyle = {
+    line: LineStyle;
+    marker: MarkerStyle;
+    mode?: Plotly.ScatterData['mode'];
+    name?: string;
+};
+
+type PlotRenderState = {
+    data: Plotly.Data[];
+    layout?: Partial<Plotly.Layout>;
+    config?: Partial<Plotly.Config>;
+};
+
+const defaultPlotConfig: Partial<Plotly.Config> = {
+    displayModeBar: false,
+    responsive: true,
+    staticPlot: false,
+};
+
+const plotRenderState: PlotRenderState = {
+    data: [],
+    layout: {},
+    config: defaultPlotConfig,
+};
+
+const colorMap: Record<string, string> = {
+    k: 'black',
+    black: 'black',
+    r: 'red',
+    red: 'red',
+    g: 'green',
+    green: 'green',
+    b: 'blue',
+    blue: 'blue',
+    y: 'yellow',
+    yellow: 'yellow',
+    m: 'magenta',
+    magenta: 'magenta',
+    c: 'cyan',
+    cyan: 'cyan',
+    w: 'white',
+    white: 'white',
+};
+
+const markerMap: Record<string, Plotly.ScatterMarker['symbol']> = {
+    '+': 'cross',
+    o: 'circle',
+    '*': 'star',
+    '.': 'circle',
+    x: 'x',
+    '|': 'line-ns',
+    _: 'line-ew',
+    s: 'square',
+    d: 'diamond',
+    '^': 'triangle-up',
+    v: 'triangle-down',
+    '>': 'triangle-right',
+    '<': 'triangle-left',
+    p: 'pentagon',
+    h: 'hexagon',
+};
+
+const lineStyleMap: Record<string, Plotly.ScatterLine['dash']> = {
+    '-': 'solid',
+    '--': 'dash',
+    ':': 'dot',
+    '-.': 'dashdot',
+};
+
+const plotPropertyNames = new Set(['color', 'linestyle', 'linewidth', 'marker', 'markersize', 'markeredgecolor', 'markerfacecolor', 'displayname']);
+
+const isNumericPlotValue = (value: ElementType): value is ComplexDecimal | MultiArray => value instanceof ComplexDecimal || value instanceof MultiArray;
+
+const isStringPlotValue = (value: ElementType): value is CharString => value instanceof CharString;
+
+const realNumber = (value: ElementType, argumentName: string): number => {
+    if (!(value instanceof ComplexDecimal)) {
+        throw new Error(`${argumentName}: expected numeric scalar`);
+    }
+    if (!value.im.eq(0)) {
+        throw new Error(`${argumentName}: complex values are not supported in this context`);
+    }
+    const result = value.re.toNumber();
+    if (!Number.isFinite(result)) {
+        throw new Error(`${argumentName}: value must be finite`);
+    }
+    return result;
+};
+
+const complexPoint = (value: ElementType, argumentName: string): ComplexPoint => {
+    if (!(value instanceof ComplexDecimal)) {
+        throw new Error(`${argumentName}: expected numeric scalar`);
+    }
+    const re = value.re.toNumber();
+    const im = value.im.toNumber();
+    if (!Number.isFinite(re) || !Number.isFinite(im)) {
+        throw new Error(`${argumentName}: value must be finite`);
+    }
+    return { re, im };
+};
+
+const numericMatrix = (value: ElementType, argumentName: string): NumericMatrix => {
+    if (value instanceof ComplexDecimal) {
+        return [[realNumber(value, argumentName)]];
+    }
+    if (!(value instanceof MultiArray)) {
+        throw new Error(`${argumentName}: expected numeric array`);
+    }
+    return value.array.map((row) => row.map((entry) => realNumber(entry, argumentName)));
+};
+
+const complexVector = (value: ElementType, argumentName: string): ComplexPoint[] => {
+    if (value instanceof ComplexDecimal) {
+        return [complexPoint(value, argumentName)];
+    }
+    if (!(value instanceof MultiArray)) {
+        throw new Error(`${argumentName}: expected numeric array`);
+    }
+    if (!isVectorMatrix(value)) {
+        throw new Error(`${argumentName}: expected vector`);
+    }
+    return vectorElements(value).map((entry) => complexPoint(entry, argumentName));
+};
+
+const matrixSize = (matrix: NumericMatrix): [number, number] => [matrix.length, matrix[0]?.length ?? 0];
+
+const isVector = (matrix: NumericMatrix): boolean => {
+    const [rows, columns] = matrixSize(matrix);
+    return rows === 1 || columns === 1;
+};
+
+const vectorFromMatrix = (matrix: NumericMatrix): number[] => {
+    const [rows, columns] = matrixSize(matrix);
+    if (rows === 1) {
+        return [...matrix[0]];
+    }
+    if (columns === 1) {
+        return matrix.map((row) => row[0]);
+    }
+    throw new Error('expected vector');
+};
+
+const isVectorMatrix = (value: MultiArray): boolean => value.dimension[0] === 1 || value.dimension[1] === 1;
+
+const vectorElements = (value: MultiArray): ElementType[] => {
+    if (value.dimension[0] === 1) {
+        return [...value.array[0]];
+    }
+    if (value.dimension[1] === 1) {
+        return value.array.map((row) => row[0]);
+    }
+    throw new Error('expected vector');
+};
+
+const defaultX = (length: number): number[] => Array.from({ length }, (_, index) => index + 1);
+
+const columnsOf = (matrix: NumericMatrix): number[][] => {
+    const [rows, columns] = matrixSize(matrix);
+    return Array.from({ length: columns }, (_, column) => Array.from({ length: rows }, (_unused, row) => matrix[row][column]));
+};
+
+const rowsOf = (matrix: NumericMatrix): number[][] => matrix.map((row) => [...row]);
+
+const applyFormat = (style: TraceStyle, fmt: string): void => {
+    const legend = fmt.match(/;(.*);$/u);
+    if (legend) {
+        style.name = legend[1];
+        fmt = fmt.slice(0, legend.index);
+    }
+    const lineStyle = ['--', '-.', '-', ':'].find((candidate) => fmt.includes(candidate));
+    if (lineStyle) {
+        style.line.dash = lineStyleMap[lineStyle];
+        fmt = fmt.replace(lineStyle, '');
+    }
+    for (const [key, color] of Object.entries(colorMap)) {
+        if (fmt.includes(key)) {
+            style.line.color = color;
+            style.marker.color = color;
+            fmt = fmt.replace(key, '');
+            break;
+        }
+    }
+    for (const [key, marker] of Object.entries(markerMap)) {
+        if (fmt.includes(key)) {
+            style.marker.symbol = marker;
+            style.mode = style.line.dash ? 'lines+markers' : 'markers';
+            fmt = fmt.replace(key, '');
+            break;
+        }
+    }
+    if (!style.mode) {
+        style.mode = 'lines';
+    }
+};
+
+const applyProperty = (style: TraceStyle, property: string, value: ElementType): void => {
+    const name = property.toLowerCase();
+    if (name === 'color' || name === 'markeredgecolor') {
+        const color = isStringPlotValue(value) ? (colorMap[value.str.toLowerCase()] ?? value.str) : undefined;
+        if (!color) throw new Error(`${property}: expected color string`);
+        style.line.color = color;
+        style.marker.color = color;
+    } else if (name === 'markerfacecolor') {
+        const color = isStringPlotValue(value) ? (colorMap[value.str.toLowerCase()] ?? value.str) : undefined;
+        if (!color) throw new Error(`${property}: expected color string`);
+        style.marker.color = color;
+    } else if (name === 'linestyle') {
+        if (!isStringPlotValue(value)) throw new Error(`${property}: expected line style string`);
+        style.line.dash = lineStyleMap[value.str] ?? lineStyleMap[value.str.toLowerCase()] ?? 'solid';
+        style.mode = style.marker.symbol ? 'lines+markers' : 'lines';
+    } else if (name === 'linewidth') {
+        style.line.width = realNumber(value, property);
+    } else if (name === 'marker') {
+        if (!isStringPlotValue(value)) throw new Error(`${property}: expected marker string`);
+        style.marker.symbol = markerMap[value.str] ?? markerMap[value.str.toLowerCase()] ?? 'circle';
+        style.mode = style.line.dash ? 'lines+markers' : 'markers';
+    } else if (name === 'markersize') {
+        style.marker.size = realNumber(value, property);
+    } else if (name === 'displayname') {
+        if (!isStringPlotValue(value)) throw new Error(`${property}: expected display name string`);
+        style.name = value.str;
+    }
+};
+
+const styleFromArgs = (args: ElementType[], index: number): { style: TraceStyle; next: number } => {
+    const style: TraceStyle = { line: {}, marker: {} };
+    const formatArg = args[index];
+    if (formatArg && isStringPlotValue(formatArg) && !plotPropertyNames.has(formatArg.str.toLowerCase())) {
+        applyFormat(style, formatArg.str);
+        index++;
+    }
+    while (true) {
+        const propertyArg = args[index];
+        if (!propertyArg || !isStringPlotValue(propertyArg) || !plotPropertyNames.has(propertyArg.str.toLowerCase())) {
+            break;
+        }
+        if (index + 1 >= args.length) {
+            throw new Error(`${propertyArg.str}: missing property value`);
+        }
+        applyProperty(style, propertyArg.str, args[index + 1]);
+        index += 2;
+    }
+    if (!style.mode) {
+        style.mode = 'lines';
+    }
+    return { style, next: index };
+};
+
+const scatterTrace = (x: number[], y: number[], style: TraceStyle): Plotly.Data => ({
+    x,
+    y,
+    type: 'scatter',
+    mode: style.mode,
+    line: style.line,
+    marker: style.marker,
+    name: style.name,
+});
+
+const scatter3Trace = (x: number[], y: number[], z: number[], style: TraceStyle): Plotly.Data => ({
+    x,
+    y,
+    z,
+    type: 'scatter3d',
+    mode: style.mode,
+    line: style.line,
+    marker: style.marker,
+    name: style.name,
+});
+
+const build2DTraces = (xValue: ElementType | undefined, yValue: ElementType, style: TraceStyle): Plotly.Data[] => {
+    const yMatrix = numericMatrix(yValue, 'Y');
+    const xMatrix = xValue ? numericMatrix(xValue, 'X') : undefined;
+    if (!xMatrix) {
+        if (isVector(yMatrix)) {
+            const y = vectorFromMatrix(yMatrix);
+            return [scatterTrace(defaultX(y.length), y, style)];
+        }
+        return columnsOf(yMatrix).map((y) => scatterTrace(defaultX(y.length), y, style));
+    }
+    if (isVector(xMatrix) && isVector(yMatrix)) {
+        const x = vectorFromMatrix(xMatrix);
+        const y = vectorFromMatrix(yMatrix);
+        if (x.length !== y.length) {
+            throw new Error('plot: X and Y vectors must have the same length');
+        }
+        return [scatterTrace(x, y, style)];
+    }
+    if (isVector(xMatrix)) {
+        const x = vectorFromMatrix(xMatrix);
+        const [rows, columns] = matrixSize(yMatrix);
+        if (x.length === rows) {
+            return columnsOf(yMatrix).map((y) => scatterTrace(x, y, style));
+        }
+        if (x.length === columns) {
+            return rowsOf(yMatrix).map((y) => scatterTrace(x, y, style));
+        }
+    }
+    if (isVector(yMatrix)) {
+        const y = vectorFromMatrix(yMatrix);
+        const [rows, columns] = matrixSize(xMatrix);
+        if (y.length === rows) {
+            return columnsOf(xMatrix).map((x) => scatterTrace(x, y, style));
+        }
+        if (y.length === columns) {
+            return rowsOf(xMatrix).map((x) => scatterTrace(x, y, style));
+        }
+    }
+    const [xRows, xColumns] = matrixSize(xMatrix);
+    const [yRows, yColumns] = matrixSize(yMatrix);
+    if (xRows !== yRows || xColumns !== yColumns) {
+        throw new Error('plot: X and Y matrices must have the same dimensions');
+    }
+    return columnsOf(yMatrix).map((y, index) => scatterTrace(columnsOf(xMatrix)[index], y, style));
+};
+
+const buildPlot = (args: ElementType[]): PlotRenderState => {
+    const data: Plotly.Data[] = [];
+    let index = 0;
+    while (index < args.length) {
+        if (!isNumericPlotValue(args[index])) {
+            throw new Error('plot: expected numeric data argument');
+        }
+        const first = args[index++];
+        const second = isNumericPlotValue(args[index]) ? args[index++] : undefined;
+        const { style, next } = styleFromArgs(args, index);
+        index = next;
+        data.push(...build2DTraces(second ? first : undefined, second ?? first, style));
+    }
+    return {
+        data,
+        layout: { autosize: true },
+        config: defaultPlotConfig,
+    };
+};
+
+const build3DFromVectors = (x: number[], y: number[], z: number[], style: TraceStyle): Plotly.Data => {
+    if (x.length !== y.length || x.length !== z.length) {
+        throw new Error('plot3: X, Y, and Z vectors must have the same length');
+    }
+    return scatter3Trace(x, y, z, style);
+};
+
+const buildPlot3 = (args: ElementType[]): PlotRenderState => {
+    const data: Plotly.Data[] = [];
+    let index = 0;
+    while (index < args.length) {
+        if (!isNumericPlotValue(args[index])) {
+            throw new Error('plot3: expected numeric data argument');
+        }
+        if (isNumericPlotValue(args[index]) && isNumericPlotValue(args[index + 1]) && isNumericPlotValue(args[index + 2])) {
+            const xMatrix = numericMatrix(args[index++], 'X');
+            const yMatrix = numericMatrix(args[index++], 'Y');
+            const zMatrix = numericMatrix(args[index++], 'Z');
+            const { style, next } = styleFromArgs(args, index);
+            index = next;
+            if (isVector(xMatrix) && isVector(yMatrix) && isVector(zMatrix)) {
+                data.push(build3DFromVectors(vectorFromMatrix(xMatrix), vectorFromMatrix(yMatrix), vectorFromMatrix(zMatrix), style));
+            } else {
+                const [xRows, xColumns] = matrixSize(xMatrix);
+                const [yRows, yColumns] = matrixSize(yMatrix);
+                const [zRows, zColumns] = matrixSize(zMatrix);
+                if (xRows !== yRows || xRows !== zRows || xColumns !== yColumns || xColumns !== zColumns) {
+                    throw new Error('plot3: X, Y, and Z matrices must have the same dimensions');
+                }
+                const xColumnsData = columnsOf(xMatrix);
+                const yColumnsData = columnsOf(yMatrix);
+                columnsOf(zMatrix).forEach((z, column) => data.push(scatter3Trace(xColumnsData[column], yColumnsData[column], z, style)));
+            }
+        } else if (isNumericPlotValue(args[index]) && isNumericPlotValue(args[index + 1])) {
+            const x = vectorFromMatrix(numericMatrix(args[index++], 'X'));
+            const complex = complexVector(args[index++], 'CPLX');
+            const { style, next } = styleFromArgs(args, index);
+            index = next;
+            data.push(
+                build3DFromVectors(
+                    x,
+                    complex.map((value) => value.re),
+                    complex.map((value) => value.im),
+                    style,
+                ),
+            );
+        } else {
+            const complex = complexVector(args[index++], 'CPLX');
+            const { style, next } = styleFromArgs(args, index);
+            index = next;
+            data.push(
+                scatter3Trace(
+                    defaultX(complex.length),
+                    complex.map((value) => value.re),
+                    complex.map((value) => value.im),
+                    style,
+                ),
+            );
+        }
+    }
+    return {
+        data,
+        layout: { autosize: true, scene: { xaxis: { title: { text: 'X' } }, yaxis: { title: { text: 'Y' } }, zaxis: { title: { text: 'Z' } } } },
+        config: defaultPlotConfig,
+    };
+};
+
+const gridAxisFromMatrix = (matrix: NumericMatrix, axis: 'x' | 'y'): number[] => {
+    if (isVector(matrix)) {
+        return vectorFromMatrix(matrix);
+    }
+    return axis === 'x' ? [...matrix[0]] : matrix.map((row) => row[0]);
+};
+
+const consumeSurfaceProperties = (args: ElementType[], index: number): { surface: Record<string, unknown>; next: number } => {
+    const surface: Record<string, unknown> = {};
+    const colorArg = args[index];
+    if (colorArg && isNumericPlotValue(colorArg)) {
+        surface.surfacecolor = numericMatrix(colorArg, 'C');
+        index++;
+    }
+    while (true) {
+        const propertyArg = args[index];
+        if (!propertyArg || !isStringPlotValue(propertyArg)) {
+            break;
+        }
+        if (index + 1 >= args.length) {
+            throw new Error(`${propertyArg.str}: missing property value`);
+        }
+        const property = propertyArg.str.toLowerCase();
+        const value = args[index + 1];
+        if (property === 'opacity') {
+            surface.opacity = realNumber(value, property);
+        } else if (property === 'colorscale') {
+            if (!isStringPlotValue(value)) throw new Error(`${property}: expected string`);
+            surface.colorscale = value.str;
+        }
+        index += 2;
+    }
+    return { surface, next: index };
+};
+
+const buildSurf = (args: ElementType[]): PlotRenderState => {
+    if (args.length === 0 || !isNumericPlotValue(args[0])) {
+        throw new Error('surf: expected Z or X, Y, Z data');
+    }
+    let x: number[] | undefined;
+    let y: number[] | undefined;
+    let z: NumericMatrix;
+    let index = 0;
+    if (isNumericPlotValue(args[0]) && isNumericPlotValue(args[1]) && isNumericPlotValue(args[2])) {
+        const xMatrix = numericMatrix(args[index++], 'X');
+        const yMatrix = numericMatrix(args[index++], 'Y');
+        z = numericMatrix(args[index++], 'Z');
+        x = gridAxisFromMatrix(xMatrix, 'x');
+        y = gridAxisFromMatrix(yMatrix, 'y');
+    } else {
+        z = numericMatrix(args[index++], 'Z');
+        const [rows, columns] = matrixSize(z);
+        x = defaultX(columns);
+        y = defaultX(rows);
+    }
+    const surfaceProperties = consumeSurfaceProperties(args, index);
+    if (surfaceProperties.next < args.length) {
+        throw new Error('surf: unsupported argument');
+    }
+    const surface = {
+        x,
+        y,
+        z,
+        type: 'surface',
+        ...surfaceProperties.surface,
+    } as Plotly.Data;
+    return {
+        data: [surface],
+        layout: { autosize: true, scene: { xaxis: { title: { text: 'X' } }, yaxis: { title: { text: 'Y' } }, zaxis: { title: { text: 'Z' } } } },
+        config: defaultPlotConfig,
+    };
+};
+
+const setPlotRenderState = (state: PlotRenderState): void => {
+    plotRenderState.data = state.data;
+    plotRenderState.layout = state.layout;
+    plotRenderState.config = state.config;
+};
+
 /**
  * Bridges MathJSLab plotting built-ins to Plotly renderers used by the web
  * application.
  */
 abstract class PlotEngine {
     public static readonly outputFunction: { [k: string]: Function } = {
-        plot: function (parent: string): void {
+        plot: function (parent: HTMLElement): void {
             (async () => {
-                const trace1 = {
-                    x: [1, 2.5, 3, 4],
-                    y: [10, 15, 13, 17],
-                    type: 'scatter',
-                };
-
-                const trace2 = {
-                    x: [1, 2, 3, 4],
-                    y: [16, 5, 11, 9],
-                    type: 'scatter',
-                };
-
-                const data = [trace1, trace2] as Plotly.Data[];
-                await Plotly.newPlot(parent, data);
+                await Plotly.newPlot(parent, plotRenderState.data, plotRenderState.layout, plotRenderState.config);
             })();
             insertOutput.type = '';
         },
-        plot3: function (parent: string): void {
+        plot3: function (parent: HTMLElement): void {
             (async () => {
-                const line3d = {
-                    x: [] as number[],
-                    y: [] as number[],
-                    z: [] as number[],
-                    type: 'scatter3d',
-                    mode: 'lines',
-                };
-                // Create sample sinusoidal data for the demonstration plot.
-                const steps = 500;
-                const tmax = 4 * 2 * Math.PI;
-                for (let t = 0; t < tmax; t += tmax / steps) {
-                    const r = 1;
-                    const x = r * Math.sin(t);
-                    const y = r * Math.cos(t);
-                    const z = t / tmax;
-                    line3d.x.push(x);
-                    line3d.y.push(y);
-                    line3d.z.push(z);
-                }
-
-                const layout = {
-                    autosize: true,
-                };
-
-                const data = [line3d] as Plotly.Data[];
-                await Plotly.newPlot(parent, data, layout);
+                await Plotly.newPlot(parent, plotRenderState.data, plotRenderState.layout, plotRenderState.config);
             })();
             insertOutput.type = '';
         },
-        surf: function (parent: string): void {
-            insertOutput.type = '';
+        surf: function (parent: HTMLElement): void {
             (async () => {
-                function custom(x: number, y: number) {
-                    return Math.sin(x / 50) * Math.cos(y / 50) * 50 + 50;
-                }
-
-                const steps = 50; // The number of data points is steps * steps.
-                const axisMax = 314;
-                const axisStep = axisMax / steps;
-
-                const surface1 = {
-                    x: new Array(steps) as number[],
-                    y: new Array(steps) as number[],
-                    z: new Array(steps) as number[][],
-                    type: 'surface',
-                };
-
-                for (let x = 0, i = 0; x < axisMax; x += axisStep, i++) {
-                    surface1.x[i] = x;
-                    surface1.z[i] = new Array(steps) as number[];
-                    for (let y = 0, j = 0; y < axisMax; y += axisStep, j++) {
-                        if (i === 0) {
-                            surface1.y[j] = y;
-                        }
-                        surface1.z[i][j] = custom(x, y);
-                    }
-                }
-
-                const layout = {
-                    title: { text: '3D Plot' },
-                    autosize: true,
-                };
-
-                const data = [surface1] as Plotly.Data[];
-                await Plotly.newPlot(parent, data, layout);
+                await Plotly.newPlot(parent, plotRenderState.data, plotRenderState.layout, plotRenderState.config);
             })();
             insertOutput.type = '';
         },
@@ -168,6 +589,7 @@ abstract class PlotEngine {
             mapper: false,
             ev: [],
             func: (...args: ElementType[]): NodeExpr => {
+                setPlotRenderState(buildPlot(args));
                 insertOutput.type = 'plot';
                 return AST.nodeIndexExpr(AST.nodeIdentifier('plot'), AST.nodeList(args));
             },
@@ -179,6 +601,7 @@ abstract class PlotEngine {
             mapper: false,
             ev: [],
             func: (...args: ElementType[]): NodeExpr => {
+                setPlotRenderState(buildPlot3(args));
                 insertOutput.type = 'plot3';
                 return AST.nodeIndexExpr(AST.nodeIdentifier('plot3'), AST.nodeList(args));
             },
@@ -190,6 +613,7 @@ abstract class PlotEngine {
             mapper: false,
             ev: [],
             func: (...args: ElementType[]): NodeExpr => {
+                setPlotRenderState(buildSurf(args));
                 insertOutput.type = 'surf';
                 return AST.nodeIndexExpr(AST.nodeIdentifier('surf'), AST.nodeList(args));
             },
@@ -286,12 +710,6 @@ abstract class PlotEngine {
             },
         },
     };
-
-    public static plot(..._args: ElementType[]): NodeExpr {}
-
-    public static plot3(..._args: ElementType[]): NodeExpr {}
-
-    public static surf(..._args: ElementType[]): NodeExpr {}
 }
 
 export type { PlotData };

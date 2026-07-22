@@ -38,7 +38,6 @@ class Example {
     private examplesAvailable: boolean;
     private examplesContainer: HTMLElement;
     private buttons: HTMLButtonElement[] = [];
-    private currentExampleId: string = '';
     /**
      * Example constructor
      */
@@ -99,7 +98,6 @@ class Example {
      * Load an example file into the command shell.
      */
     private async loadExample(exampleId: string): Promise<void> {
-        this.currentExampleId = exampleId;
         const response = await globalThis.fetch(this.exampleUrl(exampleId));
         if (!response.ok) {
             throw new Error('Network response error.');
@@ -107,19 +105,14 @@ class Example {
         this.loadHandler(await response.text());
     }
     /**
-     * Change example button captions and reload the current localized example.
+     * Change example button captions without replacing user-edited content.
      */
     public setLanguage(lang?: string): void {
         if (lang) {
             appEngine.lang = lang;
         }
-        if (this.isFileProtocol || !this.examplesAvailable) {
-            this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
-            return;
-        }
-        this.setButtonCaptions();
-        if (this.currentExampleId && this.hasLocalizedFile(this.currentExampleId)) {
-            void this.loadExample(this.currentExampleId);
+        if (!this.isFileProtocol && this.examplesAvailable) {
+            this.setButtonCaptions();
         }
     }
     /**

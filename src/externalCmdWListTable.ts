@@ -8,6 +8,18 @@ import { Markdown } from './Markdown';
 const externalCmdWListTable = {
     help: {
         func: (...args: string[]): void => {
+            const loadHelpFile = async (url: string, topic: string): Promise<string> => {
+                const response = await globalThis.fetch(url);
+                const contentType = response.headers.get('content-type') ?? '';
+                if (!response.ok || contentType.includes('text/html')) {
+                    throw new Error(`help: ${topic} not found.`);
+                }
+                const text = await response.text();
+                if (/^\s*(<!doctype\s+html|<html)\b/iu.test(text)) {
+                    throw new Error(`help: ${topic} not found.`);
+                }
+                return text;
+            };
             const encodeName = (name: string): string => {
                 name = appEngine.interpreter.context.aliasNameFunction(name);
                 const result: string[] = [];
@@ -25,42 +37,28 @@ const externalCmdWListTable = {
                 }
                 return result.join('');
             };
-            const promptEntry = appEngine.shell.commandShell.element.promptSet.previousPrompt;
+            const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (args.length == 1) {
                 if (appEngine.shell.isFileProtocol) {
                     promptEntry.element.frameBox.className = 'bad';
                     promptEntry.element.output.innerHTML = 'help command unavailable <b>offline</b>.';
                 } else {
-                    globalThis
-                        .fetch(`${appEngine.config.helpBaseUrl}help/${appEngine.lang}/${encodeURIComponent(encodeName(args[0]))}.md`)
-                        .then((response) => {
-                            if (response.ok) {
-                                promptEntry.element.frameBox.className = 'info';
-                                return response.text();
-                            } else {
-                                promptEntry.element.frameBox.className = 'bad';
-                                return `help ${args[0]} not found.`;
-                            }
-                        })
+                    loadHelpFile(`${appEngine.config.helpBaseUrl}help/${appEngine.lang}/${encodeURIComponent(encodeName(args[0]))}.md`, args[0])
                         .then((responseText) => {
+                            promptEntry.element.frameBox.className = 'info';
                             promptEntry.element.output.innerHTML = Markdown.parse(responseText);
                             Markdown.typeset(promptEntry.element.output);
+                        })
+                        .catch((error) => {
+                            promptEntry.element.frameBox.className = 'bad';
+                            promptEntry.element.output.innerHTML = Markdown.parse((error as Error).message);
                         });
                 }
             } else if (args.length == 0) {
                 promptEntry.element.frameBox.className = 'info';
-                globalThis
-                    .fetch(`${appEngine.config.helpBaseUrl}help/${appEngine.lang}/help.md`)
-                    .then((response) => {
-                        if (response.ok) {
-                            promptEntry.element.frameBox.className = 'info';
-                            return response.text();
-                        } else {
-                            promptEntry.element.frameBox.className = 'bad';
-                            return `help ${args[0]} not found.`;
-                        }
-                    })
+                loadHelpFile(`${appEngine.config.helpBaseUrl}help/${appEngine.lang}/help.md`, 'help')
                     .then((responseText) => {
+                        promptEntry.element.frameBox.className = 'info';
                         promptEntry.element.output.innerHTML = Markdown.parse(
                             responseText +
                                 appEngine.interpreter.context.builtInFunctionList
@@ -69,6 +67,10 @@ const externalCmdWListTable = {
                                     .join(', '),
                         );
                         Markdown.typeset(promptEntry.element.output);
+                    })
+                    .catch((error) => {
+                        promptEntry.element.frameBox.className = 'bad';
+                        promptEntry.element.output.innerHTML = Markdown.parse((error as Error).message);
                     });
             } else {
                 promptEntry.element.frameBox.className = 'bad';

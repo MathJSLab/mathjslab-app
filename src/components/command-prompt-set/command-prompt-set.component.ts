@@ -260,7 +260,6 @@ export class CommandPromptSet extends HTMLElement {
                     if (this.promptIndex + 1 === this.element.prompt.length) {
                         /* Append to end. */
                         ({ newPrompt } = this.promptAppend());
-                        this.promptIndex++;
                     }
                     const prompt = this.element.prompt[currentPromptIndex];
                     this.evalPrompt(prompt, currentPromptIndex);

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.8.0
+
+- The external `plot`, `plot3`, and `surf` functions now translate
+  MATLAB/Octave-style numeric arguments, line formats, and basic property pairs
+  into Plotly traces instead of rendering placeholder charts.
+- Localized examples now demonstrate `plot`, `plot3`, and `surf` with the point
+  series, 3D spiral, and sinusoidal surface that previously existed as
+  hard-coded placeholder charts.
+- The plotting examples have been reordered so point plots, histograms,
+  function plots, sampled sine waves, and 3D plots appear together.
+- The `help` command now reports a missing topic when a help file cannot be
+  found instead of rendering the application's HTML fallback as help content.
+- Prompt navigation no longer advances `promptIndex` before the current prompt
+  finishes evaluating, keeping asynchronous command output attached to the
+  prompt that produced it.
+- Changing the application language now updates example button captions and
+  tooltips without reloading the current example, preserving user edits in the
+  textarea and prompts.
+- The asset build now copies root `help/*.md` navigation files alongside the
+  localized help directories.
+
 ## 1.7.11
 
 - The examples catalog now includes localized programming-oriented examples for
@@ -15,6 +36,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
   class inheritance with `vehicle`, `car`, and `truck` classes.
 - Source comments and JSDoc have been reviewed, translated to English where
   needed, and expanded for shared application and Web Component helpers.
+- The `help/` directory now includes localized GitHub navigation indexes that
+  link to all English, Spanish, and Portuguese help files.
 
 ## 1.7.10
 

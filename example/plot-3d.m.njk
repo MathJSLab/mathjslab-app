@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "3D graphics with plot3 and surf",
+            "es": "Gráficos 3D con plot3 y surf",
+            "pt": "Gráficos 3D com plot3 e surf"
+        },
+        "spiral": {
+            "en": "a three-dimensional spiral",
+            "es": "una espiral tridimensional",
+            "pt": "uma espiral tridimensional"
+        },
+        "surface": {
+            "en": "a sinusoidal surface",
+            "es": "una superficie sinusoidal",
+            "pt": "uma superfície senoidal"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+clear
+
+% {{ comments.spiral[lang] }}
+t = linspace(0, 8*pi, 80)
+x = sin(t)
+y = cos(t)
+z = t ./ (8*pi)
+plot3(x, y, z, 'm-')
+help plot3
+
+% {{ comments.surface[lang] }}
+axis = linspace(0, 314, 14)
+[X, Y] = meshgrid(axis, axis)
+Z = sin(X ./ 50) .* cos(Y ./ 50) .* 50 + 50
+surf(X, Y, Z)
+help surf
