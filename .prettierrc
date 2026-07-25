@@ -49,8 +49,7 @@
         "tabWidth": 2,
         "useTabs": false,
         "proseWrap": "preserve",
-        "bracketSpacing": true,
-        "yamlBracketSpacing": true
+        "bracketSpacing": true
       }
     }
   ]

@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.8.1
+
+- Dependecies updated (`mathjslab` 2.2.1).
+- English help files have been added for `char`, `deal`, `double`, `isfinite`,
+  `isfloat`, `isinf`, `isinteger`, `isnan`, `subsasgn`, `subsref`, and
+  `substruct`.
+- Spanish and Portuguese translations have been added for the new help files,
+  and the localized help indexes now link to them.
+
 ## 1.8.0
 
 - The external `plot`, `plot3`, and `surf` functions now translate
