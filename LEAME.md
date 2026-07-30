@@ -65,8 +65,6 @@ del código.
 
 Esta aplicación de demostración también utiliza:
 
-- [MathJax](https://www.mathjax.org/) para navegadores sin soporte
-  [MathML](https://www.w3.org/Math/).
 - [Marked](https://www.npmjs.com/package/marked) para formatear archivos
   [Markdown](https://www.markdownguide.org/) como
   [HTML](https://developer.mozilla.org/es/docs/Web/HTML).

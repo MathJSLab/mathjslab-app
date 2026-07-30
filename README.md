@@ -62,8 +62,6 @@ code reuse easier.
 
 This demo application also uses:
 
-- [MathJax](https://www.mathjax.org/) for navigators without
-  [MathML](https://www.w3.org/Math/) support.
 - [Marked](https://www.npmjs.com/package/marked) to format
   [Markdown](https://www.markdownguide.org/) files as
   [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML).

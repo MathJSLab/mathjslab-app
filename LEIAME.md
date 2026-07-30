@@ -62,8 +62,6 @@ modular, facilitando a personalização, manutenção e reutilização do códig
 
 Esta aplicação de demontração também usa:
 
-- [MathJax](https://www.mathjax.org/) para navegadores sem suporte
-  [MathML](https://www.w3.org/Math/).
 - [Marked](https://www.npmjs.com/package/marked) para formatar arquivos
   [Markdown](https://www.markdownguide.org/) como
   [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML).
