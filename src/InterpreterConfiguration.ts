@@ -5,23 +5,35 @@ import { Markdown } from './Markdown';
 import buildConfiguration from './build-configuration.json';
 import { externalFunctionTable } from './externalFunctionTable';
 import { externalCmdWListTable } from './externalCmdWListTable';
+import i18n from './i18n';
 
 /**
- * To change the language after load (to be used in a language selection menu, for example).
- * @param lang
+ * Synchronize interpreter configuration and language-aware UI components with
+ * the current application locale.
+ */
+const syncLanguage = (): void => {
+    appEngine.lang = i18n.locale;
+    InterpreterConfiguration.aliasNameTable = languageAlias[i18n.locale];
+    /*
+     * Update aliases in the existing interpreter context so locale changes do
+     * not recreate the workspace, re-evaluate prompts, or replace user input.
+     */
+    appEngine.interpreter.context.setAliasNameTable(InterpreterConfiguration.aliasNameTable);
+    if (appEngine.shell?.commandShell) {
+        appEngine.shell.commandShell.setLanguage();
+    }
+    appEngine.shell?.example?.setLanguage();
+};
+
+/**
+ * Change the application language.
+ * @param lang Language code.
  */
 appEngine.setLanguage = (lang?: string): void => {
-    if (lang) {
-        appEngine.lang = lang in languageAlias ? lang : appEngine.config.defaultLanguage!;
-    }
-    document.querySelector('html')!.setAttribute('lang', appEngine.lang);
-    appEngine.shell.commandShell.setLanguage(appEngine.lang);
-    InterpreterConfiguration.aliasNameTable = languageAlias[appEngine.lang];
-    appEngine.interpreter = Interpreter.Create(InterpreterConfiguration);
-    appEngine.interpreter.debug = buildConfiguration.debug;
-    appEngine.shell.commandShell.evaluate();
-    appEngine.shell.example.setLanguage(appEngine.lang);
+    i18n.setLocale(lang);
 };
+
+i18n.addEventListener('languagechange', syncLanguage);
 
 export const languageAlias: Record<string, AliasNameTable> = {
     en: {
@@ -163,7 +175,7 @@ export const InterpreterConfiguration: InterpreterConfig = {
     /**
      * Alias table
      */
-    aliasNameTable: languageAlias[appEngine.lang],
+    aliasNameTable: languageAlias[i18n.locale],
 
     /**
      * External function table
@@ -177,7 +189,7 @@ export const InterpreterConfiguration: InterpreterConfig = {
 };
 
 /**
- * To open file from device.
+ * Open a local script file through the configured external function.
  */
 appEngine.openFile = (): void => {
     InterpreterConfiguration.externalFunctionTable!.open.func();
@@ -192,7 +204,7 @@ Object.assign(InterpreterConfiguration.externalCmdWListTable!, {
 });
 
 /**
- * Interpreter and Markdown initialization.
+ * Initialize the interpreter and Markdown services.
  */
 function bootstrap() {
     const baseUrl = globalThis.location.href.substring(0, globalThis.location.href.lastIndexOf('/') + 1);
@@ -231,11 +243,8 @@ function bootstrap() {
     } else {
         throw new Error('invalid appEngine configuration.');
     }
-    appEngine.lang = navigator.language.split('-')[0];
-    if (!(appEngine.lang in languageAlias)) {
-        appEngine.lang = appEngine.config.defaultLanguage!;
-    }
-    InterpreterConfiguration.aliasNameTable = languageAlias[appEngine.lang];
+    appEngine.lang = i18n.locale;
+    InterpreterConfiguration.aliasNameTable = languageAlias[i18n.locale];
     appEngine.interpreter = Interpreter.Create(InterpreterConfiguration);
     appEngine.interpreter.debug = buildConfiguration.debug;
     appEngine.buildMessage = buildConfiguration.buildMessage;

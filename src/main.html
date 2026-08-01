@@ -32,130 +32,9 @@
         <link rel="icon" href="images/favicon.ico" />
         <link rel="icon" href="images/favicon-dark.ico" media="(prefers-color-scheme: dark)" />
         <link rel="manifest" href="manifest.json" />
-        <script>
-            var colorModeLight;
-            var colorModeDark;
-            function loadText() {
-                if (!document.location.href.startsWith('file:')) {
-                    globalThis
-                        .fetch(
-                            {
-                                en: 'README.md',
-                                es: 'LEAME.md',
-                                pt: 'LEIAME.md',
-                            }[globalThis.appEngine.lang],
-                        )
-                        .then((response) => {
-                            if (!response.ok) {
-                                throw new URIError('loadText: Network error.');
-                            }
-                            return response.text();
-                        })
-                        .then((readme) => {
-                            document.getElementById('mathjslab-readme').innerHTML = globalThis.appEngine.Markdown.parse(readme);
-                        })
-                        .catch((error) => {
-                            console.error(error);
-                        });
-                }
-                document.getElementById('title').innerHTML = {
-                    en: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
-                    es: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
-                    pt: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
-                }[globalThis.appEngine.lang];
-                document.getElementById('subtitle').innerHTML = {
-                    en: 'An <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">interpreter</a> with language syntax like <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-                    es: 'Un <a href="https://es.wikipedia.org/wiki/Int%C3%A9rprete_(inform%C3%A1tica)" target="_blank" rel="noopener">intérprete</a> con sintaxis de lenguaje como <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-                    pt: 'Um <a href="https://pt.wikipedia.org/wiki/Interpretador" target="_blank" rel="noopener">interpretador</a> com sintaxe de linguagem como o <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-                }[globalThis.appEngine.lang];
-                document.getElementById('abstract').innerHTML = {
-                    en: 'This is a demo application of the <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> <a href="https://en.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">npm package</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repository</a>), an emulator of a subset of the <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> language written completely in <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. This application is intended for educational purposes. See the <a href="#readme">notes</a> below for detailed information.',
-                    es: 'Esta es una aplicación de demostración del <a href="https://es.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">paquete npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositorio</a>), un emulador de un subconjunto del lenguaje <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente en <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Esta aplicación está destinada a fines educativos. Consulte las <a href="#readme">notas</a> a continuación para obtener información detallada.',
-                    pt: 'Este é um aplicativo de demonstração do <a href="https://pt.wikipedia.org/wiki/Npm_(software)" target="_blank" rel="noopener">pacote npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositório</a>), um emulador de um subconjunto da linguagem <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente em <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Este aplicativo é destinado a fins educacionais. Consulte as <a href="#readme">notas</a> abaixo para obter informações detalhadas.',
-                }[globalThis.appEngine.lang];
-                document.getElementById('trademark-notice').innerHTML = {
-                    en: '<strong>Important Notice:</strong> This software, the <strong><a href="https://mathjslab.com/">MathJSLab</a>, is not affiliated, sponsored, or endorsed by <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> is a registered trademark of <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> For more information about <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visit <a href="https://www.mathworks.com/">www.mathworks.com</a>.',
-                    es: '<strong>Aviso Importante:</strong> Este software, <strong><a href="https://mathjslab.com/">MathJSLab</a>, no está afiliado, patrocinado ni respaldado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> es una marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para más información sobre <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visita <a href="https://www.mathworks.com">www.mathworks.com</a>.',
-                    pt: '<strong>Aviso Importante:</strong> Este software, o <strong><a href="https://mathjslab.com/">MathJSLab</a>, não é afiliado, patrocinado ou endossado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> é uma marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para mais informações sobre o <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visite <a href="https://www.mathworks.com">www.mathworks.com</a>.',
-                }[globalThis.appEngine.lang];
-                document.getElementById('examples').element.title.innerHTML = {
-                    en: 'Examples',
-                    es: 'Ejemplos',
-                    pt: 'Exemplos',
-                }[globalThis.appEngine.lang];
-                document.getElementById('open-file').innerHTML = {
-                    en: 'Open...',
-                    es: 'Abrir...',
-                    pt: 'Abrir...',
-                }[globalThis.appEngine.lang];
-                document.getElementById('readme').element.title.innerHTML = {
-                    en: 'More Info',
-                    es: 'Más información',
-                    pt: 'Mais Informações',
-                }[globalThis.appEngine.lang];
-                document.getElementById('github-repository').innerHTML = {
-                    en: 'GitHub Repository',
-                    es: 'Repositorio GitHub',
-                    pt: 'Repositório GitHub',
-                }[globalThis.appEngine.lang];
-                document.getElementById('curriculum').innerHTML = {
-                    en: 'Curriculum',
-                    es: 'Currículum',
-                    pt: 'Currículo Lattes',
-                }[globalThis.appEngine.lang];
-                colorModeDark = {
-                    en: 'dark',
-                    es: 'oscuro',
-                    pt: 'escuro',
-                }[globalThis.appEngine.lang];
-                colorModeLight = {
-                    en: 'light',
-                    es: 'claro',
-                    pt: 'claro',
-                }[globalThis.appEngine.lang];
-                if (document.documentElement.getAttribute('data-theme') === 'dark') {
-                    document.getElementById('theme-toggle').innerHTML = colorModeLight;
-                } else {
-                    document.getElementById('theme-toggle').innerHTML = colorModeDark;
-                }
-            }
-            function toggleTheme() {
-                const currentTheme = document.documentElement.getAttribute('data-theme');
-                if (currentTheme === 'dark') {
-                    document.documentElement.setAttribute('data-theme', 'light');
-                    document.getElementById('theme-toggle').innerHTML = colorModeDark;
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    document.documentElement.setAttribute('data-theme', 'dark');
-                    document.getElementById('theme-toggle').innerHTML = colorModeLight;
-                    localStorage.setItem('theme', 'dark');
-                }
-            }
-            function scrollToTop() {
-                globalThis.setTimeout(() => {
-                    globalThis.scrollTo(0, 0);
-                }, 600);
-            }
-            document.addEventListener('DOMContentLoaded', () => {
-                const savedTheme = localStorage.getItem('theme');
-                if (savedTheme) {
-                    document.documentElement.setAttribute('data-theme', savedTheme);
-                } else {
-                    if (globalThis.matchMedia('(prefers-color-scheme: dark)').matches) {
-                        document.documentElement.setAttribute('data-theme', 'dark');
-                    }
-                }
-            });
-        </script>
     </head>
 
-    <body
-        onload="
-            javascript: loadText();
-            document.getElementById('language').value = globalThis.appEngine.lang;
-            scrollToTop();
-        "
-    >
+    <body>
         <div id="app">
             <header>
                 <img alt="MathJSLab logo" class="logo" src="./images/mathjslab-logo.svg" width="125" height="125" />
@@ -171,22 +50,15 @@
                 </div>
                 <div class="right-align-panel text-align-center">
                     <div class="green-panel width-fit-content text-align-center right-align-panel">
-                        <select
-                            id="language"
-                            onchange="
-                                javascript: globalThis.appEngine.setLanguage(document.getElementById('language').value);
-                                loadText();
-                                scrollToTop();
-                            "
-                        >
+                        <select id="language">
                             <option value="en">English</option>
                             <option value="es">Español</option>
                             <option value="pt">Português</option>
                         </select>
                         <br />
-                        <button id="open-file" onclick="javascript: globalThis.appEngine.openFile();"></button>
+                        <button id="open-file"></button>
                         <br />
-                        <button id="theme-toggle" onclick="javascript: toggleTheme();"></button>
+                        <button id="theme-toggle"></button>
                     </div>
                 </div>
             </header>
@@ -228,11 +100,5 @@
                 </p>
             </footer>
         </div>
-        <script>
-            const app = document.querySelector('div#app');
-            if (app) {
-                app.style.marginBottom = '100%';
-            }
-        </script>
     </body>
 </html>

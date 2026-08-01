@@ -1,4 +1,5 @@
 import { appEngine } from './appEngine';
+import i18n from './i18n';
 import { Markdown } from './Markdown';
 
 /**
@@ -8,18 +9,25 @@ import { Markdown } from './Markdown';
 const externalCmdWListTable = {
     help: {
         func: (...args: string[]): void => {
+            /**
+             * Load a Markdown help page and reject SPA fallbacks returned as HTML.
+             */
             const loadHelpFile = async (url: string, topic: string): Promise<string> => {
                 const response = await globalThis.fetch(url);
                 const contentType = response.headers.get('content-type') ?? '';
                 if (!response.ok || contentType.includes('text/html')) {
-                    throw new Error(`help: ${topic} not found.`);
+                    throw new Error(i18n.format('help.notFound', { topic }));
                 }
                 const text = await response.text();
                 if (/^\s*(<!doctype\s+html|<html)\b/iu.test(text)) {
-                    throw new Error(`help: ${topic} not found.`);
+                    throw new Error(i18n.format('help.notFound', { topic }));
                 }
                 return text;
             };
+
+            /**
+             * Encode command names after applying interpreter aliases.
+             */
             const encodeName = (name: string): string => {
                 name = appEngine.interpreter.context.aliasNameFunction(name);
                 const result: string[] = [];
@@ -41,9 +49,9 @@ const externalCmdWListTable = {
             if (args.length == 1) {
                 if (appEngine.shell.isFileProtocol) {
                     promptEntry.element.frameBox.className = 'bad';
-                    promptEntry.element.output.innerHTML = 'help command unavailable <b>offline</b>.';
+                    promptEntry.element.output.innerHTML = i18n.page.help.unavailableOfflineHtml;
                 } else {
-                    loadHelpFile(`${appEngine.config.helpBaseUrl}help/${appEngine.lang}/${encodeURIComponent(encodeName(args[0]))}.md`, args[0])
+                    loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/${encodeURIComponent(encodeName(args[0]))}.md`, args[0])
                         .then((responseText) => {
                             promptEntry.element.frameBox.className = 'info';
                             promptEntry.element.output.innerHTML = Markdown.parse(responseText);
@@ -56,7 +64,7 @@ const externalCmdWListTable = {
                 }
             } else if (args.length == 0) {
                 promptEntry.element.frameBox.className = 'info';
-                loadHelpFile(`${appEngine.config.helpBaseUrl}help/${appEngine.lang}/help.md`, 'help')
+                loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/help.md`, 'help')
                     .then((responseText) => {
                         promptEntry.element.frameBox.className = 'info';
                         promptEntry.element.output.innerHTML = Markdown.parse(
@@ -74,7 +82,7 @@ const externalCmdWListTable = {
                     });
             } else {
                 promptEntry.element.frameBox.className = 'bad';
-                promptEntry.element.output.innerHTML = `help: function called with too many inputs`;
+                promptEntry.element.output.textContent = i18n.page.help.tooManyInputs;
             }
         },
     },

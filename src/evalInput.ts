@@ -1,10 +1,8 @@
-/**
- * Input Interpreter
- */
 import { appEngine } from './appEngine';
 
 /**
- * Evaluate multiline input.
+ * Parse multiline input and recover the source slices for each top-level
+ * statement so the prompt list can show what was evaluated.
  * @param {string} input Multiline input.
  * @returns {{ statements: string[]; lines: string[] }} An object containing statements and lines.
  */
@@ -16,7 +14,7 @@ function evalInput(input: string): { statements: string[]; lines: string[] } {
         if (tree) {
             for (let i = 0; i < tree.list.length; i++) {
                 if (tree.list[i].stop.line === tree.list[i].start.line) {
-                    // if statement is single line and there's no other statement in the same line then pass entire line.
+                    // Preserve a whole single-line statement when it is alone on that line.
                     if ((i === 0 || tree.list[i - 1].stop.line < tree.list[i].start.line) && (i === tree.list.length - 1 || tree.list[i + 1].start.line > tree.list[i].start.line)) {
                         statements[i] = lines[tree.list[i].start.line - 1];
                     } else {
@@ -45,7 +43,7 @@ function evalInput(input: string): { statements: string[]; lines: string[] } {
             return { statements: [], lines: [] };
         }
     } catch (error) {
-        // TODO: Better error handling.
+        // Keep parse errors visible until the prompt UI gets structured diagnostics.
         globalThis.alert(error);
         return { statements: [], lines: [] };
     }

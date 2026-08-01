@@ -1,21 +1,26 @@
-/**
- * First example record entry.
- */
 import { appEngine } from './appEngine';
 import firstExample from './first-example.json';
+import i18n from './i18n';
+
 /**
- * Examples record entry.
+ * Localized strings in `example/example.json` can be plain legacy values or
+ * per-locale records generated alongside localized example files.
  */
 type LocalizedText = string | Record<string, string>;
+
+/**
+ * Single entry from the examples manifest.
+ */
 interface ExampleEntry {
     file: string;
     caption: LocalizedText;
     description: LocalizedText;
 }
 /**
- * Load `examplesRecord` handler type.
+ * Callback used to load example source text into the command shell.
  */
 type LoadExampleHandler = (text?: string) => any;
+
 /**
  * # Example class
  *
@@ -54,23 +59,27 @@ class Example {
     public get examples(): Record<string, ExampleEntry> {
         return this.examplesRecord;
     }
+
     /**
-     * Get localized text with fallback.
+     * Get localized manifest text while preserving compatibility with legacy
+     * non-localized example metadata.
      */
-    private localizedText(text: LocalizedText, lang = appEngine.lang): string {
+    private localizedText(text: LocalizedText, lang = i18n.locale): string {
         if (typeof text === 'string') {
             return text;
         }
-        return text[lang] ?? text[appEngine.config.defaultLanguage!] ?? Object.values(text)[0] ?? '';
+        return text[lang] ?? text[i18n.defaultLocale] ?? text[appEngine.config.defaultLanguage!] ?? Object.values(text)[0] ?? '';
     }
+
     /**
-     * Test whether an example entry has localized generated files.
+     * Check whether an example entry points to generated localized files.
      */
     private hasLocalizedFile(exampleId: string): boolean {
         return typeof this.examplesRecord[exampleId].caption === 'object';
     }
+
     /**
-     * Update one example button caption.
+     * Update one example button caption and tooltip for the current locale.
      */
     private setButtonCaption(button: HTMLButtonElement): void {
         const exampleId = button.id.substring(8);
@@ -78,22 +87,25 @@ class Example {
         button.innerHTML = this.localizedText(example.caption);
         button.title = this.localizedText(example.description);
     }
+
     /**
-     * Update all example button captions.
+     * Update all example button captions and tooltips for the current locale.
      */
     private setButtonCaptions(): void {
         this.buttons.forEach((button) => {
             this.setButtonCaption(button);
         });
     }
+
     /**
-     * Get the URL for the example source file.
+     * Build the URL for an example source file in the active locale.
      */
     private exampleUrl(exampleId: string): string {
         const example = this.examplesRecord[exampleId];
-        const languagePath = this.hasLocalizedFile(exampleId) ? `${appEngine.lang}/` : '';
+        const languagePath = this.hasLocalizedFile(exampleId) ? `${i18n.locale}/` : '';
         return `${appEngine.config.exampleBaseUrl}example/${languagePath}${example.file}`;
     }
+
     /**
      * Load an example file into the command shell.
      */
@@ -104,17 +116,17 @@ class Example {
         }
         this.loadHandler(await response.text());
     }
+
     /**
-     * Change example button captions without replacing user-edited content.
+     * Change example button captions without replacing user-edited content in
+     * the textarea or existing prompts.
      */
-    public setLanguage(lang?: string): void {
-        if (lang) {
-            appEngine.lang = lang;
-        }
+    public setLanguage(): void {
         if (!this.isFileProtocol && this.examplesAvailable) {
             this.setButtonCaptions();
         }
     }
+
     /**
      * Load `examplesRecord` if examples available.
      */
@@ -171,6 +183,11 @@ class Example {
     public static async initialize(id: string, loadHandler: LoadExampleHandler): Promise<Example> {
         const example = new Example(id, loadHandler);
         await example.load();
+        /*
+         * The examples panel lives for the lifetime of the app, so this listener
+         * intentionally follows the singleton instead of being detached later.
+         */
+        i18n.addEventListener('languagechange', () => example.setLanguage());
         return example;
     }
 }

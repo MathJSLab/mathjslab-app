@@ -11,6 +11,7 @@ import setIdFirstFactory from '../setIdFirstFactory';
 import styles from './command-shell.styles.scss';
 import { CharString, Interpreter, FunctionHandle, MultiArray } from 'mathjslab';
 import { appEngine } from '../../appEngine';
+import i18n from '../../i18n';
 /* BatchPanel Web component. */
 import { BatchPanel } from '../batch-panel/batch-panel.component';
 /* CommandPrompt Web component. */
@@ -178,7 +179,7 @@ export class CommandShell extends HTMLElement {
         globalThis.removeEventListener('resize', this.element.variables.resize);
     }
     /**
-     *
+     * Attach runtime listeners when the component enters the document.
      */
     protected connectedCallback(): void {
         this.element.batch.onChangeDisplay = (_event?: Event, display?: boolean): void => {
@@ -202,15 +203,17 @@ export class CommandShell extends HTMLElement {
             this.variablesAddEventListener();
         }
         globalThis.addEventListener('resize', this.resize);
+        i18n.addEventListener('languagechange', this.setLanguage);
         this.resize();
         this.setLanguage();
         this.element.promptSet.promptAppend();
     }
     /**
-     *
+     * Detach runtime listeners when the component leaves the document.
      */
     protected disconnectedCallback(): void {
         globalThis.removeEventListener('resize', this.resize);
+        i18n.removeEventListener('languagechange', this.setLanguage);
         if (this.element.variables.state.display) {
             this.variablesRemoveEventListener();
         }
@@ -247,53 +250,39 @@ export class CommandShell extends HTMLElement {
     public nameList: HTMLUListElement;
     /**
      * Change strings depending on the language.
-     * @param lang Language.
      */
-    public setLanguage(lang?: string) {
-        if (lang) {
-            appEngine.lang = lang;
-        } else {
-            appEngine.lang = navigator.language.replace(/\-.+/, '');
-        }
-        this.element.variables.element.title.innerHTML = {
-            en: 'Variables',
-            es: 'Variables',
-            pt: 'Variáveis',
-        }[appEngine.lang]!;
-        this.element.batch.element.evaluateButton.innerHTML = {
-            en: 'Evaluate',
-            es: 'Computar',
-            pt: 'Computar',
-        }[appEngine.lang]!;
-    }
+    public readonly setLanguage = ((): void => {
+        this.element.variables.element.title.textContent = i18n.page.shell.variables;
+        this.element.batch.element.evaluateButton.textContent = i18n.page.shell.evaluate;
+    }).bind(this);
     /**
      * To be called in resize events.
-     * @param _event
+     * @param _event Resize event, ignored.
      */
     public readonly resize: (event?: Event) => void = ((event?: Event): void => {
         this.element.batch.resize();
         this.element.variables.resize();
     }).bind(this);
     /**
-     *
+     * Schedule a resize after textarea content changes have been applied.
      */
     private readonly delayedResize: (event?: Event) => void = ((_event?: Event): void => {
         globalThis.setTimeout(this.resize, 0);
     }).bind(this);
     /**
-     * Restart
-     * @param _event
+     * Restart the interpreter and clear the command prompt history.
+     * @param _event Restart event, ignored.
      */
     public readonly restart: (event?: Event) => void = ((_event?: Event): void => {
         this.interpreterPointer.Restart();
-        /* Removes all child nodes from the this.nameList. */
+        /* Remove every rendered variable entry. */
         this.nameList.replaceChildren();
         this.element.promptSet.clear();
         this.element.variables.resize();
     }).bind(this);
     /**
      * Batch execution (button click) event handler.
-     * @param _event
+     * @param _event Click event, ignored.
      */
     public readonly evaluate: (event?: Event) => void = ((_event?: Event): void => {
         this.element.promptSet.clear();
@@ -303,7 +292,7 @@ export class CommandShell extends HTMLElement {
      * Refresh name list in variables panel.
      */
     public readonly refreshNameList: () => void = ((): void => {
-        /* Removes all child nodes from the this.nameList. */
+        /* Remove every rendered variable entry before rebuilding the list. */
         this.nameList.replaceChildren();
         for (const name in this.interpreterPointer.context.currentScope.nameTable) {
             if (!this.interpreterPointer.context.nativeNameSet.has(name)) {
@@ -339,7 +328,8 @@ export class CommandShell extends HTMLElement {
         }
     }).bind(this);
     /**
-     * Load text if argument is passed, else load code from batch input, separing statements, running it and creating evaluated prompts.
+     * Load optional source text, split the batch input into statements, and
+     * evaluate them into prompt entries.
      */
     public load(text?: string): {
         statements: string[];

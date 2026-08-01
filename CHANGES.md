@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.8.3
+
+- The application localization layer has been standardized around an
+  `intl-messageformat`-based i18n singleton while preserving the existing
+  `appEngine.setLanguage()` and component `setLanguage()` APIs.
+- Static page text, language selection, localized README loading, theme labels,
+  help messages, example captions, and example tooltips now read from the
+  shared i18n state.
+- Language changes now update interpreter aliases in the existing interpreter
+  context without re-evaluating prompts, recreating the workspace, reloading
+  the selected example, or replacing user-edited textarea content.
+- Source comments and JSDoc have been reviewed for app-owned files touched by
+  the localization release.
+
 ## 1.8.2
 
 - Dependecies updated (`mathjslab` 2.3.0).
