@@ -66,6 +66,7 @@
         "crono:mark": "npm run tsx script/helper/mark-crono.ts -- mark",
         "crono:stop": "npm run tsx script/helper/mark-crono.ts -- stop",
         "format": "prettier --plugin=@prettier/plugin-xml --write **/*.{ts,tsx,js,jsx,cjs,mjs,css,scss,html,htm,json,jsonc,yml,yaml,xml,svg,md,yml,yaml}",
+        "postformat": "replace-in-file --verbose --configFile=replace.fix-linebreak.json",
         "lint": "eslint --fix",
         "format:lint": "npm run format && npm run lint",
         "build:script": "tsc --project script/tsconfig.json",
