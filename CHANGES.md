@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.8.4
+
+- Dependecies updated (`mathjslab` 2.4.0).
+
 ## 1.8.3
 
 - The application localization layer has been standardized around an
