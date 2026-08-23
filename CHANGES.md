@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.8.6
+
+- Dependecies updated (`mathjslab` 2.5.1).
+
 ## 1.8.5
 
 - Dependecies updated (`mathjslab` 2.5.0).

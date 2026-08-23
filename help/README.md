@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://mathjslab.com/" target="_blank" rel="noopener"><img src="https://mathjslab.com/img/mathjslab-logo.svg" alt="MathJSLab" width="200" height="200" /></a>
+  <a href="https://mathjslab.com/" target="_blank" rel="noopener"><img src="https://mathjslab.com/images/mathjslab-logo.svg" alt="MathJSLab" width="200" height="200" /></a>
 </p>
 
 # MathJSLab Help
