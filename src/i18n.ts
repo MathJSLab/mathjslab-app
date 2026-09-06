@@ -1,149 +1,35 @@
 import { IntlMessageFormat } from 'intl-messageformat';
+import en from '../data/i18n-en';
+import es from '../data/i18n-es';
+import pt from '../data/i18n-pt';
 
 /**
- * Shared locale and message formatting service for the web application.
- *
- * The app keeps existing `setLanguage` hooks on components, but all locale
- * detection, persistence, and ICU formatting now flows through this singleton.
+ * Supported application locale identifiers.
  */
 type Locale = 'en' | 'es' | 'pt';
+
+/**
+ * Recursive source message shape used before ICU formatting.
+ */
 type MessageTree = string | MessageTree[] | { [key: string]: MessageTree };
+
 type MessageValues = Parameters<IntlMessageFormat['format']>[0];
 
 /**
- * Locale source messages.
- *
- * Keys ending in `Html` intentionally contain trusted markup that is rendered
- * into static page containers. Other strings can be formatted through ICU.
+ * Locale source messages rendered by the application shell and components.
  */
 const source = {
-    en: {
-        locale: 'en',
-        htmlLang: 'en',
-        languageName: 'English',
-        app: {
-            title: 'MathJSLab',
-            description: 'An interpreter with language syntax like MATLAB®/Octave. ISBN 978-65-00-82338-7.',
-        },
-        page: {
-            titleHtml: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
-            subtitleHtml:
-                'An <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)" target="_blank" rel="noopener">interpreter</a> with language syntax like <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-            abstractHtml:
-                'This is a demo application of the <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> <a href="https://en.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">npm package</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repository</a>), an emulator of a subset of the <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> language written completely in <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. This application is intended for educational purposes. See the <a href="#readme">notes</a> below for detailed information.',
-            trademarkNoticeHtml:
-                '<strong>Important Notice:</strong> This software, the <strong><a href="https://mathjslab.com/">MathJSLab</a>, is not affiliated, sponsored, or endorsed by <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> is a registered trademark of <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> For more information about <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visit <a href="https://www.mathworks.com/">www.mathworks.com</a>.',
-            readmeFile: 'README.md',
-            examples: 'Examples',
-            openFile: 'Open...',
-            readme: 'More Info',
-            githubRepository: 'GitHub Repository',
-            curriculum: 'Curriculum',
-        },
-        shell: {
-            variables: 'Variables',
-            evaluate: 'Evaluate',
-        },
-        theme: {
-            dark: 'dark',
-            light: 'light',
-        },
-        help: {
-            unavailableOfflineHtml: 'help command unavailable <b>offline</b>.',
-            tooManyInputs: 'help: function called with too many inputs',
-            notFound: 'help: {topic} not found.',
-        },
-        error: {
-            loadTextNetwork: 'loadText: Network error.',
-        },
-    },
-    es: {
-        locale: 'es',
-        htmlLang: 'es',
-        languageName: 'Español',
-        app: {
-            title: 'MathJSLab',
-            description: 'Un intérprete con sintaxis de lenguaje como MATLAB®/Octave. ISBN 978-65-00-82338-7.',
-        },
-        page: {
-            titleHtml: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
-            subtitleHtml:
-                'Un <a href="https://es.wikipedia.org/wiki/Int%C3%A9rprete_(inform%C3%A1tica)" target="_blank" rel="noopener">intérprete</a> con sintaxis de lenguaje como <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-            abstractHtml:
-                'Esta es una aplicación de demostración del <a href="https://es.wikipedia.org/wiki/Npm" target="_blank" rel="noopener">paquete npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositorio</a>), un emulador de un subconjunto del lenguaje <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente en <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Esta aplicación está destinada a fines educativos. Consulte las <a href="#readme">notas</a> a continuación para obtener información detallada.',
-            trademarkNoticeHtml:
-                '<strong>Aviso Importante:</strong> Este software, <strong><a href="https://mathjslab.com/">MathJSLab</a>, no está afiliado, patrocinado ni respaldado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> es una marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para más información sobre <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visita <a href="https://www.mathworks.com">www.mathworks.com</a>.',
-            readmeFile: 'LEAME.md',
-            examples: 'Ejemplos',
-            openFile: 'Abrir...',
-            readme: 'Más información',
-            githubRepository: 'Repositorio GitHub',
-            curriculum: 'Currículum',
-        },
-        shell: {
-            variables: 'Variables',
-            evaluate: 'Computar',
-        },
-        theme: {
-            dark: 'oscuro',
-            light: 'claro',
-        },
-        help: {
-            unavailableOfflineHtml: 'comando help no disponible <b>sin conexión</b>.',
-            tooManyInputs: 'help: función llamada con demasiadas entradas',
-            notFound: 'help: {topic} no encontrado.',
-        },
-        error: {
-            loadTextNetwork: 'loadText: Error de red.',
-        },
-    },
-    pt: {
-        locale: 'pt',
-        htmlLang: 'pt-BR',
-        languageName: 'Português',
-        app: {
-            title: 'MathJSLab',
-            description: 'Um interpretador com sintaxe de linguagem como MATLAB®/Octave. ISBN 978-65-00-82338-7.',
-        },
-        page: {
-            titleHtml: '<a href="https://github.com/MathJSLab/mathjslab-app" target="_blank" rel="noopener">MathJSLab</a>',
-            subtitleHtml:
-                'Um <a href="https://pt.wikipedia.org/wiki/Interpretador" target="_blank" rel="noopener">interpretador</a> com sintaxe de linguagem como o <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a>',
-            abstractHtml:
-                'Este é um aplicativo de demonstração do <a href="https://pt.wikipedia.org/wiki/Npm_(software)" target="_blank" rel="noopener">pacote npm</a> <a href="https://www.npmjs.com/package/mathjslab" target="_blank" rel="noopener">MathJSLab</a> (<a href="https://github.com/MathJSLab/mathjslab" target="_blank" rel="noopener">repositório</a>), um emulador de um subconjunto da linguagem <a href="https://www.mathworks.com/" target="_blank" rel="noopener">MATLAB&reg;</a>/<a href="https://www.gnu.org/software/octave/" target="_blank" rel="noopener">Octave</a> escrito completamente em <a href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>. Este aplicativo é destinado a fins educacionais. Consulte as <a href="#readme">notas</a> abaixo para obter informações detalhadas.',
-            trademarkNoticeHtml:
-                '<strong>Aviso Importante:</strong> Este software, o <strong><a href="https://mathjslab.com/">MathJSLab</a>, não é afiliado, patrocinado ou endossado por <a href="https://www.mathworks.com/">The MathWorks, Inc.</a></strong> <a href="https://www.mathworks.com/products/matlab.html">MATLAB&reg;</a> é uma marca registrada de <a href="https://www.mathworks.com/">The MathWorks, Inc.</a> Para mais informações sobre o <a href="https://www.mathworks.com/products/matlab.html">MATLAB</a>, visite <a href="https://www.mathworks.com">www.mathworks.com</a>.',
-            readmeFile: 'LEIAME.md',
-            examples: 'Exemplos',
-            openFile: 'Abrir...',
-            readme: 'Mais Informações',
-            githubRepository: 'Repositório GitHub',
-            curriculum: 'Currículo Lattes',
-        },
-        shell: {
-            variables: 'Variáveis',
-            evaluate: 'Computar',
-        },
-        theme: {
-            dark: 'escuro',
-            light: 'claro',
-        },
-        help: {
-            unavailableOfflineHtml: 'comando help indisponível <b>offline</b>.',
-            tooManyInputs: 'help: função chamada com muitas entradas',
-            notFound: 'help: {topic} não encontrado.',
-        },
-        error: {
-            loadTextNetwork: 'loadText: Erro de rede.',
-        },
-    },
+    en,
+    es,
+    pt,
 } as const;
 
 const locales = Object.keys(source) as Locale[];
+const localeStorageKey = 'mathjslab-app:i18n:locale';
+const isBrowser = typeof window !== 'undefined';
 
 /**
- * Normalize a browser, query-string, or stored language code to a supported
- * application locale.
+ * Normalize a language tag to one of the supported application locales.
  */
 const normalizeLocale = (locale?: string | null): Locale => {
     const language = locale?.toLowerCase().split('-')[0] as Locale | undefined;
@@ -151,25 +37,58 @@ const normalizeLocale = (locale?: string | null): Locale => {
 };
 
 /**
- * Prepare non-parameterized page messages for direct rendering.
- *
- * ICU messages with placeholders and rich HTML strings are left untouched so
- * callers can format them explicitly or assign them to HTML containers.
+ * Return the first supported language from a prioritized list of candidates.
  */
-const formatValue = (value: MessageTree, locale: Locale): any => {
+const firstSupportedLocale = (locales: Iterable<string | null | undefined>): Locale | undefined => {
+    for (const locale of locales) {
+        const language = locale?.toLowerCase().split('-')[0] as Locale | undefined;
+        if (language && source[language]) {
+            return language;
+        }
+    }
+    return undefined;
+};
+
+/**
+ * Build the public endpoint path for one supported locale.
+ */
+const localePath = (locale: Locale): string => `/${locale}/`;
+
+/**
+ * Check whether the current document is the root endpoint.
+ */
+const isRootPath = (pathname: string): boolean => pathname === '/' || pathname === '/index.html';
+
+/**
+ * Format static ICU messages recursively for direct component consumption.
+ */
+const formatValue = (value: MessageTree, locale: Locale, key = ''): any => {
     if (typeof value === 'string') {
-        if (value.includes('{') || value.includes('<')) {
+        if (key.endsWith('Html') || key.endsWith('MathML') || value.includes('{')) {
             return value;
         }
         return new IntlMessageFormat(value, locale).format();
     }
+
     if (Array.isArray(value)) {
-        return value.map((entry) => formatValue(entry, locale));
+        return value.map((entry) => formatValue(entry, locale, key));
     }
-    return Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, formatValue(entry, locale)]));
+
+    return Object.fromEntries(Object.entries(value).map(([entryKey, entry]) => [entryKey, formatValue(entry, locale, entryKey)]));
 };
 
 const pages = Object.fromEntries(Object.entries(source).map(([locale, values]) => [locale, formatValue(values, locale as Locale)])) as Record<Locale, any>;
+const languageNames = Object.fromEntries(Object.entries(source).map(([locale, values]) => [locale, values.languageName])) as Record<Locale, string>;
+
+/**
+ * Static locale data shared by browser runtime and Eleventy templates.
+ */
+const i18nData = {
+    defaultLocale: 'en' as Locale,
+    locales,
+    languageNames,
+    pages,
+};
 
 /**
  * Resolve a dotted message path against a locale message tree.
@@ -184,11 +103,15 @@ const getByPath = (messages: MessageTree, path: string): MessageTree => {
 };
 
 /**
- * Pick the startup locale from `?lang=`, then localStorage, then the browser.
+ * Pick the startup locale from URL, path, stored settings, then browser settings.
  */
 const getInitialLocale = (): Locale => {
-    const params = new URLSearchParams(globalThis.location.search);
-    return normalizeLocale(params.get('lang') || globalThis.localStorage.getItem('mathjslab-app:locale') || globalThis.navigator.language);
+    const location = globalThis.location;
+    const navigator = globalThis.navigator;
+    const params = new URLSearchParams(location?.search || '');
+    const pathLocale = location?.pathname.split('/').find(Boolean);
+    const storedLocale = isBrowser ? globalThis.localStorage?.getItem(localeStorageKey) : null;
+    return firstSupportedLocale([params.get('lang'), pathLocale, storedLocale, ...(navigator?.languages || []), navigator?.language]) ?? 'en';
 };
 
 /**
@@ -196,11 +119,16 @@ const getInitialLocale = (): Locale => {
  * interpreter alias configuration.
  */
 class I18n extends EventTarget {
-    public readonly defaultLocale: Locale = 'en';
-    public readonly locales = locales;
-    public readonly languageNames = Object.fromEntries(Object.entries(source).map(([locale, values]) => [locale, values.languageName])) as Record<Locale, string>;
+    public readonly defaultLocale: Locale = i18nData.defaultLocale;
+    public readonly locales = i18nData.locales;
+    public readonly languageNames = i18nData.languageNames;
     public readonly pages = pages;
     private currentLocale: Locale = getInitialLocale();
+
+    public constructor() {
+        super();
+        this.redirectRootEndpoint();
+    }
 
     public get locale(): Locale {
         return this.currentLocale;
@@ -222,15 +150,20 @@ class I18n extends EventTarget {
     }
 
     /**
-     * Change and persist the current locale, then notify language-aware code.
+     * Change and persist the active locale.
      */
     public setLocale(locale?: string | null): void {
         const nextLocale = normalizeLocale(locale);
+        if (isBrowser) {
+            globalThis.localStorage?.setItem(localeStorageKey, nextLocale);
+            if (this.navigateToLocaleEndpoint(nextLocale)) {
+                return;
+            }
+        }
         if (nextLocale === this.currentLocale) {
             return;
         }
         this.currentLocale = nextLocale;
-        globalThis.localStorage.setItem('mathjslab-app:locale', nextLocale);
         this.applyDocumentLanguage();
         this.dispatchEvent(new CustomEvent('languagechange', { detail: { locale: nextLocale } }));
     }
@@ -239,6 +172,9 @@ class I18n extends EventTarget {
      * Apply localized document metadata used by browsers and link previews.
      */
     public applyDocumentLanguage(): void {
+        if (typeof document === 'undefined') {
+            return;
+        }
         document.documentElement.lang = this.page.htmlLang;
         document.title = this.page.app.title;
         document.querySelector('meta[name="description"]')?.setAttribute('content', this.page.app.description);
@@ -246,9 +182,39 @@ class I18n extends EventTarget {
         document.querySelector('meta[property="og:image:alt"]')?.setAttribute('content', this.page.app.description);
         document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', this.page.app.description);
     }
+
+    /**
+     * Redirect the root app endpoint to the locale-specific endpoint selected
+     * from URL parameters, stored settings, or browser preferences.
+     */
+    private redirectRootEndpoint(): void {
+        if (!isBrowser || !isRootPath(globalThis.location.pathname)) {
+            return;
+        }
+        this.navigateToLocaleEndpoint(this.currentLocale, true);
+    }
+
+    /**
+     * Navigate to the canonical endpoint for a locale when needed.
+     */
+    private navigateToLocaleEndpoint(locale: Locale, replace = false): boolean {
+        const targetPath = localePath(locale);
+        if (!isBrowser || globalThis.location.protocol === 'file:' || globalThis.location.pathname === targetPath) {
+            return false;
+        }
+
+        const nextUrl = new URL(globalThis.location.href);
+        nextUrl.pathname = targetPath;
+        if (replace) {
+            globalThis.location.replace(nextUrl.href);
+        } else {
+            globalThis.location.assign(nextUrl.href);
+        }
+        return true;
+    }
 }
 
 const i18n = new I18n();
 
-export { type Locale, i18n };
+export { type Locale, i18n, i18nData };
 export default i18n;

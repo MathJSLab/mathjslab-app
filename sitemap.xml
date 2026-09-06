@@ -1,11 +1,67 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Initial page -->
   <url>
     <loc>https://app.mathjslab.com/</loc>
     <lastmod>2026-08-23</lastmod>
+    
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.mathjslab.com/en/" />
+    
+    <xhtml:link rel="alternate" hreflang="es" href="https://app.mathjslab.com/es/" />
+    
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://app.mathjslab.com/pt/" />
+    
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.mathjslab.com/" />
     <priority>1.0</priority>
   </url>
+
+  
+  
+  <url>
+    <loc>https://app.mathjslab.com/en/</loc>
+    <lastmod>2026-08-23</lastmod>
+    
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.mathjslab.com/en/" />
+    
+    <xhtml:link rel="alternate" hreflang="es" href="https://app.mathjslab.com/es/" />
+    
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://app.mathjslab.com/pt/" />
+    
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.mathjslab.com/" />
+    <priority>0.9</priority>
+  </url>
+  
+  
+  <url>
+    <loc>https://app.mathjslab.com/es/</loc>
+    <lastmod>2026-08-23</lastmod>
+    
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.mathjslab.com/en/" />
+    
+    <xhtml:link rel="alternate" hreflang="es" href="https://app.mathjslab.com/es/" />
+    
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://app.mathjslab.com/pt/" />
+    
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.mathjslab.com/" />
+    <priority>0.9</priority>
+  </url>
+  
+  
+  <url>
+    <loc>https://app.mathjslab.com/pt/</loc>
+    <lastmod>2026-08-23</lastmod>
+    
+    <xhtml:link rel="alternate" hreflang="en" href="https://app.mathjslab.com/en/" />
+    
+    <xhtml:link rel="alternate" hreflang="es" href="https://app.mathjslab.com/es/" />
+    
+    <xhtml:link rel="alternate" hreflang="pt-BR" href="https://app.mathjslab.com/pt/" />
+    
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://app.mathjslab.com/" />
+    <priority>0.9</priority>
+  </url>
+  
 
 </urlset>

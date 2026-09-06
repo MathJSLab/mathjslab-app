@@ -14,13 +14,7 @@
 }
 
 .green-panel {
-  display: block;
-  background-color: var(--green-background);
-  border: 2px solid var(--green-border);
   margin: 1rem;
-  padding: 1rem;
-  border-radius: 1rem;
-  box-shadow: 0px 10px 14px -7px var(--color-panel-box-shadow);
 }
 
 .right-align-panel {
@@ -30,5 +24,66 @@
 @media (min-width: sizes.get(screen-width-medium)) {
   .right-align-panel {
     margin: auto 0 auto auto;
+  }
+}
+
+.command-workspace-wrapper {
+  display: block;
+  position: relative;
+}
+
+.command-workspace-frame-box {
+  box-sizing: border-box;
+  display: block;
+  flex: 1;
+  max-width: 100%;
+  overflow-y: visible;
+  padding: 0;
+  z-index: 1;
+}
+
+batch-code-editor {
+  display: none;
+}
+
+control-bar.command-workspace-control-bar {
+  --control-bar-gap: 0.5rem;
+
+  display: none;
+  margin: 0.75rem auto 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+.command-workspace-status {
+  color: var(--green-color-text-hover);
+  display: none;
+  font-size: 0.95rem;
+  margin-inline-start: auto;
+  min-height: 1.3em;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.namelist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nameitem {
+  list-style: none;
+}
+
+@media (min-width: 768px) {
+  .command-workspace-frame-box {
+    max-width: calc(100% - 15%);
+    padding: 1rem;
+  }
+
+  batch-code-editor,
+  control-bar.command-workspace-control-bar,
+  .command-workspace-status {
+    display: block;
   }
 }

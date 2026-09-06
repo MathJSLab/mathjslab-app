@@ -1,3 +1,13 @@
 {
-    "include": ["collapsible-content-panel", "fixed-scroll-panel", "command-prompt", "command-prompt-set", "batch-panel", "command-shell"]
+    "include": [
+        "collapsible-content-panel",
+        "fixed-scroll-panel",
+        "command-prompt",
+        "command-prompt-list",
+        "batch-code-editor",
+        "control-bar",
+        "language-switcher",
+        "appearance-mode",
+        "application-wrapper"
+    ]
 }

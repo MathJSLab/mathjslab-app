@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.9.0
+
+- The app localization structure now follows the same project pattern used by
+  `mathjslab-calc` and `mathjslab-batch`, with per-locale i18n data files in
+  `data/`, shared Nunjucks page templates, and generated localized endpoints.
+- Webpack now emits root, English, Spanish, and Portuguese HTML entry pages
+  from Eleventy-generated templates, and the runtime i18n service shares the
+  same locale catalog with Eleventy while keeping help, examples, README files,
+  and interpreter aliases resolved for the active locale.
+- The former app-specific command shell, prompt set, and `batch-panel`
+  implementation files have been removed after the shell was rebuilt around
+  reusable Web Components.
+- Prompt input now uses the shared `command-prompt` Web Component with syntax
+  highlighting, responsive MathML output sizing, horizontal overflow handling
+  for wide MathML, preserved prompt result states, and the original evaluation,
+  history, keyboard navigation, insertion, deletion, and refresh behavior.
+- Prompt history now uses the shared `command-prompt-list` Web Component,
+  providing the same prompt list behavior used by the calculator project.
+- The shared `batch-code-editor` is now used in the application workspace, with
+  aligned line numbering, focus styling, syntax highlighting, and a reusable
+  control bar containing Run, Clear output, Restore example, and localized
+  execution status actions.
+- The reusable `control-bar`, `language-switcher`, `appearance-mode`, and
+  `application-wrapper` Web Components have been integrated into the app shell
+  and registered for reuse from the organization repository.
+- The app now uses shared button and panel SCSS templates for a unified visual
+  identity across green and gray buttons, command prompts, fixed panels,
+  collapsible panels, batch editors, shadows, borders, spacing, and responsive
+  prompt gaps.
+- `collapsible-content-panel` and `fixed-scroll-panel` styles now follow the
+  same shared surface, border, spacing, radius, and dark-mode conventions as
+  the generalized Web Components, and are available from the organization
+  repository.
+- The responsive language switcher and appearance mode button now use shared
+  SVG assets, and the appearance mode integration keeps application logos and
+  favicons synchronized with light and dark themes.
+- The top-right page controls now use a vertical green `control-bar`, while the
+  workspace batch controls use a horizontal `control-bar` without a green
+  panel.
+- The app now includes technical SEO support for `app.mathjslab.com`, including
+  localized canonical and Open Graph URLs, JSON-LD page/application metadata,
+  localized `hreflang` alternates, a generated `robots.txt`, and a generated
+  multilingual sitemap with file-based `lastmod` values.
+- Generated assets now include the localized endpoints, SEO metadata, shared
+  Web Component templates, and the updated root, English, Spanish, and
+  Portuguese app pages.
+
 ## 1.8.6
 
 - Dependecies updated (`mathjslab` 2.5.1).

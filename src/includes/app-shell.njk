@@ -1,0 +1,115 @@
+{%- set pageData = i18n.pages[lang] -%}
+{%- set main = pageData.app -%}
+{% set canonicalPath = '/' if rootEndpoint else '/' + lang + '/' %}
+{% set canonicalUrl = site.url + canonicalPath %}
+{% set alternateCanonical = '' if rootEndpoint else lang %}
+{%- from 'head-macros.njk' import headBegin, headOpenGraph, headTwitter, headAlternate, headIcon -%}
+<!doctype html>
+<html lang="{{ pageData.htmlLang }}">
+    <head>
+{{ headBegin(main.title, main.description, pkg.author, pkg.keywords.join()) }}
+        <meta name="color-scheme" content="light dark">
+        <meta name="hostname" content="mathjslab.com">
+        <meta name="expected-hostname" content="mathjslab.com">
+{{ headOpenGraph(i18n, lang, pageData.app.title, pageData.app.description, site.url, site.title, '/images/mathjslab-og.png', pageUrl = canonicalUrl) }}
+{{ headTwitter(main.title, main.description, site.url, '/images/mathjslab-og.png', main.description) }}
+{%- include "app-json-ld.njk" -%}
+{{ headAlternate(i18n, alternateCanonical, site.url) }}
+{{ headIcon(light = '/images/favicon.ico', dark = '/images/favicon-dark.ico', svg = '/images/mathjslab-logo.svg') }}
+        <link rel="manifest" href="/manifest.json">
+    </head>
+
+    <body>
+        <div id="app">
+            <header>
+                <img id="page-logo" alt="MathJSLab logo" class="logo" src="/images/mathjslab-logo.svg" width="125" height="125">
+                <noscript>{{ main.noscript }}</noscript>
+                <div class="header-wrapper">
+                    <div class="header-panel">
+                        <h1 id="title" class="green-text">{{ pageData.page.titleHtml | safe }}</h1>
+                        <h3 id="subtitle">{{ pageData.page.subtitleHtml | safe }}</h3>
+                        <p>
+                            <a href="https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1" target="_blank" rel="noopener"><b>ISBN 978-65-00-84828-1</b></a>
+                        </p>
+                    </div>
+                </div>
+                <div class="right-align-panel text-align-center">
+                    <control-bar class="right-align-panel" panel="green" orientation="vertical" width="fit" align="center" aria-label="{{ pageData.page.controlsLabel or 'Page controls' }}">
+                        <language-switcher id="language" locale="{{ lang }}">
+                            {% for locale in i18n.locales -%}
+                            <a
+                                href="/{{ locale }}/"
+                                hreflang="{{ i18n.pages[locale].htmlLang }}"
+                                data-locale="{{ locale }}"
+                                {%- if locale == lang %}
+                                aria-current="page"
+                                {%- endif %}
+                                >{{ i18n.languageNames[locale] }}</a
+                            >
+                            {% endfor -%}
+                        </language-switcher>
+                        <button id="open-file">{{ pageData.page.openFile }}</button>
+                        <appearance-mode id="theme-toggle" light-label="{{ pageData.theme.light }}" dark-label="{{ pageData.theme.dark }}"></appearance-mode>
+                    </control-bar>
+                </div>
+            </header>
+
+            <main>
+                <p id="abstract">{{ pageData.page.abstractHtml | safe }}</p>
+
+                <p id="trademark-notice">{{ pageData.page.trademarkNoticeHtml | safe }}</p>
+
+                <collapsible-content-panel id="examples">
+                    <div id="mathjslab-examples" slot="content" style="display: block; text-align: center"></div>
+                </collapsible-content-panel>
+
+                <br>
+                <application-wrapper id="mathjslab-shell" chrome="none">
+                    <div id="mathjslab-shell-wrapper" class="command-workspace-wrapper">
+                        <div id="mathjslab-shell-frame-box" class="command-workspace-frame-box">
+                            <batch-code-editor id="mathjslab-shell-batch"></batch-code-editor>
+                            <control-bar
+                                id="mathjslab-shell-controls"
+                                class="command-workspace-control-bar"
+                                panel="none"
+                                aria-label="{{ pageData.shell.controlsLabel }}"
+                            >
+                                <button type="button" id="mathjslab-shell-run" class="primary">{{ pageData.shell.run }}</button>
+                                <button type="button" id="mathjslab-shell-clear-output">{{ pageData.shell.clearOutput }}</button>
+                                <button type="button" id="mathjslab-shell-reset">{{ pageData.shell.resetSample }}</button>
+                                <span id="mathjslab-shell-status" class="command-workspace-status">{{ pageData.shell.status.ready }}</span>
+                            </control-bar>
+                            <command-prompt-list id="mathjslab-shell-prompt-set"></command-prompt-list>
+                        </div>
+                        <fixed-scroll-panel id="mathjslab-shell-variables"></fixed-scroll-panel>
+                    </div>
+                </application-wrapper>
+                <br>
+
+                <collapsible-content-panel id="readme">
+                    <div id="mathjslab-readme" slot="content"></div>
+                </collapsible-content-panel>
+            </main>
+
+            <footer>
+                <p class="text-align-center">
+                    <a href="https://github.com/MathJSLab" target="_blank" rel="noopener">
+                        <img alt="GitHub Repository" src="/images/github-mark.svg" width="24" height="24">
+                        <span id="github-repository">{{ pageData.page.githubRepository }}</span>
+                    </a>
+                </p>
+
+                <p class="text-align-center">
+                    &copy; 2016 <span aria-hidden="true">-</span>
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    <a href="mailto:sergiolindau@gmail.com" target="_blank" rel="noopener">Sergio Lindau</a>
+                    (<a href="http://lattes.cnpq.br/3843370693067429" target="_blank" rel="noopener"><span id="curriculum">{{ pageData.page.curriculum }}</span></a>)
+                </p>
+            </footer>
+        </div>
+    </body>
+</html>
+
+

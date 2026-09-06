@@ -1,5 +1,6 @@
 import { appEngine } from './appEngine';
-import { EvalInputHandler, CommandPromptEvalHandler, CommandShell } from './components/components';
+import { CommandPromptEvalHandler } from './components/components';
+import { CommandWorkspace, EvalInputHandler } from './CommandWorkspace';
 import { Example } from './Example';
 /**
  * Shell instantiation options.
@@ -20,7 +21,7 @@ interface ShellOptions {
 class Shell {
     public readonly options: ShellOptions = {};
     public readonly isFileProtocol: boolean = globalThis.location.href.startsWith('file:');
-    public commandShell: CommandShell;
+    public commandShell: CommandWorkspace;
     public example: Example;
     /**
      * `Shell` initialization (instantiation).
@@ -31,21 +32,21 @@ class Shell {
         const newShell = new Shell();
         if (options.shellId) {
             newShell.options.shellId = options.shellId;
-            newShell.commandShell = document.getElementById(options.shellId) as CommandShell;
+            newShell.commandShell = new CommandWorkspace(options.shellId);
         } else {
             newShell.options.shellId = 'mathjslab-shell';
-            const docShell = document.querySelectorAll('command-shell');
-            if (docShell.length === 1 && docShell[0].tagName === CommandShell.tagName.toUpperCase()) {
-                newShell.commandShell = docShell[0] as CommandShell;
+            const docShell = document.querySelectorAll('application-wrapper#mathjslab-shell');
+            if (docShell.length === 1) {
+                newShell.commandShell = new CommandWorkspace('mathjslab-shell');
             } else {
                 if (docShell.length === 0) {
-                    throw new Error(`cannot find 'command-shell' element with id = '${options.shellId}'.`);
-                } else {
-                    throw new Error(`More than one 'command-shell' element found. Specify the id of the 'command-shell' element to be used (options.shellId);`);
+                    throw new Error(`cannot find 'application-wrapper' element with id = 'mathjslab-shell'.`);
                 }
+                throw new Error(`More than one 'application-wrapper#mathjslab-shell' element found.`);
             }
         }
         newShell.commandShell.interpreterPointer = appEngine.interpreter;
+        newShell.commandShell.connect();
         newShell.commandShell.debugMessage(appEngine.buildMessage);
         if (options.evalPrompt) {
             newShell.commandShell.evalPrompt = options.evalPrompt;

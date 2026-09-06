@@ -1,9 +1,12 @@
 import './InterpreterConfiguration';
+import './components/components';
 import { evalInput } from './evalInput';
 import { evalPrompt } from './evalPrompt';
 import { Shell } from './Shell';
 import { appEngine } from './appEngine';
 import i18n from './i18n';
+import { type AppearanceMode, type AppearanceModeToggleEvent } from './components/appearance-mode/appearance-mode.component';
+import { type LanguageSwitcher, type LanguageSwitcherSelectEvent } from './components/language-switcher/language-switcher.component';
 import './main.scss';
 
 type Theme = 'dark' | 'light';
@@ -38,11 +41,41 @@ const setText = (id: string, value: string): void => {
  */
 const currentTheme = (): Theme => (document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light');
 
+const colorScheme = globalThis.matchMedia('(prefers-color-scheme: dark)');
+
+const currentIconTheme = (): Theme => {
+    const theme = document.documentElement.getAttribute('data-theme');
+    if (theme === 'dark' || theme === 'light') {
+        return theme;
+    }
+    return colorScheme.matches ? 'dark' : 'light';
+};
+
+const themedHref = (href: string, theme: Theme): string => `${href}${href.includes('?') ? '&' : '?'}theme=${theme}`;
+
+const syncThemeIcons = (): void => {
+    const theme = currentIconTheme();
+    const pageLogo = document.getElementById('page-logo') as HTMLImageElement | null;
+    if (pageLogo) {
+        pageLogo.src = theme === 'dark' ? '/images/mathjslab-logo-dark.svg' : '/images/mathjslab-logo-light.svg';
+    }
+    document.querySelectorAll<HTMLLinkElement>('link[data-appearance-icon]').forEach((icon) => {
+        const href = theme === 'dark' ? icon.dataset.darkHref : icon.dataset.lightHref;
+        if (href) {
+            icon.href = themedHref(href, theme);
+        }
+    });
+};
+
 /**
  * Render the theme toggle label for the opposite available theme.
  */
 const renderThemeButton = (): void => {
-    setText('theme-toggle', currentTheme() === 'dark' ? i18n.page.theme.light : i18n.page.theme.dark);
+    const themeToggle = byId<AppearanceMode>('theme-toggle');
+    themeToggle.setAttribute('mode', currentTheme());
+    themeToggle.setAttribute('light-label', i18n.page.theme.light);
+    themeToggle.setAttribute('dark-label', i18n.page.theme.dark);
+    themeToggle.render();
 };
 
 /**
@@ -52,13 +85,7 @@ const setTheme = (theme: Theme): void => {
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
     renderThemeButton();
-};
-
-/**
- * Toggle between the supported page themes.
- */
-const toggleTheme = (): void => {
-    setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+    syncThemeIcons();
 };
 
 /**
@@ -71,20 +98,6 @@ const scrollToTop = (): void => {
 };
 
 /**
- * Build the language selector from the locales registered by the i18n service.
- */
-const renderLanguageOptions = (): void => {
-    const language = byId<HTMLSelectElement>('language');
-    language.replaceChildren();
-    for (const locale of i18n.locales) {
-        const option = document.createElement('option');
-        option.value = locale;
-        option.textContent = i18n.languageNames[locale];
-        language.append(option);
-    }
-};
-
-/**
  * Load the localized project notes shown below the interactive shell.
  */
 const loadReadme = async (): Promise<void> => {
@@ -92,7 +105,7 @@ const loadReadme = async (): Promise<void> => {
         return;
     }
     try {
-        const response = await globalThis.fetch(i18n.page.page.readmeFile);
+        const response = await globalThis.fetch(new URL(`/${i18n.page.page.readmeFile}`, globalThis.location.href));
         if (!response.ok) {
             throw new URIError(i18n.page.error.loadTextNetwork);
         }
@@ -107,7 +120,9 @@ const loadReadme = async (): Promise<void> => {
  */
 const renderPage = (): void => {
     i18n.applyDocumentLanguage();
-    byId<HTMLSelectElement>('language').value = i18n.locale;
+    const language = byId<LanguageSwitcher>('language');
+    language.setAttribute('locale', i18n.locale);
+    language.setLanguage();
     setHTML('title', i18n.page.page.titleHtml);
     setHTML('subtitle', i18n.page.page.subtitleHtml);
     setHTML('abstract', i18n.page.page.abstractHtml);
@@ -128,9 +143,10 @@ const initializeTheme = (): void => {
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme === 'dark' || savedTheme === 'light') {
         document.documentElement.setAttribute('data-theme', savedTheme);
-    } else if (globalThis.matchMedia('(prefers-color-scheme: dark)').matches) {
+    } else if (colorScheme.matches) {
         document.documentElement.setAttribute('data-theme', 'dark');
     }
+    syncThemeIcons();
 };
 
 /**
@@ -138,13 +154,21 @@ const initializeTheme = (): void => {
  */
 const initializePage = (): void => {
     initializeTheme();
-    renderLanguageOptions();
-    byId<HTMLSelectElement>('language').addEventListener('change', (event) => {
-        appEngine.setLanguage((event.currentTarget as HTMLSelectElement).value);
+    byId<LanguageSwitcher>('language').addEventListener('language-switcher-select', (event) => {
+        event.preventDefault();
+        appEngine.setLanguage((event as LanguageSwitcherSelectEvent).detail.locale);
         scrollToTop();
     });
     byId('open-file').addEventListener('click', () => appEngine.openFile());
-    byId('theme-toggle').addEventListener('click', toggleTheme);
+    byId<AppearanceMode>('theme-toggle').addEventListener('appearance-mode-toggle', (event) => {
+        event.preventDefault();
+        setTheme((event as AppearanceModeToggleEvent).detail.mode);
+    });
+    colorScheme.addEventListener('change', syncThemeIcons);
+    new MutationObserver(syncThemeIcons).observe(document.documentElement, {
+        attributeFilter: ['data-theme'],
+        attributes: true,
+    });
     i18n.addEventListener('languagechange', renderPage);
     renderPage();
     scrollToTop();
@@ -155,10 +179,25 @@ const initializePage = (): void => {
 };
 
 /**
+ * Wait for static custom elements before application controllers address their public APIs.
+ */
+const waitForComponentDefinitions = async (): Promise<void> => {
+    await Promise.all([
+        customElements.whenDefined('batch-code-editor'),
+        customElements.whenDefined('collapsible-content-panel'),
+        customElements.whenDefined('command-prompt-list'),
+        customElements.whenDefined('fixed-scroll-panel'),
+        customElements.whenDefined('language-switcher'),
+        customElements.whenDefined('appearance-mode'),
+        customElements.whenDefined('application-wrapper'),
+    ]);
+};
+/**
  * Initialize the application shell and connect the interpreter callbacks used
  * by the command prompt and examples panel.
  */
 async function bootstrap(): Promise<void> {
+    await waitForComponentDefinitions();
     appEngine.shell = await Shell.initialize({
         shellId: 'mathjslab-shell',
         examplesId: 'mathjslab-examples',

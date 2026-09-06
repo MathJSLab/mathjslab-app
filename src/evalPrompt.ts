@@ -3,7 +3,7 @@
  */
 
 import { Interpreter, appEngine } from './appEngine';
-import { CommandPrompt } from './components/components';
+import { CommandPrompt } from './components/command-prompt/command-prompt.component';
 import { InterpreterError, type NodeInput } from 'mathjslab';
 import { outputFunction, insertOutput } from './outputFunction';
 import { formatErrorForHTML } from './formatErrorForHTML';
@@ -20,7 +20,7 @@ function evalPrompt(prompt: CommandPrompt, _index?: number): void {
             const unparse_input = appEngine.interpreter.Unparse(tree);
             const eval_input = appEngine.interpreter.Evaluate(tree);
             if (appEngine.interpreter.exitStatus === Interpreter.response.OK) {
-                prompt.element.frameBox.className = 'good';
+                prompt.element.frameBox.className = 'green-panel good';
                 const unparse_eval_input = appEngine.interpreter.Unparse(eval_input);
                 if (unparse_input !== unparse_eval_input) {
                     const evalsign = typeof tree.list[0].type === 'string' && tree.list[0].type.substring(tree.list[0].type.length - 1, tree.list[0].type.length) === '=' ? '&rArr;' : '=';
@@ -35,6 +35,7 @@ function evalPrompt(prompt: CommandPrompt, _index?: number): void {
                 }
                 if (insertOutput.type !== '') {
                     const output = document.createElement('div');
+                    output.className = 'plot-output';
                     prompt.element.output.append(output);
                     outputFunction[insertOutput.type](output);
                 }
@@ -54,7 +55,7 @@ function evalPrompt(prompt: CommandPrompt, _index?: number): void {
             }
         }
     } catch (error) {
-        prompt.element.frameBox.className = 'bad';
+        prompt.element.frameBox.className = 'green-panel bad';
         prompt.element.output.innerHTML =
             "<table><tr><td align='left'>" +
             appEngine.interpreter.UnparseMathML(tree) +

@@ -1,0 +1,18 @@
+<template id="batch-code-editor-template">
+    <div id="batch-code-editor-root" class="editor green-panel" data-empty="false">
+        <div id="batch-code-editor-gutter" class="gutter" aria-hidden="true"></div>
+        <div id="batch-code-editor-stack" class="stack">
+            <pre id="batch-code-editor-highlight" class="highlight language-matlab" aria-hidden="true"></pre>
+            <textarea
+                id="batch-code-editor-input"
+                class="input"
+                aria-label="MATLAB batch commands"
+                autocapitalize="off"
+                autocomplete="off"
+                autocorrect="off"
+                spellcheck="false"
+                wrap="off"
+            ></textarea>
+        </div>
+    </div>
+</template>

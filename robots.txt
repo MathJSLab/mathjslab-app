@@ -10,4 +10,5 @@ Allow: /*.jpg$
 Allow: /*.png$
 Allow: /*.gif$
 Allow: /*.svg$
+
 Sitemap: https://app.mathjslab.com/sitemap.xml

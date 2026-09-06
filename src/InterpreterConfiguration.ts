@@ -207,7 +207,8 @@ Object.assign(InterpreterConfiguration.externalCmdWListTable!, {
  * Initialize the interpreter and Markdown services.
  */
 function bootstrap() {
-    const baseUrl = globalThis.location.href.substring(0, globalThis.location.href.lastIndexOf('/') + 1);
+    const baseUrl =
+        globalThis.location.protocol === 'file:' ? globalThis.location.href.substring(0, globalThis.location.href.lastIndexOf('/') + 1) : new URL('/', globalThis.location.href).href;
     if (typeof appEngine.config === 'undefined' || appEngine.config === null) {
         appEngine.config = {
             exampleBaseUrl: baseUrl,

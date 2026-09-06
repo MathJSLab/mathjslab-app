@@ -126,7 +126,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
             const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (url) {
                 if (appEngine.shell.isFileProtocol) {
-                    promptEntry.element.frameBox.className = 'bad';
+                    promptEntry.element.frameBox.className = 'green-panel bad';
                     promptEntry.element.output.innerHTML = 'open function unavailable <b>offline</b>.';
                 } else {
                     globalThis
@@ -143,7 +143,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
                         })
                         /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
                         .catch((error) => {
-                            promptEntry.element.frameBox.className = 'bad';
+                            promptEntry.element.frameBox.className = 'green-panel bad';
                             promptEntry.element.output.innerHTML = `open: error loading ${url.str}`;
                         });
                 }
@@ -166,7 +166,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
             const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (url) {
                 if (appEngine.shell.isFileProtocol) {
-                    promptEntry.element.frameBox.className = 'bad';
+                    promptEntry.element.frameBox.className = 'green-panel bad';
                     promptEntry.element.output.innerHTML = 'markdown function unavailable <b>offline</b>.';
                 } else {
                     globalThis
@@ -179,20 +179,20 @@ const externalFunctionTable: BuiltInFunctionTable = {
                             }
                         })
                         .then((responseFile: string) => {
-                            promptEntry.element.frameBox.className = 'doc';
+                            promptEntry.element.frameBox.className = 'green-panel doc';
                             promptEntry.element.output.innerHTML = Markdown.parse(responseFile);
                             Markdown.typeset(promptEntry.element.output);
                         })
                         /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
                         .catch((error) => {
-                            promptEntry.element.frameBox.className = 'bad';
+                            promptEntry.element.frameBox.className = 'green-panel bad';
                             promptEntry.element.output.innerHTML = `markdown: error loading ${url.str}`;
                         });
                 }
                 return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeList([url.str]));
             } else {
                 openFileDialog((content: string) => {
-                    promptEntry.element.frameBox.className = 'doc';
+                    promptEntry.element.frameBox.className = 'green-panel doc';
                     promptEntry.element.output.innerHTML = Markdown.parse(content);
                     Markdown.typeset(promptEntry.element.output);
                 }, openFileOptionMarkdown);
@@ -223,17 +223,17 @@ const externalFunctionTable: BuiltInFunctionTable = {
                     errorMessage = `load: error loading ${name}: ${e}`;
                 }
                 if (error) {
-                    promptEntry.element.frameBox.className = 'bad';
+                    promptEntry.element.frameBox.className = 'green-panel bad';
                     promptEntry.element.output.innerHTML = errorMessage;
                 } else {
-                    promptEntry.element.frameBox.className = 'good';
+                    promptEntry.element.frameBox.className = 'green-panel good';
                     promptEntry.element.output.innerHTML = `Loaded script from ${name}</ br>`;
                 }
                 appEngine.shell.commandShell.refreshNameList();
             };
             if (url.length > 0) {
                 if (appEngine.shell.isFileProtocol) {
-                    promptEntry.element.frameBox.className = 'bad';
+                    promptEntry.element.frameBox.className = 'green-panel bad';
                     promptEntry.element.output.innerHTML = 'load function unavailable <b>offline</b>.';
                 } else {
                     url.forEach((file: CharString) => {
@@ -251,7 +251,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
                             })
                             /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
                             .catch((error) => {
-                                promptEntry.element.frameBox.className = 'bad';
+                                promptEntry.element.frameBox.className = 'green-panel bad';
                                 promptEntry.element.output.innerHTML = `load: error loading ${file.str}`;
                             });
                     });

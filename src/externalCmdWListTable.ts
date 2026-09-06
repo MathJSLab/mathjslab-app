@@ -48,25 +48,25 @@ const externalCmdWListTable = {
             const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
             if (args.length == 1) {
                 if (appEngine.shell.isFileProtocol) {
-                    promptEntry.element.frameBox.className = 'bad';
+                    promptEntry.element.frameBox.className = 'green-panel bad';
                     promptEntry.element.output.innerHTML = i18n.page.help.unavailableOfflineHtml;
                 } else {
                     loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/${encodeURIComponent(encodeName(args[0]))}.md`, args[0])
                         .then((responseText) => {
-                            promptEntry.element.frameBox.className = 'info';
+                            promptEntry.element.frameBox.className = 'green-panel info';
                             promptEntry.element.output.innerHTML = Markdown.parse(responseText);
                             Markdown.typeset(promptEntry.element.output);
                         })
                         .catch((error) => {
-                            promptEntry.element.frameBox.className = 'bad';
+                            promptEntry.element.frameBox.className = 'green-panel bad';
                             promptEntry.element.output.innerHTML = Markdown.parse((error as Error).message);
                         });
                 }
             } else if (args.length == 0) {
-                promptEntry.element.frameBox.className = 'info';
+                promptEntry.element.frameBox.className = 'green-panel info';
                 loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/help.md`, 'help')
                     .then((responseText) => {
-                        promptEntry.element.frameBox.className = 'info';
+                        promptEntry.element.frameBox.className = 'green-panel info';
                         promptEntry.element.output.innerHTML = Markdown.parse(
                             responseText +
                                 appEngine.interpreter.context.builtInFunctionList
@@ -77,11 +77,11 @@ const externalCmdWListTable = {
                         Markdown.typeset(promptEntry.element.output);
                     })
                     .catch((error) => {
-                        promptEntry.element.frameBox.className = 'bad';
+                        promptEntry.element.frameBox.className = 'green-panel bad';
                         promptEntry.element.output.innerHTML = Markdown.parse((error as Error).message);
                     });
             } else {
-                promptEntry.element.frameBox.className = 'bad';
+                promptEntry.element.frameBox.className = 'green-panel bad';
                 promptEntry.element.output.textContent = i18n.page.help.tooManyInputs;
             }
         },
