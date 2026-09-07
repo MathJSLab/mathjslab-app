@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.9.1
+
+- Dependencies Updated (`mathjslab` 2.5.2).
+
 ## 1.9.0
 
 - The app localization structure now follows the same project pattern used by
