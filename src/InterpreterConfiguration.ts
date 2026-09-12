@@ -3,7 +3,7 @@ import { Interpreter, InterpreterConfig, AliasNameTable } from 'mathjslab';
 import { appEngine } from './appEngine';
 import { Markdown } from './Markdown';
 import buildConfiguration from './build-configuration.json';
-import { externalFunctionTable } from './externalFunctionTable';
+import { externalFunctionTable, openMathJSLabFile } from './externalFunctionTable';
 import { externalCmdWListTable } from './externalCmdWListTable';
 import i18n from './i18n';
 
@@ -200,11 +200,7 @@ export const InterpreterConfiguration: InterpreterConfig = {
  * Open a local script file through the configured external function.
  */
 appEngine.openFile = (): void => {
-    const openFunction = externalFunctionTable.open;
-    if (!openFunction) {
-        throw new Error('open function is not configured.');
-    }
-    openFunction.func();
+    openMathJSLabFile();
 };
 
 Object.assign(InterpreterConfiguration.externalCmdWListTable!, {

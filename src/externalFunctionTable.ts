@@ -28,6 +28,13 @@ const openFileOptionMarkdown: OpenFilePickerOptions & { multiple?: false | undef
     excludeAcceptAllOption: true,
 };
 
+/** Open a local MathJSLab script in the command editor. */
+const openMathJSLabFile = (): void => {
+    openFileDialog((content: string) => {
+        appEngine.shell.commandShell.load(content);
+    }, openFileOptionMathJSLab);
+};
+
 /**
  * Browser-facing built-ins registered in addition to the core MathJSLab
  * function table.
@@ -43,8 +50,8 @@ const externalFunctionTable: BuiltInFunctionTable = {
         mapper: false,
         ev: [true],
         func: (url?: CharString): NodeExpr => {
-            const outputTarget = getCommandOutputTarget();
             if (url) {
+                const outputTarget = getCommandOutputTarget();
                 if (appEngine.shell.isFileProtocol) {
                     outputTarget.setState('bad');
                     outputTarget.setHTML('open function unavailable <b>offline</b>.');
@@ -69,9 +76,7 @@ const externalFunctionTable: BuiltInFunctionTable = {
                 }
                 return AST.nodeIndexExpr(AST.nodeIdentifier('open'), AST.nodeList([url.str]));
             } else {
-                openFileDialog((content: string) => {
-                    appEngine.shell.commandShell.load(content);
-                }, openFileOptionMathJSLab);
+                openMathJSLabFile();
                 return AST.nodeIndexExpr(AST.nodeIdentifier('open'), AST.nodeListFirst());
             }
         },
@@ -188,5 +193,5 @@ const externalFunctionTable: BuiltInFunctionTable = {
         },
     },
 };
-export { externalFunctionTable };
+export { externalFunctionTable, openMathJSLabFile };
 export default { externalFunctionTable };

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.9.3
+
+- Improved dark-mode contrast for gray controls and the shared appearance and
+  language icons when they are displayed on green panels.
+- Decoupled language menu label colors from calculator-specific control tokens,
+  giving App and Calc consistent text colors while exposing component-level
+  override variables.
+- Reused a dedicated `openMathJSLabFile` helper for toolbar and no-argument
+  `open()` actions, and deferred command-output setup until the URL-opening
+  branch needs it.
+- Updated Sass to 1.104.1.
+
 ## 1.9.2
 
 - Added three command workspace modes: batch editor with interactive prompts,
