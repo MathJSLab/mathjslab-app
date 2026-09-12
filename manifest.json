@@ -1,12 +1,14 @@
 {
+    "id": "/",
     "name": "MathJSLab",
     "short_name": "MathJSLab",
     "description": "MathJSLab - An interpreter with language syntax like MATLAB®/Octave. https://mathjslab.com/, ISBN 978-65-00-82338-7. A demo application from the mathjslab npm package, https://www.npmjs.com/package/mathjslab, ISBN 978-65-00-84828-1.",
-    "categories": ["Education", "Tools", "Utilities"],
+    "categories": ["education", "tools", "utilities"],
     "lang": "en",
-    "start_url": ".",
-    "background_color": "white",
-    "theme_color": "green",
+    "start_url": "/",
+    "scope": "/",
+    "background_color": "#ffffff",
+    "theme_color": "#166534",
     "display": "standalone",
     "icons": [
         {

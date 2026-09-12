@@ -4,14 +4,18 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import webpack from 'webpack';
 import 'webpack-dev-server';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import buildConfig from 'build.config.json';
+import buildConfig from './build.config.json' with { type: 'json' };
 
 import { components, templates } from './src/components/component.include';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export default (env: any, argv: any): webpack.Configuration[] => {
     const mode = (argv.mode || 'production') as 'production' | 'development';

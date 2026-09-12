@@ -1,7 +1,7 @@
 import './InterpreterConfiguration';
 import './components/components';
 import { evalInput } from './evalInput';
-import { evalPrompt } from './evalPrompt';
+import { evalCommand, evalPrompt } from './evalPrompt';
 import { Shell } from './Shell';
 import { appEngine } from './appEngine';
 import i18n from './i18n';
@@ -79,11 +79,10 @@ const renderThemeButton = (): void => {
 };
 
 /**
- * Apply and persist the selected page theme.
+ * Apply the selected page theme.
  */
 const setTheme = (theme: Theme): void => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('theme', theme);
     renderThemeButton();
     syncThemeIcons();
 };
@@ -137,15 +136,10 @@ const renderPage = (): void => {
 };
 
 /**
- * Initialize the theme from localStorage or the browser preference.
+ * Initialize the theme from the browser preference.
  */
 const initializeTheme = (): void => {
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    if (savedTheme === 'dark' || savedTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', savedTheme);
-    } else if (colorScheme.matches) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-    }
+    document.documentElement.setAttribute('data-theme', colorScheme.matches ? 'dark' : 'light');
     syncThemeIcons();
 };
 
@@ -179,31 +173,17 @@ const initializePage = (): void => {
 };
 
 /**
- * Wait for static custom elements before application controllers address their public APIs.
- */
-const waitForComponentDefinitions = async (): Promise<void> => {
-    await Promise.all([
-        customElements.whenDefined('batch-code-editor'),
-        customElements.whenDefined('collapsible-content-panel'),
-        customElements.whenDefined('command-prompt-list'),
-        customElements.whenDefined('fixed-scroll-panel'),
-        customElements.whenDefined('language-switcher'),
-        customElements.whenDefined('appearance-mode'),
-        customElements.whenDefined('application-wrapper'),
-    ]);
-};
-/**
  * Initialize the application shell and connect the interpreter callbacks used
  * by the command prompt and examples panel.
  */
 async function bootstrap(): Promise<void> {
-    await waitForComponentDefinitions();
     appEngine.shell = await Shell.initialize({
         shellId: 'mathjslab-shell',
         examplesId: 'mathjslab-examples',
+        evalCommand,
         evalPrompt,
         evalInput,
     });
     initializePage();
 }
-bootstrap();
+void bootstrap();

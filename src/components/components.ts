@@ -1,9 +1,10 @@
-/* Web components. File generated at Mon, 07 Sep 2026 00:50:48 GMT. */
+/* Web components. File generated at Sat, 12 Sep 2026 05:48:17 GMT. */
 export * from './collapsible-content-panel/collapsible-content-panel.component';
 export * from './fixed-scroll-panel/fixed-scroll-panel.component';
 export * from './command-prompt/command-prompt.component';
 export * from './command-prompt-list/command-prompt-list.component';
 export * from './batch-code-editor/batch-code-editor.component';
+export * from './batch-output/batch-output.component';
 export * from './control-bar/control-bar.component';
 export * from './language-switcher/language-switcher.component';
 export * from './appearance-mode/appearance-mode.component';

@@ -1,0 +1,143 @@
+@use '../../styles/component/panel';
+
+:host {
+  display: block;
+  margin-block-end: 1rem;
+}
+
+:host([hidden]) {
+  display: none;
+}
+
+.output-panel {
+  box-shadow: none;
+}
+
+.output {
+  background: var(--calc-surface, var(--color-background, Canvas));
+  border: 1px solid var(--calc-border, var(--color-border, currentColor));
+  border-radius: 8px;
+  min-height: 160px;
+  overflow: visible;
+}
+
+.placeholder {
+  color: var(--calc-text-muted, var(--color-text-hover, GrayText));
+  padding: 18px;
+}
+
+.list {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry {
+  border-top: 1px solid var(--calc-border, var(--color-border, currentColor));
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  padding: 14px 16px;
+}
+
+.entry:first-child {
+  border-top: 0;
+}
+
+.command {
+  color: var(--calc-text-muted, var(--color-text-hover, GrayText));
+  font:
+    0.86rem/1.45 Consolas,
+    'SFMono-Regular',
+    'Liberation Mono',
+    Menlo,
+    monospace;
+  margin: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: pre-wrap;
+}
+
+.command code {
+  font: inherit;
+}
+
+.hljs-keyword,
+.hljs-built_in,
+.hljs-name {
+  color: var(--blue-text, #0550ae);
+  font-weight: 650;
+}
+
+.hljs-string {
+  color: var(--green-text, #0a7c46);
+}
+
+.hljs-number {
+  color: var(--red-text, #9a3412);
+}
+
+.hljs-comment {
+  color: var(--color-text-hover, #6b7280);
+  font-style: italic;
+}
+
+.hljs-title,
+.hljs-function {
+  color: var(--blue-text-hover, #7c3aed);
+}
+
+.result-scroller {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+}
+
+.result {
+  color: var(--calc-text, var(--color-text, CanvasText));
+  display: block;
+  font:
+    0.95rem/1.5 Consolas,
+    'SFMono-Regular',
+    'Liberation Mono',
+    Menlo,
+    monospace;
+  margin: 0;
+  min-width: 100%;
+  overflow: visible;
+  white-space: pre-wrap;
+  width: max-content;
+}
+
+.result:has(.plot-output) {
+  width: 100%;
+}
+
+.result .plot-output {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  overflow: visible;
+  width: 100%;
+}
+
+.error {
+  color: var(--calc-error, var(--red-text, #b42318));
+}
+
+math {
+  font-size: 1.08rem;
+}
+
+@media (min-width: 768px) {
+  .output-panel {
+    box-shadow: 0 5px 7px -3.5px var(--color-panel-box-shadow, transparent);
+  }
+}

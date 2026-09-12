@@ -42,14 +42,23 @@
   z-index: 1;
 }
 
-batch-code-editor {
-  display: none;
+.command-workspace-wrapper [hidden] {
+  display: none !important;
+}
+
+control-bar.command-workspace-mode-bar {
+  --control-bar-gap: 0.75rem;
+
+  display: block;
+  margin: 0 auto 0.75rem;
+  max-width: 100%;
+  width: 100%;
 }
 
 control-bar.command-workspace-control-bar {
   --control-bar-gap: 0.5rem;
 
-  display: none;
+  display: block;
   margin: 0.75rem auto 0;
   max-width: 100%;
   width: 100%;
@@ -57,12 +66,31 @@ control-bar.command-workspace-control-bar {
 
 .command-workspace-status {
   color: var(--green-color-text-hover);
-  display: none;
+  display: block;
   font-size: 0.95rem;
   margin-inline-start: auto;
   min-height: 1.3em;
   text-align: right;
   white-space: nowrap;
+}
+
+.command-workspace-option {
+  align-items: center;
+  color: var(--color-text-hover);
+  display: inline-flex;
+  gap: 0.4rem;
+  min-height: 2.35rem;
+}
+
+.command-workspace-option select {
+  margin: 0;
+}
+
+.command-workspace-option input {
+  accent-color: var(--green-background);
+  height: 1rem;
+  margin: 0;
+  width: 1rem;
 }
 
 .namelist {
@@ -79,11 +107,5 @@ control-bar.command-workspace-control-bar {
   .command-workspace-frame-box {
     max-width: calc(100% - 15%);
     padding: 1rem;
-  }
-
-  batch-code-editor,
-  control-bar.command-workspace-control-bar,
-  .command-workspace-status {
-    display: block;
   }
 }

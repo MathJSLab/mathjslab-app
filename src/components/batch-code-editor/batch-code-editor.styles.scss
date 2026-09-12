@@ -40,7 +40,7 @@
 }
 
 .stack:focus-within {
-  background: var(--color-input-background-focus, var(--yellow-background, hsl(60deg 100% 87%)));
+  background: var(--calc-app-background, var(--color-background, Canvas));
 }
 
 .highlight,
@@ -81,7 +81,7 @@
 }
 
 .input::selection {
-  background: color-mix(in srgb, var(--blue-background, #93c5fd) 36%, transparent);
+  background: color-mix(in srgb, var(--blue-background, Highlight) 52%, transparent);
   color: transparent;
 }
 

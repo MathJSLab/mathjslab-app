@@ -14,8 +14,15 @@ abstract class DeviceScreen {
      * Initializes DeviceScreen object (add `'resize'` event listener).
      */
     public static initialize(onScreenChange?: (event?: Event) => void): void {
-        DeviceScreen.widthSmall = parseInt(constants['screen-width-small'].match(/([0-9]+(?:\.[0-9]*)?|[0-9]*\.[0-9]+)px/)![1], 10);
-        DeviceScreen.widthMedium = parseInt(constants['screen-width-medium'].match(/([0-9]+(?:\.[0-9]*)?|[0-9]*\.[0-9]+)px/)![1], 10);
+        const parsePixelWidth = (value: string): number => {
+            const width = value.match(/([0-9]+(?:\.[0-9]*)?|[0-9]*\.[0-9]+)px/)?.[1];
+            if (!width) {
+                throw new Error(`invalid CSS pixel width: ${value}`);
+            }
+            return parseInt(width, 10);
+        };
+        DeviceScreen.widthSmall = parsePixelWidth(constants['screen-width-small']);
+        DeviceScreen.widthMedium = parsePixelWidth(constants['screen-width-medium']);
         DeviceScreen.isTouchCapable = 'ontouchstart' in globalThis || (navigator.maxTouchPoints || (navigator as Navigator & { msMaxTouchPoints: number }).msMaxTouchPoints || 0) > 0;
         DeviceScreen.innerWidth = globalThis.innerWidth;
         DeviceScreen.innerHeight = globalThis.innerHeight;

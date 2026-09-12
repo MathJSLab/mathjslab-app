@@ -18,28 +18,31 @@
     {% endif %}
 {% endmacro %}
 
-{% macro headOpenGraph(i18n, lang, title, description, url, name, image, imageType = 'image/png', width = 630, height = 630, pageUrl = '') %}
+{% macro headOpenGraph(i18n, lang, title, description, url, name, image, imageType = 'image/png', width = 1200, height = 630, pageUrl = '') %}
     <meta property="og:type" content="website">
     <meta property="og:title" content="{{ title }}">
     <meta property="og:description" content="{{ description }}">
     <meta property="og:url" content="{{ pageUrl or url + '/' }}">
     <meta property="og:site_name" content="{{ name }}">
+    {% if i18n %}
     <meta property="og:locale" content="{{ i18n.pages[lang].ogLocale }}">
     {%- for locale in i18n.locales %}
       {%- if locale != lang %}
     <meta property="og:locale:alternate" content="{{ i18n.pages[locale].ogLocale }}">
       {%- endif -%}
     {% endfor %}
+    {% else %}
+    <meta property="og:locale" content="{{ lang }}">
+    {% endif %}
     <meta property="og:image" content="{{ url }}{{ image }}">
     <meta property="og:image:type" content="{{ imageType }}">
     <meta property="og:image:width" content="{{ width }}">
     <meta property="og:image:height" content="{{ height }}">
-    <meta property="og:image:alt" content="{{ description }}">
+    <meta property="og:image:alt" content="{{ title }}">
 {% endmacro %}
 
 {% macro headTwitter(title, description, url, image, imageAlt) %}
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@mathjslab">
     <meta name="twitter:title" content="{{ title }}">
     <meta name="twitter:description" content="{{ description }}">
     <meta name="twitter:image" content="{{ url }}{{ image }}">
@@ -57,6 +60,7 @@
     </script>
 {% endmacro %}
 
+{# Emits a schema.org WebPage node inside a JSON-LD graph. #}
 {% macro headJsonLdWebPage(id, url, name, description, language, websiteId, aboutId, comma = true) %}
           {
             "@type": "WebPage",
@@ -74,6 +78,7 @@
           }{% if comma %},{% endif %}
 {% endmacro %}
 
+{# Emits a schema.org WebSite node inside a JSON-LD graph. #}
 {% macro headJsonLdWebSite(id, url, name, publisherId, comma = true) %}
           {
             "@type": "WebSite",
@@ -86,7 +91,8 @@
           }{% if comma %},{% endif %}
 {% endmacro %}
 
-{% macro headJsonLdApplication(type, id, name, url, description = '', language = '', category = 'EducationalApplication', operatingSystem = 'Web', license = '', publisherId = '', isAccessibleForFree = '', comma = true) %}
+{# Emits a schema.org SoftwareApplication or WebApplication node. #}
+{% macro headJsonLdApplication(type, id, name, url, description = '', language = '', category = 'EducationalApplication', operatingSystem = 'Web', license = '', authorId = '', publisherId = '', isAccessibleForFree = '', offersPrice = '', comma = true) %}
           {
             "@type": "{{ type }}",
             "@id": "{{ id }}",
@@ -97,13 +103,60 @@
             "operatingSystem": "{{ operatingSystem }}"{% if language %},
             "inLanguage": "{{ language }}"{% endif %}{% if isAccessibleForFree %},
             "isAccessibleForFree": {{ isAccessibleForFree }}{% endif %}{% if license %},
-            "license": "{{ license }}"{% endif %}{% if publisherId %},
+            "license": "{{ license }}"{% endif %}{% if offersPrice %},
+            "offers": {
+              "@type": "Offer",
+              "price": {{ offersPrice }}
+            }{% endif %}{% if authorId %},
+            "author": {
+              "@id": "{{ authorId }}"
+            }{% endif %}{% if publisherId %},
             "publisher": {
               "@id": "{{ publisherId }}"
             }{% endif %}
           }{% if comma %},{% endif %}
 {% endmacro %}
 
+{# Emits an ItemList node whose items are application summaries. #}
+{% macro headJsonLdApplicationList(id, name, apps, publisherId, comma = true) %}
+          {
+            "@type": "ItemList",
+            "@id": "{{ id }}",
+            "name": "{{ name }}",
+            "numberOfItems": {{ apps | length }},
+            "itemListElement": [
+              {% for app in apps %}
+                {
+                  "@type": "ListItem",
+                  "position": {{ loop.index }},
+                  "item": {
+                    "@type": "SoftwareApplication",
+                    "@id": "{{ app.href }}#software",
+                    "name": "{{ app.label }}",
+                    "description": "{{ app.description }}",
+                    "url": "{{ app.href }}",
+                    "applicationCategory": "EducationalApplication",
+                    "operatingSystem": "Web",
+                    "publisher": {
+                      "@id": "{{ publisherId }}"
+                    }
+                  }
+                }{% if not loop.last %},{% endif %}
+              {% endfor %}
+            ]
+          }{% if comma %},{% endif %}
+{% endmacro %}
+
+{# Emits a schema.org Person node inside a JSON-LD graph. #}
+{% macro headJsonLdPerson(id, name, comma = true) %}
+          {
+            "@type": "Person",
+            "@id": "{{ id }}",
+            "name": "{{ name }}"
+          }{% if comma %},{% endif %}
+{% endmacro %}
+
+{# Emits a schema.org Organization node with logo and sameAs links. #}
 {% macro headJsonLdOrganization(id, name, url, logoUrl, logoWidth, logoHeight, sameAs, comma = true) %}
           {
             "@type": "Organization",

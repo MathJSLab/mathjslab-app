@@ -38,9 +38,9 @@ type ComplexPoint = {
     im: number;
 };
 
-type LineStyle = Partial<Plotly.ScatterLine>;
+type LineStyle = Pick<NonNullable<Plotly.ScatterData['line']>, 'color' | 'dash' | 'width'>;
 
-type MarkerStyle = Partial<Plotly.ScatterMarker>;
+type MarkerStyle = Pick<NonNullable<Plotly.ScatterData['marker']>, 'color' | 'size' | 'symbol'>;
 
 type TraceStyle = {
     line: LineStyle;
@@ -51,8 +51,8 @@ type TraceStyle = {
 
 type PlotRenderState = {
     data: Plotly.Data[];
-    layout?: Partial<Plotly.Layout>;
-    config?: Partial<Plotly.Config>;
+    layout: Partial<Plotly.Layout>;
+    config: Partial<Plotly.Config>;
 };
 
 const defaultPlotConfig: Partial<Plotly.Config> = {
@@ -86,7 +86,7 @@ const colorMap: Record<string, string> = {
     white: 'white',
 };
 
-const markerMap: Record<string, Plotly.ScatterMarker['symbol']> = {
+const markerMap: Record<string, NonNullable<MarkerStyle['symbol']>> = {
     '+': 'cross',
     o: 'circle',
     '*': 'star',
@@ -104,7 +104,7 @@ const markerMap: Record<string, Plotly.ScatterMarker['symbol']> = {
     h: 'hexagon',
 };
 
-const lineStyleMap: Record<string, Plotly.ScatterLine['dash']> = {
+const lineStyleMap: Record<string, NonNullable<LineStyle['dash']>> = {
     '-': 'solid',
     '--': 'dash',
     ':': 'dot',
@@ -176,10 +176,10 @@ const isVector = (matrix: NumericMatrix): boolean => {
 const vectorFromMatrix = (matrix: NumericMatrix): number[] => {
     const [rows, columns] = matrixSize(matrix);
     if (rows === 1) {
-        return [...matrix[0]];
+        return [...matrix[0]!];
     }
     if (columns === 1) {
-        return matrix.map((row) => row[0]);
+        return matrix.map((row) => row[0]!);
     }
     throw new Error('expected vector');
 };
@@ -188,10 +188,10 @@ const isVectorMatrix = (value: MultiArray): boolean => value.dimension[0] === 1 
 
 const vectorElements = (value: MultiArray): ElementType[] => {
     if (value.dimension[0] === 1) {
-        return [...value.array[0]];
+        return [...value.array[0]!];
     }
     if (value.dimension[1] === 1) {
-        return value.array.map((row) => row[0]);
+        return value.array.map((row) => row[0]!);
     }
     throw new Error('expected vector');
 };
@@ -200,7 +200,7 @@ const defaultX = (length: number): number[] => Array.from({ length }, (_, index)
 
 const columnsOf = (matrix: NumericMatrix): number[][] => {
     const [rows, columns] = matrixSize(matrix);
-    return Array.from({ length: columns }, (_, column) => Array.from({ length: rows }, (_unused, row) => matrix[row][column]));
+    return Array.from({ length: columns }, (_, column) => Array.from({ length: rows }, (_unused, row) => matrix[row]![column]!));
 };
 
 const rowsOf = (matrix: NumericMatrix): number[][] => matrix.map((row) => [...row]);
@@ -208,12 +208,12 @@ const rowsOf = (matrix: NumericMatrix): number[][] => matrix.map((row) => [...ro
 const applyFormat = (style: TraceStyle, fmt: string): void => {
     const legend = fmt.match(/;(.*);$/u);
     if (legend) {
-        style.name = legend[1];
+        style.name = legend[1]!;
         fmt = fmt.slice(0, legend.index);
     }
     const lineStyle = ['--', '-.', '-', ':'].find((candidate) => fmt.includes(candidate));
     if (lineStyle) {
-        style.line.dash = lineStyleMap[lineStyle];
+        style.line.dash = lineStyleMap[lineStyle]!;
         fmt = fmt.replace(lineStyle, '');
     }
     for (const [key, color] of Object.entries(colorMap)) {
@@ -294,10 +294,10 @@ const scatterTrace = (x: number[], y: number[], style: TraceStyle): Plotly.Data 
     x,
     y,
     type: 'scatter',
-    mode: style.mode,
+    mode: style.mode ?? 'lines',
     line: style.line,
     marker: style.marker,
-    name: style.name,
+    ...(style.name !== undefined ? { name: style.name } : {}),
 });
 
 const scatter3Trace = (x: number[], y: number[], z: number[], style: TraceStyle): Plotly.Data => ({
@@ -305,10 +305,10 @@ const scatter3Trace = (x: number[], y: number[], z: number[], style: TraceStyle)
     y,
     z,
     type: 'scatter3d',
-    mode: style.mode,
+    mode: style.mode ?? 'lines',
     line: style.line,
     marker: style.marker,
-    name: style.name,
+    ...(style.name !== undefined ? { name: style.name } : {}),
 });
 
 const build2DTraces = (xValue: ElementType | undefined, yValue: ElementType, style: TraceStyle): Plotly.Data[] => {
@@ -354,7 +354,8 @@ const build2DTraces = (xValue: ElementType | undefined, yValue: ElementType, sty
     if (xRows !== yRows || xColumns !== yColumns) {
         throw new Error('plot: X and Y matrices must have the same dimensions');
     }
-    return columnsOf(yMatrix).map((y, index) => scatterTrace(columnsOf(xMatrix)[index], y, style));
+    const xColumnData = columnsOf(xMatrix);
+    return columnsOf(yMatrix).map((y, index) => scatterTrace(xColumnData[index]!, y, style));
 };
 
 const buildPlot = (args: ElementType[]): PlotRenderState => {
@@ -408,7 +409,7 @@ const buildPlot3 = (args: ElementType[]): PlotRenderState => {
                 }
                 const xColumnsData = columnsOf(xMatrix);
                 const yColumnsData = columnsOf(yMatrix);
-                columnsOf(zMatrix).forEach((z, column) => data.push(scatter3Trace(xColumnsData[column], yColumnsData[column], z, style)));
+                columnsOf(zMatrix).forEach((z, column) => data.push(scatter3Trace(xColumnsData[column]!, yColumnsData[column]!, z, style)));
             }
         } else if (isNumericPlotValue(args[index]) && isNumericPlotValue(args[index + 1])) {
             const x = vectorFromMatrix(numericMatrix(args[index++], 'X'));
@@ -448,7 +449,7 @@ const gridAxisFromMatrix = (matrix: NumericMatrix, axis: 'x' | 'y'): number[] =>
     if (isVector(matrix)) {
         return vectorFromMatrix(matrix);
     }
-    return axis === 'x' ? [...matrix[0]] : matrix.map((row) => row[0]);
+    return axis === 'x' ? [...matrix[0]!] : matrix.map((row) => row[0]!);
 };
 
 const consumeSurfaceProperties = (args: ElementType[], index: number): { surface: Record<string, unknown>; next: number } => {
@@ -555,7 +556,10 @@ abstract class PlotEngine {
                     type: 'lines',
                 };
 
-                const layout = {};
+                const layout = {
+                    autosize: true,
+                    margin: { b: 48, l: 56, r: 24, t: 24 },
+                };
                 const config = {
                     displayModeBar: false, // Show or hide the Plotly mode bar.
                     responsive: true, // Resize the plot with its container.
@@ -657,8 +661,8 @@ abstract class PlotEngine {
                     } else {
                         throw new Error('non real number in plot2d y axis');
                     }
-                    plotData.MaxY = Math.max(plotData.MaxY, plotData.data[i]);
-                    plotData.MinY = Math.min(plotData.MinY, plotData.data[i]);
+                    plotData.MaxY = Math.max(plotData.MaxY, plotData.data[i]!);
+                    plotData.MinY = Math.min(plotData.MinY, plotData.data[i]!);
                 }
                 /* Restore the call stack after sampling the expression. */
                 appEngine.interpreter.context.callStack!.pop();
@@ -684,27 +688,27 @@ abstract class PlotEngine {
                 plotData.MinY = 0;
                 plotData.X = [];
                 plotData.data = [];
-                for (let i = 0; i < IMAG.dimension[1]; i++) {
+                const imagRow = IMAG.array[0]!;
+                const domainRow = DOM?.array[0];
+                for (let i = 0; i < (IMAG.dimension[1] ?? 0); i++) {
                     if (DOM) {
-                        if (DOM.array[0][i] instanceof ComplexDecimal) {
-                            plotData.X[i] = (DOM.array[0][i] as ComplexDecimal).re.toNumber();
-                        } else if (DOM.array[0][i] instanceof CharString) {
-                            plotData.X[i] = (DOM.array[0][i] as CharString).str;
+                        const domainValue = domainRow?.[i];
+                        if (domainValue instanceof ComplexDecimal) {
+                            plotData.X[i] = domainValue.re.toNumber();
+                        } else if (domainValue instanceof CharString) {
+                            plotData.X[i] = domainValue.str;
                         }
                     } else {
                         plotData.X[i] = i;
                     }
-                    if (
-                        isFinite((IMAG.array[0][i] as ComplexDecimal).re.toNumber()) &&
-                        isFinite((IMAG.array[0][i] as ComplexDecimal).im.toNumber()) &&
-                        (IMAG.array[0][i] as ComplexDecimal).im.eq(0)
-                    ) {
-                        plotData.data[i] = (IMAG.array[0][i] as ComplexDecimal).re.toNumber();
+                    const value = imagRow[i];
+                    if (value instanceof ComplexDecimal && isFinite(value.re.toNumber()) && isFinite(value.im.toNumber()) && value.im.eq(0)) {
+                        plotData.data[i] = value.re.toNumber();
                     } else {
                         throw new Error('non real number in histogram y axis');
                     }
-                    plotData.MaxY = Math.max(plotData.MaxY, plotData.data[i]);
-                    plotData.MinY = Math.min(plotData.MinY, plotData.data[i]);
+                    plotData.MaxY = Math.max(plotData.MaxY, plotData.data[i]!);
+                    plotData.MinY = Math.min(plotData.MinY, plotData.data[i]!);
                 }
                 return AST.nodeIndexExpr(AST.nodeIdentifier('histogram'), AST.nodeList([IMAG, DOM]));
             },

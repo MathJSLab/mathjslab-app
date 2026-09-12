@@ -27,14 +27,25 @@ export default {
         variables: 'Variáveis',
         evaluate: 'Computar',
         controlsLabel: 'Controles do lote',
+        modeControlsLabel: 'Controles do modo de trabalho',
+        modeLabel: 'Área de trabalho',
+        modes: {
+            editorPrompts: 'Editor e prompts',
+            prompts: 'Somente prompts',
+            editorOutput: 'Editor e saída em lote',
+        },
         run: 'Executar',
         clearOutput: 'Limpar saída',
         resetSample: 'Restaurar exemplo',
+        showCommandOutput: 'Mostrar comandos na saída',
         status: {
             ready: 'Pronto',
             finished: 'Concluído: {count, plural, one {# comando} other {# comandos}}',
-            error: 'Interrompido por erro',
+            error: 'Concluído com erros',
         },
+    },
+    output: {
+        placeholder: 'A saída aparecerá aqui.',
     },
     prompt: {
         ariaLabel: 'Prompt do MathJSLab',

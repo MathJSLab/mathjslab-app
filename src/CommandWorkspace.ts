@@ -1,14 +1,31 @@
 import { CharString, FunctionHandle, Interpreter, MultiArray } from 'mathjslab';
 import i18n from './i18n';
 import type { BatchCodeEditor } from './components/batch-code-editor/batch-code-editor.component';
+import type { BatchOutput } from './components/batch-output/batch-output.component';
 import type { CommandPrompt } from './components/command-prompt/command-prompt.component';
 import { type CommandPromptEvalHandler, type CommandPromptList } from './components/command-prompt-list/command-prompt-list.component';
 import type { FixedScrollPanel } from './components/fixed-scroll-panel/fixed-scroll-panel.component';
+import { BatchOutputTarget, type CommandOutputTarget, PromptOutputTarget } from './CommandOutputTarget';
+
+/**
+ * Result of parsing multiline editor input.
+ */
+export type EvalInputResult = { statements: string[]; lines: string[]; hasError?: boolean };
 
 /**
  * Input interpreter handler.
  */
-export type EvalInputHandler = (input: string) => { statements: string[]; lines: string[] };
+export type EvalInputHandler = (input: string) => EvalInputResult;
+
+/**
+ * Presentation-neutral command evaluator.
+ */
+export type EvalCommandHandler = (input: string, target: CommandOutputTarget) => boolean;
+
+/**
+ * Available command workspace presentations.
+ */
+export type CommandWorkspaceMode = 'editor-prompts' | 'prompts' | 'editor-output';
 
 /**
  * Elements used by the command workspace controller.
@@ -17,6 +34,16 @@ export type CommandWorkspaceElement = {
     wrapper: HTMLElement;
     frameBox: HTMLElement;
     batch: BatchCodeEditor;
+    output: BatchOutput;
+    modeControls: HTMLElement;
+    modeSelect: HTMLSelectElement;
+    modeLabel: HTMLElement;
+    modeEditorPromptsOption: HTMLOptionElement;
+    modePromptsOption: HTMLOptionElement;
+    modeEditorOutputOption: HTMLOptionElement;
+    showCommandOption: HTMLElement;
+    showCommandCheckbox: HTMLInputElement;
+    showCommandLabel: HTMLElement;
     controls: HTMLElement;
     runButton: HTMLButtonElement;
     clearOutputButton: HTMLButtonElement;
@@ -33,17 +60,30 @@ type CommandWorkspaceStatus = { type: 'ready' | 'finished' | 'error'; count?: nu
  */
 export class CommandWorkspace {
     public readonly element: CommandWorkspaceElement;
-    public interpreterPointer: Interpreter;
+    public interpreterPointer!: Interpreter;
     public evalInput: EvalInputHandler;
+    public evalCommand: EvalCommandHandler;
     public nameList: HTMLUListElement;
     private lastLoadedSource = '';
     private statusState: CommandWorkspaceStatus = { type: 'ready' };
+    private mode: CommandWorkspaceMode = globalThis.matchMedia('(min-width: 768px)').matches ? 'editor-prompts' : 'prompts';
+    private batchListenersConnected = false;
 
     public constructor(rootId = 'mathjslab-shell') {
         this.element = {
             wrapper: this.byId(`${rootId}-wrapper`),
             frameBox: this.byId(`${rootId}-frame-box`),
             batch: this.byId(`${rootId}-batch`),
+            output: this.byId(`${rootId}-output`),
+            modeControls: this.byId(`${rootId}-mode-controls`),
+            modeSelect: this.byId(`${rootId}-mode`),
+            modeLabel: this.byId(`${rootId}-mode-label`),
+            modeEditorPromptsOption: this.byId(`${rootId}-mode-editor-prompts`),
+            modePromptsOption: this.byId(`${rootId}-mode-prompts`),
+            modeEditorOutputOption: this.byId(`${rootId}-mode-editor-output`),
+            showCommandOption: this.byId(`${rootId}-show-command-option`),
+            showCommandCheckbox: this.byId(`${rootId}-show-command`),
+            showCommandLabel: this.byId(`${rootId}-show-command-label`),
             controls: this.byId(`${rootId}-controls`),
             runButton: this.byId(`${rootId}-run`),
             clearOutputButton: this.byId(`${rootId}-clear-output`),
@@ -60,26 +100,25 @@ export class CommandWorkspace {
         this.element.variables.append(this.nameList);
         this.element.promptSet.evalPrompt = (prompt: CommandPrompt, index?: number): void => {
             index = typeof index === 'number' && index >= 0 ? index : this.element.promptSet.element.prompt.indexOf(prompt);
-            prompt.element.output.innerHTML = `evalPrompt(${prompt.element.input.value}, ${index})`;
+            new PromptOutputTarget(prompt).setText(`evalPrompt(${prompt.element.input.value}, ${index})`);
         };
-        this.evalInput = (input: string): { statements: string[]; lines: string[] } => ({
+        this.evalInput = (input: string): EvalInputResult => ({
             statements: [],
             lines: input.split(/\r?\n/),
         });
+        this.evalCommand = (input: string, target: CommandOutputTarget): boolean => {
+            target.setText(`evalCommand(${input})`);
+            return true;
+        };
         this.element.promptSet.evalPromptRefresh = this.refreshNameList;
     }
 
     public connect(): void {
-        this.element.batch.onChangeDisplay = (_event?: Event, display?: boolean): void => {
-            if (display) {
-                this.batchAddEventListener();
-            } else {
-                this.batchRemoveEventListener();
-            }
-        };
-        if (this.element.batch.state.display) {
-            this.batchAddEventListener();
-        }
+        this.element.modeSelect.value = this.mode;
+        this.element.modeSelect.addEventListener('change', this.changeMode);
+        this.element.showCommandCheckbox.addEventListener('change', this.toggleShowCommand);
+        this.element.output.showCommand = this.element.showCommandCheckbox.checked;
+        this.applyMode();
         this.element.variables.onChangeDisplay = (_event?: Event, display?: boolean): void => {
             if (display) {
                 this.variablesAddEventListener();
@@ -106,6 +145,12 @@ export class CommandWorkspace {
 
     public readonly setLanguage = (): void => {
         this.element.variables.element.title.textContent = i18n.page.shell.variables;
+        this.element.modeControls.setAttribute('aria-label', i18n.page.shell.modeControlsLabel);
+        this.element.modeLabel.textContent = i18n.page.shell.modeLabel;
+        this.element.modeEditorPromptsOption.textContent = i18n.page.shell.modes.editorPrompts;
+        this.element.modePromptsOption.textContent = i18n.page.shell.modes.prompts;
+        this.element.modeEditorOutputOption.textContent = i18n.page.shell.modes.editorOutput;
+        this.element.showCommandLabel.textContent = i18n.page.shell.showCommandOutput;
         this.element.controls.setAttribute('aria-label', i18n.page.shell.controlsLabel);
         this.element.runButton.textContent = i18n.page.shell.run;
         this.element.clearOutputButton.textContent = i18n.page.shell.clearOutput;
@@ -122,17 +167,19 @@ export class CommandWorkspace {
         this.interpreterPointer.Restart();
         this.nameList.replaceChildren();
         this.element.promptSet.clear();
+        this.element.output.clear();
         this.element.variables.resize();
     };
 
     public readonly evaluate = (): void => {
         try {
-            this.element.promptSet.clear();
-            const { statements } = this.load();
-            this.setStatus({ type: 'finished', count: statements.length });
+            const { statements, hasErrors } = this.load();
+            this.setStatus(hasErrors ? { type: 'error' } : { type: 'finished', count: statements.length });
         } catch (error) {
             this.setStatus({ type: 'error' });
-            throw error;
+            if (this.interpreterPointer.debug) {
+                throw error;
+            }
         }
     };
 
@@ -140,7 +187,11 @@ export class CommandWorkspace {
      * Clear evaluated prompts while keeping the source currently in the editor.
      */
     public readonly clearOutput = (): void => {
-        this.element.promptSet.clear();
+        if (this.mode === 'editor-output') {
+            this.element.output.clear();
+        } else {
+            this.element.promptSet.clear();
+        }
         this.setStatus({ type: 'ready' });
         this.resize();
         this.element.batch.focus();
@@ -162,6 +213,9 @@ export class CommandWorkspace {
         for (const name in this.interpreterPointer.context.currentScope.nameTable) {
             if (!this.interpreterPointer.context.nativeNameSet.has(name)) {
                 const nameTableEntry = this.interpreterPointer.context.currentScope.nameTable[name];
+                if (!nameTableEntry) {
+                    continue;
+                }
                 const nameListEntry = document.createElement('li');
                 nameListEntry.className = 'nameitem';
                 this.nameList.append(nameListEntry);
@@ -189,17 +243,26 @@ export class CommandWorkspace {
         }
     };
 
-    public load(text?: string): { statements: string[]; lines: string[] } {
+    public load(text?: string): { statements: string[]; lines: string[]; hasErrors: boolean } {
         if (text !== undefined) {
             this.element.batch.value = text;
             this.lastLoadedSource = text;
         }
         this.nameList.replaceChildren();
-        let { statements, lines } = this.evalInput(this.element.batch.value);
-        statements = this.element.promptSet.promptLoadEval(statements);
+        const { statements, lines, hasError } = this.evalInput(this.element.batch.value);
+        let hasErrors = hasError === true;
+        if (this.mode === 'editor-output') {
+            this.element.output.clear();
+            for (const statement of statements) {
+                hasErrors = !this.evalCommand(statement, new BatchOutputTarget(this.element.output, statement)) || hasErrors;
+            }
+        } else {
+            this.element.promptSet.promptLoadEval([...statements]);
+            hasErrors = this.element.promptSet.element.prompt.some((prompt) => prompt.element.frameBox.classList.contains('bad')) || hasErrors;
+        }
         this.refreshNameList();
         this.resize();
-        return { statements, lines };
+        return { statements, lines, hasErrors };
     }
 
     public debugMessage(message: string): void {
@@ -219,6 +282,10 @@ export class CommandWorkspace {
     }
 
     private batchAddEventListener(): void {
+        if (this.batchListenersConnected) {
+            return;
+        }
+        this.batchListenersConnected = true;
         globalThis.addEventListener('resize', this.element.batch.resize);
         this.element.batch.element.input.addEventListener('change', this.resize);
         this.element.batch.element.input.addEventListener('cut', this.delayedResize);
@@ -232,6 +299,10 @@ export class CommandWorkspace {
     }
 
     private batchRemoveEventListener(): void {
+        if (!this.batchListenersConnected) {
+            return;
+        }
+        this.batchListenersConnected = false;
         globalThis.removeEventListener('resize', this.element.batch.resize);
         this.element.batch.element.input.removeEventListener('change', this.resize);
         this.element.batch.element.input.removeEventListener('cut', this.delayedResize);
@@ -252,6 +323,37 @@ export class CommandWorkspace {
     private variablesRemoveEventListener(): void {
         globalThis.removeEventListener('scroll', this.element.variables.resize);
         globalThis.removeEventListener('resize', this.element.variables.resize);
+    }
+
+    private readonly changeMode = (): void => {
+        const value = this.element.modeSelect.value;
+        this.mode = value === 'editor-prompts' || value === 'editor-output' ? value : 'prompts';
+        this.applyMode();
+        if (this.mode === 'prompts') {
+            this.element.promptSet.focusActive();
+        } else {
+            this.element.batch.focus();
+        }
+    };
+
+    private readonly toggleShowCommand = (): void => {
+        this.element.output.showCommand = this.element.showCommandCheckbox.checked;
+    };
+
+    private applyMode(): void {
+        const showEditor = this.mode !== 'prompts';
+        const showBatchOutput = this.mode === 'editor-output';
+        this.element.batch.hidden = !showEditor;
+        this.element.controls.hidden = !showEditor;
+        this.element.promptSet.hidden = showBatchOutput;
+        this.element.output.hidden = !showBatchOutput;
+        this.element.showCommandOption.hidden = !showBatchOutput;
+        if (showEditor) {
+            this.batchAddEventListener();
+        } else {
+            this.batchRemoveEventListener();
+        }
+        this.resize();
     }
 
     private readonly delayedResize = (): void => {

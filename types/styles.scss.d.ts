@@ -1,4 +1,4 @@
 declare module '*.styles.scss' {
-    export const styles: string;
-    export default styles;
+    const content: string;
+    export default content;
 }

@@ -38,9 +38,9 @@ type LoadExampleHandler = (text?: string) => any;
 class Example {
     public readonly baseUrl: string;
     public readonly isFileProtocol: boolean;
-    private examplesRecord: Record<string, ExampleEntry>;
+    private examplesRecord: Record<string, ExampleEntry> = {};
     private readonly loadHandler: LoadExampleHandler;
-    private examplesAvailable: boolean;
+    private examplesAvailable = false;
     private examplesContainer: HTMLElement;
     private buttons: HTMLButtonElement[] = [];
     /**
@@ -75,7 +75,7 @@ class Example {
      * Check whether an example entry points to generated localized files.
      */
     private hasLocalizedFile(exampleId: string): boolean {
-        return typeof this.examplesRecord[exampleId].caption === 'object';
+        return typeof this.getExample(exampleId).caption === 'object';
     }
 
     /**
@@ -83,7 +83,7 @@ class Example {
      */
     private setButtonCaption(button: HTMLButtonElement): void {
         const exampleId = button.id.substring(8);
-        const example = this.examplesRecord[exampleId];
+        const example = this.getExample(exampleId);
         button.innerHTML = this.localizedText(example.caption);
         button.title = this.localizedText(example.description);
     }
@@ -101,7 +101,7 @@ class Example {
      * Build the URL for an example source file in the active locale.
      */
     private exampleUrl(exampleId: string): string {
-        const example = this.examplesRecord[exampleId];
+        const example = this.getExample(exampleId);
         const languagePath = this.hasLocalizedFile(exampleId) ? `${i18n.locale}/` : '';
         return `${appEngine.config.exampleBaseUrl}example/${languagePath}${example.file}`;
     }
@@ -115,6 +115,14 @@ class Example {
             throw new Error('Network response error.');
         }
         this.loadHandler(await response.text());
+    }
+
+    private getExample(exampleId: string): ExampleEntry {
+        const example = this.examplesRecord[exampleId];
+        if (!example) {
+            throw new Error(`unknown example: ${exampleId}`);
+        }
+        return example;
     }
 
     /**

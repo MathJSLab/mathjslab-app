@@ -40,9 +40,7 @@ const stepData = [
             EleventyUtil.configAddEntries(eleventyConfig, filters, 'addFilter');
             EleventyUtil.configAddEntries(eleventyConfig, shortcodes, 'addShortcode');
             EleventyUtil.configAddRenderTemplateTools(eleventyConfig, true);
-            // EleventyUtil.configAddFileContentAsGlobalData(eleventyConfig, path.resolve('./data/files'));
             return stepData[0].options;
-            // return getStepOption(0);
         },
     },
 ];
@@ -56,5 +54,3 @@ EleventyUtil.run(stepData[0].config, stepData[0].options, () => {
     EleventyUtil.console.log(`Running step01 done.`);
     EleventyUtil.console.log(`Building ${eleventyBuild.dataset} project repository (build script: ${scriptName}) done.`);
 });
-// .then()
-// .catch();

@@ -25,7 +25,6 @@ const source = {
 } as const;
 
 const locales = Object.keys(source) as Locale[];
-const localeStorageKey = 'mathjslab-app:i18n:locale';
 const isBrowser = typeof window !== 'undefined';
 
 /**
@@ -103,15 +102,14 @@ const getByPath = (messages: MessageTree, path: string): MessageTree => {
 };
 
 /**
- * Pick the startup locale from URL, path, stored settings, then browser settings.
+ * Pick the startup locale from URL, path, then browser settings.
  */
 const getInitialLocale = (): Locale => {
     const location = globalThis.location;
     const navigator = globalThis.navigator;
     const params = new URLSearchParams(location?.search || '');
     const pathLocale = location?.pathname.split('/').find(Boolean);
-    const storedLocale = isBrowser ? globalThis.localStorage?.getItem(localeStorageKey) : null;
-    return firstSupportedLocale([params.get('lang'), pathLocale, storedLocale, ...(navigator?.languages || []), navigator?.language]) ?? 'en';
+    return firstSupportedLocale([params.get('lang'), pathLocale, ...(navigator?.languages || []), navigator?.language]) ?? 'en';
 };
 
 /**
@@ -150,12 +148,11 @@ class I18n extends EventTarget {
     }
 
     /**
-     * Change and persist the active locale.
+     * Change the active locale.
      */
     public setLocale(locale?: string | null): void {
         const nextLocale = normalizeLocale(locale);
         if (isBrowser) {
-            globalThis.localStorage?.setItem(localeStorageKey, nextLocale);
             if (this.navigateToLocaleEndpoint(nextLocale)) {
                 return;
             }
@@ -185,7 +182,7 @@ class I18n extends EventTarget {
 
     /**
      * Redirect the root app endpoint to the locale-specific endpoint selected
-     * from URL parameters, stored settings, or browser preferences.
+     * from URL parameters, path, or browser preferences.
      */
     private redirectRootEndpoint(): void {
         if (!isBrowser || !isRootPath(globalThis.location.pathname)) {

@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.9.2
+
+- Added three command workspace modes: batch editor with interactive prompts,
+  prompts only, and batch editor with consolidated batch output.
+- Integrated the reusable `batch-output` component with optional command echo,
+  vertically expanding results, horizontal overflow handling, and responsive
+  Plotly containers.
+- Introduced presentation-neutral command output targets so MathML, Markdown,
+  plots, diagnostics, and other rich output can be rendered in prompts or the
+  batch output panel.
+- Improved batch execution status so parsing failures and individual command
+  failures produce an aggregate completed-with-errors state while subsequent
+  commands continue to run.
+- Simplified application startup around statically imported Web Components and
+  aligned the strict TypeScript configuration with the other web applications.
+- Adopted the shared Eleventy and ESLint entry points, PWA manifest, endpoint,
+  JSON-LD, robots, sitemap, SCSS declaration, and `tsconfig.webapp.json`
+  resources provided by the organization repository.
+- Removed persisted language and appearance settings so startup follows browser
+  preferences, and replaced the responsive language text control with the
+  shared icon-only language and appearance controls using green and white SVG
+  variants.
+- Moved `PlotEngine`, its output registry, and the `summation` and `productory`
+  implementations to shared organization sources while retaining the App-only
+  file, Markdown, load, and help integrations.
+- Updated dependencies, including `mathjslab` 2.5.3, Plotly 4.1.0, Mermaid 12,
+  and the current build and lint tooling.
+
 ## 1.9.1
 
 - Dependencies Updated (`mathjslab` 2.5.2).

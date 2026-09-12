@@ -22,22 +22,23 @@
     <meta property="og:description" content="Um interpretador com sintaxe de linguagem como MATLAB®/Octave. ISBN 978-65-00-82338-7.">
     <meta property="og:url" content="https://app.mathjslab.com/pt/">
     <meta property="og:site_name" content="MathJSLab">
+    
     <meta property="og:locale" content="pt_BR">
     <meta property="og:locale:alternate" content="en_US">
     <meta property="og:locale:alternate" content="es_ES">
+    
     <meta property="og:image" content="https://app.mathjslab.com/images/mathjslab-og.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="630">
+    <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Um interpretador com sintaxe de linguagem como MATLAB®/Octave. ISBN 978-65-00-82338-7.">
+    <meta property="og:image:alt" content="MathJSLab">
 
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@mathjslab">
     <meta name="twitter:title" content="MathJSLab">
     <meta name="twitter:description" content="Um interpretador com sintaxe de linguagem como MATLAB®/Octave. ISBN 978-65-00-82338-7.">
     <meta name="twitter:image" content="https://app.mathjslab.com/images/mathjslab-og.png">
-    <meta name="twitter:image:alt" content="Um interpretador com sintaxe de linguagem como MATLAB®/Octave. ISBN 978-65-00-82338-7.">
+    <meta name="twitter:image:alt" content="MathJSLab">
 
     <script type="application/ld+json">
       {
@@ -188,12 +189,32 @@
                 <application-wrapper id="mathjslab-shell" chrome="none">
                     <div id="mathjslab-shell-wrapper" class="command-workspace-wrapper">
                         <div id="mathjslab-shell-frame-box" class="command-workspace-frame-box">
-                            <batch-code-editor id="mathjslab-shell-batch"></batch-code-editor>
+                            <control-bar
+                                id="mathjslab-shell-mode-controls"
+                                class="command-workspace-mode-bar"
+                                panel="none"
+                                aria-label="Controles do modo de trabalho"
+                            >
+                                <label class="command-workspace-option" for="mathjslab-shell-mode">
+                                    <span id="mathjslab-shell-mode-label">Área de trabalho</span>
+                                    <select id="mathjslab-shell-mode">
+                                        <option id="mathjslab-shell-mode-editor-prompts" value="editor-prompts">Editor e prompts</option>
+                                        <option id="mathjslab-shell-mode-prompts" value="prompts">Somente prompts</option>
+                                        <option id="mathjslab-shell-mode-editor-output" value="editor-output">Editor e saída em lote</option>
+                                    </select>
+                                </label>
+                                <label id="mathjslab-shell-show-command-option" class="command-workspace-option" hidden>
+                                    <input type="checkbox" id="mathjslab-shell-show-command" checked>
+                                    <span id="mathjslab-shell-show-command-label">Mostrar comandos na saída</span>
+                                </label>
+                            </control-bar>
+                            <batch-code-editor id="mathjslab-shell-batch" hidden></batch-code-editor>
                             <control-bar
                                 id="mathjslab-shell-controls"
                                 class="command-workspace-control-bar"
                                 panel="none"
                                 aria-label="Controles do lote"
+                                hidden
                             >
                                 <button type="button" id="mathjslab-shell-run" class="primary">Executar</button>
                                 <button type="button" id="mathjslab-shell-clear-output">Limpar saída</button>
@@ -201,6 +222,7 @@
                                 <span id="mathjslab-shell-status" class="command-workspace-status">Pronto</span>
                             </control-bar>
                             <command-prompt-list id="mathjslab-shell-prompt-set"></command-prompt-list>
+                            <batch-output id="mathjslab-shell-output" hidden></batch-output>
                         </div>
                         <fixed-scroll-panel id="mathjslab-shell-variables"></fixed-scroll-panel>
                     </div>

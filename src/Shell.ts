@@ -1,6 +1,6 @@
 import { appEngine } from './appEngine';
 import { CommandPromptEvalHandler } from './components/components';
-import { CommandWorkspace, EvalInputHandler } from './CommandWorkspace';
+import { CommandWorkspace, EvalCommandHandler, EvalInputHandler } from './CommandWorkspace';
 import { Example } from './Example';
 /**
  * Shell instantiation options.
@@ -9,6 +9,7 @@ interface ShellOptions {
     shellId?: string;
     examplesId?: string;
     evalInput?: EvalInputHandler;
+    evalCommand?: EvalCommandHandler;
     evalPrompt?: CommandPromptEvalHandler;
 }
 /**
@@ -21,8 +22,8 @@ interface ShellOptions {
 class Shell {
     public readonly options: ShellOptions = {};
     public readonly isFileProtocol: boolean = globalThis.location.href.startsWith('file:');
-    public commandShell: CommandWorkspace;
-    public example: Example;
+    public commandShell!: CommandWorkspace;
+    public example?: Example;
     /**
      * `Shell` initialization (instantiation).
      * @param {ShellOptions} options Shell instantiation options.
@@ -46,8 +47,10 @@ class Shell {
             }
         }
         newShell.commandShell.interpreterPointer = appEngine.interpreter;
-        newShell.commandShell.connect();
-        newShell.commandShell.debugMessage(appEngine.buildMessage);
+        if (options.evalCommand) {
+            newShell.commandShell.evalCommand = options.evalCommand;
+        }
+        newShell.options.evalCommand = newShell.commandShell.evalCommand;
         if (options.evalPrompt) {
             newShell.commandShell.evalPrompt = options.evalPrompt;
         }
@@ -56,6 +59,8 @@ class Shell {
             newShell.commandShell.evalInput = options.evalInput;
         }
         newShell.options.evalInput = newShell.commandShell.evalInput;
+        newShell.commandShell.connect();
+        newShell.commandShell.debugMessage(appEngine.buildMessage);
         if (options.examplesId) {
             newShell.options.examplesId = options.examplesId;
             newShell.example = await Example.initialize(options.examplesId, newShell.commandShell.load.bind(newShell.commandShell));

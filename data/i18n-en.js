@@ -27,14 +27,25 @@ export default {
         variables: 'Variables',
         evaluate: 'Evaluate',
         controlsLabel: 'Batch controls',
+        modeControlsLabel: 'Workspace mode controls',
+        modeLabel: 'Workspace',
+        modes: {
+            editorPrompts: 'Editor and prompts',
+            prompts: 'Prompts only',
+            editorOutput: 'Editor and batch output',
+        },
         run: 'Run',
         clearOutput: 'Clear output',
         resetSample: 'Reset example',
+        showCommandOutput: 'Show commands in output',
         status: {
             ready: 'Ready',
             finished: 'Finished: {count, plural, one {# statement} other {# statements}}',
-            error: 'Stopped with error',
+            error: 'Finished with errors',
         },
+    },
+    output: {
+        placeholder: 'Output will appear here.',
     },
     prompt: {
         ariaLabel: 'MathJSLab prompt',

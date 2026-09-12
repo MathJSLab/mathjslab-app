@@ -1,8 +1,11 @@
 {
     "extends": "./tsconfig.json",
     "compilerOptions": {
-        "baseUrl": "./" /* Specify the base directory to resolve non-relative module names. */,
-        "outDir": "./dist" /* Specify an output folder for all emitted files. */
+        "baseUrl": "./",
+        "declaration": false,
+        "declarationMap": false,
+        "noEmit": false,
+        "outDir": "./dist"
     },
     "exclude": ["node_modules", "webpack.config.ts", "capacitor.config.ts", "data", "dist", "doc", "example", "help", "images", "m-file", "script"]
 }

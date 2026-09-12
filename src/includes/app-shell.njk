@@ -12,7 +12,7 @@
         <meta name="hostname" content="mathjslab.com">
         <meta name="expected-hostname" content="mathjslab.com">
 {{ headOpenGraph(i18n, lang, pageData.app.title, pageData.app.description, site.url, site.title, '/images/mathjslab-og.png', pageUrl = canonicalUrl) }}
-{{ headTwitter(main.title, main.description, site.url, '/images/mathjslab-og.png', main.description) }}
+{{ headTwitter(main.title, main.description, site.url, '/images/mathjslab-og.png', site.title) }}
 {%- include "app-json-ld.njk" -%}
 {{ headAlternate(i18n, alternateCanonical, site.url) }}
 {{ headIcon(light = '/images/favicon.ico', dark = '/images/favicon-dark.ico', svg = '/images/mathjslab-logo.svg') }}
@@ -67,12 +67,32 @@
                 <application-wrapper id="mathjslab-shell" chrome="none">
                     <div id="mathjslab-shell-wrapper" class="command-workspace-wrapper">
                         <div id="mathjslab-shell-frame-box" class="command-workspace-frame-box">
-                            <batch-code-editor id="mathjslab-shell-batch"></batch-code-editor>
+                            <control-bar
+                                id="mathjslab-shell-mode-controls"
+                                class="command-workspace-mode-bar"
+                                panel="none"
+                                aria-label="{{ pageData.shell.modeControlsLabel }}"
+                            >
+                                <label class="command-workspace-option" for="mathjslab-shell-mode">
+                                    <span id="mathjslab-shell-mode-label">{{ pageData.shell.modeLabel }}</span>
+                                    <select id="mathjslab-shell-mode">
+                                        <option id="mathjslab-shell-mode-editor-prompts" value="editor-prompts">{{ pageData.shell.modes.editorPrompts }}</option>
+                                        <option id="mathjslab-shell-mode-prompts" value="prompts">{{ pageData.shell.modes.prompts }}</option>
+                                        <option id="mathjslab-shell-mode-editor-output" value="editor-output">{{ pageData.shell.modes.editorOutput }}</option>
+                                    </select>
+                                </label>
+                                <label id="mathjslab-shell-show-command-option" class="command-workspace-option" hidden>
+                                    <input type="checkbox" id="mathjslab-shell-show-command" checked>
+                                    <span id="mathjslab-shell-show-command-label">{{ pageData.shell.showCommandOutput }}</span>
+                                </label>
+                            </control-bar>
+                            <batch-code-editor id="mathjslab-shell-batch" hidden></batch-code-editor>
                             <control-bar
                                 id="mathjslab-shell-controls"
                                 class="command-workspace-control-bar"
                                 panel="none"
                                 aria-label="{{ pageData.shell.controlsLabel }}"
+                                hidden
                             >
                                 <button type="button" id="mathjslab-shell-run" class="primary">{{ pageData.shell.run }}</button>
                                 <button type="button" id="mathjslab-shell-clear-output">{{ pageData.shell.clearOutput }}</button>
@@ -80,6 +100,7 @@
                                 <span id="mathjslab-shell-status" class="command-workspace-status">{{ pageData.shell.status.ready }}</span>
                             </control-bar>
                             <command-prompt-list id="mathjslab-shell-prompt-set"></command-prompt-list>
+                            <batch-output id="mathjslab-shell-output" hidden></batch-output>
                         </div>
                         <fixed-scroll-panel id="mathjslab-shell-variables"></fixed-scroll-panel>
                     </div>

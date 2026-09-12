@@ -1,4 +1,4 @@
-import { appEngine } from './appEngine';
+import { appEngine, getCommandOutputTarget } from './appEngine';
 import i18n from './i18n';
 import { Markdown } from './Markdown';
 
@@ -38,51 +38,54 @@ const externalCmdWListTable = {
                         (c >= 65 && c <= 90) || // Upper case letter
                         (c >= 97 && c <= 122) // Lower case letter
                     ) {
-                        result.push(name[i]);
+                        result.push(name[i]!);
                     } else {
                         result.push(`%${name.charCodeAt(i).toString(16).toUpperCase().padStart(2, '0')}`);
                     }
                 }
                 return result.join('');
             };
-            const promptEntry = appEngine.shell.commandShell.element.promptSet.currentPrompt;
+            const outputTarget = getCommandOutputTarget();
             if (args.length == 1) {
                 if (appEngine.shell.isFileProtocol) {
-                    promptEntry.element.frameBox.className = 'green-panel bad';
-                    promptEntry.element.output.innerHTML = i18n.page.help.unavailableOfflineHtml;
+                    outputTarget.setState('bad');
+                    outputTarget.setHTML(i18n.page.help.unavailableOfflineHtml);
                 } else {
-                    loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/${encodeURIComponent(encodeName(args[0]))}.md`, args[0])
+                    const topic = args[0]!;
+                    loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/${encodeURIComponent(encodeName(topic))}.md`, topic)
                         .then((responseText) => {
-                            promptEntry.element.frameBox.className = 'green-panel info';
-                            promptEntry.element.output.innerHTML = Markdown.parse(responseText);
-                            Markdown.typeset(promptEntry.element.output);
+                            outputTarget.setState('info');
+                            outputTarget.setHTML(Markdown.parse(responseText));
+                            Markdown.typeset(outputTarget.content);
                         })
                         .catch((error) => {
-                            promptEntry.element.frameBox.className = 'green-panel bad';
-                            promptEntry.element.output.innerHTML = Markdown.parse((error as Error).message);
+                            outputTarget.setState('bad');
+                            outputTarget.setHTML(Markdown.parse((error as Error).message));
                         });
                 }
             } else if (args.length == 0) {
-                promptEntry.element.frameBox.className = 'green-panel info';
+                outputTarget.setState('info');
                 loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/help.md`, 'help')
                     .then((responseText) => {
-                        promptEntry.element.frameBox.className = 'green-panel info';
-                        promptEntry.element.output.innerHTML = Markdown.parse(
-                            responseText +
-                                appEngine.interpreter.context.builtInFunctionList
-                                    .map((func) => `\`${func}\``)
-                                    .sort()
-                                    .join(', '),
+                        outputTarget.setState('info');
+                        outputTarget.setHTML(
+                            Markdown.parse(
+                                responseText +
+                                    appEngine.interpreter.context.builtInFunctionList
+                                        .map((func) => `\`${func}\``)
+                                        .sort()
+                                        .join(', '),
+                            ),
                         );
-                        Markdown.typeset(promptEntry.element.output);
+                        Markdown.typeset(outputTarget.content);
                     })
                     .catch((error) => {
-                        promptEntry.element.frameBox.className = 'green-panel bad';
-                        promptEntry.element.output.innerHTML = Markdown.parse((error as Error).message);
+                        outputTarget.setState('bad');
+                        outputTarget.setHTML(Markdown.parse((error as Error).message));
                     });
             } else {
-                promptEntry.element.frameBox.className = 'green-panel bad';
-                promptEntry.element.output.textContent = i18n.page.help.tooManyInputs;
+                outputTarget.setState('bad');
+                outputTarget.setText(i18n.page.help.tooManyInputs);
             }
         },
     },
