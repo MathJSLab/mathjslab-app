@@ -146,7 +146,7 @@
     },
     "dependencies": {
         "highlight.js": "^11.12.0",
-        "marked": "^18.0.12",
+        "marked": "^18.0.13",
         "mathjslab": "^2.5.3",
         "mermaid": "^12.0.0",
         "plotly.js-dist-min": "^4.1.0"

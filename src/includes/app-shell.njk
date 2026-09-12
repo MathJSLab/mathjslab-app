@@ -9,8 +9,6 @@
     <head>
 {{ headBegin(main.title, main.description, pkg.author, pkg.keywords.join()) }}
         <meta name="color-scheme" content="light dark">
-        <meta name="hostname" content="mathjslab.com">
-        <meta name="expected-hostname" content="mathjslab.com">
 {{ headOpenGraph(i18n, lang, pageData.app.title, pageData.app.description, site.url, site.title, '/images/mathjslab-og.png', pageUrl = canonicalUrl) }}
 {{ headTwitter(main.title, main.description, site.url, '/images/mathjslab-og.png', site.title) }}
 {%- include "app-json-ld.njk" -%}
