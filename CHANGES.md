@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.10.1
+
+- Fixed Netlify dependency installation by pinning `@types/node` to the
+  published Node.js 24 type definitions, matching the Node 24 deployment
+  runtime.
+- Added an npm-check-updates policy that preserves the supported Node.js type
+  major during routine dependency updates.
+
 ## 1.10.0
 
 - Added the reusable public Markdown engine and `<markdown-document>`
@@ -14,8 +22,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
   recovery, mediated resources, and serializable plot output rendered on the
   main thread.
 - Deferred Plotly loading to main-thread rendering and made plot value
-  recognition safe across the distinct core and runtime bundles used by
-  Worker sessions.
+  recognition safe across the distinct core and runtime bundles used by Worker
+  sessions.
 - Expanded `help` so user-defined functions can render their leading source
   comments and links navigate correctly inside Markdown documents or open
   absolute destinations in a separate browser tab.
