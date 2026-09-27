@@ -77,13 +77,16 @@ const messages: Readonly<Record<'en' | 'es' | 'pt', MarkdownDocumentMessages>> =
 const template = document.createElement('template');
 template.innerHTML = `
 <style>
-    :host { box-sizing: border-box; container-type: inline-size; display: block; max-width: 100%; min-width: 0; }
+    :host { box-sizing: border-box; container-type: inline-size; display: block; max-width: 100%; min-width: 0; width: 100%; }
     *, *::before, *::after { box-sizing: inherit; }
     [part="root"] { max-width: 100%; min-width: 0; }
     [part="status"] { padding: 0.75rem; }
     [part="announcer"] { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
     :host([state="ready"]) [part="status"] { display: none; }
-    [part="layout"] { display: grid; gap: 1rem; grid-template-columns: minmax(11rem, 16rem) minmax(0, 1fr) minmax(10rem, 14rem); max-width: 100%; }
+    [part="layout"] { display: grid; gap: 1rem; grid-template-columns: minmax(0, 1fr); max-width: 100%; }
+    [part="layout"]:has(> [part="collection"]:not([hidden])) { grid-template-columns: minmax(11rem, 16rem) minmax(0, 1fr); }
+    [part="layout"]:has(> [part="page-outline"]:not([hidden])) { grid-template-columns: minmax(0, 1fr) minmax(10rem, 14rem); }
+    [part="layout"]:has(> [part="collection"]:not([hidden])):has(> [part="page-outline"]:not([hidden])) { grid-template-columns: minmax(11rem, 16rem) minmax(0, 1fr) minmax(10rem, 14rem); }
     [part="main"] { min-width: 0; }
     [part="collection"], [part="page-outline"] { align-self: start; max-height: 100vh; overflow: auto; position: sticky; top: 0; }
     [part="toolbar"], [part="sequence"] { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: space-between; margin-block: 0 1rem; }
@@ -99,6 +102,16 @@ template.innerHTML = `
     [part="content"] { max-width: 100%; min-width: 0; overflow-wrap: anywhere; }
     [part="content"] img, [part="content"] svg, [part="content"] canvas { max-width: 100%; }
     [part="content"] pre, [part="content"] table { max-width: 100%; overflow: auto; }
+    :host([outline="hidden"]) [part="page-outline"] { display: none !important; }
+    :host([outline="hidden"]) [part="layout"] { grid-template-columns: minmax(0, 1fr); }
+    :host([outline="hidden"]) [part="layout"]:has(> [part="collection"]:not([hidden])) { grid-template-columns: minmax(11rem, 16rem) minmax(0, 1fr); }
+    :host([outline="inline"]) [part="layout"] { grid-template-columns: minmax(0, 1fr); }
+    :host([outline="inline"]) [part="main"] { display: contents; }
+    :host([outline="inline"]) [part="toolbar"] { order: 1; }
+    :host([outline="inline"]) [part="collection"] { max-height: none; order: 2; position: static; }
+    :host([outline="inline"]) [part="page-outline"] { max-height: none; order: 3; position: static; }
+    :host([outline="inline"]) [part="content"] { min-width: 0; order: 4; }
+    :host([outline="inline"]) [part="sequence"] { order: 5; }
     :host([presentation="embedded"]) [part="layout"] { display: block; }
     :host([presentation="embedded"]) [part="collection"],
     :host([presentation="embedded"]) [part="page-outline"],
@@ -336,7 +349,7 @@ export class MarkdownDocumentElement extends HTMLElement {
 
     private async loadText(source: string, context: MarkdownDocumentContext): Promise<void> {
         this.activeDocument = await this.engine.renderDocument(source, this.contentElement, context);
-        this.prepareEmbeddedLinks();
+        this.prepareLinkTargets();
         this.activeNavigator = new MarkdownNavigator(this.activeDocument, {
             ...(this.getAttribute('presentation') === 'embedded'
                 ? {
@@ -350,7 +363,7 @@ export class MarkdownDocumentElement extends HTMLElement {
                 else if (state === 'error') this.setState('error', cause);
             },
             onCurrentChange: ({ url }) => {
-                this.prepareEmbeddedLinks();
+                this.prepareLinkTargets();
                 const changedDocument = this.lastNavigationUrl !== undefined && this.documentChanged(this.lastNavigationUrl, url);
                 this.renderStandaloneNavigation(url);
                 if (changedDocument) this.focusDocument();
@@ -361,8 +374,8 @@ export class MarkdownDocumentElement extends HTMLElement {
         this.renderStandaloneNavigation(this.activeDocument.sourceUrl);
     }
 
-    private prepareEmbeddedLinks(): void {
-        if (this.getAttribute('presentation') !== 'embedded') return;
+    private prepareLinkTargets(): void {
+        if (this.getAttribute('presentation') !== 'embedded' && this.getAttribute('external-links') !== 'new-tab') return;
         for (const anchor of this.contentElement.querySelectorAll<HTMLAnchorElement>('a[href]')) {
             const reference = anchor.getAttribute('data-markdown-source-href') ?? anchor.getAttribute('href') ?? '';
             if (!isAbsoluteReference(reference)) continue;
@@ -578,7 +591,7 @@ export class MarkdownDocumentElement extends HTMLElement {
         this.renderOutline(this.standaloneOutline, this.activeFragment);
         this.backButton.disabled = !(this.activeNavigator?.canGoBack ?? false);
         this.forwardButton.disabled = !(this.activeNavigator?.canGoForward ?? false);
-        this.toolbarElement.hidden = !this.activeDocument?.sourceUrl;
+        this.toolbarElement.hidden = !this.activeDocument?.sourceUrl && this.getAttribute('outline') !== 'inline';
         this.sequenceElement.hidden = true;
         this.lastNavigationUrl = url ? new URL(url) : undefined;
         this.toggleNavigationAttribute();

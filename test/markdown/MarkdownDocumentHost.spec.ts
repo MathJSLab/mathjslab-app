@@ -79,4 +79,26 @@ describe('MarkdownDocumentHost', () => {
         expect(container.childElementCount).toBe(0);
         await engine.dispose();
     });
+
+    it('configures hidden and inline outline presentations', async () => {
+        const engine = new MarkdownEngine({ profile: 'gfm' });
+        const container = document.createElement('div');
+        document.body.append(container);
+
+        const hidden = await mountMarkdownDocument(container, {
+            engine,
+            markdown: '# Help\n\n[External](https://example.test/reference)',
+            outline: 'hidden',
+            externalLinks: 'new-tab',
+        });
+        expect(hidden.getAttribute('outline')).toBe('hidden');
+        expect(hidden.shadowRoot?.querySelector<HTMLAnchorElement>('a')?.target).toBe('_blank');
+
+        const inline = await mountMarkdownDocument(container, { engine, markdown: '# Lesson', outline: 'inline' });
+        expect(inline.getAttribute('outline')).toBe('inline');
+        expect(inline.shadowRoot?.querySelector<HTMLElement>('[part="toolbar"]')?.hidden).toBe(false);
+
+        await disposeMarkdownDocument(container);
+        await engine.dispose();
+    });
 });

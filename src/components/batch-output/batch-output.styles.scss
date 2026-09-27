@@ -119,6 +119,19 @@
   width: 100%;
 }
 
+.result:has(markdown-document) {
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+}
+
+.result markdown-document {
+  display: block;
+  max-width: 100%;
+  min-width: 0;
+  width: 100%;
+}
+
 .result .plot-output {
   box-sizing: border-box;
   display: block;
@@ -130,6 +143,21 @@
 
 .error {
   color: var(--calc-error, var(--red-text, #b42318));
+}
+
+.file-picker-button {
+  background: var(--calc-control, var(--color-background-mute, #edf1f6));
+  border: 1px solid var(--calc-border, var(--color-border, #cfd7df));
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+}
+
+.file-picker-button:disabled {
+  cursor: wait;
+  opacity: 0.65;
 }
 
 math {

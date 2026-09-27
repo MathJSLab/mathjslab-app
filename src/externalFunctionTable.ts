@@ -1,11 +1,12 @@
 import { type NodeExpr, type BuiltInFunctionTable, CharString, AST } from 'mathjslab';
 import { PlotEngine } from './PlotEngine';
 import { commonExternalFunctionTable } from './commonExternalFunctionTable';
-import { openFileDialog } from './openFileDialog';
+import { createOpenFileButton, openFileDialog } from './openFileDialog';
 import { markdownEngine } from './Markdown';
 import { disposeMarkdownDocument, mountMarkdownDocument } from './markdown/MarkdownDocumentHost';
 import { appEngine, getCommandOutputTarget, withCommandOutputTarget } from './appEngine';
 import { getActiveInterpreter } from './InterpreterRuntime';
+import i18n from './i18n';
 
 const openFileOptionMathJSLab: OpenFilePickerOptions & { multiple?: false | undefined } = {
     multiple: false,
@@ -102,6 +103,9 @@ const externalFunctionTable: BuiltInFunctionTable = {
                     void mountMarkdownDocument(outputTarget.content, {
                         engine: markdownEngine,
                         src: documentUrl,
+                        locale: i18n.locale,
+                        outline: 'inline',
+                        externalLinks: 'new-tab',
                     }).catch(async () => {
                         await disposeMarkdownDocument(outputTarget.content);
                         outputTarget.setState('bad');
@@ -110,17 +114,32 @@ const externalFunctionTable: BuiltInFunctionTable = {
                 }
                 return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeList([url.str]));
             } else {
-                openFileDialog((content: string) => {
-                    outputTarget.setState('doc');
-                    void mountMarkdownDocument(outputTarget.content, {
-                        engine: markdownEngine,
-                        markdown: content,
-                    }).catch(async () => {
-                        await disposeMarkdownDocument(outputTarget.content);
-                        outputTarget.setState('bad');
-                        outputTarget.setText('markdown: error rendering local file');
-                    });
-                }, openFileOptionMarkdown);
+                const button = createOpenFileButton(
+                    i18n.page.page.selectMarkdownFile,
+                    (content: string) => {
+                        outputTarget.setState('doc');
+                        void mountMarkdownDocument(outputTarget.content, {
+                            engine: markdownEngine,
+                            markdown: content,
+                            locale: i18n.locale,
+                            outline: 'inline',
+                            externalLinks: 'new-tab',
+                        }).catch(async () => {
+                            await disposeMarkdownDocument(outputTarget.content);
+                            outputTarget.setState('bad');
+                            outputTarget.setText('markdown: error rendering local file');
+                        });
+                    },
+                    openFileOptionMarkdown,
+                );
+                // The evaluator writes the returned AST after this function
+                // finishes. Install the interactive control immediately after
+                // that synchronous output pass so it is not overwritten.
+                globalThis.queueMicrotask(() => {
+                    outputTarget.setState('info');
+                    outputTarget.clear();
+                    outputTarget.append(button);
+                });
                 return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeListFirst());
             }
         },

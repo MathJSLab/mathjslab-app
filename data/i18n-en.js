@@ -19,6 +19,7 @@ export default {
         readmeFile: 'README.md',
         examples: 'Examples',
         openFile: 'Open...',
+        selectMarkdownFile: 'Select Markdown file...',
         readme: 'More Info',
         githubRepository: 'GitHub Repository',
         curriculum: 'Curriculum',

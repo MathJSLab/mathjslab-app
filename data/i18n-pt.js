@@ -19,6 +19,7 @@ export default {
         readmeFile: 'LEIAME.md',
         examples: 'Exemplos',
         openFile: 'Abrir...',
+        selectMarkdownFile: 'Selecionar arquivo Markdown...',
         readme: 'Mais Informações',
         githubRepository: 'Repositório GitHub',
         curriculum: 'Currículo Lattes',

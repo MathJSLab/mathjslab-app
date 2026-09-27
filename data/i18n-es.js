@@ -19,6 +19,7 @@ export default {
         readmeFile: 'LEAME.md',
         examples: 'Ejemplos',
         openFile: 'Abrir...',
+        selectMarkdownFile: 'Seleccionar archivo Markdown...',
         readme: 'Más información',
         githubRepository: 'Repositorio GitHub',
         curriculum: 'Currículum',

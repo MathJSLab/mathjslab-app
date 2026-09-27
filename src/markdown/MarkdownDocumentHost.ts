@@ -10,6 +10,8 @@ export type MarkdownDocumentHostOptions = {
     readonly theme?: 'light' | 'dark';
     readonly security?: 'trusted' | 'sanitized' | 'strict';
     readonly presentation?: 'document' | 'embedded';
+    readonly outline?: 'sidebar' | 'inline' | 'hidden';
+    readonly externalLinks?: 'same-context' | 'new-tab';
 };
 
 const hostedDocuments = new WeakMap<HTMLElement, MarkdownDocumentElement>();
@@ -34,6 +36,8 @@ export const mountMarkdownDocument = async (container: HTMLElement, options: Mar
     if (options.theme) element.setAttribute('theme', options.theme);
     if (options.security) element.setAttribute('security', options.security);
     if (options.presentation === 'embedded') element.setAttribute('presentation', 'embedded');
+    if (options.outline && options.outline !== 'sidebar') element.setAttribute('outline', options.outline);
+    if (options.externalLinks === 'new-tab') element.setAttribute('external-links', 'new-tab');
     if (options.src !== undefined) element.src = options.src.toString();
     else element.markdown = options.markdown ?? '';
 

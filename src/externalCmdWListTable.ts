@@ -70,7 +70,8 @@ const externalCmdWListTable = {
                                 markdown,
                                 context: { sourceUrl },
                                 locale: i18n.locale,
-                                presentation: 'embedded',
+                                outline: 'hidden',
+                                externalLinks: 'new-tab',
                             });
                         })
                         .catch(async (error) => {
@@ -100,7 +101,8 @@ const externalCmdWListTable = {
                                     .join(', '),
                             context: { sourceUrl: helpUrl },
                             locale: i18n.locale,
-                            presentation: 'embedded',
+                            outline: 'hidden',
+                            externalLinks: 'new-tab',
                         });
                     })
                     .catch(async (error) => {

@@ -18,26 +18,40 @@ function showOpenFilePickerPolyfill(options?: OpenFilePickerOptions): Promise<Fi
     return new Promise((resolve: (value: FileSystemFileHandle[] | PromiseLike<FileSystemFileHandle[]>) => void) => {
         const input = document.createElement('input');
         input.type = 'file';
+        input.hidden = true;
         if (options) {
             input.multiple = !!options.multiple;
-            input.accept = options.types?.flatMap((type) => Object.entries(type.accept ?? {}).flatMap(([_, exts]) => exts)).join(',') ?? '';
+            input.accept = options.types?.flatMap((type) => Object.entries(type.accept ?? {}).flatMap(([mimeType, extensions]) => [mimeType, ...extensions])).join(',') ?? '';
         }
-        input.addEventListener('change', () => {
-            if (!input.files) {
-                resolve([]);
-                return;
-            }
-            const handles = [...input.files].map((file: File) => ({
-                getFile: async () => file,
-                queryPermission: async () => 'granted',
-                requestPermission: async () => 'granted',
-                kind: 'file',
-            })) as FileSystemFileHandle[];
+
+        const finish = (handles: FileSystemFileHandle[]) => {
+            input.remove();
             resolve(handles);
-        });
+        };
+
+        input.addEventListener(
+            'change',
+            () => {
+                if (!input.files) {
+                    finish([]);
+                    return;
+                }
+                const handles = [...input.files].map((file: File) => ({
+                    getFile: async () => file,
+                    queryPermission: async () => 'granted',
+                    requestPermission: async () => 'granted',
+                    kind: 'file',
+                })) as FileSystemFileHandle[];
+                finish(handles);
+            },
+            { once: true },
+        );
+        input.addEventListener('cancel', () => finish([]), { once: true });
+        document.body.append(input);
         input.click();
     });
 }
 if (typeof globalThis.showOpenFilePicker !== 'function') {
     globalThis.showOpenFilePicker = showOpenFilePickerPolyfill;
 }
+export { showOpenFilePickerPolyfill };
