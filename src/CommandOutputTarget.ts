@@ -22,6 +22,13 @@ export interface CommandOutputTarget {
     append(...nodes: (Node | string)[]): void;
     /** Remove all rendered content from the destination. */
     clear(): void;
+    /** Defer a rich renderer until its host is connected to the presentation. */
+    renderRichOutput?(
+        type: string,
+        render: (container: HTMLDivElement) => void | Promise<void>,
+        dispose?: (container: HTMLDivElement) => void | Promise<void>,
+        resize?: (container: HTMLDivElement) => void | Promise<void>,
+    ): void;
 }
 
 /**

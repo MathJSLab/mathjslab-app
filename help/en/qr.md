@@ -23,15 +23,15 @@ For example, given the matrix `A = [1, 2; 3, 4]`,
 
 returns
 
-> > `%Q=[-0.31623,-0.94868;-0.94868,0.31623]%`
+> > %`Q=[-0.31623,-0.94868;-0.94868,0.31623]`%
 
-> > `%R=[-3.16228,-4.42719;0,-0.63246]%`
+> > %`R=[-3.16228,-4.42719;0,-0.63246]`%
 
 which multiplied together return the original matrix
 
 > > `Q * R`
 
-> > `%[1, 2; 3, 4]%`
+> > %`[1, 2; 3, 4]`%
 
 If just a single return value is requested then it is either `R`, if `A` is
 sparse, or `X`, such that `R = triu (X)` if `A` is full. (Note: unlike most
@@ -59,11 +59,11 @@ For example, given the matrix `A = [1, 2; 3, 4]`,
 
 returns
 
-> > `%Q=[-0.44721,-0.89443;-0.89443,0.44721]%`
+> > %`Q=[-0.44721,-0.89443;-0.89443,0.44721]`%
 
-> > `%R=[-4.47214,-3.13050;0.00000,0.44721]%`
+> > %`R=[-4.47214,-3.13050;0.00000,0.44721]`%
 
-> > `%P=[0,1;1,0]%`
+> > %`P=[0,1;1,0]`%
 
 If the input matrix `A` is sparse, the sparse QR factorization is computed by
 using `SPQR` or `CXSPARSE` (e.g., if `SPQR` is notavailable). Because the

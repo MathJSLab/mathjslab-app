@@ -9,7 +9,7 @@ the matrix are nonzero. For example:
 
 > > `any (eye (2, 4))`
 > >
-> > > `%[ 1, 1, 0, 0 ]%`
+> > > %`[ 1, 1, 0, 0 ]`%
 
 If the optional argument `DIM` is supplied, work along dimension `DIM`. For
 example:

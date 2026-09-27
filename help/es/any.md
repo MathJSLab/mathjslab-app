@@ -9,7 +9,7 @@ correspondiente de la matriz es distinto de cero. Por ejemplo:
 
 > > `any (eye (2, 4))`
 
-> > > `%[ 1, 1, 0, 0 ]%`
+> > > %`[ 1, 1, 0, 0 ]`%
 
 Si se proporciona el argumento opcional `DIM`, opera sobre la dimensión `DIM`.
 Por ejemplo:

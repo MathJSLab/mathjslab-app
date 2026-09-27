@@ -10,7 +10,7 @@ import { BatchOutputTarget, type CommandOutputTarget, PromptOutputTarget } from 
 /**
  * Result of parsing multiline editor input.
  */
-export type EvalInputResult = { statements: string[]; lines: string[]; hasError?: boolean };
+export type EvalInputResult = { statements: string[]; lines: string[]; hasError?: boolean; error?: unknown };
 
 /**
  * Input interpreter handler.

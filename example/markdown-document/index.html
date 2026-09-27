@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Markdown Document</title>
+        <style>
+            body {
+                color: #202124;
+                font:
+                    1rem/1.55 system-ui,
+                    sans-serif;
+                margin: 0 auto;
+                max-width: 80rem;
+                padding: 1rem;
+            }
+        </style>
+    </head>
+    <body>
+        <markdown-document locale="pt" security="sanitized"></markdown-document>
+        <script type="module">
+                        import { createEducationalMarkdownEngine } from '../../dist/markdown-document/markdown-document.js';
+
+                        const viewer = document.querySelector('markdown-document');
+                        viewer.engine = createEducationalMarkdownEngine({
+                            features: ['mermaid', 'smiles', 'graphviz', 'vega-lite'],
+                            securityMode: 'sanitized',
+                        });
+                        viewer.markdown = `# Aula independente
+
+            O componente e o engine não dependem do estado da aplicação MathJSLab.
+
+            ```mermaid
+            flowchart LR
+                Markdown --> Aula
+            ```
+            `;
+        </script>
+    </body>
+</html>

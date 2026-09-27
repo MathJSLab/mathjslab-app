@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Markdown document browser fixture</title>
+        <style>
+            body {
+                font-family: system-ui, sans-serif;
+                margin: 1rem;
+            }
+            #narrow {
+                border: 1px solid #888;
+                width: 22rem;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="narrow">
+            <markdown-document id="viewer" locale="en" security="sanitized"></markdown-document>
+        </div>
+        <script type="module">
+            import { createEducationalMarkdownEngine } from '/dist/markdown-document/markdown-document.js';
+
+            const viewer = document.querySelector('#viewer');
+            viewer.engine = createEducationalMarkdownEngine({
+                features: ['mermaid', 'smiles'],
+                securityMode: 'sanitized',
+            });
+            if (new URL(location.href).searchParams.has('manifest')) {
+                viewer.setAttribute('manifest', './course.json');
+            } else {
+                viewer.src = './lesson.md';
+            }
+        </script>
+    </body>
+</html>

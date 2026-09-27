@@ -9,7 +9,7 @@ the matrix are nonzero. For example:
 
 > > `all ([2, 3; 1, 0])`
 > >
-> > > `%[ 1, 0 ]%`
+> > > %`[ 1, 0 ]`%
 
 If the optional argument `DIM` is supplied, work along dimension `DIM`.
 

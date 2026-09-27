@@ -1,0 +1,19 @@
+{
+    "version": 1,
+    "title": "Browser course",
+    "baseUrl": "./",
+    "items": [
+        {
+            "type": "page",
+            "id": "first",
+            "title": "First page",
+            "source": "course-first.md"
+        },
+        {
+            "type": "page",
+            "id": "second",
+            "title": "Second page",
+            "source": "course-second.md"
+        }
+    ]
+}

@@ -1,5 +1,6 @@
 import { appEngine } from './appEngine';
 import type { EvalInputResult } from './CommandWorkspace';
+import type { Interpreter } from 'mathjslab';
 
 /**
  * Parse multiline input and recover the source slices for each top-level
@@ -7,11 +8,11 @@ import type { EvalInputResult } from './CommandWorkspace';
  * @param {string} input Multiline input.
  * @returns {{ statements: string[]; lines: string[] }} An object containing statements and lines.
  */
-function evalInput(input: string): EvalInputResult {
+function evalInputWithInterpreter(interpreter: Interpreter, input: string, reportError = true): EvalInputResult {
     const lines: string[] = input.split(/\r?\n/);
     try {
         const statements: string[] = [];
-        const tree = appEngine.interpreter.Parse(input);
+        const tree = interpreter.Parse(input);
         if (tree) {
             for (let i = 0; i < tree.list.length; i++) {
                 const statement = tree.list[i]!;
@@ -50,9 +51,12 @@ function evalInput(input: string): EvalInputResult {
         }
     } catch (error) {
         // Keep parse errors visible and report them to the workspace status.
-        globalThis.alert(error);
-        return { statements: [], lines, hasError: true };
+        if (reportError) globalThis.alert(error);
+        return { statements: [], lines, hasError: true, error };
     }
 }
-export { evalInput };
+function evalInput(input: string, reportError = true): EvalInputResult {
+    return evalInputWithInterpreter(appEngine.interpreter, input, reportError);
+}
+export { evalInput, evalInputWithInterpreter };
 export default { evalInput };

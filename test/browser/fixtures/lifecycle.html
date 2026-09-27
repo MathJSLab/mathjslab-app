@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Markdown lifecycle fixture</title>
+        <style>
+            markdown-document {
+                display: block;
+                min-height: 10rem;
+                width: min(48rem, 100%);
+            }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            const api = await import('/dist/markdown-document/markdown-document.js');
+            window.markdownTestApi = api;
+            document.body.dataset.ready = 'true';
+        </script>
+    </body>
+</html>

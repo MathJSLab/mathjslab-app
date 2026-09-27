@@ -9,7 +9,7 @@ a la matriz son diferentes de cero. Por ejemplo:
 
 > > `all ([2, 3; 1, 0])`
 > >
-> > > `%[ 1, 0 ]%`
+> > > %`[ 1, 0 ]`%
 
 Se o parámetro opcional `DIM` fornecido, a função opera na dimensão `DIM`.
 

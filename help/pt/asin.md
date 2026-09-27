@@ -4,7 +4,7 @@ Calcula o seno inverso em radianos para cada elemento de `X`.
 
 O seno inverso em radianos é definido por
 
-> > `%asin(z) = i*ln(sqrt(1-z^2)-I*z)%`
+> > %`asin(z) = i*ln(sqrt(1-z^2)-I*z)`%
 
 Veja também: `sin`, `asind`.
 

@@ -1,0 +1,20 @@
+{
+    "documents": [
+        { "file": "extensions/heading-ids.md", "extension": "gfm-heading-ids", "fences": [] },
+        { "file": "extensions/relative-urls.md", "extension": "relative-urls", "fences": [] },
+        { "file": "extensions/syntax-highlight.md", "extension": "syntax-highlight", "fences": [] },
+        { "file": "extensions/mathjax.md", "extension": "mathjax", "fences": ["math"] },
+        { "file": "extensions/mathjslab.md", "extension": "mathjslab", "fences": ["mathjslab"] },
+        { "file": "extensions/mermaid.md", "extension": "mermaid", "fences": ["mermaid"] },
+        { "file": "extensions/smiles.md", "extension": "smiles", "fences": ["smiles"] },
+        { "file": "extensions/abc.md", "extension": "abc-music", "fences": ["abc"], "source": "https://docs.abcjs.net/overview/getting-started" },
+        { "file": "extensions/verovio.md", "extension": "verovio-music", "fences": ["mei", "musicxml"] },
+        { "file": "extensions/maps.md", "extension": "maps", "fences": ["geojson", "topojson"], "source": "https://leafletjs.com/examples/geojson/" },
+        { "file": "extensions/vega-lite.md", "extension": "vega-lite", "fences": ["vega-lite"], "source": "https://vega.github.io/vega-lite/examples/bar.html" },
+        { "file": "extensions/graphviz.md", "extension": "graphviz", "fences": ["dot", "graphviz"], "source": "https://graphviz.org/Gallery/directed/cluster.html" },
+        { "file": "extensions/molecule-3d.md", "extension": "molecule-3d", "fences": ["pdb", "cif", "mmcif", "sdf", "mol2", "xyz", "cube"] },
+        { "file": "extensions/model-3d.md", "extension": "model-3d", "fences": ["stl", "obj", "gltf"] }
+    ],
+    "combined": ["combined/all-extensions.md", "combined/gfm-and-math.md"],
+    "conflicts": ["conflicts/delimiters.md", "conflicts/fences.md"]
+}

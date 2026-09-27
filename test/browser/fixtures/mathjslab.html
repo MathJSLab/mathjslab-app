@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>MathJSLab Markdown fixture</title>
+        <style>
+            markdown-document {
+                display: block;
+                width: min(48rem, 100%);
+            }
+            .test-visualization {
+                background: #def;
+                height: 3rem;
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            const { createEducationalMarkdownEngine, mathJSLabExtension } = await import('/dist/markdown-document/markdown-document.js');
+            const parameters = new URL(location.href).searchParams;
+            const securityMode = parameters.get('security') ?? 'trusted';
+            const allowInRestrictedMode = parameters.get('allow') === 'true';
+            const statistics = { sessions: 0, disposedSessions: 0, mounted: 0, resized: 0, disposedOutputs: 0, diagnostics: [] };
+            const executor = {
+                toMathML(source, display) {
+                    return `<math display="${display}"><mtext>${source}</mtext></math>`;
+                },
+                createSession() {
+                    statistics.sessions++;
+                    const variables = new Map();
+                    return {
+                        parse(source) {
+                            return {
+                                statements: source
+                                    .split(/;|\n/)
+                                    .map((value) => value.trim())
+                                    .filter(Boolean),
+                            };
+                        },
+                        execute(statement) {
+                            if (statement.startsWith('set ')) {
+                                const [name, value] = statement.slice(4).split('=');
+                                variables.set(name.trim(), value.trim());
+                                return { status: 'success', outputs: [{ type: 'text', text: `set:${name.trim()}` }] };
+                            }
+                            if (statement.startsWith('get ')) {
+                                const name = statement.slice(4).trim();
+                                return { status: 'success', outputs: [{ type: 'text', text: `value:${variables.get(name) ?? 'undefined'}` }] };
+                            }
+                            const node = document.createElement('div');
+                            node.className = 'test-visualization';
+                            node.textContent = 'visualization';
+                            return {
+                                status: 'success',
+                                outputs: [
+                                    {
+                                        type: 'node',
+                                        node,
+                                        role: 'visualization',
+                                        mount: () => statistics.mounted++,
+                                        resize: () => statistics.resized++,
+                                        dispose: () => statistics.disposedOutputs++,
+                                    },
+                                ],
+                            };
+                        },
+                        dispose() {
+                            statistics.disposedSessions++;
+                        },
+                    };
+                },
+            };
+            const viewer = document.createElement('markdown-document');
+            viewer.setAttribute('security', securityMode);
+            viewer.engine = createEducationalMarkdownEngine({
+                securityMode,
+                executionPolicy: { mathjslab: { allowInRestrictedMode } },
+                extensions: [mathJSLabExtension(executor)],
+            });
+            viewer.context = { onDiagnostic: (diagnostic) => statistics.diagnostics.push(diagnostic.code) };
+            viewer.markdown = `# Executable lesson
+
+%sqrt(2)%
+
+\`\`\`mathjslab
+set x=one; get x
+\`\`\`
+
+\`\`\`mathjslab
+get x; chart
+\`\`\``;
+            document.body.append(viewer);
+            window.mathJSLabTest = {
+                viewer,
+                statistics,
+                replace() {
+                    viewer.markdown = '# Replacement';
+                },
+                dispose() {
+                    viewer.remove();
+                },
+            };
+        </script>
+    </body>
+</html>

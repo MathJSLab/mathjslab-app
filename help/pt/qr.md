@@ -23,15 +23,15 @@ Por exemplo, dada a matriz `A = [1, 2; 3, 4]`,
 
 retorna
 
-> > `%Q=[-0.31623,-0.94868;-0.94868,0.31623]%`
+> > %`Q=[-0.31623,-0.94868;-0.94868,0.31623]`%
 
-> > `%R=[-3.16228,-4.42719;0,-0.63246]%`
+> > %`R=[-3.16228,-4.42719;0,-0.63246]`%
 
 que, multiplicados entre si, retornam a matriz original
 
 > > `Q * R`
 
-> > `%[1, 2; 3, 4]%`
+> > %`[1, 2; 3, 4]`%
 
 Se apenas um único valor de retorno for solicitado, ele será `R`, se `A` for
 esparsa, ou `X`, tal que `R = triu (X)` se `A` for cheia. (Observação:
@@ -60,11 +60,11 @@ Por exemplo, dada a matriz `A = [1, 2; 3, 4]`,
 
 retorna
 
-> > `%Q=[-0.44721,-0.89443;-0.89443,0.44721]%`
+> > %`Q=[-0.44721,-0.89443;-0.89443,0.44721]`%
 
-> > `%R=[-4.47214,-3.13050;0.00000,0.44721]%`
+> > %`R=[-4.47214,-3.13050;0.00000,0.44721]`%
 
-> > `%P=[0,1;1,0]%`
+> > %`P=[0,1;1,0]`%
 
 Se a matriz de entrada `A` for esparsa, a fatoração QR esparsa é calculada
 usando `SPQR` ou `CXSPARSE` (por exemplo, se `SPQR` não estiver disponível).

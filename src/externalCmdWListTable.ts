@@ -1,6 +1,7 @@
 import { appEngine, getCommandOutputTarget } from './appEngine';
 import i18n from './i18n';
-import { Markdown } from './Markdown';
+import { Markdown, markdownEngine } from './Markdown';
+import { disposeMarkdownDocument, mountMarkdownDocument } from './markdown/MarkdownDocumentHost';
 
 /**
  * External command-form functions that receive the raw command word list from
@@ -52,13 +53,28 @@ const externalCmdWListTable = {
                     outputTarget.setHTML(i18n.page.help.unavailableOfflineHtml);
                 } else {
                     const topic = args[0]!;
-                    loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/${encodeURIComponent(encodeName(topic))}.md`, topic)
-                        .then(async (responseText) => {
-                            outputTarget.setState('info');
-                            outputTarget.setHTML(Markdown.parse(responseText));
-                            await Markdown.typeset(outputTarget.content);
+                    const helpUrl = new URL(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/${encodeURIComponent(encodeName(topic))}.md`, globalThis.location.href);
+                    loadHelpFile(helpUrl.href, topic)
+                        .catch((error: unknown) => {
+                            const userHelp = appEngine.interpreter.GetFunctionHelp(topic);
+                            if (!userHelp) throw error;
+                            const sourceUrl = userHelp.sourceName ? new URL(userHelp.sourceName, globalThis.location.href) : helpUrl;
+                            return { markdown: userHelp.text, sourceUrl };
                         })
-                        .catch((error) => {
+                        .then(async (result) => {
+                            const markdown = typeof result === 'string' ? result : result.markdown;
+                            const sourceUrl = typeof result === 'string' ? helpUrl : result.sourceUrl;
+                            outputTarget.setState('info');
+                            await mountMarkdownDocument(outputTarget.content, {
+                                engine: markdownEngine,
+                                markdown,
+                                context: { sourceUrl },
+                                locale: i18n.locale,
+                                presentation: 'embedded',
+                            });
+                        })
+                        .catch(async (error) => {
+                            await disposeMarkdownDocument(outputTarget.content);
                             outputTarget.setState('bad');
                             outputTarget.setHTML(Markdown.parse((error as Error).message));
                         });
@@ -70,21 +86,25 @@ const externalCmdWListTable = {
                     return;
                 }
                 outputTarget.setState('info');
-                loadHelpFile(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/help.md`, 'help')
+                const helpUrl = new URL(`${appEngine.config.helpBaseUrl}help/${i18n.locale}/help.md`, globalThis.location.href);
+                loadHelpFile(helpUrl.href, 'help')
                     .then(async (responseText) => {
                         outputTarget.setState('info');
-                        outputTarget.setHTML(
-                            Markdown.parse(
+                        await mountMarkdownDocument(outputTarget.content, {
+                            engine: markdownEngine,
+                            markdown:
                                 responseText +
-                                    appEngine.interpreter.context.builtInFunctionList
-                                        .map((func) => `\`${func}\``)
-                                        .sort()
-                                        .join(', '),
-                            ),
-                        );
-                        await Markdown.typeset(outputTarget.content);
+                                appEngine.interpreter.context.builtInFunctionList
+                                    .map((func) => `\`${func}\``)
+                                    .sort()
+                                    .join(', '),
+                            context: { sourceUrl: helpUrl },
+                            locale: i18n.locale,
+                            presentation: 'embedded',
+                        });
                     })
-                    .catch((error) => {
+                    .catch(async (error) => {
+                        await disposeMarkdownDocument(outputTarget.content);
                         outputTarget.setState('bad');
                         outputTarget.setHTML(Markdown.parse((error as Error).message));
                     });

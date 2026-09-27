@@ -13,7 +13,7 @@ diagonal principal. Por ejemplo:
 
 > > `diag([1, 2, 3], 1)`
 
-> > `%[0,1,0,0;0,0,2,0;0,0,0,3;0,0,0,0]%`
+> > %`[0,1,0,0;0,0,2,0;0,0,0,3;0,0,0,0]`%
 
 La forma de 3 argumentos devuelve un array diagonal con el vector `V` en la
 diagonal principal. El array resultante tiene un tamaño de `M` filas x `N`

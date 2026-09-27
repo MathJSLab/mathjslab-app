@@ -87,6 +87,16 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                         use: ['sass-to-string', 'sass-loader'],
                     },
                     {
+                        test: /node_modules[\\/]leaflet[\\/]dist[\\/]leaflet\.css$/i,
+                        resourceQuery: { not: [/inline/] },
+                        use: [isProduction ? MiniCssExtractPlugin.loader : 'style-loader', 'css-loader'],
+                    },
+                    {
+                        test: /\.css$/i,
+                        resourceQuery: /inline/,
+                        type: 'asset/source',
+                    },
+                    {
                         test: /\.(c|sa|sc)ss$/i,
                         exclude: [...defaultExclude, /\.module\.(c|sa|sc)ss$/i, /\.styles\.(c|sa|sc)ss$/i].map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
                         use: [
@@ -106,10 +116,24 @@ export default (env: any, argv: any): webpack.Configuration[] => {
             },
             resolve: {
                 extensions: ['.ts', '.js'],
+                fallback: {
+                    module: false,
+                },
                 extensionAlias: {
                     '.js': ['.js', '.ts'],
                 },
             },
+            // MathJax publishes tex-svg.js as a prebuilt component whose
+            // extension loader intentionally uses a dynamic require(). The
+            // optional Node `module` dependency is disabled above; suppress
+            // only this vendor warning while preserving every other critical
+            // dependency warning.
+            ignoreWarnings: [
+                {
+                    module: /node_modules[\\/]mathjax[\\/]tex-svg\.js$/,
+                    message: /Critical dependency: require function is used in a way in which dependencies cannot be statically extracted/,
+                },
+            ],
             output: {
                 filename: 'mathjslab-app.js',
                 path: path.join(__dirname, 'dist'),
@@ -120,6 +144,11 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                 },
             },
             plugins: [
+                // Verovio's Emscripten module contains a Node-only dynamic
+                // import guarded by its runtime environment check. Omitting
+                // that unreachable browser dependency keeps the WASM chunk
+                // usable without polyfilling Node's module API.
+                new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ }),
                 ...htmlPages.map(
                     (page) =>
                         new HtmlWebpackPlugin({

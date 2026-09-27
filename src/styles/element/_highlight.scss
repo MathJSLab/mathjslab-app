@@ -1,0 +1,50 @@
+pre code.hljs {
+  background: var(--calc-surface, var(--color-background, Canvas));
+  border: 1px solid var(--calc-border, var(--color-border, currentColor));
+  border-radius: 0.35rem;
+  color: var(--color-text, CanvasText);
+  display: block;
+  overflow-x: auto;
+  padding: 0.85rem 1rem;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--color-text-hover, #6a737d);
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: var(--blue-color-text, #0550ae);
+  font-weight: 600;
+}
+
+.hljs-string,
+.hljs-doctag,
+.hljs-regexp,
+.hljs-template-variable {
+  color: var(--green-color-text, #0a7c46);
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-attribute {
+  color: var(--red-color-text, #9a3412);
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-function,
+.hljs-type,
+.hljs-built_in {
+  color: var(--magenta-color-text, #8250df);
+}
+
+.hljs-meta,
+.hljs-symbol,
+.hljs-bullet {
+  color: var(--yellow-color-text, #9a6700);
+}

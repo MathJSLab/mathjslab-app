@@ -13,7 +13,7 @@ equivalent to lexicographic and collexicographic orders, respectively.
 
 ![Row- and column-major order](https://upload.wikimedia.org/wikipedia/commons/4/4d/Row_and_column_major_order.svg "Row- and column-major order")
 
-`%summation(m,1,s,(i(m)-1)*productory(n,1,m-1,d(n)))%`
+%`summation(m,1,s,(i(m)-1)*productory(n,1,m-1,d(n)))`%
 
 ## References
 

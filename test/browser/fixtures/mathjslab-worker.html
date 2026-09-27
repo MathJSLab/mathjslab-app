@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>MathJSLab Worker fixture</title>
+    </head>
+    <body>
+        <script type="module">
+            const { createBrowserMathJSLabWorkerExecutor, createEducationalMarkdownEngine, mathJSLabExtension } = await import('/dist/markdown-document/markdown-document.js');
+            const executor = createBrowserMathJSLabWorkerExecutor({
+                toMathML: (source, display) => `<math display="${display}"><mtext>${source}</mtext></math>`,
+            });
+            const engine = createEducationalMarkdownEngine({ extensions: [mathJSLabExtension(executor)] });
+            const viewer = document.createElement('markdown-document');
+            viewer.engine = engine;
+            viewer.markdown = `# Worker lesson
+
+\`\`\`mathjslab
+x = 41
+\`\`\`
+
+\`\`\`mathjslab
+x + 1
+\`\`\`
+
+\`\`\`mathjslab
+plot([1, 4, 2, 5])
+\`\`\``;
+            document.body.append(viewer);
+            window.mathJSLabWorkerTest = {
+                viewer,
+                async timeoutAndRecover() {
+                    const session = await executor.createSession({});
+                    await session.execute('x = 0', { blockIndex: 0, statementIndex: 0 });
+                    let timeout;
+                    try {
+                        await session.execute('while 1\nx = x + 1\nendwhile', {
+                            blockIndex: 0,
+                            statementIndex: 0,
+                            executionPolicy: { mathjslab: { timeoutMs: 50 } },
+                        });
+                    } catch (error) {
+                        timeout = { name: error.name, code: error.code, message: error.message };
+                    }
+                    const recovery = await session.execute('1 + 1', { blockIndex: 1, statementIndex: 0 });
+                    await session.dispose();
+                    return { timeout, recovery };
+                },
+                async loadRelative() {
+                    const sourceUrl = new URL('/test/browser/fixtures/worker-lesson.md', location.href);
+                    const session = await executor.createSession({ sourceUrl });
+                    const loaded = await session.execute("load('./mathjslab-loaded.m')", { sourceUrl, blockIndex: 0, statementIndex: 0 });
+                    const result = await session.execute('workerLoaded + 1', { sourceUrl, blockIndex: 1, statementIndex: 0 });
+                    await session.dispose();
+                    return { loaded, result };
+                },
+                async loadBlocked() {
+                    const sourceUrl = new URL('/test/browser/fixtures/worker-lesson.md', location.href);
+                    const context = { sourceUrl, resourcePolicy: { allowNetwork: false } };
+                    const session = await executor.createSession(context);
+                    const result = await session.execute("load('./mathjslab-loaded.m')", { ...context, blockIndex: 0, statementIndex: 0 });
+                    await session.dispose();
+                    return result;
+                },
+                async shutdown() {
+                    viewer.remove();
+                    await engine.dispose();
+                },
+            };
+        </script>
+    </body>
+</html>

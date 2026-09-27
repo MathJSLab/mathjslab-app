@@ -13,7 +13,7 @@ exemplo:
 
 > > `diag ([1, 2, 3], 1)`
 
-> > `%[0,1,0,0;0,0,2,0;0,0,0,3;0,0,0,0]%`
+> > %`[0,1,0,0;0,0,2,0;0,0,0,3;0,0,0,0]`%
 
 A forma com 3 argumentos retorna uma matriz diagonal com o vetor `V` na
 diagonal principal e a matriz resultante tem tamanho `M` linhas x `N` colunas.

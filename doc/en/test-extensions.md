@@ -1,4 +1,6 @@
-Testing!
+# Markdown renderer
+
+## Test 1 - mermaid
 
 ```mermaid
 sequenceDiagram
@@ -14,7 +16,7 @@ sequenceDiagram
     Bob-->>John: Jolly good!
 ```
 
-Test 2
+## Test 2 - mermaid
 
 ```mermaid
 graph TD
@@ -23,7 +25,7 @@ graph TD
     B --> D[Server2]
 ```
 
-Another Graph
+## Test 3 - mermaid
 
 ```mermaid
 graph TD
@@ -31,4 +33,17 @@ graph TD
     B(Load Balancer)
     B -->|tcp_456| C[Server1]
     B -->|tcp_456| D[Server2]
+```
+
+## Test 4 - smiles
+
+```smiles
+CN1C=NC2=C1C(=O)N(C(=O)N2C)C
+```
+
+## Test 5 - mathjslab
+
+```mathjslab
+x = linspace(0, 2*pi, 100);
+plot(x, sin(x));
 ```

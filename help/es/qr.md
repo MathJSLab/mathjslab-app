@@ -23,15 +23,15 @@ Por ejemplo, dada la matriz `A = [1, 2; 3, 4]`,
 
 devuelve
 
-> > `%Q=[-0.31623,-0.94868;-0.94868,0.31623]%`
+> > %`Q=[-0.31623,-0.94868;-0.94868,0.31623]`%
 
-> > `%R=[-3.16228,-4.42719;0,-0.63246]%`
+> > %`R=[-3.16228,-4.42719;0,-0.63246]`%
 
 que, al multiplicarse, devuelve la matriz original:
 
 > > `Q * R`
 
-> > `%[1, 2; 3, 4]%`
+> > %`[1, 2; 3, 4]`%
 
 Si solo se solicita un valor de retorno, será `R` si `A` es dispersa, o `X`, de
 modo que `R = triu (X)` si `A` es completa. (Nota: A diferencia de la mayoría
@@ -60,11 +60,11 @@ Por ejemplo, dada la matriz `A = [1, 2; 3, 4]`,
 
 devuelve
 
-> > `%Q=[-0.44721,-0.89443;-0.89443,0.44721]%`
+> > %`Q=[-0.44721,-0.89443;-0.89443,0.44721]`%
 
-> > `%R=[-4.47214,-3.13050;0.00000,0.44721]%`
+> > %`R=[-4.47214,-3.13050;0.00000,0.44721]`%
 
-> > `%P=[0,1;1,0]%`
+> > %`P=[0,1;1,0]`%
 
 Si la matriz de entrada `A` es dispersa, la factorización QR dispersa se
 calcula utilizando `SPQR` o `CXSPARSE` (por ejemplo, si `SPQR` no está

@@ -1,0 +1,14 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "types": ["jest", "node"],
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noEmit": true,
+        "skipLibCheck": true
+    },
+    "include": ["src/**/*.ts", "test/**/*.ts", "types/**/*.d.ts"],
+    "exclude": ["node_modules", "dist", "report"]
+}

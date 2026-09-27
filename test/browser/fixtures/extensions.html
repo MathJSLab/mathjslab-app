@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Markdown extension fixture</title>
+        <style>
+            body {
+                font-family: system-ui, sans-serif;
+                margin: 1rem;
+            }
+            markdown-document {
+                display: block;
+                margin-block: 1rem;
+                min-height: 10rem;
+                width: min(48rem, 100%);
+            }
+        </style>
+    </head>
+    <body>
+        <script type="module">
+            import { createEducationalMarkdownEngine } from '/dist/markdown-document/markdown-document.js';
+
+            const parameters = new URL(location.href).searchParams;
+            const features = parameters.get('features')?.split(',').filter(Boolean) ?? [];
+            const source = parameters.get('src') ?? './extensions-core.md';
+            const instances = Number.parseInt(parameters.get('instances') ?? '1', 10);
+            for (let index = 0; index < instances; index++) {
+                const viewer = document.createElement('markdown-document');
+                viewer.setAttribute('locale', 'en');
+                viewer.setAttribute('security', 'sanitized');
+                viewer.engine = createEducationalMarkdownEngine({ features, securityMode: 'sanitized' });
+                viewer.src = source;
+                document.body.append(viewer);
+            }
+        </script>
+    </body>
+</html>

@@ -5,6 +5,8 @@ import { evalCommand, evalPrompt } from './evalPrompt';
 import { Shell } from './Shell';
 import { appEngine } from './appEngine';
 import i18n from './i18n';
+import { markdownEngine } from './Markdown';
+import { mountMarkdownDocument } from './markdown/MarkdownDocumentHost';
 import { type AppearanceMode, type AppearanceModeToggleEvent } from './components/appearance-mode/appearance-mode.component';
 import { type LanguageSwitcher, type LanguageSwitcherSelectEvent } from './components/language-switcher/language-switcher.component';
 import './main.scss';
@@ -104,12 +106,18 @@ const loadReadme = async (): Promise<void> => {
         return;
     }
     try {
-        const response = await globalThis.fetch(new URL(`/${i18n.page.page.readmeFile}`, globalThis.location.href));
+        const readmeUrl = new URL(`/${i18n.page.page.readmeFile}`, globalThis.location.href);
+        const response = await globalThis.fetch(readmeUrl);
         if (!response.ok) {
             throw new URIError(i18n.page.error.loadTextNetwork);
         }
-        byId('mathjslab-readme').innerHTML = appEngine.Markdown.parse(await response.text());
-        await appEngine.Markdown.typeset(byId('mathjslab-readme'));
+        await mountMarkdownDocument(byId('mathjslab-readme'), {
+            engine: markdownEngine,
+            markdown: await response.text(),
+            context: { sourceUrl: readmeUrl },
+            locale: i18n.locale,
+            theme: currentTheme(),
+        });
     } catch (error) {
         console.error(error);
     }

@@ -1,0 +1,62 @@
+name: Markdown engine
+
+on:
+  push:
+    paths:
+      - 'src/markdown/**'
+      - 'src/components/markdown-document/**'
+      - 'src/MarkdownEngine.ts'
+      - 'src/markdown-document.ts'
+      - 'test/browser/**'
+      - 'test/markdown/**'
+      - 'playwright.config.ts'
+      - 'webpack.markdown.config.ts'
+      - 'package.json'
+      - '.github/workflows/markdown-engine.yml'
+  pull_request:
+    paths:
+      - 'src/markdown/**'
+      - 'src/components/markdown-document/**'
+      - 'src/MarkdownEngine.ts'
+      - 'src/markdown-document.ts'
+      - 'test/browser/**'
+      - 'test/markdown/**'
+      - 'playwright.config.ts'
+      - 'webpack.markdown.config.ts'
+      - 'package.json'
+      - '.github/workflows/markdown-engine.yml'
+  workflow_dispatch:
+
+jobs:
+  compatibility:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CI: 'true'
+      MARKDOWN_BROWSER_PROJECTS: all
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install dependencies
+        run: npm install --ignore-scripts
+      - name: Install browser engines
+        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Run Markdown unit tests
+        run: npm test
+      - name: Build standalone component
+        run: npm run build:markdown-component
+      - name: Measure optional chunks
+        run: npm run measure:markdown
+      - name: Run browser compatibility matrix
+        run: npx playwright test --workers=1
+      - name: Upload browser diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: markdown-playwright-diagnostics
+          path: |
+            playwright-report
+            test-results/playwright
+          if-no-files-found: ignore

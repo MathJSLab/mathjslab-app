@@ -13,7 +13,7 @@ main diagonal. For example:
 
 > > `diag ([1, 2, 3], 1)`
 
-> > `%[0,1,0,0;0,0,2,0;0,0,0,3;0,0,0,0]%`
+> > %`[0,1,0,0;0,0,2,0;0,0,0,3;0,0,0,0]`%
 
 The 3-input form returns a diagonal matrix with vector `V` on the main diagonal
 and the resulting matrix being of size `M` rows x `N` columns.

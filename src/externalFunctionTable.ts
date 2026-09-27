@@ -1,10 +1,11 @@
 import { type NodeExpr, type BuiltInFunctionTable, CharString, AST } from 'mathjslab';
-import { insertOutput } from './outputFunction';
 import { PlotEngine } from './PlotEngine';
 import { commonExternalFunctionTable } from './commonExternalFunctionTable';
 import { openFileDialog } from './openFileDialog';
-import { Markdown } from './Markdown';
+import { markdownEngine } from './Markdown';
+import { disposeMarkdownDocument, mountMarkdownDocument } from './markdown/MarkdownDocumentHost';
 import { appEngine, getCommandOutputTarget, withCommandOutputTarget } from './appEngine';
+import { getActiveInterpreter } from './InterpreterRuntime';
 
 const openFileOptionMathJSLab: OpenFilePickerOptions & { multiple?: false | undefined } = {
     multiple: false,
@@ -96,32 +97,29 @@ const externalFunctionTable: BuiltInFunctionTable = {
                 } else {
                     // Resolve document paths one directory above the localized page.
                     const baseUrl = new URL('../', globalThis.location.href);
-                    globalThis
-                        .fetch(new URL(url.str, baseUrl))
-                        .then((response) => {
-                            if (response.ok) {
-                                return response.text();
-                            } else {
-                                throw new URIError('Load error.');
-                            }
-                        })
-                        .then(async (responseFile: string) => {
-                            outputTarget.setState('doc');
-                            outputTarget.setHTML(Markdown.parse(responseFile));
-                            await Markdown.typeset(outputTarget.content);
-                        })
-                        /* eslint-disable-next-line  @typescript-eslint/no-unused-vars */
-                        .catch((error) => {
-                            outputTarget.setState('bad');
-                            outputTarget.setHTML(`markdown: error loading ${url.str}`);
-                        });
+                    const documentUrl = new URL(url.str, baseUrl);
+                    outputTarget.setState('doc');
+                    void mountMarkdownDocument(outputTarget.content, {
+                        engine: markdownEngine,
+                        src: documentUrl,
+                    }).catch(async () => {
+                        await disposeMarkdownDocument(outputTarget.content);
+                        outputTarget.setState('bad');
+                        outputTarget.setHTML(`markdown: error loading ${url.str}`);
+                    });
                 }
                 return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeList([url.str]));
             } else {
                 openFileDialog((content: string) => {
                     outputTarget.setState('doc');
-                    outputTarget.setHTML(Markdown.parse(content));
-                    void Markdown.typeset(outputTarget.content);
+                    void mountMarkdownDocument(outputTarget.content, {
+                        engine: markdownEngine,
+                        markdown: content,
+                    }).catch(async () => {
+                        await disposeMarkdownDocument(outputTarget.content);
+                        outputTarget.setState('bad');
+                        outputTarget.setText('markdown: error rendering local file');
+                    });
                 }, openFileOptionMarkdown);
                 return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeListFirst());
             }
@@ -134,17 +132,17 @@ const externalFunctionTable: BuiltInFunctionTable = {
         mapper: false,
         ev: [true],
         func: (...url: CharString[]): NodeExpr => {
+            const interpreter = getActiveInterpreter();
             const outputTarget = getCommandOutputTarget();
             const loadContent = (content: string, name: string) => {
                 let error: boolean = false;
                 let errorMessage: string = '';
-                insertOutput.type = '';
                 outputTarget.clear();
                 try {
                     withCommandOutputTarget(outputTarget, () => {
-                        const tree = appEngine.interpreter.Parse(content);
+                        const tree = interpreter.Parse(content);
                         if (tree) {
-                            appEngine.interpreter.Evaluate(tree);
+                            interpreter.Evaluate(tree);
                         }
                     });
                 } catch (e) {

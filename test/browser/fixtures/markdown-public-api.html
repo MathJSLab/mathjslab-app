@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Markdown public API entrypoints</title>
+    </head>
+    <body>
+        <script type="module">
+            const [core, component, extensions, mathjslab, worker] = await Promise.all([
+                import('/dist/markdown-document/core.js'),
+                import('/dist/markdown-document/component.js'),
+                import('/dist/markdown-document/extensions.js'),
+                import('/dist/markdown-document/mathjslab.js'),
+                import('/dist/markdown-document/mathjslab-worker.js'),
+            ]);
+            window.markdownPublicApiTest = {
+                core: typeof core.MarkdownEngine === 'function' && !('MarkdownDocumentElement' in core),
+                component: typeof component.MarkdownDocumentElement === 'function' && !('MarkdownEngine' in component),
+                componentUnregistered: customElements.get('markdown-document') === undefined,
+                extensions: typeof extensions.mermaidExtension === 'function' && !('mathJSLabExtension' in extensions),
+                mathjslab: typeof mathjslab.mathJSLabExtension === 'function' && !('MathJSLabWorkerRuntime' in mathjslab),
+                worker: typeof worker.MathJSLabWorkerRuntime === 'function' && !('mathJSLabExtension' in worker),
+            };
+            const registration = await import('/dist/markdown-document/component-register.js');
+            window.markdownPublicApiTest.componentRegistered = customElements.get('markdown-document') === registration.MarkdownDocumentElement;
+            document.body.dataset.ready = 'true';
+        </script>
+    </body>
+</html>

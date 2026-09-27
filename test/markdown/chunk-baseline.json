@@ -1,0 +1,424 @@
+{
+    "generatedAt": "2026-09-18T17:55:57.661Z",
+    "mode": "production-minified",
+    "output": "dist/markdown-document",
+    "initial": {
+        "bytes": 228167,
+        "gzipBytes": 72356,
+        "files": [
+            {
+                "name": "markdown-document.js",
+                "bytes": 228167,
+                "gzipBytes": 72356
+            }
+        ]
+    },
+    "resources": {
+        "abc": {
+            "bytes": 509041,
+            "gzipBytes": 147203,
+            "files": [
+                {
+                    "name": "chunks/markdown-abc.e9270148.js",
+                    "bytes": 509041,
+                    "gzipBytes": 147203
+                }
+            ]
+        },
+        "graphviz": {
+            "bytes": 1323747,
+            "gzipBytes": 480893,
+            "files": [
+                {
+                    "name": "chunks/markdown-graphviz.d279a9fa.js",
+                    "bytes": 1323747,
+                    "gzipBytes": 480893
+                }
+            ]
+        },
+        "maps": {
+            "bytes": 172633,
+            "gzipBytes": 48625,
+            "files": [
+                {
+                    "name": "chunks/markdown-maps.f498e56e.js",
+                    "bytes": 172633,
+                    "gzipBytes": 48625
+                }
+            ]
+        },
+        "mathjax": {
+            "bytes": 2160064,
+            "gzipBytes": 670505,
+            "files": [
+                {
+                    "name": "chunks/markdown-mathjax.ecb14e33.js",
+                    "bytes": 2160064,
+                    "gzipBytes": 670505
+                }
+            ]
+        },
+        "mermaid": {
+            "bytes": 720455,
+            "gzipBytes": 174442,
+            "files": [
+                {
+                    "name": "chunks/markdown-mermaid.e60be6cc.js",
+                    "bytes": 720455,
+                    "gzipBytes": 174442
+                }
+            ]
+        },
+        "model-3d": {
+            "bytes": 832450,
+            "gzipBytes": 207615,
+            "files": [
+                {
+                    "name": "chunks/markdown-model-3d.8c581cd2.js",
+                    "bytes": 832450,
+                    "gzipBytes": 207615
+                }
+            ]
+        },
+        "molecule-3d": {
+            "bytes": 575907,
+            "gzipBytes": 161858,
+            "files": [
+                {
+                    "name": "chunks/markdown-molecule-3d.e3679304.js",
+                    "bytes": 575907,
+                    "gzipBytes": 161858
+                }
+            ]
+        },
+        "smiles": {
+            "bytes": 190836,
+            "gzipBytes": 55481,
+            "files": [
+                {
+                    "name": "chunks/markdown-smiles.f57821ae.js",
+                    "bytes": 190836,
+                    "gzipBytes": 55481
+                }
+            ]
+        },
+        "vega-lite": {
+            "bytes": 867884,
+            "gzipBytes": 292110,
+            "files": [
+                {
+                    "name": "chunks/markdown-vega-lite.23590384.js",
+                    "bytes": 867884,
+                    "gzipBytes": 292110
+                }
+            ]
+        },
+        "verovio": {
+            "bytes": 8097192,
+            "gzipBytes": 2385720,
+            "files": [
+                {
+                    "name": "chunks/markdown-verovio.5e9ab57a.js",
+                    "bytes": 8097192,
+                    "gzipBytes": 2385720
+                }
+            ]
+        }
+    },
+    "shared": {
+        "bytes": 14591907,
+        "gzipBytes": 3528941,
+        "files": [
+            {
+                "name": "chunks/1019.f1f3552a.js",
+                "bytes": 674120,
+                "gzipBytes": 144793
+            },
+            {
+                "name": "chunks/1238.b1ad8260.js",
+                "bytes": 43312,
+                "gzipBytes": 11603
+            },
+            {
+                "name": "chunks/1493.a7f5131d.js",
+                "bytes": 26123,
+                "gzipBytes": 8880
+            },
+            {
+                "name": "chunks/1819.f0fe416f.js",
+                "bytes": 31750,
+                "gzipBytes": 10002
+            },
+            {
+                "name": "chunks/1898.70776164.js",
+                "bytes": 85758,
+                "gzipBytes": 28418
+            },
+            {
+                "name": "chunks/2130.5dec0fe7.js",
+                "bytes": 262448,
+                "gzipBytes": 76433
+            },
+            {
+                "name": "chunks/2180.e1f1ec84.js",
+                "bytes": 512840,
+                "gzipBytes": 156283
+            },
+            {
+                "name": "chunks/2208.6cad7139.js",
+                "bytes": 703649,
+                "gzipBytes": 152983
+            },
+            {
+                "name": "chunks/2223.2873b0ca.js",
+                "bytes": 154,
+                "gzipBytes": 138
+            },
+            {
+                "name": "chunks/2355.1a49a3f9.js",
+                "bytes": 158,
+                "gzipBytes": 143
+            },
+            {
+                "name": "chunks/2840.dd7576c0.js",
+                "bytes": 17661,
+                "gzipBytes": 6467
+            },
+            {
+                "name": "chunks/3327.3559cdde.js",
+                "bytes": 152,
+                "gzipBytes": 140
+            },
+            {
+                "name": "chunks/3711.66abd87e.js",
+                "bytes": 190780,
+                "gzipBytes": 49293
+            },
+            {
+                "name": "chunks/406.52053bdc.js",
+                "bytes": 23919,
+                "gzipBytes": 8116
+            },
+            {
+                "name": "chunks/4142.a63f8557.js",
+                "bytes": 153,
+                "gzipBytes": 139
+            },
+            {
+                "name": "chunks/4638.35773022.js",
+                "bytes": 682153,
+                "gzipBytes": 148069
+            },
+            {
+                "name": "chunks/4738.c55b6019.js",
+                "bytes": 685323,
+                "gzipBytes": 148422
+            },
+            {
+                "name": "chunks/4773.2f1abcb4.js",
+                "bytes": 20518,
+                "gzipBytes": 7214
+            },
+            {
+                "name": "chunks/4810.6ea5a370.js",
+                "bytes": 83548,
+                "gzipBytes": 25820
+            },
+            {
+                "name": "chunks/510.692f5c53.js",
+                "bytes": 1539369,
+                "gzipBytes": 460253
+            },
+            {
+                "name": "chunks/5137.83183abe.js",
+                "bytes": 987,
+                "gzipBytes": 543
+            },
+            {
+                "name": "chunks/5289.72aeb635.js",
+                "bytes": 65735,
+                "gzipBytes": 21298
+            },
+            {
+                "name": "chunks/5448.283921da.js",
+                "bytes": 699300,
+                "gzipBytes": 150866
+            },
+            {
+                "name": "chunks/5487.e71c24ab.js",
+                "bytes": 679972,
+                "gzipBytes": 147026
+            },
+            {
+                "name": "chunks/5567.6faeba62.js",
+                "bytes": 691687,
+                "gzipBytes": 149360
+            },
+            {
+                "name": "chunks/5698.28913a92.js",
+                "bytes": 65958,
+                "gzipBytes": 21354
+            },
+            {
+                "name": "chunks/5784.9c913e07.js",
+                "bytes": 157,
+                "gzipBytes": 142
+            },
+            {
+                "name": "chunks/6180.3b157b5e.js",
+                "bytes": 31200,
+                "gzipBytes": 9918
+            },
+            {
+                "name": "chunks/6389.bec81d27.js",
+                "bytes": 49440,
+                "gzipBytes": 16069
+            },
+            {
+                "name": "chunks/6445.dfc85712.js",
+                "bytes": 150,
+                "gzipBytes": 137
+            },
+            {
+                "name": "chunks/6480.a0d5df18.js",
+                "bytes": 158,
+                "gzipBytes": 143
+            },
+            {
+                "name": "chunks/6483.83f3189e.js",
+                "bytes": 154670,
+                "gzipBytes": 50092
+            },
+            {
+                "name": "chunks/6699.e5df3637.js",
+                "bytes": 678022,
+                "gzipBytes": 146276
+            },
+            {
+                "name": "chunks/6936.c5cae64b.js",
+                "bytes": 41836,
+                "gzipBytes": 15014
+            },
+            {
+                "name": "chunks/7034.ace433f8.js",
+                "bytes": 691440,
+                "gzipBytes": 149343
+            },
+            {
+                "name": "chunks/7089.7beaf1a6.js",
+                "bytes": 158,
+                "gzipBytes": 142
+            },
+            {
+                "name": "chunks/7118.d695a381.js",
+                "bytes": 23053,
+                "gzipBytes": 8160
+            },
+            {
+                "name": "chunks/7280.964bd276.js",
+                "bytes": 120611,
+                "gzipBytes": 31767
+            },
+            {
+                "name": "chunks/7335.b7fd8c55.js",
+                "bytes": 43868,
+                "gzipBytes": 14543
+            },
+            {
+                "name": "chunks/7475.0b7aa9f1.js",
+                "bytes": 683894,
+                "gzipBytes": 147937
+            },
+            {
+                "name": "chunks/7599.2598d285.js",
+                "bytes": 31101,
+                "gzipBytes": 10790
+            },
+            {
+                "name": "chunks/7632.e9ce4133.js",
+                "bytes": 153,
+                "gzipBytes": 141
+            },
+            {
+                "name": "chunks/7636.8d6a7f77.js",
+                "bytes": 153,
+                "gzipBytes": 140
+            },
+            {
+                "name": "chunks/7834.f9ddceb5.js",
+                "bytes": 678701,
+                "gzipBytes": 146562
+            },
+            {
+                "name": "chunks/791.8c72fe91.js",
+                "bytes": 33872,
+                "gzipBytes": 9676
+            },
+            {
+                "name": "chunks/8365.28dcc394.js",
+                "bytes": 151,
+                "gzipBytes": 137
+            },
+            {
+                "name": "chunks/8726.473d2d40.js",
+                "bytes": 52768,
+                "gzipBytes": 17012
+            },
+            {
+                "name": "chunks/884.ec971ea3.js",
+                "bytes": 151,
+                "gzipBytes": 136
+            },
+            {
+                "name": "chunks/8931.f17212b3.js",
+                "bytes": 691644,
+                "gzipBytes": 149388
+            },
+            {
+                "name": "chunks/9035.0f6e671a.js",
+                "bytes": 158,
+                "gzipBytes": 144
+            },
+            {
+                "name": "chunks/9252.3c80b0a7.js",
+                "bytes": 691259,
+                "gzipBytes": 149229
+            },
+            {
+                "name": "chunks/9301.d9a1e287.js",
+                "bytes": 67708,
+                "gzipBytes": 19146
+            },
+            {
+                "name": "chunks/9418.97efa713.js",
+                "bytes": 28914,
+                "gzipBytes": 10806
+            },
+            {
+                "name": "chunks/944.51cb3190.js",
+                "bytes": 684598,
+                "gzipBytes": 148536
+            },
+            {
+                "name": "chunks/9590.8270d8d8.js",
+                "bytes": 149,
+                "gzipBytes": 135
+            },
+            {
+                "name": "chunks/9827.d2449b1d.js",
+                "bytes": 1254559,
+                "gzipBytes": 320797
+            },
+            {
+                "name": "chunks/9936.ff055e2e.js",
+                "bytes": 69530,
+                "gzipBytes": 22288
+            },
+            {
+                "name": "chunks/9945.a611745c.js",
+                "bytes": 154,
+                "gzipBytes": 139
+            }
+        ]
+    }
+}

@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.10.0
+
+- Added the reusable public Markdown engine and `<markdown-document>`
+  component, with document navigation, safe absolute-link handling, MathJax,
+  syntax highlighting, GFM, diagrams, maps, music notation, molecules, 3D
+  models, Vega-Lite, and other opt-in educational extensions.
+- Integrated executable MathJSLab Markdown blocks with the public asynchronous
+  `mathjslab` runtime, isolated Worker sessions, cancellation, timeout
+  recovery, mediated resources, and serializable plot output rendered on the
+  main thread.
+- Deferred Plotly loading to main-thread rendering and made plot value
+  recognition safe across the distinct core and runtime bundles used by
+  Worker sessions.
+- Expanded `help` so user-defined functions can render their leading source
+  comments and links navigate correctly inside Markdown documents or open
+  absolute destinations in a separate browser tab.
+- Added compatibility, legacy, and browser coverage for the Markdown engine and
+  component, together with representative extension documents and examples.
+- Updated dependencies to `mathjslab` 2.6.1 and the current shared organization
+  resources.
+
 ## 1.9.4
 
 - Dependencies Updated (`mathjslab` 2.5.4).
