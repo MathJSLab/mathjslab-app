@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.10.2
+
+- Replaced the unavailable `@types/node` 24.19.0 release with the
+  registry-verified 24.10.1 release so clean Netlify installations succeed.
+
 ## 1.10.1
 
 - Fixed Netlify dependency installation by pinning `@types/node` to the

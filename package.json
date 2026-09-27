@@ -1,6 +1,6 @@
 {
     "name": "mathjslab-app",
-    "version": "1.10.1",
+    "version": "1.10.2",
     "description": "MathJSLab - An interpreter with language syntax like MATLAB®/Octave, ISBN 978-65-00-82338-7. A demo application from the mathjslab npm package, ISBN 978-65-00-84828-1.",
     "repository": {
         "type": "git",
@@ -111,7 +111,7 @@
         "@types/eslint-config-prettier": "^6.11.3",
         "@types/jest": "^30.0.0",
         "@types/leaflet": "1.9.22",
-        "@types/node": "24.19.0",
+        "@types/node": "24.10.1",
         "@types/plotly.js-dist-min": "^2.3.4",
         "@types/three": "0.186.0",
         "@types/topojson-client": "3.1.5",
