@@ -47,6 +47,40 @@ const fetchContext = (requests: string[]) => ({
 });
 
 describe('Markdown document controller', () => {
+    it('keeps the external signal linked to the initially rendered document until disposal', async () => {
+        const { engine, container, model, requests } = createFixture();
+        const abort = new AbortController();
+        const controller = await MarkdownDocumentController.create(engine, container, model, { context: { ...fetchContext(requests), signal: abort.signal } });
+        abort.abort();
+        expect(controller.document?.signal.aborted).toBe(true);
+        await controller.dispose();
+        await engine.dispose();
+    });
+    it('cancels initial rendering when disposed after fetch and before HTML publication', async () => {
+        const { engine, container, model, requests } = createFixture();
+        let started!: () => void;
+        let finish!: (html: string) => void;
+        const rendering = new Promise<void>((resolve) => (started = resolve));
+        const html = new Promise<string>((resolve) => (finish = resolve));
+        engine.renderHTML = async () => {
+            started();
+            return html;
+        };
+        const controller = new MarkdownDocumentController(engine, container, model, { context: fetchContext(requests) });
+        const published: string[] = [];
+        const observer = new MutationObserver(() => published.push(container.textContent ?? ''));
+        observer.observe(container, { childList: true, subtree: true });
+        const initialization = controller.initialize();
+        await rendering;
+        await controller.dispose();
+        finish('<h1>Too late</h1>');
+        await initialization;
+        observer.disconnect();
+        expect(published.some((value) => value.includes('Too late'))).toBe(false);
+        expect(controller.document).toBeUndefined();
+        expect(controller.snapshot.state).toBe('disposed');
+        await engine.dispose();
+    });
     it('loads the initial page and publishes page and document summaries', async () => {
         const { engine, container, model, requests } = createFixture();
         const changes: MarkdownControllerSnapshot[] = [];

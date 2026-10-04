@@ -1,4 +1,4 @@
-import type { MarkdownExtension } from '../../../MarkdownEngine';
+import type { MarkdownDocumentContext, MarkdownExtension } from '../../../MarkdownEngine';
 import { smilesManifest } from './manifest';
 
 type SmilesDrawerApi = typeof import('smiles-drawer').default;
@@ -13,9 +13,10 @@ export const smilesExtension = (): MarkdownExtension => {
         return loading;
     };
 
-    const render = async (container: Element, source: string): Promise<void> => {
+    const render = async (container: Element, source: string, context: MarkdownDocumentContext): Promise<void> => {
         try {
             const SmilesDrawer = await load();
+            if (context.signal?.aborted) return;
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.id = `mathjslab-smiles-${++sequence}`;
             const drawer = new SmilesDrawer.SvgDrawer({ width: 500, height: 300 });
@@ -33,11 +34,13 @@ export const smilesExtension = (): MarkdownExtension => {
                     reject,
                 );
             });
+            if (context.signal?.aborted) return;
             svg.setAttribute('role', 'img');
             svg.setAttribute('aria-label', `SMILES: ${source.trim()}`);
             container.replaceChildren(svg);
             rendered.add(container);
         } catch (error) {
+            if (context.signal?.aborted) return;
             const message = document.createElement('pre');
             message.className = 'smiles-error';
             message.setAttribute('role', 'alert');

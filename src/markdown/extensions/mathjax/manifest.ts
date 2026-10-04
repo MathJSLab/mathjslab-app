@@ -6,6 +6,7 @@ export const mathJaxManifest = {
     dependencies: ['mathjax'],
     fences: [{ language: 'math', className: 'mathjax-pending' }],
     interactive: true,
+    capabilities: ['interactive'],
     styles: `
 .mathjax-pending { box-sizing: border-box; max-width: 100%; overflow-x: auto; }
 .mathjax-pending > svg { height: auto; max-width: 100%; }

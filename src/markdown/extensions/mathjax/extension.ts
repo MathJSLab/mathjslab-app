@@ -1,4 +1,5 @@
 import type { MarkdownExtension } from '../../../MarkdownEngine';
+import { isMarkdownNodeWithin } from '../../lifecycle';
 import { mathJaxManifest } from './manifest';
 
 type MathToken = {
@@ -88,6 +89,16 @@ export const mathJaxExtension = (): MarkdownExtension => {
     let mathJax: MathJaxApi | undefined;
     const rendered = new Set<Element>();
 
+    const disposeContainer = (container: ParentNode): void => {
+        const owned = Array.from(rendered).filter((element) => isMarkdownNodeWithin(container, element));
+        if (owned.length === 0) return;
+        mathJax?.typesetClear?.(owned);
+        for (const element of owned) {
+            rendered.delete(element);
+            element.replaceChildren();
+        }
+    };
+
     const loadMathJax = async (): Promise<MathJaxApi> => {
         if (globalThis.MathJax && typeof (globalThis.MathJax as MathJaxApi).typesetPromise === 'function') {
             mathJax = globalThis.MathJax as MathJaxApi;
@@ -156,10 +167,14 @@ export const mathJaxExtension = (): MarkdownExtension => {
                 }
             }
         },
+        disposeContainer,
         dispose() {
-            mathJax?.typesetClear?.(Array.from(rendered));
-            for (const element of rendered) element.replaceChildren();
-            rendered.clear();
+            const remaining = Array.from(rendered);
+            mathJax?.typesetClear?.(remaining);
+            for (const element of remaining) {
+                rendered.delete(element);
+                element.replaceChildren();
+            }
             mathJaxLoading = undefined;
             mathJax = undefined;
         },

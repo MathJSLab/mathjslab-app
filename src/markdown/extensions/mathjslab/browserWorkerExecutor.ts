@@ -38,7 +38,8 @@ const statementSources = (interpreter: Interpreter, source: string): string[] =>
 export const createBrowserMathJSLabWorkerExecutor = (options: BrowserMathJSLabWorkerExecutorOptions): MathJSLabExecutor => {
     const contexts = new Map<string, MarkdownDocumentContext>();
     const fallbackResources = new DefaultMarkdownResourceService();
-    const storage = new Map<string, unknown>();
+    const storage = new Map<string, Map<string, unknown>>();
+    let disposal: Promise<void> | undefined;
     const host: RuntimeHost = {
         async request(effect, context) {
             const documentContext = contexts.get(context.sessionId);
@@ -49,9 +50,11 @@ export const createBrowserMathJSLabWorkerExecutor = (options: BrowserMathJSLabWo
                 case 'read-binary':
                     throw new Error('Binary resources are not enabled by the Markdown adapter.');
                 case 'storage-get':
-                    return { value: storage.get(effect.key) };
+                    return { value: storage.get(context.sessionId)?.get(effect.key) };
                 case 'storage-set':
-                    storage.set(effect.key, effect.value);
+                    let sessionStorage = storage.get(context.sessionId);
+                    if (!sessionStorage) storage.set(context.sessionId, (sessionStorage = new Map()));
+                    sessionStorage.set(effect.key, effect.value);
                     return {};
                 case 'clock-now':
                     return { value: Date.now() };
@@ -86,7 +89,15 @@ export const createBrowserMathJSLabWorkerExecutor = (options: BrowserMathJSLabWo
         async createSession(context) {
             const sessionId = `markdown-${executorId}-${++sessionSequence}`;
             contexts.set(sessionId, context);
-            const session = await runtime.createSession({ id: sessionId, parfor: 'fallback' });
+            let session: Awaited<ReturnType<typeof runtime.createSession>>;
+            try {
+                session = await runtime.createSession({ id: sessionId, parfor: 'fallback' });
+            } catch (error) {
+                contexts.delete(sessionId);
+                storage.delete(sessionId);
+                throw error;
+            }
+            let sessionDisposal: Promise<void> | undefined;
             return {
                 async parse(source, activeContext) {
                     contexts.set(sessionId, activeContext);
@@ -112,15 +123,26 @@ export const createBrowserMathJSLabWorkerExecutor = (options: BrowserMathJSLabWo
                     };
                 },
                 async dispose() {
+                    if (sessionDisposal) return sessionDisposal;
                     contexts.delete(sessionId);
-                    await session.dispose();
+                    storage.delete(sessionId);
+                    sessionDisposal = Promise.resolve().then(() => session.dispose());
+                    return sessionDisposal;
                 },
             };
         },
-        async dispose() {
+        dispose() {
+            if (disposal) return disposal;
             contexts.clear();
-            await runtime.dispose();
-            fallbackResources.dispose();
+            storage.clear();
+            disposal = Promise.resolve().then(async () => {
+                try {
+                    await runtime.dispose();
+                } finally {
+                    fallbackResources.dispose();
+                }
+            });
+            return disposal;
         },
     };
 };

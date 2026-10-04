@@ -30,14 +30,21 @@ export const verovioExtension = (): MarkdownExtension => {
             toolkit = new Toolkit(module);
             toolkit.setOptions({ inputFrom: language, svgViewBox: true, adjustPageHeight: true, scale: 35 });
             if (!toolkit.loadData(source)) throw new Error('The score could not be parsed');
-            container.innerHTML = await sanitizeSVG(toolkit.renderToSVG(1, {}));
+            const svg = await sanitizeSVG(toolkit.renderToSVG(1, {}));
+            if (context.signal?.aborted) {
+                toolkit.destroy();
+                toolkit = undefined;
+                container.replaceChildren();
+                return;
+            }
+            container.innerHTML = svg;
             const image = container.querySelector('svg');
             image?.setAttribute('role', 'img');
             image?.setAttribute('aria-label', language === 'mei' ? 'MEI musical score' : 'MusicXML musical score');
             toolkits.set(container, toolkit);
         } catch (error) {
             toolkit?.destroy();
-            renderExtensionError(container, 'Verovio', language, source, error, context);
+            if (!context.signal?.aborted) renderExtensionError(container, 'Verovio', language, source, error, context);
         }
     };
     return {

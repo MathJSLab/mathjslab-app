@@ -37,19 +37,54 @@ export const model3DExtension = (): MarkdownExtension => {
         const entry = entries.get(container);
         if (entry) {
             if (entry.frame !== undefined) cancelAnimationFrame(entry.frame);
-            entry.disconnect();
-            entry.disconnectVisibility();
-            entry.controls.removeEventListener('change', entry.onChange);
-            entry.controls.dispose();
-            disposeObject(entry.scene);
-            entry.renderer.dispose();
-            entry.renderer.forceContextLoss();
+            try {
+                entry.disconnect();
+            } catch {
+                /* Continue releasing the remaining WebGL resources. */
+            }
+            try {
+                entry.disconnectVisibility();
+            } catch {
+                /* Continue releasing the remaining WebGL resources. */
+            }
+            try {
+                entry.controls.removeEventListener('change', entry.onChange);
+            } catch {
+                /* Continue releasing the remaining WebGL resources. */
+            }
+            try {
+                entry.controls.dispose();
+            } catch {
+                /* Continue releasing the remaining WebGL resources. */
+            }
+            try {
+                disposeObject(entry.scene);
+            } catch {
+                /* Continue releasing the remaining WebGL resources. */
+            }
+            try {
+                entry.renderer.dispose();
+            } catch {
+                /* Continue releasing the remaining WebGL resources. */
+            }
+            try {
+                entry.renderer.forceContextLoss();
+            } catch {
+                /* Continue releasing the remaining WebGL resources. */
+            }
         }
         entries.delete(container);
         container.replaceChildren();
     };
     const render = async (container: Element, source: string, context: MarkdownDocumentContext): Promise<void> => {
         const language = container.getAttribute('data-markdown-language') ?? 'gltf';
+        let partialRenderer: WebGLRenderer | undefined;
+        let partialScene: Scene | undefined;
+        let partialControls: OrbitControls | undefined;
+        let partialObject: Object3D | undefined;
+        let partialDisconnect = (): void => undefined;
+        let partialDisconnectVisibility = (): void => undefined;
+        let partialOnChange = (): void => undefined;
         try {
             assertSourceSize(source, context);
             const [THREE, { OrbitControls }, { STLLoader }, { OBJLoader }, { GLTFLoader }] = await Promise.all([
@@ -63,15 +98,15 @@ export const model3DExtension = (): MarkdownExtension => {
             dispose(container);
             const width = Math.max(context.width ?? container.clientWidth ?? 640, 1);
             const height = Math.max(context.height ?? container.clientHeight ?? 420, 1);
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            const renderer = (partialRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }));
             renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
             renderer.setSize(width, height, false);
             renderer.domElement.setAttribute('role', 'application');
             renderer.domElement.setAttribute('aria-label', `Interactive ${language.toUpperCase()} model`);
             container.append(renderer.domElement);
-            const scene = new THREE.Scene();
+            const scene = (partialScene = new THREE.Scene());
             const camera = new THREE.PerspectiveCamera(45, width / height, 0.01, 10000);
-            const controls = new OrbitControls(camera, renderer.domElement);
+            const controls = (partialControls = new OrbitControls(camera, renderer.domElement));
             scene.add(new THREE.HemisphereLight(0xffffff, 0x444444, 2.5));
             const directional = new THREE.DirectionalLight(0xffffff, 2);
             directional.position.set(3, 5, 4);
@@ -98,11 +133,13 @@ export const model3DExtension = (): MarkdownExtension => {
                     return;
                 }
                 object = gltf.scene;
+                partialObject = object;
                 if (gltf.animations.length) {
                     mixer = new THREE.AnimationMixer(object);
                     gltf.animations.forEach((clip: import('three').AnimationClip) => mixer!.clipAction(clip).play());
                 }
             }
+            partialObject = object;
             scene.add(object);
             const box = new THREE.Box3().setFromObject(object);
             const sphere = box.getBoundingSphere(new THREE.Sphere());
@@ -114,7 +151,7 @@ export const model3DExtension = (): MarkdownExtension => {
             controls.target.copy(sphere.center);
             controls.update();
             const clock = new THREE.Clock();
-            const onChange = (): void => renderer.render(scene, camera);
+            const onChange = (partialOnChange = (): void => renderer.render(scene, camera));
             const entry: Entry = {
                 scene,
                 camera,
@@ -137,7 +174,7 @@ export const model3DExtension = (): MarkdownExtension => {
                 if (mixer) entry.frame = requestAnimationFrame(draw);
             };
             controls.addEventListener('change', onChange);
-            entry.disconnect = observeElementResize(container, context, (nextWidth, nextHeight) => {
+            entry.disconnect = partialDisconnect = observeElementResize(container, context, (nextWidth, nextHeight) => {
                 if (!nextWidth || !nextHeight) return;
                 camera.aspect = nextWidth / nextHeight;
                 camera.updateProjectionMatrix();
@@ -156,12 +193,67 @@ export const model3DExtension = (): MarkdownExtension => {
                     }
                 });
                 observer.observe(container);
-                entry.disconnectVisibility = () => observer.disconnect();
+                entry.disconnectVisibility = partialDisconnectVisibility = () => observer.disconnect();
             }
             entries.set(container, entry);
             draw();
+            partialRenderer = undefined;
+            partialScene = undefined;
+            partialControls = undefined;
+            partialObject = undefined;
+            partialDisconnect = (): void => undefined;
+            partialDisconnectVisibility = (): void => undefined;
+            partialOnChange = (): void => undefined;
         } catch (error) {
-            renderExtensionError(container, 'Three.js', language, source, error, context);
+            if (entries.has(container)) {
+                dispose(container);
+            } else {
+                try {
+                    partialDisconnect();
+                } catch {
+                    /* Continue releasing partially initialized resources. */
+                }
+                try {
+                    partialDisconnectVisibility();
+                } catch {
+                    /* Continue releasing partially initialized resources. */
+                }
+                try {
+                    partialControls?.removeEventListener('change', partialOnChange);
+                } catch {
+                    /* Continue releasing partially initialized resources. */
+                }
+                try {
+                    partialControls?.dispose();
+                } catch {
+                    /* Continue releasing partially initialized resources. */
+                }
+                if (partialObject) {
+                    try {
+                        disposeObject(partialObject);
+                    } catch {
+                        /* Continue releasing partially initialized resources. */
+                    }
+                } else if (partialScene) {
+                    try {
+                        disposeObject(partialScene);
+                    } catch {
+                        /* Continue releasing partially initialized resources. */
+                    }
+                }
+                try {
+                    partialRenderer?.dispose();
+                } catch {
+                    /* Continue releasing partially initialized resources. */
+                }
+                try {
+                    partialRenderer?.forceContextLoss();
+                } catch {
+                    /* Continue releasing partially initialized resources. */
+                }
+                container.replaceChildren();
+            }
+            if (!context.signal?.aborted) renderExtensionError(container, 'Three.js', language, source, error, context);
         }
     };
     return {

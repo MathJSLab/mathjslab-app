@@ -1,4 +1,5 @@
 import type { MarkdownDocumentContext } from '../MarkdownEngine';
+import { markdownDiagnosticCodes } from './diagnostics';
 
 export const DEFAULT_MAX_SOURCE_BYTES = 2 * 1024 * 1024;
 export const DEFAULT_MAX_RESOURCE_BYTES = 20 * 1024 * 1024;
@@ -50,7 +51,8 @@ export const renderExtensionError = (container: Element, extension: string, lang
     context.onDiagnostic?.({
         extension,
         language,
-        code: 'extension-render-error',
+        code: markdownDiagnosticCodes.extensionRenderError,
+        category: 'extension',
         severity: 'error',
         ...(context.sourceUrl ? { sourceUrl: context.sourceUrl } : {}),
         message: detail,

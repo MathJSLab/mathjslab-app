@@ -6,6 +6,7 @@ export const mermaidManifest = {
     dependencies: ['mermaid'],
     fences: [{ language: 'mermaid', className: 'mermaid' }],
     interactive: true,
+    capabilities: ['interactive', 'network', 'wasm'],
     styles: `
 .mermaid { box-sizing: border-box; max-width: 100%; overflow-x: auto; }
 .mermaid > svg { display: block; height: auto; max-width: 100%; }

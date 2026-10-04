@@ -144,10 +144,29 @@ describe('Markdown compatibility corpus', () => {
     it('resolves relative links and images from the fixture document URL', async () => {
         const engine = new MarkdownEngine({ profile: 'gfm' });
         const container = document.createElement('div');
-        await engine.render(read('extensions/relative-urls.md'), container, { sourceUrl: new URL('https://example.test/test/markdown/extensions/relative-urls.md') });
-        expect(container.querySelector('a')?.href).toBe('https://example.test/test/markdown/combined/gfm-and-math.md');
-        expect(container.querySelector('img')?.src).toBe('https://example.test/test/markdown/resources/pixel.svg');
-        await engine.dispose();
+        const previousCreate = URL.createObjectURL;
+        const previousRevoke = URL.revokeObjectURL;
+        URL.createObjectURL = () => 'blob:https://example.test/managed-image';
+        URL.revokeObjectURL = () => undefined;
+        try {
+            await engine.render(read('extensions/relative-urls.md'), container, {
+                sourceUrl: new URL('https://example.test/test/markdown/extensions/relative-urls.md'),
+                fetchResource: async () =>
+                    ({
+                        ok: true,
+                        status: 200,
+                        statusText: 'OK',
+                        headers: { get: () => null },
+                        blob: async () => new Blob(['<svg/>'], { type: 'image/svg+xml' }),
+                    }) as unknown as Response,
+            });
+            expect(container.querySelector('a')?.href).toBe('https://example.test/test/markdown/combined/gfm-and-math.md');
+            expect(container.querySelector('img')?.src).toBe('blob:https://example.test/managed-image');
+        } finally {
+            await engine.dispose();
+            URL.createObjectURL = previousCreate;
+            URL.revokeObjectURL = previousRevoke;
+        }
     });
 
     it('records a nonzero optional chunk baseline without counting the initial application asset', () => {

@@ -1,5 +1,6 @@
 import type { MarkdownDocumentContext, MarkdownExtension } from '../../../MarkdownEngine';
 import { resolveResourceUrl } from '../../extensionUtils';
+import { markdownDiagnosticCodes, markdownDiagnosticCategory } from '../../diagnostics';
 import { relativeUrlsManifest } from './manifest';
 
 const resolveAttribute = (element: Element, attribute: 'href' | 'src', context: MarkdownDocumentContext): void => {
@@ -12,7 +13,8 @@ const resolveAttribute = (element: Element, attribute: 'href' | 'src', context: 
         element.removeAttribute(attribute);
         context.onDiagnostic?.({
             extension: relativeUrlsManifest.name,
-            code: 'resource-url-blocked',
+            code: markdownDiagnosticCodes.resourceUrlBlocked,
+            category: markdownDiagnosticCategory(markdownDiagnosticCodes.resourceUrlBlocked),
             severity: 'warning',
             ...(context.sourceUrl ? { sourceUrl: context.sourceUrl } : {}),
             message: cause instanceof Error ? cause.message : String(cause),

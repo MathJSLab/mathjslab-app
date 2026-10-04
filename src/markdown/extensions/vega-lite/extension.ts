@@ -1,5 +1,6 @@
 import type { MarkdownDocumentContext, MarkdownExtension } from '../../../MarkdownEngine';
 import { assertSourceSize, fetchResource, observeElementResize, readResourceText, renderExtensionError } from '../../extensionUtils';
+import { markdownDiagnosticCodes } from '../../diagnostics';
 import { vegaLiteManifest } from './manifest';
 
 type VegaResult = { view: { resize(): unknown; runAsync(): Promise<unknown> }; finalize(): void };
@@ -32,6 +33,8 @@ export const vegaLiteExtension = (): MarkdownExtension => {
         container.replaceChildren();
     };
     const render = async (container: Element, source: string, context: MarkdownDocumentContext): Promise<void> => {
+        let result: VegaResult | undefined;
+        let disconnect = (): void => undefined;
         try {
             assertSourceSize(source, context);
             const spec = JSON.parse(source) as Record<string, unknown>;
@@ -39,7 +42,7 @@ export const vegaLiteExtension = (): MarkdownExtension => {
             if (context.signal?.aborted) return;
             const { default: embed } = await import(/* webpackChunkName: "markdown-vega-lite" */ 'vega-embed');
             dispose(container);
-            const result = (await embed(container as HTMLElement, spec, {
+            result = (await embed(container as HTMLElement, spec, {
                 mode: 'vega-lite',
                 renderer: 'svg',
                 actions: false,
@@ -47,16 +50,39 @@ export const vegaLiteExtension = (): MarkdownExtension => {
             })) as unknown as VegaResult;
             if (context.signal?.aborted) {
                 result.finalize();
+                result = undefined;
                 container.replaceChildren();
                 return;
             }
-            const disconnect = observeElementResize(container, context, () => {
-                result.view.resize();
-                void result.view.runAsync();
+            disconnect = observeElementResize(container, context, () => {
+                if (context.signal?.aborted) return;
+                result?.view.resize();
+                void result?.view.runAsync().catch((error) =>
+                    context.onDiagnostic?.({
+                        extension: vegaLiteManifest.name,
+                        language: 'vega-lite',
+                        code: markdownDiagnosticCodes.vegaResizeError,
+                        category: 'extension',
+                        severity: 'warning',
+                        ...(context.sourceUrl ? { sourceUrl: context.sourceUrl } : {}),
+                        message: error instanceof Error ? error.message : String(error),
+                        cause: error,
+                    }),
+                );
             });
             results.set(container, { result, disconnect });
+            result = undefined;
+            disconnect = (): void => undefined;
         } catch (error) {
-            renderExtensionError(container, 'Vega-Lite', 'vega-lite', source, error, context);
+            disconnect();
+            try {
+                result?.finalize();
+            } catch {
+                /* Preserve the original render diagnostic. */
+            }
+            results.delete(container);
+            container.replaceChildren();
+            if (!context.signal?.aborted) renderExtensionError(container, 'Vega-Lite', 'vega-lite', source, error, context);
         }
     };
     return {

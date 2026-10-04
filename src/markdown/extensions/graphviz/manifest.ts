@@ -10,7 +10,7 @@ export const graphvizManifest = {
         { language: 'graphviz', className: 'graphviz' },
     ],
     interactive: true,
-    capabilities: ['wasm'],
+    capabilities: ['network', 'wasm'],
     formats: [{ language: 'dot', mimeTypes: ['text/vnd.graphviz'], extensions: ['.dot', '.gv'] }],
     styles: extensionStyles('graphviz'),
 } as const satisfies MarkdownExtensionManifest;

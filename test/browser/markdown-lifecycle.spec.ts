@@ -7,6 +7,85 @@ const openFixture = async (page: Page): Promise<void> => {
     await expect(page.locator('body')).toHaveAttribute('data-ready', 'true');
 };
 
+test('reconnects during an extension render without adopting the obsolete session', async ({ page }) => {
+    await openFixture(page);
+    const failures: string[] = [];
+    page.on('pageerror', (error) => failures.push(error.message));
+    const result = await page.evaluate(async () => {
+        let start!: () => void;
+        let finish!: () => void;
+        const started = new Promise<void>((resolve) => (start = resolve));
+        const gate = new Promise<void>((resolve) => (finish = resolve));
+        const active = new Set<Element>();
+        const engine = new window.markdownTestApi!.MarkdownEngine({
+            profile: 'core',
+            extensions: [
+                {
+                    name: 'fixture',
+                    fences: [
+                        {
+                            language: 'fixture',
+                            className: 'fixture',
+                            async render(container, source, context) {
+                                active.add(container);
+                                if (source === 'slow') {
+                                    start();
+                                    await gate;
+                                }
+                                if (!context.signal?.aborted) container.textContent = source;
+                            },
+                            dispose(container) {
+                                active.delete(container);
+                                container.replaceChildren();
+                            },
+                        },
+                    ],
+                },
+            ],
+        });
+        const viewer = document.createElement('markdown-document');
+        viewer.engine = engine;
+        viewer.markdown = '```fixture\nslow\n```';
+        let readyEvents = 0;
+        viewer.addEventListener('markdown-ready', () => readyEvents++);
+        document.body.append(viewer);
+        await started;
+        viewer.remove();
+        viewer.markdown = '```fixture\ncurrent\n```';
+        const ready = new Promise<void>((resolve) => viewer.addEventListener('markdown-ready', () => resolve(), { once: true }));
+        document.body.append(viewer);
+        finish();
+        await ready;
+        const content = viewer.shadowRoot?.querySelector('[part="content"]')?.textContent;
+        const disposed = viewer.documentSession?.disposed;
+        await Promise.all([viewer.dispose(), viewer.dispose()]);
+        await engine.dispose();
+        return { content, disposed, readyEvents, resources: active.size };
+    });
+    expect(result.content).toContain('current');
+    expect(result.content).not.toContain('slow');
+    expect(result.disposed).toBe(false);
+    expect(result.readyEvents).toBe(1);
+    expect(result.resources).toBe(0);
+    expect(failures).toEqual([]);
+});
+
+test('explicit disposal cancels a load requested in the same turn', async ({ page }) => {
+    await openFixture(page);
+    const result = await page.evaluate(async () => {
+        const viewer = document.createElement('markdown-document');
+        viewer.engine = new window.markdownTestApi!.MarkdownEngine({ profile: 'core' });
+        document.body.append(viewer);
+        viewer.markdown = '# Cancelled';
+        await viewer.dispose();
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        const result = { state: viewer.state, session: Boolean(viewer.documentSession), content: viewer.shadowRoot?.querySelector('[part="content"]')?.textContent };
+        await viewer.engine.dispose();
+        return result;
+    });
+    expect(result).toEqual({ state: 'empty', session: false, content: '' });
+});
+
 test('aborts a stale document request before it can replace the current document', async ({ page }) => {
     await openFixture(page);
     await page.evaluate(() => {

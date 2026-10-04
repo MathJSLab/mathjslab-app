@@ -18,6 +18,8 @@ export const molecule3DExtension = (): MarkdownExtension => {
     };
     const render = async (container: Element, source: string, context: MarkdownDocumentContext): Promise<void> => {
         const language = container.getAttribute('data-markdown-language') ?? 'pdb';
+        let viewer: GLViewer | undefined;
+        let disconnect = (): void => undefined;
         try {
             assertSourceSize(source, context);
             const mol = await import(/* webpackChunkName: "markdown-molecule-3d" */ '3dmol');
@@ -29,7 +31,9 @@ export const molecule3DExtension = (): MarkdownExtension => {
             viewport.setAttribute('role', 'application');
             viewport.setAttribute('aria-label', `Interactive ${language.toUpperCase()} molecular structure`);
             container.append(viewport);
-            const viewer = mol.createViewer(viewport, { backgroundColor: context.theme === 'dark' ? '#111827' : '#ffffff' });
+            viewer = mol.createViewer(viewport, { backgroundColor: context.theme === 'dark' ? '#111827' : '#ffffff' });
+            const entry = { viewer, disconnect };
+            viewers.set(container, entry);
             viewer.addModel(source, language === 'mmcif' ? 'cif' : language);
             if (language === 'pdb' || language === 'cif' || language === 'mmcif') {
                 viewer.setStyle({}, { cartoon: { color: 'spectrum' } });
@@ -39,10 +43,38 @@ export const molecule3DExtension = (): MarkdownExtension => {
             }
             viewer.zoomTo();
             viewer.render();
-            const disconnect = observeElementResize(container, context, () => viewer.resize());
-            viewers.set(container, { viewer, disconnect });
+            disconnect = observeElementResize(container, context, () => {
+                if (!context.signal?.aborted) viewer?.resize();
+            });
+            entry.disconnect = disconnect;
+            if (context.signal?.aborted) {
+                dispose(container);
+                return;
+            }
+            viewer = undefined;
+            disconnect = (): void => undefined;
         } catch (error) {
-            renderExtensionError(container, '3Dmol', language, source, error, context);
+            disconnect();
+            if (viewer) {
+                viewers.delete(container);
+                try {
+                    viewer.spin(false);
+                } catch {
+                    /* Continue releasing a partially initialized viewer. */
+                }
+                try {
+                    viewer.removeAllModels();
+                } catch {
+                    /* Continue releasing a partially initialized viewer. */
+                }
+                try {
+                    viewer.clear();
+                } catch {
+                    /* Continue releasing a partially initialized viewer. */
+                }
+            }
+            container.replaceChildren();
+            if (!context.signal?.aborted) renderExtensionError(container, '3Dmol', language, source, error, context);
         }
     };
     return {

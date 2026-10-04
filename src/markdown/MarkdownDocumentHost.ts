@@ -14,19 +14,38 @@ export type MarkdownDocumentHostOptions = {
     readonly externalLinks?: 'same-context' | 'new-tab';
 };
 
-const hostedDocuments = new WeakMap<HTMLElement, MarkdownDocumentElement>();
+type HostedDocument = { readonly element: MarkdownDocumentElement; cancelMount: () => void };
+const hostedDocuments = new WeakMap<HTMLElement, HostedDocument>();
+const mountRevisions = new WeakMap<HTMLElement, number>();
+const hostDisposals = new WeakMap<HTMLElement, Promise<void>>();
 
-const disposeHostedContent = async (container: HTMLElement): Promise<void> => {
-    const element = hostedDocuments.get(container);
+const abortError = (): DOMException => new DOMException('Markdown document mount was cancelled', 'AbortError');
+
+const disposeHostedContent = (container: HTMLElement): Promise<void> => {
+    const disposing = hostDisposals.get(container);
+    if (disposing) return disposing;
+    const hosted = hostedDocuments.get(container);
+    if (!hosted) return Promise.resolve();
     hostedDocuments.delete(container);
-    if (element) await element.dispose();
+    hosted.cancelMount();
+    const disposal = Promise.resolve()
+        .then(() => hosted.element.dispose())
+        .then(() => undefined)
+        .finally(() => {
+            if (hostDisposals.get(container) === disposal) hostDisposals.delete(container);
+        });
+    hostDisposals.set(container, disposal);
+    return disposal;
 };
 
 /**
  * Mount the reusable Markdown component in an existing application surface.
  */
 export const mountMarkdownDocument = async (container: HTMLElement, options: MarkdownDocumentHostOptions): Promise<MarkdownDocumentElement> => {
+    const revision = (mountRevisions.get(container) ?? 0) + 1;
+    mountRevisions.set(container, revision);
     await disposeHostedContent(container);
+    if (mountRevisions.get(container) !== revision) throw abortError();
 
     defineMarkdownDocumentElement();
     const element = new MarkdownDocumentElement();
@@ -41,6 +60,9 @@ export const mountMarkdownDocument = async (container: HTMLElement, options: Mar
     if (options.src !== undefined) element.src = options.src.toString();
     else element.markdown = options.markdown ?? '';
 
+    let cancelMount!: () => void;
+    let hosted!: HostedDocument;
+    let observer: MutationObserver | undefined;
     const completion = new Promise<MarkdownDocumentElement>((resolve, reject) => {
         const ready = (event: Event): void => {
             cleanup();
@@ -54,19 +76,34 @@ export const mountMarkdownDocument = async (container: HTMLElement, options: Mar
         const cleanup = (): void => {
             element.removeEventListener('markdown-ready', ready);
             element.removeEventListener('markdown-error', error);
+            observer?.disconnect();
+        };
+        cancelMount = () => {
+            cleanup();
+            if (hostedDocuments.get(container) === hosted) hostedDocuments.delete(container);
+            reject(abortError());
         };
         element.addEventListener('markdown-ready', ready);
         element.addEventListener('markdown-error', error);
     });
 
-    hostedDocuments.set(container, element);
+    observer =
+        typeof MutationObserver === 'undefined'
+            ? undefined
+            : new MutationObserver(() => {
+                  if (!container.contains(element)) cancelMount();
+              });
+    hosted = { element, cancelMount };
+    observer?.observe(container, { childList: true });
+    hostedDocuments.set(container, hosted);
     container.replaceChildren(element);
     return completion;
 };
 
 /** Release the component currently owned by an application surface. */
 export const disposeMarkdownDocument = async (container: HTMLElement): Promise<void> => {
-    const element = hostedDocuments.get(container);
+    mountRevisions.set(container, (mountRevisions.get(container) ?? 0) + 1);
+    const element = hostedDocuments.get(container)?.element;
     await disposeHostedContent(container);
     if (!element) {
         container.replaceChildren();
@@ -75,4 +112,4 @@ export const disposeMarkdownDocument = async (container: HTMLElement): Promise<v
     if (element.parentNode === container) element.remove();
 };
 
-export const getHostedMarkdownDocument = (container: HTMLElement): MarkdownDocumentElement | undefined => hostedDocuments.get(container);
+export const getHostedMarkdownDocument = (container: HTMLElement): MarkdownDocumentElement | undefined => hostedDocuments.get(container)?.element;

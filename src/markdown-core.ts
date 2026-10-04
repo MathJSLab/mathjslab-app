@@ -7,3 +7,6 @@ export * from './markdown/MarkdownDocumentController';
 export * from './markdown/MarkdownDocumentModel';
 export * from './markdown/MarkdownNavigator';
 export * from './markdown/createEducationalMarkdownEngine';
+export { markdownExtensionCatalog } from './markdown/extensionCatalog';
+export type { MarkdownExtensionCatalogEntry } from './markdown/extensionCatalog';
+export * from './markdown/createMarkdownEnginePreset';

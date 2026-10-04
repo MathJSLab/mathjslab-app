@@ -238,4 +238,59 @@ describe('MathJSLab Worker transport and runtime', () => {
         expect(channel.terminated).toBe(true);
         await runtime.dispose();
     });
+
+    test('makes runtime and session disposal idempotent under concurrent calls', async () => {
+        const channel = new LoopbackChannel();
+        let disposeCount = 0;
+        const runtime = new MathJSLabWorkerRuntime(channel.scope, {
+            createSession: () => ({
+                parse: (source) => [source],
+                execute: () => ({ status: 'success' }),
+                dispose: async () => {
+                    disposeCount++;
+                    await new Promise((resolve) => setTimeout(resolve, 0));
+                },
+            }),
+            toMathML: (source) => source,
+        });
+        const transport = createWorkerMathJSLabTransport(channel.main);
+        await transport.request({ type: 'create-session', sessionId: 'concurrent', context: {} });
+        await Promise.all([transport.request({ type: 'dispose-session', sessionId: 'concurrent' }), transport.request({ type: 'dispose-session', sessionId: 'concurrent' })]);
+        expect(disposeCount).toBe(1);
+        const first = runtime.dispose();
+        const second = runtime.dispose();
+        expect(second).toBe(first);
+        await Promise.all([first, second]);
+        transport.dispose();
+    });
+
+    test('disposes a session that finishes creating during runtime shutdown', async () => {
+        const channel = new LoopbackChannel();
+        let finish!: (session: NonNullable<Awaited<ReturnType<MathJSLabWorkerRuntimeHandler['createSession']>>>) => void;
+        let started!: () => void;
+        const creationStarted = new Promise<void>((resolve) => (started = resolve));
+        let disposeCount = 0;
+        const runtime = new MathJSLabWorkerRuntime(channel.scope, {
+            createSession: () => {
+                started();
+                return new Promise((resolve) => (finish = resolve));
+            },
+            toMathML: (source) => source,
+        });
+        const transport = createWorkerMathJSLabTransport(channel.main);
+        const creating = transport.request({ type: 'create-session', sessionId: 'late', context: {} }).catch(() => undefined);
+        await creationStarted;
+        const disposal = runtime.dispose();
+        finish({
+            parse: (source) => [source],
+            execute: () => ({ status: 'success' }),
+            dispose: () => {
+                disposeCount++;
+            },
+        });
+        await disposal;
+        expect(disposeCount).toBe(1);
+        transport.dispose();
+        await creating;
+    });
 });

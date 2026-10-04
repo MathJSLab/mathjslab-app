@@ -1,4 +1,5 @@
 import type { MarkdownExtension } from '../../../MarkdownEngine';
+import { isMarkdownNodeWithin } from '../../lifecycle';
 import { assertSourceSize, renderExtensionError, sanitizeSVG } from '../../extensionUtils';
 import { graphvizManifest } from './manifest';
 
@@ -23,14 +24,29 @@ export const graphvizExtension = (): MarkdownExtension => {
             image?.setAttribute('aria-label', 'Graphviz diagram');
             rendered.add(container);
         } catch (error) {
-            renderExtensionError(container, 'Graphviz', language, source, error, context);
+            if (!context.signal?.aborted) renderExtensionError(container, 'Graphviz', language, source, error, context);
         }
     };
 
     return {
         name: graphvizManifest.name,
         manifest: graphvizManifest,
-        fences: graphvizManifest.fences.map((fence) => ({ ...fence, render, dispose: (container) => container.replaceChildren() })),
+        fences: graphvizManifest.fences.map((fence) => ({
+            ...fence,
+            render,
+            dispose: (container) => {
+                rendered.delete(container);
+                container.replaceChildren();
+            },
+        })),
+        disposeContainer(container) {
+            for (const element of rendered) {
+                if (isMarkdownNodeWithin(container, element)) {
+                    element.replaceChildren();
+                    rendered.delete(element);
+                }
+            }
+        },
         dispose() {
             for (const container of rendered) container.replaceChildren();
             rendered.clear();

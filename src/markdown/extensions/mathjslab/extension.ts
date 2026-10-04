@@ -1,6 +1,8 @@
 import type { MarkdownDocumentContext, MarkdownExtension } from '../../../MarkdownEngine';
 import type { MathJSLabExecutionResult, MathJSLabExecutionSession, MathJSLabExecutor, MathJSLabNodeOutput, MathJSLabParseResult } from './executor';
 import { mathJSLabManifest } from './manifest';
+import { isMarkdownNodeWithin } from '../../lifecycle';
+import { markdownDiagnosticCodes } from '../../diagnostics';
 
 type MathJSLabToken = {
     type: 'mathjslab-inline' | 'mathjslab-block';
@@ -44,6 +46,9 @@ type SessionEntry = {
     nextBlockIndex: number;
     statementCount: number;
     disposed: boolean;
+    disposal?: Promise<void>;
+    unlink?: () => void;
+    containers: Set<Element>;
 };
 
 const defaultPolicy = {
@@ -118,12 +123,21 @@ export const mathJSLabExtension = (executor: MathJSLabExecutor): MarkdownExtensi
         }
     };
 
-    const disposeSession = async (key: AbortSignal | MarkdownDocumentContext, entry: SessionEntry): Promise<void> => {
-        if (entry.disposed) return;
+    const disposeSession = (key: AbortSignal | MarkdownDocumentContext, entry: SessionEntry): Promise<void> => {
+        if (entry.disposal) return entry.disposal;
         entry.disposed = true;
-        sessions.delete(key);
-        await entry.operation.catch(() => undefined);
-        if (entry.session) await (await entry.session).dispose?.();
+        entry.unlink?.();
+        delete entry.unlink;
+        entry.disposal = Promise.resolve()
+            .then(async () => {
+                await entry.operation.catch(() => undefined);
+                if (entry.session) await (await entry.session).dispose?.();
+            })
+            .finally(() => {
+                if (sessions.get(key) === entry) sessions.delete(key);
+                entry.containers.clear();
+            });
+        return entry.disposal;
     };
 
     const entryFor = (context: MarkdownDocumentContext): SessionEntry => {
@@ -136,9 +150,16 @@ export const mathJSLabExtension = (executor: MathJSLabExecutor): MarkdownExtensi
             nextBlockIndex: 0,
             statementCount: 0,
             disposed: false,
+            containers: new Set(),
         };
         sessions.set(key, entry);
-        signal?.addEventListener('abort', () => void disposeSession(key, entry!), { once: true });
+        if (signal) {
+            const abort = (): void => {
+                void disposeSession(key, entry!).catch(() => undefined);
+            };
+            signal.addEventListener('abort', abort, { once: true });
+            entry.unlink = () => signal.removeEventListener('abort', abort);
+        }
         return entry;
     };
 
@@ -152,6 +173,7 @@ export const mathJSLabExtension = (executor: MathJSLabExecutor): MarkdownExtensi
             extension: mathJSLabManifest.name,
             language: mathJSLabManifest.fences[0].language,
             code,
+            category: 'policy',
             severity: 'warning',
             ...(context.sourceUrl ? { sourceUrl: context.sourceUrl } : {}),
             message,
@@ -163,7 +185,13 @@ export const mathJSLabExtension = (executor: MathJSLabExecutor): MarkdownExtensi
         context.onDiagnostic?.({
             extension: mathJSLabManifest.name,
             language: mathJSLabManifest.fences[0].language,
-            code: code === 'MATHJSLAB_TIMEOUT' ? 'mathjslab-execution-timeout' : code === 'MATHJSLAB_WORKER_RESTARTED' ? 'mathjslab-worker-restarted' : 'mathjslab-execution-error',
+            code:
+                code === 'MATHJSLAB_TIMEOUT'
+                    ? markdownDiagnosticCodes.mathJSLabExecutionTimeout
+                    : code === 'MATHJSLAB_WORKER_RESTARTED'
+                      ? markdownDiagnosticCodes.mathJSLabWorkerRestarted
+                      : markdownDiagnosticCodes.mathJSLabExecutionError,
+            category: 'execution',
             severity: 'error',
             ...(context.sourceUrl ? { sourceUrl: context.sourceUrl } : {}),
             message: error instanceof Error ? error.message : String(error),
@@ -173,6 +201,7 @@ export const mathJSLabExtension = (executor: MathJSLabExecutor): MarkdownExtensi
 
     const render = (container: Element, source: string, context: MarkdownDocumentContext): Promise<void> => {
         const entry = entryFor(context);
+        entry.containers.add(container);
         const blockIndex = entry.nextBlockIndex++;
         const configured = context.executionPolicy?.[mathJSLabManifest.name] ?? {};
         const policy = {
@@ -184,16 +213,16 @@ export const mathJSLabExtension = (executor: MathJSLabExecutor): MarkdownExtensi
         };
         const restricted = context.securityMode === 'sanitized' || context.securityMode === 'strict';
         if (!policy.enabled || (restricted && !policy.allowInRestrictedMode)) {
-            reportPolicy(container, context, 'mathjslab-execution-disabled', 'command execution is disabled by the document policy');
+            reportPolicy(container, context, markdownDiagnosticCodes.mathJSLabExecutionDisabled, 'command execution is disabled by the document policy');
             return Promise.resolve();
         }
         if (blockIndex >= policy.maxBlocks) {
-            reportPolicy(container, context, 'mathjslab-block-limit', `document exceeds the limit of ${policy.maxBlocks} executable blocks`);
+            reportPolicy(container, context, markdownDiagnosticCodes.mathJSLabBlockLimit, `document exceeds the limit of ${policy.maxBlocks} executable blocks`);
             return Promise.resolve();
         }
         const sourceBytes = utf8ByteLength(source);
         if (sourceBytes > policy.maxSourceBytes) {
-            reportPolicy(container, context, 'mathjslab-source-limit', `block exceeds the limit of ${policy.maxSourceBytes} source bytes`);
+            reportPolicy(container, context, markdownDiagnosticCodes.mathJSLabSourceLimit, `block exceeds the limit of ${policy.maxSourceBytes} source bytes`);
             return Promise.resolve();
         }
         const operation = entry.operation.then(async () => {
@@ -227,7 +256,7 @@ export const mathJSLabExtension = (executor: MathJSLabExecutor): MarkdownExtensi
                 return;
             }
             if (entry.statementCount + statements.length > policy.maxStatements) {
-                reportPolicy(container, context, 'mathjslab-statement-limit', `document exceeds the limit of ${policy.maxStatements} executable statements`);
+                reportPolicy(container, context, markdownDiagnosticCodes.mathJSLabStatementLimit, `document exceeds the limit of ${policy.maxStatements} executable statements`);
                 return;
             }
             entry.statementCount += statements.length;
@@ -256,19 +285,25 @@ export const mathJSLabExtension = (executor: MathJSLabExecutor): MarkdownExtensi
         return operation;
     };
 
-    const disposeContainer = async (container: Element): Promise<void> => {
+    const disposeFence = async (container: Element): Promise<void> => {
         rendered.delete(container);
         await Promise.all(Array.from(container.querySelectorAll('.mathjslab-result'), (result) => disposeOutputs(result)));
         container.replaceChildren();
+    };
+
+    const disposeOwnedSessions = async (container: ParentNode): Promise<void> => {
+        const owned = Array.from(sessions.entries()).filter(([, entry]) => Array.from(entry.containers).some((element) => isMarkdownNodeWithin(container, element)));
+        await Promise.all(owned.map(([key, entry]) => disposeSession(key, entry)));
     };
 
     return {
         name: mathJSLabManifest.name,
         manifest: mathJSLabManifest,
         marked: { extensions: [block(executor), inline(executor)] },
-        fences: [{ ...mathJSLabManifest.fences[0], render, dispose: disposeContainer }],
+        fences: [{ ...mathJSLabManifest.fences[0], render, dispose: disposeFence }],
+        disposeContainer: disposeOwnedSessions,
         async dispose() {
-            await Promise.all(Array.from(rendered, async (container) => disposeContainer(container)));
+            await Promise.all(Array.from(rendered, async (container) => disposeFence(container)));
             rendered.clear();
             await Promise.all(Array.from(sessions, ([key, entry]) => disposeSession(key, entry)));
             await executor.dispose?.();

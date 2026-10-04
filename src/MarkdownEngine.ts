@@ -3,7 +3,13 @@ import { mathJaxExtension } from './markdown/extensions/mathjax/extension';
 import { relativeUrlsExtension } from './markdown/extensions/relative-urls/extension';
 import { syntaxHighlightExtension } from './markdown/extensions/syntax-highlight/extension';
 import { DefaultMarkdownResourceService, sanitizeMarkdownHTML } from './markdown/security';
+import { cleanupAll, notifyMarkdownDocumentDispose } from './markdown/lifecycle';
+import { markdownDiagnosticCategory, markdownDiagnosticCodes } from './markdown/diagnostics';
+import type { MarkdownDiagnostic } from './markdown/diagnostics';
 import { Marked, type MarkedExtension, type MarkedOptions } from 'marked';
+
+export { markdownDiagnosticCategory, markdownDiagnosticCodes } from './markdown/diagnostics';
+export type { MarkdownDiagnostic, MarkdownDiagnosticCategory, MarkdownDiagnosticCode, MarkdownDiagnosticEventDetail } from './markdown/diagnostics';
 
 const escapeHTML = (text: string): string => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 export type MarkdownRenderMode = 'eager' | 'visible';
@@ -45,6 +51,7 @@ export type MarkdownDocumentContext = {
     securityMode?: MarkdownSecurityMode;
     executionPolicy?: MarkdownExecutionPolicies;
     resourcePolicy?: MarkdownResourcePolicy;
+    allowedCapabilities?: readonly MarkdownExtensionCapability[];
     resources?: MarkdownResourceService;
     maxSourceBytes?: number;
     maxResourceBytes?: number;
@@ -53,17 +60,6 @@ export type MarkdownDocumentContext = {
     observeResize?: (element: Element, callback: (width: number, height: number) => void) => (() => void) | void;
     createMapBaseLayer?: (leaflet: unknown, context: MarkdownDocumentContext) => { addTo(map: unknown): unknown } | void;
     onDiagnostic?: (diagnostic: MarkdownDiagnostic) => void;
-};
-export type MarkdownDiagnostic = {
-    extension: string;
-    language?: string;
-    code?: string;
-    severity?: 'info' | 'warning' | 'error';
-    sourceUrl?: URL;
-    line?: number;
-    column?: number;
-    message: string;
-    cause?: unknown;
 };
 export type MarkdownExtensionCapability = 'audio' | 'interactive' | 'network' | 'wasm' | 'webgl';
 export type MarkdownProfile = 'core' | 'gfm';
@@ -92,6 +88,8 @@ export type MarkdownExtension = {
     initialize?: (services: MarkdownEngineServices) => void | Promise<void>;
     prepare?: (container: ParentNode, context: MarkdownDocumentContext) => void | Promise<void>;
     typeset?: (container: ParentNode, context: MarkdownDocumentContext) => void | Promise<void>;
+    /** Release resources owned by a document, including non-fence hooks. */
+    disposeContainer?: (container: ParentNode) => void | Promise<void>;
     dispose?: () => void | Promise<void>;
 };
 export type MarkdownEngineOptions = {
@@ -101,6 +99,7 @@ export type MarkdownEngineOptions = {
     securityMode?: MarkdownSecurityMode;
     resourcePolicy?: MarkdownResourcePolicy;
     executionPolicy?: MarkdownExecutionPolicies;
+    allowedCapabilities?: readonly MarkdownExtensionCapability[];
 };
 export interface MarkdownDocument {
     readonly container: HTMLElement;
@@ -119,7 +118,7 @@ export const markdownProfiles: Readonly<Record<MarkdownProfile, Readonly<MarkedO
 
 type FenceEntry = { extension: MarkdownExtension; fence: MarkdownFence };
 type DeferredRendering = { observer: IntersectionObserver; removeAbortListener: () => void };
-type ScheduledRendering = { signal?: AbortSignal; task: () => Promise<void>; resolve: () => void; reject: (reason: unknown) => void };
+type ScheduledRendering = { signal?: AbortSignal; task: () => Promise<void>; resolve: () => void; reject: (reason: unknown) => void; unlink: () => void };
 
 const belongsTo = (root: ParentNode, candidate: Node): boolean => {
     let node: Node | null = candidate;
@@ -150,15 +149,20 @@ class MarkdownDocumentSession implements MarkdownDocument {
     private unlink = (): void => undefined;
     private revision = 0;
     private readonly resources: MarkdownResourceService;
+    private disposal?: Promise<void>;
     public disposed = false;
 
     public constructor(
         private readonly engine: MarkdownEngine,
         public readonly container: HTMLElement,
         context: MarkdownDocumentContext,
+        ready: Promise<void> = Promise.resolve(),
     ) {
-        this.context = context;
+        this.context = { ...context };
+        // Signals belong to an operation; an aborted first load must allow retry.
+        delete this.context.signal;
         this.resources = engine.createResourceService();
+        this.operation = ready;
     }
     public get sourceUrl(): URL | undefined {
         return this.context.sourceUrl;
@@ -176,15 +180,22 @@ class MarkdownDocumentSession implements MarkdownDocument {
             return { source, context: { ...activeContext, sourceUrl: url } };
         }, context);
     }
-    public async dispose(): Promise<void> {
-        if (this.disposed) return;
+    public dispose(): Promise<void> {
+        if (this.disposal) return this.disposal;
         this.disposed = true;
+        this.disposal = Promise.resolve().then(async () => {
+            await this.operation.catch(() => undefined);
+            try {
+                await this.engine.disposeContainer(this.container);
+            } finally {
+                this.resources.dispose();
+                this.container.replaceChildren();
+                this.engine.releaseSession(this);
+            }
+        });
+        notifyMarkdownDocumentDispose(this);
         this.cancel();
-        await this.operation.catch(() => undefined);
-        await this.engine.disposeContainer(this.container);
-        this.resources.dispose();
-        this.container.replaceChildren();
-        this.engine.releaseSession(this);
+        return this.disposal;
     }
     private start(producer: (context: MarkdownDocumentContext) => Promise<{ source: string; context: MarkdownDocumentContext }>, context: MarkdownDocumentContext): Promise<void> {
         if (this.disposed) return Promise.reject(new Error('Markdown document is disposed'));
@@ -198,14 +209,26 @@ class MarkdownDocumentSession implements MarkdownDocument {
         this.operation = (async () => {
             await previous;
             if (activeContext.signal?.aborted || revision !== this.revision) return;
-            const next = await producer(activeContext);
+            let next: { source: string; context: MarkdownDocumentContext };
+            try {
+                next = await producer(activeContext);
+            } catch (error) {
+                if (activeContext.signal?.aborted || revision !== this.revision) return;
+                throw error;
+            }
             if (activeContext.signal?.aborted || revision !== this.revision) return;
             await this.engine.disposeContainer(this.container);
             if (activeContext.signal?.aborted || revision !== this.revision) return;
+            const html = await this.engine.renderHTML(next.source, next.context);
+            if (activeContext.signal?.aborted || revision !== this.revision) {
+                this.releaseImageObjectUrls(html);
+                return;
+            }
             const persistentContext = { ...next.context };
             delete persistentContext.signal;
             this.context = persistentContext;
-            this.container.innerHTML = await this.engine.renderHTML(next.source, next.context);
+            this.releaseImageObjectUrls(this.container);
+            this.container.innerHTML = html;
             await this.engine.typeset(this.container, next.context);
         })();
         return this.operation;
@@ -215,6 +238,20 @@ class MarkdownDocumentSession implements MarkdownDocument {
         this.unlink();
         this.unlink = () => undefined;
     }
+    private releaseImageObjectUrls(root: ParentNode | string): void {
+        const template = document.createElement('template');
+        if (typeof root === 'string') template.innerHTML = root;
+        const container = typeof root === 'string' ? template.content : root;
+        for (const image of container.querySelectorAll('img, source, image')) {
+            const urls = [
+                image.getAttribute('src') ?? '',
+                image.getAttribute('href') ?? '',
+                image.getAttribute('xlink:href') ?? '',
+                ...(image.getAttribute('srcset') ?? '').split(',').map((candidate) => candidate.trim().split(/\s+/)[0] ?? ''),
+            ];
+            for (const url of urls) if (url.startsWith('blob:')) this.resources.revokeObjectURL(url);
+        }
+    }
 }
 
 export class MarkdownEngine {
@@ -223,9 +260,12 @@ export class MarkdownEngine {
     private configured = false;
     private initialization?: Promise<void>;
     private disposed = false;
+    private disposal?: Promise<void>;
     private readonly renderings = new Map<Element, Promise<void>>();
     private readonly rendered = new Map<Element, MarkdownFence>();
     private readonly deferred = new Map<Element, DeferredRendering>();
+    private readonly hookOperations = new Set<{ root: ParentNode; controller: AbortController; unlink: () => void; operation: Promise<void> }>();
+    private readonly containerDisposals = new Map<ParentNode, Promise<void>>();
     private readonly sessions = new Map<HTMLElement, MarkdownDocumentSession>();
     private readonly extensions = new Map<string, MarkdownExtension>();
     private readonly fences = new Map<string, FenceEntry>();
@@ -233,14 +273,18 @@ export class MarkdownEngine {
     private readonly securityMode: MarkdownSecurityMode;
     private readonly resourcePolicy: MarkdownResourcePolicy;
     private readonly executionPolicy: MarkdownExecutionPolicies;
+    private readonly allowedCapabilities: readonly MarkdownExtensionCapability[] | undefined;
     private activeRenders = 0;
     private readonly renderQueue: ScheduledRendering[] = [];
+    private parsingSource = '';
+    private parsingCursor = 0;
 
     public constructor(options: MarkdownEngineOptions = {}) {
         this.profile = options.profile ?? 'gfm';
         this.securityMode = options.securityMode ?? 'trusted';
         this.resourcePolicy = options.resourcePolicy ?? {};
         this.executionPolicy = options.executionPolicy ?? {};
+        this.allowedCapabilities = options.allowedCapabilities;
         this.maxConcurrentRenders = Math.max(1, Math.floor(options.maxConcurrentRenders ?? 4));
         if (this.profile === 'gfm') {
             this.registerExtension(headingIdsExtension());
@@ -271,7 +315,14 @@ export class MarkdownEngine {
     }
     public parse(src: string, options?: MarkedOptions<string, string> | null): string {
         this.configure();
-        return this.parser.parse(src, options) as string;
+        this.parsingSource = src;
+        this.parsingCursor = 0;
+        try {
+            return this.parser.parse(src, options) as string;
+        } finally {
+            this.parsingSource = '';
+            this.parsingCursor = 0;
+        }
     }
     public async renderHTML(src: string, context: MarkdownDocumentContext = {}): Promise<string> {
         const mode = context.securityMode ?? this.securityMode;
@@ -287,14 +338,23 @@ export class MarkdownEngine {
                       },
                   }
                 : undefined;
-        return sanitizeMarkdownHTML(this.parse(src, options), mode);
+        return sanitizeMarkdownHTML(this.parse(src, options), mode, { ...context, securityMode: mode }, this.resourcePolicy);
     }
     public async renderDocument(src: string, container: HTMLElement, context: MarkdownDocumentContext = {}): Promise<MarkdownDocument> {
         if (this.disposed) throw new Error('Markdown engine is disposed');
-        await this.sessions.get(container)?.dispose();
-        const session = new MarkdownDocumentSession(this, container, context);
+        const previous = this.sessions.get(container);
+        let releasePrevious!: () => void;
+        let rejectPrevious!: (cause: unknown) => void;
+        const ready = new Promise<void>((resolve, reject) => {
+            releasePrevious = resolve;
+            rejectPrevious = reject;
+        });
+        const session = new MarkdownDocumentSession(this, container, context, ready);
         this.sessions.set(container, session);
-        await session.update(src, context);
+        const operation = session.update(src, context);
+        // Reserve ownership and start the operation before abort can invoke host callbacks.
+        void (previous?.dispose() ?? Promise.resolve()).then(releasePrevious, rejectPrevious);
+        await operation;
         return session;
     }
     public async render(src: string, container: HTMLElement, context: MarkdownDocumentContext = {}): Promise<void> {
@@ -302,7 +362,20 @@ export class MarkdownEngine {
         if (session) await session.update(src, context);
         else await this.renderDocument(src, container, context);
     }
-    public async typeset(element: ParentNode = document, context: MarkdownDocumentContext = {}): Promise<void> {
+    public typeset(element: ParentNode = document, context: MarkdownDocumentContext = {}): Promise<void> {
+        if (this.disposed) return Promise.reject(new Error('Markdown engine is disposed'));
+        const root = element as Node;
+        if (Array.from(this.containerDisposals.keys()).some((disposing) => belongsTo(disposing, root) || belongsTo(element, disposing as Node))) return Promise.resolve();
+        const linked = linkedController(context.signal);
+        const entry = { root: element, ...linked, operation: Promise.resolve() };
+        this.hookOperations.add(entry);
+        entry.operation = this.typesetActive(element, { ...context, signal: linked.controller.signal }).finally(() => {
+            linked.unlink();
+            this.hookOperations.delete(entry);
+        });
+        return entry.operation;
+    }
+    private async typesetActive(element: ParentNode, context: MarkdownDocumentContext): Promise<void> {
         await this.initialize();
         const executionPolicy = Object.fromEntries(
             Array.from(new Set([...Object.keys(this.executionPolicy), ...Object.keys(context.executionPolicy ?? {})]), (name) => [
@@ -310,25 +383,59 @@ export class MarkdownEngine {
                 { ...this.executionPolicy[name], ...context.executionPolicy?.[name] },
             ]),
         );
+        const defaultCapabilities = this.allowedCapabilitiesFor(context.securityMode ?? this.securityMode);
+        const allowedCapabilities =
+            context.allowedCapabilities && this.allowedCapabilities
+                ? context.allowedCapabilities.filter((capability) => this.allowedCapabilities?.includes(capability))
+                : (context.allowedCapabilities ?? this.allowedCapabilities ?? defaultCapabilities);
         const activeContext: MarkdownDocumentContext = {
             ...context,
             securityMode: context.securityMode ?? this.securityMode,
             executionPolicy,
+            allowedCapabilities,
         };
         if (activeContext.signal?.aborted) return;
-        for (const extension of this.extensions.values()) await extension.prepare?.(element, activeContext);
-        if (activeContext.signal?.aborted) return;
+        for (const extension of this.extensions.values()) {
+            if (activeContext.signal?.aborted || this.disposed) return;
+            if (!this.extensionAllowed(extension, activeContext)) continue;
+            await extension.prepare?.(element, activeContext);
+        }
+        if (activeContext.signal?.aborted || this.disposed) return;
         const found = this.findRenderables(element);
         await Promise.all(
             Array.from(found, async (renderable) => {
                 const entry = this.fences.get(renderable.getAttribute('data-markdown-language') ?? '');
                 if (!entry) return;
+                if (!this.extensionAllowed(entry.extension, activeContext)) {
+                    const source = renderable.querySelector('.markdown-extension-source')?.textContent ?? '';
+                    const fallback = document.createElement('pre');
+                    fallback.textContent = source;
+                    renderable.replaceChildren(fallback);
+                    const blocked = (entry.extension.manifest?.capabilities ?? []).filter((capability) => !activeContext.allowedCapabilities?.includes(capability));
+                    const line = this.sourceLineFromElement(renderable);
+                    activeContext.onDiagnostic?.({
+                        extension: entry.extension.name,
+                        language: entry.fence.language,
+                        code: markdownDiagnosticCodes.extensionCapabilityBlocked,
+                        category: 'policy',
+                        severity: 'warning',
+                        ...(line !== undefined ? { line } : {}),
+                        ...(activeContext.sourceUrl ? { sourceUrl: activeContext.sourceUrl } : {}),
+                        message: `Extension requires capabilities that are not allowed: ${blocked.join(', ')}`,
+                    });
+                    return;
+                }
                 if (this.shouldDefer(entry.extension, activeContext)) this.deferRendering(renderable, entry, activeContext);
                 else await this.renderElement(renderable, entry, activeContext);
             }),
         );
         if (activeContext.signal?.aborted) return;
-        for (const extension of this.extensions.values()) await extension.typeset?.(element, activeContext);
+        for (const extension of this.extensions.values()) {
+            if (activeContext.signal?.aborted || this.disposed) return;
+            if (!this.extensionAllowed(extension, activeContext)) continue;
+            await extension.typeset?.(element, activeContext);
+        }
+        if (activeContext.signal?.aborted || this.disposed) return;
         for (const renderable of found) {
             const extension = this.extensions.get(renderable.getAttribute('data-markdown-extension') ?? '');
             if (extension) this.installLocalStyles(renderable, extension);
@@ -343,27 +450,69 @@ export class MarkdownEngine {
             await this.disposeContainer(container);
             return;
         }
-        if (this.disposed) return;
-        await this.initialize();
-        for (const session of Array.from(this.sessions.values())) await session.dispose();
-        await this.disposeContainer(document);
-        for (const [element, entry] of this.deferred) {
-            entry.observer.disconnect();
-            entry.removeAbortListener();
-            this.renderings.delete(element);
-        }
-        this.deferred.clear();
-        await Promise.all(Array.from(this.renderings.values(), (rendering) => rendering.catch(() => undefined)));
-        for (const [element, fence] of Array.from(this.rendered.entries()).reverse()) {
-            await fence.dispose?.(element);
-            this.renderings.delete(element);
-        }
-        this.rendered.clear();
-        for (const extension of Array.from(this.extensions.values()).reverse()) await extension.dispose?.();
+        if (this.disposal) return this.disposal;
         this.disposed = true;
+        const sessions: Promise<void>[] = [];
+        this.disposal = Promise.resolve().then(async () => {
+            await this.initialization?.catch(() => undefined);
+            await cleanupAll([
+                ...sessions.map((session) => () => session),
+                ...Array.from(this.hookOperations, (entry) => () => this.disposeContainer(entry.root)),
+                () => this.disposeContainer(document),
+                async () => {
+                    for (const entry of this.deferred.values()) {
+                        entry.observer.disconnect();
+                        entry.removeAbortListener();
+                    }
+                    this.deferred.clear();
+                    await Promise.all(Array.from(this.renderings.values(), (rendering) => rendering.catch(() => undefined)));
+                    const fences = Array.from(this.rendered.entries()).reverse();
+                    this.rendered.clear();
+                    this.renderings.clear();
+                    await cleanupAll(
+                        fences.map(
+                            ([element, fence]) =>
+                                () =>
+                                    fence.dispose?.(element),
+                        ),
+                    );
+                },
+                ...Array.from(this.extensions.values())
+                    .reverse()
+                    .map((extension) => () => extension.dispose?.()),
+            ]);
+        });
+        for (const scheduled of this.renderQueue.splice(0)) {
+            scheduled.unlink();
+            scheduled.resolve();
+        }
+        // Cache disposal before abort callbacks, and cancel all documents before waiting.
+        sessions.push(...Array.from(this.sessions.values(), (session) => session.dispose()));
+        for (const entry of this.hookOperations) entry.controller.abort();
+        return this.disposal;
     }
     /** @internal */
-    public async disposeContainer(container: ParentNode): Promise<void> {
+    public disposeContainer(container: ParentNode): Promise<void> {
+        const previous = this.containerDisposals.get(container);
+        if (previous) return previous;
+        const hooks = Array.from(this.hookOperations).filter((entry) => belongsTo(container, entry.root as Node));
+        const operation = Promise.resolve().then(async () => {
+            try {
+                await this.clearContainer(container, hooks);
+            } finally {
+                this.containerDisposals.delete(container);
+            }
+        });
+        this.containerDisposals.set(container, operation);
+        for (const entry of hooks) {
+            entry.controller.abort();
+            entry.unlink();
+        }
+        return operation;
+    }
+    private async clearContainer(container: ParentNode, hooks: Array<{ root: ParentNode; operation: Promise<void> }>): Promise<void> {
+        await Promise.all(hooks.map((entry) => entry.operation.catch(() => undefined)));
+        for (const entry of Array.from(this.hookOperations)) if (hooks.includes(entry)) this.hookOperations.delete(entry);
         for (const [element, entry] of Array.from(this.deferred.entries()).filter(([element]) => belongsTo(container, element))) {
             entry.observer.disconnect();
             entry.removeAbortListener();
@@ -372,13 +521,23 @@ export class MarkdownEngine {
         }
         const pending = Array.from(this.renderings.entries()).filter(([element]) => belongsTo(container, element));
         await Promise.all(pending.map(([, rendering]) => rendering.catch(() => undefined)));
-        for (const [element, fence] of Array.from(this.rendered.entries())
+        const fences = Array.from(this.rendered.entries())
             .filter(([element]) => belongsTo(container, element))
-            .reverse()) {
-            await fence.dispose?.(element);
+            .reverse();
+        for (const [element] of fences) {
             this.rendered.delete(element);
             this.renderings.delete(element);
         }
+        await cleanupAll([
+            ...fences.map(
+                ([element, fence]) =>
+                    () =>
+                        fence.dispose?.(element),
+            ),
+            ...Array.from(this.extensions.values())
+                .reverse()
+                .map((extension) => () => extension.disposeContainer?.(container)),
+        ]);
     }
     /** @internal */
     public releaseSession(session: MarkdownDocumentSession): void {
@@ -395,7 +554,10 @@ export class MarkdownEngine {
                 const language = token.lang?.trim().split(/\s+/)[0] ?? '';
                 const entry = this.fences.get(language);
                 if (!entry) return false;
-                return `<div class="${entry.fence.className}" data-markdown-extension="${entry.extension.name}" data-markdown-language="${language}"><pre class="markdown-extension-source">${escapeHTML(token.text)}</pre></div>`;
+                const raw = (token as typeof token & { raw?: string }).raw;
+                const line = this.sourceLineForToken(raw);
+                const sourceLocation = line === undefined ? '' : ` data-markdown-line="${line}"`;
+                return `<div class="${entry.fence.className}" data-markdown-extension="${entry.extension.name}" data-markdown-language="${language}"${sourceLocation}><pre class="markdown-extension-source">${escapeHTML(token.text)}</pre></div>`;
             },
         };
         this.parser.options(markdownProfiles[this.profile]);
@@ -423,19 +585,29 @@ export class MarkdownEngine {
         const capabilities = extension.manifest?.capabilities ?? [];
         return capabilities.some((capability) => capability === 'audio' || capability === 'interactive' || capability === 'wasm' || capability === 'webgl');
     }
+    private allowedCapabilitiesFor(mode: MarkdownSecurityMode): readonly MarkdownExtensionCapability[] {
+        if (mode === 'trusted') return ['audio', 'interactive', 'network', 'wasm', 'webgl'];
+        if (mode === 'sanitized') return ['interactive', 'wasm'];
+        return [];
+    }
+    private extensionAllowed(extension: MarkdownExtension, context: MarkdownDocumentContext): boolean {
+        return (extension.manifest?.capabilities ?? []).every((capability) => context.allowedCapabilities?.includes(capability) ?? true);
+    }
     private deferRendering(renderable: Element, entry: FenceEntry, context: MarkdownDocumentContext): void {
-        if (this.rendered.has(renderable) || this.renderings.has(renderable) || this.deferred.has(renderable) || context.signal?.aborted) return;
+        if (this.disposed || this.rendered.has(renderable) || this.renderings.has(renderable) || this.deferred.has(renderable) || context.signal?.aborted) return;
         const observer = new IntersectionObserver(
             (entries) => {
+                if (this.disposed || context.signal?.aborted || this.deferred.get(renderable)?.observer !== observer) return;
                 if (!entries.some(({ isIntersecting }) => isIntersecting)) return;
                 observer.disconnect();
                 this.deferred.get(renderable)?.removeAbortListener();
                 this.deferred.delete(renderable);
                 void this.renderElement(renderable, entry, context).catch((cause) =>
-                    context.onDiagnostic?.({
+                    this.withFenceDiagnosticContext(context, renderable).onDiagnostic?.({
                         extension: entry.extension.name,
                         language: entry.fence.language,
-                        code: 'extension-render-error',
+                        code: markdownDiagnosticCodes.extensionRenderError,
+                        category: 'extension',
                         severity: 'error',
                         ...(context.sourceUrl ? { sourceUrl: context.sourceUrl } : {}),
                         message: cause instanceof Error ? cause.message : String(cause),
@@ -447,6 +619,7 @@ export class MarkdownEngine {
         );
         const abort = (): void => {
             observer.disconnect();
+            context.signal?.removeEventListener('abort', abort);
             this.deferred.delete(renderable);
         };
         context.signal?.addEventListener('abort', abort, { once: true });
@@ -454,17 +627,22 @@ export class MarkdownEngine {
         this.deferred.set(renderable, { observer, removeAbortListener: () => context.signal?.removeEventListener('abort', abort) });
     }
     private renderElement(renderable: Element, entry: FenceEntry, context: MarkdownDocumentContext): Promise<void> {
+        if (this.disposed || context.signal?.aborted) return Promise.resolve();
         const previous = this.renderings.get(renderable);
         if (previous) return previous;
         const source = renderable.querySelector('.markdown-extension-source')?.textContent ?? '';
+        const diagnosticContext = this.withFenceDiagnosticContext(context, renderable);
         const pending = this.schedule(async () => {
-            if (context.signal?.aborted) return;
+            if (context.signal?.aborted || this.disposed) return;
             this.rendered.set(renderable, entry.fence);
             try {
-                await entry.fence.render(renderable, source, context);
+                await entry.fence.render(renderable, source, diagnosticContext);
             } catch (error) {
-                await entry.fence.dispose?.(renderable);
-                this.rendered.delete(renderable);
+                try {
+                    await entry.fence.dispose?.(renderable);
+                } finally {
+                    this.rendered.delete(renderable);
+                }
                 throw error;
             }
         }, context.signal).catch((error) => {
@@ -472,21 +650,69 @@ export class MarkdownEngine {
             throw error;
         });
         this.renderings.set(renderable, pending);
-        void pending.then(() => {
-            if (context.signal?.aborted) this.renderings.delete(renderable);
-        });
+        void pending.then(
+            () => {
+                if (context.signal?.aborted) this.renderings.delete(renderable);
+            },
+            () => undefined,
+        );
         return pending;
+    }
+    private withFenceDiagnosticContext(context: MarkdownDocumentContext, renderable: Element): MarkdownDocumentContext {
+        const line = this.sourceLineFromElement(renderable);
+        return {
+            ...context,
+            onDiagnostic: (diagnostic) => {
+                if (this.disposed || context.signal?.aborted) return;
+                const code = diagnostic.code ?? markdownDiagnosticCodes.extensionDiagnostic;
+                context.onDiagnostic?.({
+                    ...diagnostic,
+                    code,
+                    category: diagnostic.category ?? markdownDiagnosticCategory(code),
+                    ...(!diagnostic.sourceUrl && context.sourceUrl ? { sourceUrl: context.sourceUrl } : {}),
+                    ...(diagnostic.line === undefined && line !== undefined ? { line } : {}),
+                });
+            },
+        };
+    }
+    private sourceLineFromElement(renderable: Element): number | undefined {
+        const line = Number(renderable.getAttribute('data-markdown-line'));
+        return Number.isInteger(line) && line > 0 ? line : undefined;
+    }
+    private sourceLineForToken(raw?: string): number | undefined {
+        if (!raw) return undefined;
+        let index = this.parsingSource.indexOf(raw, this.parsingCursor);
+        if (index < 0) index = this.parsingSource.indexOf(raw);
+        if (index < 0) return undefined;
+        this.parsingCursor = index + raw.length;
+        let line = 1;
+        for (let cursor = 0; cursor < index; cursor++) if (this.parsingSource.charCodeAt(cursor) === 10) line++;
+        return line;
     }
     private schedule(task: () => Promise<void>, signal?: AbortSignal): Promise<void> {
         return new Promise<void>((resolve, reject) => {
-            this.renderQueue.push({ ...(signal ? { signal } : {}), task, resolve, reject });
+            if (signal?.aborted || this.disposed) {
+                resolve();
+                return;
+            }
+            const scheduled: ScheduledRendering = { ...(signal ? { signal } : {}), task, resolve, reject, unlink: () => signal?.removeEventListener('abort', abort) };
+            const abort = (): void => {
+                const index = this.renderQueue.indexOf(scheduled);
+                if (index < 0) return;
+                this.renderQueue.splice(index, 1);
+                scheduled.unlink();
+                resolve();
+            };
+            signal?.addEventListener('abort', abort, { once: true });
+            this.renderQueue.push(scheduled);
             this.pumpQueue();
         });
     }
     private pumpQueue(): void {
         while (this.activeRenders < this.maxConcurrentRenders && this.renderQueue.length) {
             const scheduled = this.renderQueue.shift()!;
-            if (scheduled.signal?.aborted) {
+            scheduled.unlink();
+            if (scheduled.signal?.aborted || this.disposed) {
                 scheduled.resolve();
                 continue;
             }

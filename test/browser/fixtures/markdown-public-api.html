@@ -13,8 +13,18 @@
                 import('/dist/markdown-document/mathjslab.js'),
                 import('/dist/markdown-document/mathjslab-worker.js'),
             ]);
+            const presetEngine = core.createMarkdownEnginePreset('safe-remote');
+            const presetReady =
+                presetEngine.profile === 'gfm' && core.markdownEnginePresets['safe-remote'].securityMode === 'sanitized' && Object.keys(core.markdownExtensionCatalog).length === 14;
+            await presetEngine.dispose();
             window.markdownPublicApiTest = {
-                core: typeof core.MarkdownEngine === 'function' && !('MarkdownDocumentElement' in core),
+                core:
+                    typeof core.MarkdownEngine === 'function' &&
+                    typeof core.createMarkdownEnginePreset === 'function' &&
+                    typeof core.markdownDiagnosticCategory === 'function' &&
+                    core.markdownDiagnosticCodes.documentLoadError === 'document-load-error' &&
+                    presetReady &&
+                    !('MarkdownDocumentElement' in core),
                 component: typeof component.MarkdownDocumentElement === 'function' && !('MarkdownEngine' in component),
                 componentUnregistered: customElements.get('markdown-document') === undefined,
                 extensions: typeof extensions.mermaidExtension === 'function' && !('mathJSLabExtension' in extensions),

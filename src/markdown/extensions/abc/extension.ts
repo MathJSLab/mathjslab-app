@@ -1,5 +1,6 @@
 import type { MarkdownDocumentContext, MarkdownExtension } from '../../../MarkdownEngine';
 import { assertSourceSize, renderExtensionError, sanitizeSVG } from '../../extensionUtils';
+import { markdownDiagnosticCodes } from '../../diagnostics';
 import { abcManifest } from './manifest';
 
 export const abcExtension = (): MarkdownExtension => {
@@ -20,6 +21,10 @@ export const abcExtension = (): MarkdownExtension => {
             const tunes = abcjs.renderAbc(container, source, { responsive: 'resize', add_classes: true });
             if (!tunes.length) throw new Error('No score could be produced');
             container.innerHTML = await sanitizeSVG(container.innerHTML);
+            if (context.signal?.aborted) {
+                dispose(container);
+                return;
+            }
             const image = container.querySelector('svg');
             image?.setAttribute('role', 'img');
             image?.setAttribute('aria-label', context.locale?.startsWith('pt') ? 'Partitura musical' : 'Musical score');
@@ -31,13 +36,27 @@ export const abcExtension = (): MarkdownExtension => {
                 button.textContent = context.locale?.startsWith('pt') ? 'Reproduzir partitura' : 'Play score';
                 let synth: InstanceType<typeof abcjs.synth.CreateSynth> | undefined;
                 const play = async (): Promise<void> => {
+                    if (context.signal?.aborted) return;
                     button.disabled = true;
                     try {
                         synth?.stop();
                         synth = new abcjs.synth.CreateSynth();
                         await synth.init({ visualObj: tunes[0] });
                         await synth.prime();
-                        if (!context.signal?.aborted) synth.start();
+                        if (context.signal?.aborted) synth.stop();
+                        else synth.start();
+                    } catch (error) {
+                        if (!context.signal?.aborted)
+                            context.onDiagnostic?.({
+                                extension: abcManifest.name,
+                                language: 'abc',
+                                code: markdownDiagnosticCodes.audioPlaybackError,
+                                category: 'extension',
+                                severity: 'warning',
+                                ...(context.sourceUrl ? { sourceUrl: context.sourceUrl } : {}),
+                                message: error instanceof Error ? error.message : String(error),
+                                cause: error,
+                            });
                     } finally {
                         button.disabled = false;
                     }
@@ -49,6 +68,10 @@ export const abcExtension = (): MarkdownExtension => {
             }
             rendered.set(container, entry);
         } catch (error) {
+            if (context.signal?.aborted) {
+                dispose(container);
+                return;
+            }
             renderExtensionError(container, 'ABC', 'abc', source, error, context);
         }
     };

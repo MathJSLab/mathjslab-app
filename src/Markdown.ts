@@ -6,6 +6,7 @@ import { mapsExtension } from './markdown/extensions/maps/extension';
 import { mathJSLabExtension } from './markdown/extensions/mathjslab/extension';
 import { createBrowserMathJSLabWorkerExecutor } from './markdown/extensions/mathjslab/browserWorkerExecutor';
 import { MarkdownNavigator } from './markdown/MarkdownNavigator';
+import { onMarkdownDocumentDispose } from './markdown/lifecycle';
 import { mermaidExtension } from './markdown/extensions/mermaid/extension';
 import { model3DExtension } from './markdown/extensions/model-3d/extension';
 import { molecule3DExtension } from './markdown/extensions/molecule-3d/extension';
@@ -40,6 +41,15 @@ const engine = new MarkdownEngine({
  */
 abstract class Markdown {
     private static readonly navigators = new Map<HTMLElement, MarkdownNavigator>();
+    private static readonly navigatorSubscriptions = new Map<HTMLElement, () => void>();
+    private static readonly renderRevisions = new Map<HTMLElement, number>();
+
+    private static releaseNavigator(container: HTMLElement): void {
+        this.navigatorSubscriptions.get(container)?.();
+        this.navigatorSubscriptions.delete(container);
+        this.navigators.get(container)?.dispose();
+        this.navigators.delete(container);
+    }
 
     public static initialize(): Promise<void> {
         return engine.initialize();
@@ -66,11 +76,26 @@ abstract class Markdown {
     }
 
     public static async renderDocument(src: string, container: HTMLElement, context: MarkdownDocumentContext = {}): Promise<MarkdownDocument> {
-        this.navigators.get(container)?.dispose();
-        this.navigators.delete(container);
-        const document = await engine.renderDocument(src, container, context);
-        if (typeof container.addEventListener === 'function') this.navigators.set(container, new MarkdownNavigator(document));
-        return document;
+        const revision = (this.renderRevisions.get(container) ?? 0) + 1;
+        this.renderRevisions.set(container, revision);
+        this.releaseNavigator(container);
+        try {
+            const rendered = await engine.renderDocument(src, container, context);
+            if (this.renderRevisions.get(container) === revision && !rendered.disposed && !rendered.signal.aborted && typeof container.addEventListener === 'function') {
+                this.releaseNavigator(container);
+                const navigator = new MarkdownNavigator(rendered);
+                this.navigators.set(container, navigator);
+                this.navigatorSubscriptions.set(
+                    container,
+                    onMarkdownDocumentDispose(rendered, () => {
+                        if (this.navigators.get(container) === navigator) this.releaseNavigator(container);
+                    }),
+                );
+            }
+            return rendered;
+        } finally {
+            if (this.renderRevisions.get(container) === revision) this.renderRevisions.delete(container);
+        }
     }
 
     public static getNavigator(container: HTMLElement): MarkdownNavigator | undefined {
@@ -79,11 +104,13 @@ abstract class Markdown {
 
     public static async dispose(container?: ParentNode): Promise<void> {
         if (container instanceof HTMLElement) {
-            this.navigators.get(container)?.dispose();
-            this.navigators.delete(container);
+            this.renderRevisions.set(container, (this.renderRevisions.get(container) ?? 0) + 1);
+            this.releaseNavigator(container);
         } else if (!container) {
-            for (const navigator of this.navigators.values()) navigator.dispose();
-            this.navigators.clear();
+            for (const element of this.navigators.keys()) {
+                this.renderRevisions.set(element, (this.renderRevisions.get(element) ?? 0) + 1);
+                this.releaseNavigator(element);
+            }
         }
         await engine.dispose(container);
     }
@@ -91,6 +118,9 @@ abstract class Markdown {
 
 export type {
     MarkdownDiagnostic,
+    MarkdownDiagnosticCategory,
+    MarkdownDiagnosticCode,
+    MarkdownDiagnosticEventDetail,
     MarkdownDocument,
     MarkdownDocumentContext,
     MarkdownExecutionPolicies,
@@ -107,7 +137,7 @@ export type {
     MarkdownResourceService,
     MarkdownSecurityMode,
 } from './MarkdownEngine';
-export { MarkdownEngine, markdownProfiles } from './MarkdownEngine';
+export { MarkdownEngine, markdownDiagnosticCategory, markdownDiagnosticCodes, markdownProfiles } from './MarkdownEngine';
 export { MarkdownNavigator } from './markdown/MarkdownNavigator';
 export { createMarkdownOutline, MarkdownDocumentModel } from './markdown/MarkdownDocumentModel';
 export { MarkdownDocumentController } from './markdown/MarkdownDocumentController';

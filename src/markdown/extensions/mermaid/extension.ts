@@ -1,4 +1,4 @@
-import type { MarkdownExtension } from '../../../MarkdownEngine';
+import type { MarkdownDocumentContext, MarkdownExtension } from '../../../MarkdownEngine';
 import { mermaidManifest } from './manifest';
 
 type MermaidApi = typeof import('mermaid').default;
@@ -13,7 +13,7 @@ export const mermaidExtension = (): MarkdownExtension => {
             mermaid.initialize({
                 startOnLoad: false,
                 theme: 'neutral',
-                securityLevel: 'loose',
+                securityLevel: 'strict',
                 suppressErrorRendering: true,
             });
             return mermaid;
@@ -21,14 +21,17 @@ export const mermaidExtension = (): MarkdownExtension => {
         return loading;
     };
 
-    const render = async (container: Element, source: string): Promise<void> => {
+    const render = async (container: Element, source: string, context: MarkdownDocumentContext): Promise<void> => {
         try {
             const mermaid = await load();
+            if (context.signal?.aborted) return;
             const { svg, bindFunctions } = await mermaid.render(`mathjslab-mermaid-${++sequence}`, source);
+            if (context.signal?.aborted) return;
             container.innerHTML = svg;
             bindFunctions?.(container);
             rendered.add(container);
         } catch (error) {
+            if (context.signal?.aborted) return;
             const message = document.createElement('pre');
             message.className = 'mermaid-error';
             message.setAttribute('role', 'alert');

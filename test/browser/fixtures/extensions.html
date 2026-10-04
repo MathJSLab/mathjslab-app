@@ -29,7 +29,7 @@
                 const viewer = document.createElement('markdown-document');
                 viewer.setAttribute('locale', 'en');
                 viewer.setAttribute('security', 'sanitized');
-                viewer.engine = createEducationalMarkdownEngine({ features, securityMode: 'sanitized' });
+                viewer.engine = createEducationalMarkdownEngine({ features, securityMode: 'sanitized', allowedCapabilities: ['audio', 'interactive', 'network', 'wasm', 'webgl'] });
                 viewer.src = source;
                 document.body.append(viewer);
             }

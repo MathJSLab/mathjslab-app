@@ -10,7 +10,6 @@ import {
     type MathJSLabWorkerOutboundMessage,
     type MathJSLabWorkerResourceRequest,
     type MathJSLabWorkerResourceResponse,
-    type MathJSLabWorkerResponse,
     type MathJSLabWorkerSuccess,
 } from './workerProtocol';
 

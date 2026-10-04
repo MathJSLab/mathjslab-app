@@ -172,7 +172,72 @@ Os estados `empty`, `loading`, `ready` e `error` aparecem no atributo `state` e
 em `aria-busy`. O Shadow DOM expõe as partes `root`, `status` e `content` para
 estilização externa. O componente emite os eventos compostos
 `markdown-state-change`, `markdown-ready`, `markdown-error` e
-`markdown-navigate`, que atravessam o limite do Shadow DOM.
+`markdown-navigate`, que atravessam o limite do Shadow DOM. Ele também emite
+`markdown-diagnostic` sempre que o engine ou o carregamento do documento produz
+um diagnóstico estruturado.
+
+## Diagnósticos
+
+`MarkdownDiagnostic` mantém `extension`, `message`, `severity`, causa e, quando
+conhecidos, `sourceUrl`, `line` e `column`. A propriedade `code` continua
+opcional para compatibilidade com extensões externas antigas; todos os
+diagnósticos internos do engine usam um código do catálogo
+`markdownDiagnosticCodes`. `category` separa política, rede, extensão,
+execução, carregamento de documento e navegação.
+
+| Código                         | Categoria  | Severidade usual    | Significado                                  |
+| ------------------------------ | ---------- | ------------------- | -------------------------------------------- |
+| `resource-url-blocked`         | policy     | warning             | protocolo, origem ou recurso não permitido   |
+| `resource-size-limit`          | policy     | warning             | conteúdo ultrapassou o limite configurado    |
+| `resource-load-error`          | network    | error               | falha ao buscar ou ler um recurso            |
+| `extension-capability-blocked` | policy     | warning             | extensão requer capability não concedida     |
+| `extension-render-error`       | extension  | error               | renderer de extensão falhou                  |
+| `extension-diagnostic`         | extension  | definida pelo autor | código de fallback para extensão antiga      |
+| `audio-playback-error`         | extension  | warning             | áudio ABC não pôde ser iniciado              |
+| `vega-resize-error`            | extension  | warning             | atualização de visualização Vega falhou      |
+| `mathjslab-execution-disabled` | policy     | warning             | execução bloqueada pela política             |
+| `mathjslab-block-limit`        | policy     | warning             | limite de blocos executáveis excedido        |
+| `mathjslab-source-limit`       | policy     | warning             | limite de bytes de código excedido           |
+| `mathjslab-statement-limit`    | policy     | warning             | limite de comandos excedido                  |
+| `mathjslab-execution-timeout`  | execution  | error               | execução atingiu o timeout                   |
+| `mathjslab-worker-restarted`   | execution  | error               | Worker foi reiniciado durante a execução     |
+| `mathjslab-execution-error`    | execution  | error               | execução MathJSLab falhou                    |
+| `document-load-error`          | document   | error               | operação de carregamento do documento falhou |
+| `document-navigation-error`    | navigation | error               | navegação solicitada falhou                  |
+
+Recursos que causam uma falha de carregamento podem produzir primeiro um
+diagnóstico detalhado (`resource-load-error`) e depois o diagnóstico agregado
+(`document-load-error`). Cancelamentos por `AbortSignal` são fluxo de controle:
+não produzem diagnóstico nem erro tardio no componente. Linhas apontam para o
+início da fence quando o parser consegue associar o token ao texto fonte;
+colunas só são incluídas quando uma extensão consegue determiná-las.
+
+O evento expõe um detalhe normalizado e mantém a callback do contexto:
+
+```ts
+import type { MarkdownDocumentDiagnosticDetail } from "./markdown-component.js";
+
+viewer.addEventListener("markdown-diagnostic", (event) => {
+    const diagnostic = (event as CustomEvent<MarkdownDocumentDiagnosticDetail>)
+        .detail;
+    console.warn(
+        diagnostic.code,
+        diagnostic.category,
+        diagnostic.sourceUrl,
+        diagnostic.line,
+        diagnostic.message,
+    );
+});
+
+viewer.context = {
+    onDiagnostic: (diagnostic) =>
+        console.warn(diagnostic.code, diagnostic.message),
+};
+```
+
+O detalhe do evento sempre tem `code` e `category`. Códigos fornecidos por
+extensões externas continuam aceitos; se a extensão omitir o código, o evento
+usa `extension-diagnostic` e mantém a mensagem e a causa originais.
 
 Quando recebe um manifesto, o elemento cria um `MarkdownDocumentController` e o
 expõe pela propriedade `controller`; `model` contém o catálogo resultante. Com
@@ -518,19 +583,24 @@ documento no contexto.
 
 A política `resourcePolicy` controla `allowedProtocols`, `allowedOrigins`,
 `allowNetwork`, `allowDataUrls`, `maxResourceBytes` e o cache `memory` ou
-`none`. A resolução relativa, a navegação e os recursos carregados por
-extensões usam o mesmo serviço. O cache textual pertence à sessão do documento,
-falhas não são armazenadas e todas as operações recebem o `AbortSignal` da
-revisão ativa. URLs de objeto criadas pelo serviço são revogadas no descarte.
+`none`. URLs no HTML são verificadas antes da inserção; imagens em sessões são
+buscadas pelo serviço e publicadas como object URLs sujeitos ao limite de
+bytes. Vega-Lite e leituras do Worker MathJSLab também usam o serviço. O cache
+textual pertence à sessão do documento, falhas não são armazenadas e URLs de
+objeto são revogadas ao substituir imagens ou descartar a sessão. A política
+normativa por modo e as limitações de bibliotecas de terceiros estão em
+[`markdown-security-policy.md`](markdown-security-policy.md).
 
 Links e imagens proibidos perdem o atributo de destino e geram um diagnóstico
 `resource-url-blocked`. Diagnósticos agora também podem informar código,
 severidade, URL de origem, linha e coluna. Erros de extensões usam o código
 `extension-render-error` e preservam o conteúdo-fonte como fallback.
 
-Mermaid mantém a configuração `loose` já existente. Para documentos externos, o
+Mermaid usa o nível de segurança `strict`. Para documentos externos, o
 integrador deve escolher `sanitized` ou `strict` e limitar origens conforme o
-ambiente de hospedagem.
+ambiente de hospedagem. Capabilities são filtradas pelo modo e podem ser
+concedidas por `allowedCapabilities`; grants no engine limitam o que o contexto
+do documento pode conceder.
 
 ## Limites e próximo componente
 

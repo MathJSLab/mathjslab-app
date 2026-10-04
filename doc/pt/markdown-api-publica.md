@@ -24,20 +24,61 @@ não define o contrato do pacote.
 
 Estes símbolos formam a interface recomendada para a maioria dos integradores:
 
-| Família                  | Símbolos                                                                                                                                                  |
-| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Engine                   | `MarkdownEngine`, `MarkdownEngineOptions`, `MarkdownDocument`, `MarkdownDocumentContext`, `MarkdownProfile`, `markdownProfiles`                           |
-| Extensões                | `MarkdownExtension`, `MarkdownExtensionManifest`, `MarkdownFence`, `MarkdownEngineServices`, `MarkdownExtensionCapability`                                |
-| Segurança e recursos     | `MarkdownSecurityMode`, `MarkdownResourcePolicy`, `MarkdownResourceService`, `MarkdownExecutionPolicy`, `MarkdownExecutionPolicies`, `MarkdownDiagnostic` |
-| Configuração educacional | `createEducationalMarkdownEngine`, `EducationalMarkdownEngineOptions`, `EducationalMarkdownFeature`, `educationalMarkdownFeatures`                        |
-| Componente               | `MarkdownDocumentElement`, `defineMarkdownDocumentElement` e os tipos dos eventos e estados do elemento                                                   |
-| Hospedagem               | `mountMarkdownDocument`, `disposeMarkdownDocument`, `getHostedMarkdownDocument`, `MarkdownDocumentHostOptions`                                            |
-| Coleções                 | `MarkdownDocumentModel`, definições de página e grupo, manifesto, sumário e outline                                                                       |
-| Navegação                | `MarkdownDocumentController`, `MarkdownNavigator` e seus tipos de estado, opções e eventos                                                                |
+| Família                 | Símbolos                                                                                                                                 |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Engine                  | `MarkdownEngine`, `MarkdownEngineOptions`, `MarkdownDocument`, `MarkdownDocumentContext`, `MarkdownProfile`, `markdownProfiles`          |
+| Extensões               | `MarkdownExtension`, `MarkdownExtensionManifest`, `MarkdownFence`, `MarkdownEngineServices`, `MarkdownExtensionCapability`               |
+| Diagnósticos            | `MarkdownDiagnostic`, `MarkdownDiagnosticCode`, `MarkdownDiagnosticCategory`, `MarkdownDiagnosticEventDetail`, `markdownDiagnosticCodes` |
+| Segurança e recursos    | `MarkdownSecurityMode`, `MarkdownResourcePolicy`, `MarkdownResourceService`, `MarkdownExecutionPolicy`, `MarkdownExecutionPolicies`      |
+| Configuração e catálogo | `createEducationalMarkdownEngine`, `createMarkdownEnginePreset`, `markdownEnginePresets`, `markdownExtensionCatalog`                     |
+| Componente              | `MarkdownDocumentElement`, `defineMarkdownDocumentElement`, `MarkdownDocumentDiagnosticDetail` e tipos dos demais eventos e estados      |
+| Hospedagem              | `mountMarkdownDocument`, `disposeMarkdownDocument`, `getHostedMarkdownDocument`, `MarkdownDocumentHostOptions`                           |
+| Coleções                | `MarkdownDocumentModel`, definições de página e grupo, manifesto, sumário e outline                                                      |
+| Navegação               | `MarkdownDocumentController`, `MarkdownNavigator` e seus tipos de estado, opções e eventos                                               |
 
 Essa camada não depende do estado global do aplicativo. Um consumidor deve
 conseguir criar um engine, montar o componente, navegar por documentos e
 descartá-lo usando somente esses contratos.
+
+O catálogo `markdownExtensionCatalog` centraliza os manifests incluídos e as
+factories que não precisam de um adapter externo. MathJSLab aparece como
+manifest, mas sua factory continua no entry point `mathjslab`, pois exige um
+executor fornecido pelo integrador. `educationalMarkdownFeatures` é derivado
+desse catálogo.
+
+`createMarkdownEnginePreset` aceita `core`, `gfm`, `education-basic`,
+`education-full`, `trusted-local` e `safe-remote`. O campo `profile` seleciona
+somente a sintaxe Markdown; `securityMode`, capabilities e `resourcePolicy`
+permanecem configurações independentes. Os presets educacionais usam política
+sanitizada; `trusted-local` é a escolha explícita para conteúdo local
+confiável. `safe-remote` permite buscar o documento e aplica os limites de
+origem e de conteúdo do modo sanitizado. As opções do integrador podem
+substituir cada dimensão explicitamente.
+
+| Preset            | Perfil | Segurança | Factories educacionais opcionais             |
+| ----------------- | ------ | --------- | -------------------------------------------- |
+| `core`            | core   | strict    | nenhuma                                      |
+| `gfm`             | gfm    | sanitized | nenhuma                                      |
+| `education-basic` | gfm    | sanitized | SMILES                                       |
+| `education-full`  | gfm    | sanitized | catálogo educacional completo                |
+| `trusted-local`   | gfm    | trusted   | catálogo educacional completo                |
+| `safe-remote`     | gfm    | sanitized | nenhuma; rede limitada à origem do documento |
+
+`education-full` registra todas as factories educacionais, mas mantém o modo
+sanitizado. A verificação de capabilities continua valendo; extensões cuja
+manifestação exija permissões não concedidas podem permanecer bloqueadas até o
+integrador ajustar a política. `trusted-local` concede as capabilities do modo
+`trusted` e deve ser usado apenas quando a origem do conteúdo for confiável.
+
+Exemplos independentes do estado do aplicativo estão em
+[`markdown-integracao.md`](markdown-integracao.md).
+
+Os eventos do componente e o catálogo de diagnósticos estão descritos em
+[`markdown-rendering.md`](markdown-rendering.md). O ciclo de vida, políticas de
+segurança e recursos também possuem documentos próprios:
+[`markdown-lifecycle-audit.md`](markdown-lifecycle-audit.md),
+[`markdown-security-policy.md`](markdown-security-policy.md) e
+[`markdown-resource-audit.md`](markdown-resource-audit.md).
 
 ## Extensões públicas
 

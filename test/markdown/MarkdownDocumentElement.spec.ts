@@ -12,6 +12,40 @@ const ready = (element: MarkdownDocumentElement): Promise<MarkdownDocumentReadyD
 describe('<markdown-document>', () => {
     afterEach(() => document.body.replaceChildren());
 
+    it('cancels a queued property load when explicitly disposed before the microtask', async () => {
+        const element = new MarkdownDocumentElement();
+        element.engine = new MarkdownEngine({ profile: 'core' });
+        document.body.append(element);
+        element.markdown = '# Cancelled';
+        await element.dispose();
+        await new Promise((resolve) => setTimeout(resolve, 0));
+        expect(element.state).toBe('empty');
+        expect(element.documentSession).toBeUndefined();
+        expect(element.shadowRoot?.querySelector('[part="content"]')?.textContent).toBe('');
+        await element.engine.dispose();
+    });
+
+    it('creates a fresh session when disconnected and immediately reconnected', async () => {
+        const element = new MarkdownDocumentElement();
+        element.engine = new MarkdownEngine({ profile: 'core' });
+        element.markdown = '# Initial';
+        const firstReady = ready(element);
+        document.body.append(element);
+        await firstReady;
+        const first = element.documentSession!;
+        element.remove();
+        element.markdown = '# Reconnected';
+        const nextReady = ready(element);
+        document.body.append(element);
+        await nextReady;
+        expect(first.disposed).toBe(true);
+        expect(element.documentSession).not.toBe(first);
+        expect(element.documentSession?.disposed).toBe(false);
+        expect(element.shadowRoot?.querySelector('h1')?.textContent).toBe('Reconnected');
+        await element.dispose();
+        await element.engine.dispose();
+    });
+
     it('renders Markdown supplied through the markdown property in Shadow DOM', async () => {
         const element = new MarkdownDocumentElement();
         element.engine = new MarkdownEngine({ profile: 'gfm' });
@@ -50,6 +84,104 @@ describe('<markdown-document>', () => {
         expect(requested).toEqual(['https://course.test/index.md', 'https://course.test/next.md']);
         await element.dispose();
         await element.engine.dispose();
+    });
+
+    it('forwards structured engine diagnostics as composed events and preserves the host callback', async () => {
+        const callbacks: unknown[] = [];
+        const events: CustomEvent[] = [];
+        const engine = new MarkdownEngine({
+            profile: 'core',
+            securityMode: 'strict',
+            extensions: [
+                {
+                    name: 'diagnostic-fixture',
+                    manifest: {
+                        name: 'diagnostic-fixture',
+                        description: '',
+                        dependencies: [],
+                        fences: [{ language: 'diagnostic-fixture', className: 'diagnostic-fixture' }],
+                        capabilities: ['network'],
+                    },
+                    fences: [{ language: 'diagnostic-fixture', className: 'diagnostic-fixture', render: async () => undefined }],
+                },
+            ],
+        });
+        const element = new MarkdownDocumentElement();
+        element.engine = engine;
+        element.context = { sourceUrl: new URL('https://course.test/lesson.md'), onDiagnostic: (diagnostic) => callbacks.push(diagnostic) };
+        element.markdown = '# Lesson\n\n```diagnostic-fixture\ncontent\n```';
+        element.addEventListener('markdown-diagnostic', (event) => events.push(event as CustomEvent));
+        const completed = ready(element);
+        document.body.append(element);
+        await completed;
+
+        expect(callbacks).toHaveLength(1);
+        expect(events).toHaveLength(1);
+        expect(events[0]?.bubbles).toBe(true);
+        expect(events[0]?.composed).toBe(true);
+        expect(events[0]?.detail).toMatchObject({
+            code: 'extension-capability-blocked',
+            category: 'policy',
+            line: 3,
+            sourceUrl: new URL('https://course.test/lesson.md'),
+        });
+        expect(events[0]?.detail).toEqual(callbacks[0]);
+        await element.dispose();
+        await engine.dispose();
+    });
+
+    it('emits a structured document diagnostic when loading fails', async () => {
+        const element = new MarkdownDocumentElement();
+        element.context = {
+            fetchResource: async () => {
+                throw new Error('offline');
+            },
+        };
+        element.src = 'https://course.test/broken.md';
+        const diagnostics: CustomEvent[] = [];
+        element.addEventListener('markdown-diagnostic', (event) => diagnostics.push(event as CustomEvent));
+        const failed = new Promise<void>((resolve) => element.addEventListener('markdown-error', () => resolve(), { once: true }));
+        document.body.append(element);
+        await failed;
+        expect(diagnostics.map(({ detail }) => detail.code)).toEqual(['resource-load-error', 'document-load-error']);
+        expect(diagnostics[0]?.detail).toMatchObject({ category: 'network', sourceUrl: new URL('https://course.test/broken.md') });
+        expect(diagnostics[1]?.detail).toMatchObject({ category: 'document', severity: 'error', sourceUrl: new URL('https://course.test/broken.md') });
+        await element.dispose();
+        await element.engine.dispose();
+    });
+
+    it('reports navigation failures with the target URL and navigation category', async () => {
+        const element = new MarkdownDocumentElement();
+        const engine = new MarkdownEngine({ profile: 'core' });
+        element.engine = engine;
+        element.context = {
+            fetchResource: async (url) => {
+                if (url.pathname === '/index.md') return { ok: true, status: 200, statusText: 'OK', headers: new Headers(), text: async () => '# Index\n\n[Next](next.md)' } as Response;
+                throw new Error('offline');
+            },
+        };
+        element.src = 'https://course.test/index.md';
+        const completed = ready(element);
+        document.body.append(element);
+        await completed;
+        const diagnostic = new Promise<CustomEvent>((resolve) => {
+            const listener = (event: Event): void => {
+                const customEvent = event as CustomEvent<{ code?: string }>;
+                if (customEvent.detail.code !== 'document-navigation-error') return;
+                element.removeEventListener('markdown-diagnostic', listener);
+                resolve(customEvent);
+            };
+            element.addEventListener('markdown-diagnostic', listener);
+        });
+        element.shadowRoot?.querySelector('a')?.dispatchEvent(new MouseEvent('click', { bubbles: true, composed: true, cancelable: true, button: 0 }));
+
+        expect((await diagnostic).detail).toMatchObject({
+            code: 'document-navigation-error',
+            category: 'navigation',
+            sourceUrl: new URL('https://course.test/next.md'),
+        });
+        await element.dispose();
+        await engine.dispose();
     });
 
     it('creates a document controller when supplied with a collection manifest', async () => {

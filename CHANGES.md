@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.11.0
+
+- Hardened Markdown document lifecycle handling so updates and navigation
+  supersede stale work, aborted renders can be retried, and disposal remains
+  idempotent across shared engines and reconnecting `<markdown-document>`
+  elements.
+- Improved cancellation and cleanup for render queues, observers, listeners,
+  resource URLs, extension-owned resources, and MathJSLab Worker sessions.
+- Added reusable Markdown engine presets, an opt-in extension catalog, and
+  structured diagnostics surfaced through the public API and document events.
+- Strengthened document resource and security policies, including safer remote
+  resource handling and diagnostic reporting; policy-approved cross-origin
+  images now load in the browser without a CORS-dependent fetch.
+- Expanded Markdown lifecycle, security, public API, and Worker coverage in
+  Jest and Playwright, and documented the public API, integration, and audit
+  policies.
+- Updated build, lint, and Markdown dependencies, including Mermaid 12.1.0,
+  Viz.js 3.31.0, ESLint 10.12.0, TypeScript ESLint 8.71.0, and Sass 1.105.1.
+
 ## 1.10.2
 
 - Replaced the unavailable `@types/node` 24.19.0 release with the

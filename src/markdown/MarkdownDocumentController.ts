@@ -108,13 +108,13 @@ export class MarkdownDocumentController {
         try {
             const source = await resources.readText(target.url, context);
             if (revision !== this.revision || this.disposed || linked.controller.signal.aborted) return;
-            const renderContext = { ...this.options.context, sourceUrl: target.url };
-            this.session = await this.engine.renderDocument(source, this.container, renderContext);
-            if (revision !== this.revision || this.disposed) {
-                await this.session.dispose();
-                this.session = undefined;
+            const renderContext = { ...this.options.context, sourceUrl: target.url, signal: linked.controller.signal };
+            const session = await this.engine.renderDocument(source, this.container, renderContext);
+            if (session.disposed || revision !== this.revision || this.disposed || linked.controller.signal.aborted) {
+                await session.dispose();
                 return;
             }
+            this.session = session;
             this.navigator = new MarkdownNavigator(this.session, {
                 ...this.options.navigation,
                 isNavigable: (url) => this.model.isNavigable(url),
@@ -131,7 +131,9 @@ export class MarkdownDocumentController {
             throw cause;
         } finally {
             resources.dispose();
-            if (this.loadingController === linked.controller) {
+            // The rendered document still uses this signal for deferred work.
+            // Keep the external link until the controller releases the document.
+            if (this.loadingController === linked.controller && !this.session) {
                 this.loadingController = undefined;
                 this.unlinkSignal();
                 this.unlinkSignal = () => undefined;

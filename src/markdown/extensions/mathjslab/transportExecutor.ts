@@ -63,6 +63,7 @@ export const createTransportMathJSLabExecutor = (options: MathJSLabTransportExec
             let disposed = false;
             let remoteGeneration = -1;
             let creating: Promise<void> | undefined;
+            let disposal: Promise<void> | undefined;
             const ensureSession = async (activeContext: MarkdownDocumentContext): Promise<void> => {
                 if (disposed) throw new Error('MathJSLab execution session is disposed');
                 options.transport.setSessionContext?.(sessionId, activeContext);
@@ -131,16 +132,19 @@ export const createTransportMathJSLabExecutor = (options: MathJSLabTransportExec
                         ...(error ? { error: deserializeMathJSLabWorkerError(error) } : {}),
                     };
                 },
-                async dispose() {
-                    if (disposed) return;
+                dispose() {
+                    if (disposal) return disposal;
                     disposed = true;
-                    try {
-                        if (remoteGeneration === (options.transport.generation ?? 0)) {
-                            expectResponse(await options.transport.request({ type: 'dispose-session', sessionId }), 'session-disposed');
+                    disposal = Promise.resolve().then(async () => {
+                        try {
+                            if (remoteGeneration === (options.transport.generation ?? 0)) {
+                                expectResponse(await options.transport.request({ type: 'dispose-session', sessionId }), 'session-disposed');
+                            }
+                        } finally {
+                            options.transport.deleteSessionContext?.(sessionId);
                         }
-                    } finally {
-                        options.transport.deleteSessionContext?.(sessionId);
-                    }
+                    });
+                    return disposal;
                 },
             };
         },

@@ -1,4 +1,13 @@
-import { MarkdownEngine, type MarkdownDocument, type MarkdownDocumentContext, type MarkdownSecurityMode } from '../../MarkdownEngine';
+import {
+    MarkdownEngine,
+    markdownDiagnosticCategory,
+    markdownDiagnosticCodes,
+    type MarkdownDiagnostic,
+    type MarkdownDiagnosticEventDetail,
+    type MarkdownDocument,
+    type MarkdownDocumentContext,
+    type MarkdownSecurityMode,
+} from '../../MarkdownEngine';
 import { MarkdownDocumentController, type MarkdownControllerSnapshot } from '../../markdown/MarkdownDocumentController';
 import {
     createMarkdownOutline,
@@ -17,6 +26,7 @@ export type MarkdownDocumentReadyDetail = {
     readonly model?: MarkdownDocumentModel;
 };
 export type MarkdownDocumentStateDetail = { readonly state: MarkdownDocumentElementState; readonly error?: unknown };
+export type MarkdownDocumentDiagnosticDetail = MarkdownDiagnosticEventDetail;
 
 type MarkdownDocumentMessages = {
     back: string;
@@ -188,6 +198,7 @@ export class MarkdownDocumentElement extends HTMLElement {
     private readonly sectionEntries = new Map<Element, IntersectionObserverEntry>();
     private lastNavigationUrl: URL | undefined;
     private sectionObservationPausedUntil = 0;
+    private readonly navigationDiagnosticCauses = new WeakSet<object>();
 
     public constructor() {
         super();
@@ -328,6 +339,17 @@ export class MarkdownDocumentElement extends HTMLElement {
             );
         } catch (error) {
             if (revision !== this.operation || context.signal?.aborted) return;
+            this.dispatchDiagnostic(
+                {
+                    extension: 'markdown-document',
+                    code: markdownDiagnosticCodes.documentLoadError,
+                    category: 'document',
+                    severity: 'error',
+                    message: error instanceof Error ? error.message : String(error),
+                    cause: error,
+                },
+                context.sourceUrl,
+            );
             this.setState('error', error);
             this.dispatchEvent(new CustomEvent('markdown-error', { detail: { error }, bubbles: true, composed: true }));
         }
@@ -342,13 +364,19 @@ export class MarkdownDocumentElement extends HTMLElement {
 
     private requestLoad(): void {
         if (!this.isConnected) return;
+        const revision = this.operation;
         queueMicrotask(() => {
-            if (this.isConnected) void this.reload();
+            if (this.isConnected && revision === this.operation) void this.reload();
         });
     }
 
     private async loadText(source: string, context: MarkdownDocumentContext): Promise<void> {
-        this.activeDocument = await this.engine.renderDocument(source, this.contentElement, context);
+        const session = await this.engine.renderDocument(source, this.contentElement, context);
+        if (session.disposed || context.signal?.aborted || !this.isConnected) {
+            await session.dispose();
+            return;
+        }
+        this.activeDocument = session;
         this.prepareLinkTargets();
         this.activeNavigator = new MarkdownNavigator(this.activeDocument, {
             ...(this.getAttribute('presentation') === 'embedded'
@@ -358,9 +386,12 @@ export class MarkdownDocumentElement extends HTMLElement {
                   }
                 : {}),
             scrollToFragment: (_fragment, target) => this.scrollTarget(target),
-            onStateChange: ({ state, cause }) => {
+            onStateChange: ({ state, cause, url }) => {
                 if (state === 'loading') this.setState('loading');
-                else if (state === 'error') this.setState('error', cause);
+                else if (state === 'error') {
+                    this.setState('error', cause);
+                    this.reportNavigationError(cause, url);
+                }
             },
             onCurrentChange: ({ url }) => {
                 this.prepareLinkTargets();
@@ -390,8 +421,10 @@ export class MarkdownDocumentElement extends HTMLElement {
     private async loadSource(reference: string, revision: number, context: MarkdownDocumentContext): Promise<void> {
         const resources = this.engine.createResourceService();
         try {
-            const url = resources.resolve(reference, context);
-            const source = await resources.readText(url, { ...context, sourceUrl: url, resources });
+            const requestedUrl = new URL(reference, context.sourceUrl ?? document.baseURI);
+            const sourceContext = { ...context, sourceUrl: requestedUrl, resources };
+            const url = resources.resolve(requestedUrl.href, sourceContext);
+            const source = await resources.readText(url, sourceContext);
             if (revision !== this.operation || context.signal?.aborted) return;
             await this.loadText(source, { ...context, sourceUrl: url });
         } finally {
@@ -407,20 +440,26 @@ export class MarkdownDocumentElement extends HTMLElement {
             if (!reference) throw new Error('Markdown manifest URL is empty');
             const resources = this.engine.createResourceService();
             try {
-                manifestUrl = resources.resolve(reference, context);
-                manifest = JSON.parse(await resources.readText(manifestUrl, { ...context, sourceUrl: manifestUrl, resources })) as MarkdownCollectionManifest;
+                const requestedUrl = new URL(reference, context.sourceUrl ?? document.baseURI);
+                const manifestContext = { ...context, sourceUrl: requestedUrl, resources };
+                manifestUrl = resources.resolve(requestedUrl.href, manifestContext);
+                manifest = JSON.parse(await resources.readText(manifestUrl, manifestContext)) as MarkdownCollectionManifest;
             } finally {
                 resources.dispose();
             }
         }
         if (revision !== this.operation || context.signal?.aborted) return;
         this.activeModel = new MarkdownDocumentModel(manifest, manifestUrl ?? context.sourceUrl ?? document.baseURI);
-        this.activeController = await MarkdownDocumentController.create(this.engine, this.contentElement, this.activeModel, {
+        const controller = new MarkdownDocumentController(this.engine, this.contentElement, this.activeModel, {
             context,
             ...(this.getAttribute('initial-page') ? { initialPage: this.getAttribute('initial-page')! } : {}),
             navigation: { scrollToFragment: (_fragment, target) => this.scrollTarget(target) },
-            onChange: (snapshot) => this.handleControllerChange(snapshot),
+            onChange: (snapshot) => {
+                if (revision === this.operation && !context.signal?.aborted) this.handleControllerChange(snapshot);
+            },
         });
+        this.activeController = controller;
+        await controller.initialize();
     }
 
     private createContext(signal: AbortSignal): MarkdownDocumentContext {
@@ -434,13 +473,43 @@ export class MarkdownDocumentElement extends HTMLElement {
             ...(mode ? { securityMode: mode } : {}),
             ...(locale ? { locale } : {}),
             ...(theme ? { theme } : {}),
+            onDiagnostic: (diagnostic) => {
+                if (signal.aborted) return;
+                this.dispatchDiagnostic(diagnostic, this.suppliedContext.sourceUrl);
+            },
         };
+    }
+
+    private dispatchDiagnostic(diagnostic: MarkdownDiagnostic, fallbackSourceUrl?: URL): void {
+        const code = diagnostic.code ?? markdownDiagnosticCodes.extensionDiagnostic;
+        const sourceUrl = diagnostic.sourceUrl ?? fallbackSourceUrl ?? this.suppliedContext.sourceUrl ?? this.activeDocument?.sourceUrl ?? this.sourceUrlFromAttribute();
+        const detail: MarkdownDocumentDiagnosticDetail = {
+            ...diagnostic,
+            code,
+            category: diagnostic.category ?? markdownDiagnosticCategory(code),
+            ...(sourceUrl ? { sourceUrl: new URL(sourceUrl) } : {}),
+        };
+        this.dispatchEvent(new CustomEvent<MarkdownDocumentDiagnosticDetail>('markdown-diagnostic', { detail, bubbles: true, composed: true }));
+        this.suppliedContext.onDiagnostic?.(detail);
+    }
+
+    private sourceUrlFromAttribute(): URL | undefined {
+        if (this.src) {
+            try {
+                return new URL(this.src, this.suppliedContext.sourceUrl ?? document.baseURI);
+            } catch {
+                return undefined;
+            }
+        }
+        return this.activeModel ? new URL(this.activeModel.baseUrl) : undefined;
     }
 
     private handleControllerChange(snapshot: MarkdownControllerSnapshot): void {
         if (snapshot.state === 'loading') this.setState('loading');
-        else if (snapshot.state === 'error') this.setState('error', snapshot.error);
-        else if (snapshot.state === 'idle') {
+        else if (snapshot.state === 'error') {
+            this.setState('error', snapshot.error);
+            this.reportNavigationError(snapshot.error, snapshot.targetUrl ?? snapshot.url);
+        } else if (snapshot.state === 'idle') {
             const previous = this.lastSnapshot;
             const changedPage = previous !== undefined && previous.page?.id !== snapshot.page?.id;
             const changedFragment = previous !== undefined && this.fragment(previous.url) !== this.fragment(snapshot.url);
@@ -545,8 +614,26 @@ export class MarkdownDocumentElement extends HTMLElement {
         try {
             await action();
         } catch (error) {
+            if (error instanceof Error && error.name === 'AbortError') return;
+            this.reportNavigationError(error, this.lastSnapshot?.targetUrl ?? this.lastSnapshot?.url ?? this.activeDocument?.sourceUrl);
             this.setState('error', error);
         }
+    }
+
+    private reportNavigationError(error: unknown, sourceUrl?: URL): void {
+        if (error !== null && (typeof error === 'object' || typeof error === 'function')) {
+            if (this.navigationDiagnosticCauses.has(error)) return;
+            this.navigationDiagnosticCauses.add(error);
+        }
+        this.dispatchDiagnostic({
+            extension: 'markdown-document',
+            code: markdownDiagnosticCodes.documentNavigationError,
+            category: 'navigation',
+            severity: 'error',
+            ...(sourceUrl ? { sourceUrl } : {}),
+            message: error instanceof Error ? error.message : String(error),
+            cause: error,
+        });
     }
 
     private async openFragment(fragment: string): Promise<void> {
@@ -733,8 +820,9 @@ export class MarkdownDocumentElement extends HTMLElement {
     private observeSections(items: readonly MarkdownOutlineItem[]): void {
         this.disconnectSectionObserver();
         if (typeof globalThis.IntersectionObserver !== 'function') return;
-        this.sectionObserver = new IntersectionObserver(
+        const observer = new IntersectionObserver(
             (entries) => {
+                if (this.sectionObserver !== observer || !this.isConnected) return;
                 for (const entry of entries) this.sectionEntries.set(entry.target, entry);
                 if (Date.now() < this.sectionObservationPausedUntil) return;
                 const visible = Array.from(this.sectionEntries.values())
@@ -748,6 +836,7 @@ export class MarkdownDocumentElement extends HTMLElement {
             },
             { rootMargin: '0px 0px -65% 0px', threshold: [0, 1] },
         );
+        this.sectionObserver = observer;
         for (const item of this.flattenOutline(items)) {
             const heading = Array.from(this.contentElement.querySelectorAll<HTMLElement>('[id]')).find(({ id }) => id === item.id);
             if (heading) this.sectionObserver.observe(heading);

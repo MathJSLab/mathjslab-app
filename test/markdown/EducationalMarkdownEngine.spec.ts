@@ -1,5 +1,6 @@
 /// <reference types="jest" />
 import { createEducationalMarkdownEngine, educationalMarkdownFeatures } from '../../src/markdown/createEducationalMarkdownEngine';
+import { markdownExtensionCatalog } from '../../src/markdown/extensionCatalog';
 
 describe('createEducationalMarkdownEngine', () => {
     it('registers only selected educational fences', async () => {
@@ -15,5 +16,13 @@ describe('createEducationalMarkdownEngine', () => {
         const engine = createEducationalMarkdownEngine({ features: ['graphviz', 'graphviz'] });
         expect(() => engine.parse('```dot\ndigraph { a -> b }\n```')).not.toThrow();
         await engine.dispose();
+    });
+
+    it('uses one catalog entry for every published built-in manifest', () => {
+        expect(Object.keys(markdownExtensionCatalog)).toHaveLength(14);
+        expect(Object.values(markdownExtensionCatalog).every(({ manifest }) => manifest.name.length > 0)).toBe(true);
+        expect(markdownExtensionCatalog.mathjslab?.create).toBeUndefined();
+        expect(educationalMarkdownFeatures).toEqual(expect.arrayContaining(['abc', 'graphviz', 'maps', 'mermaid', 'model-3d', 'molecule-3d', 'smiles', 'vega-lite', 'verovio']));
+        expect(educationalMarkdownFeatures.every((feature) => markdownExtensionCatalog[feature]?.create)).toBe(true);
     });
 });
