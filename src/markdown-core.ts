@@ -1,6 +1,6 @@
 /** Framework-agnostic Markdown engine, document model and navigation API. */
 /** Incremented when a stable public contract changes incompatibly. */
-export const markdownPublicApiVersion = 1 as const;
+export const markdownPublicApiVersion = 2 as const;
 
 export * from './MarkdownEngine';
 export * from './markdown/MarkdownDocumentController';

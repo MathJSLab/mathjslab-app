@@ -10,6 +10,16 @@
             const { createBrowserMathJSLabWorkerExecutor, createEducationalMarkdownEngine, mathJSLabExtension } = await import('/dist/markdown-document/markdown-document.js');
             const executor = createBrowserMathJSLabWorkerExecutor({
                 toMathML: (source, display) => `<math display="${display}"><mtext>${source}</mtext></math>`,
+                workerFactory: () => new Worker('/dist/markdown-test-worker/mathjslab-worker.js', { type: 'module', name: 'mathjslab-markdown-test' }),
+                plotRenderer: {
+                    render(container, request) {
+                        const plot = document.createElement('div');
+                        plot.className = 'plot-container';
+                        plot.dataset.plotType = request.type;
+                        plot.style.height = '1px';
+                        container.append(plot);
+                    },
+                },
             });
             const engine = createEducationalMarkdownEngine({ extensions: [mathJSLabExtension(executor)] });
             const viewer = document.createElement('markdown-document');

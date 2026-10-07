@@ -1,6 +1,5 @@
 import type { MarkdownDocumentContext, MarkdownExecutionPolicies, MarkdownResourcePolicy, MarkdownSecurityMode } from '../../../MarkdownEngine';
-import type { MathJSLabExecutionStatus, MathJSLabOutputState } from './executor';
-import type { PlotOutputRequest } from '../../../PlotOutputCapture';
+import type { MathJSLabExecutionStatus, MathJSLabOutputState, MathJSLabPlotlyRequest } from './executor';
 
 export const mathJSLabWorkerProtocolVersion = 1 as const;
 
@@ -39,7 +38,7 @@ export type MathJSLabWorkerOutput =
     | { readonly type: 'text'; readonly text: string }
     | { readonly type: 'mathml'; readonly markup: string }
     | { readonly type: 'html'; readonly markup: string; readonly trusted: boolean }
-    | { readonly type: 'visualization'; readonly renderer: 'plotly'; readonly request: PlotOutputRequest; readonly role: 'visualization' };
+    | { readonly type: 'visualization'; readonly renderer: 'plotly'; readonly request: MathJSLabPlotlyRequest; readonly role: 'visualization' };
 
 export type MathJSLabWorkerExecutionResult = {
     readonly status: MathJSLabExecutionStatus;

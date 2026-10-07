@@ -4,12 +4,15 @@ import { RemoteMathJSLabRuntime, type RuntimeHost, type RuntimeOutput, type Runt
 import type { MarkdownDocumentContext } from '../../../MarkdownEngine';
 import { DefaultMarkdownResourceService } from '../../security';
 import type { MathJSLabExecutionResult, MathJSLabExecutor, MathJSLabOutput } from './executor';
-import { materializePlotlyOutput } from './plotlyOutput';
+import { materializePlotlyOutput, type MathJSLabPlotRenderer } from './plotlyOutput';
 
 export type BrowserMathJSLabWorkerExecutorOptions = {
     readonly toMathML: MathJSLabExecutor['toMathML'];
-    readonly workerFactory?: () => Worker;
+    /** Required because the host owns the Worker implementation and its bundling. */
+    readonly workerFactory: () => Worker;
     readonly timeoutMs?: number;
+    /** Host-owned renderer for plot descriptions returned by the Worker. */
+    readonly plotRenderer?: MathJSLabPlotRenderer;
 };
 
 let executorSequence = 0;
@@ -66,8 +69,7 @@ export const createBrowserMathJSLabWorkerExecutor = (options: BrowserMathJSLabWo
             }
         },
     };
-    const workerFactory = options.workerFactory ?? (() => new Worker(new URL('./mathjslab.worker.ts', import.meta.url), { type: 'module', name: 'mathjslab-markdown' }));
-    const runtime = new RemoteMathJSLabRuntime(() => workerFactory() as unknown as RuntimeWorkerEndpoint, { host });
+    const runtime = new RemoteMathJSLabRuntime(() => options.workerFactory() as unknown as RuntimeWorkerEndpoint, { host });
     const parser = Interpreter.Create();
     const executorId = ++executorSequence;
     let sessionSequence = 0;
@@ -78,7 +80,7 @@ export const createBrowserMathJSLabWorkerExecutor = (options: BrowserMathJSLabWo
             if (output.type === 'data' || (output.type === 'text' && !output.text.startsWith('Loaded script from '))) continue;
             if (output.type === 'visualization') {
                 if (output.renderer !== 'plotly') throw new Error(`Unsupported MathJSLab visualization renderer: ${output.renderer}`);
-                result.push(await materializePlotlyOutput({ ...output, renderer: 'plotly', role: 'visualization' } as Parameters<typeof materializePlotlyOutput>[0]));
+                result.push(await materializePlotlyOutput({ ...output, renderer: 'plotly', role: 'visualization' } as Parameters<typeof materializePlotlyOutput>[0], options.plotRenderer));
             } else result.push(output);
         }
         return result;

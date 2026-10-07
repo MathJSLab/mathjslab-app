@@ -137,6 +137,33 @@ describe('standalone Markdown public API', () => {
                 'snapshotMathJSLabContext',
             ].sort(),
         );
-        expect(coreApi.markdownPublicApiVersion).toBe(1);
+        expect(coreApi.markdownPublicApiVersion).toBe(2);
+    });
+
+    test('materializes Worker plots through the injected host renderer', async () => {
+        const calls: string[] = [];
+        const output = mathJSLabApi.materializePlotlyOutput(
+            { type: 'visualization', renderer: 'plotly', role: 'visualization', request: { type: 'plot', data: [], layout: {}, config: {} } },
+            {
+                render: (container, request) => {
+                    calls.push(`render:${request.type}:${container.dataset.outputType}`);
+                },
+                resize: () => {
+                    calls.push('resize');
+                },
+                dispose: () => {
+                    calls.push('dispose');
+                },
+            },
+        );
+
+        await output.mount?.(output.node);
+        await output.resize?.(output.node);
+        await output.dispose?.();
+
+        expect(calls).toEqual(['render:plot:plot', 'resize', 'dispose']);
+        expect(() =>
+            mathJSLabApi.materializePlotlyOutput({ type: 'visualization', renderer: 'plotly', role: 'visualization', request: { type: 'plot', data: [], layout: {}, config: {} } }),
+        ).toThrow('A Plotly renderer must be supplied');
     });
 });

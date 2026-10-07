@@ -87,9 +87,9 @@ const messages: Readonly<Record<'en' | 'es' | 'pt', MarkdownDocumentMessages>> =
 const template = document.createElement('template');
 template.innerHTML = `
 <style>
-    :host { box-sizing: border-box; container-type: inline-size; display: block; max-width: 100%; min-width: 0; width: 100%; }
+    :host { box-sizing: border-box; display: block; max-width: 100%; min-width: 0; width: 100%; }
     *, *::before, *::after { box-sizing: inherit; }
-    [part="root"] { max-width: 100%; min-width: 0; }
+    [part="root"] { container-type: inline-size; max-width: 100%; min-width: 0; }
     [part="status"] { padding: 0.75rem; }
     [part="announcer"] { clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
     :host([state="ready"]) [part="status"] { display: none; }
@@ -129,7 +129,10 @@ template.innerHTML = `
     :host([presentation="embedded"]) [part="sequence"] { display: none !important; }
     [hidden] { display: none !important; }
     @container (max-width: 54rem) {
-        [part="layout"] { grid-template-columns: minmax(0, 1fr); }
+        :host [part="layout"],
+        :host [part="layout"]:has(> [part="collection"]:not([hidden])),
+        :host [part="layout"]:has(> [part="page-outline"]:not([hidden])),
+        :host [part="layout"]:has(> [part="collection"]:not([hidden])):has(> [part="page-outline"]:not([hidden])) { grid-template-columns: minmax(0, 1fr); }
         [part="collection"], [part="page-outline"] { max-height: none; position: static; }
         [part="collection"] { order: 1; }
         [part="main"] { order: 2; }
@@ -195,6 +198,7 @@ export class MarkdownDocumentElement extends HTMLElement {
     private standaloneOutline: readonly MarkdownOutlineItem[] = [];
     private activeFragment = '';
     private sectionObserver: IntersectionObserver | undefined;
+    private sectionResumeTimer: ReturnType<typeof setTimeout> | undefined;
     private readonly sectionEntries = new Map<Element, IntersectionObserverEntry>();
     private lastNavigationUrl: URL | undefined;
     private sectionObservationPausedUntil = 0;
@@ -825,14 +829,7 @@ export class MarkdownDocumentElement extends HTMLElement {
                 if (this.sectionObserver !== observer || !this.isConnected) return;
                 for (const entry of entries) this.sectionEntries.set(entry.target, entry);
                 if (Date.now() < this.sectionObservationPausedUntil) return;
-                const visible = Array.from(this.sectionEntries.values())
-                    .filter((entry) => entry.isIntersecting)
-                    .sort((left, right) => Math.abs(left.boundingClientRect?.top ?? 0) - Math.abs(right.boundingClientRect?.top ?? 0))[0];
-                const fragment = visible?.target.id;
-                if (!fragment || fragment === this.activeFragment) return;
-                this.activeFragment = fragment;
-                this.updateActiveSection();
-                this.announceSection(fragment);
+                this.updateVisibleSection();
             },
             { rootMargin: '0px 0px -65% 0px', threshold: [0, 1] },
         );
@@ -841,6 +838,25 @@ export class MarkdownDocumentElement extends HTMLElement {
             const heading = Array.from(this.contentElement.querySelectorAll<HTMLElement>('[id]')).find(({ id }) => id === item.id);
             if (heading) this.sectionObserver.observe(heading);
         }
+        const remainingPause = this.sectionObservationPausedUntil - Date.now();
+        if (remainingPause > 0) {
+            this.sectionResumeTimer = globalThis.setTimeout(() => {
+                this.sectionResumeTimer = undefined;
+                if (this.sectionObserver !== observer || !this.isConnected) return;
+                this.updateVisibleSection();
+            }, remainingPause + 1);
+        }
+    }
+
+    private updateVisibleSection(): void {
+        const visible = Array.from(this.sectionEntries.values())
+            .filter((entry) => entry.isIntersecting)
+            .sort((left, right) => Math.abs(left.boundingClientRect?.top ?? 0) - Math.abs(right.boundingClientRect?.top ?? 0))[0];
+        const fragment = visible?.target.id;
+        if (!fragment || fragment === this.activeFragment) return;
+        this.activeFragment = fragment;
+        this.updateActiveSection();
+        this.announceSection(fragment);
     }
 
     private flattenOutline(items: readonly MarkdownOutlineItem[]): readonly MarkdownOutlineItem[] {
@@ -857,6 +873,8 @@ export class MarkdownDocumentElement extends HTMLElement {
     private disconnectSectionObserver(): void {
         this.sectionObserver?.disconnect();
         this.sectionObserver = undefined;
+        if (this.sectionResumeTimer !== undefined) globalThis.clearTimeout(this.sectionResumeTimer);
+        this.sectionResumeTimer = undefined;
         this.sectionEntries.clear();
     }
 

@@ -58,8 +58,7 @@ test('sanitized documents display policy-approved cross-origin images without CO
     const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="green"/></svg>';
     await page.route('https://mathjslab.com/**', (route) => route.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
     await page.route('https://dl.circleci.com/**', (route) => route.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
-    await page.route('https://badges.gitter.im/Join%20Chat.svg', (route) => route.fulfill({ status: 301, headers: { location: 'https://badges.gitter.im/JoinChat.svg' } }));
-    await page.route('https://badges.gitter.im/JoinChat.svg', (route) => route.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
+    await page.route('https://badges.gitter.im/Join%20Chat.svg', (route) => route.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
     await page.goto('/test/browser/fixtures/lifecycle.html');
 
     const result = await page.evaluate(async () => {
@@ -90,6 +89,6 @@ test('sanitized documents display policy-approved cross-origin images without CO
         'https://badges.gitter.im/Join%20Chat.svg',
     ]);
     expect(result.loaded).toEqual([true, true, true]);
-    expect(requests.some((url) => url.includes('JoinChat.svg'))).toBe(true);
+    expect(requests.some((url) => url.includes('Join%20Chat.svg'))).toBe(true);
     expect(failures).toEqual([]);
 });

@@ -2,7 +2,11 @@ import { expect, test } from '@playwright/test';
 
 test('loads each standalone public API entrypoint with isolated exports', async ({ page }) => {
     const errors: string[] = [];
+    const optionalChunks: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
+    page.on('request', (request) => {
+        if (new URL(request.url()).pathname.includes('/dist/markdown-document/chunks/')) optionalChunks.push(request.url());
+    });
     await page.goto('/test/browser/fixtures/markdown-public-api.html');
     await expect(page.locator('body')).toHaveAttribute('data-ready', 'true');
 
@@ -10,4 +14,5 @@ test('loads each standalone public API entrypoint with isolated exports', async 
 
     expect(result).toEqual({ core: true, component: true, componentRegistered: true, componentUnregistered: true, extensions: true, mathjslab: true, worker: true });
     expect(errors).toEqual([]);
+    expect(optionalChunks).toEqual([]);
 });

@@ -1,10 +1,9 @@
-# Inventário da API pública do engine Markdown
+# Contrato público e independente do engine Markdown
 
-Este documento registra a decisão da etapa 15.1. Ele descreve a superfície que
-deverá ser estabilizada antes da distribuição do engine como pacote. A presença
-de uma declaração `.d.ts` transitiva no diretório de build não torna o símbolo
-público; somente símbolos alcançáveis pelos pontos de entrada publicados fazem
-parte da API.
+Este documento define a superfície pública que deverá ser mantida estável antes
+da distribuição do engine como pacote. A presença de uma declaração `.d.ts`
+transitiva no diretório de build não torna o símbolo público; somente símbolos
+alcançáveis pelos pontos de entrada abaixo fazem parte do contrato.
 
 ## Pontos de entrada atuais
 
@@ -19,6 +18,44 @@ O pacote reutilizável não deve exportar `Markdown`, `markdownEngine`,
 `appEngine`, targets do prompt ou funções de interface do aplicativo. A fachada
 histórica poderá continuar reexportando partes da API durante a migração, mas
 não define o contrato do pacote.
+
+## Fronteira com o aplicativo
+
+Os entry points reutilizáveis são `markdown-core.ts`, `markdown-component.ts`,
+`markdown-component-register.ts`, `markdown-extensions.ts`,
+`markdown-mathjslab.ts`, `markdown-mathjslab-worker.ts` e o agregado
+`markdown-document.ts`. Seus imports locais transitivos não podem alcançar o
+runtime MathJSLab do aplicativo (`appEngine`, `evalInput`, `evalPrompt`,
+`InterpreterRuntime`, `PlotEngine` ou `PlotOutputCapture`) nem a fachada
+histórica `Markdown.ts`. Uma integração específica do app pode usar o contrato
+por composição, mas fica fora desses entry points. Um teste percorre esses
+grafos de imports para impedir regressões nessa fronteira.
+
+O contrato é independente de framework e de estado global do app, mas a
+renderização e o Web Component requerem um ambiente de navegador com DOM. O
+componente é opcional: importar `markdown-core.ts` não registra elemento algum;
+`markdown-component-register.ts` registra `<markdown-document>` explicitamente,
+enquanto `markdown-component.ts` exporta sua classe e helpers sem registro
+automático. O entry point agregado `markdown-document.ts` mantém a
+compatibilidade do bundle anterior.
+
+O host cria e possui o `MarkdownEngine`; sessões podem compartilhar o engine,
+mas cada sessão é isolada por container. A sessão controla o conteúdo que
+renderiza nesse container e deve ser descartada quando o host remover ou
+substituir esse conteúdo. Descartar uma sessão não descarta um engine
+compartilhado; o host descarta o engine quando termina de usá-lo. O componente
+descarta sua sessão ao desconectar, mas não descarta um engine externo.
+Recursos e cancelamento são escopados à sessão/operação, e uma operação
+substituída ou cancelada não pode publicar resultado tardio. `dispose()` é
+idempotente.
+
+Os nomes de exports JavaScript por entry point e a versão
+`markdownPublicApiVersion` são travados em testes. Uma remoção ou mudança
+incompatível de símbolo ou semântica pública exige incrementar a versão; novas
+dependências específicas do app devem permanecer em adapters fora do grafo
+público. Os subpaths npm ainda não estão publicados: a tabela de subpaths
+abaixo é o mapeamento pretendido para a etapa de distribuição, não uma garantia
+de instalação npm nesta etapa.
 
 ## API principal
 
@@ -103,9 +140,14 @@ apresentar formatos suportados sem carregar a biblioteca opcional.
 | Vega-Lite        | `vegaLiteExtension`        | `vegaLiteManifest`        |
 | Verovio          | `verovioExtension`         | `verovioManifest`         |
 
-O ponto de entrada reutilizável passou a exportar todos esses pares. As
+O ponto de entrada reutilizável passou a exportar todos esses pares. O catálogo
+é a fonte única para a seleção de extensões e para suas capabilities; MathJSLab
+é a única entrada sem factory, pois depende de um executor injetado. As
 bibliotecas associadas continuam sendo importadas dinamicamente somente quando
-o documento usa a extensão.
+o documento usa a extensão. O teste de navegador importa as superfícies
+públicas e instancia um preset sem solicitar chunks de renderizadores
+opcionais; testes específicos verificam a carga quando uma extensão é realmente
+usada.
 
 ## Integração MathJSLab
 
@@ -114,9 +156,13 @@ acoplar o engine ao aplicativo. Fazem parte dessa camada `MathJSLabExecutor`,
 `MathJSLabExecutionSession`, os tipos de entrada e saída, `mathJSLabExtension`
 e `createBrowserMathJSLabWorkerExecutor`.
 
-O adaptador Plotly fornecido pelo pacote também é público, mas específico dessa
-integração: `materializePlotlyOutput` transforma o descritor serializado pelo
-Worker em uma saída rica na thread principal.
+O Worker retorna `MathJSLabPlotlyRequest`, um descritor serializável, e não
+depende de uma implementação Plotly. `createBrowserMathJSLabWorkerExecutor`
+recebe `workerFactory` e `plotRenderer` do host; não empacota nem escolhe um
+Worker específico. `materializePlotlyOutput` adapta o descritor para o ciclo de
+vida da saída rica usando somente o renderer injetado. O app injeta seu Worker
+e `PlotEngine` pela fachada histórica, fora dos entry points públicos. Outros
+hosts fornecem seus próprios adapters de Worker e de renderização.
 
 ## API avançada
 
@@ -197,10 +243,13 @@ distribuição.
 ## Estabilidade e versionamento
 
 `markdownPublicApiVersion` identifica a versão principal do contrato público e
-começa em `1`. Adições compatíveis não alteram esse número. Remoção ou mudança
-incompatível de um símbolo, opção, evento, formato de manifesto ou semântica de
-ciclo de vida exige incrementá-lo. O protocolo MathJSLab Worker mantém sua
-versão independente em `mathJSLabWorkerProtocolVersion`.
+está em `2`. A versão `2` removeu a dependência implícita de `PlotEngine` de
+`materializePlotlyOutput` e exige `workerFactory` e renderer injetados para
+usar a integração browser MathJSLab. Adições compatíveis não alteram esse
+número. Remoção ou mudança incompatível de um símbolo, opção, evento, formato
+de manifesto ou semântica de ciclo de vida exige incrementá-lo. O protocolo
+MathJSLab Worker mantém sua versão independente em
+`mathJSLabWorkerProtocolVersion`.
 
 Testes mantêm listas exatas dos exports JavaScript de cada superfície. Uma
 adição ou remoção precisa, portanto, atualizar deliberadamente o contrato e sua

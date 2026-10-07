@@ -32,6 +32,7 @@ test('supports collection sequence, history, focus and localized accessible name
     await expect.poll(() => document.evaluate((host) => host.shadowRoot?.activeElement?.textContent?.trim())).toBe('Second page');
     await expect(document.locator('[data-page-id="second"]')).toHaveAttribute('aria-current', 'page');
 
+    await document.locator('[part="page-outline"]').evaluate((outline) => ((outline as HTMLElement).style.display = 'none'));
     await document.locator('[data-action="back"]').click();
     await expect(document.locator('h1')).toHaveText('First page');
 });
@@ -59,13 +60,16 @@ test('handles keyboard shortcuts and arrow navigation within the collection', as
 });
 
 test('uses a single-column layout in a narrow host', async ({ page }) => {
+    await page.setViewportSize({ width: 900, height: 700 });
     await page.goto('/test/browser/fixtures/?manifest');
     const document = viewer(page);
     await expect(document).toHaveAttribute('state', 'ready');
 
     const columns = await document.evaluate((host) => {
         const layout = host.shadowRoot?.querySelector('[part="layout"]');
-        return layout ? getComputedStyle(layout).gridTemplateColumns.trim().split(/\s+/).length : 0;
+        if (!layout) return 0;
+        const style = getComputedStyle(layout);
+        return style.display === 'grid' ? style.gridTemplateColumns.match(/(?:^|\s)(?:minmax\([^)]*\)|\d+(?:\.\d+)?px)/g)?.length ?? 0 : 0;
     });
     expect(columns).toBe(1);
 });
@@ -75,8 +79,10 @@ test('tracks the visible section after user scrolling', async ({ page }) => {
     await page.goto('/test/browser/fixtures/');
     const document = viewer(page);
     await expect(document).toHaveAttribute('state', 'ready');
-    await page.waitForTimeout(1_250);
-    await document.locator('#local-section').evaluate((heading) => heading.scrollIntoView({ block: 'start' }));
+    await document.locator('#local-section').evaluate((heading) => {
+        heading.scrollIntoView({ block: 'start', behavior: 'instant' });
+        window.scrollBy({ top: heading.getBoundingClientRect().top - 10, behavior: 'instant' });
+    });
 
     await expect(document.locator('[data-fragment="local-section"]')).toHaveAttribute('aria-current', 'location');
 });

@@ -1,4 +1,5 @@
 import { appEngine } from './appEngine';
+import { PlotEngine, type PlotOutputRequest } from './PlotEngine';
 import { MarkdownEngine, type MarkdownDocument, type MarkdownDocumentContext, type MarkdownExtension } from './MarkdownEngine';
 import { abcExtension } from './markdown/extensions/abc/extension';
 import { graphvizExtension } from './markdown/extensions/graphviz/extension';
@@ -31,6 +32,12 @@ const engine = new MarkdownEngine({
             createBrowserMathJSLabWorkerExecutor({
                 toMathML: (source, display) => withActiveInterpreter(appEngine.interpreter, () => appEngine.interpreter.ToMathML(source, display)),
                 timeoutMs: 10000,
+                workerFactory: () => new Worker(new URL('./markdown/extensions/mathjslab/mathjslab.worker.ts', import.meta.url), { type: 'module', name: 'mathjslab-markdown' }),
+                plotRenderer: {
+                    render: (container, request) => PlotEngine.render(container, request as PlotOutputRequest),
+                    resize: (container) => PlotEngine.resize(container),
+                    dispose: (container) => PlotEngine.dispose(container),
+                },
             }),
         ),
     ],

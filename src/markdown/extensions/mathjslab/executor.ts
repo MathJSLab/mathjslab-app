@@ -5,6 +5,13 @@ export type MathJSLabOutputState = 'default' | 'good' | 'bad' | 'info' | 'doc';
 export type MathJSLabTextOutput = { readonly type: 'text'; readonly text: string };
 export type MathJSLabMathMLOutput = { readonly type: 'mathml'; readonly markup: string };
 export type MathJSLabHTMLOutput = { readonly type: 'html'; readonly markup: string; readonly trusted: boolean };
+/** Structured-cloneable plot description; rendering is owned by the host adapter. */
+export type MathJSLabPlotlyRequest = {
+    readonly type: 'plot' | 'plot3' | 'surf' | 'plot2d' | 'histogram';
+    readonly data: readonly unknown[];
+    readonly layout: object;
+    readonly config: object;
+};
 export type MathJSLabNodeOutput = {
     readonly type: 'node';
     readonly node: Node;

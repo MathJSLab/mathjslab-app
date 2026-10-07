@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.12.0
+
+- Consolidated the App-independent Markdown entry points, extension catalog,
+  manifests, and security-aware engine presets, with a versioned public API
+  contract and standalone integration documentation.
+- Decoupled MathJSLab Worker output from the App's `PlotEngine`; hosts now
+  inject the Worker factory and rich-output renderer, while the App keeps its
+  adapter in the compatibility facade.
+- Fixed structured-clone handling for Worker effect requests and improved
+  document outline responsiveness and section tracking after navigation.
+- Added transitive App-boundary checks, exact public export and extension
+  catalog tests, lazy-chunk browser assertions, and expanded lifecycle,
+  security, and Worker coverage.
+- Updated dependencies, including `mathjslab` 2.7.0, Marked 18.1.0, Plotly.js
+  4.1.2, TypeScript ESLint 8.71.1, and intl-messageformat 12.1.3.
+
 ## 1.11.0
 
 - Hardened Markdown document lifecycle handling so updates and navigation

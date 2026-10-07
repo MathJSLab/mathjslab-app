@@ -8,7 +8,9 @@ test('loads the standalone ESM bundle and renders a relative Markdown document',
     const viewer = page.locator('markdown-document');
     await expect(viewer).toHaveAttribute('state', 'ready');
     await expect(viewer.locator('h1')).toHaveText('Browser lesson');
-    await expect(viewer.locator('img')).toHaveAttribute('src', 'http://127.0.0.1:4173/test/browser/fixtures/pixel.svg');
+    const image = viewer.locator('img');
+    await expect(image).toHaveAttribute('src', /^blob:http:\/\/127\.0\.0\.1:4173\//);
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.naturalWidth)).toBeGreaterThan(0);
     await expect(viewer.locator('[part="page-outline"]')).toBeVisible();
     expect(pageErrors).toEqual([]);
 });

@@ -1,6 +1,6 @@
 import { expect, test } from '@playwright/test';
 
-test('executes document sessions in the packaged MathJSLab module Worker', async ({ page }) => {
+test('executes document sessions through an injected MathJSLab module Worker', async ({ page }) => {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('/test/browser/fixtures/mathjslab-worker.html');

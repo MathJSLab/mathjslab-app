@@ -132,11 +132,12 @@ function service() {
         const { outputText } = ts.transpileModule(source, {
             compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true },
         });
+        const compatibleOutput = outputText.replaceAll('import.meta.url', JSON.stringify(new URL(path.relative(path.dirname(resolved), resolved), import.meta.url).href));
         const require = (name) => {
             if (name === 'mermaid' || name === 'smiles-drawer') libraryLoads.push(name);
             return imports[name] ?? (name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name)) : nodeRequire(name));
         };
-        vm.runInNewContext(outputText, { exports: moduleExports, require, document, Element: HTMLElement, Error, MathJax, URL, AbortController, AbortSignal, TextEncoder });
+        vm.runInNewContext(compatibleOutput, { exports: moduleExports, require, document, Element: HTMLElement, Error, MathJax, URL, AbortController, AbortSignal, TextEncoder });
         return moduleExports;
     };
     const { Markdown, MarkdownEngine, markdownEngine } = load(path.join(sourceRoot, 'Markdown'));

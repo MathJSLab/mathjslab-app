@@ -12,9 +12,11 @@ export type {
     MathJSLabOutput,
     MathJSLabOutputState,
     MathJSLabParseResult,
+    MathJSLabPlotlyRequest,
     MathJSLabStatementContext,
     MathJSLabTextOutput,
 } from './markdown/extensions/mathjslab/executor';
 export { createBrowserMathJSLabWorkerExecutor } from './markdown/extensions/mathjslab/browserWorkerExecutor';
 export type { BrowserMathJSLabWorkerExecutorOptions } from './markdown/extensions/mathjslab/browserWorkerExecutor';
 export { materializePlotlyOutput } from './markdown/extensions/mathjslab/plotlyOutput';
+export type { MathJSLabPlotRenderer } from './markdown/extensions/mathjslab/plotlyOutput';
