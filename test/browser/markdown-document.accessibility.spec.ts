@@ -69,7 +69,7 @@ test('uses a single-column layout in a narrow host', async ({ page }) => {
         const layout = host.shadowRoot?.querySelector('[part="layout"]');
         if (!layout) return 0;
         const style = getComputedStyle(layout);
-        return style.display === 'grid' ? style.gridTemplateColumns.match(/(?:^|\s)(?:minmax\([^)]*\)|\d+(?:\.\d+)?px)/g)?.length ?? 0 : 0;
+        return style.display === 'grid' ? (style.gridTemplateColumns.match(/(?:^|\s)(?:minmax\([^)]*\)|\d+(?:\.\d+)?px)/g)?.length ?? 0) : 0;
     });
     expect(columns).toBe(1);
 });
