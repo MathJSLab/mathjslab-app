@@ -8,9 +8,11 @@ test('navigates fragments, updates the outline and announces the active section'
     await expect(document).toHaveAttribute('state', 'ready');
     const pageUrl = page.url();
 
-    await document.getByRole('link', { name: 'Jump to the local section' }).click();
+    await document.locator('[part="page-outline"] [data-fragment="local-section"]').click();
 
     await expect(document.locator('[data-fragment="local-section"]')).toHaveAttribute('aria-current', 'location');
+    await expect(document).toHaveAttribute('state', 'ready');
+    await expect(document.locator('[part="status"]')).toBeHidden();
     await expect(document.locator('[part="announcer"]')).toHaveText('Section Local section');
     expect(page.url()).toBe(pageUrl);
 });

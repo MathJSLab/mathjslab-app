@@ -4,7 +4,6 @@ test('sanitized documents mediate allowed images and prevent cross-origin reques
     const requests: string[] = [];
     page.on('request', (request) => requests.push(request.url()));
     await page.route('http://127.0.0.1:4173/course-image.png', (route) => route.fulfill({ status: 200, contentType: 'image/png', body: Buffer.from([137, 80, 78, 71]) }));
-    await page.route('http://127.0.0.1:4173/redirect.png', (route) => route.fulfill({ status: 302, headers: { location: 'https://outside.test/redirected.png' } }));
     await page.route('https://outside.test/**', (route) => route.fulfill({ status: 200, contentType: 'image/png', body: Buffer.from([137, 80, 78, 71]) }));
     await page.goto('/test/browser/fixtures/lifecycle.html');
 
@@ -16,7 +15,7 @@ test('sanitized documents mediate allowed images and prevent cross-origin reques
         document.body.append(container);
         const diagnostics: string[] = [];
         const session = await engine.renderDocument(
-            '![local](/course-image.png) ![external](https://outside.test/blocked.png) ![redirect](/redirect.png)\n\n<img src="https://outside.test/raw.png" onerror="alert(1)"><svg><image href="/course-image.png"></image><image href="https://outside.test/svg.png"></image></svg><audio src="/audio.mp3"></audio>',
+            '![local](/course-image.png) ![external](https://outside.test/blocked.png) ![redirect](/test/browser/fixtures/security-redirect.png)\n\n<img src="https://outside.test/raw.png" onerror="alert(1)"><svg><image href="/course-image.png"></image><image href="https://outside.test/svg.png"></image></svg><audio src="/audio.mp3"></audio>',
             container,
             {
                 sourceUrl: new URL(location.href),

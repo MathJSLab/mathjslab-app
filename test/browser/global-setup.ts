@@ -19,6 +19,19 @@ export default async function globalSetup(_config: FullConfig): Promise<() => Pr
         try {
             const requestUrl = new URL(request.url ?? '/', `http://${request.headers.host ?? '127.0.0.1'}`);
             const relative = decodeURIComponent(requestUrl.pathname).replace(/^\/+/, '');
+            if (relative === 'test/browser/fixtures/security-redirect.png') {
+                response.writeHead(302, { Location: 'https://outside.test/redirected.png', 'Cache-Control': 'no-store' });
+                response.end();
+                return;
+            }
+            if (relative.startsWith('test/mathjslab-lib/')) {
+                const kernelLibrary = resolve(root, '..', 'mathjslab', 'lib');
+                const kernelFile = resolve(kernelLibrary, relative.slice('test/mathjslab-lib/'.length));
+                if (!kernelFile.startsWith(`${kernelLibrary}${sep}`)) throw new Error('Path outside kernel library');
+                response.writeHead(200, { 'Cache-Control': 'no-store', 'Content-Type': mimeTypes[extname(kernelFile)] ?? 'application/octet-stream' });
+                createReadStream(kernelFile).pipe(response);
+                return;
+            }
             let filename = resolve(root, relative || 'test/browser/fixtures/index.html');
             if (filename !== root && !filename.startsWith(`${root}${sep}`)) throw new Error('Path outside test root');
             if (statSync(filename).isDirectory()) filename = resolve(filename, 'index.html');

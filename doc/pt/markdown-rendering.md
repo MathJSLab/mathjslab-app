@@ -57,7 +57,7 @@ instalada no container, ela permanece válida depois de cada renderização.
 Fragmentos no documento atual não fazem nova requisição. O navegador localiza
 elementos por `id` ou âncoras por `name`; documentos diferentes podem usar
 referências como `capitulo.md#secao`. A função opcional `scrollToFragment`
-permite que o futuro componente defina rolagem própria.
+permite que o componente defina rolagem própria.
 
 O navegador mantém histórico próprio com `back()`, `forward()`, `canGoBack` e
 `canGoForward`. O histórico só é alterado depois de uma carga bem-sucedida;
@@ -329,176 +329,7 @@ ficam no componente reutilizável.
 
 ## Distribuição independente
 
-O ponto de entrada `src/markdown-document.ts` exporta apenas o engine, o custom
-element, navegação, modelo, controlador, adaptador de montagem e factories de
-extensões. Ele não importa `appEngine`, shell, prompt ou traduções da
-aplicação. O bundle ESM é gerado por:
-
-```console
-npm run build:markdown-component
-```
-
-O resultado principal é `dist/markdown-document/markdown-document.js`; as
-bibliotecas opcionais ficam em chunks do subdiretório `chunks/`, e as
-declarações TypeScript em `types/`. O bundle registra `<markdown-document>` ao
-ser importado e também exporta `defineMarkdownDocumentElement()` para registros
-com nome escolhido pelo integrador.
-
-`createEducationalMarkdownEngine()` recebe `features`, que pode ser uma lista
-ou `"all"`. A lista controla quais fences educacionais são registrados; cada
-biblioteca continua sendo importada somente no primeiro bloco correspondente.
-GFM, IDs de títulos, URLs relativas, realce de código e MathJax pertencem ao
-perfil `gfm` do núcleo. A extensão MathJSLab é exportada, mas exige serviços de
-execução injetados pelo integrador e não faz parte da factory independente.
-
-```javascript
-import { createEducationalMarkdownEngine } from "./markdown-document/markdown-document.js";
-
-const viewer = document.querySelector("markdown-document");
-viewer.engine = createEducationalMarkdownEngine({
-    features: ["mermaid", "smiles", "graphviz", "vega-lite"],
-    securityMode: "sanitized",
-});
-viewer.src = new URL("./aula.md", location.href).href;
-```
-
-`example/markdown-document/index.html` é uma página mínima fora do fluxo da
-aplicação. Ela serve como verificação de integração para hospedagem comum e
-como ponto inicial para consumidores futuros, inclusive plugins de CMS.
-
-Na compilação de referência, o módulo inicial minificado tem aproximadamente
-223 KiB. Mermaid, MathJax, Verovio, Graphviz, Vega, Leaflet, Three.js, 3Dmol.js
-e os demais renderizadores permanecem em chunks separados. Alguns desses chunks
-são grandes, especialmente o módulo WebAssembly do Verovio; eles não são
-transferidos até que uma extensão correspondente realmente os importe. O aviso
-de limite de tamanho do Webpack registra esses custos opcionais sem impedir a
-compilação.
-
-## Testes em navegador real
-
-O Playwright executa a distribuição ESM em Chromium por padrão. O `globalSetup`
-inicia um servidor HTTP efêmero na interface local e o encerra ao final da
-suíte, evitando dependências de servidor e processos residuais. As fixtures em
-`test/browser/fixtures` exercitam o bundle produzido, arquivos Markdown e
-recursos relativos como um consumidor externo faria.
-
-```console
-npx playwright install chromium
-npm run test:browser
-```
-
-O primeiro conjunto confirma o carregamento do bundle independente, a
-renderização dentro do Shadow DOM, a resolução de imagem relativa, o sumário da
-página, a ausência de erros JavaScript e a navegação de Markdown dentro do
-componente sem substituir a página hospedeira. Firefox e WebKit já estão
-configurados e podem ser habilitados por `npm run test:browser:all` depois da
-instalação dos respectivos binários.
-
-Falhas preservam trace, captura de tela e vídeo em `test-results/playwright`.
-No CI, o relatório HTML também é escrito em `playwright-report`. Esses
-diretórios são artefatos locais e não fazem parte do repositório.
-
-### Navegação e acessibilidade
-
-A suíte real também cobre documentos avulsos e coleções de duas páginas:
-
-- links de fragmento, sumário local e anúncios de seção;
-- páginas anterior e seguinte, histórico e página ativa;
-- foco no primeiro título após troca de página;
-- localização dinâmica dos controles;
-- atalhos de histórico e sequência;
-- `Seta acima`, `Seta abaixo`, `Home` e `End` dentro do sumário;
-- seleção da seção visível depois de uma rolagem do usuário;
-- layout de uma coluna em container estreito;
-- rolagem instantânea sob `prefers-reduced-motion`.
-
-O navegador revelou que um `IntersectionObserver` podia sobrescrever a seção
-escolhida e o anúncio de uma página durante a rolagem programática. O
-componente agora pausa temporariamente a observação ao navegar ou mover o foco.
-Encerrada a rolagem, novas interseções voltam a atualizar normalmente a seção
-ativa.
-
-### Renderizadores opcionais
-
-A suíte `test/browser/markdown-extensions.spec.ts` executa os renderizadores
-reais, sem substituir suas bibliotecas por mocks. Ela cobre:
-
-- Mermaid, SMILES, MathJax, Graphviz e Vega-Lite, incluindo a transferência de
-  chunks opcionais;
-- duas instâncias simultâneas com Shadow DOM e diagramas independentes;
-- ABC e Verovio, incluindo a inicialização WebAssembly deste último;
-- GeoJSON e TopoJSON em mapas Leaflet sem tiles;
-- moléculas com 3Dmol.js e modelos gerais com Three.js sob WebGL.
-
-O MathJax usa um resolvedor de componentes ligado a imports dinâmicos do
-Webpack. Assim, `mhchem`, `mathtools`, `physics`, `units`, `boldsymbol`, a
-política `safe` e a fonte SVG de `mhchem` são carregados a partir da própria
-distribuição, sem depender de caminhos absolutos ou de um CDN. A geração de
-fala, Braille e o enriquecimento semântico do pacote combinado permanecem
-desativados nesta integração enquanto o componente não distribuir o worker SRE.
-A renderização visual não depende desse worker; sua distribuição acessível fica
-registrada como trabalho posterior.
-
-Os testes podem ser executados isoladamente após o build com:
-
-```console
-npx playwright test test/browser/markdown-extensions.spec.ts --workers=1
-```
-
-### Cancelamento, isolamento de falhas e descarte
-
-A suíte `test/browser/markdown-lifecycle.spec.ts` verifica o ciclo de vida no
-navegador real. Uma navegação nova aborta a requisição anterior, e a resposta
-antiga não pode substituir o documento corrente. Remover o componente durante
-uma requisição também aborta o carregamento e impede atualizações tardias.
-
-Falhas de uma extensão permanecem no bloco que as produziu: o código-fonte e o
-diagnóstico são preservados, enquanto os blocos seguintes continuam sendo
-renderizados. Ao chamar `dispose()`, o componente encerra views e mapas, remove
-o conteúdo interativo e desconecta todos os `ResizeObserver` criados pelas
-extensões. Para modelos glTF animados, o teste instrumenta
-`requestAnimationFrame` e confirma que nenhum frame fica agendado depois do
-descarte.
-
-```console
-npx playwright test test/browser/markdown-lifecycle.spec.ts --workers=1
-```
-
-### Matriz de navegadores e tamanho dos chunks
-
-`npm run test:browser:all` habilita os projetos Chromium, Firefox e WebKit. A
-execução padrão continua usando Chromium para fornecer retorno rápido durante o
-desenvolvimento. A workflow `.github/workflows/markdown-engine.yml` usa Node.js
-22, instala os três motores, executa os testes unitários, compila a
-distribuição e roda toda a matriz. Traces, capturas e vídeos de falhas são
-preservados como artefatos do CI.
-
-Os imports dinâmicos possuem nomes de chunk estáveis por família, como
-`markdown-mermaid`, `markdown-mathjax` e `markdown-model-3d`. O build
-independente desativa a divisão automática desses grupos pelo Webpack, mantendo
-cada dependência principal associada ao recurso que a carrega. Bibliotecas que
-fazem seus próprios imports dinâmicos, em especial os tipos adicionais de
-diagrama do Mermaid, continuam aparecendo como chunks lazy compartilhados.
-
-Depois do build, o comando abaixo grava tamanhos minificados, brutos e gzip em
-`test/markdown/chunk-baseline.json`:
-
-```console
-npm run measure:markdown
-```
-
-Na medição de referência, o módulo inicial tem 223 KiB, ou 71 KiB em gzip. Os
-maiores recursos opcionais são Verovio, com cerca de 7,7 MiB, e MathJax, com
-cerca de 2,1 MiB; nenhum deles faz parte da transferência inicial.
-
-No host de desenvolvimento atual, Chromium e WebKit completaram as 18
-verificações. O Firefox 155 fornecido pelo Playwright não consegue criar uma
-página sob o Node.js 26 deste host, inclusive em um programa vazio fora da
-suíte. Executado temporariamente sob Node.js 22, ele completou as 16
-verificações sem WebGL. Os dois testes WebGL são ignorados nesse projeto porque
-o runtime headless do Firefox não fornece o contexto exigido pelo Three.js;
-ambos são executados em Chromium e WebKit. A matriz de CI fixa Node.js 22 para
-isolar a incompatibilidade do driver com o runtime local.
+O pacote `mathjslab-markdown` fornece módulos ESM, declarações de tipos e bundles para navegador. Os bundles compartilham runtime e chunks; a implantação deve conservar a árvore de assets gerada pelo build. O aplicativo também oferece `npm run build:markdown-component` para gerar sua distribuição independente.
 
 ## Entradas e destinos
 
@@ -535,34 +366,6 @@ Markdown nem dispara Mermaid por conta própria.
 O interpretador permanece síncrono: iniciar um carregamento não bloqueia os
 comandos seguintes. A conclusão do componente é tratada pelo adaptador, mas não
 é aguardada pelo avaliador do interpretador.
-
-## Problemas tratados
-
-- O renderizador inseria código Mermaid diretamente como HTML. Tags, entidades
-  e sequências como `</div>` podiam alterar a estrutura antes de Mermaid
-  receber o texto. O código agora é escapado e recuperado com `textContent`.
-- Um sinalizador global vinculava `parse` e `typeset`: processar um destino
-  consumia a indicação de diagramas de outros documentos já analisados. A
-  descoberta agora depende do conteúdo de cada destino.
-- `map(async ...)` descartava as promessas. Falhas ficavam sem tratamento e
-  chamadas seguintes podiam tentar interpretar SVG já renderizado como fonte. O
-  engine mantém a tarefa de cada elemento, limita a concorrência e permite
-  aguardar chamadas simultâneas sem renderizá-lo duas vezes.
-- IDs dependiam do índice local e do ID do destino. Saídas em lote não têm ID;
-  diagramas de documentos distintos podiam reutilizar o mesmo ID. A chamada sem
-  argumento também acessava `element!.id`. Agora os IDs usam um contador
-  próprio, independente do destino, e o argumento padrão é `document`.
-- Erros de diagramas agora aparecem como texto junto da fonte original, sem
-  impedir os demais diagramas. `suppressErrorRendering` evita o desenho de uma
-  mensagem de erro de Mermaid fora do container de saída.
-- Saídas com Mermaid agora usam largura de 100%, como as saídas de gráficos, em
-  vez de `max-content`, para dar uma largura definida aos SVGs percentuais.
-- O README não chamava `typeset`; agora também processa diagramas.
-- `help` sem argumentos agora aplica a mesma restrição em `file:` que
-  `help tópico`.
-
-Estas correções cobrem defeitos identificados no código. A confirmação visual
-no navegador ainda é necessária para fechar o diagnóstico do caso relatado.
 
 ## Segurança e recursos externos
 
@@ -601,38 +404,6 @@ integrador deve escolher `sanitized` ou `strict` e limitar origens conforme o
 ambiente de hospedagem. Capabilities são filtradas pelo modo e podem ser
 concedidas por `allowedCapabilities`; grants no engine limitam o que o contexto
 do documento pode conceder.
-
-## Limites e próximo componente
-
-Links e imagens relativos são resolvidos em relação ao endereço do Markdown.
-Fragmentos ainda precisam de navegação própria dentro de Shadow DOM. O tema
-Mermaid é fixo e não acompanha a troca de aparência. O mixin
-`src/styles/component/_markdown.scss` compartilha as regras de largura dos
-documentos entre prompt e saída em lote, nos estados `doc` e `info`: texto com
-quebra automática, imagens e SVGs limitados à largura disponível, e rolagem
-horizontal local para código, tabelas e fórmulas em bloco. O restante da
-apresentação ainda está distribuído entre a página e as saídas.
-
-`openFileDialog` é genérico: ignora arquivos vazios e não oferece estado de
-erro ao chamador para falhas de leitura. Erros síncronos de parsing no callback
-local também não têm a mesma apresentação dos erros de carregamento remoto.
-Esses pontos permanecem para uma revisão do carregamento.
-
-O futuro componente pode receber `src` ou texto diretamente, manter o estado de
-carregamento, resolver recursos relativos pela URL de origem e expor uma
-promessa ou evento de conclusão. Convém separar:
-
-- Carregamento: fetch, cancelamento, leitura local, validação da resposta e URL
-  de origem. A resolução de tópicos, aliases e idiomas de `help` fica fora.
-- Renderização: Markdown, conversão matemática injetável, política de HTML,
-  Mermaid e erros por bloco.
-- Container: tipografia, rolagem, acessibilidade, navegação interna, tema e
-  ciclo de vida. Uma nova fonte deve substituir os nós e invalidar operações
-  antigas; o `WeakMap` atual pressupõe que cada nó representa uma fonte fixa.
-
-Assim, `markdown`, `help` e README podem reutilizar o componente mantendo suas
-regras de carregamento e apresentação. Esta alteração ainda não cria o
-componente web.
 
 ## Sessões de execução MathJSLab
 
@@ -744,23 +515,6 @@ O executor padrão executa as fences em um Web Worker. O `AbortSignal` e
 `timeoutMs` encerram a geração ativa do Worker, portanto também interrompem uma
 operação JavaScript síncrona que esteja ocupando o interpretador.
 
-### Fechamento da integração MathJSLab
-
-As funções externas que precisam reavaliar expressões não consultam mais
-`appEngine.interpreter`. Durante cada avaliação, `InterpreterRuntime` associa
-sincronamente o interpretador à sessão proprietária e restaura o contexto
-anterior mesmo quando há exceção. `summation`, `productory`, `plot2d`, a
-geração MathML dessas funções e scripts carregados por `load` usam esse
-contexto. Isso impede que um documento leia ou altere o workspace interativo ou
-a sessão de outro documento.
-
-O corpus de navegador inclui um executor injetado pelo ponto de entrada público
-do componente. Os testes cobrem duas fences que compartilham variáveis, saída
-rica dentro do Shadow DOM, resize, substituição do documento, descarte da
-sessão e do objeto visual, bloqueio em modo `sanitized` e autorização explícita
-pelo integrador. Esses testes complementam os testes unitários do contrato, da
-fila, dos limites e das capturas Plotly.
-
 ### Protocolo assíncrono para Worker
 
 A primeira parte do isolamento em Web Worker define um protocolo versionado e
@@ -853,22 +607,7 @@ timeout e reinicialização são apresentados no próprio bloco, geram diagnóst
 estruturados e não impedem a execução dos blocos seguintes. O descarte do
 engine encerra a geração ativa e rejeita todas as operações ainda pendentes.
 
-## Verificação
 
-`node --test script/markdown.test.mjs` executa regressões para preservação da
-fonte, códigos comuns, MathML, documentos concorrentes, IDs, repetição, Shadow
-DOM, argumento omitido e isolamento de erros. O teste usa o Marked e o serviço
-reais, um DOM de teste e um substituto para a geração SVG de Mermaid; não
-verifica medidas ou aparência do SVG.
+## Testes
 
-Também foram executados TypeScript sem emissão e compilação Webpack de
-desenvolvimento. O navegador integrado não conseguiu abrir a sessão local (erro
-de associação da aba à sessão e timeout de navegação), impedindo a verificação
-visual nesta execução.
-
-Para a conferência manual, carregar
-`markdown('doc/en/row-and-column-major-order.md')`, que contém três diagramas,
-no prompt e no editor em lote. Repetir o carregamento e verificar se as saídas
-anteriores permanecem visíveis. Conferir também `help`, `help markdown`,
-arquivo local com diagrama e um documento com diagrama inválido seguido de
-válido.
+Os testes de contrato e ciclo de vida ficam em `test/markdown`; a integração em navegadores fica em `mathjslab-app/test/browser`. Consulte os scripts de teste dos respectivos `package.json`. Relatórios e medições são artefatos temporários, regenerados quando necessários.

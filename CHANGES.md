@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.13.0
+
+- Adopt mathjslab 2.8.1 and mathjslab-markdown 0.1.1 through public package
+  dependencies, delegating reusable Markdown entry points to the extracted
+  engine.
+- Use session-owned native plot preparation and serializable core plot outputs,
+  with lazy Plotly rendering and exception-safe capture/context cleanup.
+- Bind summation and productory to the active session and restore their scopes
+  after failures. Correct optional-domain histogram integration.
+- Integrate real browser Worker regressions for retained control flow, calls,
+  argument binding, native destinations, matrix/cell literals and returned
+  receivers, including cancellation, failure recovery and session isolation.
+- Include production artifacts and declarations in the application tarball;
+  exclude the browser-only probe Worker and development artifacts.
+- Consolidate Markdown integration, lifecycle, resource and security guides,
+  and document resumable runtime support and remaining synchronous boundaries.
+
 ## 1.12.0
 
 - Consolidated the App-independent Markdown entry points, extension catalog,

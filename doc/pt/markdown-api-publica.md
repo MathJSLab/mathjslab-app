@@ -1,23 +1,26 @@
 # Contrato público e independente do engine Markdown
 
-Este documento define a superfície pública que deverá ser mantida estável antes
-da distribuição do engine como pacote. A presença de uma declaração `.d.ts`
+Este documento define a superfície pública do pacote reutilizável. A presença de uma declaração `.d.ts`
 transitiva no diretório de build não torna o símbolo público; somente símbolos
 alcançáveis pelos pontos de entrada abaixo fazem parte do contrato.
 
 ## Pontos de entrada atuais
 
-Há duas superfícies com finalidades diferentes:
+O mapa `exports` de `mathjslab-markdown/package.json` define o contrato npm:
 
-| Origem                     | Finalidade                              | Destino              |
-| -------------------------- | --------------------------------------- | -------------------- |
-| `src/markdown-document.ts` | Engine e componente reutilizáveis       | Pacote independente  |
-| `src/Markdown.ts`          | Fachada histórica ligada ao `appEngine` | Aplicativo MathJSLab |
+| Subpath | Responsabilidade |
+| --- | --- |
+| `mathjslab-markdown` | Engine e contratos principais |
+| `/component` | Classe do componente e helpers |
+| `/component/register` | Registro de `<markdown-document>` |
+| `/extensions` | Presets e extensões |
+| `/mathjslab` | Integração opcional MathJSLab |
+| `/mathjslab/worker` | Transporte e protocolo Worker |
+| `/browser` | Entrada agregada |
+| `/compat/*` | Módulos de compatibilidade |
+| `/bundles/*` | Assets da distribuição para navegador |
 
-O pacote reutilizável não deve exportar `Markdown`, `markdownEngine`,
-`appEngine`, targets do prompt ou funções de interface do aplicativo. A fachada
-histórica poderá continuar reexportando partes da API durante a migração, mas
-não define o contrato do pacote.
+A fachada `Markdown.ts` e o estado global do aplicativo pertencem ao app.
 
 ## Fronteira com o aplicativo
 
@@ -53,9 +56,7 @@ Os nomes de exports JavaScript por entry point e a versão
 `markdownPublicApiVersion` são travados em testes. Uma remoção ou mudança
 incompatível de símbolo ou semântica pública exige incrementar a versão; novas
 dependências específicas do app devem permanecer em adapters fora do grafo
-público. Os subpaths npm ainda não estão publicados: a tabela de subpaths
-abaixo é o mapeamento pretendido para a etapa de distribuição, não uma garantia
-de instalação npm nesta etapa.
+público. Os subpaths npm são definidos pelo mapa `exports` do pacote.
 
 ## API principal
 
@@ -113,9 +114,9 @@ Exemplos independentes do estado do aplicativo estão em
 Os eventos do componente e o catálogo de diagnósticos estão descritos em
 [`markdown-rendering.md`](markdown-rendering.md). O ciclo de vida, políticas de
 segurança e recursos também possuem documentos próprios:
-[`markdown-lifecycle-audit.md`](markdown-lifecycle-audit.md),
+[`markdown-lifecycle.md`](markdown-lifecycle.md),
 [`markdown-security-policy.md`](markdown-security-policy.md) e
-[`markdown-resource-audit.md`](markdown-resource-audit.md).
+[`markdown-resources.md`](markdown-resources.md).
 
 ## Extensões públicas
 
@@ -194,52 +195,6 @@ Esses arquivos podem aparecer na árvore de declarações porque são dependênc
 dos tipos públicos. Eles não devem receber subpaths públicos nem ser importados
 diretamente por consumidores.
 
-## Problemas encontrados e decisões
-
-1. O ponto de entrada independente exportava factories, mas omitia seus
-   manifestos e as extensões básicas. A assimetria foi corrigida.
-2. `src/Markdown.ts` mistura a fachada histórica com muitas reexportações. Ela
-   permanece compatível com o aplicativo, mas não será o ponto de entrada do
-   pacote.
-3. A API avançada do Worker estava misturada à API principal. A etapa 15.2 a
-   separou em um módulo próprio; o entrypoint agregado ainda a reexporta para
-   preservar compatibilidade até definirmos a política de versionamento.
-4. `package.json` ainda não publica `exports`, `types`, `files` ou requisitos
-   de browser. Essa configuração pertence à etapa de distribuição.
-5. O módulo `component` não produz efeitos colaterais. O registro do elemento é
-   feito por `component/register`; o entrypoint agregado conserva o registro
-   automático para manter compatibilidade com o bundle anterior.
-
-## Pontos de entrada definidos na etapa 15.2
-
-| Módulo fonte                         | Futuro subpath         | Conteúdo                                           |
-| ------------------------------------ | ---------------------- | -------------------------------------------------- |
-| `src/markdown-core.ts`               | `.`                    | API principal e configuração educacional           |
-| `src/markdown-component.ts`          | `./component`          | Web Component e helpers de hospedagem              |
-| `src/markdown-component-register.ts` | `./component/register` | Registro explícito e API do componente             |
-| `src/markdown-extensions.ts`         | `./extensions`         | Factories e manifestos, exceto MathJSLab           |
-| `src/markdown-mathjslab.ts`          | `./mathjslab`          | Executor, extensão e integração browser MathJSLab  |
-| `src/markdown-mathjslab-worker.ts`   | `./mathjslab/worker`   | Protocolo, transport e runtime avançados do Worker |
-
-Os módulos são reais e possuem testes de importação e de fronteira. O arquivo
-`src/markdown-document.ts` continua reexportando os cinco módulos para
-preservar a superfície disponível antes da divisão. A publicação dos nomes de
-subpath em `package.json`, com bundles e declarações correspondentes, pertence
-à etapa de distribuição; nenhum consumidor precisa importar caminhos internos
-de `src`.
-
-As fronteiras evitam dependências conceituais acidentais: `core` não registra o
-componente, `component` não reexporta o engine, `extensions` não inclui o
-runtime MathJSLab, a integração MathJSLab comum não expõe o protocolo Worker e
-o módulo avançado do Worker não registra a extensão Markdown.
-
-O build independente gera `markdown-document.js`, `core.js`, `component.js`,
-`component-register.js`, `extensions.js`, `mathjslab.js` e
-`mathjslab-worker.js`. Um teste em navegador importa os módulos separados,
-confirma suas fronteiras e verifica o registro explícito do elemento. A
-associação formal desses arquivos aos subpaths npm continua reservada à
-distribuição.
-
 ## Estabilidade e versionamento
 
 `markdownPublicApiVersion` identifica a versão principal do contrato público e
@@ -256,7 +211,3 @@ adição ou remoção precisa, portanto, atualizar deliberadamente o contrato e 
 documentação. Tipos emitidos são verificados pelo build TypeScript dos
 entrypoints. APIs avançadas seguem a mesma disciplina de remoção, embora possam
 receber adições com maior frequência.
-
-Com inventário, fronteiras, registro explícito, versão e testes de contrato, o
-item 15 está encerrado. Metadados npm, mapas de `exports`, seleção de arquivos
-e validação por instalação pertencem ao item 16, dedicado à distribuição.

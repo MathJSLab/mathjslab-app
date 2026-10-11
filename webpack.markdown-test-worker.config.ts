@@ -7,7 +7,7 @@ const directory = path.dirname(fileURLToPath(import.meta.url));
 export default (_environment: unknown, arguments_: { mode?: 'development' | 'production' }): webpack.Configuration => ({
     name: 'markdown-test-worker',
     mode: arguments_.mode ?? 'production',
-    entry: path.join(directory, 'src', 'markdown', 'extensions', 'mathjslab', 'mathjslab.worker.ts'),
+    entry: path.join(directory, 'test', 'browser', 'fixtures', 'mathjslab-worker-probe.ts'),
     experiments: { outputModule: true },
     module: {
         rules: [

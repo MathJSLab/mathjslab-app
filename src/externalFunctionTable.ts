@@ -1,5 +1,4 @@
 import { type NodeExpr, type BuiltInFunctionTable, CharString, AST } from 'mathjslab';
-import { PlotEngine } from './PlotEngine';
 import { commonExternalFunctionTable } from './commonExternalFunctionTable';
 import { createOpenFileButton, openFileDialog } from './openFileDialog';
 import { markdownEngine } from './Markdown';
@@ -42,8 +41,6 @@ const openMathJSLabFile = (): void => {
  * function table.
  */
 const externalFunctionTable: BuiltInFunctionTable = {
-    ...PlotEngine.externalFunctionTable,
-
     ...commonExternalFunctionTable,
 
     open: {

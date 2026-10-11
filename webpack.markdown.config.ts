@@ -32,7 +32,7 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
         fallback: { module: false },
         extensionAlias: { '.js': ['.js', '.ts'] },
     },
-    optimization: { splitChunks: false },
+    optimization: { runtimeChunk: 'single', splitChunks: { chunks: 'all' } },
     ignoreWarnings: [
         {
             module: /node_modules[\\/]mathjax[\\/]tex-svg\.js$/,

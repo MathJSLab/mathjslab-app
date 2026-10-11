@@ -62,3 +62,6 @@ node_modules/
 # OpenAI Codex Agent
 .agents/
 .codex/
+
+coverage/
+test/markdown/chunk-baseline.json

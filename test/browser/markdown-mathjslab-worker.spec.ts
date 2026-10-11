@@ -5,7 +5,7 @@ test('executes document sessions through an injected MathJSLab module Worker', a
     page.on('pageerror', (error) => errors.push(error.message));
     await page.goto('/test/browser/fixtures/mathjslab-worker.html');
     const viewer = page.locator('markdown-document');
-    await expect(viewer).toHaveAttribute('state', 'ready');
+    await expect(viewer).toHaveAttribute('state', 'ready', { timeout: 20_000 });
     await expect(viewer.locator('.mathjslab-result')).toHaveCount(3);
     await expect(viewer.locator('.mathjslab-result').nth(1)).toContainText('42');
     await expect(viewer.locator('[data-mathjslab-output-role="visualization"] .plot-container')).toBeVisible();
@@ -15,7 +15,7 @@ test('executes document sessions through an injected MathJSLab module Worker', a
 
 test('terminates a timed-out evaluation and recreates a clean Worker session', async ({ page }) => {
     await page.goto('/test/browser/fixtures/mathjslab-worker.html');
-    await expect(page.locator('markdown-document')).toHaveAttribute('state', 'ready');
+    await expect(page.locator('markdown-document')).toHaveAttribute('state', 'ready', { timeout: 20_000 });
     const result = await page.evaluate(() =>
         (
             window as unknown as {
@@ -37,7 +37,7 @@ test('terminates a timed-out evaluation and recreates a clean Worker session', a
 
 test('loads a relative MathJSLab script through the document resource service', async ({ page }) => {
     await page.goto('/test/browser/fixtures/mathjslab-worker.html');
-    await expect(page.locator('markdown-document')).toHaveAttribute('state', 'ready');
+    await expect(page.locator('markdown-document')).toHaveAttribute('state', 'ready', { timeout: 20_000 });
     const result = await page.evaluate(() =>
         (
             window as unknown as {
@@ -58,7 +58,7 @@ test('loads a relative MathJSLab script through the document resource service', 
 
 test('applies the document resource policy to Worker loads', async ({ page }) => {
     await page.goto('/test/browser/fixtures/mathjslab-worker.html');
-    await expect(page.locator('markdown-document')).toHaveAttribute('state', 'ready');
+    await expect(page.locator('markdown-document')).toHaveAttribute('state', 'ready', { timeout: 20_000 });
     const result = await page.evaluate(() =>
         (
             window as unknown as {

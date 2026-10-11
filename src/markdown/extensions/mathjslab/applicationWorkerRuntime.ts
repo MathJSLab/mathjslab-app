@@ -1,7 +1,6 @@
 import { Interpreter, type InterpreterConfig, type NodeInput } from 'mathjslab';
 import { commonExternalFunctionTable } from '../../../commonExternalFunctionTable';
 import { withActiveInterpreter } from '../../../InterpreterRuntime';
-import { PlotEngine } from '../../../PlotEngine';
 import { withPlotOutputCapture } from '../../../PlotOutputCapture';
 import { serializeMathJSLabWorkerError, type MathJSLabWorkerExecutionResult, type MathJSLabWorkerOutput } from './workerProtocol';
 import type { MathJSLabWorkerResources, MathJSLabWorkerRuntimeHandler, MathJSLabWorkerSession } from './workerRuntime';
@@ -77,28 +76,24 @@ const evaluationMarkup = (interpreter: Interpreter, input: NodeInput, evaluated:
 };
 
 const createInterpreter = (): Interpreter => {
-    const configuration: InterpreterConfig = { externalFunctionTable: { ...PlotEngine.externalFunctionTable, ...commonExternalFunctionTable } };
+    const configuration: InterpreterConfig = { externalFunctionTable: { ...commonExternalFunctionTable } };
     return Interpreter.Create(configuration);
 };
 
 const createSession = (_context: unknown, resources: MathJSLabWorkerResources): MathJSLabWorkerSession => {
     const interpreter = createInterpreter();
     const evaluate = (statement: string): MathJSLabWorkerOutput[] =>
-        withPlotOutputCapture(
-            interpreter,
-            (plots) => {
-                const tree = interpreter.Parse(statement);
-                if (!tree) return [];
-                const evaluated = interpreter.Evaluate(tree);
-                if (interpreter.exitStatus !== Interpreter.response.OK) throw new Error('MathJSLab evaluation failed');
-                const outputs: MathJSLabWorkerOutput[] = [
-                    { type: 'mathml' as const, markup: evaluationMarkup(interpreter, tree, evaluated) },
-                    ...plots.map((request): MathJSLabWorkerOutput => ({ type: 'visualization', renderer: 'plotly', request, role: 'visualization' })),
-                ];
-                return outputs;
-            },
-            PlotEngine,
-        ).value;
+        withPlotOutputCapture(interpreter, (plots) => {
+            const tree = interpreter.Parse(statement);
+            if (!tree) return [];
+            const evaluated = interpreter.Evaluate(tree);
+            if (interpreter.exitStatus !== Interpreter.response.OK) throw new Error('MathJSLab evaluation failed');
+            const outputs: MathJSLabWorkerOutput[] = [
+                { type: 'mathml' as const, markup: evaluationMarkup(interpreter, tree, evaluated) },
+                ...plots.map((request): MathJSLabWorkerOutput => ({ type: 'visualization', renderer: 'plotly', request, role: 'visualization' })),
+            ];
+            return outputs;
+        }).value;
     const executeStatement = async (statement: string, depth = 0): Promise<MathJSLabWorkerOutput[]> => {
         const references = loadReferences(statement);
         if (!references) return evaluate(statement);

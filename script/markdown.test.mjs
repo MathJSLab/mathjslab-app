@@ -124,7 +124,10 @@ function service() {
     const modules = new Map();
     const sourceRoot = fileURLToPath(new URL('../src/', import.meta.url));
     const load = (filename) => {
-        const resolved = path.resolve(filename.endsWith('.ts') ? filename : `${filename}.ts`);
+        const base = filename.replace(/\.js$/, '');
+        const candidates = [filename, base + '.ts', base + '.js'].map((candidate) => path.resolve(candidate));
+        const resolved = candidates.find((candidate) => fs.existsSync(candidate) && fs.statSync(candidate).isFile());
+        if (!resolved) throw new Error('Cannot load test module: ' + filename);
         if (modules.has(resolved)) return modules.get(resolved);
         const moduleExports = {};
         modules.set(resolved, moduleExports);
@@ -135,7 +138,12 @@ function service() {
         const compatibleOutput = outputText.replaceAll('import.meta.url', JSON.stringify(new URL(path.relative(path.dirname(resolved), resolved), import.meta.url).href));
         const require = (name) => {
             if (name === 'mermaid' || name === 'smiles-drawer') libraryLoads.push(name);
-            return imports[name] ?? (name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name)) : nodeRequire(name));
+            const normalized = name.replace(/\.js$/, '');
+            if (imports[normalized]) return imports[normalized];
+            if (name.startsWith('mathjslab-markdown')) {
+                return load(nodeRequire.resolve(name));
+            }
+            return name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name)) : nodeRequire(name);
         };
         vm.runInNewContext(compatibleOutput, { exports: moduleExports, require, document, Element: HTMLElement, Error, MathJax, URL, AbortController, AbortSignal, TextEncoder });
         return moduleExports;

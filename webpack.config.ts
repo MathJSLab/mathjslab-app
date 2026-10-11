@@ -84,7 +84,8 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                     {
                         test: /\.styles\.(c|sa|sc)ss$/i,
                         exclude: defaultExclude.map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
-                        use: ['sass-to-string', 'sass-loader'],
+                        type: 'asset/source',
+                        use: ['sass-loader'],
                     },
                     {
                         test: /node_modules[\\/]leaflet[\\/]dist[\\/]leaflet\.css$/i,

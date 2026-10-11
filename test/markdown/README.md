@@ -18,7 +18,6 @@ npm run measure:markdown
 ```
 
 `measure:markdown` deve ser executado depois de um build. Ele agrupa os chunks
-opcionais emitidos em `dist/` por família e atualiza `chunk-baseline.json`. A
-baseline atual usa o build de desenvolvimento sem compressão; portanto serve
-para detectar regressões relativas, não para estimar os bytes transferidos em
-produção.
+opcionais emitidos em `dist/` por família e atualiza `chunk-baseline.json`. O
+arquivo gerado é temporário e ignorado pelo Git. Compare medições de builds
+equivalentes; valores de desenvolvimento não estimam transferência em produção.

@@ -7,5 +7,6 @@
         "noEmit": false,
         "outDir": "./dist"
     },
-    "exclude": ["node_modules", "webpack.config.ts", "capacitor.config.ts", "data", "dist", "doc", "example", "help", "images", "m-file", "script"]
+    "exclude": ["node_modules", "webpack.config.ts", "capacitor.config.ts", "data", "dist", "doc", "example", "help", "images", "m-file", "script"],
+    "include": ["src/**/*.ts", "types/**/*.d.ts"]
 }

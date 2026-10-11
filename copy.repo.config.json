@@ -167,6 +167,7 @@
         "images/theme-dark-green-mathjslab.svg",
         "images/theme-light-white-mathjslab.svg",
         "images/theme-dark-white-mathjslab.svg",
+        "src/InterpreterRuntime.ts",
         "src/PlotEngine.ts",
         "src/outputFunction.ts",
         "src/commonExternalFunctionTable.ts",

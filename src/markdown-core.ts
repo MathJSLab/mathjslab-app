@@ -1,12 +1,2 @@
-/** Framework-agnostic Markdown engine, document model and navigation API. */
-/** Incremented when a stable public contract changes incompatibly. */
-export const markdownPublicApiVersion = 2 as const;
-
-export * from './MarkdownEngine';
-export * from './markdown/MarkdownDocumentController';
-export * from './markdown/MarkdownDocumentModel';
-export * from './markdown/MarkdownNavigator';
-export * from './markdown/createEducationalMarkdownEngine';
-export { markdownExtensionCatalog } from './markdown/extensionCatalog';
-export type { MarkdownExtensionCatalogEntry } from './markdown/extensionCatalog';
-export * from './markdown/createMarkdownEnginePreset';
+/** Compatibility delegation to the single package implementation. */
+export * from 'mathjslab-markdown';

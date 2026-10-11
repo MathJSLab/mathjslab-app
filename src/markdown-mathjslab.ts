@@ -1,22 +1,2 @@
-/** Public MathJSLab execution contract and browser integration. */
-export { mathJSLabExtension } from './markdown/extensions/mathjslab/extension';
-export { mathJSLabManifest } from './markdown/extensions/mathjslab/manifest';
-export type {
-    MathJSLabExecutionResult,
-    MathJSLabExecutionSession,
-    MathJSLabExecutionStatus,
-    MathJSLabExecutor,
-    MathJSLabHTMLOutput,
-    MathJSLabMathMLOutput,
-    MathJSLabNodeOutput,
-    MathJSLabOutput,
-    MathJSLabOutputState,
-    MathJSLabParseResult,
-    MathJSLabPlotlyRequest,
-    MathJSLabStatementContext,
-    MathJSLabTextOutput,
-} from './markdown/extensions/mathjslab/executor';
-export { createBrowserMathJSLabWorkerExecutor } from './markdown/extensions/mathjslab/browserWorkerExecutor';
-export type { BrowserMathJSLabWorkerExecutorOptions } from './markdown/extensions/mathjslab/browserWorkerExecutor';
-export { materializePlotlyOutput } from './markdown/extensions/mathjslab/plotlyOutput';
-export type { MathJSLabPlotRenderer } from './markdown/extensions/mathjslab/plotlyOutput';
+/** Compatibility delegation to the single package implementation. */
+export * from 'mathjslab-markdown/mathjslab';

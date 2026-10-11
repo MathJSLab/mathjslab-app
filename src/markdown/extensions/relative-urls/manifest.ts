@@ -1,8 +1,2 @@
-import type { MarkdownExtensionManifest } from '../../../MarkdownEngine';
-
-export const relativeUrlsManifest = {
-    name: 'relative-urls',
-    description: 'Resolves relative links and image sources against the Markdown document URL.',
-    dependencies: [],
-    fences: [],
-} as const satisfies MarkdownExtensionManifest;
+/** Compatibility delegation to the single package implementation. */
+export * from 'mathjslab-markdown/compat/markdown/extensions/relative-urls/manifest';

@@ -12,7 +12,16 @@ test('loads each standalone public API entrypoint with isolated exports', async 
 
     const result = await page.evaluate(() => (window as unknown as { markdownPublicApiTest: Record<string, boolean> }).markdownPublicApiTest);
 
-    expect(result).toEqual({ core: true, component: true, componentRegistered: true, componentUnregistered: true, extensions: true, mathjslab: true, worker: true });
+    expect(result).toEqual({
+        core: true,
+        component: true,
+        componentRegistered: true,
+        componentUnregistered: true,
+        sharedEngineIdentity: true,
+        extensions: true,
+        mathjslab: true,
+        worker: true,
+    });
     expect(errors).toEqual([]);
     expect(optionalChunks).toEqual([]);
 });

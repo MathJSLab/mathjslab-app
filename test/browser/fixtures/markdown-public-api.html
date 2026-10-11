@@ -32,7 +32,10 @@
                 worker: typeof worker.MathJSLabWorkerRuntime === 'function' && !('mathJSLabExtension' in worker),
             };
             const registration = await import('/dist/markdown-document/component-register.js');
-            window.markdownPublicApiTest.componentRegistered = customElements.get('markdown-document') === registration.MarkdownDocumentElement;
+            window.markdownPublicApiTest.componentRegistered =
+                customElements.get('markdown-document') === registration.MarkdownDocumentElement && registration.MarkdownDocumentElement === component.MarkdownDocumentElement;
+            const viewer = document.createElement('markdown-document');
+            window.markdownPublicApiTest.sharedEngineIdentity = viewer.engine instanceof core.MarkdownEngine;
             document.body.dataset.ready = 'true';
         </script>
     </body>

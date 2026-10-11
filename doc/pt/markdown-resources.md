@@ -1,7 +1,4 @@
-# Auditoria de segurança e caminhos de recursos Markdown
-
-Data: 4 de outubro de 2026. Escopo: Etapa 2 da estratégia pós-1.10, no
-`mathjslab-app`.
+# Política e fluxo de recursos
 
 ## Fluxos e decisões
 
@@ -45,36 +42,11 @@ Data: 4 de outubro de 2026. Escopo: Etapa 2 da estratégia pós-1.10, no
    `resource-url-blocked`. Fences cujas capabilities faltam viram texto e geram
    `extension-capability-blocked`.
 
-## Evidência adicionada
-
-Os testes Jest reproduzem as URLs fora da origem, esquemas não autorizados,
-bloqueio por capability, override explícito, redirects por origem, códigos de
-diagnóstico de política/transporte, download de imagem por sessão, limite
-calculado pelo corpo, tipo MIME e revogação de object URL após update e
-dispose. O teste Playwright observa requests reais: imagem same-origin passa
-pelo serviço, referências externas em Markdown/SVG não geram requests, redirect
-cross-origin não chega ao destino, handlers de evento são removidos e elementos
-de mídia são eliminados.
-
-## Validações finais
-
-- `npx tsc --noEmit --project tsconfig.build.json`: passou.
-- `npm run test:markdown:all`: 19 suítes / 151 testes Jest e 15 testes legados,
-  todos aprovados.
-- Playwright Chromium para security, extensões e Worker: 10/10 aprovados.
-- `npm run build:markdown-component`: passou; webpack avisa sobre bundles
-  maiores que o limite recomendado.
-- `npm run build:prod`: passou; webpack avisa sobre tamanho dos chunks e
-  `runtimeChunk`.
-- `npm run lint`: sem erros; permanece um warning preexistente de `console` em
-  `src/main.ts:122`.
-- `git diff --check`: sem erros de whitespace.
-
-## Pendências
+## Limites de integração
 
 - Medir bytes de glTF carregados pelo Three.js requer trocar seu loader por um
   pipeline próprio de prefetch e object URLs ou manter `network` bloqueada em
-  modos restritos. Este incremento escolhe a segunda opção por padrão.
+  modos restritos. A segunda opção é o comportamento padrão.
 - A lista de atributos HTML com carga indireta deve ser reavaliada diante de
   novas tags/recursos admitidos por DOMPurify.
 - Uma extensão customizada só é tão restritiva quanto seu manifest e sua

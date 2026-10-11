@@ -5,13 +5,11 @@ O entry point `markdown-core` não depende do estado de execução do
 documento pode usar um preset e o componente sem acessar `appEngine`, comandos
 do aplicativo ou estado global:
 
-Os exemplos abaixo usam os nomes dos bundles produzidos por
-`webpack.markdown.config.ts`; eles não representam subpaths npm publicados. A
-configuração de `exports` do pacote será feita na etapa de distribuição.
+Os imports npm são definidos pelo mapa `exports` de `mathjslab-markdown/package.json`. Para uso direto no navegador, conserve toda a árvore de bundles e chunks.
 
 ```ts
-import { createMarkdownEnginePreset } from "./markdown-core.js";
-import { defineMarkdownDocumentElement } from "./markdown-component-register.js";
+import { createMarkdownEnginePreset } from "mathjslab-markdown";
+import { defineMarkdownDocumentElement } from "mathjslab-markdown/component";
 
 defineMarkdownDocumentElement();
 
@@ -37,10 +35,10 @@ Para um host que gerencia diretamente os containers, o engine pode ser usado
 sem o Web Component:
 
 ```ts
-import { createMarkdownEnginePreset } from "./markdown-core.js";
+import { createMarkdownEnginePreset } from "mathjslab-markdown";
 
 const engine = createMarkdownEnginePreset("education-basic");
-const documentSession = engine.createDocument(container, {
+const documentSession = await engine.renderDocument("# Lesson", container, {
     sourceUrl: new URL("/course/lesson.md", location.href),
 });
 

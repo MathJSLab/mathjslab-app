@@ -1,4 +1,5 @@
-import type { Interpreter } from 'mathjslab';
+import { Interpreter } from 'mathjslab';
+import { PlotEngine } from '../../src/PlotEngine';
 import { capturePlotOutput, type PlotOutputRequest, withPlotOutputCapture } from '../../src/PlotOutputCapture';
 
 const request = (value: number): PlotOutputRequest => ({
@@ -10,8 +11,8 @@ const request = (value: number): PlotOutputRequest => ({
 
 describe('MathJSLab Plotly output capture', () => {
     test('captures immutable requests per interpreter evaluation and restores nested captures', () => {
-        const firstInterpreter = {} as Interpreter;
-        const secondInterpreter = {} as Interpreter;
+        const firstInterpreter = Interpreter.Create();
+        const secondInterpreter = Interpreter.Create();
 
         const outer = withPlotOutputCapture(firstInterpreter, () => {
             capturePlotOutput(request(1));
@@ -26,6 +27,27 @@ describe('MathJSLab Plotly output capture', () => {
         expect((outer.requests[0]!.data[0] as { y: number[] }).y).toEqual([1]);
         expect((outer.value[0]!.data[0] as { y: number[] }).y).toEqual([2]);
         expect((outer.requests[1]!.data[0] as { y: number[] }).y).toEqual([3]);
+    });
+
+    test('publishes native session plots through the renderer host exactly once and preserves the callback result', () => {
+        const interpreter = Interpreter.Create();
+        const captured = withPlotOutputCapture(
+            interpreter,
+            () => {
+                interpreter.Evaluate(interpreter.Parse('plot([1,2])')!);
+                return true;
+            },
+            PlotEngine,
+        );
+        const value: boolean = captured.value;
+        expect(value).toBe(true);
+        expect(captured.requests).toHaveLength(1);
+        expect(captured.requests[0]!.data[0]!.y).toEqual([1, 2]);
+        const subsequent = withPlotOutputCapture(interpreter, () => {
+            interpreter.Evaluate(interpreter.Parse('plot([3,4])')!);
+        });
+        expect(subsequent.requests).toHaveLength(1);
+        expect(captured.requests).toHaveLength(1);
     });
 
     test('rejects plotting outside an active evaluation capture', () => {

@@ -8,14 +8,30 @@
     <body>
         <script type="module">
             const { createBrowserMathJSLabWorkerExecutor, createEducationalMarkdownEngine, mathJSLabExtension } = await import('/dist/markdown-document/markdown-document.js');
+            const effects = [];
+            const workers = [];
+            const effectObservers = new Set();
+            let workerCount = 0;
             const executor = createBrowserMathJSLabWorkerExecutor({
                 toMathML: (source, display) => `<math display="${display}"><mtext>${source}</mtext></math>`,
-                workerFactory: () => new Worker('/dist/markdown-test-worker/mathjslab-worker.js', { type: 'module', name: 'mathjslab-markdown-test' }),
+                workerFactory: () => {
+                    workerCount++;
+                    const worker = new Worker('/dist/markdown-test-worker/mathjslab-worker.js', { type: 'module', name: 'mathjslab-markdown-test' });
+                    workers.push(worker);
+                    worker.addEventListener('message', ({ data }) => {
+                        if (data.type === 'effect-request') {
+                            effects.push(data.effect);
+                            for (const observe of effectObservers) observe(data.effect);
+                        }
+                    });
+                    return worker;
+                },
                 plotRenderer: {
                     render(container, request) {
                         const plot = document.createElement('div');
                         plot.className = 'plot-container';
                         plot.dataset.plotType = request.type;
+                        plot.dataset.request = JSON.stringify(request);
                         plot.style.height = '1px';
                         container.append(plot);
                     },
@@ -39,6 +55,42 @@ plot([1, 4, 2, 5])
 \`\`\``;
             document.body.append(viewer);
             window.mathJSLabWorkerTest = {
+                executor,
+                effects,
+                nextEffect() {
+                    return new Promise((resolve) => {
+                        const observe = (effect) => {
+                            effectObservers.delete(observe);
+                            resolve(effect);
+                        };
+                        effectObservers.add(observe);
+                    });
+                },
+                async probe() {
+                    const worker = workers.at(-1);
+                    return new Promise((resolve) => {
+                        const receive = ({ data }) => {
+                            if (data.type !== 'test-context-result') return;
+                            worker.removeEventListener('message', receive);
+                            resolve(data);
+                        };
+                        worker.addEventListener('message', receive);
+                        worker.postMessage({ type: 'test-context-probe' });
+                    });
+                },
+                get workerCount() {
+                    return workerCount;
+                },
+                async serialize(result) {
+                    const outputs = [];
+                    for (const output of result.outputs ?? []) {
+                        if (output.type === 'node') {
+                            await output.mount?.(output.node);
+                            outputs.push({ type: 'plot', request: JSON.parse(output.node.querySelector('.plot-container').dataset.request) });
+                        } else outputs.push(output);
+                    }
+                    return { status: result.status, outputs, error: result.error?.message };
+                },
                 viewer,
                 async timeoutAndRecover() {
                     const session = await executor.createSession({});

@@ -1,6 +1,2 @@
-/** Register `<markdown-document>` as an explicit browser side effect. */
-import { defineMarkdownDocumentElement } from './components/markdown-document/markdown-document.component';
-
-defineMarkdownDocumentElement();
-
-export * from './markdown-component';
+/** Compatibility delegation to the single package implementation. */
+export * from 'mathjslab-markdown/component/register';
