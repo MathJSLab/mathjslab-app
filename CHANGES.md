@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.14.0
+
+- Refresh supporting dependencies, including DOMPurify 3.4.17, Marked 18.1.1, Vega-Lite 6.5.0 and TypeScript ESLint 8.71.2.
+
+- Adopt published mathjslab ^2.9.0 and mathjslab-markdown ^0.2.0.
+- Integrate Markdown statement suppression, diagnostic codes and resource
+  cleanup from the reusable package.
+- Expose the core 2.9 statistical selectors, weighted variance/standard
+  deviation and paired mean outputs through the existing interpreter and Worker
+  adapters.
+- Retain native plotting, session-scoped callbacks and the public runtime
+  integration; update the runtime compatibility guide.
+
 ## 1.13.0
 
 - Adopt mathjslab 2.8.1 and mathjslab-markdown 0.1.1 through public package

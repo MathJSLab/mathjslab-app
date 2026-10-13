@@ -51,8 +51,8 @@ terminam em erro ou cancelamento.
 
 ## Verificação reproduzível
 
-A preparação 1.13.0 usa as dependências públicas `mathjslab ^2.8.1` e
-`mathjslab-markdown ^0.1.1`. Os checks devem executar com os pacotes instalados
+A preparação 1.14.0 usa as dependências públicas `mathjslab ^2.9.0` e
+`mathjslab-markdown ^0.2.0`. Os checks devem executar com os pacotes instalados
 em `node_modules`, incluindo seus bundles e declarações, sem exigir junctions
 para os repositórios irmãos.
 
