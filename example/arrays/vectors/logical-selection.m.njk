@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Logical selection",
+            "es": "Selección lógica",
+            "pt": "Seleção lógica"
+        },
+        "goal": {
+            "en": "Select measurements above a threshold using a logical mask.",
+            "es": "Seleccionar mediciones por encima de un umbral con una máscara lógica.",
+            "pt": "Selecionar medições acima de um limite com uma máscara lógica."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+measurements = [12,7,15,9,18]
+mask = measurements >= 12
+selected = measurements(mask)
+
+% {{ comments.check[lang] }}
+example_check = all(selected == [12,15,18]) && sum(mask) == 3

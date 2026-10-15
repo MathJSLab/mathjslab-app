@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "polimeros.md",
+    "comments": {
+        "title": {
+            "en": "Polymers: from unit to chain",
+            "es": "Polímeros: de la unidad a la cadena",
+            "pt": "Polímeros: da unidade à cadeia"
+        },
+        "goal": {
+            "en": "Open “Polymers: from unit to chain” from mathjslab-markdown.",
+            "es": "Abrir «Polímeros: de la unidad a la cadena» de mathjslab-markdown.",
+            "pt": "Abrir “Polímeros: da unidade à cadeia” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/polimeros.md")

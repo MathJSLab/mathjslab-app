@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "geometria-solidos.md",
+    "comments": {
+        "title": {
+            "en": "Tetrahedron",
+            "es": "Tetraedro",
+            "pt": "Tetraedro"
+        },
+        "goal": {
+            "en": "Open “Tetrahedron” from mathjslab-markdown.",
+            "es": "Abrir «Tetraedro» de mathjslab-markdown.",
+            "pt": "Abrir “Tetraedro” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/geometria-solidos.md")

@@ -1,200 +1,247 @@
 import { appEngine } from './appEngine';
 import firstExample from './first-example.json';
 import i18n from './i18n';
+import { exampleLeaves } from './example-manifest.cjs';
+import type { ExampleEntry, ExampleDirectory, ExampleLeaf, LocalizedText } from './ExampleManifest';
 
-/**
- * Localized strings in `example/example.json` can be plain legacy values or
- * per-locale records generated alongside localized example files.
- */
-type LocalizedText = string | Record<string, string>;
-
-/**
- * Single entry from the examples manifest.
- */
-interface ExampleEntry {
-    file: string;
-    caption: LocalizedText;
-    description: LocalizedText;
-}
-/**
- * Callback used to load example source text into the command shell.
- */
 type LoadExampleHandler = (text?: string) => any;
+type DirectoryLevel = { keys: string[]; entry: ExampleDirectory };
 
-/**
- * # Example class
- *
- * This class provides support for example files. It reads the
- * `example/example.json` file with information about the example files, then
- * creates buttons in the Examples panel with listeners to load each file.
- * This class has only one public static async method:
- *
- * `Example.initialize(id, loadHandler)`
- *
- * It loads the examplesRecord, if they are available. The `id` argument is the HTML
- * element id of the example buttons container. The `loadHandler` is the
- * function handler that loads example content in the Shell.
- */
+/** Loads individual examples and browses manifest directories without changing shell content. */
 class Example {
     public readonly baseUrl: string;
     public readonly isFileProtocol: boolean;
     private examplesRecord: Record<string, ExampleEntry> = {};
     private readonly loadHandler: LoadExampleHandler;
     private examplesAvailable = false;
-    private examplesContainer: HTMLElement;
-    private buttons: HTMLButtonElement[] = [];
-    /**
-     * Example constructor
-     */
+    private readonly examplesContainer: HTMLElement;
+    private readonly buttons = new Map<HTMLButtonElement, ExampleEntry>();
+    private leaves: ExampleLeaf[] = [];
+    private readonly menu = document.createElement('div');
+    private readonly status = document.createElement('p');
+    private origin: HTMLButtonElement | undefined;
+    private levels: DirectoryLevel[] = [];
+    private failed = false;
+
     private constructor(id: string, loadHandler: LoadExampleHandler) {
         this.baseUrl = globalThis.location.href.substring(0, globalThis.location.href.lastIndexOf('/') + 1);
         this.isFileProtocol = this.baseUrl.startsWith('file:');
         this.loadHandler = loadHandler;
         this.examplesContainer = document.getElementById(id)!;
+        this.menu.id = `${id}-menu`;
+        this.menu.className = 'example-menu';
+        this.menu.hidden = true;
+        this.menu.setAttribute('role', 'region');
+        this.status.className = 'example-status';
+        this.status.setAttribute('role', 'status');
+        document.addEventListener('click', (event) => {
+            // Rendering the next level detaches the clicked button before this
+            // event reaches document; its original event path still contains the menu.
+            if (this.origin && !event.composedPath().includes(this.menu) && !event.composedPath().includes(this.origin)) this.closeMenu(false);
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && this.origin) {
+                event.preventDefault();
+                this.closeMenu();
+            }
+        });
+        window.addEventListener('resize', () => this.positionMenu());
+        window.addEventListener('scroll', () => this.positionMenu(), true);
     }
-    /**
-     * `examplesRecord` getter.
-     * @returns {Record<string, ExampleEntry>} The `examplesRecord` private property.
-     */
+
     public get examples(): Record<string, ExampleEntry> {
         return this.examplesRecord;
     }
 
-    /**
-     * Get localized manifest text while preserving compatibility with legacy
-     * non-localized example metadata.
-     */
     private localizedText(text: LocalizedText, lang = i18n.locale): string {
-        if (typeof text === 'string') {
-            return text;
-        }
+        if (typeof text === 'string') return text;
         return text[lang] ?? text[i18n.defaultLocale] ?? text[appEngine.config.defaultLanguage!] ?? Object.values(text)[0] ?? '';
     }
 
-    /**
-     * Check whether an example entry points to generated localized files.
-     */
-    private hasLocalizedFile(exampleId: string): boolean {
-        return typeof this.getExample(exampleId).caption === 'object';
+    private setButtonCaption(button: HTMLButtonElement, entry: ExampleEntry): void {
+        button.textContent = this.localizedText(entry.caption);
+        button.title = this.localizedText(entry.description);
     }
 
-    /**
-     * Update one example button caption and tooltip for the current locale.
-     */
-    private setButtonCaption(button: HTMLButtonElement): void {
-        const exampleId = button.id.substring(8);
-        const example = this.getExample(exampleId);
-        button.innerHTML = this.localizedText(example.caption);
-        button.title = this.localizedText(example.description);
+    private exampleUrl(leaf: ExampleLeaf): string {
+        const languagePath = typeof leaf.entry.caption === 'object' ? `${i18n.locale}/` : '';
+        return `${appEngine.config.exampleBaseUrl}example/${languagePath}${leaf.path.split('/').map(encodeURIComponent).join('/')}`;
     }
 
-    /**
-     * Update all example button captions and tooltips for the current locale.
-     */
-    private setButtonCaptions(): void {
-        this.buttons.forEach((button) => {
-            this.setButtonCaption(button);
-        });
-    }
-
-    /**
-     * Build the URL for an example source file in the active locale.
-     */
-    private exampleUrl(exampleId: string): string {
-        const example = this.getExample(exampleId);
-        const languagePath = this.hasLocalizedFile(exampleId) ? `${i18n.locale}/` : '';
-        return `${appEngine.config.exampleBaseUrl}example/${languagePath}${example.file}`;
-    }
-
-    /**
-     * Load an example file into the command shell.
-     */
-    private async loadExample(exampleId: string): Promise<void> {
-        const response = await globalThis.fetch(this.exampleUrl(exampleId));
-        if (!response.ok) {
-            throw new Error('Network response error.');
+    private async loadExample(keys: string[]): Promise<boolean> {
+        try {
+            const leaf = this.leaves.find((item) => JSON.stringify(item.keys) === JSON.stringify(keys));
+            if (!leaf) throw new Error('Unknown example.');
+            const response = await globalThis.fetch(this.exampleUrl(leaf));
+            if (!response.ok) throw new Error('Network response error.');
+            const text = await response.text();
+            this.loadHandler(text);
+            this.failed = false;
+            this.updateStatus();
+            return true;
+        } catch {
+            this.failed = true;
+            this.updateStatus();
+            return false;
         }
-        this.loadHandler(await response.text());
     }
 
-    private getExample(exampleId: string): ExampleEntry {
-        const example = this.examplesRecord[exampleId];
-        if (!example) {
-            throw new Error(`unknown example: ${exampleId}`);
+    private updateStatus(): void {
+        this.status.textContent = this.failed ? i18n.format('exampleBrowser.loadError') : '';
+    }
+
+    private closeMenu(focus = true): void {
+        const origin = this.origin;
+        origin?.setAttribute('aria-expanded', 'false');
+        this.origin = undefined;
+        this.levels = [];
+        this.menu.hidden = true;
+        if (focus) origin?.focus();
+    }
+
+    private positionMenu(): void {
+        if (!this.origin) return;
+        const rect = this.origin.getBoundingClientRect();
+        const width = Math.min(360, Math.max(0, window.innerWidth - 16));
+        this.menu.style.width = `${width}px`;
+        this.menu.style.left = `${Math.max(8, Math.min(rect.left, window.innerWidth - width - 8))}px`;
+        const bottom = Math.max(8, Math.min(rect.bottom, window.innerHeight - 8));
+        const top = Math.max(8, Math.min(rect.top, window.innerHeight - 8));
+        const below = window.innerHeight - bottom - 8;
+        const above = top - 8;
+        const useBelow = below >= Math.min(240, above);
+        this.menu.style.maxHeight = `${Math.max(0, useBelow ? below : above)}px`;
+        this.menu.style.top = `${useBelow ? bottom : Math.max(8, top - this.menu.offsetHeight)}px`;
+    }
+
+    private renderMenu(focus = true): void {
+        const level = this.levels.at(-1);
+        if (!level) return;
+        this.menu.replaceChildren();
+        this.menu.setAttribute('aria-label', this.localizedText(level.entry.caption));
+        const heading = document.createElement('p');
+        heading.className = 'example-menu-path';
+        heading.textContent = this.levels.map((item) => this.localizedText(item.entry.caption)).join(' / ');
+        this.menu.append(heading);
+        if (this.levels.length > 1) {
+            const back = document.createElement('button');
+            back.textContent = i18n.format('exampleBrowser.back');
+            back.addEventListener('click', () => {
+                const previous = this.levels.pop()!;
+                this.renderMenu(false);
+                Array.from(this.menu.querySelectorAll<HTMLButtonElement>('button'))
+                    .find((button) => button.dataset.entryKey === previous.keys.at(-1))
+                    ?.focus();
+            });
+            this.menu.append(back);
         }
-        return example;
+        const list = document.createElement('ul');
+        for (const [key, entry] of Object.entries(level.entry.children)) {
+            const item = document.createElement('li');
+            const button = this.entryButton(entry, [...level.keys, key], false);
+            button.dataset.entryKey = key;
+            item.append(button);
+            list.append(item);
+        }
+        this.menu.append(list);
+        if (!list.childElementCount) {
+            const empty = document.createElement('p');
+            empty.textContent = i18n.format('exampleBrowser.empty');
+            this.menu.append(empty);
+        }
+        this.menu.hidden = false;
+        this.menu.tabIndex = -1;
+        this.positionMenu();
+        if (focus) (this.menu.querySelector<HTMLButtonElement>('button') ?? this.menu).focus();
     }
 
-    /**
-     * Change example button captions without replacing user-edited content in
-     * the textarea or existing prompts.
-     */
+    private entryButton(entry: ExampleEntry, keys: string[], root: boolean): HTMLButtonElement {
+        const button = document.createElement('button');
+        button.type = 'button';
+        this.setButtonCaption(button, entry);
+        if (root) {
+            button.id = `example-${encodeURIComponent(keys[0]!)}`;
+            this.buttons.set(button, entry);
+        }
+        if (entry.directory !== undefined) {
+            button.classList.add('example-directory');
+            if (root) {
+                button.setAttribute('aria-expanded', 'false');
+                button.setAttribute('aria-controls', this.menu.id);
+            }
+            button.addEventListener('click', () => {
+                if (root) {
+                    if (this.origin === button) {
+                        this.closeMenu();
+                        return;
+                    }
+                    this.closeMenu(false);
+                    this.origin = button;
+                    button.setAttribute('aria-expanded', 'true');
+                    this.levels = [{ keys, entry }];
+                } else this.levels.push({ keys, entry });
+                this.renderMenu();
+            });
+        } else {
+            button.addEventListener('click', async () => {
+                button.disabled = true;
+                try {
+                    if (await this.loadExample(keys)) this.closeMenu();
+                } finally {
+                    button.disabled = false;
+                }
+            });
+        }
+        return button;
+    }
+
     public setLanguage(): void {
         if (!this.isFileProtocol && this.examplesAvailable) {
-            this.setButtonCaptions();
+            this.buttons.forEach((entry, button) => this.setButtonCaption(button, entry));
+            const active = document.activeElement as HTMLElement | null;
+            const focusedKey = this.menu.contains(active) ? active?.dataset.entryKey : undefined;
+            const menuFocused = this.menu.contains(active);
+            if (this.origin) {
+                this.renderMenu(false);
+                if (menuFocused) {
+                    const buttons = Array.from(this.menu.querySelectorAll<HTMLButtonElement>('button'));
+                    (buttons.find((button) => button.dataset.entryKey === focusedKey) ?? this.menu).focus();
+                }
+            }
+            this.updateStatus();
         }
     }
 
-    /**
-     * Load `examplesRecord` if examples available.
-     */
     private async load(): Promise<void> {
-        if (!this.examplesContainer) {
-            throw new Error(`undefined Example.examplesContainer property.`);
-        }
-        if (!this.loadHandler) {
-            throw new Error(`undefined Example.loadHandler callback.`);
-        }
+        if (!this.examplesContainer || !this.loadHandler) throw new Error('Examples container and load handler are required.');
         if (!this.isFileProtocol) {
-            await globalThis
-                .fetch(`${appEngine.config.exampleBaseUrl}example/example.json`)
-                .then((response) => {
-                    if (!response.ok) {
-                        throw new Error('Examples unavailable.');
-                    }
-                    return response.json();
-                })
-                .then((data) => {
-                    this.examplesRecord = data;
-                    this.examplesAvailable = true;
-                })
-                .catch((_error) => {
-                    this.examplesAvailable = false;
-                });
+            try {
+                const response = await globalThis.fetch(`${appEngine.config.exampleBaseUrl}example/example.json`);
+                if (!response.ok) throw new Error('Examples unavailable.');
+                const data = await response.json();
+                this.leaves = exampleLeaves(data);
+                this.examplesRecord = data;
+                this.examplesAvailable = true;
+            } catch {
+                this.examplesAvailable = false;
+            }
         }
         if (this.isFileProtocol || !this.examplesAvailable) {
             this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
-        } else {
-            let first = true;
-            for (const example in this.examplesRecord) {
-                const button = document.createElement('button');
-                this.buttons.push(button);
-                this.examplesContainer.append(button);
-                button.id = 'example-' + example;
-                this.setButtonCaption(button);
-                button.addEventListener('click', async (event: Event): Promise<void> => {
-                    await this.loadExample((event.currentTarget as HTMLButtonElement).id.substring(8));
-                });
-                if (first) {
-                    await this.loadExample(example);
-                    first = false;
-                }
-            }
+            return;
         }
+        for (const [key, entry] of Object.entries(this.examplesRecord)) {
+            this.examplesContainer.append(this.entryButton(entry, [key], true));
+        }
+        this.examplesContainer.append(this.status);
+        document.body.append(this.menu);
+        const first = this.leaves[0];
+        if (!first || !(await this.loadExample(first.keys))) this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
     }
-    /**
-     * ## Example class initialization (instantiation).
-     * @param {string} id
-     * @param {LoadExampleHandler} loadHandler
-     * @returns {Promise<Example>} A promise for a `Example` instance.
-     */
+
     public static async initialize(id: string, loadHandler: LoadExampleHandler): Promise<Example> {
         const example = new Example(id, loadHandler);
         await example.load();
-        /*
-         * The examples panel lives for the lifetime of the app, so this listener
-         * intentionally follows the singleton instead of being detached later.
-         */
         i18n.addEventListener('languagechange', () => example.setLanguage());
         return example;
     }

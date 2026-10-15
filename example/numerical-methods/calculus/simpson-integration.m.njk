@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Composite Simpson rule",
+            "es": "Regla de Simpson compuesta",
+            "pt": "Regra de Simpson composta"
+        },
+        "goal": {
+            "en": "Integrate sine on zero to pi with forty intervals and alternating Simpson weights.",
+            "es": "Integrar seno de cero a pi con cuarenta intervalos y pesos alternos de Simpson.",
+            "pt": "Integrar seno de zero a pi com quarenta intervalos e pesos alternados de Simpson."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+intervals = 40
+x = linspace(0,pi,intervals+1);
+y = sin(x);
+width = pi/intervals;
+odd_sum = sum(y(2:2:end-1));
+even_sum = sum(y(3:2:end-2));
+area = width*(y(1)+y(end)+4*odd_sum+2*even_sum)/3
+absolute_error = abs(area-2)
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 1e-6

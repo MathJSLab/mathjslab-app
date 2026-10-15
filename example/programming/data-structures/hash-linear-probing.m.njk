@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Hash table with linear probing",
+            "es": "Tabla hash con sondeo lineal",
+            "pt": "Tabela hash com sondagem linear"
+        },
+        "goal": {
+            "en": "Resolve colliding integer keys by advancing to the next free slot.",
+            "es": "Resolver claves enteras en colisión avanzando al siguiente espacio libre.",
+            "pt": "Resolver chaves inteiras em colisão avançando ao próximo espaço livre."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+keys = [1,6,11]; table_keys = zeros(1,5); occupied_values = zeros(1,5);
+for item_index = 1:3
+ slot_index = mod(keys(item_index),5)+1;
+ while occupied_values(slot_index)
+  slot_index = mod(slot_index,5)+1;
+ end
+ table_keys(slot_index) = keys(item_index); occupied_values(slot_index) = 1;
+end
+
+% {{ comments.check[lang] }}
+example_check = all(table_keys == [0,1,6,11,0]) && sum(occupied_values) == 3

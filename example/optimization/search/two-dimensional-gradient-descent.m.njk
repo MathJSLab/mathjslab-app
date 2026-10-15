@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Two-dimensional gradient descent",
+            "es": "Descenso de gradiente bidimensional",
+            "pt": "Descida de gradiente bidimensional"
+        },
+        "goal": {
+            "en": "Minimize a positive quadratic bowl with a fixed stable gradient step.",
+            "es": "Minimizar una función cuadrática positiva con un paso de gradiente fijo y estable.",
+            "pt": "Minimizar uma função quadrática positiva com passo de gradiente fixo e estável."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = 0;
+y = 3;
+learning_rate = 0.1;
+for iteration = 1:80
+  gradient_x = 2*(x-2);
+  gradient_y = 4*(y+1);
+  x = x-learning_rate*gradient_x;
+  y = y-learning_rate*gradient_y;
+end
+point = [x,y]
+objective_value = (x-2)^2+2*(y+1)^2
+
+% {{ comments.check[lang] }}
+example_check = max(abs(point-[2,-1])) < 1e-6 && objective_value < 1e-10

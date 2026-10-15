@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Four-sample circular convolution",
+            "es": "Convolución circular de cuatro muestras",
+            "pt": "Convolução circular de quatro amostras"
+        },
+        "goal": {
+            "en": "Wrap indices modulo four to calculate circular rather than full linear convolution.",
+            "es": "Envolver índices módulo cuatro para calcular convolución circular en lugar de lineal completa.",
+            "pt": "Circular índices módulo quatro para calcular convolução circular em vez de linear completa."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [1,2,3,4];
+kernel_values = [1,0,1,0];
+output_values = zeros(1,4);
+for output_index = 0:3
+  for input_index = 0:3
+    kernel_index = mod(output_index-input_index+4,4)+1;
+    output_values(output_index+1) = output_values(output_index+1)+samples(input_index+1)*kernel_values(kernel_index);
+  end
+end
+output_values
+
+% {{ comments.check[lang] }}
+example_check = all(output_values == [4,6,4,6])

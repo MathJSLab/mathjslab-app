@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Polar complex number",
+            "es": "Número complejo polar",
+            "pt": "Número complexo polar"
+        },
+        "goal": {
+            "en": "Construct a complex number from magnitude and angle using sine and cosine.",
+            "es": "Construir un número complejo con magnitud y ángulo usando seno y coseno.",
+            "pt": "Construir um número complexo com módulo e ângulo usando seno e cosseno."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+radius = 4
+phase_radians = pi/3
+z = radius*(cos(phase_radians)+1i*sin(phase_radians))
+recovered_radius = abs(z)
+
+% {{ comments.check[lang] }}
+example_check = abs(recovered_radius-radius) < 1e-10 && abs(real(z)-2) < 1e-10

@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Insertion sort",
+            "es": "Ordenación por inserción",
+            "pt": "Ordenação por inserção"
+        },
+        "goal": {
+            "en": "Sort a short vector by inserting each value into the already sorted prefix.",
+            "es": "Ordenar un vector corto insertando cada valor en el prefijo ya ordenado.",
+            "pt": "Ordenar um vetor curto inserindo cada valor no prefixo já ordenado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [7,2,5,1,4];
+for k = 2:numel(values)
+  selected_value = values(k);
+  position = k-1;
+  while position >= 1
+    if values(position) <= selected_value
+      break;
+    end
+    values(position+1) = values(position);
+    position = position-1;
+  end
+  values(position+1) = selected_value;
+end
+values
+
+% {{ comments.check[lang] }}
+example_check = all(values == [1,2,4,5,7])

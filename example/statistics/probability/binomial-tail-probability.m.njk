@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Binomial tail probability",
+            "es": "Probabilidad de cola binomial",
+            "pt": "Probabilidade de cauda binomial"
+        },
+        "goal": {
+            "en": "Sum probabilities for at least three successes in five fair trials.",
+            "es": "Sumar probabilidades de al menos tres éxitos en cinco ensayos equiprobables.",
+            "pt": "Somar probabilidades de pelo menos três sucessos em cinco ensaios equiprováveis."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+trial_count = 5
+tail_probability = 0;
+for success_count = 3:5
+  ways = factorial(trial_count)/(factorial(success_count)*factorial(trial_count-success_count));
+  tail_probability = tail_probability+ways/2^trial_count;
+end
+tail_probability
+
+% {{ comments.check[lang] }}
+example_check = abs(tail_probability-0.5) < 1e-10

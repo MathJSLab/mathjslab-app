@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Trimmed mean",
+            "es": "Media recortada",
+            "pt": "Média aparada"
+        },
+        "goal": {
+            "en": "Remove one value at each end of a sorted sample before averaging.",
+            "es": "Eliminar un valor de cada extremo de una muestra ordenada antes de promediar.",
+            "pt": "Remover um valor de cada extremo de uma amostra ordenada antes de calcular a média."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [1,2,3,4,100]
+ordered = sort(data)
+trimmed_average = mean(ordered(2:end-1))
+ordinary_average = mean(data)
+
+% {{ comments.check[lang] }}
+example_check = trimmed_average == 3 && ordinary_average == 22

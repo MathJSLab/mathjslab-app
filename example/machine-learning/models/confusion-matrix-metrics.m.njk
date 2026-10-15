@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Confusion matrix metrics",
+            "es": "Métricas de matriz de confusión",
+            "pt": "Métricas da matriz de confusão"
+        },
+        "goal": {
+            "en": "Calculate accuracy, precision and recall from binary predictions.",
+            "es": "Calcular exactitud, precisión y exhaustividad con predicciones binarias.",
+            "pt": "Calcular acurácia, precisão e revocação com previsões binárias."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+actual_values = [1,1,1,0,0,0]; predicted_values = [1,0,1,1,0,0];
+tp = sum(actual_values == 1 & predicted_values == 1); fp = sum(actual_values == 0 & predicted_values == 1);
+fn = sum(actual_values == 1 & predicted_values == 0); tn = sum(actual_values == 0 & predicted_values == 0);
+accuracy_value = (tp+tn)/6; precision_value = tp/(tp+fp); recall_value = tp/(tp+fn);
+
+% {{ comments.check[lang] }}
+example_check = abs(accuracy_value-2/3) < 1e-10 && abs(precision_value-2/3) < 1e-10 && abs(recall_value-2/3) < 1e-10

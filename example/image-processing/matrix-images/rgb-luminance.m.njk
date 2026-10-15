@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "RGB luminance",
+            "es": "Luminancia RGB",
+            "pt": "Luminância RGB"
+        },
+        "goal": {
+            "en": "Combine synthetic red, green and blue planes with luminance weights.",
+            "es": "Combinar planos sintéticos rojo, verde y azul con pesos de luminancia.",
+            "pt": "Combinar planos sintéticos vermelho, verde e azul com pesos de luminância."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+red_values = [1,0;0,1]; green_values = [0,1;0,1]; blue_values = [0,0;1,1];
+gray_values = 0.2126*red_values+0.7152*green_values+0.0722*blue_values;
+
+% {{ comments.check[lang] }}
+example_check = abs(gray_values(2,2)-1) < 1e-10 && abs(gray_values(1,2)-0.7152) < 1e-10

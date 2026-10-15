@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Measurement record",
+            "es": "Registro de mediciones",
+            "pt": "Registro de medições"
+        },
+        "goal": {
+            "en": "Store measurements and their summary in named structure fields.",
+            "es": "Guardar mediciones y su resumen en campos de una estructura.",
+            "pt": "Guardar medições e seu resumo em campos de uma estrutura."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+measurement.values = [12,14,16]
+measurement.average = mean(measurement.values)
+measurement.count = numel(measurement.values)
+
+% {{ comments.check[lang] }}
+example_check = measurement.average == 14 && measurement.count == 3

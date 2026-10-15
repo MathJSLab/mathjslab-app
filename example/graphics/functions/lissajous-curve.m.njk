@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Lissajous curve",
+            "es": "Curva de Lissajous",
+            "pt": "Curva de Lissajous"
+        },
+        "goal": {
+            "en": "Draw a parametric curve using two sine waves with different frequencies.",
+            "es": "Dibujar una curva paramétrica con dos senos de frecuencias distintas.",
+            "pt": "Traçar uma curva paramétrica com dois senos de frequências diferentes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+t = linspace(0,2*pi,101);
+x = sin(2*t);
+y = sin(3*t);
+plot(x,y)
+
+% {{ comments.check[lang] }}
+example_check = numel(x) == 101 && abs(x(1)-x(end)) < 1e-10 && abs(y(1)-y(end)) < 1e-10

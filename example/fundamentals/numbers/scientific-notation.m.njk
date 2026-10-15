@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Scientific notation",
+            "es": "Notación científica",
+            "pt": "Notação científica"
+        },
+        "goal": {
+            "en": "Use powers of ten to compare small and large quantities.",
+            "es": "Usar potencias de diez para comparar cantidades pequeñas y grandes.",
+            "pt": "Usar potências de dez para comparar quantidades pequenas e grandes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+small_value = 2.5e-3
+large_value = 4e6
+product_value = small_value*large_value
+ratio_value = large_value/(4*10^6)
+
+% {{ comments.check[lang] }}
+example_check = product_value == 10000 && ratio_value == 1

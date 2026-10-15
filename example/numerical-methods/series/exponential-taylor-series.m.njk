@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Exponential Taylor series",
+            "es": "Serie de Taylor exponencial",
+            "pt": "Série de Taylor exponencial"
+        },
+        "goal": {
+            "en": "Accumulate thirteen terms of the exponential series using a recurrence for each term.",
+            "es": "Acumular trece términos de la serie exponencial con una recurrencia para cada término.",
+            "pt": "Acumular treze termos da série exponencial usando uma recorrência para cada termo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = 1;
+term = 1;
+approximation = 1;
+for k = 1:12
+  term = term*x/k;
+  approximation = approximation+term;
+end
+approximation
+absolute_error = abs(approximation-exp(x))
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 1e-8

@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Newton root search",
+            "es": "Búsqueda de raíz con Newton",
+            "pt": "Busca de raiz com Newton"
+        },
+        "goal": {
+            "en": "Apply six Newton iterations to a positive initial guess for the square root of two.",
+            "es": "Aplicar seis iteraciones de Newton a una aproximación inicial positiva de la raíz de dos.",
+            "pt": "Aplicar seis iterações de Newton a uma estimativa inicial positiva da raiz de dois."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+estimate = 1;
+for iteration = 1:6
+  function_value = estimate^2-2;
+  derivative = 2*estimate;
+  estimate = estimate-function_value/derivative;
+end
+estimate
+residual = estimate^2-2
+
+% {{ comments.check[lang] }}
+example_check = abs(residual) < 1e-10

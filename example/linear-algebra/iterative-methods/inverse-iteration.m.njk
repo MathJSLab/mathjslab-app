@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Inverse iteration",
+            "es": "Iteración inversa",
+            "pt": "Iteração inversa"
+        },
+        "goal": {
+            "en": "Normalize repeated linear solves to find the smallest eigenvalue.",
+            "es": "Normalizar soluciones lineales repetidas para hallar el menor autovalor.",
+            "pt": "Normalizar soluções lineares repetidas para encontrar o menor autovalor."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [2,0;0,5]; v = [1;1];
+for step_index = 1:18
+ w = A\v; v = w/norm(w);
+end
+lambda_value = sum(sum(v.'*A*v))
+
+% {{ comments.check[lang] }}
+example_check = abs(lambda_value-2) < 1e-10

@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Kinetic energy",
+            "es": "Energía cinética",
+            "pt": "Energia cinética"
+        },
+        "goal": {
+            "en": "Evaluate kinetic energy at several speeds in metres per second.",
+            "es": "Evaluar energía cinética a varias velocidades en metros por segundo.",
+            "pt": "Avaliar energia cinética em várias velocidades em metros por segundo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+mass_kg = 2
+speed_m_per_s = [0,3,6]
+energy_joules = 0.5*mass_kg*speed_m_per_s.^2
+
+% {{ comments.check[lang] }}
+example_check = all(energy_joules == [0,9,36])

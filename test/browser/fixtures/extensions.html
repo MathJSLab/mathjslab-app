@@ -29,7 +29,14 @@
                 const viewer = document.createElement('markdown-document');
                 viewer.setAttribute('locale', 'en');
                 viewer.setAttribute('security', 'sanitized');
-                viewer.engine = createEducationalMarkdownEngine({ features, securityMode: 'sanitized', allowedCapabilities: ['audio', 'interactive', 'network', 'wasm', 'webgl'] });
+                const online = parameters.get('maps') === 'online';
+                viewer.engine = createEducationalMarkdownEngine({
+                    features,
+                    mapOptions: online ? { defaultProvider: 'openstreetmap' } : undefined,
+                    securityMode: 'sanitized',
+                    resourcePolicy: online ? { allowedOrigins: [location.origin, 'https://tile.openstreetmap.org', 'https://basemaps.cartocdn.com'] } : undefined,
+                    allowedCapabilities: ['audio', 'interactive', 'network', 'wasm', 'webgl'],
+                });
                 viewer.src = source;
                 document.body.append(viewer);
             }

@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Lattice path counts",
+            "es": "Conteos de caminos en retícula",
+            "pt": "Contagens de caminhos em retícula"
+        },
+        "goal": {
+            "en": "Count monotone paths across a three-by-three move grid using dynamic programming.",
+            "es": "Contar caminos monótonos con tres pasos por eje mediante programación dinámica.",
+            "pt": "Contar caminhos monótonos com três passos por eixo por programação dinâmica."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+counts = ones(4,4);
+for row_index = 2:4
+  for column_index = 2:4
+    counts(row_index,column_index) = counts(row_index-1,column_index)+counts(row_index,column_index-1);
+  end
+end
+path_count = counts(4,4)
+
+% {{ comments.check[lang] }}
+example_check = path_count == 20

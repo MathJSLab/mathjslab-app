@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Absolute value and sign",
+            "es": "Valor absoluto y signo",
+            "pt": "Valor absoluto e sinal"
+        },
+        "goal": {
+            "en": "Separate magnitudes from signs and reconstruct the original values.",
+            "es": "Separar magnitudes de signos y reconstruir los valores originales.",
+            "pt": "Separar magnitudes dos sinais e reconstruir os valores originais."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [-8, 0, 5]
+magnitudes = abs(values)
+signs = sign(values)
+reconstructed = magnitudes .* signs
+
+% {{ comments.check[lang] }}
+example_check = all(reconstructed == values) && all(signs == [-1,0,1])

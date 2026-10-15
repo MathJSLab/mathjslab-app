@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Centered derivative",
+            "es": "Derivada centrada",
+            "pt": "Derivada centrada"
+        },
+        "goal": {
+            "en": "Approximate the derivative of sine with a centered finite difference.",
+            "es": "Aproximar la derivada del seno con una diferencia finita centrada.",
+            "pt": "Aproximar a derivada do seno com uma diferença finita centrada."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = pi/4
+step = 0.0001
+derivative = (sin(x+step)-sin(x-step))/(2*step)
+exact_derivative = cos(x)
+
+% {{ comments.check[lang] }}
+example_check = abs(derivative-exact_derivative) < 1e-7

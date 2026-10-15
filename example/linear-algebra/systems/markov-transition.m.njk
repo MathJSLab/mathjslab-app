@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Markov transition",
+            "es": "Transición de Markov",
+            "pt": "Transição de Markov"
+        },
+        "goal": {
+            "en": "Apply a two-state transition matrix repeatedly and conserve total probability.",
+            "es": "Aplicar repetidamente una matriz de transición de dos estados y conservar la probabilidad total.",
+            "pt": "Aplicar repetidamente uma matriz de transição de dois estados e preservar a probabilidade total."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+transition = [0.8,0.3;0.2,0.7]
+probabilities = [1;0]
+for step = 1:30
+  probabilities = transition*probabilities;
+end
+stationary = [0.6;0.4]
+
+% {{ comments.check[lang] }}
+example_check = abs(sum(probabilities)-1) < 1e-10 && max(abs(probabilities-stationary)) < 1e-8

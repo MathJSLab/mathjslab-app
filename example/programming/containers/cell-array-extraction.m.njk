@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Cell-array extraction",
+            "es": "Extracción de celdas",
+            "pt": "Extração de células"
+        },
+        "goal": {
+            "en": "Retrieve numeric values of different shapes from a cell array with braces.",
+            "es": "Recuperar valores numéricos de distintas formas de un arreglo de celdas con llaves.",
+            "pt": "Recuperar valores numéricos de formas diferentes de um array de células com chaves."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+cells = {[1,2,3],10,[4;5]}
+first_values = cells{1}
+last_values = cells{3}
+total = sum(first_values)+cells{2}+sum(last_values)
+
+% {{ comments.check[lang] }}
+example_check = total == 25 && all(size(last_values) == [2,1])

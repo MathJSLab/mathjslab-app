@@ -1,0 +1,46 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Dependent area property",
+            "es": "Propiedad de área dependiente",
+            "pt": "Propriedade de área dependente"
+        },
+        "goal": {
+            "en": "Compute an area on property access and reflect subsequent width changes.",
+            "es": "Calcular área al acceder a la propiedad y reflejar cambios posteriores de ancho.",
+            "pt": "Calcular área no acesso à propriedade e refletir alterações posteriores da largura."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef DependentRectangle
+  properties
+    Width = 2;
+    Height = 3;
+  end
+  properties (Dependent)
+    Area
+  end
+  methods
+    function value = get.Area(obj)
+      value = obj.Width*obj.Height;
+    end
+  end
+end
+rectangle = DependentRectangle();
+initial_area = rectangle.Area;
+rectangle.Width = 5;
+updated_area = rectangle.Area
+
+% {{ comments.check[lang] }}
+example_check = initial_area == 6 && updated_area == 15

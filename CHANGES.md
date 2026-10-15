@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.15.0
+
+- Add recursive example directories and subdirectories, with localized menus,
+  keyboard navigation, focus management, empty states and loading errors.
+  Keep menus within the viewport without horizontal scrolling and preserve
+  editor content when browsing folders or changing language.
+- Expand the catalogue to 430 Nunjucks templates in English, Spanish and
+  Portuguese: reorganize the original 39 examples, add 340 numerical and
+  programming exercises, and provide 51 Markdown document launchers.
+  Include reference URLs for adapted examples and retain Bhaskara as the
+  initial example.
+- Add a Markdown category covering the package's 50 teaching notes and
+  localized lesson index, using raw GitHub URLs in the selected language.
+- Validate the recursive manifest, paths and required files before asset
+  cleanup; generate localized and legacy paths and select the same first
+  example in the build and application.
+- Fix Markdown URL output being overwritten by the evaluator's success state,
+  preserving the document panel background after evaluation. Apply document
+  styling to Markdown batch output and correct the returned URL AST node.
+- Adopt mathjslab-markdown ^0.3.2, Mermaid ^12.2.0, Playwright 1.64.1 and
+  eslint-plugin-prettier ^5.5.7. Configure the package's map provider selector
+  with OpenStreetMap as the application default.
+- Preserve inline package styles for Shadow DOM when using locally linked
+  packages and add a helper to synchronize matching local Markdown builds.
+- Consolidate application documentation in English, remove obsolete guides
+  and delegate reusable Markdown engine documentation to mathjslab-markdown.
+  Announce the expanded example catalogue in all three project READMEs.
+- Remove the unused standalone Markdown example page and consolidate test
+  infrastructure around the installed packages and a shared browser server.
+  Store generated test artifacts under test/result/.
+- Add recursive catalogue, localized execution, asset safety, documentation
+  link and browser regression checks; include application builds and type
+  checks in the test and CI workflows.
+
 ## 1.14.0
 
 - Refresh supporting dependencies, including DOMPurify 3.4.17, Marked 18.1.1, Vega-Lite 6.5.0 and TypeScript ESLint 8.71.2.

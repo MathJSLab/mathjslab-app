@@ -1,0 +1,46 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Overridden method dispatch",
+            "es": "Despacho de método sobrescrito",
+            "pt": "Despacho de método sobrescrito"
+        },
+        "goal": {
+            "en": "Compare base and child results when the child overrides a method.",
+            "es": "Comparar resultados de base e hija cuando la hija sobrescribe un método.",
+            "pt": "Comparar resultados da base e derivada quando a derivada sobrescreve um método."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef BaseRate
+  methods
+    function value = multiplier(obj)
+      value = 2;
+    end
+  end
+end
+classdef SpecialRate < BaseRate
+  methods
+    function value = multiplier(obj)
+      value = 3;
+    end
+  end
+end
+base = BaseRate();
+special = SpecialRate();
+base_value = base.multiplier()
+special_value = special.multiplier()
+
+% {{ comments.check[lang] }}
+example_check = base_value == 2 && special_value == 3

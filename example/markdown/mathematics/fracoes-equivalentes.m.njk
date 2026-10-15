@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "fracoes-equivalentes.md",
+    "comments": {
+        "title": {
+            "en": "Equivalent fractions and addition",
+            "es": "Fracciones equivalentes y suma",
+            "pt": "Frações equivalentes e adição"
+        },
+        "goal": {
+            "en": "Open “Equivalent fractions and addition” from mathjslab-markdown.",
+            "es": "Abrir «Fracciones equivalentes y suma» de mathjslab-markdown.",
+            "pt": "Abrir “Frações equivalentes e adição” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/fracoes-equivalentes.md")

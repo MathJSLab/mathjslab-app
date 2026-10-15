@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Ideal gas pressure",
+            "es": "Presión de gas ideal",
+            "pt": "Pressão de gás ideal"
+        },
+        "goal": {
+            "en": "Calculate pressure from the ideal gas relation with SI units and positive temperature.",
+            "es": "Calcular presión con la relación de gas ideal usando unidades SI y temperatura positiva.",
+            "pt": "Calcular pressão pela relação de gás ideal com unidades SI e temperatura positiva."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+moles = 1
+gas_constant = 8.314
+temperature_kelvin = 300
+volume_m3 = 0.025
+pressure_pa = moles*gas_constant*temperature_kelvin/volume_m3
+recovered_temperature = pressure_pa*volume_m3/(moles*gas_constant)
+
+% {{ comments.check[lang] }}
+example_check = abs(pressure_pa-99768) < 1e-8 && abs(recovered_temperature-temperature_kelvin) < 1e-10

@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Diagonal preconditioning",
+            "es": "Precondicionamiento diagonal",
+            "pt": "Pré-condicionamento diagonal"
+        },
+        "goal": {
+            "en": "Rescale equations before a fixed-point iteration.",
+            "es": "Reescalar ecuaciones antes de una iteración de punto fijo.",
+            "pt": "Reescalar equações antes de uma iteração de ponto fixo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [100,2;2,4]; b = [102;6]; D = [100,0;0,4]; x = zeros(2,1);
+scaled_matrix = D\A;
+for step_index = 1:12
+ x = x+D\(b-A*x);
+end
+
+% {{ comments.check[lang] }}
+example_check = max(abs(x-[1;1])) < 1e-10 && abs(scaled_matrix(1,1)-1) < 1e-10

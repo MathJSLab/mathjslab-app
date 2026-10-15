@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "metano-tetraedrico.md",
+    "comments": {
+        "title": {
+            "en": "methane in SDF",
+            "es": "metano en SDF",
+            "pt": "metano em SDF"
+        },
+        "goal": {
+            "en": "Open “methane in SDF” from mathjslab-markdown.",
+            "es": "Abrir «metano en SDF» de mathjslab-markdown.",
+            "pt": "Abrir “metano em SDF” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/metano-tetraedrico.md")

@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Heun decay steps",
+            "es": "Pasos de Heun para decaimiento",
+            "pt": "Passos de Heun para decaimento"
+        },
+        "goal": {
+            "en": "Average an Euler prediction slope and the initial slope in a decay model.",
+            "es": "Promediar la pendiente de una predicción de Euler y la inicial en un modelo de decaimiento.",
+            "pt": "Calcular a média da inclinação prevista por Euler e da inicial num modelo de decaimento."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+step_count = 20;
+dt = 1/step_count;
+y = 1;
+for k = 1:step_count
+  initial_slope = -y;
+  predicted_y = y+dt*initial_slope;
+  predicted_slope = -predicted_y;
+  y = y+dt*(initial_slope+predicted_slope)/2;
+end
+final_value = y
+absolute_error = abs(y-exp(-1))
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 0.0002

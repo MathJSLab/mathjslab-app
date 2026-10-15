@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Cell-array reduction",
+            "es": "Reducción de celdas",
+            "pt": "Redução de células"
+        },
+        "goal": {
+            "en": "Sum each numeric cell separately before combining differently sized arrays.",
+            "es": "Sumar cada celda numérica por separado antes de combinar arreglos de distintos tamaños.",
+            "pt": "Somar cada célula numérica separadamente antes de combinar arrays de tamanhos diferentes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+cells = {[2,4],[1,3,5],7};
+subtotals = zeros(1,3);
+for k = 1:3
+  subtotals(k) = sum(cells{k});
+end
+subtotals
+total = sum(subtotals)
+
+% {{ comments.check[lang] }}
+example_check = all(subtotals == [6,9,7]) && total == 22

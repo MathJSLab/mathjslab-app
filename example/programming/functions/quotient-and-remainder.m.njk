@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Quotient and remainder",
+            "es": "Cociente y resto",
+            "pt": "Quociente e resto"
+        },
+        "goal": {
+            "en": "Return an integer quotient and remainder from one function call.",
+            "es": "Devolver cociente entero y resto desde una llamada de función.",
+            "pt": "Retornar quociente inteiro e resto numa chamada de função."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+function [quotient,remainder] = divide_integer(value,divisor)
+  quotient = floor(value/divisor);
+  remainder = value-quotient*divisor;
+end
+[q,r] = divide_integer(47,6)
+
+% {{ comments.check[lang] }}
+example_check = q == 7 && r == 5 && 6*q+r == 47

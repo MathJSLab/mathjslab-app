@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "crescimento-composto.md",
+    "comments": {
+        "title": {
+            "en": "Compound growth: a multiplicative model",
+            "es": "Crecimiento compuesto: un modelo multiplicativo",
+            "pt": "Crescimento composto: um modelo multiplicativo"
+        },
+        "goal": {
+            "en": "Open “Compound growth: a multiplicative model” from mathjslab-markdown.",
+            "es": "Abrir «Crecimiento compuesto: un modelo multiplicativo» de mathjslab-markdown.",
+            "pt": "Abrir “Crescimento composto: um modelo multiplicativo” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/crescimento-composto.md")

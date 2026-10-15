@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Pascal triangle matrix",
+            "es": "Matriz del triángulo de Pascal",
+            "pt": "Matriz do triângulo de Pascal"
+        },
+        "goal": {
+            "en": "Build seven rows of binomial coefficients by adding adjacent entries.",
+            "es": "Construir siete filas de coeficientes binomiales sumando entradas adyacentes.",
+            "pt": "Construir sete linhas de coeficientes binomiais somando entradas adjacentes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+triangle = zeros(7,7);
+triangle(:,1) = 1;
+for row_index = 2:7
+  for column_index = 2:row_index
+    triangle(row_index,column_index) = triangle(row_index-1,column_index-1)+triangle(row_index-1,column_index);
+  end
+end
+last_row = triangle(7,:)
+
+% {{ comments.check[lang] }}
+example_check = all(last_row == [1,6,15,20,15,6,1]) && sum(last_row) == 64

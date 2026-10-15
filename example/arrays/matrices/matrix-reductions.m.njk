@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Row and column totals",
+            "es": "Totales por filas y columnas",
+            "pt": "Totais por linhas e colunas"
+        },
+        "goal": {
+            "en": "Compare row totals, column totals and the total of all entries.",
+            "es": "Comparar totales por filas, columnas y de todas las entradas.",
+            "pt": "Comparar totais por linhas, colunas e de todos os elementos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [1,2,3;4,5,6]
+column_totals = sum(A,1)
+row_totals = sum(A,2)
+grand_total = sum(column_totals)
+
+% {{ comments.check[lang] }}
+example_check = all(column_totals == [5,7,9]) && all(row_totals == [6;15]) && grand_total == 21

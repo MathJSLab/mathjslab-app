@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "nomenclatura-organica.md",
+    "comments": {
+        "title": {
+            "en": "Organic nomenclature",
+            "es": "Nomenclatura orgánica",
+            "pt": "Nomenclatura orgânica"
+        },
+        "goal": {
+            "en": "Open “Organic nomenclature” from mathjslab-markdown.",
+            "es": "Abrir «Nomenclatura orgánica» de mathjslab-markdown.",
+            "pt": "Abrir “Nomenclatura orgânica” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/nomenclatura-organica.md")

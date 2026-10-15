@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Downsample a waveform",
+            "es": "Reducir muestras de una onda",
+            "pt": "Reduzir amostras de uma onda"
+        },
+        "goal": {
+            "en": "Keep every second sample of a three-hertz sine, from sixteen to eight samples per second.",
+            "es": "Conservar cada segunda muestra de un seno de tres hercios, de dieciséis a ocho muestras por segundo.",
+            "pt": "Preservar uma a cada duas amostras de um seno de três hertz, de dezesseis para oito amostras por segundo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+times = (0:15)/16;
+samples = sin(2*pi*3*times);
+reduced_times = times(1:2:end);
+reduced_samples = samples(1:2:end);
+expected_samples = sin(2*pi*3*((0:7)/8));
+
+% {{ comments.check[lang] }}
+example_check = numel(reduced_samples) == 8 && max(abs(reduced_samples-expected_samples)) < 1e-10

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "bacia-hidrografica.md",
+    "comments": {
+        "title": {
+            "en": "Drainage basins: area and drainage network",
+            "es": "Cuencas hidrográficas: área y red de drenaje",
+            "pt": "Bacias hidrográficas: área e rede de drenagem"
+        },
+        "goal": {
+            "en": "Open “Drainage basins: area and drainage network” from mathjslab-markdown.",
+            "es": "Abrir «Cuencas hidrográficas: área y red de drenaje» de mathjslab-markdown.",
+            "pt": "Abrir “Bacias hidrográficas: área e rede de drenagem” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/bacia-hidrografica.md")

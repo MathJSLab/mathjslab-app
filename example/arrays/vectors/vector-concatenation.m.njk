@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Join vectors",
+            "es": "Unir vectores",
+            "pt": "Unir vetores"
+        },
+        "goal": {
+            "en": "Concatenate two vectors horizontally and vertically.",
+            "es": "Concatenar dos vectores horizontal y verticalmente.",
+            "pt": "Concatenar dois vetores horizontal e verticalmente."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+a = [1,2,3]
+b = [4,5,6]
+joined = [a,b]
+stacked = [a;b]
+
+% {{ comments.check[lang] }}
+example_check = all(joined == 1:6) && all(size(stacked) == [2,3])

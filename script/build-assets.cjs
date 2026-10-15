@@ -25,72 +25,9 @@ try {
     images.forEach((image) => {
         fs.copyFileSync(path.resolve(__dirname, '..', 'images', image), path.resolve(__dirname, '..', 'dist', 'images', image));
     });
-    // Create dist/example directory.
-    directory = path.resolve(__dirname, '..', 'dist', 'example');
-    if (!fs.existsSync(directory)) {
-        fs.mkdirSync(directory);
-    }
-    // Copy example/example.json to dist/example/example.json
-    fs.copyFileSync(path.resolve(__dirname, '..', 'example', 'example.json'), path.resolve(__dirname, '..', 'dist', 'example', 'example.json'));
-    // Copy files in example directory to dist/example. Create first-example.json.
-    const example = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'example', 'example.json')));
-    const exampleFiles = new Set();
-    for (let name in example) {
-        if (typeof example[name].caption === 'object') {
-            Object.keys(example[name].caption).forEach((lang) => {
-                exampleFiles.add(path.resolve(__dirname, '..', 'dist', 'example', lang, example[name].file));
-            });
-        } else {
-            exampleFiles.add(path.resolve(__dirname, '..', 'dist', 'example', example[name].file));
-        }
-    }
-    /**
-     * Remove generated example files that are no longer present in
-     * example/example.json.
-     *
-     * @param {string} dir Directory to scan recursively.
-     */
-    const removeStaleExampleFiles = (dir) => {
-        fs.readdirSync(dir, { withFileTypes: true }).forEach((entry) => {
-            const entryPath = path.resolve(dir, entry.name);
-            if (entry.isDirectory()) {
-                removeStaleExampleFiles(entryPath);
-            } else if (path.extname(entry.name) === '.m' && !exampleFiles.has(entryPath)) {
-                fs.rmSync(entryPath);
-            }
-        });
-    };
-    removeStaleExampleFiles(path.resolve(__dirname, '..', 'dist', 'example'));
-    let first = true;
-    for (let name in example) {
-        if (typeof example[name].caption === 'object') {
-            if (first) {
-                const content = {};
-                const languages = Object.keys(example[name].caption);
-                languages.forEach((lang) => {
-                    content[lang] = fs.readFileSync(path.resolve(__dirname, '..', 'dist', 'example', lang, example[name].file)).toString();
-                });
-                const firstExample = {
-                    name,
-                    description: example[name].description,
-                    content,
-                };
-                fs.writeFileSync(path.resolve(__dirname, '..', 'src', 'first-example.json'), JSON.stringify(firstExample, null, 2));
-                first = false;
-            }
-        } else {
-            fs.copyFileSync(path.resolve(__dirname, '..', 'example', example[name].file), path.resolve(__dirname, '..', 'dist', 'example', example[name].file));
-            if (first) {
-                const firstExample = {
-                    name,
-                    description: example[name].description,
-                    content: fs.readFileSync(path.resolve(__dirname, '..', 'example', example[name].file)).toString(),
-                };
-                fs.writeFileSync(path.resolve(__dirname, '..', 'src', 'first-example.json'), JSON.stringify(firstExample, null, 2));
-                first = false;
-            }
-        }
-    }
+    // Validate and publish the recursive examples manifest and its assets.
+    const example = JSON.parse(fs.readFileSync(path.resolve(__dirname, '..', 'example', 'example.json'), 'utf8'));
+    require('./helper/example-assets.cjs').writeExamples(path.resolve(__dirname, '..'), example);
     // Create dist/help directory.
     directory = path.resolve(__dirname, '..', 'dist', 'help');
     if (!fs.existsSync(directory)) {
@@ -130,6 +67,7 @@ try {
     fs.copyFileSync(path.resolve(__dirname, '..', 'LEAME.md'), path.resolve(__dirname, '..', 'dist', 'LEAME.md'));
 } catch (err) {
     console.error(err);
+    process.exitCode = 1;
 }
 console.warn('Copying assets to /dist directory done.');
 console.log(`Running ${__filename} done.`);

@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Numeric image contrast",
+            "es": "Contraste de imagen numérica",
+            "pt": "Contraste de imagem numérica"
+        },
+        "goal": {
+            "en": "Stretch a nonconstant grayscale matrix to the range from zero to 255.",
+            "es": "Estirar una matriz de grises no constante al rango de cero a 255.",
+            "pt": "Expandir uma matriz de tons de cinza não constante para a faixa de zero a 255."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+image_values = [50,100;150,200]
+low_value = min(min(image_values))
+high_value = max(max(image_values))
+stretched = 255*(image_values-low_value)/(high_value-low_value)
+
+% {{ comments.check[lang] }}
+example_check = min(min(stretched)) == 0 && max(max(stretched)) == 255 && stretched(1,2) == 85

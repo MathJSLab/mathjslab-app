@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Intensity negative",
+            "es": "Negativo de intensidad",
+            "pt": "Negativo de intensidade"
+        },
+        "goal": {
+            "en": "Invert normalized intensities and recover the original with a second inversion.",
+            "es": "Invertir intensidades normalizadas y recuperarlas con una segunda inversión.",
+            "pt": "Inverter intensidades normalizadas e recuperá-las com uma segunda inversão."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+image_values = [0,0.25;0.75,1]; negative_values = 1-image_values; recovered = 1-negative_values;
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(recovered-image_values))) < 1e-10 && negative_values(1,1) == 1

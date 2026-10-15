@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Euler exponential decay",
+            "es": "Decaimiento exponencial con Euler",
+            "pt": "Decaimento exponencial com Euler"
+        },
+        "goal": {
+            "en": "Integrate y prime equals minus y with fifty explicit Euler steps and compare with exp.",
+            "es": "Integrar y prima igual a menos y con cincuenta pasos de Euler explícito y comparar con exp.",
+            "pt": "Integrar y linha igual a menos y com cinquenta passos de Euler explícito e comparar com exp."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+steps = 50;
+dt = 1/steps;
+time = linspace(0,1,steps+1);
+values = zeros(1,steps+1);
+values(1) = 1;
+for k = 1:steps
+  values(k+1) = values(k)-dt*values(k);
+end
+final_value = values(end)
+exact_value = exp(-1)
+absolute_error = abs(final_value-exact_value)
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 0.004 && all(diff(values) < 0)

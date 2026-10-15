@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Quadratic Lagrange interpolation",
+            "es": "Interpolación cuadrática de Lagrange",
+            "pt": "Interpolação quadrática de Lagrange"
+        },
+        "goal": {
+            "en": "Interpolate three distinct nodes with explicitly constructed Lagrange basis factors.",
+            "es": "Interpolar tres nodos distintos con factores de base de Lagrange explícitos.",
+            "pt": "Interpolar três nós distintos com fatores explícitos da base de Lagrange."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+nodes = [0,1,2]
+values = [0,1,4]
+queries = [0.5,1.5]
+interpolated = zeros(1,2);
+for node_index = 1:3
+  basis_values = ones(1,2);
+  for other_index = 1:3
+    if other_index ~= node_index
+      basis_values = basis_values.*(queries-nodes(other_index))/(nodes(node_index)-nodes(other_index));
+    end
+  end
+  interpolated = interpolated+values(node_index)*basis_values;
+end
+interpolated
+
+% {{ comments.check[lang] }}
+example_check = max(abs(interpolated-[0.25,2.25])) < 1e-10

@@ -1,0 +1,51 @@
+.example-menu {
+  position: fixed;
+  z-index: 1000;
+  box-sizing: border-box;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid var(--color-text);
+  border-radius: 6px;
+  color: var(--color-text);
+  background: var(--color-background);
+  box-shadow: 0 4px 16px #0004;
+  text-align: left;
+
+  &[hidden] {
+    display: none;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0;
+  }
+  li {
+    margin: 4px 0;
+  }
+  button {
+    // Global button margins would add to the full-width list buttons.
+    margin: 0;
+    max-width: 100%;
+  }
+  li button {
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  button:focus-visible {
+    outline: 2px solid var(--color-text);
+    outline-offset: 2px;
+  }
+}
+
+.example-menu-path {
+  margin: 0 0 8px;
+  overflow-wrap: anywhere;
+}
+.example-directory::after {
+  content: ' ▸';
+}
+.example-status:empty {
+  display: none;
+}

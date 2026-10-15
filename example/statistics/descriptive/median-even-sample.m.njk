@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Median of an even sample",
+            "es": "Mediana de una muestra par",
+            "pt": "Mediana de uma amostra par"
+        },
+        "goal": {
+            "en": "Average the two central sorted values to compute the median.",
+            "es": "Promediar los dos valores centrales ordenados para calcular la mediana.",
+            "pt": "Calcular a média dos dois valores centrais ordenados para obter a mediana."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [12,3,8,5,14,10]
+ordered = sort(data)
+middle_index = numel(data)/2
+sample_median = (ordered(middle_index)+ordered(middle_index+1))/2
+
+% {{ comments.check[lang] }}
+example_check = sample_median == 9

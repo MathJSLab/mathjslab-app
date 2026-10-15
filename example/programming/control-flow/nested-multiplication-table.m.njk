@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Nested multiplication table",
+            "es": "Tabla de multiplicación con bucles",
+            "pt": "Tabuada com laços aninhados"
+        },
+        "goal": {
+            "en": "Fill a multiplication table with two nested loops.",
+            "es": "Llenar una tabla de multiplicación con dos bucles anidados.",
+            "pt": "Preencher uma tabuada com dois laços aninhados."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+table = zeros(4,4);
+for row_index = 1:4
+  for column_index = 1:4
+    table(row_index,column_index) = row_index*column_index;
+  end
+end
+table
+
+% {{ comments.check[lang] }}
+example_check = table(3,4) == 12 && all(all(table == table.'))

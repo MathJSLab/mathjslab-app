@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Gamma intensity transform",
+            "es": "Transformación gamma de intensidad",
+            "pt": "Transformação gama de intensidade"
+        },
+        "goal": {
+            "en": "Brighten normalized midtones with a square-root transform.",
+            "es": "Aclarar tonos medios normalizados mediante raíz cuadrada.",
+            "pt": "Clarear tons médios normalizados com raiz quadrada."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+image_values = [0,0.25;0.64,1]; gamma_value = 0.5; corrected_values = image_values.^gamma_value;
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(corrected_values-[0,0.5;0.8,1]))) < 1e-10 && all(all(corrected_values >= image_values))

@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Interleave vectors",
+            "es": "Intercalar vectores",
+            "pt": "Intercalar vetores"
+        },
+        "goal": {
+            "en": "Alternate entries from two equal-length vectors using indexed assignment.",
+            "es": "Alternar entradas de dos vectores de igual longitud mediante índices.",
+            "pt": "Alternar entradas de dois vetores de mesmo comprimento por índices."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+a = [1,3,5]
+b = [2,4,6]
+interleaved = zeros(1,6);
+interleaved(1:2:end) = a;
+interleaved(2:2:end) = b;
+interleaved
+
+% {{ comments.check[lang] }}
+example_check = all(interleaved == 1:6)

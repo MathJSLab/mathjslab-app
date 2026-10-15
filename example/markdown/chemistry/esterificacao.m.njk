@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "esterificacao.md",
+    "comments": {
+        "title": {
+            "en": "Esterification",
+            "es": "Esterificación",
+            "pt": "Esterificação"
+        },
+        "goal": {
+            "en": "Open “Esterification” from mathjslab-markdown.",
+            "es": "Abrir «Esterificación» de mathjslab-markdown.",
+            "pt": "Abrir “Esterificação” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/esterificacao.md")

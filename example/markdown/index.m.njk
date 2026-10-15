@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "README.md",
+    "comments": {
+        "title": {
+            "en": "Lesson index",
+            "es": "Índice de lecciones",
+            "pt": "Índice das notas"
+        },
+        "goal": {
+            "en": "Open “Lesson index” from mathjslab-markdown.",
+            "es": "Abrir «Índice de lecciones» de mathjslab-markdown.",
+            "pt": "Abrir “Índice das notas” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/README.md")

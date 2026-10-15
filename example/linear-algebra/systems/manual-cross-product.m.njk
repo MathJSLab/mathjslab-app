@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Manual cross product",
+            "es": "Producto vectorial manual",
+            "pt": "Produto vetorial manual"
+        },
+        "goal": {
+            "en": "Construct a three-dimensional cross product from its coordinate formula.",
+            "es": "Construir un producto vectorial tridimensional con su fórmula por coordenadas.",
+            "pt": "Construir um produto vetorial tridimensional pela fórmula das coordenadas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+a = [1,2,3]
+b = [2,0,1]
+normal_vector = [a(2)*b(3)-a(3)*b(2),a(3)*b(1)-a(1)*b(3),a(1)*b(2)-a(2)*b(1)]
+
+% {{ comments.check[lang] }}
+example_check = all(normal_vector == [2,5,-4]) && abs(sum(a.*normal_vector)) < 1e-10 && abs(sum(b.*normal_vector)) < 1e-10

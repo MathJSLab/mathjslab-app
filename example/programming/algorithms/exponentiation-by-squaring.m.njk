@@ -1,0 +1,41 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Exponentiation by squaring",
+            "es": "Potenciación por cuadrados",
+            "pt": "Exponenciação por quadrados"
+        },
+        "goal": {
+            "en": "Consume binary exponent digits while squaring the base.",
+            "es": "Consumir dígitos binarios del exponente al elevar la base al cuadrado.",
+            "pt": "Consumir dígitos binários do expoente ao elevar a base ao quadrado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+base_value = 3; exponent_value = 13; product_value = 1;
+while exponent_value > 0
+ if mod(exponent_value,2) == 1
+  product_value = product_value*base_value;
+ end
+ base_value = base_value^2; exponent_value = floor(exponent_value/2);
+end
+
+% {{ comments.check[lang] }}
+example_check = product_value == 1594323

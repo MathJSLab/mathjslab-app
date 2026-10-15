@@ -1,4 +1,5 @@
 export default {
+    exampleBrowser: { back: 'Back', empty: 'This directory is empty.', loadError: 'Unable to load the example. Please try again.' },
     locale: 'en',
     htmlLang: 'en',
     ogLocale: 'en_US',

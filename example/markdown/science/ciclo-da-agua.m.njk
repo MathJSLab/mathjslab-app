@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "ciclo-da-agua.md",
+    "comments": {
+        "title": {
+            "en": "Water cycle",
+            "es": "Ciclo del agua",
+            "pt": "Ciclo da água"
+        },
+        "goal": {
+            "en": "Open “Water cycle” from mathjslab-markdown.",
+            "es": "Abrir «Ciclo del agua» de mathjslab-markdown.",
+            "pt": "Abrir “Ciclo da água” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/ciclo-da-agua.md")

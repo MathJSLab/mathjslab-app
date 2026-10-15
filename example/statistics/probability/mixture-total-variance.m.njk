@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Mixture total variance",
+            "es": "Varianza total de una mezcla",
+            "pt": "Variância total de uma mistura"
+        },
+        "goal": {
+            "en": "Combine within-component variance and between-component mean variation.",
+            "es": "Combinar varianza dentro de componentes y variación entre medias de componentes.",
+            "pt": "Combinar variância dentro dos componentes e variação entre suas médias."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+weights = [0.25,0.75]
+component_means = [4,10]
+component_variances = [1,4]
+mixture_average = sum(weights.*component_means)
+within_variance = sum(weights.*component_variances)
+between_variance = sum(weights.*(component_means-mixture_average).^2)
+mixture_variance = within_variance+between_variance
+
+% {{ comments.check[lang] }}
+example_check = mixture_average == 8.5 && mixture_variance == 10

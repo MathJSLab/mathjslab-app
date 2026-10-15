@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Matrix diagonals",
+            "es": "Diagonales de matrices",
+            "pt": "Diagonais de matrizes"
+        },
+        "goal": {
+            "en": "Build a diagonal matrix and extract its diagonal entries.",
+            "es": "Construir una matriz diagonal y extraer sus entradas diagonales.",
+            "pt": "Construir uma matriz diagonal e extrair seus elementos diagonais."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [2,5,9]
+D = diag(values)
+extracted = diag(D)
+
+% {{ comments.check[lang] }}
+example_check = all(extracted == values.') && trace(D) == 16

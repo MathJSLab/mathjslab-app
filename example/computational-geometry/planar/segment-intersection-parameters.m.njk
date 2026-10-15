@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Segment intersection parameters",
+            "es": "Parámetros de intersección de segmentos",
+            "pt": "Parâmetros de interseção de segmentos"
+        },
+        "goal": {
+            "en": "Solve for the intersection of two nonparallel segments.",
+            "es": "Resolver la intersección de dos segmentos no paralelos.",
+            "pt": "Resolver a interseção de dois segmentos não paralelos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+a = [0;0]; b = [4;4]; c = [0;4]; d = [4;0];
+parameters = [b-a,-(d-c)]\(c-a); intersection_point = a+parameters(1)*(b-a);
+
+% {{ comments.check[lang] }}
+example_check = all(parameters >= 0 & parameters <= 1) && max(abs(intersection_point-[2;2])) < 1e-10

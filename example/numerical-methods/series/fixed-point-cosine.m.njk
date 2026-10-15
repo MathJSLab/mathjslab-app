@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Cosine fixed point",
+            "es": "Punto fijo del coseno",
+            "pt": "Ponto fixo do cosseno"
+        },
+        "goal": {
+            "en": "Iterate cosine fifty times and test the final fixed-point residual.",
+            "es": "Iterar el coseno cincuenta veces y comprobar el residuo final de punto fijo.",
+            "pt": "Iterar o cosseno cinquenta vezes e verificar o resíduo final do ponto fixo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+estimate = 1;
+for iteration = 1:50
+  estimate = cos(estimate);
+end
+estimate
+residual = estimate-cos(estimate)
+
+% {{ comments.check[lang] }}
+example_check = abs(residual) < 1e-8

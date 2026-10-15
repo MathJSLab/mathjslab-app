@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Nearest-rank percentiles",
+            "es": "Percentiles de rango más próximo",
+            "pt": "Percentis de posto mais próximo"
+        },
+        "goal": {
+            "en": "Use the nearest-rank convention with ceiling of p times the sample size.",
+            "es": "Usar la convención de rango más próximo con techo de p por el tamaño de muestra.",
+            "pt": "Usar a convenção de posto mais próximo com teto de p vezes o tamanho da amostra."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [9,1,7,3,5,2,10,4,8,6]
+ordered = sort(data)
+probabilities = [0.25,0.5,0.75]
+indices = ceil(probabilities*numel(data))
+percentiles = ordered(indices)
+
+% {{ comments.check[lang] }}
+example_check = all(percentiles == [3,5,8])

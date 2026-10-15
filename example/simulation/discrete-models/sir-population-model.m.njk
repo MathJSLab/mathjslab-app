@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "SIR population model",
+            "es": "Modelo poblacional SIR",
+            "pt": "Modelo populacional SIR"
+        },
+        "goal": {
+            "en": "Transfer population between susceptible, infected and recovered compartments.",
+            "es": "Transferir población entre compartimentos susceptibles, infectados y recuperados.",
+            "pt": "Transferir população entre compartimentos suscetíveis, infectados e recuperados."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+states = zeros(11,3); states(1,:) = [99,1,0]; beta_value = 0.3; gamma_value = 0.1; dt = 0.5;
+for step_index = 1:10
+ old_values = states(step_index,:); infections = dt*beta_value*old_values(1)*old_values(2)/100; recoveries = dt*gamma_value*old_values(2);
+ states(step_index+1,:) = old_values+[-infections,infections-recoveries,recoveries];
+end
+
+% {{ comments.check[lang] }}
+example_check = max(abs(sum(states,2)-100)) < 1e-10 && all(all(states >= 0)) && states(11,3) > 0

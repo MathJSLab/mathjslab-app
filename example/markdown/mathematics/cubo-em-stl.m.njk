@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "cubo-em-stl.md",
+    "comments": {
+        "title": {
+            "en": "a cube in STL",
+            "es": "cubo en STL",
+            "pt": "cubo em STL"
+        },
+        "goal": {
+            "en": "Open “a cube in STL” from mathjslab-markdown.",
+            "es": "Abrir «cubo en STL» de mathjslab-markdown.",
+            "pt": "Abrir “cubo em STL” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/cubo-em-stl.md")

@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Nilpotent matrix powers",
+            "es": "Potencias de una matriz nilpotente",
+            "pt": "Potências de uma matriz nilpotente"
+        },
+        "goal": {
+            "en": "Apply powers of a shift matrix until the result becomes zero.",
+            "es": "Aplicar potencias de una matriz de desplazamiento hasta obtener cero.",
+            "pt": "Aplicar potências de uma matriz de deslocamento até obter zero."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+N = [0,1,0;0,0,1;0,0,0]
+second_power = N^2
+third_power = N^3
+
+% {{ comments.check[lang] }}
+example_check = second_power(1,3) == 1 && all(all(third_power == zeros(3,3)))

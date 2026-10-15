@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Plane rotation",
+            "es": "Rotación en el plano",
+            "pt": "Rotação no plano"
+        },
+        "goal": {
+            "en": "Rotate a two-dimensional point by ninety degrees and preserve its length.",
+            "es": "Rotar un punto bidimensional noventa grados y conservar su longitud.",
+            "pt": "Girar um ponto bidimensional noventa graus e preservar seu comprimento."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+phase_radians = pi/2
+R = [cos(phase_radians),-sin(phase_radians);sin(phase_radians),cos(phase_radians)]
+point = [3;4]
+rotated = R*point
+
+% {{ comments.check[lang] }}
+example_check = max(abs(rotated-[-4;3])) < 1e-10 && abs(norm(rotated)-norm(point)) < 1e-10

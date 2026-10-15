@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Circular queue",
+            "es": "Cola circular",
+            "pt": "Fila circular"
+        },
+        "goal": {
+            "en": "Reuse freed slots by wrapping the read and write positions.",
+            "es": "Reutilizar espacios liberados haciendo circulares las posiciones.",
+            "pt": "Reutilizar espaços liberados tornando circulares as posições."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+capacity_value = 3; storage = [10,20,30]; head_index = 1; tail_index = 1; count_value = 3;
+removed_value = storage(head_index); head_index = mod(head_index,capacity_value)+1; count_value = count_value-1;
+storage(tail_index) = 40; tail_index = mod(tail_index,capacity_value)+1; count_value = count_value+1;
+ordered_values = storage([head_index,3,1])
+
+% {{ comments.check[lang] }}
+example_check = removed_value == 10 && count_value == 3 && all(ordered_values == [20,30,40])

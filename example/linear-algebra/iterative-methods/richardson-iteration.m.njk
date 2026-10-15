@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Richardson iteration",
+            "es": "Iteración de Richardson",
+            "pt": "Iteração de Richardson"
+        },
+        "goal": {
+            "en": "Apply a fixed correction proportional to the residual.",
+            "es": "Aplicar una corrección fija proporcional al residuo.",
+            "pt": "Aplicar uma correção fixa proporcional ao resíduo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [2,0;0,3]; b = [2;6]; x = zeros(2,1);
+for step_index = 1:24
+ x = x+0.4*(b-A*x);
+end
+residual = A*x-b
+
+% {{ comments.check[lang] }}
+example_check = max(abs(residual)) < 1e-12

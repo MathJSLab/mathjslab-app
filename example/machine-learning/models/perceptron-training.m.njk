@@ -1,0 +1,44 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Perceptron training",
+            "es": "Entrenamiento de perceptrón",
+            "pt": "Treinamento de perceptron"
+        },
+        "goal": {
+            "en": "Correct mistaken predictions on a linearly separable tiny data set.",
+            "es": "Corregir predicciones erróneas en un conjunto pequeño linealmente separable.",
+            "pt": "Corrigir previsões erradas em um pequeno conjunto linearmente separável."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+features = [-2,-1,1,2]; labels = [-1,-1,1,1]; weight_value = 0; bias_value = 0;
+for epoch_index = 1:4
+ for item_index = 1:4
+  score_value = weight_value*features(item_index)+bias_value;
+  if labels(item_index)*score_value <= 0
+   weight_value = weight_value+labels(item_index)*features(item_index); bias_value = bias_value+labels(item_index);
+  end
+ end
+end
+margins = labels.*(weight_value*features+bias_value);
+
+% {{ comments.check[lang] }}
+example_check = all(margins > 0)

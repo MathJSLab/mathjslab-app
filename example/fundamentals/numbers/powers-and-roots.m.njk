@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Powers and roots",
+            "es": "Potencias y raíces",
+            "pt": "Potências e raízes"
+        },
+        "goal": {
+            "en": "Recover positive values from square roots and cube roots.",
+            "es": "Recuperar valores positivos con raíces cuadradas y cúbicas.",
+            "pt": "Recuperar valores positivos com raízes quadradas e cúbicas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+squares = [4, 25, 81]
+square_roots = sqrt(squares)
+cube = 7^3
+cube_root = cube^(1/3)
+
+% {{ comments.check[lang] }}
+example_check = all(square_roots == [2,5,9]) && abs(cube_root-7) < 1e-10

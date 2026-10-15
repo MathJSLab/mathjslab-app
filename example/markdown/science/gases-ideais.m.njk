@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "gases-ideais.md",
+    "comments": {
+        "title": {
+            "en": "Ideal gases: pressure and volume",
+            "es": "Gases ideales: presión y volumen",
+            "pt": "Gases ideais: pressão e volume"
+        },
+        "goal": {
+            "en": "Open “Ideal gases: pressure and volume” from mathjslab-markdown.",
+            "es": "Abrir «Gases ideales: presión y volumen» de mathjslab-markdown.",
+            "pt": "Abrir “Gases ideais: pressão e volume” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/gases-ideais.md")

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "energia-mecanica.md",
+    "comments": {
+        "title": {
+            "en": "Mechanical energy and transformations",
+            "es": "Energía mecánica y transformaciones",
+            "pt": "Energia mecânica e transformações"
+        },
+        "goal": {
+            "en": "Open “Mechanical energy and transformations” from mathjslab-markdown.",
+            "es": "Abrir «Energía mecánica y transformaciones» de mathjslab-markdown.",
+            "pt": "Abrir “Energia mecânica e transformações” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/energia-mecanica.md")

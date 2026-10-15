@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Helical curve",
+            "es": "Curva helicoidal",
+            "pt": "Curva helicoidal"
+        },
+        "goal": {
+            "en": "Draw two turns of a helix and check its constant horizontal radius.",
+            "es": "Dibujar dos vueltas de una hélice y comprobar su radio horizontal constante.",
+            "pt": "Traçar duas voltas de uma hélice e verificar seu raio horizontal constante."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+t = linspace(0,4*pi,61);
+x = cos(t);
+y = sin(t);
+z = t/(4*pi);
+plot3(x,y,z)
+
+% {{ comments.check[lang] }}
+example_check = max(abs(x.^2+y.^2-1)) < 1e-10 && abs(z(end)-1) < 1e-10

@@ -1,0 +1,45 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Rectangle constructor",
+            "es": "Constructor de rectángulo",
+            "pt": "Construtor de retângulo"
+        },
+        "goal": {
+            "en": "Initialize two properties in a constructor and call an instance area method.",
+            "es": "Inicializar dos propiedades en un constructor y llamar un método de área de la instancia.",
+            "pt": "Inicializar duas propriedades num construtor e chamar um método de área da instância."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef StudyRectangle
+  properties
+    Width = 0;
+    Height = 0;
+  end
+  methods
+    function obj = StudyRectangle(width,height)
+      obj.Width = width;
+      obj.Height = height;
+    end
+    function value = area(obj)
+      value = obj.Width*obj.Height;
+    end
+  end
+end
+rectangle = StudyRectangle(3,4);
+area_value = rectangle.area()
+
+% {{ comments.check[lang] }}
+example_check = area_value == 12 && rectangle.Width == 3

@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Hankel construction",
+            "es": "Construcción Hankel",
+            "pt": "Construção Hankel"
+        },
+        "goal": {
+            "en": "Use constant anti-diagonals.",
+            "es": "Usar antidiagonales constantes.",
+            "pt": "Usar antidiagonais constantes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = zeros(3,4);
+for row_index = 1:3
+ for column_index = 1:4
+  A(row_index,column_index) = row_index+column_index-1;
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = A(1,3) == A(2,2) && A(2,2) == A(3,1) && A(3,4) == 6

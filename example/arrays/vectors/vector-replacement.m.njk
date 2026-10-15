@@ -1,0 +1,30 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Replace vector entries",
+            "es": "Reemplazar entradas de un vector",
+            "pt": "Substituir entradas de um vetor"
+        },
+        "goal": {
+            "en": "Replace selected positions while preserving the other entries.",
+            "es": "Reemplazar posiciones seleccionadas conservando las demás entradas.",
+            "pt": "Substituir posições selecionadas preservando as demais entradas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [3,6,9,12,15]
+values([2,4]) = [60,120]
+
+% {{ comments.check[lang] }}
+example_check = all(values == [3,60,9,120,15])

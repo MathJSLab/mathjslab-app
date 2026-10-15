@@ -406,7 +406,9 @@ test('built-in extension manifests keep libraries lazy, styles local, and render
 
     await engine.typeset(container);
     assert.deepEqual([...libraryLoads].sort(), ['mermaid', 'smiles-drawer']);
-    assert.equal(container.querySelectorAll('style[data-markdown-extension-style]').length, 3);
+    for (const name of ['syntax-highlight', 'mermaid', 'smiles', 'mathjslab']) {
+        assert.equal(container.querySelectorAll(`style[data-markdown-extension-style="${name}"]`).length, 1);
+    }
     assert.ok(container.querySelector('.mermaid svg'));
     assert.ok(container.querySelector('.smiles svg'));
     assert.ok(container.querySelector('math[data-command="a = 1"]'));
@@ -428,4 +430,22 @@ test('educational fences are registered without loading their optional libraries
         languages,
     );
     assert.deepEqual(libraryLoads, []);
+});
+
+test('the application facade parses every corpus document with its installed extension set', () => {
+    const { Markdown, libraryLoads } = service();
+    const corpusRoot = fileURLToPath(new URL('../test/markdown/', import.meta.url));
+    const corpus = JSON.parse(fs.readFileSync(path.join(corpusRoot, 'corpus.json'), 'utf8'));
+    for (const { file, extension, fences } of corpus.documents) {
+        const container = element(Markdown.parse(fs.readFileSync(path.join(corpusRoot, file), 'utf8')));
+        for (const language of fences) {
+            assert.ok(container.querySelector(`[data-markdown-language="${language}"]`), `${file}: ${language}`);
+        }
+        if (fences.length) assert.ok(container.querySelector(`[data-markdown-extension="${extension}"]`), `${file}: ${extension}`);
+    }
+    for (const file of [...corpus.combined, ...corpus.conflicts]) {
+        const html = Markdown.parse(fs.readFileSync(path.join(corpusRoot, file), 'utf8'));
+        assert.ok(html.trim(), file);
+    }
+    assert.deepEqual(libraryLoads, [], 'Corpus parsing must not load optional rendering libraries.');
 });

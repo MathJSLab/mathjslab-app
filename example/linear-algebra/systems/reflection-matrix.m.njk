@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Reflection matrix",
+            "es": "Matriz de reflexión",
+            "pt": "Matriz de reflexão"
+        },
+        "goal": {
+            "en": "Reflect points across the horizontal axis and undo the reflection.",
+            "es": "Reflejar puntos respecto al eje horizontal y deshacer la reflexión.",
+            "pt": "Refletir pontos em relação ao eixo horizontal e desfazer a reflexão."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+reflection = [1,0;0,-1]
+points = [2,-3;4,5]
+reflected = reflection*points
+restored = reflection*reflected
+
+% {{ comments.check[lang] }}
+example_check = all(all(reflected == [2,-3;-4,-5])) && all(all(restored == points))

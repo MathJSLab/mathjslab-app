@@ -1,0 +1,48 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Controlled private balance",
+            "es": "Saldo privado controlado",
+            "pt": "Saldo privado controlado"
+        },
+        "goal": {
+            "en": "Use methods to change a publicly readable property with private write access.",
+            "es": "Usar métodos para cambiar una propiedad legible públicamente con escritura privada.",
+            "pt": "Usar métodos para alterar uma propriedade de leitura pública com escrita privada."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef ControlledBalance < handle
+  properties (SetAccess = private)
+    Balance = 0;
+  end
+  methods
+    function deposit(obj,amount)
+      obj.Balance = obj.Balance+amount;
+    end
+  end
+end
+account = ControlledBalance();
+account.deposit(12);
+account.deposit(8);
+blocked = false;
+try
+  account.Balance = 100;
+catch
+  blocked = true;
+end
+balance_value = account.Balance
+
+% {{ comments.check[lang] }}
+example_check = blocked && balance_value == 20

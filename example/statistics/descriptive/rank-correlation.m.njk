@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Correlation of ranks",
+            "es": "Correlación de rangos",
+            "pt": "Correlação de postos"
+        },
+        "goal": {
+            "en": "Compute correlation from two already ranked samples without tied ranks.",
+            "es": "Calcular correlación con dos muestras ya ordenadas por rango sin empates.",
+            "pt": "Calcular correlação de duas amostras já classificadas por postos sem empates."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+ranks_a = [1,2,3,4,5]
+ranks_b = [5,4,3,2,1]
+centered_a = ranks_a-mean(ranks_a)
+centered_b = ranks_b-mean(ranks_b)
+rank_correlation = sum(centered_a.*centered_b)/sqrt(sum(centered_a.^2)*sum(centered_b.^2))
+
+% {{ comments.check[lang] }}
+example_check = abs(rank_correlation+1) < 1e-10

@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "First-match linear search",
+            "es": "Búsqueda lineal del primer resultado",
+            "pt": "Busca linear da primeira ocorrência"
+        },
+        "goal": {
+            "en": "Stop scanning when the requested key is first found.",
+            "es": "Detener el recorrido al encontrar por primera vez la clave solicitada.",
+            "pt": "Interromper o percurso ao encontrar a chave solicitada pela primeira vez."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+values = [4,8,2,8,9]; target_value = 8; found_index = 0;
+for item_index = 1:5
+ if values(item_index) == target_value
+  found_index = item_index; break
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = found_index == 2

@@ -1,0 +1,41 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Binary cross dilation",
+            "es": "Dilatación binaria en cruz",
+            "pt": "Dilatação binária em cruz"
+        },
+        "goal": {
+            "en": "Expand one foreground pixel to its four immediate neighbors.",
+            "es": "Expandir un píxel de primer plano hacia sus cuatro vecinos inmediatos.",
+            "pt": "Expandir um pixel de primeiro plano aos seus quatro vizinhos imediatos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+image_values = zeros(5,5); image_values(3,3) = 1; dilated_values = zeros(5,5);
+for row_index = 2:4
+ for column_index = 2:4
+  neighborhood = [image_values(row_index,column_index),image_values(row_index-1,column_index),image_values(row_index+1,column_index),image_values(row_index,column_index-1),image_values(row_index,column_index+1)];
+  dilated_values(row_index,column_index) = max(neighborhood);
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = sum(sum(dilated_values)) == 5 && dilated_values(3,2) == 1 && dilated_values(2,2) == 0

@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Class constant property",
+            "es": "Propiedad constante de clase",
+            "pt": "Propriedade constante de classe"
+        },
+        "goal": {
+            "en": "Read a shared conversion constant from the class and use it in arithmetic.",
+            "es": "Leer una constante de conversión compartida de la clase y usarla en aritmética.",
+            "pt": "Ler uma constante compartilhada de conversão da classe e usá-la em aritmética."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef LengthUnits
+  properties (Constant)
+    CentimetersPerMeter = 100;
+  end
+end
+meters = 2.5
+centimeters = meters*LengthUnits.CentimetersPerMeter
+
+% {{ comments.check[lang] }}
+example_check = centimeters == 250

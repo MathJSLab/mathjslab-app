@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Center a vector",
+            "es": "Centrar un vector",
+            "pt": "Centrar um vetor"
+        },
+        "goal": {
+            "en": "Subtract the average and verify both zero sum and unchanged pairwise differences.",
+            "es": "Restar la media y verificar suma cero y diferencias entre pares sin cambios.",
+            "pt": "Subtrair a média e verificar soma zero e diferenças entre pares preservadas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [4,7,10,15]
+centered = values-mean(values)
+original_differences = diff(values)
+centered_differences = diff(centered)
+
+% {{ comments.check[lang] }}
+example_check = abs(sum(centered)) < 1e-10 && all(centered_differences == original_differences)

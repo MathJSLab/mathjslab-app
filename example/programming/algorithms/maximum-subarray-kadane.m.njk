@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Maximum subarray",
+            "es": "Subarreglo de suma máxima",
+            "pt": "Subarray de soma máxima"
+        },
+        "goal": {
+            "en": "Keep the best sum ending at each position, including negative inputs.",
+            "es": "Mantener la mejor suma que termina en cada posición, incluyendo entradas negativas.",
+            "pt": "Manter a melhor soma que termina em cada posição, incluindo entradas negativas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+values = [-2,3,-1,4,-6,2]; ending_total = values(1); best_total = ending_total;
+for item_index = 2:6
+ ending_total = max([values(item_index),ending_total+values(item_index)]);
+ best_total = max([best_total,ending_total]);
+end
+
+% {{ comments.check[lang] }}
+example_check = best_total == 6

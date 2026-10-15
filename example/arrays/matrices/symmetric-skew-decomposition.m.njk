@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Symmetric decomposition",
+            "es": "Descomposición simétrica",
+            "pt": "Decomposição simétrica"
+        },
+        "goal": {
+            "en": "Split a real square matrix into symmetric and skew-symmetric parts.",
+            "es": "Separar una matriz real cuadrada en partes simétrica y antisimétrica.",
+            "pt": "Separar uma matriz real quadrada em partes simétrica e antissimétrica."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [1,4;2,3]
+symmetric_part = (A+A.')/2
+skew_part = (A-A.')/2
+
+% {{ comments.check[lang] }}
+example_check = all(all(symmetric_part+skew_part == A)) && all(all(skew_part.' == -skew_part))

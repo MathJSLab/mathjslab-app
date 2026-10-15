@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Polar rose curve",
+            "es": "Curva rosa polar",
+            "pt": "Curva de rosa polar"
+        },
+        "goal": {
+            "en": "Convert a polar rose to Cartesian samples before drawing it.",
+            "es": "Convertir una rosa polar a muestras cartesianas antes de dibujarla.",
+            "pt": "Converter uma rosa polar para amostras cartesianas antes de traçá-la."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+phases = linspace(0,2*pi,81);
+radii = sin(2*phases);
+x = radii.*cos(phases);
+y = radii.*sin(phases);
+plot(x,y)
+
+% {{ comments.check[lang] }}
+example_check = all(x.^2+y.^2 <= 1+1e-10) && abs(x(1)-x(end)) < 1e-10 && abs(y(1)-y(end)) < 1e-10

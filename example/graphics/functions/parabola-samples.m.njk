@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Parabola samples",
+            "es": "Muestras de una parábola",
+            "pt": "Amostras de uma parábola"
+        },
+        "goal": {
+            "en": "Sample a parabola at twenty-one points and draw the resulting curve.",
+            "es": "Muestrear una parábola en veintiún puntos y dibujar la curva.",
+            "pt": "Amostrar uma parábola em vinte e um pontos e traçar a curva."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = linspace(-2,2,21);
+y = x.^2;
+plot(x,y)
+minimum_value = min(y)
+
+% {{ comments.check[lang] }}
+example_check = minimum_value == 0 && numel(x) == 21 && y(1) == 4 && y(end) == 4

@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Row and column vectors",
+            "es": "Vectores fila y columna",
+            "pt": "Vetores linha e coluna"
+        },
+        "goal": {
+            "en": "Transpose a row vector and compare the resulting dimensions.",
+            "es": "Transponer un vector fila y comparar las dimensiones resultantes.",
+            "pt": "Transpor um vetor linha e comparar as dimensões resultantes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+row_vector = [2,4,6,8]
+column_vector = row_vector.'
+row_size = size(row_vector)
+column_size = size(column_vector)
+
+% {{ comments.check[lang] }}
+example_check = all(row_size == [1,4]) && all(column_size == [4,1])

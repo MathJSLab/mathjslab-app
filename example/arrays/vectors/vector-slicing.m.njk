@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Vector slices",
+            "es": "Porciones de un vector",
+            "pt": "Fatias de um vetor"
+        },
+        "goal": {
+            "en": "Select alternate entries and the last three elements of a vector.",
+            "es": "Seleccionar entradas alternas y los últimos tres elementos de un vector.",
+            "pt": "Selecionar entradas alternadas e os últimos três elementos de um vetor."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = 10:10:80
+alternate = values(1:2:end)
+tail = values(end-2:end)
+
+% {{ comments.check[lang] }}
+example_check = all(alternate == [10,30,50,70]) && all(tail == [60,70,80])

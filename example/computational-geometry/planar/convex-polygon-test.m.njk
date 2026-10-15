@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Convex polygon test",
+            "es": "Prueba de polígono convexo",
+            "pt": "Teste de polígono convexo"
+        },
+        "goal": {
+            "en": "Check that all successive turns have the same strict sign.",
+            "es": "Comprobar que todos los giros sucesivos tienen el mismo signo estricto.",
+            "pt": "Verificar que todas as curvas sucessivas têm o mesmo sinal estrito."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+vertices = [0,0;3,0;4,2;1,3]; turns = zeros(1,4);
+for vertex_index = 1:4
+ a = vertices(vertex_index,:); b = vertices(mod(vertex_index,4)+1,:); c = vertices(mod(vertex_index+1,4)+1,:);
+ u = b-a; v = c-b; turns(vertex_index) = u(1)*v(2)-u(2)*v(1);
+end
+
+% {{ comments.check[lang] }}
+example_check = all(turns > 0)

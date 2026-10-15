@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Saddle surface",
+            "es": "Superficie de silla",
+            "pt": "Superfície de sela"
+        },
+        "goal": {
+            "en": "Visualize a saddle with positive and negative heights on a small mesh.",
+            "es": "Visualizar una silla con alturas positivas y negativas en una malla pequeña.",
+            "pt": "Visualizar uma sela com alturas positivas e negativas numa pequena malha."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+axis_values = linspace(-2,2,9);
+[X,Y] = meshgrid(axis_values,axis_values);
+Z = X.^2-Y.^2;
+surf(X,Y,Z)
+
+% {{ comments.check[lang] }}
+example_check = min(min(Z)) == -4 && max(max(Z)) == 4 && Z(5,5) == 0

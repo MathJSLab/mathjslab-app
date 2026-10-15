@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Composite trapezoidal rule",
+            "es": "Regla trapezoidal compuesta",
+            "pt": "Regra dos trapézios composta"
+        },
+        "goal": {
+            "en": "Approximate the integral of x squared on zero to one with forty trapezoids, without trapz.",
+            "es": "Aproximar la integral de x al cuadrado de cero a uno con cuarenta trapecios, sin trapz.",
+            "pt": "Aproximar a integral de x ao quadrado de zero a um com quarenta trapézios, sem trapz."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = linspace(0,1,41)
+y = x.^2
+width = x(2)-x(1)
+area = width*(sum(y)-0.5*y(1)-0.5*y(end))
+exact_area = 1/3
+absolute_error = abs(area-exact_area)
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 0.0002

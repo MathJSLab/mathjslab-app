@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "redes-alimentares.md",
+    "comments": {
+        "title": {
+            "en": "Food webs",
+            "es": "Redes alimentarias",
+            "pt": "Redes alimentares"
+        },
+        "goal": {
+            "en": "Open “Food webs” from mathjslab-markdown.",
+            "es": "Abrir «Redes alimentarias» de mathjslab-markdown.",
+            "pt": "Abrir “Redes alimentares” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/redes-alimentares.md")

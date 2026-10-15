@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sinusoid RMS over a period",
+            "es": "RMS de seno en un período",
+            "pt": "RMS de seno num período"
+        },
+        "goal": {
+            "en": "Compute RMS from uniformly spaced sine samples covering one full period without repeating the endpoint.",
+            "es": "Calcular RMS con muestras de seno equidistantes de un período sin repetir el extremo.",
+            "pt": "Calcular RMS de amostras de seno equidistantes num período sem repetir o extremo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+phases = 2*pi*(0:15)/16
+samples = sin(phases)
+rms_value = sqrt(mean(samples.^2))
+
+% {{ comments.check[lang] }}
+example_check = abs(rms_value-1/sqrt(2)) < 1e-10 && abs(mean(samples)) < 1e-10

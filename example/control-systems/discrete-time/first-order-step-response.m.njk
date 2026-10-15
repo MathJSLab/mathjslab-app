@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "First-order step response",
+            "es": "Respuesta de primer orden al escalón",
+            "pt": "Resposta de primeira ordem ao degrau"
+        },
+        "goal": {
+            "en": "Simulate a stable scalar recurrence with constant unit input and zero initial state.",
+            "es": "Simular una recurrencia escalar estable con entrada unidad constante y estado inicial cero.",
+            "pt": "Simular uma recorrência escalar estável com entrada unitária constante e estado inicial zero."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+state = 0;
+response = zeros(1,25);
+for k = 1:25
+  state = 0.8*state+0.2;
+  response(k) = state;
+end
+final_value = response(end)
+
+% {{ comments.check[lang] }}
+example_check = abs(final_value-(1-0.8^25)) < 1e-10 && all(diff(response) > 0) && final_value < 1

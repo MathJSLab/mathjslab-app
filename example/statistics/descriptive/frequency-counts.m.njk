@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Frequency counts",
+            "es": "Conteos de frecuencias",
+            "pt": "Contagens de frequência"
+        },
+        "goal": {
+            "en": "Count each category with logical comparisons and reconstruct the sample size.",
+            "es": "Contar cada categoría con comparaciones lógicas y reconstruir el tamaño de la muestra.",
+            "pt": "Contar cada categoria com comparações lógicas e reconstruir o tamanho da amostra."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+observations = [1,2,1,3,2,1,3,3,1]
+categories = 1:3
+counts = zeros(1,3);
+for k = 1:3
+  counts(k) = sum(observations == categories(k));
+end
+relative_frequencies = counts/numel(observations)
+
+% {{ comments.check[lang] }}
+example_check = all(counts == [4,2,3]) && abs(sum(relative_frequencies)-1) < 1e-10

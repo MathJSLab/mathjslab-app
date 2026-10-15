@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Law of cosines",
+            "es": "Ley de cosenos",
+            "pt": "Lei dos cossenos"
+        },
+        "goal": {
+            "en": "Find a triangle side from two known sides and their included angle.",
+            "es": "Encontrar un lado de triángulo con dos lados conocidos y el ángulo entre ellos.",
+            "pt": "Encontrar um lado de triângulo com dois lados conhecidos e o ângulo entre eles."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+a = 3
+b = 4
+included_angle = pi/2
+c = sqrt(a^2+b^2-2*a*b*cos(included_angle))
+
+% {{ comments.check[lang] }}
+example_check = abs(c-5) < 1e-10

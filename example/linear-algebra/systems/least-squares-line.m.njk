@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Least-squares line",
+            "es": "Recta de mínimos cuadrados",
+            "pt": "Reta de mínimos quadrados"
+        },
+        "goal": {
+            "en": "Fit an intercept and slope with normal equations, without polyfit.",
+            "es": "Ajustar intercepto y pendiente con ecuaciones normales, sin polyfit.",
+            "pt": "Ajustar intercepto e inclinação com equações normais, sem polyfit."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [0;1;2;3]
+y = [1;3;5;7]
+design = [ones(4,1),x]
+coefficients = (design.'*design)\(design.'*y)
+fitted = design*coefficients
+
+% {{ comments.check[lang] }}
+example_check = max(abs(coefficients-[1;2])) < 1e-10 && max(abs(fitted-y)) < 1e-10

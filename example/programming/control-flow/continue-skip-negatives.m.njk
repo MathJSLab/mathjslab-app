@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Skip negative entries",
+            "es": "Omitir entradas negativas",
+            "pt": "Pular entradas negativas"
+        },
+        "goal": {
+            "en": "Use continue to sum only nonnegative entries in a vector.",
+            "es": "Usar continue para sumar solo entradas no negativas de un vector.",
+            "pt": "Usar continue para somar apenas entradas não negativas de um vetor."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [3,-2,5,-7,4]
+total = 0;
+for k = 1:numel(values)
+  if values(k) < 0
+    continue;
+  end
+  total = total+values(k);
+end
+total
+
+% {{ comments.check[lang] }}
+example_check = total == 12

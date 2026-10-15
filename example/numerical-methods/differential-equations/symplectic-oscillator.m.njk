@@ -1,0 +1,41 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Symplectic oscillator steps",
+            "es": "Pasos simplécticos de un oscilador",
+            "pt": "Passos simpléticos de um oscilador"
+        },
+        "goal": {
+            "en": "Update velocity before position in a unit oscillator and inspect bounded energy error.",
+            "es": "Actualizar velocidad antes de posición en un oscilador unitario y observar el error acotado de energía.",
+            "pt": "Atualizar velocidade antes da posição num oscilador unitário e observar o erro limitado da energia."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+steps = 200;
+dt = 0.02;
+x = 1;
+velocity = 0;
+energy = zeros(1,steps+1);
+energy(1) = 0.5;
+for k = 1:steps
+  velocity = velocity-dt*x;
+  x = x+dt*velocity;
+  energy(k+1) = (x^2+velocity^2)/2;
+end
+final_position = x
+largest_energy_error = max(abs(energy-0.5))
+
+% {{ comments.check[lang] }}
+example_check = largest_energy_error < 0.01

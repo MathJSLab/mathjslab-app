@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "cadeias-carbonicas.md",
+    "comments": {
+        "title": {
+            "en": "Carbon chains",
+            "es": "Cadenas carbonadas",
+            "pt": "Cadeias carbônicas"
+        },
+        "goal": {
+            "en": "Open “Carbon chains” from mathjslab-markdown.",
+            "es": "Abrir «Cadenas carbonadas» de mathjslab-markdown.",
+            "pt": "Abrir “Cadeias carbônicas” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/cadeias-carbonicas.md")

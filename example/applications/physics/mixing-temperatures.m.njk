@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Mixing temperatures",
+            "es": "Mezcla de temperaturas",
+            "pt": "Mistura de temperaturas"
+        },
+        "goal": {
+            "en": "Mix two portions of the same substance assuming equal specific heat and no heat loss.",
+            "es": "Mezclar dos porciones de la misma sustancia suponiendo igual calor específico y sin pérdidas.",
+            "pt": "Misturar duas porções da mesma substância supondo calor específico igual e sem perdas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+masses_kg = [1,3]
+temperatures_celsius = [80,20]
+mixed_temperature = sum(masses_kg.*temperatures_celsius)/sum(masses_kg)
+
+% {{ comments.check[lang] }}
+example_check = mixed_temperature == 35

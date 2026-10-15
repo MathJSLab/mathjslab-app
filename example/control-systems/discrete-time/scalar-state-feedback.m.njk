@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Scalar state feedback",
+            "es": "Realimentación escalar de estado",
+            "pt": "Realimentação escalar de estado"
+        },
+        "goal": {
+            "en": "Apply proportional state feedback to a scalar discrete model and inspect the closed-loop decay.",
+            "es": "Aplicar realimentación proporcional de estado a un modelo discreto escalar y examinar el decaimiento.",
+            "pt": "Aplicar realimentação proporcional de estado a um modelo discreto escalar e examinar o decaimento."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+state = 4;
+trajectory = zeros(1,9);
+trajectory(1) = state;
+for k = 1:8
+  control_value = -0.4*state;
+  state = 0.9*state+control_value;
+  trajectory(k+1) = state;
+end
+trajectory
+
+% {{ comments.check[lang] }}
+example_check = abs(state-4*0.5^8) < 1e-10 && all(diff(trajectory) < 0)

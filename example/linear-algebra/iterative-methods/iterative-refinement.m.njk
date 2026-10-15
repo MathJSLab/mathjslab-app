@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Residual correction",
+            "es": "Corrección del residuo",
+            "pt": "Correção do resíduo"
+        },
+        "goal": {
+            "en": "Improve an approximate solution by solving for its residual.",
+            "es": "Mejorar una solución aproximada resolviendo su residuo.",
+            "pt": "Melhorar uma solução aproximada resolvendo seu resíduo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [3,1;1,2]; b = [7;5]; x = [1.7;1.5];
+initial_error = norm(b-A*x);
+correction = A\(b-A*x); x = x+correction;
+final_error = norm(b-A*x)
+
+% {{ comments.check[lang] }}
+example_check = initial_error > 0.1 && final_error < 1e-10

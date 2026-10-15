@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Numeric palindrome test",
+            "es": "Prueba de palíndromo numérico",
+            "pt": "Teste de palíndromo numérico"
+        },
+        "goal": {
+            "en": "Compare matching positions from the two ends.",
+            "es": "Comparar posiciones correspondientes desde los dos extremos.",
+            "pt": "Comparar posições correspondentes a partir dos dois extremos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+tokens = [2,5,8,5,2]; palindrome_value = true;
+for item_index = 1:floor(length(tokens)/2)
+ if tokens(item_index) ~= tokens(length(tokens)+1-item_index)
+  palindrome_value = false;
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = palindrome_value && tokens(3) == 8

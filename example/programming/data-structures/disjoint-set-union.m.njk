@@ -1,0 +1,49 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Disjoint-set union",
+            "es": "Unión de conjuntos disjuntos",
+            "pt": "União de conjuntos disjuntos"
+        },
+        "goal": {
+            "en": "Join components by redirecting root parents.",
+            "es": "Unir componentes redirigiendo padres de raíces.",
+            "pt": "Unir componentes redirecionando pais das raízes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+parents = 1:5; pairs = [1,2;3,4;2,4];
+for pair_index = 1:3
+ root_a = pairs(pair_index,1); root_b = pairs(pair_index,2);
+ while parents(root_a) ~= root_a
+  root_a = parents(root_a);
+ end
+ while parents(root_b) ~= root_b
+  root_b = parents(root_b);
+ end
+ parents(root_b) = root_a;
+end
+root_four = 4;
+while parents(root_four) ~= root_four
+ root_four = parents(root_four);
+end
+
+% {{ comments.check[lang] }}
+example_check = root_four == 1 && parents(5) == 5

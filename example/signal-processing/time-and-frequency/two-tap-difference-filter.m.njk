@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Two-tap difference filter",
+            "es": "Filtro diferencia de dos coeficientes",
+            "pt": "Filtro de diferença de dois coeficientes"
+        },
+        "goal": {
+            "en": "Subtract a delayed sequence with zero initial state to form a difference filter.",
+            "es": "Restar una secuencia retrasada con estado inicial cero para formar un filtro diferencia.",
+            "pt": "Subtrair uma sequência atrasada com estado inicial zero para formar um filtro de diferença."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [1,2,3,4]
+delayed_samples = [0,samples(1:end-1)]
+output_values = samples-delayed_samples
+
+% {{ comments.check[lang] }}
+example_check = all(output_values == [1,1,1,1]) && sum(output_values) == samples(end)

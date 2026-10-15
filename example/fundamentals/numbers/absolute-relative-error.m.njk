@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Absolute and relative error",
+            "es": "Error absoluto y relativo",
+            "pt": "Erro absoluto e relativo"
+        },
+        "goal": {
+            "en": "Compare two approximations of pi using absolute and relative errors.",
+            "es": "Comparar dos aproximaciones de pi con errores absolutos y relativos.",
+            "pt": "Comparar duas aproximações de pi com erros absolutos e relativos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+approximations = [3.14,22/7]
+absolute_errors = abs(approximations-pi)
+relative_errors = absolute_errors/abs(pi)
+
+% {{ comments.check[lang] }}
+example_check = absolute_errors(2) < absolute_errors(1) && all(relative_errors > 0) && all(relative_errors < 0.001)

@@ -1,0 +1,43 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Shared handle counter",
+            "es": "Contador handle compartido",
+            "pt": "Contador handle compartilhado"
+        },
+        "goal": {
+            "en": "Assign a handle to another variable and observe a shared mutation without reassignment.",
+            "es": "Asignar un handle a otra variable y observar una modificación compartida sin reasignación.",
+            "pt": "Atribuir um handle a outra variável e observar uma alteração compartilhada sem reatribuição."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef SharedCounter < handle
+  properties
+    Count = 0;
+  end
+  methods
+    function increment(obj,amount)
+      obj.Count = obj.Count+amount;
+    end
+  end
+end
+first = SharedCounter();
+second = first;
+second.increment(3);
+first.increment(2);
+shared_value = first.Count
+
+% {{ comments.check[lang] }}
+example_check = shared_value == 5 && second.Count == 5

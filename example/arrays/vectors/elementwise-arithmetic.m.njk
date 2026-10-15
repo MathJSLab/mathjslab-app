@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Elementwise arithmetic",
+            "es": "Aritmética elemento a elemento",
+            "pt": "Aritmética elemento a elemento"
+        },
+        "goal": {
+            "en": "Compare elementwise products, quotients and squares of matching vectors.",
+            "es": "Comparar productos, cocientes y cuadrados elemento a elemento.",
+            "pt": "Comparar produtos, quocientes e quadrados elemento a elemento."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+a = [2,4,8]
+b = [1,2,4]
+products = a.*b
+quotients = a./b
+squares = b.^2
+
+% {{ comments.check[lang] }}
+example_check = all(products == [2,8,32]) && all(quotients == [2,2,2]) && all(squares == [1,4,16])

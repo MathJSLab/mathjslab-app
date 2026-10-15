@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sorting and extremes",
+            "es": "Ordenación y extremos",
+            "pt": "Ordenação e extremos"
+        },
+        "goal": {
+            "en": "Order a small vector and compare its first and last values with min and max.",
+            "es": "Ordenar un vector pequeño y comparar sus extremos con min y max.",
+            "pt": "Ordenar um pequeno vetor e comparar seus extremos com min e max."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [8,3,11,5,3]
+ordered = sort(data)
+range_value = max(data)-min(data)
+
+% {{ comments.check[lang] }}
+example_check = all(ordered == [3,3,5,8,11]) && range_value == 8

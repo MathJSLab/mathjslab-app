@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Elementary cellular automaton",
+            "es": "Autómata celular elemental",
+            "pt": "Autômato celular elementar"
+        },
+        "goal": {
+            "en": "Update a fixed-boundary binary row with the XOR neighbor rule.",
+            "es": "Actualizar una fila binaria de bordes fijos con la regla XOR de vecinos.",
+            "pt": "Atualizar uma linha binária com bordas fixas pela regra XOR dos vizinhos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+grid_values = zeros(4,9); grid_values(1,5) = 1;
+for time_index = 1:3
+ for position_index = 2:8
+  grid_values(time_index+1,position_index) = mod(grid_values(time_index,position_index-1)+grid_values(time_index,position_index+1),2);
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = sum(grid_values(2,:)) == 2 && sum(grid_values(3,:)) == 2 && sum(grid_values(4,:)) == 4

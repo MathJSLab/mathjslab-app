@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Tilted plane surface",
+            "es": "Superficie de plano inclinado",
+            "pt": "Superfície de plano inclinado"
+        },
+        "goal": {
+            "en": "Render a small mesh of the plane z equals two x minus y.",
+            "es": "Mostrar una malla pequeña del plano z igual a dos x menos y.",
+            "pt": "Mostrar uma pequena malha do plano z igual a dois x menos y."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+axis_values = linspace(-1,1,9);
+[X,Y] = meshgrid(axis_values,axis_values);
+Z = 2*X-Y;
+surf(X,Y,Z)
+
+% {{ comments.check[lang] }}
+example_check = min(min(Z)) == -3 && max(max(Z)) == 3 && Z(5,5) == 0

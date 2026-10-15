@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Record table lookup",
+            "es": "Consulta de tabla de registros",
+            "pt": "Consulta de tabela de registros"
+        },
+        "goal": {
+            "en": "Locate a record by an identifier stored in a separate key column.",
+            "es": "Localizar un registro por un identificador en una columna de claves.",
+            "pt": "Localizar um registro por um identificador em uma coluna de chaves."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+records = struct(); records.ids = [101,205,309]; records.quantities = [7,4,9]; target_id = 205; found_quantity = -1;
+for row_index = 1:3
+ if records.ids(row_index) == target_id
+  found_quantity = records.quantities(row_index); break
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = found_quantity == 4

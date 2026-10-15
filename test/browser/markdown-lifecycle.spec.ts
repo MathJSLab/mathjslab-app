@@ -181,7 +181,7 @@ digraph { valid -> result }
 
     const viewer = page.locator('markdown-document');
     await expect(viewer).toHaveAttribute('state', 'ready');
-    await expect(viewer.locator('[data-markdown-extension="mermaid"] [role="alert"]')).toContainText('Mermaid:');
+    await expect(viewer.locator('[data-markdown-extension="mermaid"] [role="alert"]')).toContainText('Mermaid (mermaid):');
     await expect(viewer.locator('[data-markdown-extension="mermaid"] pre').last()).toContainText('not a mermaid diagram');
     await expect(viewer.locator('[data-markdown-extension="graphviz"] svg')).toBeVisible();
 });
@@ -239,6 +239,10 @@ test('dispose disconnects extension ResizeObservers and removes interactive outp
 });
 
 test('dispose cancels the Three.js animation loop and removes its WebGL canvas', async ({ page, browserName }) => {
+    const warnings: string[] = [];
+    page.on('console', (message) => {
+        if (message.text().includes('THREE.Clock')) warnings.push(message.text());
+    });
     test.skip(browserName === 'firefox', 'Playwright Firefox does not provide the WebGL implementation required by Three.js on this test host.');
     await openFixture(page);
     const hasWebGL = await page.evaluate(() => Boolean(document.createElement('canvas').getContext('webgl2') ?? document.createElement('canvas').getContext('webgl')));
@@ -260,6 +264,18 @@ test('dispose cancels the Three.js animation loop and removes its WebGL canvas',
             nativeCancel(id);
         };
         window.markdownAnimationFrames = active;
+        const visibilityListeners = new Set<EventListenerOrEventListenerObject>();
+        const nativeAdd = document.addEventListener.bind(document);
+        const nativeRemove = document.removeEventListener.bind(document);
+        document.addEventListener = ((type: string, listener: EventListenerOrEventListenerObject | null, options?: boolean | AddEventListenerOptions) => {
+            if (type === 'visibilitychange' && listener) visibilityListeners.add(listener);
+            nativeAdd(type, listener!, options);
+        }) as typeof document.addEventListener;
+        document.removeEventListener = ((type: string, listener: EventListenerOrEventListenerObject | null, options?: boolean | EventListenerOptions) => {
+            if (type === 'visibilitychange' && listener) visibilityListeners.delete(listener);
+            nativeRemove(type, listener!, options);
+        }) as typeof document.removeEventListener;
+        window.markdownTimerListeners = visibilityListeners;
 
         const viewer = document.createElement('markdown-document');
         viewer.engine = window.markdownTestApi!.createEducationalMarkdownEngine({ features: ['model-3d'] });
@@ -288,11 +304,14 @@ test('dispose cancels the Three.js animation loop and removes its WebGL canvas',
     await expect(viewer).toHaveAttribute('state', 'ready');
     await expect(viewer.locator('[data-markdown-extension="model-3d"] canvas')).toBeVisible();
     await expect.poll(() => page.evaluate(() => window.markdownAnimationFrames!.size)).toBeGreaterThan(0);
+    expect(warnings).toEqual([]);
+    expect(await page.evaluate(() => window.markdownTimerListeners!.size)).toBe(1);
 
     await page.evaluate(() => window.markdownLifecycle!.viewer.dispose());
     await expect(viewer).toHaveAttribute('state', 'empty');
     await expect(viewer.locator('canvas')).toHaveCount(0);
     await expect.poll(() => page.evaluate(() => window.markdownAnimationFrames!.size)).toBe(0);
+    expect(await page.evaluate(() => window.markdownTimerListeners!.size)).toBe(0);
 });
 
 declare global {
@@ -301,5 +320,6 @@ declare global {
         markdownLifecycle?: { viewer: import('../../src/components/markdown-document/markdown-document.component').MarkdownDocumentElement; aborted: string[] };
         markdownResizeObservers?: Set<object>;
         markdownAnimationFrames?: Set<number>;
+        markdownTimerListeners?: Set<EventListenerOrEventListenerObject>;
     }
 }

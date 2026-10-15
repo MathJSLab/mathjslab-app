@@ -45,6 +45,7 @@
 @use 'abstract/commons';
 @use 'layout/header';
 @use 'layout/footer';
+@use 'component/examples';
 
 body {
   display: block;

@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Toeplitz construction",
+            "es": "Construcción Toeplitz",
+            "pt": "Construção Toeplitz"
+        },
+        "goal": {
+            "en": "Use constant descending diagonals.",
+            "es": "Usar diagonales descendentes constantes.",
+            "pt": "Usar diagonais descendentes constantes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = zeros(4,4);
+for row_index = 1:4
+ for column_index = 1:4
+  A(row_index,column_index) = 5-abs(row_index-column_index);
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = A(1,4) == 2 && max(max(abs(A-A.'))) < 1e-10

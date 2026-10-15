@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "genetica-mendeliana.md",
+    "comments": {
+        "title": {
+            "en": "Genetics: a monohybrid cross",
+            "es": "Genética: un cruce monohíbrido",
+            "pt": "Genética: um cruzamento monohíbrido"
+        },
+        "goal": {
+            "en": "Open “Genetics: a monohybrid cross” from mathjslab-markdown.",
+            "es": "Abrir «Genética: un cruce monohíbrido» de mathjslab-markdown.",
+            "pt": "Abrir “Genética: um cruzamento monohíbrido” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/genetica-mendeliana.md")

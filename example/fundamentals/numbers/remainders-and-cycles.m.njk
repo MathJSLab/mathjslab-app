@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Remainders and cycles",
+            "es": "Restos y ciclos",
+            "pt": "Restos e ciclos"
+        },
+        "goal": {
+            "en": "Use mod to wrap an index around a seven-day cycle.",
+            "es": "Usar mod para recorrer un ciclo de siete días.",
+            "pt": "Usar mod para percorrer um ciclo de sete dias."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+day = 3
+elapsed_days = 19
+next_day = mod(day-1+elapsed_days,7)+1
+quotient = floor(19/7)
+remainder = mod(19,7)
+
+% {{ comments.check[lang] }}
+example_check = next_day == 1 && 7*quotient+remainder == 19

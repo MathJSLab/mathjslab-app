@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Complex conjugates",
+            "es": "Conjugados complejos",
+            "pt": "Conjugados complexos"
+        },
+        "goal": {
+            "en": "Multiply a complex number by its conjugate to obtain its squared magnitude.",
+            "es": "Multiplicar un número complejo por su conjugado para obtener su magnitud al cuadrado.",
+            "pt": "Multiplicar um número complexo pelo conjugado para obter o quadrado do módulo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+z = 5+12i
+conjugate_value = conj(z)
+magnitude = abs(z)
+squared_magnitude = z*conjugate_value
+real_part = real(z)
+imaginary_part = imag(z)
+
+% {{ comments.check[lang] }}
+example_check = magnitude == 13 && squared_magnitude == 169 && real_part == 5 && imaginary_part == 12

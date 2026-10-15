@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "piramide-quadrada.md",
+    "comments": {
+        "title": {
+            "en": "Square-based pyramid: height and volume",
+            "es": "Pirámide de base cuadrada: altura y volumen",
+            "pt": "Pirâmide de base quadrada: altura e volume"
+        },
+        "goal": {
+            "en": "Open “Square-based pyramid: height and volume” from mathjslab-markdown.",
+            "es": "Abrir «Pirámide de base cuadrada: altura y volumen» de mathjslab-markdown.",
+            "pt": "Abrir “Pirâmide de base quadrada: altura e volume” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/piramide-quadrada.md")

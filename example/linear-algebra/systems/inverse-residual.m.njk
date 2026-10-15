@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Inverse residual",
+            "es": "Residuo de la inversa",
+            "pt": "Resíduo da inversa"
+        },
+        "goal": {
+            "en": "Multiply a matrix by its inverse and measure the difference from the identity.",
+            "es": "Multiplicar una matriz por su inversa y medir la diferencia con la identidad.",
+            "pt": "Multiplicar uma matriz pela inversa e medir a diferença para a identidade."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [4,1;2,3]
+inverse_matrix = inv(A)
+identity_error = A*inverse_matrix-eye(2)
+largest_error = max(max(abs(identity_error)))
+
+% {{ comments.check[lang] }}
+example_check = largest_error < 1e-10

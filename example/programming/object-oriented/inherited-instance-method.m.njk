@@ -1,0 +1,45 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Inherited instance method",
+            "es": "Método de instancia heredado",
+            "pt": "Método de instância herdado"
+        },
+        "goal": {
+            "en": "Construct a subclass and call a method inherited from its base class.",
+            "es": "Construir una subclase y llamar un método heredado de su clase base.",
+            "pt": "Construir uma subclasse e chamar um método herdado de sua classe base."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef BaseMeasurement
+  properties
+    Value = 4;
+  end
+  methods
+    function result = doubled(obj)
+      result = 2*obj.Value;
+    end
+  end
+end
+classdef LabeledMeasurement < BaseMeasurement
+  properties
+    Code = 7;
+  end
+end
+measurement = LabeledMeasurement();
+result = measurement.doubled()
+
+% {{ comments.check[lang] }}
+example_check = result == 8 && measurement.Code == 7

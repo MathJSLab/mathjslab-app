@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Ignore missing measurements",
+            "es": "Omitir mediciones faltantes",
+            "pt": "Ignorar medições ausentes"
+        },
+        "goal": {
+            "en": "Exclude NaN entries before calculating an average and retain a valid-count report.",
+            "es": "Excluir entradas NaN antes de calcular una media y conservar el conteo válido.",
+            "pt": "Excluir entradas NaN antes de calcular uma média e preservar a contagem válida."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+measurements = [10,NaN,14,NaN,18]
+valid_mask = ~isnan(measurements)
+valid_values = measurements(valid_mask)
+valid_count = sum(valid_mask)
+valid_average = mean(valid_values)
+
+% {{ comments.check[lang] }}
+example_check = valid_count == 3 && valid_average == 14

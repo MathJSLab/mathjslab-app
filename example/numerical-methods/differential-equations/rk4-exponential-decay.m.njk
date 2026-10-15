@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Runge-Kutta exponential decay",
+            "es": "Decaimiento exponencial con Runge-Kutta",
+            "pt": "Decaimento exponencial com Runge-Kutta"
+        },
+        "goal": {
+            "en": "Integrate the same decay model with twenty fourth-order Runge-Kutta steps.",
+            "es": "Integrar el mismo modelo de decaimiento con veinte pasos de Runge-Kutta de cuarto orden.",
+            "pt": "Integrar o mesmo modelo de decaimento com vinte passos de Runge-Kutta de quarta ordem."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+steps = 20;
+dt = 1/steps;
+y = 1;
+for k = 1:steps
+  k1 = -y;
+  k2 = -(y+dt*k1/2);
+  k3 = -(y+dt*k2/2);
+  k4 = -(y+dt*k3);
+  y = y+dt*(k1+2*k2+2*k3+k4)/6;
+end
+final_value = y
+absolute_error = abs(y-exp(-1))
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 1e-6

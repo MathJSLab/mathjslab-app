@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Linear conversion function",
+            "es": "Función de conversión lineal",
+            "pt": "Função de conversão linear"
+        },
+        "goal": {
+            "en": "Define a reusable affine transformation that accepts vector inputs.",
+            "es": "Definir una transformación afín reutilizable que acepta vectores.",
+            "pt": "Definir uma transformação afim reutilizável que aceita vetores."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+function output = affine_convert(input,scale,offset)
+  output = scale.*input+offset;
+end
+converted = affine_convert([0,10,20],1.8,32)
+
+% {{ comments.check[lang] }}
+example_check = max(abs(converted-[32,50,68])) < 1e-10

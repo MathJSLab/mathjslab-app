@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Radial ripple surface",
+            "es": "Superficie de ondulación radial",
+            "pt": "Superfície de ondulação radial"
+        },
+        "goal": {
+            "en": "Plot cosine of the distance from the origin on a small square grid.",
+            "es": "Graficar el coseno de la distancia al origen en una cuadrícula cuadrada pequeña.",
+            "pt": "Traçar o cosseno da distância até a origem numa pequena grade quadrada."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+axis_values = linspace(-pi,pi,9);
+[X,Y] = meshgrid(axis_values,axis_values);
+radii = sqrt(X.^2+Y.^2);
+Z = cos(radii);
+surf(X,Y,Z)
+
+% {{ comments.check[lang] }}
+example_check = abs(Z(5,5)-1) < 1e-10 && all(all(abs(Z) <= 1+1e-10))

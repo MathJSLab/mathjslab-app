@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Adjacency lists in cells",
+            "es": "Listas de adyacencia en celdas",
+            "pt": "Listas de adjacência em células"
+        },
+        "goal": {
+            "en": "Store variable-length neighbor lists and calculate vertex degrees.",
+            "es": "Guardar listas de vecinos de longitud variable y calcular grados.",
+            "pt": "Guardar listas de vizinhos de comprimento variável e calcular graus."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+neighbors = {[2,3],[1],[1,4],[3]}; degrees = zeros(1,4);
+for node_index = 1:4
+ degrees(node_index) = length(neighbors{node_index});
+end
+edge_count = sum(degrees)/2;
+
+% {{ comments.check[lang] }}
+example_check = all(degrees == [2,1,2,1]) && edge_count == 3

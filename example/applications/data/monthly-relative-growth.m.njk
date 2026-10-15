@@ -1,0 +1,30 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Monthly relative growth",
+            "es": "Crecimiento relativo mensual",
+            "pt": "Crescimento relativo mensal"
+        },
+        "goal": {
+            "en": "Calculate percentage changes between consecutive positive monthly values.",
+            "es": "Calcular cambios porcentuales entre valores mensuales positivos consecutivos.",
+            "pt": "Calcular variações percentuais entre valores mensais positivos consecutivos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+monthly_values = [100,120,90,135]
+growth_percent = 100*diff(monthly_values)./monthly_values(1:end-1)
+
+% {{ comments.check[lang] }}
+example_check = max(abs(growth_percent-[20,-25,50])) < 1e-10

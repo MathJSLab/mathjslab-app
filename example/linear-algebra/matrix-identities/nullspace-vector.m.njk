@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "A nullspace direction",
+            "es": "Una dirección del núcleo",
+            "pt": "Uma direção do núcleo"
+        },
+        "goal": {
+            "en": "Exhibit a nonzero vector sent to zero by a rectangular matrix.",
+            "es": "Exhibir un vector no nulo enviado a cero por una matriz rectangular.",
+            "pt": "Exibir um vetor não nulo enviado a zero por uma matriz retangular."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [1,2,3;2,4,6]; null_vector = [2;-1;0];
+image_vector = A*null_vector
+
+% {{ comments.check[lang] }}
+example_check = norm(null_vector) > 0 && max(abs(image_vector)) < 1e-10

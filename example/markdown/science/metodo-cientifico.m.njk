@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "metodo-cientifico.md",
+    "comments": {
+        "title": {
+            "en": "Investigating germination",
+            "es": "Investigación de la germinación",
+            "pt": "Investigação da germinação"
+        },
+        "goal": {
+            "en": "Open “Investigating germination” from mathjslab-markdown.",
+            "es": "Abrir «Investigación de la germinación» de mathjslab-markdown.",
+            "pt": "Abrir “Investigação da germinação” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/metodo-cientifico.md")

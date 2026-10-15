@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Triangle circumcenter",
+            "es": "Circuncentro de triángulo",
+            "pt": "Circuncentro de triângulo"
+        },
+        "goal": {
+            "en": "Solve perpendicular-bisector equations for the circle center.",
+            "es": "Resolver ecuaciones de mediatrices para el centro del círculo.",
+            "pt": "Resolver equações de mediatrizes para o centro do círculo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+a = [0,0]; b = [4,0]; c = [0,3];
+center_point = (2*[b-a;c-a])\[sum(b.^2)-sum(a.^2);sum(c.^2)-sum(a.^2)];
+radii = [norm(center_point-a.'),norm(center_point-b.'),norm(center_point-c.')];
+
+% {{ comments.check[lang] }}
+example_check = max(abs(center_point-[2;1.5])) < 1e-10 && max(abs(radii-2.5)) < 1e-10

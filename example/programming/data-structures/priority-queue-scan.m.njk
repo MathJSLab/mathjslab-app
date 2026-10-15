@@ -1,0 +1,45 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Priority queue by scanning",
+            "es": "Cola de prioridad por recorrido",
+            "pt": "Fila de prioridade por percurso"
+        },
+        "goal": {
+            "en": "Remove the active item with the smallest priority.",
+            "es": "Retirar el elemento activo con la menor prioridad.",
+            "pt": "Retirar o item ativo com a menor prioridade."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+priorities = [4,1,3]; identifiers = [40,10,30]; active_values = [1,1,1]; best_index = 0;
+for item_index = 1:3
+ if active_values(item_index)
+  if best_index == 0
+   best_index = item_index;
+  elseif priorities(item_index) < priorities(best_index)
+   best_index = item_index;
+  end
+ end
+end
+removed_id = identifiers(best_index); active_values(best_index) = 0;
+
+% {{ comments.check[lang] }}
+example_check = removed_id == 10 && sum(active_values) == 2

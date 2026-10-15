@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Nested structure",
+            "es": "Estructura anidada",
+            "pt": "Estrutura aninhada"
+        },
+        "goal": {
+            "en": "Group geometry and calculated area under a nested field.",
+            "es": "Agrupar geometría y área calculada dentro de un campo anidado.",
+            "pt": "Agrupar geometria e área calculada num campo aninhado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+shape.geometry.width = 3
+shape.geometry.height = 7
+shape.area = shape.geometry.width*shape.geometry.height
+
+% {{ comments.check[lang] }}
+example_check = shape.area == 21 && shape.geometry.height == 7

@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Gram-Schmidt orthogonalization",
+            "es": "Ortogonalización de Gram-Schmidt",
+            "pt": "Ortogonalização de Gram-Schmidt"
+        },
+        "goal": {
+            "en": "Remove one projection and normalize two independent real vectors.",
+            "es": "Eliminar una proyección y normalizar dos vectores reales independientes.",
+            "pt": "Remover uma projeção e normalizar dois vetores reais independentes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+v1 = [1;1;0]
+v2 = [1;0;1]
+q1 = v1/norm(v1)
+remainder_vector = v2-q1*(q1.'*v2)
+q2 = remainder_vector/norm(remainder_vector)
+Q = [q1,q2]
+orthogonality_error = Q.'*Q-eye(2)
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(orthogonality_error))) < 1e-10

@@ -4,7 +4,7 @@ const allBrowsers = process.env.MARKDOWN_BROWSER_PROJECTS === 'all';
 
 export default defineConfig({
     testDir: './test/browser',
-    outputDir: './test-results/playwright',
+    outputDir: './test/result/playwright',
     globalSetup: './test/browser/global-setup.ts',
     fullyParallel: true,
     forbidOnly: Boolean(process.env.CI),

@@ -1,0 +1,41 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Modular exponentiation",
+            "es": "Potenciación modular",
+            "pt": "Exponenciação modular"
+        },
+        "goal": {
+            "en": "Reduce each multiplication to keep intermediate numbers bounded.",
+            "es": "Reducir cada multiplicación para limitar los números intermedios.",
+            "pt": "Reduzir cada multiplicação para limitar os números intermediários."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+base_value = 7; exponent_value = 13; modulus_value = 11; product_value = 1;
+while exponent_value > 0
+ if mod(exponent_value,2) == 1
+  product_value = mod(product_value*base_value,modulus_value);
+ end
+ base_value = mod(base_value^2,modulus_value); exponent_value = floor(exponent_value/2);
+end
+
+% {{ comments.check[lang] }}
+example_check = product_value == 2

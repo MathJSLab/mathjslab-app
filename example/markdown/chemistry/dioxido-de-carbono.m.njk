@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "dioxido-de-carbono.md",
+    "comments": {
+        "title": {
+            "en": "Carbon dioxide: bonds and symmetry",
+            "es": "Dióxido de carbono: enlaces y simetría",
+            "pt": "Dióxido de carbono: ligações e simetria"
+        },
+        "goal": {
+            "en": "Open “Carbon dioxide: bonds and symmetry” from mathjslab-markdown.",
+            "es": "Abrir «Dióxido de carbono: enlaces y simetría» de mathjslab-markdown.",
+            "pt": "Abrir “Dióxido de carbono: ligações e simetria” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/dioxido-de-carbono.md")

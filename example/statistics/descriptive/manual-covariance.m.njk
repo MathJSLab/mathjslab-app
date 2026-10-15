@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Covariance from deviations",
+            "es": "Covarianza con desviaciones",
+            "pt": "Covariância a partir de desvios"
+        },
+        "goal": {
+            "en": "Compute sample covariance without depending on cov.",
+            "es": "Calcular covarianza muestral sin depender de cov.",
+            "pt": "Calcular covariância amostral sem depender de cov."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [1,2,3,4]
+y = [2,4,6,8]
+dx = x-mean(x)
+dy = y-mean(y)
+sample_covariance = sum(dx.*dy)/(numel(x)-1)
+correlation = sample_covariance/(std(x)*std(y))
+
+% {{ comments.check[lang] }}
+example_check = abs(sample_covariance-10/3) < 1e-10 && abs(correlation-1) < 1e-10

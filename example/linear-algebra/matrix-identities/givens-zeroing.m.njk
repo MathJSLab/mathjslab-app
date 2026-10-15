@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Givens rotation",
+            "es": "Rotación de Givens",
+            "pt": "Rotação de Givens"
+        },
+        "goal": {
+            "en": "Rotate a two-entry vector to eliminate its second component.",
+            "es": "Rotar un vector de dos entradas para eliminar su segundo componente.",
+            "pt": "Rotacionar um vetor de duas entradas para eliminar seu segundo componente."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+v = [3;4]; radius_value = norm(v); c = v(1)/radius_value; s = v(2)/radius_value;
+G = [c,s;-s,c]; rotated = G*v
+
+% {{ comments.check[lang] }}
+example_check = max(abs(rotated-[5;0])) < 1e-10 && max(max(abs(G.'*G-eye(2)))) < 1e-10

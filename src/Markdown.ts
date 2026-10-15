@@ -16,6 +16,7 @@ import { vegaLiteExtension } from './markdown/extensions/vega-lite/extension';
 import { verovioExtension } from './markdown/extensions/verovio/extension';
 import type { MarkedOptions } from 'marked';
 import { withActiveInterpreter } from './InterpreterRuntime';
+import { markdownMapConfiguration } from './MarkdownMapConfiguration';
 
 const engine = new MarkdownEngine({
     extensions: [
@@ -25,7 +26,7 @@ const engine = new MarkdownEngine({
         abcExtension(),
         verovioExtension(),
         vegaLiteExtension(),
-        mapsExtension(),
+        mapsExtension(markdownMapConfiguration),
         molecule3DExtension(),
         model3DExtension(),
         mathJSLabExtension(

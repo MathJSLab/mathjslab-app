@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Clip vector values",
+            "es": "Limitar valores de un vector",
+            "pt": "Limitar valores de um vetor"
+        },
+        "goal": {
+            "en": "Clamp measurements to an interval using logical assignment.",
+            "es": "Limitar mediciones a un intervalo usando asignación lógica.",
+            "pt": "Limitar medições a um intervalo usando atribuição lógica."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [-3,0,2,7,12]
+clipped = values;
+clipped(clipped < 0) = 0;
+clipped(clipped > 8) = 8;
+clipped
+
+% {{ comments.check[lang] }}
+example_check = all(clipped == [0,0,2,7,8])

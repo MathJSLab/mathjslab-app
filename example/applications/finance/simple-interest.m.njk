@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Simple interest",
+            "es": "Interés simple",
+            "pt": "Juros simples"
+        },
+        "goal": {
+            "en": "Calculate a balance with a fixed annual simple rate and no reinvestment.",
+            "es": "Calcular un saldo con tasa anual simple fija y sin reinversión.",
+            "pt": "Calcular um saldo com taxa anual simples fixa e sem reinvestimento."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+principal = 1500
+annual_rate = 0.04
+years = 3
+interest = principal*annual_rate*years
+balance = principal+interest
+
+% {{ comments.check[lang] }}
+example_check = interest == 180 && balance == 1680

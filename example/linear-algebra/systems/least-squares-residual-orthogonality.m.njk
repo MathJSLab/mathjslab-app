@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Least-squares residual orthogonality",
+            "es": "Ortogonalidad del residuo de mínimos cuadrados",
+            "pt": "Ortogonalidade do resíduo de mínimos quadrados"
+        },
+        "goal": {
+            "en": "Fit noisy linear data and verify that the residual is orthogonal to the design columns.",
+            "es": "Ajustar datos lineales con ruido y verificar que el residuo es ortogonal a las columnas del diseño.",
+            "pt": "Ajustar dados lineares com ruído e verificar que o resíduo é ortogonal às colunas do projeto."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [0;1;2;3]
+y = [1;2;2;4]
+design = [ones(4,1),x]
+coefficients = (design.'*design)\(design.'*y)
+residual = y-design*coefficients
+normal_residual = design.'*residual
+
+% {{ comments.check[lang] }}
+example_check = max(abs(normal_residual)) < 1e-10 && norm(residual) > 0

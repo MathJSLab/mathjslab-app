@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Two variance conventions",
+            "es": "Dos convenciones de varianza",
+            "pt": "Duas convenções de variância"
+        },
+        "goal": {
+            "en": "Compare division by n and n minus one using the same squared deviations.",
+            "es": "Comparar división por n y n menos uno con las mismas desviaciones cuadradas.",
+            "pt": "Comparar divisão por n e n menos um usando os mesmos desvios quadráticos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [2,4,6,8]
+deviations = data-mean(data)
+squared_total = sum(deviations.^2)
+population_variance = squared_total/numel(data)
+sample_variance = squared_total/(numel(data)-1)
+
+% {{ comments.check[lang] }}
+example_check = population_variance == 5 && abs(sample_variance-20/3) < 1e-10

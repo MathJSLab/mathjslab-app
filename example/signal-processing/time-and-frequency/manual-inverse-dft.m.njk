@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Manual inverse DFT",
+            "es": "DFT inversa manual",
+            "pt": "DFT inversa manual"
+        },
+        "goal": {
+            "en": "Recover four time samples with the positive exponential and one-over-n normalization.",
+            "es": "Recuperar cuatro muestras temporales con exponencial positiva y normalización uno sobre n.",
+            "pt": "Recuperar quatro amostras temporais com exponencial positiva e normalização um sobre n."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+coefficients = [0,2,0,2];
+recovered = zeros(1,4);
+for sample_index = 0:3
+  for frequency_index = 0:3
+    phase_radians = 2*pi*frequency_index*sample_index/4;
+    recovered(sample_index+1) = recovered(sample_index+1)+coefficients(frequency_index+1)*exp(1i*phase_radians)/4;
+  end
+end
+recovered
+
+% {{ comments.check[lang] }}
+example_check = max(abs(recovered-[1,0,-1,0])) < 1e-10

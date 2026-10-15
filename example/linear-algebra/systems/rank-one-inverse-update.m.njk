@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Rank-one inverse update",
+            "es": "Actualización de inversa de rango uno",
+            "pt": "Atualização de inversa de posto um"
+        },
+        "goal": {
+            "en": "Check a Sherman-Morrison update against direct inversion when the denominator is nonzero.",
+            "es": "Comprobar una actualización de Sherman-Morrison con inversión directa cuando el denominador no es cero.",
+            "pt": "Verificar uma atualização de Sherman-Morrison por inversão direta quando o denominador não é zero."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [2,0;0,3]
+u = [1;2]
+v = [2;1]
+inverse_matrix = inv(A)
+denominator_value = 1+sum(v.*(inverse_matrix*u))
+updated_inverse = inverse_matrix-(inverse_matrix*u*v.'*inverse_matrix)/denominator_value
+direct_inverse = inv(A+u*v.')
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(updated_inverse-direct_inverse))) < 1e-10

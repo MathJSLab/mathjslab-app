@@ -1,0 +1,43 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Point-in-polygon ray test",
+            "es": "Prueba de rayo para punto en polígono",
+            "pt": "Teste de raio para ponto em polígono"
+        },
+        "goal": {
+            "en": "Count horizontal ray crossings for a point away from the boundary.",
+            "es": "Contar cruces de un rayo horizontal para un punto fuera del borde.",
+            "pt": "Contar cruzamentos de um raio horizontal para um ponto fora da borda."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+vertices = [0,0;4,0;4,3;0,3]; point_value = [1,1]; crossing_values = zeros(1,4);
+for edge_index = 1:4
+ a = vertices(edge_index,:); b = vertices(mod(edge_index,4)+1,:);
+ if (a(2) > point_value(2)) ~= (b(2) > point_value(2))
+  crossing_x = a(1)+(point_value(2)-a(2))*(b(1)-a(1))/(b(2)-a(2));
+  crossing_values(edge_index) = crossing_x > point_value(1);
+ end
+end
+inside_value = mod(sum(crossing_values),2) == 1;
+
+% {{ comments.check[lang] }}
+example_check = inside_value && sum(crossing_values) == 1

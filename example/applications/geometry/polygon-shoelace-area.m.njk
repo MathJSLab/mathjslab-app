@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Polygon area",
+            "es": "Área de un polígono",
+            "pt": "Área de um polígono"
+        },
+        "goal": {
+            "en": "Apply the shoelace sum to ordered vertices of a simple rectangle.",
+            "es": "Aplicar la suma de productos cruzados a vértices ordenados de un rectángulo simple.",
+            "pt": "Aplicar a soma de produtos cruzados aos vértices ordenados de um retângulo simples."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [0,4,4,0,0]
+y = [0,0,3,3,0]
+cross_sum = 0;
+for k = 1:4
+  cross_sum = cross_sum+x(k)*y(k+1)-x(k+1)*y(k);
+end
+area = abs(cross_sum)/2
+
+% {{ comments.check[lang] }}
+example_check = area == 12

@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Barycentric point",
+            "es": "Punto baricéntrico",
+            "pt": "Ponto baricêntrico"
+        },
+        "goal": {
+            "en": "Recover weights for a point inside a triangle using an augmented coordinate system.",
+            "es": "Recuperar pesos de un punto dentro de un triángulo usando un sistema de coordenadas aumentado.",
+            "pt": "Recuperar pesos de um ponto dentro de um triângulo usando um sistema de coordenadas aumentado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+vertices = [0,4,0;0,0,4]
+point = [1;1]
+augmented = [vertices;ones(1,3)]
+weights = augmented\[point;1]
+recovered_point = vertices*weights
+
+% {{ comments.check[lang] }}
+example_check = max(abs(weights-[0.5;0.25;0.25])) < 1e-10 && max(abs(recovered_point-point)) < 1e-10

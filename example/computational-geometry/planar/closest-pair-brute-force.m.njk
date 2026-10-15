@@ -1,0 +1,43 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Closest pair of points",
+            "es": "Par de puntos más cercano",
+            "pt": "Par de pontos mais próximo"
+        },
+        "goal": {
+            "en": "Compare every distinct pair using squared distances.",
+            "es": "Comparar cada par distinto con distancias cuadradas.",
+            "pt": "Comparar cada par distinto com distâncias quadráticas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+points = [0,0;4,0;4,1;0,5]; best = [1,2,sum((points(1,:)-points(2,:)).^2)];
+for first_index = 1:3
+ for second_index = (first_index+1):4
+  squared_value = sum((points(first_index,:)-points(second_index,:)).^2);
+  if squared_value < best(3)
+   best(1) = first_index; best(2) = second_index; best(3) = squared_value;
+  end
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = all(best == [2,3,1])

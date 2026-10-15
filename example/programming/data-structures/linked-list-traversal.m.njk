@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Linked list traversal",
+            "es": "Recorrido de lista enlazada",
+            "pt": "Percurso de lista encadeada"
+        },
+        "goal": {
+            "en": "Follow next-node indices through noncontiguous storage.",
+            "es": "Seguir índices del siguiente nodo en almacenamiento no contiguo.",
+            "pt": "Seguir índices do próximo nó em armazenamento não contíguo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+node_values = [20,30,10]; next_nodes = [2,0,1]; node_index = 3; visited_values = zeros(1,3); count_value = 0;
+while node_index ~= 0
+ count_value = count_value+1; visited_values(count_value) = node_values(node_index); node_index = next_nodes(node_index);
+end
+
+% {{ comments.check[lang] }}
+example_check = all(visited_values == [10,20,30])

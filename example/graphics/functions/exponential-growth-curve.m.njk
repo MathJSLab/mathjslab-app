@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Exponential growth curve",
+            "es": "Curva de crecimiento exponencial",
+            "pt": "Curva de crescimento exponencial"
+        },
+        "goal": {
+            "en": "Plot a small exponential growth model and compare its final and initial values.",
+            "es": "Graficar un pequeño modelo de crecimiento exponencial y comparar extremos.",
+            "pt": "Traçar um pequeno modelo de crescimento exponencial e comparar os extremos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+time = linspace(0,5,31);
+population = 100*exp(0.2*time);
+plot(time,population)
+growth_factor = population(end)/population(1)
+
+% {{ comments.check[lang] }}
+example_check = abs(growth_factor-exp(1)) < 1e-10 && all(diff(population) > 0)

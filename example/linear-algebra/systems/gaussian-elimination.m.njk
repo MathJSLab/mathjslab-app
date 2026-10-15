@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Gaussian elimination",
+            "es": "Eliminación de Gauss",
+            "pt": "Eliminação de Gauss"
+        },
+        "goal": {
+            "en": "Eliminate one coefficient and recover a two-variable solution by back substitution.",
+            "es": "Eliminar un coeficiente y recuperar una solución de dos variables por sustitución regresiva.",
+            "pt": "Eliminar um coeficiente e recuperar uma solução de duas variáveis por substituição regressiva."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [2,1;4,3]
+b = [5;11]
+factor = A(2,1)/A(1,1)
+reduced_row = A(2,:)-factor*A(1,:)
+reduced_rhs = b(2)-factor*b(1)
+y = reduced_rhs/reduced_row(2)
+x = (b(1)-A(1,2)*y)/A(1,1)
+solution = [x;y]
+
+% {{ comments.check[lang] }}
+example_check = max(abs(A*solution-b)) < 1e-10 && all(solution == [2;1])

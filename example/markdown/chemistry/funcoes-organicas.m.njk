@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "funcoes-organicas.md",
+    "comments": {
+        "title": {
+            "en": "Organic functional groups",
+            "es": "Funciones orgánicas",
+            "pt": "Funções orgânicas"
+        },
+        "goal": {
+            "en": "Open “Organic functional groups” from mathjslab-markdown.",
+            "es": "Abrir «Funciones orgánicas» de mathjslab-markdown.",
+            "pt": "Abrir “Funções orgânicas” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/funcoes-organicas.md")

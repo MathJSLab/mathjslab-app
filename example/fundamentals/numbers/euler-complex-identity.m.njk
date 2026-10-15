@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Euler complex identity",
+            "es": "Identidad compleja de Euler",
+            "pt": "Identidade complexa de Euler"
+        },
+        "goal": {
+            "en": "Compare a complex exponential with its sine and cosine representation.",
+            "es": "Comparar una exponencial compleja con su representación en seno y coseno.",
+            "pt": "Comparar uma exponencial complexa com sua representação em seno e cosseno."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+phase_radians = pi/4
+exponential_value = exp(1i*phase_radians)
+trigonometric_value = cos(phase_radians)+1i*sin(phase_radians)
+half_turn = exp(1i*pi)
+
+% {{ comments.check[lang] }}
+example_check = abs(exponential_value-trigonometric_value) < 1e-10 && abs(half_turn+1) < 1e-10

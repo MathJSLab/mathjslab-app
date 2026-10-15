@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "mitose.md",
+    "comments": {
+        "title": {
+            "en": "Mitosis and the cell cycle",
+            "es": "Mitosis y organización del ciclo celular",
+            "pt": "Mitose e organização do ciclo celular"
+        },
+        "goal": {
+            "en": "Open “Mitosis and the cell cycle” from mathjslab-markdown.",
+            "es": "Abrir «Mitosis y organización del ciclo celular» de mathjslab-markdown.",
+            "pt": "Abrir “Mitose e organização do ciclo celular” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/mitose.md")

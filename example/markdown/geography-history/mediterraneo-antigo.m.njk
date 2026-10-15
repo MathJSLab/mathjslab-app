@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "mediterraneo-antigo.md",
+    "comments": {
+        "title": {
+            "en": "Ancient Mediterranean: cities and connections",
+            "es": "Mediterráneo antiguo: ciudades y conexiones",
+            "pt": "Mediterrâneo antigo: cidades e conexões"
+        },
+        "goal": {
+            "en": "Open “Ancient Mediterranean: cities and connections” from mathjslab-markdown.",
+            "es": "Abrir «Mediterráneo antiguo: ciudades y conexiones» de mathjslab-markdown.",
+            "pt": "Abrir “Mediterrâneo antigo: cidades e conexões” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/mediterraneo-antigo.md")

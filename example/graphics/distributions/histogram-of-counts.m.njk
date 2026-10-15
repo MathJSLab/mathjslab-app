@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Histogram of counts",
+            "es": "Histograma de conteos",
+            "pt": "Histograma de contagens"
+        },
+        "goal": {
+            "en": "Display precomputed category counts with the MathJSLab histogram helper.",
+            "es": "Mostrar conteos de categorías ya calculados con la función histogram de MathJSLab.",
+            "pt": "Mostrar contagens de categorias já calculadas com a função histogram do MathJSLab."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+categories = [1,2,3,4]
+counts = [3,7,5,1]
+histogram(counts,categories)
+total_count = sum(counts)
+
+% {{ comments.check[lang] }}
+example_check = total_count == 16 && all(counts >= 0)

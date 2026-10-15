@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Krylov subspace",
+            "es": "Subespacio de Krylov",
+            "pt": "Subespaço de Krylov"
+        },
+        "goal": {
+            "en": "Build a basis from a vector and repeated matrix products.",
+            "es": "Construir una base con un vector y productos matriciales repetidos.",
+            "pt": "Construir uma base com um vetor e produtos matriciais repetidos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [1,0,0;0,2,0;0,0,3]; v = [1;1;1];
+K = [v,A*v,A*A*v]
+coefficients = K\[1;0;0]
+
+% {{ comments.check[lang] }}
+example_check = abs(det(K)-2) < 1e-10 && max(abs(K*coefficients-[1;0;0])) < 1e-10

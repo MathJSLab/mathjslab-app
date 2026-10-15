@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Matched pattern search",
+            "es": "Búsqueda de patrón correlacionado",
+            "pt": "Busca de padrão correlacionado"
+        },
+        "goal": {
+            "en": "Slide a known signed pattern across samples and compare inner-product scores.",
+            "es": "Deslizar un patrón de signos conocido por las muestras y comparar productos internos.",
+            "pt": "Deslizar um padrão de sinais conhecido pelas amostras e comparar produtos internos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [0,0,1,-1,1,-1,0,0];
+pattern_values = [1,-1,1,-1];
+scores = zeros(1,5);
+for k = 1:5
+  scores(k) = sum(samples(k:k+3).*pattern_values);
+end
+scores
+
+% {{ comments.check[lang] }}
+example_check = scores(3) == 4 && max(scores) == 4

@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Gauss–Seidel iteration",
+            "es": "Iteración de Gauss–Seidel",
+            "pt": "Iteração de Gauss–Seidel"
+        },
+        "goal": {
+            "en": "Reuse the newest component while solving a diagonally dominant system.",
+            "es": "Reutilizar el componente más reciente al resolver un sistema diagonalmente dominante.",
+            "pt": "Reutilizar o componente mais recente ao resolver um sistema diagonalmente dominante."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [4,1;1,3]; b = [1;2]; x = zeros(2,1);
+for step_index = 1:16
+ x(1) = (b(1)-x(2))/4;
+ x(2) = (b(2)-x(1))/3;
+end
+residual = A*x-b
+
+% {{ comments.check[lang] }}
+example_check = max(abs(residual)) < 1e-10

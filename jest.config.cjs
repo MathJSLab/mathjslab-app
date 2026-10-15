@@ -6,6 +6,13 @@ module.exports = {
     rootDir: '.',
     projects: [
         {
+            displayName: 'example-tests',
+            testEnvironment: 'jsdom',
+            extensionsToTreatAsEsm: ['.ts'],
+            testMatch: ['<rootDir>/test/examples/**/*.spec.ts'],
+            transform,
+        },
+        {
             displayName: 'markdown-compatibility-tests',
             testEnvironment: 'jsdom',
             extensionsToTreatAsEsm: ['.ts'],

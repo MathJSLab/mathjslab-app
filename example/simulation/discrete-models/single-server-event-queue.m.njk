@@ -1,0 +1,43 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Single-server event queue",
+            "es": "Cola de eventos de un servidor",
+            "pt": "Fila de eventos de um servidor"
+        },
+        "goal": {
+            "en": "Start each service after both arrival and the previous completion.",
+            "es": "Iniciar cada servicio después de la llegada y de la finalización anterior.",
+            "pt": "Iniciar cada atendimento após a chegada e o término anterior."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+arrivals = [0,1,3,8]; durations = [2,3,2,1]; starts = zeros(1,4); completions = zeros(1,4);
+for customer_index = 1:4
+ previous_completion = 0;
+ if customer_index > 1
+  previous_completion = completions(customer_index-1);
+ end
+ starts(customer_index) = max([arrivals(customer_index),previous_completion]); completions(customer_index) = starts(customer_index)+durations(customer_index);
+end
+waits = starts-arrivals;
+
+% {{ comments.check[lang] }}
+example_check = all(starts == [0,2,5,8]) && all(waits == [0,1,2,0])

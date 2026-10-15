@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Exponentials and logarithms",
+            "es": "Exponenciales y logaritmos",
+            "pt": "Exponenciais e logaritmos"
+        },
+        "goal": {
+            "en": "Check that logarithms reverse exponentiation for positive inputs.",
+            "es": "Comprobar que los logaritmos invierten la exponenciación con entradas positivas.",
+            "pt": "Verificar que logaritmos invertem a exponenciação com entradas positivas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [1, 2, 5]
+natural_logs = log(values)
+recovered = exp(natural_logs)
+decimal_logs = log10([1,10,100,1000])
+
+% {{ comments.check[lang] }}
+example_check = max(abs(recovered-values)) < 1e-10 && max(abs(decimal_logs-[0,1,2,3])) < 1e-10

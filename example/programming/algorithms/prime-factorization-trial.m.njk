@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Trial prime factorization",
+            "es": "Factorización prima por pruebas",
+            "pt": "Fatoração prima por tentativas"
+        },
+        "goal": {
+            "en": "Repeatedly divide by small candidate factors.",
+            "es": "Dividir repetidamente por pequeños factores candidatos.",
+            "pt": "Dividir repetidamente por pequenos fatores candidatos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+remaining_value = 84; factors = zeros(1,4); count_value = 0; divisor_value = 2;
+while remaining_value > 1
+ if mod(remaining_value,divisor_value) == 0
+  count_value = count_value+1; factors(count_value) = divisor_value; remaining_value = remaining_value/divisor_value;
+ else
+  divisor_value = divisor_value+1;
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = all(factors == [2,2,3,7]) && prod(factors) == 84

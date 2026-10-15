@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Rayleigh quotient bounds",
+            "es": "Cotas del cociente de Rayleigh",
+            "pt": "Limites do quociente de Rayleigh"
+        },
+        "goal": {
+            "en": "Sample directions and bound their quadratic quotients.",
+            "es": "Muestrear direcciones y acotar sus cocientes cuadráticos.",
+            "pt": "Amostrar direções e limitar seus quocientes quadráticos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [2,0;0,5]; quotients = zeros(1,9);
+for sample_index = 1:9
+ phase_radians = (sample_index-1)*pi/16;
+ v = [cos(phase_radians);sin(phase_radians)]; quotients(sample_index) = (v.'*A*v)/(v.'*v);
+end
+
+% {{ comments.check[lang] }}
+example_check = min(quotients) >= 2-1e-10 && max(quotients) <= 5+1e-10

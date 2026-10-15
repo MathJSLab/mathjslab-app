@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "historia-capitais.md",
+    "comments": {
+        "title": {
+            "en": "Capitals of Brazil",
+            "es": "Capitales de Brasil",
+            "pt": "Capitais do Brasil"
+        },
+        "goal": {
+            "en": "Open “Capitals of Brazil” from mathjslab-markdown.",
+            "es": "Abrir «Capitales de Brasil» de mathjslab-markdown.",
+            "pt": "Abrir “Capitais do Brasil” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/historia-capitais.md")

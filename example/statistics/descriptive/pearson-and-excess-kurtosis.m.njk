@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Pearson and excess kurtosis",
+            "es": "Curtosis de Pearson y exceso",
+            "pt": "Curtose de Pearson e excesso"
+        },
+        "goal": {
+            "en": "Compare the population standardized fourth moment with excess kurtosis, without sample corrections.",
+            "es": "Comparar el cuarto momento estandarizado poblacional con el exceso de curtosis, sin correcciones muestrales.",
+            "pt": "Comparar o quarto momento padronizado populacional com o excesso de curtose, sem correções amostrais."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [-1,-1,1,1]
+deviations = data-mean(data)
+variance_value = mean(deviations.^2)
+pearson_kurtosis = mean(deviations.^4)/variance_value^2
+excess_kurtosis = pearson_kurtosis-3
+
+% {{ comments.check[lang] }}
+example_check = pearson_kurtosis == 1 && excess_kurtosis == -2

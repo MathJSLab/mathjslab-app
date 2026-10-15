@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Polynomial long division",
+            "es": "División larga de polinomios",
+            "pt": "Divisão longa de polinômios"
+        },
+        "goal": {
+            "en": "Cancel leading coefficients using coefficient vectors in descending order.",
+            "es": "Cancelar coeficientes principales usando vectores en orden descendente.",
+            "pt": "Cancelar coeficientes principais usando vetores em ordem decrescente."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+numerator_values = [1,-3,2]; divisor_values = [1,-1]; quotient_values = zeros(1,2); remainder_values = numerator_values;
+for term_index = 1:2
+ quotient_values(term_index) = remainder_values(term_index)/divisor_values(1);
+ remainder_values(term_index:term_index+1) = remainder_values(term_index:term_index+1)-quotient_values(term_index)*divisor_values;
+end
+
+% {{ comments.check[lang] }}
+example_check = all(quotient_values == [1,-2]) && all(remainder_values == [0,0,0])

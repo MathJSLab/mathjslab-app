@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Leibniz series for pi",
+            "es": "Serie de Leibniz para pi",
+            "pt": "Série de Leibniz para pi"
+        },
+        "goal": {
+            "en": "Approximate pi with six hundred alternating terms and observe slow convergence.",
+            "es": "Aproximar pi con seiscientos términos alternos y observar la convergencia lenta.",
+            "pt": "Aproximar pi com seiscentos termos alternados e observar a convergência lenta."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+approximation = 0;
+for k = 0:599
+  approximation = approximation+4*(-1)^k/(2*k+1);
+end
+approximation
+absolute_error = abs(approximation-pi)
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 0.002

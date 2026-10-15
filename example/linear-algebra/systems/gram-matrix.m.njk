@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Gram matrix",
+            "es": "Matriz de Gram",
+            "pt": "Matriz de Gram"
+        },
+        "goal": {
+            "en": "Collect vector inner products in a symmetric matrix.",
+            "es": "Reunir productos internos de vectores en una matriz simétrica.",
+            "pt": "Reunir produtos internos de vetores numa matriz simétrica."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+vectors = [1,0,1;0,2,1]
+gram = vectors.'*vectors
+diagonal = diag(gram)
+
+% {{ comments.check[lang] }}
+example_check = all(all(gram == gram.')) && all(diagonal == [1;4;2])

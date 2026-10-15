@@ -1,0 +1,41 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Token edit distance",
+            "es": "Distancia de edición de tokens",
+            "pt": "Distância de edição de tokens"
+        },
+        "goal": {
+            "en": "Count insertions, deletions and replacements with unit cost.",
+            "es": "Contar inserciones, eliminaciones y sustituciones con costo unitario.",
+            "pt": "Contar inserções, exclusões e substituições com custo unitário."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+first_tokens = [1,2,3]; second_tokens = [1,4,3,5]; costs = zeros(4,5); costs(:,1) = (0:3).'; costs(1,:) = 0:4;
+for i = 1:3
+ for j = 1:4
+  mismatch = first_tokens(i) ~= second_tokens(j);
+  costs(i+1,j+1) = min([costs(i,j+1)+1,costs(i+1,j)+1,costs(i,j)+mismatch]);
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = costs(4,5) == 2

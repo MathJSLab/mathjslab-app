@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "ode-a-alegria.md",
+    "comments": {
+        "title": {
+            "en": "Ode to Joy",
+            "es": "Oda a la alegría",
+            "pt": "Ode à alegria"
+        },
+        "goal": {
+            "en": "Open “Ode to Joy” from mathjslab-markdown.",
+            "es": "Abrir «Oda a la alegría» de mathjslab-markdown.",
+            "pt": "Abrir “Ode à alegria” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/ode-a-alegria.md")

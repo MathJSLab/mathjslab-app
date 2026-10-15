@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Closed triangle polyline",
+            "es": "Polilínea triangular cerrada",
+            "pt": "Polilinha triangular fechada"
+        },
+        "goal": {
+            "en": "Draw a triangle with its first vertex repeated to close the polyline.",
+            "es": "Dibujar un triángulo repitiendo el primer vértice para cerrar la polilínea.",
+            "pt": "Traçar um triângulo repetindo o primeiro vértice para fechar a polilinha."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [0,4,0,0];
+y = [0,0,3,0];
+plot(x,y)
+perimeter = sum(sqrt(diff(x).^2+diff(y).^2))
+
+% {{ comments.check[lang] }}
+example_check = perimeter == 12 && x(1) == x(end) && y(1) == y(end)

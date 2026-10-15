@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sine Taylor series",
+            "es": "Serie de Taylor del seno",
+            "pt": "Série de Taylor do seno"
+        },
+        "goal": {
+            "en": "Approximate sine at one radian with six alternating odd-power terms.",
+            "es": "Aproximar seno de un radián con seis términos alternos de potencias impares.",
+            "pt": "Aproximar seno de um radiano com seis termos alternados de potências ímpares."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = 1;
+approximation = 0;
+for k = 0:5
+  approximation = approximation+(-1)^k*x^(2*k+1)/factorial(2*k+1);
+end
+approximation
+absolute_error = abs(approximation-sin(x))
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 2e-10

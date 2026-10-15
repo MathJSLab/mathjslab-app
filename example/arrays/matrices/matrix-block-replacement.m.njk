@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Replace a matrix block",
+            "es": "Reemplazar un bloque de matriz",
+            "pt": "Substituir um bloco da matriz"
+        },
+        "goal": {
+            "en": "Replace the upper-right block without changing the remaining entries.",
+            "es": "Reemplazar el bloque superior derecho sin cambiar las demás entradas.",
+            "pt": "Substituir o bloco superior direito sem alterar as demais entradas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = zeros(4,4)
+A(1:2,3:4) = [1,2;3,4]
+total = sum(sum(A))
+
+% {{ comments.check[lang] }}
+example_check = total == 10 && A(2,4) == 4 && A(4,1) == 0

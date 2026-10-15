@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Polygon perimeter",
+            "es": "Perímetro de un polígono",
+            "pt": "Perímetro de um polígono"
+        },
+        "goal": {
+            "en": "Sum edge lengths of a closed three-four-five triangle.",
+            "es": "Sumar longitudes de aristas de un triángulo cerrado de lados tres, cuatro y cinco.",
+            "pt": "Somar comprimentos das arestas de um triângulo fechado de lados três, quatro e cinco."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [0,4,0,0]
+y = [0,0,3,0]
+edge_lengths = sqrt(diff(x).^2+diff(y).^2)
+perimeter = sum(edge_lengths)
+
+% {{ comments.check[lang] }}
+example_check = all(edge_lengths == [4,5,3]) && perimeter == 12

@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Bounded Collatz sequence",
+            "es": "Secuencia de Collatz acotada",
+            "pt": "Sequência de Collatz limitada"
+        },
+        "goal": {
+            "en": "Follow the Collatz rule from six with a twenty-step cap, without claiming general convergence.",
+            "es": "Seguir la regla de Collatz desde seis con límite de veinte pasos, sin afirmar convergencia general.",
+            "pt": "Seguir a regra de Collatz a partir de seis com limite de vinte passos, sem afirmar convergência geral."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+value = 6;
+sequence = zeros(1,21);
+sequence(1) = value;
+step_count = 0;
+while value ~= 1 && step_count < 20
+  if mod(value,2) == 0
+    value = value/2;
+  else
+    value = 3*value+1;
+  end
+  step_count = step_count+1;
+  sequence(step_count+1) = value;
+end
+sequence = sequence(1:step_count+1)
+
+% {{ comments.check[lang] }}
+example_check = value == 1 && step_count == 8 && all(sequence == [6,3,10,5,16,8,4,2,1])

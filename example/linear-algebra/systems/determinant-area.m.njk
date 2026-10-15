@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Determinant and area",
+            "es": "Determinante y área",
+            "pt": "Determinante e área"
+        },
+        "goal": {
+            "en": "Interpret the absolute determinant as the area of a transformed unit square.",
+            "es": "Interpretar el determinante absoluto como área de un cuadrado unidad transformado.",
+            "pt": "Interpretar o módulo do determinante como área de um quadrado unitário transformado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+transformation = [3,1;0,2]
+signed_area = det(transformation)
+area_scale = abs(signed_area)
+
+% {{ comments.check[lang] }}
+example_check = area_scale == 6

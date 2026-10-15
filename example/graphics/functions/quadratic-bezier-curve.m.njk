@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Quadratic Bezier curve",
+            "es": "Curva de Bézier cuadrática",
+            "pt": "Curva de Bézier quadrática"
+        },
+        "goal": {
+            "en": "Blend three control points with quadratic Bernstein weights.",
+            "es": "Combinar tres puntos de control con pesos cuadráticos de Bernstein.",
+            "pt": "Combinar três pontos de controle com pesos quadráticos de Bernstein."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+t = linspace(0,1,21);
+x = 2*(1-t).*t+3*t.^2;
+y = 4*(1-t).*t;
+plot(x,y)
+
+% {{ comments.check[lang] }}
+example_check = x(1) == 0 && x(end) == 3 && abs(x(11)-1.25) < 1e-10 && abs(y(11)-1) < 1e-10

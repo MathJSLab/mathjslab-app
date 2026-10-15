@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Degrees and radians",
+            "es": "Grados y radianes",
+            "pt": "Graus e radianos"
+        },
+        "goal": {
+            "en": "Convert angles to radians before evaluating trigonometric functions.",
+            "es": "Convertir ángulos a radianes antes de evaluar funciones trigonométricas.",
+            "pt": "Converter ângulos para radianos antes de avaliar funções trigonométricas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+degrees = [0,30,90,180]
+radians = degrees*pi/180
+sines = sin(radians)
+recovered_degrees = radians*180/pi
+
+% {{ comments.check[lang] }}
+example_check = max(abs(recovered_degrees-degrees)) < 1e-10 && abs(sines(2)-0.5) < 1e-10

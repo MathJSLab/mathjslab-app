@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sliding window maximum",
+            "es": "Máximo de ventana móvil",
+            "pt": "Máximo em janela móvel"
+        },
+        "goal": {
+            "en": "Find the maximum in each three-entry sliding window.",
+            "es": "Encontrar el máximo en cada ventana móvil de tres entradas.",
+            "pt": "Encontrar o máximo em cada janela móvel de três entradas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [2,7,3,5,1,8]
+maxima = zeros(1,4);
+for k = 1:4
+  maxima(k) = max(values(k:k+2));
+end
+maxima
+
+% {{ comments.check[lang] }}
+example_check = all(maxima == [7,7,5,8])

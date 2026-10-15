@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Harmonic sum bounds",
+            "es": "Cotas de suma armónica",
+            "pt": "Limites de soma harmônica"
+        },
+        "goal": {
+            "en": "Bracket a positive harmonic sum between integral-based logarithmic bounds.",
+            "es": "Encerrar una suma armónica positiva entre cotas logarítmicas basadas en integrales.",
+            "pt": "Limitar uma soma harmônica positiva entre limites logarítmicos baseados em integrais."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+term_count = 20
+harmonic_sum = sum(1./(1:term_count))
+lower_bound = log(term_count+1)
+upper_bound = 1+log(term_count)
+
+% {{ comments.check[lang] }}
+example_check = harmonic_sum > lower_bound && harmonic_sum < upper_bound

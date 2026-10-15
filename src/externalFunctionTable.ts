@@ -96,20 +96,24 @@ const externalFunctionTable: BuiltInFunctionTable = {
                     // Resolve document paths one directory above the localized page.
                     const baseUrl = new URL('../', globalThis.location.href);
                     const documentUrl = new URL(url.str, baseUrl);
-                    outputTarget.setState('doc');
-                    void mountMarkdownDocument(outputTarget.content, {
-                        engine: markdownEngine,
-                        src: documentUrl,
-                        locale: i18n.locale,
-                        outline: 'inline',
-                        externalLinks: 'new-tab',
-                    }).catch(async () => {
-                        await disposeMarkdownDocument(outputTarget.content);
-                        outputTarget.setState('bad');
-                        outputTarget.setHTML(`markdown: error loading ${url.str}`);
+                    // Install rich output after the evaluator writes its result
+                    // and success state, as in the local-file picker below.
+                    globalThis.queueMicrotask(() => {
+                        outputTarget.setState('doc');
+                        void mountMarkdownDocument(outputTarget.content, {
+                            engine: markdownEngine,
+                            src: documentUrl,
+                            locale: i18n.locale,
+                            outline: 'inline',
+                            externalLinks: 'new-tab',
+                        }).catch(async () => {
+                            await disposeMarkdownDocument(outputTarget.content);
+                            outputTarget.setState('bad');
+                            outputTarget.setHTML(`markdown: error loading ${url.str}`);
+                        });
                     });
                 }
-                return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeList([url.str]));
+                return AST.nodeIndexExpr(AST.nodeIdentifier('markdown'), AST.nodeList([url]));
             } else {
                 const button = createOpenFileButton(
                     i18n.page.page.selectMarkdownFile,

@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Manual FIR convolution",
+            "es": "Convolución FIR manual",
+            "pt": "Convolução FIR manual"
+        },
+        "goal": {
+            "en": "Compute full linear convolution with nested loops and a three-tap kernel.",
+            "es": "Calcular convolución lineal completa con bucles anidados y un núcleo de tres coeficientes.",
+            "pt": "Calcular convolução linear completa com laços aninhados e um núcleo de três coeficientes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [1,2,3];
+kernel_values = [1,2,1];
+filtered = zeros(1,5);
+for sample_index = 1:3
+  for kernel_index = 1:3
+    output_index = sample_index+kernel_index-1;
+    filtered(output_index) = filtered(output_index)+samples(sample_index)*kernel_values(kernel_index);
+  end
+end
+filtered
+
+% {{ comments.check[lang] }}
+example_check = all(filtered == [1,4,8,8,3])

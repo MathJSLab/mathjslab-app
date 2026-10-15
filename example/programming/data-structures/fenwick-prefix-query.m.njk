@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Fenwick prefix query",
+            "es": "Consulta de prefijo Fenwick",
+            "pt": "Consulta de prefixo Fenwick"
+        },
+        "goal": {
+            "en": "Sum disjoint tree blocks by clearing the lowest set bit arithmetically.",
+            "es": "Sumar bloques disjuntos del árbol retirando aritméticamente el bit activo más bajo.",
+            "pt": "Somar blocos disjuntos da árvore retirando aritmeticamente o bit ativo mais baixo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+values = [3,1,4,1,5,9,2,6]; low_bits = [1,2,1,4,1,2,1,8]; tree_values = zeros(1,8);
+for item_index = 1:8
+ tree_values(item_index) = sum(values(item_index-low_bits(item_index)+1:item_index));
+end
+query_index = 7; prefix_total = 0;
+while query_index > 0
+ prefix_total = prefix_total+tree_values(query_index); query_index = query_index-low_bits(query_index);
+end
+
+% {{ comments.check[lang] }}
+example_check = prefix_total == 25 && tree_values(8) == 31

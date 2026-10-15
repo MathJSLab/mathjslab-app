@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Explicit Kronecker blocks",
+            "es": "Bloques de Kronecker explícitos",
+            "pt": "Blocos de Kronecker explícitos"
+        },
+        "goal": {
+            "en": "Construct a block product explicitly without calling kron.",
+            "es": "Construir un producto por bloques explícitamente sin llamar a kron.",
+            "pt": "Construir um produto em blocos explicitamente sem chamar kron."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [1,2;3,4]
+B = [1,0;0,2]
+block_product = [A(1,1)*B,A(1,2)*B;A(2,1)*B,A(2,2)*B]
+
+% {{ comments.check[lang] }}
+example_check = all(size(block_product) == [4,4]) && block_product(4,4) == 8 && trace(block_product) == 15

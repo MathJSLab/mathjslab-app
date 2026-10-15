@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "First Romberg extrapolation",
+            "es": "Primera extrapolación de Romberg",
+            "pt": "Primeira extrapolação de Romberg"
+        },
+        "goal": {
+            "en": "Combine two trapezoidal resolutions to remove the leading error term for a quadratic.",
+            "es": "Combinar dos resoluciones trapezoidales para eliminar el error principal de una cuadrática.",
+            "pt": "Combinar duas resoluções de trapézios para eliminar o erro principal de uma quadrática."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+coarse_nodes = linspace(0,1,5);
+fine_nodes = linspace(0,1,9);
+coarse_values = coarse_nodes.^2;
+fine_values = fine_nodes.^2;
+coarse_area = (sum(coarse_values)-0.5*coarse_values(1)-0.5*coarse_values(end))/4
+fine_area = (sum(fine_values)-0.5*fine_values(1)-0.5*fine_values(end))/8
+extrapolated = (4*fine_area-coarse_area)/3
+
+% {{ comments.check[lang] }}
+example_check = abs(extrapolated-1/3) < 1e-10 && abs(extrapolated-1/3) < abs(fine_area-1/3)

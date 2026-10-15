@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Damped sine wave",
+            "es": "Onda seno amortiguada",
+            "pt": "Onda senoidal amortecida"
+        },
+        "goal": {
+            "en": "Multiply a sampled sine by an exponential envelope and check the envelope bounds.",
+            "es": "Multiplicar un seno muestreado por una envolvente exponencial y comprobar los límites.",
+            "pt": "Multiplicar um seno amostrado por uma envoltória exponencial e verificar os limites."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+t = linspace(0,8,81);
+envelope = exp(-0.3*t);
+sampled_signal = envelope.*sin(3*t);
+plot(t,sampled_signal)
+
+% {{ comments.check[lang] }}
+example_check = all(abs(sampled_signal) <= envelope+1e-10) && envelope(end) < envelope(1)

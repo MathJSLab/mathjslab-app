@@ -50,7 +50,8 @@ const report = {
     resources,
     shared,
 };
-const destination = path.join(root, 'test', 'markdown', 'chunk-baseline.json');
+const destination = path.join(root, 'test', 'result', 'chunk-baseline.json');
+fs.mkdirSync(path.dirname(destination), { recursive: true });
 fs.writeFileSync(destination, `${JSON.stringify(report, null, 4)}\n`);
 
 const rows = { initial, ...resources, shared };

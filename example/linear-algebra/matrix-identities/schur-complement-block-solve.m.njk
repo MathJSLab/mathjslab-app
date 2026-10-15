@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Schur complement solve",
+            "es": "Solución por complemento de Schur",
+            "pt": "Solução por complemento de Schur"
+        },
+        "goal": {
+            "en": "Eliminate one block before solving the remaining equation.",
+            "es": "Eliminar un bloque antes de resolver la ecuación restante.",
+            "pt": "Eliminar um bloco antes de resolver a equação restante."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+a = 4; c = 1; d = 3; f = 9; g = 7;
+schur_value = d-c*c/a; y = (g-c*f/a)/schur_value; x = (f-c*y)/a;
+solution = [x;y]
+
+% {{ comments.check[lang] }}
+example_check = max(abs([4,1;1,3]*solution-[9;7])) < 1e-10

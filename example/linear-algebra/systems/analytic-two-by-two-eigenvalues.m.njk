@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Analytic 2x2 eigenvalues",
+            "es": "Autovalores analíticos 2x2",
+            "pt": "Autovalores analíticos 2x2"
+        },
+        "goal": {
+            "en": "Solve the characteristic quadratic of a symmetric two-by-two matrix without eig.",
+            "es": "Resolver la cuadrática característica de una matriz simétrica dos por dos sin eig.",
+            "pt": "Resolver a quadrática característica de uma matriz simétrica dois por dois sem eig."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [3,1;1,3]
+trace_value = trace(A)
+determinant_value = det(A)
+discriminant = trace_value^2-4*determinant_value
+eigenvalues = [(trace_value-sqrt(discriminant))/2,(trace_value+sqrt(discriminant))/2]
+
+% {{ comments.check[lang] }}
+example_check = all(eigenvalues == [2,4]) && abs(det(A-eigenvalues(1)*eye(2))) < 1e-10

@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Power method",
+            "es": "Método de potencias",
+            "pt": "Método das potências"
+        },
+        "goal": {
+            "en": "Normalize repeated matrix products and estimate a dominant eigenvalue by a Rayleigh quotient.",
+            "es": "Normalizar productos matriciales repetidos y estimar el autovalor dominante con un cociente de Rayleigh.",
+            "pt": "Normalizar produtos matriciais repetidos e estimar o autovalor dominante por um quociente de Rayleigh."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [6,0;0,2];
+vector = [1;1];
+for iteration = 1:20
+  vector = A*vector;
+  vector = vector/norm(vector);
+end
+eigenvalue = sum(vector.*(A*vector))/sum(vector.^2)
+residual = A*vector-eigenvalue*vector
+
+% {{ comments.check[lang] }}
+example_check = abs(eigenvalue-6) < 1e-8 && max(abs(residual)) < 1e-8

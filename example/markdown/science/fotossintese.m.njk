@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "fotossintese.md",
+    "comments": {
+        "title": {
+            "en": "Photosynthesis: matter and energy",
+            "es": "Fotosíntesis: materia y energía",
+            "pt": "Fotossíntese: matéria e energia"
+        },
+        "goal": {
+            "en": "Open “Photosynthesis: matter and energy” from mathjslab-markdown.",
+            "es": "Abrir «Fotosíntesis: materia y energía» de mathjslab-markdown.",
+            "pt": "Abrir “Fotossíntese: matéria e energia” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/fotossintese.md")

@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Successive differences",
+            "es": "Diferencias sucesivas",
+            "pt": "Diferenças sucessivas"
+        },
+        "goal": {
+            "en": "Compute first and second differences of a sequence of square numbers.",
+            "es": "Calcular primeras y segundas diferencias de una secuencia de cuadrados.",
+            "pt": "Calcular primeiras e segundas diferenças de uma sequência de quadrados."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+squares = (1:6).^2
+first_differences = diff(squares)
+second_differences = diff(first_differences)
+
+% {{ comments.check[lang] }}
+example_check = all(first_differences == [3,5,7,9,11]) && all(second_differences == 2)

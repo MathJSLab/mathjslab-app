@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Pooled sample variance",
+            "es": "Varianza muestral combinada",
+            "pt": "Variância amostral combinada"
+        },
+        "goal": {
+            "en": "Combine two sample variances assuming a common population variance.",
+            "es": "Combinar dos varianzas muestrales suponiendo una varianza poblacional común.",
+            "pt": "Combinar duas variâncias amostrais supondo uma variância populacional comum."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+a = [2,4,6]
+b = [5,7,9,11]
+va = sum((a-mean(a)).^2)/(numel(a)-1)
+vb = sum((b-mean(b)).^2)/(numel(b)-1)
+pooled_variance = ((numel(a)-1)*va+(numel(b)-1)*vb)/(numel(a)+numel(b)-2)
+
+% {{ comments.check[lang] }}
+example_check = abs(pooled_variance-5.6) < 1e-10

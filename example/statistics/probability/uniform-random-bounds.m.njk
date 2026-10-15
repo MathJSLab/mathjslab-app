@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Uniform random samples",
+            "es": "Muestras aleatorias uniformes",
+            "pt": "Amostras aleatórias uniformes"
+        },
+        "goal": {
+            "en": "Map uniform samples to a fixed interval and check bounds, not a random expected mean.",
+            "es": "Mapear muestras uniformes a un intervalo y comprobar límites, no una media aleatoria esperada.",
+            "pt": "Mapear amostras uniformes para um intervalo e verificar limites, sem exigir uma média aleatória."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+lower = -2
+upper = 5
+samples = lower+(upper-lower)*rand(1,40)
+sample_average = mean(samples)
+
+% {{ comments.check[lang] }}
+example_check = all(samples >= lower) && all(samples <= upper) && numel(samples) == 40

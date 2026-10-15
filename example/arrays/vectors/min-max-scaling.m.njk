@@ -1,0 +1,30 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Min-max scaling",
+            "es": "Escalado mínimo-máximo",
+            "pt": "Escala mínimo-máximo"
+        },
+        "goal": {
+            "en": "Map a nonconstant vector onto the interval from zero to one.",
+            "es": "Mapear un vector no constante al intervalo de cero a uno.",
+            "pt": "Mapear um vetor não constante para o intervalo de zero a um."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [10,15,20,30]
+scaled = (values-min(values))/(max(values)-min(values))
+
+% {{ comments.check[lang] }}
+example_check = max(abs(scaled-[0,0.25,0.5,1])) < 1e-10

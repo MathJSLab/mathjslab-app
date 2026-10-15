@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Graph degree handshake",
+            "es": "Suma de grados de un grafo",
+            "pt": "Soma dos graus de um grafo"
+        },
+        "goal": {
+            "en": "Count edges of a simple undirected cycle using half the sum of vertex degrees.",
+            "es": "Contar aristas de un ciclo simple no dirigido con la mitad de la suma de grados.",
+            "pt": "Contar arestas de um ciclo simples não dirigido pela metade da soma dos graus."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+adjacency = [0,1,0,1;1,0,1,0;0,1,0,1;1,0,1,0]
+degrees = sum(adjacency,2)
+edge_count = sum(degrees)/2
+
+% {{ comments.check[lang] }}
+example_check = all(degrees == [2;2;2;2]) && edge_count == 4

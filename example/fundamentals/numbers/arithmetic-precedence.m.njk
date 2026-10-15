@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Arithmetic precedence",
+            "es": "Precedencia aritmética",
+            "pt": "Precedência aritmética"
+        },
+        "goal": {
+            "en": "Compare multiplication before addition with explicit parentheses.",
+            "es": "Comparar multiplicación antes de suma con paréntesis explícitos.",
+            "pt": "Comparar multiplicação antes da soma com parênteses explícitos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+without_parentheses = 5 + 3*4
+with_parentheses = (5 + 3)*4
+difference = with_parentheses - without_parentheses
+
+% {{ comments.check[lang] }}
+example_check = without_parentheses == 17 && with_parentheses == 32 && difference == 15

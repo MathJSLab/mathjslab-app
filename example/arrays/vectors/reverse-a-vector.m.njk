@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Reverse a vector",
+            "es": "Invertir un vector",
+            "pt": "Inverter um vetor"
+        },
+        "goal": {
+            "en": "Reverse a vector with indexing and verify that a second reversal restores it.",
+            "es": "Invertir un vector mediante índices y verificar que otra inversión lo restaura.",
+            "pt": "Inverter um vetor por índices e verificar que outra inversão o restaura."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+original = [4,8,15,16,23,42]
+reversed = original(end:-1:1)
+restored = reversed(end:-1:1)
+
+% {{ comments.check[lang] }}
+example_check = reversed(1) == 42 && all(restored == original)

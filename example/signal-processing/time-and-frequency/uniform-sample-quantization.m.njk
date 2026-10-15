@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Uniform sample quantization",
+            "es": "Cuantización uniforme de muestras",
+            "pt": "Quantização uniforme de amostras"
+        },
+        "goal": {
+            "en": "Round samples to multiples of a fixed step and bound the rounding error.",
+            "es": "Redondear muestras a múltiplos de un paso fijo y limitar el error de redondeo.",
+            "pt": "Arredondar amostras para múltiplos de um passo fixo e limitar o erro de arredondamento."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [-0.9,-0.2,0.3,0.8]
+step = 0.25
+quantized = step*round(samples/step)
+errors = quantized-samples
+
+% {{ comments.check[lang] }}
+example_check = max(abs(quantized-[-1,-0.25,0.25,0.75])) < 1e-10 && max(abs(errors)) <= step/2

@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Rectangle overlap area",
+            "es": "Área de intersección de rectángulos",
+            "pt": "Área de interseção de retângulos"
+        },
+        "goal": {
+            "en": "Intersect coordinate intervals before multiplying positive overlap lengths.",
+            "es": "Intersectar intervalos de coordenadas antes de multiplicar longitudes positivas.",
+            "pt": "Intersectar intervalos de coordenadas antes de multiplicar comprimentos positivos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+first_box = [0,0,4,3]; second_box = [2,1,6,5];
+width_value = max([0,min([first_box(3),second_box(3)])-max([first_box(1),second_box(1)])]);
+height_value = max([0,min([first_box(4),second_box(4)])-max([first_box(2),second_box(2)])]);
+overlap_area = width_value*height_value;
+
+% {{ comments.check[lang] }}
+example_check = overlap_area == 4

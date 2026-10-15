@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Orientation predicate",
+            "es": "Predicado de orientación",
+            "pt": "Predicado de orientação"
+        },
+        "goal": {
+            "en": "Use a signed cross product to distinguish left and right turns.",
+            "es": "Usar un producto cruzado con signo para distinguir giros a izquierda y derecha.",
+            "pt": "Usar um produto vetorial com sinal para distinguir curvas à esquerda e à direita."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+a = [0,0]; b = [3,0]; c = [1,2]; d = [1,-2];
+left_value = (b(1)-a(1))*(c(2)-a(2))-(b(2)-a(2))*(c(1)-a(1));
+right_value = (b(1)-a(1))*(d(2)-a(2))-(b(2)-a(2))*(d(1)-a(1));
+
+% {{ comments.check[lang] }}
+example_check = left_value == 6 && right_value == -6

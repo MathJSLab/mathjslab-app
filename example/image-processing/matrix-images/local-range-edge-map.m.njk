@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Local range edge map",
+            "es": "Mapa de bordes por rango local",
+            "pt": "Mapa de bordas por amplitude local"
+        },
+        "goal": {
+            "en": "Measure the contrast within each two-by-two neighborhood.",
+            "es": "Medir el contraste en cada vecindad de dos por dos.",
+            "pt": "Medir o contraste em cada vizinhança dois por dois."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+image_values = [0,0,1;0,0,1;0,0,1]; edge_values = zeros(2,2);
+for row_index = 1:2
+ for column_index = 1:2
+  patch = image_values(row_index:row_index+1,column_index:column_index+1); edge_values(row_index,column_index) = max(max(patch))-min(min(patch));
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = all(all(edge_values == [0,1;0,1]))

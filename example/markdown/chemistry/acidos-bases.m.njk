@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "acidos-bases.md",
+    "comments": {
+        "title": {
+            "en": "Acids and bases: proton transfer",
+            "es": "Ácidos y bases: transferencia de protones",
+            "pt": "Ácidos e bases: transferência de prótons"
+        },
+        "goal": {
+            "en": "Open “Acids and bases: proton transfer” from mathjslab-markdown.",
+            "es": "Abrir «Ácidos y bases: transferencia de protones» de mathjslab-markdown.",
+            "pt": "Abrir “Ácidos e bases: transferência de prótons” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/acidos-bases.md")

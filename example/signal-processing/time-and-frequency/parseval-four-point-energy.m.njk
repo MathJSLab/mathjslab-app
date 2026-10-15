@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Four-point Parseval energy",
+            "es": "Energía de Parseval de cuatro puntos",
+            "pt": "Energia de Parseval de quatro pontos"
+        },
+        "goal": {
+            "en": "Compare time energy with normalized frequency energy for a known four-point DFT pair.",
+            "es": "Comparar energía temporal con energía frecuencial normalizada para un par DFT conocido de cuatro puntos.",
+            "pt": "Comparar energia temporal com energia frequencial normalizada para um par DFT conhecido de quatro pontos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [1,2,1,0]
+coefficients = [4,-2i,0,2i]
+time_energy = sum(abs(samples).^2)
+frequency_energy = sum(abs(coefficients).^2)/numel(samples)
+
+% {{ comments.check[lang] }}
+example_check = time_energy == 6 && frequency_energy == time_energy

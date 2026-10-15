@@ -1,0 +1,44 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Binary search tree in arrays",
+            "es": "Árbol binario de búsqueda en arreglos",
+            "pt": "Árvore binária de busca em arrays"
+        },
+        "goal": {
+            "en": "Follow child indices to locate a key in a small tree.",
+            "es": "Seguir índices de hijos para localizar una clave en un árbol pequeño.",
+            "pt": "Seguir índices de filhos para localizar uma chave em uma pequena árvore."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+keys = [8,3,12,1,6]; left_children = [2,4,0,0,0]; right_children = [3,5,0,0,0]; target_value = 6; node_index = 1;
+while node_index ~= 0
+ if target_value == keys(node_index)
+  break
+ elseif target_value < keys(node_index)
+  node_index = left_children(node_index);
+ else
+  node_index = right_children(node_index);
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = node_index == 5

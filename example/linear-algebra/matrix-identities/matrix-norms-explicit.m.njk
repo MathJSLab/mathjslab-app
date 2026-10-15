@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Three matrix norms",
+            "es": "Tres normas matriciales",
+            "pt": "Três normas matriciais"
+        },
+        "goal": {
+            "en": "Compute column, row and squared-entry norm formulas explicitly.",
+            "es": "Calcular explícitamente normas por columnas, filas y cuadrados de entradas.",
+            "pt": "Calcular explicitamente normas por colunas, linhas e quadrados das entradas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [1,-2;3,4];
+one_norm = max(sum(abs(A),1));
+infinity_norm = max(sum(abs(A),2));
+frobenius_norm = sqrt(sum(sum(A.^2)))
+
+% {{ comments.check[lang] }}
+example_check = one_norm == 6 && infinity_norm == 7 && abs(frobenius_norm-sqrt(30)) < 1e-10

@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Two-dice sum counts",
+            "es": "Conteos de sumas de dos dados",
+            "pt": "Contagens das somas de dois dados"
+        },
+        "goal": {
+            "en": "Enumerate all thirty-six outcomes of two fair six-sided dice.",
+            "es": "Enumerar los treinta y seis resultados de dos dados justos de seis caras.",
+            "pt": "Enumerar os trinta e seis resultados de dois dados justos de seis faces."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+counts = zeros(1,11);
+for first_die = 1:6
+  for second_die = 1:6
+    position = first_die+second_die-1;
+    counts(position) = counts(position)+1;
+  end
+end
+counts
+probabilities = counts/36
+
+% {{ comments.check[lang] }}
+example_check = all(counts == [1,2,3,4,5,6,5,4,3,2,1]) && abs(sum(probabilities)-1) < 1e-10

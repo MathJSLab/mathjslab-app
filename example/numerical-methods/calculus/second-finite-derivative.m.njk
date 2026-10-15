@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Second finite derivative",
+            "es": "Segunda derivada finita",
+            "pt": "Segunda derivada finita"
+        },
+        "goal": {
+            "en": "Approximate the second derivative of cosine with a centered three-point formula.",
+            "es": "Aproximar la segunda derivada del coseno con una fórmula centrada de tres puntos.",
+            "pt": "Aproximar a segunda derivada do cosseno com uma fórmula centrada de três pontos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = 0.4
+step = 0.001
+second_derivative = (cos(x+step)-2*cos(x)+cos(x-step))/step^2
+exact_derivative = -cos(x)
+
+% {{ comments.check[lang] }}
+example_check = abs(second_derivative-exact_derivative) < 1e-6

@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Weighted centroid",
+            "es": "Centroide ponderado",
+            "pt": "Centroide ponderado"
+        },
+        "goal": {
+            "en": "Compute the center of three point masses from weighted coordinates.",
+            "es": "Calcular el centro de tres masas puntuales con coordenadas ponderadas.",
+            "pt": "Calcular o centro de três massas pontuais com coordenadas ponderadas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+masses = [1,2,1]
+x = [0,2,4]
+y = [0,3,0]
+centroid_x = sum(masses.*x)/sum(masses)
+centroid_y = sum(masses.*y)/sum(masses)
+
+% {{ comments.check[lang] }}
+example_check = centroid_x == 2 && centroid_y == 1.5

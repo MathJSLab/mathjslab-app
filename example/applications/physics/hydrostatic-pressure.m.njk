@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Hydrostatic pressure",
+            "es": "Presión hidrostática",
+            "pt": "Pressão hidrostática"
+        },
+        "goal": {
+            "en": "Compute gauge pressure at fixed depths for an incompressible fluid.",
+            "es": "Calcular presión relativa a profundidades fijas en un fluido incompresible.",
+            "pt": "Calcular pressão manométrica em profundidades fixas num fluido incompressível."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+density_kg_per_m3 = 1000
+gravity_m_per_s2 = 9.81
+depths_m = [0,1,3]
+pressures_pa = density_kg_per_m3*gravity_m_per_s2*depths_m
+
+% {{ comments.check[lang] }}
+example_check = max(abs(pressures_pa-[0,9810,29430])) < 1e-8

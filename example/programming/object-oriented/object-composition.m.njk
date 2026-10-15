@@ -1,0 +1,53 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Object composition",
+            "es": "Composición de objetos",
+            "pt": "Composição de objetos"
+        },
+        "goal": {
+            "en": "Store a calculation object inside another object and delegate a method call.",
+            "es": "Guardar un objeto de cálculo dentro de otro objeto y delegar una llamada de método.",
+            "pt": "Guardar um objeto de cálculo dentro de outro objeto e delegar uma chamada de método."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef GainStage
+  properties
+    Gain = 2;
+  end
+  methods
+    function value = apply(obj,input_value)
+      value = obj.Gain*input_value;
+    end
+  end
+end
+classdef CalculationPipeline
+  properties
+    Stage
+  end
+  methods
+    function obj = CalculationPipeline()
+      obj.Stage = GainStage();
+    end
+    function value = runStage(obj,input_value)
+      value = obj.Stage.apply(input_value);
+    end
+  end
+end
+pipeline = CalculationPipeline();
+result = pipeline.runStage(7)
+
+% {{ comments.check[lang] }}
+example_check = result == 14

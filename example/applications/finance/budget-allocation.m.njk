@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Budget allocation",
+            "es": "Distribución de presupuesto",
+            "pt": "Distribuição de orçamento"
+        },
+        "goal": {
+            "en": "Allocate a fixed illustrative budget across weights summing to one.",
+            "es": "Distribuir un presupuesto ilustrativo fijo con pesos que suman uno.",
+            "pt": "Distribuir um orçamento ilustrativo fixo com pesos que somam um."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+budget = 2400
+weights = [0.5,0.3,0.2]
+allocations = budget*weights
+
+% {{ comments.check[lang] }}
+example_check = all(allocations == [1200,720,480]) && sum(allocations) == budget

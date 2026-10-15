@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Explicit thin QR",
+            "es": "QR reducido explícito",
+            "pt": "QR reduzido explícito"
+        },
+        "goal": {
+            "en": "Build a thin QR factorization from two independent columns with Gram-Schmidt.",
+            "es": "Construir una factorización QR reducida con dos columnas independientes y Gram-Schmidt.",
+            "pt": "Construir uma fatoração QR reduzida com duas colunas independentes e Gram-Schmidt."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [1,1;1,0;0,1]
+r11 = norm(A(:,1));
+q1 = A(:,1)/r11;
+r12 = sum(q1.*A(:,2));
+remainder_vector = A(:,2)-r12*q1;
+r22 = norm(remainder_vector);
+q2 = remainder_vector/r22;
+Q = [q1,q2]
+R = [r11,r12;0,r22]
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(Q*R-A))) < 1e-10 && max(max(abs(Q.'*Q-eye(2)))) < 1e-10

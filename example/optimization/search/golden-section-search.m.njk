@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Golden-section search",
+            "es": "Búsqueda de sección áurea",
+            "pt": "Busca pela seção áurea"
+        },
+        "goal": {
+            "en": "Reduce a unimodal quadratic interval with thirty golden-section iterations.",
+            "es": "Reducir un intervalo de una cuadrática unimodal con treinta iteraciones de sección áurea.",
+            "pt": "Reduzir um intervalo de uma quadrática unimodal com trinta iterações de seção áurea."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+objective = @(x) (x-1.2).^2;
+left = -2;
+right = 4;
+ratio_value = (sqrt(5)-1)/2;
+for iteration = 1:30
+  c = right-ratio_value*(right-left);
+  d = left+ratio_value*(right-left);
+  if objective(c) < objective(d)
+    right = d;
+  else
+    left = c;
+  end
+end
+estimate = (left+right)/2
+
+% {{ comments.check[lang] }}
+example_check = abs(estimate-1.2) < 0.00001

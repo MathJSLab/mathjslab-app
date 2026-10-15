@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Euclidean algorithm",
+            "es": "Algoritmo de Euclides",
+            "pt": "Algoritmo de Euclides"
+        },
+        "goal": {
+            "en": "Find a greatest common divisor by repeatedly replacing a pair with its remainder.",
+            "es": "Encontrar un máximo común divisor reemplazando repetidamente un par por su resto.",
+            "pt": "Encontrar um máximo divisor comum substituindo repetidamente um par pelo resto."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+a = 84;
+b = 30;
+while b ~= 0
+  remainder = mod(a,b);
+  a = b;
+  b = remainder;
+end
+greatest_common_divisor = a
+
+% {{ comments.check[lang] }}
+example_check = greatest_common_divisor == 6

@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sinusoid coefficient projection",
+            "es": "Proyección de coeficientes sinusoidales",
+            "pt": "Projeção de coeficientes senoidais"
+        },
+        "goal": {
+            "en": "Recover positive cosine and sine coefficients from full-period projections, then their amplitude.",
+            "es": "Recuperar coeficientes positivos de coseno y seno con proyecciones de período completo y su amplitud.",
+            "pt": "Recuperar coeficientes positivos de cosseno e seno por projeções de período completo e sua amplitude."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+phases = 2*pi*(0:15)/16;
+samples = 3*cos(phases)+4*sin(phases);
+cosine_coefficient = 2*mean(samples.*cos(phases))
+sine_coefficient = 2*mean(samples.*sin(phases))
+amplitude = sqrt(cosine_coefficient^2+sine_coefficient^2)
+phase_radians = atan(sine_coefficient/cosine_coefficient)
+
+% {{ comments.check[lang] }}
+example_check = abs(cosine_coefficient-3) < 1e-10 && abs(sine_coefficient-4) < 1e-10 && abs(amplitude-5) < 1e-10

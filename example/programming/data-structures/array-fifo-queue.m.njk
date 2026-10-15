@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "FIFO queue",
+            "es": "Cola FIFO",
+            "pt": "Fila FIFO"
+        },
+        "goal": {
+            "en": "Use separate read and write positions to preserve arrival order.",
+            "es": "Usar posiciones separadas de lectura y escritura para conservar el orden de llegada.",
+            "pt": "Usar posições separadas de leitura e escrita para preservar a ordem de chegada."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+storage = zeros(1,5); head_index = 1; tail_index = 0;
+for incoming_value = [12,24,36]
+ tail_index = tail_index+1; storage(tail_index) = incoming_value;
+end
+first_out = storage(head_index); head_index = head_index+1;
+second_out = storage(head_index); head_index = head_index+1;
+
+% {{ comments.check[lang] }}
+example_check = first_out == 12 && second_out == 24 && tail_index-head_index+1 == 1

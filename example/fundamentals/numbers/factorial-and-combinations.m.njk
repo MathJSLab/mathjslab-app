@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Factorials and combinations",
+            "es": "Factoriales y combinaciones",
+            "pt": "Fatoriais e combinações"
+        },
+        "goal": {
+            "en": "Count ways to choose three items from six using factorials.",
+            "es": "Contar formas de elegir tres elementos de seis usando factoriales.",
+            "pt": "Contar maneiras de escolher três elementos entre seis usando fatoriais."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+n = 6
+k = 3
+permutations = factorial(n)
+combinations = factorial(n)/(factorial(k)*factorial(n-k))
+
+% {{ comments.check[lang] }}
+example_check = permutations == 720 && combinations == 20

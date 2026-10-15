@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Shannon entropy in bits",
+            "es": "Entropía de Shannon en bits",
+            "pt": "Entropia de Shannon em bits"
+        },
+        "goal": {
+            "en": "Calculate entropy for a finite distribution with strictly positive probabilities.",
+            "es": "Calcular entropía de una distribución finita con probabilidades estrictamente positivas.",
+            "pt": "Calcular entropia de uma distribuição finita com probabilidades estritamente positivas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+probabilities = [0.25,0.25,0.5]
+information_bits = -log(probabilities)/log(2)
+entropy_bits = sum(probabilities.*information_bits)
+
+% {{ comments.check[lang] }}
+example_check = abs(sum(probabilities)-1) < 1e-10 && abs(entropy_bits-1.5) < 1e-10

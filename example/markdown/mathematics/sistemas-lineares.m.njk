@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "sistemas-lineares.md",
+    "comments": {
+        "title": {
+            "en": "Linear systems",
+            "es": "Sistemas lineales",
+            "pt": "Sistemas lineares"
+        },
+        "goal": {
+            "en": "Open “Linear systems” from mathjslab-markdown.",
+            "es": "Abrir «Sistemas lineales» de mathjslab-markdown.",
+            "pt": "Abrir “Sistemas lineares” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/sistemas-lineares.md")

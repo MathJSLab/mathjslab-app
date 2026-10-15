@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Gaussian density curve",
+            "es": "Curva de densidad gaussiana",
+            "pt": "Curva de densidade gaussiana"
+        },
+        "goal": {
+            "en": "Plot an elementary Gaussian density formula without a statistics toolbox.",
+            "es": "Graficar la fórmula elemental de densidad gaussiana sin un toolbox estadístico.",
+            "pt": "Traçar a fórmula elementar da densidade gaussiana sem toolbox estatístico."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = linspace(-3,3,61);
+density = exp(-x.^2/2)/sqrt(2*pi);
+plot(x,density)
+peak = density(31)
+
+% {{ comments.check[lang] }}
+example_check = all(density > 0) && abs(peak-1/sqrt(2*pi)) < 1e-10 && abs(density(1)-density(end)) < 1e-10

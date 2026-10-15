@@ -1,0 +1,43 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Binary min-heap insertion",
+            "es": "Inserción en montículo mínimo",
+            "pt": "Inserção em heap mínimo"
+        },
+        "goal": {
+            "en": "Bubble a newly appended key toward its parent.",
+            "es": "Subir una nueva clave añadida hacia su padre.",
+            "pt": "Subir uma nova chave adicionada em direção ao pai."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+heap_values = [2,5,4,8,7,3]; child_index = 6;
+while child_index > 1
+ parent_index = floor(child_index/2);
+ if heap_values(parent_index) <= heap_values(child_index)
+  break
+ end
+ saved_value = heap_values(parent_index); heap_values(parent_index) = heap_values(child_index); heap_values(child_index) = saved_value;
+ child_index = parent_index;
+end
+
+% {{ comments.check[lang] }}
+example_check = all(heap_values == [2,5,3,8,7,4])

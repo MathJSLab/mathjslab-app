@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Secant cubic root",
+            "es": "Raíz cúbica con secantes",
+            "pt": "Raiz cúbica com secantes"
+        },
+        "goal": {
+            "en": "Find the real cube root of two using secant steps without an explicit derivative.",
+            "es": "Encontrar la raíz cúbica real de dos con pasos de secante sin derivada explícita.",
+            "pt": "Encontrar a raiz cúbica real de dois com passos de secante sem derivada explícita."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+previous = 1;
+current = 2;
+for iteration = 1:8
+  previous_value = previous^3-2;
+  current_value = current^3-2;
+  next_value = current-current_value*(current-previous)/(current_value-previous_value);
+  previous = current;
+  current = next_value;
+end
+estimate = current
+residual = estimate^3-2
+
+% {{ comments.check[lang] }}
+example_check = abs(residual) < 1e-8

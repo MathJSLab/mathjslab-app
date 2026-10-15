@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Triangular back substitution",
+            "es": "Sustitución regresiva triangular",
+            "pt": "Substituição regressiva triangular"
+        },
+        "goal": {
+            "en": "Solve an upper-triangular system from the last equation upward.",
+            "es": "Resolver un sistema triangular superior desde la última ecuación hacia arriba.",
+            "pt": "Resolver um sistema triangular superior da última equação para cima."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+U = [2,1,-1;0,3,2;0,0,4]
+b = [1;12;12]
+solution = zeros(3,1);
+for row_index = 3:-1:1
+  known_total = sum(U(row_index,:).*(solution.'));
+  solution(row_index) = (b(row_index)-known_total)/U(row_index,row_index);
+end
+solution
+
+% {{ comments.check[lang] }}
+example_check = max(abs(solution-[1;2;3])) < 1e-10 && max(abs(U*solution-b)) < 1e-10

@@ -99,6 +99,10 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                     },
                     {
                         test: /\.(c|sa|sc)ss$/i,
+                        // Inline styles are text for a ShadowRoot. Linked local
+                        // packages resolve outside this app's node_modules path,
+                        // so exclude by query instead of relying on that path.
+                        resourceQuery: { not: [/inline/] },
                         exclude: [...defaultExclude, /\.module\.(c|sa|sc)ss$/i, /\.styles\.(c|sa|sc)ss$/i].map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
                         use: [
                             isProduction ? MiniCssExtractPlugin.loader : 'style-loader',

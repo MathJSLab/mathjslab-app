@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Reshape order",
+            "es": "Orden de reshape",
+            "pt": "Ordem de reshape"
+        },
+        "goal": {
+            "en": "Reshape a sequence and recover the same column-major order.",
+            "es": "Reorganizar una secuencia y recuperar el mismo orden por columnas.",
+            "pt": "Reorganizar uma sequência e recuperar a mesma ordem por colunas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+sequence = 1:12
+A = reshape(sequence,3,4)
+restored = reshape(A,1,12)
+
+% {{ comments.check[lang] }}
+example_check = A(3,2) == 6 && all(restored == sequence)

@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Cumulative products",
+            "es": "Productos acumulados",
+            "pt": "Produtos acumulados"
+        },
+        "goal": {
+            "en": "Track a running product and compare its final value with prod.",
+            "es": "Seguir un producto acumulado y comparar su valor final con prod.",
+            "pt": "Acompanhar um produto acumulado e comparar o valor final com prod."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+factors = [2,3,4,5]
+running_product = cumprod(factors)
+total_product = prod(factors)
+
+% {{ comments.check[lang] }}
+example_check = all(running_product == [2,6,24,120]) && running_product(end) == total_product

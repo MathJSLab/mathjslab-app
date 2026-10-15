@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Bubble sort",
+            "es": "Ordenación burbuja",
+            "pt": "Ordenação bolha"
+        },
+        "goal": {
+            "en": "Swap adjacent inversions until the vector is ordered.",
+            "es": "Intercambiar inversiones adyacentes hasta ordenar el vector.",
+            "pt": "Trocar inversões adjacentes até ordenar o vetor."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+values = [5,1,4,2,3];
+for pass_index = 1:4
+ for item_index = 1:5-pass_index
+  if values(item_index) > values(item_index+1)
+   saved_value = values(item_index); values(item_index) = values(item_index+1); values(item_index+1) = saved_value;
+  end
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = all(values == [1,2,3,4,5])

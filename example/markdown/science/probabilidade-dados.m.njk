@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "probabilidade-dados.md",
+    "comments": {
+        "title": {
+            "en": "Probability: sums of two dice",
+            "es": "Probabilidad: sumas de dos dados",
+            "pt": "Probabilidade: somas de dois dados"
+        },
+        "goal": {
+            "en": "Open “Probability: sums of two dice” from mathjslab-markdown.",
+            "es": "Abrir «Probabilidad: sumas de dos dados» de mathjslab-markdown.",
+            "pt": "Abrir “Probabilidade: somas de dois dados” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/probabilidade-dados.md")

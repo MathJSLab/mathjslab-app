@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "pendulo-simples.md",
+    "comments": {
+        "title": {
+            "en": "Simple pendulum: period and approximations",
+            "es": "Péndulo simple: período y aproximaciones",
+            "pt": "Pêndulo simples: período e aproximações"
+        },
+        "goal": {
+            "en": "Open “Simple pendulum: period and approximations” from mathjslab-markdown.",
+            "es": "Abrir «Péndulo simple: período y aproximaciones» de mathjslab-markdown.",
+            "pt": "Abrir “Pêndulo simples: período e aproximações” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/pendulo-simples.md")

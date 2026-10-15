@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Negative square roots",
+            "es": "Raíces cuadradas negativas",
+            "pt": "Raízes quadradas negativas"
+        },
+        "goal": {
+            "en": "Inspect principal square roots of negative real numbers and square them again.",
+            "es": "Examinar raíces cuadradas principales de números negativos y elevarlas al cuadrado.",
+            "pt": "Examinar raízes quadradas principais de números negativos e elevá-las ao quadrado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [-1,-4,-9]
+roots = sqrt(values)
+recovered = roots.^2
+
+% {{ comments.check[lang] }}
+example_check = max(abs(recovered-values)) < 1e-10 && max(abs(roots-[1i,2i,3i])) < 1e-10

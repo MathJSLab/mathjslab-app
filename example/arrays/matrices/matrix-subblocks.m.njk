@@ -1,0 +1,30 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Matrix subblocks",
+            "es": "Subbloques de matrices",
+            "pt": "Sub-blocos de matrizes"
+        },
+        "goal": {
+            "en": "Select a central block from a four-by-four matrix.",
+            "es": "Seleccionar un bloque central de una matriz de cuatro por cuatro.",
+            "pt": "Selecionar um bloco central de uma matriz de quatro por quatro."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = reshape(1:16,4,4)
+center = A(2:3,2:3)
+
+% {{ comments.check[lang] }}
+example_check = all(all(center == [6,10;7,11]))

@@ -1,0 +1,46 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Four-level histogram equalization",
+            "es": "Ecualización de histograma de cuatro niveles",
+            "pt": "Equalização de histograma de quatro níveis"
+        },
+        "goal": {
+            "en": "Construct an intensity lookup table from cumulative level counts.",
+            "es": "Construir una tabla de intensidades con conteos acumulados de niveles.",
+            "pt": "Construir uma tabela de intensidades com contagens acumuladas de níveis."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+image_values = [0,0,0,1;1,2,3,3]; counts = zeros(1,4);
+for pixel_index = 1:8
+ level_index = image_values(pixel_index)+1; counts(level_index) = counts(level_index)+1;
+end
+lookup_values = zeros(1,4); running_total = 0;
+for level_index = 1:4
+ running_total = running_total+counts(level_index); lookup_values(level_index) = floor(3*running_total/8);
+end
+equalized_values = zeros(2,4);
+for pixel_index = 1:8
+ equalized_values(pixel_index) = lookup_values(image_values(pixel_index)+1);
+end
+
+% {{ comments.check[lang] }}
+example_check = all(counts == [3,2,1,2]) && all(lookup_values == [1,1,2,3]) && equalized_values(1,1) == 1

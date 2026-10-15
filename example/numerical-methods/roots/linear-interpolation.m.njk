@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Linear interpolation",
+            "es": "Interpolación lineal",
+            "pt": "Interpolação linear"
+        },
+        "goal": {
+            "en": "Interpolate between two measurements using a weighted difference, without interp1.",
+            "es": "Interpolar entre dos mediciones con una diferencia ponderada, sin interp1.",
+            "pt": "Interpolar entre duas medições com uma diferença ponderada, sem interp1."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [0,2]
+y = [1,5]
+query = 1.5
+fraction = (query-x(1))/(x(2)-x(1))
+interpolated = y(1)+fraction*(y(2)-y(1))
+
+% {{ comments.check[lang] }}
+example_check = interpolated == 4 && fraction == 0.75

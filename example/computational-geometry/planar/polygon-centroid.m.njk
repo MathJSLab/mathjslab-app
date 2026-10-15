@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Polygon centroid",
+            "es": "Centroide de polígono",
+            "pt": "Centroide de polígono"
+        },
+        "goal": {
+            "en": "Weight edge endpoint sums by signed cross products.",
+            "es": "Ponderar sumas de extremos de aristas por productos cruzados con signo.",
+            "pt": "Ponderar somas de extremos das arestas por produtos vetoriais com sinal."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+vertices = [0,0;4,0;4,2;0,2]; cross_values = zeros(1,4); weighted_values = zeros(4,2);
+for edge_index = 1:4
+ next_index = mod(edge_index,4)+1; a = vertices(edge_index,:); b = vertices(next_index,:);
+ cross_values(edge_index) = a(1)*b(2)-b(1)*a(2); weighted_values(edge_index,:) = (a+b)*cross_values(edge_index);
+end
+signed_area = sum(cross_values)/2; centroid = sum(weighted_values,1)/(6*signed_area);
+
+% {{ comments.check[lang] }}
+example_check = signed_area == 8 && max(abs(centroid-[2,1])) < 1e-10

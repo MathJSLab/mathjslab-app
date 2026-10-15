@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Zeros, ones and identity",
+            "es": "Ceros, unos e identidad",
+            "pt": "Zeros, uns e identidade"
+        },
+        "goal": {
+            "en": "Build constant matrices and check the diagonal of an identity matrix.",
+            "es": "Construir matrices constantes y comprobar la diagonal de una identidad.",
+            "pt": "Construir matrizes constantes e verificar a diagonal de uma identidade."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+zero_matrix = zeros(2,3)
+one_matrix = ones(2,3)
+identity_matrix = eye(3)
+
+% {{ comments.check[lang] }}
+example_check = sum(sum(zero_matrix)) == 0 && sum(sum(one_matrix)) == 6 && trace(identity_matrix) == 3

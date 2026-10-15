@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "ritmo-e-partitura.md",
+    "comments": {
+        "title": {
+            "en": "Rhythm and scores",
+            "es": "Ritmo y partitura",
+            "pt": "Ritmo e partitura"
+        },
+        "goal": {
+            "en": "Open “Rhythm and scores” from mathjslab-markdown.",
+            "es": "Abrir «Ritmo y partitura» de mathjslab-markdown.",
+            "pt": "Abrir “Ritmo e partitura” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/ritmo-e-partitura.md")

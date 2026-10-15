@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Recursive factorial",
+            "es": "Factorial recursivo",
+            "pt": "Fatorial recursivo"
+        },
+        "goal": {
+            "en": "Use a base case and recursion to evaluate a small factorial.",
+            "es": "Usar un caso base y recursión para evaluar un factorial pequeño.",
+            "pt": "Usar um caso base e recursão para avaliar um pequeno fatorial."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+function result = recursive_factorial(n)
+  if n <= 1
+    result = 1;
+  else
+    result = n*recursive_factorial(n-1);
+  end
+end
+value = recursive_factorial(6)
+
+% {{ comments.check[lang] }}
+example_check = value == 720

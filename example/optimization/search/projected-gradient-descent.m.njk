@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Projected gradient descent",
+            "es": "Descenso de gradiente proyectado",
+            "pt": "Descida de gradiente projetado"
+        },
+        "goal": {
+            "en": "Minimize a quadratic under nonnegative coordinate constraints by clipping after each step.",
+            "es": "Minimizar una cuadrática con coordenadas no negativas limitando cada paso.",
+            "pt": "Minimizar uma quadrática com coordenadas não negativas limitando cada passo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+point = [0,3];
+target = [2,-1];
+for iteration = 1:30
+  point = point-0.25*2*(point-target);
+  point(point < 0) = 0;
+end
+point
+
+% {{ comments.check[lang] }}
+example_check = max(abs(point-[2,0])) < 1e-8 && all(point >= 0)

@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Bisection root search",
+            "es": "Búsqueda de raíz por bisección",
+            "pt": "Busca de raiz por bisseção"
+        },
+        "goal": {
+            "en": "Bracket a root of x squared minus two and halve the interval forty times.",
+            "es": "Encerrar una raíz de x al cuadrado menos dos y dividir el intervalo cuarenta veces.",
+            "pt": "Isolar uma raiz de x ao quadrado menos dois e dividir o intervalo quarenta vezes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+left = 1;
+right = 2;
+for iteration = 1:40
+  midpoint = (left+right)/2;
+  if midpoint^2 < 2
+    left = midpoint;
+  else
+    right = midpoint;
+  end
+end
+root = (left+right)/2
+residual = root^2-2
+
+% {{ comments.check[lang] }}
+example_check = abs(residual) < 1e-9 && left <= sqrt(2) && right >= sqrt(2)

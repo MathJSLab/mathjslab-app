@@ -1,0 +1,43 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Value-class copy",
+            "es": "Copia de clase por valor",
+            "pt": "Cópia de classe por valor"
+        },
+        "goal": {
+            "en": "Modify a returned value-class copy while preserving the original instance.",
+            "es": "Modificar una copia devuelta de una clase por valor conservando la instancia original.",
+            "pt": "Modificar uma cópia retornada de uma classe por valor preservando a instância original."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef ValueBox
+  properties
+    Value = 5;
+  end
+  methods
+    function obj = increment(obj,amount)
+      obj.Value = obj.Value+amount;
+    end
+  end
+end
+original = ValueBox();
+modified = original;
+modified = modified.increment(2);
+original_value = original.Value
+modified_value = modified.Value
+
+% {{ comments.check[lang] }}
+example_check = original_value == 5 && modified_value == 7

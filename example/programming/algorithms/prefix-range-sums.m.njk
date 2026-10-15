@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Prefix range sums",
+            "es": "Sumas de intervalos con prefijos",
+            "pt": "Somas de intervalos com prefixos"
+        },
+        "goal": {
+            "en": "Precompute cumulative totals for constant-work range queries.",
+            "es": "Precalcular totales acumulados para consultas de intervalos de trabajo constante.",
+            "pt": "Pré-calcular totais acumulados para consultas de intervalos com trabalho constante."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+values = [3,1,4,1,5]; prefix_values = zeros(1,6);
+for item_index = 1:5
+ prefix_values(item_index+1) = prefix_values(item_index)+values(item_index);
+end
+range_total = prefix_values(6)-prefix_values(3)
+
+% {{ comments.check[lang] }}
+example_check = range_total == 10 && prefix_values(6) == 14

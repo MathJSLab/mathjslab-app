@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Vectorized anonymous function",
+            "es": "Función anónima vectorizada",
+            "pt": "Função anônima vetorizada"
+        },
+        "goal": {
+            "en": "Use elementwise operators in an anonymous polynomial function.",
+            "es": "Usar operadores elemento a elemento en una función polinómica anónima.",
+            "pt": "Usar operadores elemento a elemento numa função polinomial anônima."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+polynomial = @(x) x.^2-3.*x+2
+x = [0,1,2,3]
+y = polynomial(x)
+
+% {{ comments.check[lang] }}
+example_check = all(y == [2,0,0,2])

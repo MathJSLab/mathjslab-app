@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Ridge regression",
+            "es": "Regresión ridge",
+            "pt": "Regressão ridge"
+        },
+        "goal": {
+            "en": "Penalize coefficient size in a small regularized least-squares fit.",
+            "es": "Penalizar el tamaño de coeficientes en un ajuste regularizado pequeño.",
+            "pt": "Penalizar o tamanho dos coeficientes em um pequeno ajuste regularizado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+X = [1,0;1,1;1,2]; y = [1;2;3]; penalty = [0,0;0,1];
+coefficients = (X.'*X+penalty)\(X.'*y);
+predictions = X*coefficients;
+
+% {{ comments.check[lang] }}
+example_check = max(abs(coefficients-[4/3;2/3])) < 1e-10 && max(abs(predictions-[4/3;2;8/3])) < 1e-10

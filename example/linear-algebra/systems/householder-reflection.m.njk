@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Householder reflection",
+            "es": "Reflexión de Householder",
+            "pt": "Reflexão de Householder"
+        },
+        "goal": {
+            "en": "Reflect a nonzero vector onto the first coordinate axis with an orthogonal matrix.",
+            "es": "Reflejar un vector no nulo sobre el primer eje con una matriz ortogonal.",
+            "pt": "Refletir um vetor não nulo sobre o primeiro eixo com uma matriz ortogonal."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [3;4]
+direction = x+norm(x)*[1;0]
+H = eye(2)-2*(direction*direction.')/sum(direction.^2)
+reflected = H*x
+
+% {{ comments.check[lang] }}
+example_check = max(abs(reflected-[-5;0])) < 1e-10 && max(max(abs(H.'*H-eye(2)))) < 1e-10

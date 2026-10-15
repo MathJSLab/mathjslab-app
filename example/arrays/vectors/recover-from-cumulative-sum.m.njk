@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Recover increments",
+            "es": "Recuperar incrementos",
+            "pt": "Recuperar incrementos"
+        },
+        "goal": {
+            "en": "Recover original increments from cumulative totals by differencing.",
+            "es": "Recuperar incrementos originales de totales acumulados mediante diferencias.",
+            "pt": "Recuperar incrementos originais dos totais acumulados por diferenças."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+increments = [3,-2,5,4]
+cumulative = cumsum(increments)
+recovered = diff([0,cumulative])
+
+% {{ comments.check[lang] }}
+example_check = all(recovered == increments) && cumulative(end) == 10

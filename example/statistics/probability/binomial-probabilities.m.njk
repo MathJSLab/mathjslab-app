@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Binomial probabilities",
+            "es": "Probabilidades binomiales",
+            "pt": "Probabilidades binomiais"
+        },
+        "goal": {
+            "en": "Compute the probability of each success count in four independent trials.",
+            "es": "Calcular la probabilidad de cada número de éxitos en cuatro ensayos independientes.",
+            "pt": "Calcular a probabilidade de cada número de sucessos em quatro ensaios independentes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+n = 4
+p = 0.5
+probabilities = zeros(1,n+1);
+for k = 0:n
+  combinations = factorial(n)/(factorial(k)*factorial(n-k));
+  probabilities(k+1) = combinations*p^k*(1-p)^(n-k);
+end
+
+% {{ comments.check[lang] }}
+example_check = abs(sum(probabilities)-1) < 1e-10 && probabilities(3) == 0.375

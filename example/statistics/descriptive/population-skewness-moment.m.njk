@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Population skewness moment",
+            "es": "Momento de asimetría poblacional",
+            "pt": "Momento de assimetria populacional"
+        },
+        "goal": {
+            "en": "Divide a population third central moment by the cubed population standard deviation.",
+            "es": "Dividir el tercer momento central poblacional por el cubo de la desviación estándar poblacional.",
+            "pt": "Dividir o terceiro momento central populacional pelo cubo do desvio padrão populacional."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [0,0,0,4]
+deviations = data-mean(data)
+population_variance = mean(deviations.^2)
+third_moment = mean(deviations.^3)
+skewness_value = third_moment/population_variance^(3/2)
+
+% {{ comments.check[lang] }}
+example_check = abs(skewness_value-2/sqrt(3)) < 1e-10 && skewness_value > 0

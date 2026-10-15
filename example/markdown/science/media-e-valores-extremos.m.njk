@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "media-e-valores-extremos.md",
+    "comments": {
+        "title": {
+            "en": "Mean, median and extreme values",
+            "es": "Media, mediana y valores extremos",
+            "pt": "Média, mediana e valores extremos"
+        },
+        "goal": {
+            "en": "Open “Mean, median and extreme values” from mathjslab-markdown.",
+            "es": "Abrir «Media, mediana y valores extremos» de mathjslab-markdown.",
+            "pt": "Abrir “Média, mediana e valores extremos” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/media-e-valores-extremos.md")

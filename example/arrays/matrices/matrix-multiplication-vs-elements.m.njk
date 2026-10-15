@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Matrix versus element products",
+            "es": "Productos matriciales y por elementos",
+            "pt": "Produtos matriciais e por elementos"
+        },
+        "goal": {
+            "en": "Compare a matrix product with multiplication at corresponding positions.",
+            "es": "Comparar un producto matricial con multiplicación en posiciones correspondientes.",
+            "pt": "Comparar um produto matricial com multiplicação nas posições correspondentes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [1,2;3,4]
+B = [2,0;1,2]
+matrix_product = A*B
+element_product = A.*B
+
+% {{ comments.check[lang] }}
+example_check = all(all(matrix_product == [4,4;10,8])) && all(all(element_product == [2,0;3,8]))

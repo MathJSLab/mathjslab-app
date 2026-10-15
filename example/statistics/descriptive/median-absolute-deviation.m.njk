@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Median absolute deviation",
+            "es": "Desviación absoluta mediana",
+            "pt": "Desvio absoluto mediano"
+        },
+        "goal": {
+            "en": "Compute an unscaled median absolute deviation explicitly from an odd sample.",
+            "es": "Calcular explícitamente una desviación absoluta mediana sin escalar con una muestra impar.",
+            "pt": "Calcular explicitamente um desvio absoluto mediano sem escala numa amostra ímpar."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [1,2,2,4,8]
+ordered = sort(data)
+central_value = ordered(3)
+ordered_deviations = sort(abs(data-central_value))
+mad_value = ordered_deviations(3)
+
+% {{ comments.check[lang] }}
+example_check = central_value == 2 && mad_value == 1

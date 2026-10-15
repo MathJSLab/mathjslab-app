@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Composite midpoint rule",
+            "es": "Regla del punto medio compuesta",
+            "pt": "Regra do ponto médio composta"
+        },
+        "goal": {
+            "en": "Integrate x squared on zero to one with forty midpoint samples.",
+            "es": "Integrar x al cuadrado de cero a uno con cuarenta muestras en puntos medios.",
+            "pt": "Integrar x ao quadrado de zero a um com quarenta amostras nos pontos médios."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+intervals = 40
+width = 1/intervals
+midpoints = ((1:intervals)-0.5)*width
+area = width*sum(midpoints.^2)
+absolute_error = abs(area-1/3)
+
+% {{ comments.check[lang] }}
+example_check = absolute_error < 0.00006

@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Small-angle pendulum",
+            "es": "Péndulo de ángulo pequeño",
+            "pt": "Pêndulo de pequeno ângulo"
+        },
+        "goal": {
+            "en": "Compare ideal pendulum periods when the length is multiplied by four.",
+            "es": "Comparar períodos de péndulos ideales al multiplicar la longitud por cuatro.",
+            "pt": "Comparar períodos de pêndulos ideais ao multiplicar o comprimento por quatro."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+gravity_m_per_s2 = 9.81
+lengths_m = [1,4]
+periods_s = 2*pi*sqrt(lengths_m/gravity_m_per_s2)
+period_ratio = periods_s(2)/periods_s(1)
+
+% {{ comments.check[lang] }}
+example_check = abs(period_ratio-2) < 1e-10

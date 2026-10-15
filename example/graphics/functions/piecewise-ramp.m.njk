@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Piecewise ramp",
+            "es": "Rampa por tramos",
+            "pt": "Rampa por trechos"
+        },
+        "goal": {
+            "en": "Construct a bounded ramp with explicit branches before plotting its samples.",
+            "es": "Construir una rampa acotada con ramas explícitas antes de graficar las muestras.",
+            "pt": "Construir uma rampa limitada com ramos explícitos antes de traçar as amostras."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = linspace(-1,2,31);
+y = zeros(1,numel(x));
+for k = 1:numel(x)
+  if x(k) < 0
+    y(k) = 0;
+  elseif x(k) > 1
+    y(k) = 1;
+  else
+    y(k) = x(k);
+  end
+end
+plot(x,y)
+
+% {{ comments.check[lang] }}
+example_check = all(y >= 0) && all(y <= 1) && y(1) == 0 && y(end) == 1

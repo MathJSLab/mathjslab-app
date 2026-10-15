@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Parallel resistors",
+            "es": "Resistencias en paralelo",
+            "pt": "Resistores em paralelo"
+        },
+        "goal": {
+            "en": "Combine positive resistances in parallel and compute current with Ohm law.",
+            "es": "Combinar resistencias positivas en paralelo y calcular corriente con la ley de Ohm.",
+            "pt": "Combinar resistências positivas em paralelo e calcular a corrente pela lei de Ohm."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+resistances_ohms = [100,200,200]
+equivalent_ohms = 1/sum(1./resistances_ohms)
+voltage_volts = 10
+current_amperes = voltage_volts/equivalent_ohms
+
+% {{ comments.check[lang] }}
+example_check = equivalent_ohms == 50 && abs(current_amperes-0.2) < 1e-10

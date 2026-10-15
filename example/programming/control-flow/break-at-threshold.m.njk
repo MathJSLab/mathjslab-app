@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Stop at a threshold",
+            "es": "Detenerse en un umbral",
+            "pt": "Parar num limite"
+        },
+        "goal": {
+            "en": "Stop adding values as soon as the cumulative sum reaches a threshold.",
+            "es": "Dejar de sumar valores al alcanzar un umbral acumulado.",
+            "pt": "Parar de somar valores ao atingir um limite acumulado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [4,7,2,9,5]
+total = 0;
+stop_index = 0;
+for k = 1:numel(values)
+  total = total+values(k);
+  if total >= 12
+    stop_index = k;
+    break;
+  end
+end
+total
+stop_index
+
+% {{ comments.check[lang] }}
+example_check = total == 13 && stop_index == 3

@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Valid box blur",
+            "es": "Filtro de caja sin bordes",
+            "pt": "Filtro de caixa sem bordas"
+        },
+        "goal": {
+            "en": "Average three-by-three neighborhoods without padding.",
+            "es": "Promediar vecindades de tres por tres sin relleno.",
+            "pt": "Calcular médias de vizinhanças três por três sem preenchimento."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+image_values = [1,2,3,4;5,6,7,8;9,10,11,12;13,14,15,16]; blurred_values = zeros(2,2);
+for row_index = 1:2
+ for column_index = 1:2
+  patch = image_values(row_index:row_index+2,column_index:column_index+2); blurred_values(row_index,column_index) = sum(sum(patch))/9;
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(blurred_values-[6,7;10,11]))) < 1e-10

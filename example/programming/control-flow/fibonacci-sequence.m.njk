@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Fibonacci sequence",
+            "es": "Secuencia de Fibonacci",
+            "pt": "Sequência de Fibonacci"
+        },
+        "goal": {
+            "en": "Build ten Fibonacci numbers with a bounded loop and preallocated storage.",
+            "es": "Construir diez números de Fibonacci con un bucle acotado y memoria preasignada.",
+            "pt": "Construir dez números de Fibonacci com laço limitado e memória pré-alocada."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+sequence = zeros(1,10);
+sequence(1:2) = [1,1];
+for k = 3:10
+  sequence(k) = sequence(k-1)+sequence(k-2);
+end
+sequence
+
+% {{ comments.check[lang] }}
+example_check = all(sequence == [1,1,2,3,5,8,13,21,34,55])

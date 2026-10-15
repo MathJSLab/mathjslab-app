@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Function returning a record",
+            "es": "Función que devuelve un registro",
+            "pt": "Função que retorna um registro"
+        },
+        "goal": {
+            "en": "Return count, minimum and maximum together in a structure.",
+            "es": "Devolver cantidad, mínimo y máximo juntos en una estructura.",
+            "pt": "Retornar quantidade, mínimo e máximo juntos numa estrutura."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+function report = summarize_values(values)
+  report = struct();
+  report.count = numel(values);
+  report.minimum = min(values);
+  report.maximum = max(values);
+end
+summary = summarize_values([9,2,6,4])
+
+% {{ comments.check[lang] }}
+example_check = summary.count == 4 && summary.minimum == 2 && summary.maximum == 9

@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Standardized scores",
+            "es": "Puntuaciones estandarizadas",
+            "pt": "Escores padronizados"
+        },
+        "goal": {
+            "en": "Center observations and divide by their sample standard deviation.",
+            "es": "Centrar observaciones y dividir por su desviación estándar muestral.",
+            "pt": "Centrar observações e dividir pelo desvio padrão amostral."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [10,12,14,16,18]
+scores = (data-mean(data))/std(data)
+score_average = mean(scores)
+score_deviation = std(scores)
+
+% {{ comments.check[lang] }}
+example_check = abs(score_average) < 1e-10 && abs(score_deviation-1) < 1e-10

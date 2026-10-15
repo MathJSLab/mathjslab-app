@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sieve of small primes",
+            "es": "Criba de primos pequeños",
+            "pt": "Crivo de pequenos primos"
+        },
+        "goal": {
+            "en": "Mark multiples to find primes up to thirty with a small sieve.",
+            "es": "Marcar múltiplos para encontrar primos hasta treinta con una criba pequeña.",
+            "pt": "Marcar múltiplos para encontrar primos até trinta com um pequeno crivo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+flags = ones(1,30);
+flags(1) = 0;
+for candidate = 2:5
+  if flags(candidate) == 1
+    flags(candidate^2:candidate:30) = 0;
+  end
+end
+numbers = 1:30;
+prime_values = numbers(flags == 1)
+
+% {{ comments.check[lang] }}
+example_check = all(prime_values == [2,3,5,7,11,13,17,19,23,29])

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "numeros-binarios.md",
+    "comments": {
+        "title": {
+            "en": "Binary numbers and place value",
+            "es": "Números binarios y valor posicional",
+            "pt": "Números binários e valor posicional"
+        },
+        "goal": {
+            "en": "Open “Binary numbers and place value” from mathjslab-markdown.",
+            "es": "Abrir «Números binarios y valor posicional» de mathjslab-markdown.",
+            "pt": "Abrir “Números binários e valor posicional” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/numeros-binarios.md")

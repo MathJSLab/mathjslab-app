@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Break-even sales",
+            "es": "Ventas de equilibrio",
+            "pt": "Vendas no ponto de equilíbrio"
+        },
+        "goal": {
+            "en": "Find the integer sales count needed to cover a fixed cost with a positive unit margin.",
+            "es": "Encontrar las ventas enteras necesarias para cubrir un costo fijo con margen unitario positivo.",
+            "pt": "Encontrar a quantidade inteira de vendas para cobrir um custo fixo com margem unitária positiva."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+fixed_cost = 950
+unit_price = 35
+unit_cost = 15
+unit_margin = unit_price-unit_cost
+required_units = ceil(fixed_cost/unit_margin)
+profit = required_units*unit_margin-fixed_cost
+
+% {{ comments.check[lang] }}
+example_check = required_units == 48 && profit >= 0 && (required_units-1)*unit_margin < fixed_cost

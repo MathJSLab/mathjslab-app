@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Linked list reversal",
+            "es": "Inversión de lista enlazada",
+            "pt": "Inversão de lista encadeada"
+        },
+        "goal": {
+            "en": "Reverse next-node links without moving stored values.",
+            "es": "Invertir enlaces al siguiente nodo sin mover los valores almacenados.",
+            "pt": "Inverter ligações ao próximo nó sem mover os valores armazenados."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+next_nodes = [2,3,0]; previous_index = 0; current_index = 1;
+while current_index ~= 0
+ saved_index = next_nodes(current_index); next_nodes(current_index) = previous_index; previous_index = current_index; current_index = saved_index;
+end
+head_index = previous_index;
+
+% {{ comments.check[lang] }}
+example_check = head_index == 3 && all(next_nodes == [0,1,2])

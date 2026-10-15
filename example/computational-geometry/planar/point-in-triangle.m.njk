@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Point in a triangle",
+            "es": "Punto en un triángulo",
+            "pt": "Ponto em um triângulo"
+        },
+        "goal": {
+            "en": "Compute barycentric coordinates and test nonnegative weights.",
+            "es": "Calcular coordenadas baricéntricas y comprobar pesos no negativos.",
+            "pt": "Calcular coordenadas baricêntricas e verificar pesos não negativos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+a = [0;0]; b = [4;0]; c = [0;3]; point_value = [1;1];
+coordinates = [b-a,c-a]\(point_value-a); weights = [1-sum(coordinates);coordinates];
+
+% {{ comments.check[lang] }}
+example_check = all(weights >= 0) && abs(sum(weights)-1) < 1e-10 && max(abs([a,b,c]*weights-point_value)) < 1e-10

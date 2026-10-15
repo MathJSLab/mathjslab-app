@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Trigonometric identity",
+            "es": "Identidad trigonométrica",
+            "pt": "Identidade trigonométrica"
+        },
+        "goal": {
+            "en": "Verify the squared sine and cosine identity at several angles.",
+            "es": "Verificar la identidad de seno y coseno al cuadrado en varios ángulos.",
+            "pt": "Verificar a identidade dos quadrados do seno e cosseno em vários ângulos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+angles = linspace(-pi,pi,9)
+identity_values = sin(angles).^2 + cos(angles).^2
+largest_error = max(abs(identity_values-1))
+
+% {{ comments.check[lang] }}
+example_check = largest_error < 1e-10

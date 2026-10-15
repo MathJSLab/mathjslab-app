@@ -1,16 +1,29 @@
 import { expect, test } from '@playwright/test';
+import { routeApplicationAssets } from './helpers/application';
+
+test('keeps Markdown output in the document panel after evaluating a URL', async ({ page }) => {
+    await routeApplicationAssets(page);
+    await page.route('https://example.org/lesson.md', (route) => route.fulfill({ contentType: 'text/markdown', body: '# Panel regression' }));
+    await page.goto('/dist/en/index.html');
+    const prompts = page.locator('command-prompt');
+    await expect(prompts.last().locator('textarea')).toBeVisible({ timeout: 30_000 });
+    const prompt = prompts.nth((await prompts.count()) - 1);
+    const input = prompt.locator('textarea');
+    await expect(input).toBeVisible({ timeout: 30_000 });
+    await input.fill('markdown("https://example.org/lesson.md")');
+    await input.press('Enter');
+    const panel = prompt.locator('.green-panel.doc');
+    await expect(panel).toBeVisible();
+    await expect(panel.locator('markdown-document')).toHaveAttribute('state', 'ready');
+    await expect(panel.getByRole('heading', { name: 'Panel regression' })).toBeVisible();
+    expect(await panel.evaluate((element) => getComputedStyle(element).backgroundColor)).toBe('rgb(255, 255, 255)');
+});
 
 test('keeps the synchronous app prompt and renders Plotly after an external-function failure', async ({ page }) => {
     test.setTimeout(90_000);
     // The built app uses root asset URLs. Serve those assets from its local dist
     // directory without changing the production HTML or application settings.
-    await page.route('**/*', async (route) => {
-        const url = new URL(route.request().url());
-        if (url.origin === 'http://127.0.0.1:4173' && !url.pathname.startsWith('/dist/') && !url.pathname.startsWith('/test/') && /\.(?:js|css)$/.test(url.pathname)) {
-            url.pathname = `/dist${url.pathname}`;
-            await route.continue({ url: url.href });
-        } else await route.continue();
-    });
+    await routeApplicationAssets(page);
     await page.goto('/dist/en/index.html');
     const prompts = page.locator('command-prompt');
     await expect(prompts.last().locator('textarea')).toBeVisible({ timeout: 30_000 });

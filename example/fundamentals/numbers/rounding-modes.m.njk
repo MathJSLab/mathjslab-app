@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Rounding modes",
+            "es": "Modos de redondeo",
+            "pt": "Modos de arredondamento"
+        },
+        "goal": {
+            "en": "Compare round, floor, ceil and fix on positive and negative values.",
+            "es": "Comparar round, floor, ceil y fix con valores positivos y negativos.",
+            "pt": "Comparar round, floor, ceil e fix com valores positivos e negativos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [-2.7, -1.2, 1.2, 2.7]
+nearest = round(values)
+downward = floor(values)
+upward = ceil(values)
+toward_zero = fix(values)
+
+% {{ comments.check[lang] }}
+example_check = all(nearest == [-3,-1,1,3]) && all(toward_zero == [-2,-1,1,2])

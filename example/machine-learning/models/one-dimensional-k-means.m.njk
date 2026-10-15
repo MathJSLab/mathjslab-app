@@ -1,0 +1,46 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "One-dimensional k-means",
+            "es": "K-means unidimensional",
+            "pt": "K-means unidimensional"
+        },
+        "goal": {
+            "en": "Alternate nearest-center assignments and cluster means.",
+            "es": "Alternar asignaciones al centro más próximo y medias de grupos.",
+            "pt": "Alternar atribuições ao centro mais próximo e médias dos grupos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+samples = [0,1,2,8,9,10]; centers = [0,10]; assignments = zeros(1,6);
+for step_index = 1:4
+ for item_index = 1:6
+  assignments(item_index) = 1;
+  if abs(samples(item_index)-centers(2)) < abs(samples(item_index)-centers(1))
+   assignments(item_index) = 2;
+  end
+ end
+ for cluster_index = 1:2
+  selected = samples(assignments == cluster_index); centers(cluster_index) = sum(selected)/length(selected);
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = all(centers == [1,9]) && all(assignments == [1,1,1,2,2,2])

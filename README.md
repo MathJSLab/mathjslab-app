@@ -28,6 +28,14 @@ page at [mathjslab.com](https://mathjslab.com/). The repository is in the
 [MathJSLab Organization](https://github.com/MathJSLab) on
 [GitHub](https://github.com/).
 
+`mathjslab-app` now includes **more than 300 examples**, available in English,
+Spanish and Portuguese and organized into categories and subdirectories. The
+collection covers linear algebra, statistics, programming (including classes,
+algorithms and data structures), signal processing, numerical methods, graphics
+and other topics. Browse the application's examples panel to load and explore
+each script, adapted to MathJSLab's supported features. See the
+[example catalogue guide](example/README.md) for the complete organization.
+
 **Important Notice:** This software, the **[MathJSLab](https://mathjslab.com/),
 is not affiliated, sponsored, or endorsed by
 [The MathWorks, Inc.](https://www.mathworks.com/)**

@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sphere and bounding cube",
+            "es": "Esfera y cubo envolvente",
+            "pt": "Esfera e cubo envolvente"
+        },
+        "goal": {
+            "en": "Compare a sphere volume with that of the cube enclosing it.",
+            "es": "Comparar el volumen de una esfera con el cubo que la contiene.",
+            "pt": "Comparar o volume de uma esfera com o cubo que a contém."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+radius_value = 3
+sphere_volume = 4*pi*radius_value^3/3
+cube_volume = (2*radius_value)^3
+volume_fraction = sphere_volume/cube_volume
+
+% {{ comments.check[lang] }}
+example_check = abs(volume_fraction-pi/6) < 1e-10 && sphere_volume < cube_volume

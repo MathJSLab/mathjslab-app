@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Vector projection",
+            "es": "Proyección vectorial",
+            "pt": "Projeção vetorial"
+        },
+        "goal": {
+            "en": "Project a vector onto a direction and check the orthogonality of the residual.",
+            "es": "Proyectar un vector sobre una dirección y comprobar la ortogonalidad del residuo.",
+            "pt": "Projetar um vetor numa direção e verificar a ortogonalidade do resíduo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+vector = [3;4]
+direction = [1;2]
+projection = direction*(direction.'*vector)/(direction.'*direction)
+residual = vector-projection
+orthogonality = direction.'*residual
+
+% {{ comments.check[lang] }}
+example_check = all(all(abs(orthogonality) < 1e-10))

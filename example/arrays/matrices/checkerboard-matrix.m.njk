@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Checkerboard matrix",
+            "es": "Matriz de tablero",
+            "pt": "Matriz de tabuleiro"
+        },
+        "goal": {
+            "en": "Fill alternating cells using the parity of row and column indices.",
+            "es": "Llenar celdas alternas usando la paridad de índices de fila y columna.",
+            "pt": "Preencher células alternadas pela paridade dos índices de linha e coluna."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+board = zeros(4,4);
+for row_index = 1:4
+  for column_index = 1:4
+    board(row_index,column_index) = mod(row_index+column_index,2);
+  end
+end
+board
+
+% {{ comments.check[lang] }}
+example_check = sum(sum(board)) == 8 && board(1,1) == 0 && board(1,2) == 1

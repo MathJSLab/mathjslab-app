@@ -1,0 +1,46 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Merge sorted sequences",
+            "es": "Fusionar secuencias ordenadas",
+            "pt": "Mesclar sequências ordenadas"
+        },
+        "goal": {
+            "en": "Advance two read positions and append the smaller value.",
+            "es": "Avanzar dos posiciones de lectura y añadir el menor valor.",
+            "pt": "Avançar duas posições de leitura e adicionar o menor valor."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+left_values = [1,4,7]; right_values = [2,3,8]; merged = zeros(1,6); i = 1; j = 1;
+for output_index = 1:6
+ if i > 3
+  merged(output_index) = right_values(j); j = j+1;
+ elseif j > 3
+  merged(output_index) = left_values(i); i = i+1;
+ elseif left_values(i) <= right_values(j)
+  merged(output_index) = left_values(i); i = i+1;
+ else
+  merged(output_index) = right_values(j); j = j+1;
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = all(merged == [1,2,3,4,7,8])

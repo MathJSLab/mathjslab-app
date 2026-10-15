@@ -1,0 +1,44 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Selection sort",
+            "es": "Ordenación por selección",
+            "pt": "Ordenação por seleção"
+        },
+        "goal": {
+            "en": "Select the smallest remaining entry at each position.",
+            "es": "Seleccionar la menor entrada restante en cada posición.",
+            "pt": "Selecionar a menor entrada restante em cada posição."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+values = [7,2,9,2,1]; best_slot = [1,0];
+for left_index = 1:4
+ best_slot(1) = left_index;
+ for candidate_index = (left_index+1):5
+  if values(candidate_index) < values(best_slot(1))
+   best_slot(1) = candidate_index;
+  end
+ end
+ saved_value = values(left_index); values(left_index) = values(best_slot(1)); values(best_slot(1)) = saved_value;
+end
+
+% {{ comments.check[lang] }}
+example_check = all(values == [1,2,2,7,9])

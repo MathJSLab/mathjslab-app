@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Bilinear interpolation",
+            "es": "Interpolación bilineal",
+            "pt": "Interpolação bilinear"
+        },
+        "goal": {
+            "en": "Blend four corner values on a unit square; rows correspond to y and columns to x.",
+            "es": "Combinar cuatro valores de un cuadrado unidad; filas corresponden a y y columnas a x.",
+            "pt": "Combinar quatro valores num quadrado unitário; linhas correspondem a y e colunas a x."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+corners = [0,2;3,5]
+query_x = 0.25
+query_y = 0.5
+interpolated = (1-query_y)*((1-query_x)*corners(1,1)+query_x*corners(1,2))+query_y*((1-query_x)*corners(2,1)+query_x*corners(2,2))
+
+% {{ comments.check[lang] }}
+example_check = abs(interpolated-2) < 1e-10

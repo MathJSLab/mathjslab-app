@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Discrete KL divergence",
+            "es": "Divergencia KL discreta",
+            "pt": "Divergência KL discreta"
+        },
+        "goal": {
+            "en": "Compare positive normalized distributions using base-two Kullback-Leibler divergence.",
+            "es": "Comparar distribuciones positivas normalizadas con divergencia de Kullback-Leibler en base dos.",
+            "pt": "Comparar distribuições positivas normalizadas pela divergência de Kullback-Leibler em base dois."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+p = [0.5,0.5]
+q = [0.25,0.75]
+divergence_bits = sum(p.*log(p./q))/log(2)
+self_divergence = sum(p.*log(p./p))/log(2)
+
+% {{ comments.check[lang] }}
+example_check = abs(divergence_bits-0.5*log(4/3)/log(2)) < 1e-10 && divergence_bits > 0 && self_divergence == 0

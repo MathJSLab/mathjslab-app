@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Manual four-point DFT",
+            "es": "DFT manual de cuatro puntos",
+            "pt": "DFT manual de quatro pontos"
+        },
+        "goal": {
+            "en": "Compute a four-point discrete Fourier transform directly from the complex-exponential formula.",
+            "es": "Calcular una transformada discreta de Fourier de cuatro puntos con la fórmula exponencial compleja.",
+            "pt": "Calcular uma transformada discreta de Fourier de quatro pontos pela fórmula exponencial complexa."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [1,0,-1,0];
+coefficients = zeros(1,4);
+for frequency_index = 0:3
+  for sample_index = 0:3
+    phase_radians = -2*pi*frequency_index*sample_index/4;
+    coefficients(frequency_index+1) = coefficients(frequency_index+1)+samples(sample_index+1)*exp(1i*phase_radians);
+  end
+end
+coefficients
+
+% {{ comments.check[lang] }}
+example_check = max(abs(coefficients-[0,2,0,2])) < 1e-10

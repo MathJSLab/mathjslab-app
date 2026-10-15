@@ -1,0 +1,45 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Two-pointer pair sum",
+            "es": "Suma de pares con dos punteros",
+            "pt": "Soma de pares com dois ponteiros"
+        },
+        "goal": {
+            "en": "Move opposite ends of a sorted vector to find a target sum.",
+            "es": "Mover extremos opuestos de un vector ordenado para hallar una suma objetivo.",
+            "pt": "Mover extremos opostos de um vetor ordenado para encontrar uma soma alvo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+values = [1,3,4,7,11]; target_value = 10; left_index = 1; right_index = 5; found = false;
+while left_index < right_index
+ pair_total = values(left_index)+values(right_index);
+ if pair_total == target_value
+  found = true; break
+ elseif pair_total < target_value
+  left_index = left_index+1;
+ else
+  right_index = right_index-1;
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = found && left_index == 2 && right_index == 4

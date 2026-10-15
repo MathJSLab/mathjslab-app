@@ -1,0 +1,44 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Zero-one knapsack",
+            "es": "Mochila cero-uno",
+            "pt": "Mochila zero-um"
+        },
+        "goal": {
+            "en": "Fill a dynamic-programming table with each item available once.",
+            "es": "Completar una tabla de programación dinámica con cada elemento disponible una vez.",
+            "pt": "Preencher uma tabela de programação dinâmica com cada item disponível uma vez."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+weights = [2,3,4]; benefits = [3,4,5]; capacity_value = 5; table_values = zeros(4,6);
+for item_index = 1:3
+ for room_value = 0:5
+  table_values(item_index+1,room_value+1) = table_values(item_index,room_value+1);
+  if weights(item_index) <= room_value
+   proposal = benefits(item_index)+table_values(item_index,room_value-weights(item_index)+1);
+   table_values(item_index+1,room_value+1) = max([table_values(item_index+1,room_value+1),proposal]);
+  end
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = table_values(4,6) == 7

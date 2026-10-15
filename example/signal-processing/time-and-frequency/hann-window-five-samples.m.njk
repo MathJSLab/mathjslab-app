@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Five-sample Hann window",
+            "es": "Ventana Hann de cinco muestras",
+            "pt": "Janela Hann de cinco amostras"
+        },
+        "goal": {
+            "en": "Build a symmetric Hann window and inspect endpoint zeros and coherent gain.",
+            "es": "Construir una ventana Hann simétrica y examinar ceros extremos y ganancia coherente.",
+            "pt": "Construir uma janela Hann simétrica e examinar zeros nos extremos e ganho coerente."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+indices = 0:4
+window_values = 0.5-0.5*cos(2*pi*indices/4)
+coherent_gain = mean(window_values)
+
+% {{ comments.check[lang] }}
+example_check = max(abs(window_values-[0,0.5,1,0.5,0])) < 1e-10 && abs(coherent_gain-0.4) < 1e-10

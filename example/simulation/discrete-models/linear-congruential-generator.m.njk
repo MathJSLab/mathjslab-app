@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Linear congruential generator",
+            "es": "Generador congruencial lineal",
+            "pt": "Gerador congruencial linear"
+        },
+        "goal": {
+            "en": "Generate a reproducible tiny integer sequence with a fixed seed.",
+            "es": "Generar una secuencia entera pequeña reproducible con semilla fija.",
+            "pt": "Gerar uma pequena sequência inteira reprodutível com semente fixa."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+state_value = 3; states = zeros(1,8);
+for step_index = 1:8
+ state_value = mod(5*state_value+1,16); states(step_index) = state_value;
+end
+normalized_values = states/16;
+
+% {{ comments.check[lang] }}
+example_check = all(states == [0,1,6,15,12,13,2,11]) && all(normalized_values >= 0 & normalized_values < 1)

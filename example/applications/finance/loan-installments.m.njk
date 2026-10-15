@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Fixed loan installments",
+            "es": "Cuotas fijas de un préstamo",
+            "pt": "Prestações fixas de um empréstimo"
+        },
+        "goal": {
+            "en": "Compute equal installments at a positive monthly rate, excluding fees and taxes.",
+            "es": "Calcular cuotas iguales con tasa mensual positiva, sin comisiones ni impuestos.",
+            "pt": "Calcular prestações iguais com taxa mensal positiva, sem tarifas ou impostos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+principal = 1000
+monthly_rate = 0.01
+months = 12
+payment = principal*monthly_rate/(1-(1+monthly_rate)^(-months))
+balance = principal;
+for month = 1:months
+  balance = balance*(1+monthly_rate)-payment;
+end
+remaining_balance = balance
+total_paid = months*payment
+
+% {{ comments.check[lang] }}
+example_check = abs(remaining_balance) < 1e-8 && total_paid > principal

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "balanceamento-quimico.md",
+    "comments": {
+        "title": {
+            "en": "Balancing equations: conserving atoms",
+            "es": "Balanceo de ecuaciones: conservar átomos",
+            "pt": "Balanceamento: conservar átomos"
+        },
+        "goal": {
+            "en": "Open “Balancing equations: conserving atoms” from mathjslab-markdown.",
+            "es": "Abrir «Balanceo de ecuaciones: conservar átomos» de mathjslab-markdown.",
+            "pt": "Abrir “Balanceamento: conservar átomos” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/balanceamento-quimico.md")

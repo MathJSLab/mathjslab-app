@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "estatistica.md",
+    "comments": {
+        "title": {
+            "en": "Grade distribution",
+            "es": "Distribución de calificaciones",
+            "pt": "Distribuição de notas"
+        },
+        "goal": {
+            "en": "Open “Grade distribution” from mathjslab-markdown.",
+            "es": "Abrir «Distribución de calificaciones» de mathjslab-markdown.",
+            "pt": "Abrir “Distribuição de notas” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/estatistica.md")

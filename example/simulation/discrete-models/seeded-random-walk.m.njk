@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Seeded random walk",
+            "es": "Caminata aleatoria con semilla",
+            "pt": "Caminhada aleatória com semente"
+        },
+        "goal": {
+            "en": "Turn reproducible generator states into left and right steps.",
+            "es": "Convertir estados reproducibles del generador en pasos a izquierda y derecha.",
+            "pt": "Converter estados reprodutíveis do gerador em passos à esquerda e à direita."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+state_value = 3; positions = zeros(1,9); steps = zeros(1,8);
+for step_index = 1:8
+ state_value = mod(5*state_value+1,16); steps(step_index) = 2*(state_value >= 8)-1; positions(step_index+1) = positions(step_index)+steps(step_index);
+end
+
+% {{ comments.check[lang] }}
+example_check = all(positions == [0,-1,-2,-3,-2,-1,0,-1,0]) && all(abs(steps) == 1)

@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Static distance method",
+            "es": "Método estático de distancia",
+            "pt": "Método estático de distância"
+        },
+        "goal": {
+            "en": "Call a static Euclidean distance method without constructing an instance.",
+            "es": "Llamar un método estático de distancia euclidiana sin construir una instancia.",
+            "pt": "Chamar um método estático de distância euclidiana sem construir uma instância."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef GeometryTools
+  methods (Static)
+    function value = distance(a,b)
+      value = sqrt(sum((a-b).^2));
+    end
+  end
+end
+distance_value = GeometryTools.distance([1,2],[4,6])
+
+% {{ comments.check[lang] }}
+example_check = distance_value == 5

@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Warshall reachability",
+            "es": "Alcanzabilidad con Warshall",
+            "pt": "Alcançabilidade com Warshall"
+        },
+        "goal": {
+            "en": "Compute reflexive reachability in a directed chain with Boolean Warshall updates.",
+            "es": "Calcular alcanzabilidad reflexiva de una cadena dirigida con actualizaciones booleanas de Warshall.",
+            "pt": "Calcular alcançabilidade reflexiva de uma cadeia dirigida com atualizações booleanas de Warshall."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+adjacency = [0,1,0;0,0,1;0,0,0]
+reachable = (adjacency+eye(3)) > 0;
+for intermediate = 1:3
+  for start_index = 1:3
+    for end_index = 1:3
+      reachable(start_index,end_index) = reachable(start_index,end_index) || (reachable(start_index,intermediate) && reachable(intermediate,end_index));
+    end
+  end
+end
+reachable
+
+% {{ comments.check[lang] }}
+example_check = reachable(1,3) && ~reachable(3,1) && sum(sum(reachable)) == 6

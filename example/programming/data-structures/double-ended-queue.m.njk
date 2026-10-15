@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Double-ended queue",
+            "es": "Cola de doble extremo",
+            "pt": "Fila de duas pontas"
+        },
+        "goal": {
+            "en": "Reserve middle slots to insert and remove at either end.",
+            "es": "Reservar posiciones centrales para insertar y retirar en ambos extremos.",
+            "pt": "Reservar posições centrais para inserir e retirar nas duas pontas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+storage = zeros(1,7); left_index = 4; right_index = 4; storage(4) = 20;
+left_index = left_index-1; storage(left_index) = 10;
+right_index = right_index+1; storage(right_index) = 30;
+left_out = storage(left_index); left_index = left_index+1;
+right_out = storage(right_index); right_index = right_index-1;
+
+% {{ comments.check[lang] }}
+example_check = left_out == 10 && right_out == 30 && storage(left_index) == 20 && left_index == right_index

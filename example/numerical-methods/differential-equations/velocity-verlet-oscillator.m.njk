@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Velocity Verlet oscillator",
+            "es": "Oscilador con Verlet de velocidades",
+            "pt": "Oscilador com Verlet de velocidades"
+        },
+        "goal": {
+            "en": "Use paired half-velocity updates around each position step of a unit oscillator.",
+            "es": "Usar dos actualizaciones de media velocidad alrededor de cada paso de posición de un oscilador unitario.",
+            "pt": "Usar duas atualizações de meia velocidade em torno de cada passo de posição de um oscilador unitário."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = 1;
+velocity = 0;
+dt = 0.05;
+energy = zeros(1,81);
+energy(1) = 0.5;
+for k = 1:80
+  half_velocity = velocity-dt*x/2;
+  x = x+dt*half_velocity;
+  velocity = half_velocity-dt*x/2;
+  energy(k+1) = (x^2+velocity^2)/2;
+end
+largest_energy_error = max(abs(energy-0.5))
+
+% {{ comments.check[lang] }}
+example_check = largest_energy_error < 0.0004

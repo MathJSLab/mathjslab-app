@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Array stack",
+            "es": "Pila con arreglo",
+            "pt": "Pilha com array"
+        },
+        "goal": {
+            "en": "Push two values and pop them in last-in-first-out order.",
+            "es": "Apilar dos valores y retirarlos en orden inverso.",
+            "pt": "Empilhar dois valores e retirá-los em ordem inversa."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+storage = zeros(1,4); top_index = 0;
+top_index = top_index+1; storage(top_index) = 10;
+top_index = top_index+1; storage(top_index) = 20;
+first_pop = storage(top_index); top_index = top_index-1;
+second_pop = storage(top_index); top_index = top_index-1;
+
+% {{ comments.check[lang] }}
+example_check = first_pop == 20 && second_pop == 10 && top_index == 0

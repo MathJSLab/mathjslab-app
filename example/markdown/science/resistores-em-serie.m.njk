@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "resistores-em-serie.md",
+    "comments": {
+        "title": {
+            "en": "Series resistors: current and voltage",
+            "es": "Resistencias en serie: corriente y tensión",
+            "pt": "Resistores em série: corrente e tensão"
+        },
+        "goal": {
+            "en": "Open “Series resistors: current and voltage” from mathjslab-markdown.",
+            "es": "Abrir «Resistencias en serie: corriente y tensión» de mathjslab-markdown.",
+            "pt": "Abrir “Resistores em série: corrente e tensão” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/resistores-em-serie.md")

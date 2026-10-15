@@ -1,0 +1,44 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Counting sort",
+            "es": "Ordenación por conteo",
+            "pt": "Ordenação por contagem"
+        },
+        "goal": {
+            "en": "Count bounded integer keys and reconstruct their ordered sequence.",
+            "es": "Contar claves enteras acotadas y reconstruir su secuencia ordenada.",
+            "pt": "Contar chaves inteiras limitadas e reconstruir sua sequência ordenada."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+values = [3,0,2,3,1,0]; counts = zeros(1,4);
+for item_index = 1:6
+ key_index = values(item_index)+1; counts(key_index) = counts(key_index)+1;
+end
+ordered = zeros(1,6); output_index = 1;
+for key_value = 0:3
+ for repetition_index = 1:counts(key_value+1)
+  ordered(output_index) = key_value; output_index = output_index+1;
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = all(ordered == [0,0,1,2,3,3])

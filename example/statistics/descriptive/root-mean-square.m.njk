@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Root mean square",
+            "es": "Media cuadrática",
+            "pt": "Média quadrática"
+        },
+        "goal": {
+            "en": "Calculate the root mean square of a signal directly from its samples.",
+            "es": "Calcular la media cuadrática de una señal directamente con sus muestras.",
+            "pt": "Calcular a média quadrática de um sinal diretamente das amostras."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [-3,3,-3,3]
+rms_value = sqrt(mean(samples.^2))
+sample_average = mean(samples)
+
+% {{ comments.check[lang] }}
+example_check = rms_value == 3 && sample_average == 0

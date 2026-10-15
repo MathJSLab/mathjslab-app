@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Manual 2x2 Cholesky",
+            "es": "Cholesky manual 2x2",
+            "pt": "Cholesky manual 2x2"
+        },
+        "goal": {
+            "en": "Construct a lower Cholesky factor of a positive definite matrix explicitly.",
+            "es": "Construir explícitamente un factor inferior de Cholesky de una matriz definida positiva.",
+            "pt": "Construir explicitamente um fator inferior de Cholesky de uma matriz definida positiva."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [4,2;2,5]
+l11 = sqrt(A(1,1));
+l21 = A(2,1)/l11;
+l22 = sqrt(A(2,2)-l21^2);
+L = [l11,0;l21,l22]
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(L*L.'-A))) < 1e-10 && all(diag(L) > 0)

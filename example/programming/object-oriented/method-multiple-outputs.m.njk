@@ -1,0 +1,41 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Method with multiple outputs",
+            "es": "Método con múltiples salidas",
+            "pt": "Método com múltiplas saídas"
+        },
+        "goal": {
+            "en": "Return a count and total from one instance method over stored data.",
+            "es": "Devolver cantidad y total desde un método de instancia sobre datos almacenados.",
+            "pt": "Retornar quantidade e total de um método de instância sobre dados armazenados."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef SampleContainer
+  properties
+    Values = [2,4,6];
+  end
+  methods
+    function [count_value,total_value] = summary(obj)
+      count_value = numel(obj.Values);
+      total_value = sum(obj.Values);
+    end
+  end
+end
+container = SampleContainer();
+[count_value,total_value] = container.summary()
+
+% {{ comments.check[lang] }}
+example_check = count_value == 3 && total_value == 12

@@ -1,4 +1,5 @@
 export default {
+    exampleBrowser: { back: 'Volver', empty: 'Este directorio está vacío.', loadError: 'No se pudo cargar el ejemplo. Inténtalo de nuevo.' },
     locale: 'es',
     htmlLang: 'es',
     ogLocale: 'es_ES',

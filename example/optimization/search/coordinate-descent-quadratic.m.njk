@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Coordinate descent",
+            "es": "Descenso por coordenadas",
+            "pt": "Descida por coordenadas"
+        },
+        "goal": {
+            "en": "Alternate exact coordinate minimizers for a coupled positive quadratic.",
+            "es": "Alternar minimizadores exactos por coordenada de una cuadrática positiva acoplada.",
+            "pt": "Alternar minimizadores exatos por coordenada de uma quadrática positiva acoplada."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = 0;
+y = 0;
+for iteration = 1:25
+  x = (4-y)/2;
+  y = (-6-x)/2;
+end
+point = [x,y]
+gradient_values = [2*x+y-4,x+2*y+6]
+
+% {{ comments.check[lang] }}
+example_check = max(abs(point-[14/3,-16/3])) < 1e-9 && max(abs(gradient_values)) < 1e-9

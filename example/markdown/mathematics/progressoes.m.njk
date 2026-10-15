@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "progressoes.md",
+    "comments": {
+        "title": {
+            "en": "Arithmetic and geometric sequences",
+            "es": "Progresiones aritméticas y geométricas",
+            "pt": "Progressões"
+        },
+        "goal": {
+            "en": "Open “Arithmetic and geometric sequences” from mathjslab-markdown.",
+            "es": "Abrir «Progresiones aritméticas y geométricas» de mathjslab-markdown.",
+            "pt": "Abrir “Progressões” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/progressoes.md")

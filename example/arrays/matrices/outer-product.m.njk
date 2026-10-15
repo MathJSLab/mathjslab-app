@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Outer product",
+            "es": "Producto exterior",
+            "pt": "Produto externo"
+        },
+        "goal": {
+            "en": "Form a matrix from all products of one column and one row.",
+            "es": "Formar una matriz con todos los productos de una columna y una fila.",
+            "pt": "Formar uma matriz com todos os produtos de uma coluna e uma linha."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+column_values = [1;2;3]
+row_values = [4,5]
+products = column_values*row_values
+
+% {{ comments.check[lang] }}
+example_check = all(all(products == [4,5;8,10;12,15]))

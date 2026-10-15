@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Vandermonde polynomial system",
+            "es": "Sistema polinómico de Vandermonde",
+            "pt": "Sistema polinomial de Vandermonde"
+        },
+        "goal": {
+            "en": "Recover quadratic coefficients from three samples by solving a Vandermonde system.",
+            "es": "Recuperar coeficientes cuadráticos de tres muestras resolviendo un sistema de Vandermonde.",
+            "pt": "Recuperar coeficientes quadráticos de três amostras resolvendo um sistema de Vandermonde."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+nodes = [0;1;2]
+values = [1;4;9]
+V = [ones(3,1),nodes,nodes.^2]
+coefficients = V\values
+
+% {{ comments.check[lang] }}
+example_check = max(abs(coefficients-[1;2;1])) < 1e-10 && max(abs(V*coefficients-values)) < 1e-10

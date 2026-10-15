@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "isomeria.md",
+    "comments": {
+        "title": {
+            "en": "Isomerism",
+            "es": "Isomería",
+            "pt": "Isomeria"
+        },
+        "goal": {
+            "en": "Open “Isomerism” from mathjslab-markdown.",
+            "es": "Abrir «Isomería» de mathjslab-markdown.",
+            "pt": "Abrir “Isomeria” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/isomeria.md")

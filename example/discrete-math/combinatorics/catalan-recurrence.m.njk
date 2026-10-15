@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Catalan recurrence",
+            "es": "Recurrencia de Catalan",
+            "pt": "Recorrência de Catalan"
+        },
+        "goal": {
+            "en": "Generate Catalan numbers up to index six from a convolution recurrence.",
+            "es": "Generar números de Catalan hasta el índice seis con una recurrencia de convolución.",
+            "pt": "Gerar números de Catalan até o índice seis por uma recorrência de convolução."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+counts = zeros(1,7);
+counts(1) = 1;
+for n = 1:6
+  for k = 0:n-1
+    counts(n+1) = counts(n+1)+counts(k+1)*counts(n-k);
+  end
+end
+counts
+
+% {{ comments.check[lang] }}
+example_check = all(counts == [1,1,2,5,14,42,132])

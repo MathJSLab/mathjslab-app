@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Rotate a grid",
+            "es": "Rotar una cuadrícula",
+            "pt": "Girar uma grade"
+        },
+        "goal": {
+            "en": "Rotate a rectangular grid clockwise by transposing and reversing columns.",
+            "es": "Rotar una cuadrícula rectangular en sentido horario transponiendo e invirtiendo columnas.",
+            "pt": "Girar uma grade retangular no sentido horário transpondo e invertendo colunas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+grid_values = [1,2,3;4,5,6]
+rotated = grid_values.';
+rotated = rotated(:,end:-1:1)
+
+% {{ comments.check[lang] }}
+example_check = all(all(rotated == [4,1;5,2;6,3]))

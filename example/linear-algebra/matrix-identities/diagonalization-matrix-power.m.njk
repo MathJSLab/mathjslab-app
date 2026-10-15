@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Powers by diagonalization",
+            "es": "Potencias por diagonalización",
+            "pt": "Potências por diagonalização"
+        },
+        "goal": {
+            "en": "Raise eigenvalues to a power and reconstruct the matrix power.",
+            "es": "Elevar autovalores a una potencia y reconstruir la potencia matricial.",
+            "pt": "Elevar autovalores a uma potência e reconstruir a potência matricial."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+V = [1,1;0,1]; D = [2,0;0,3]; A = V*D/V;
+power_value = V*(D^4)/V
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(power_value-A^4))) < 1e-10

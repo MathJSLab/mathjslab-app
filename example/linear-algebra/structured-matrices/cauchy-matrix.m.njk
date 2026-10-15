@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Cauchy matrix",
+            "es": "Matriz de Cauchy",
+            "pt": "Matriz de Cauchy"
+        },
+        "goal": {
+            "en": "Construct reciprocal sums from two distinct coordinate lists.",
+            "es": "Construir sumas recíprocas con dos listas distintas de coordenadas.",
+            "pt": "Construir somas recíprocas com duas listas distintas de coordenadas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+u = [1,2,4]; v = [2,5,8]; C = zeros(3,3);
+for row_index = 1:3
+ for column_index = 1:3
+  C(row_index,column_index) = 1/(u(row_index)+v(column_index));
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = abs(C(1,1)-1/3) < 1e-10 && abs(det(C)) > 1e-8

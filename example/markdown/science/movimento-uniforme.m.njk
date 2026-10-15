@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "movimento-uniforme.md",
+    "comments": {
+        "title": {
+            "en": "Uniform motion",
+            "es": "Movimiento uniforme",
+            "pt": "Movimento uniforme"
+        },
+        "goal": {
+            "en": "Open “Uniform motion” from mathjslab-markdown.",
+            "es": "Abrir «Movimiento uniforme» de mathjslab-markdown.",
+            "pt": "Abrir “Movimento uniforme” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/movimento-uniforme.md")

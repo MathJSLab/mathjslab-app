@@ -1,0 +1,30 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Evenly spaced samples",
+            "es": "Muestras equidistantes",
+            "pt": "Amostras equidistantes"
+        },
+        "goal": {
+            "en": "Create six evenly spaced samples including both interval endpoints.",
+            "es": "Crear seis muestras equidistantes incluyendo los extremos del intervalo.",
+            "pt": "Criar seis amostras equidistantes incluindo os extremos do intervalo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = linspace(-2,3,6)
+spacing = samples(2)-samples(1)
+
+% {{ comments.check[lang] }}
+example_check = all(samples == [-2,-1,0,1,2,3]) && spacing == 1

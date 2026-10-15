@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "leitura-de-dados.md",
+    "comments": {
+        "title": {
+            "en": "Reading data",
+            "es": "Lectura de datos",
+            "pt": "Leitura de dados"
+        },
+        "goal": {
+            "en": "Open “Reading data” from mathjslab-markdown.",
+            "es": "Abrir «Lectura de datos» de mathjslab-markdown.",
+            "pt": "Abrir “Leitura de dados” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/leitura-de-dados.md")

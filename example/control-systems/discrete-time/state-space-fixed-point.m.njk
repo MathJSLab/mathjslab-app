@@ -1,0 +1,35 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "State-space fixed point",
+            "es": "Punto fijo de espacio de estados",
+            "pt": "Ponto fixo em espaço de estados"
+        },
+        "goal": {
+            "en": "Iterate a stable two-state system with unit input and compare with its algebraic fixed point.",
+            "es": "Iterar un sistema estable de dos estados con entrada unidad y comparar con su punto fijo algebraico.",
+            "pt": "Iterar um sistema estável de dois estados com entrada unitária e comparar com seu ponto fixo algébrico."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [0.5,0.1;0,0.25]
+B = [0;1]
+state = zeros(2,1);
+for k = 1:25
+  state = A*state+B;
+end
+steady_state = (eye(2)-A)\B
+
+% {{ comments.check[lang] }}
+example_check = max(abs(state-steady_state)) < 1e-6 && max(abs(A*steady_state+B-steady_state)) < 1e-10

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "funcao-quadratica.md",
+    "comments": {
+        "title": {
+            "en": "Quadratic functions: roots and vertex",
+            "es": "Función cuadrática: raíces y vértice",
+            "pt": "Função quadrática: raízes e vértice"
+        },
+        "goal": {
+            "en": "Open “Quadratic functions: roots and vertex” from mathjslab-markdown.",
+            "es": "Abrir «Función cuadrática: raíces y vértice» de mathjslab-markdown.",
+            "pt": "Abrir “Função quadrática: raízes e vértice” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/funcao-quadratica.md")

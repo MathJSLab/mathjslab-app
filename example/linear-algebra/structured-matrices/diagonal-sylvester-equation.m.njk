@@ -1,0 +1,40 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Diagonal Sylvester equation",
+            "es": "Ecuación de Sylvester diagonal",
+            "pt": "Equação de Sylvester diagonal"
+        },
+        "goal": {
+            "en": "Solve AX+XB=C entry by entry when A and B are diagonal.",
+            "es": "Resolver AX+XB=C entrada por entrada cuando A y B son diagonales.",
+            "pt": "Resolver AX+XB=C entrada por entrada quando A e B são diagonais."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [1,0;0,3]; B = [2,0;0,4]; C = [6,10;15,21]; X = zeros(2,2);
+for row_index = 1:2
+ for column_index = 1:2
+  X(row_index,column_index) = C(row_index,column_index)/(A(row_index,row_index)+B(column_index,column_index));
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(A*X+X*B-C))) < 1e-10

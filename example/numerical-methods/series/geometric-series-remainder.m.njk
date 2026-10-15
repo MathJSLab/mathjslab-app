@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Geometric series remainder",
+            "es": "Resto de serie geométrica",
+            "pt": "Resto de série geométrica"
+        },
+        "goal": {
+            "en": "Compare a finite geometric sum with its infinite limit and explicit remainder.",
+            "es": "Comparar una suma geométrica finita con su límite infinito y resto explícito.",
+            "pt": "Comparar uma soma geométrica finita com seu limite infinito e resto explícito."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+ratio_value = 0.5
+term_count = 12
+partial_sum = sum(ratio_value.^(0:term_count-1))
+infinite_sum = 1/(1-ratio_value)
+remainder_value = ratio_value^term_count/(1-ratio_value)
+
+% {{ comments.check[lang] }}
+example_check = abs(infinite_sum-partial_sum-remainder_value) < 1e-10 && remainder_value < 0.001

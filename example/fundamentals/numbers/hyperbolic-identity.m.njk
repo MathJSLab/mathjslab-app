@@ -1,0 +1,30 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Hyperbolic identity",
+            "es": "Identidad hiperbólica",
+            "pt": "Identidade hiperbólica"
+        },
+        "goal": {
+            "en": "Compare cosh and sinh using their difference-of-squares identity.",
+            "es": "Comparar cosh y sinh mediante su identidad de diferencia de cuadrados.",
+            "pt": "Comparar cosh e sinh pela identidade de diferença de quadrados."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [-2,-1,0,1,2]
+identity_values = cosh(x).^2 - sinh(x).^2
+
+% {{ comments.check[lang] }}
+example_check = max(abs(identity_values-1)) < 1e-10

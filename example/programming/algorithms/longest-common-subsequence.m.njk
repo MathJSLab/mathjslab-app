@@ -1,0 +1,44 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Longest common subsequence",
+            "es": "Subsecuencia común más larga",
+            "pt": "Subsequência comum mais longa"
+        },
+        "goal": {
+            "en": "Compare numeric token sequences using a two-dimensional table.",
+            "es": "Comparar secuencias de tokens numéricos mediante una tabla bidimensional.",
+            "pt": "Comparar sequências de tokens numéricos com uma tabela bidimensional."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+first_tokens = [1,2,3,4]; second_tokens = [2,4,3]; lengths = zeros(5,4);
+for i = 1:4
+ for j = 1:3
+  if first_tokens(i) == second_tokens(j)
+   lengths(i+1,j+1) = lengths(i,j)+1;
+  else
+   lengths(i+1,j+1) = max([lengths(i,j+1),lengths(i+1,j)]);
+  end
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = lengths(5,4) == 2

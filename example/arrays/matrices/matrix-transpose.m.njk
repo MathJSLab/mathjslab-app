@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Matrix transpose",
+            "es": "Transpuesta de una matriz",
+            "pt": "Transposta de uma matriz"
+        },
+        "goal": {
+            "en": "Swap rows and columns and recover the original matrix by transposing twice.",
+            "es": "Intercambiar filas y columnas y recuperar la matriz con dos transposiciones.",
+            "pt": "Trocar linhas e colunas e recuperar a matriz com duas transposições."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [1,3,5;2,4,6]
+transposed = A.'
+restored = transposed.'
+
+% {{ comments.check[lang] }}
+example_check = all(size(transposed) == [3,2]) && all(all(restored == A))

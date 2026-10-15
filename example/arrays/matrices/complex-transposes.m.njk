@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Complex transposes",
+            "es": "Transpuestas complejas",
+            "pt": "Transpostas complexas"
+        },
+        "goal": {
+            "en": "Compare ordinary transpose with conjugate transpose for complex entries.",
+            "es": "Comparar transposición ordinaria y conjugada con entradas complejas.",
+            "pt": "Comparar transposição simples e conjugada com entradas complexas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [1+2i,3-4i]
+ordinary = A.'
+conjugated = A'
+
+% {{ comments.check[lang] }}
+example_check = ordinary(1) == 1+2i && conjugated(1) == 1-2i && conjugated(2) == 3+4i

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "algoritmos.md",
+    "comments": {
+        "title": {
+            "en": "Summing with an algorithm",
+            "es": "Suma con un algoritmo",
+            "pt": "Soma com um algoritmo"
+        },
+        "goal": {
+            "en": "Open “Summing with an algorithm” from mathjslab-markdown.",
+            "es": "Abrir «Suma con un algoritmo» de mathjslab-markdown.",
+            "pt": "Abrir “Soma com um algoritmo” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/algoritmos.md")

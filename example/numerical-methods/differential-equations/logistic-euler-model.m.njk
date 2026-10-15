@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Logistic Euler model",
+            "es": "Modelo logístico con Euler",
+            "pt": "Modelo logístico com Euler"
+        },
+        "goal": {
+            "en": "Integrate logistic growth with a small explicit step and compare with its known solution.",
+            "es": "Integrar crecimiento logístico con un paso explícito pequeño y comparar con su solución conocida.",
+            "pt": "Integrar crescimento logístico com um pequeno passo explícito e comparar com a solução conhecida."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+capacity = 10;
+growth_rate = 1;
+initial_value = 2;
+y = initial_value;
+dt = 0.02;
+for k = 1:50
+  y = y+dt*growth_rate*y*(1-y/capacity);
+end
+final_value = y
+exact_value = capacity/(1+(capacity/initial_value-1)*exp(-growth_rate))
+
+% {{ comments.check[lang] }}
+example_check = abs(final_value-exact_value) < 0.03 && final_value > initial_value && final_value < capacity

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "pausas-musicais.md",
+    "comments": {
+        "title": {
+            "en": "Musical rests: silence has duration",
+            "es": "Pausas musicales: el silencio tiene duración",
+            "pt": "Pausas musicais: o silêncio tem duração"
+        },
+        "goal": {
+            "en": "Open “Musical rests: silence has duration” from mathjslab-markdown.",
+            "es": "Abrir «Pausas musicales: el silencio tiene duración» de mathjslab-markdown.",
+            "pt": "Abrir “Pausas musicais: o silêncio tem duração” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/pausas-musicais.md")

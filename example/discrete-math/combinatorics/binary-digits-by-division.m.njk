@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Binary digits by division",
+            "es": "Dígitos binarios por división",
+            "pt": "Dígitos binários por divisão"
+        },
+        "goal": {
+            "en": "Recover least-significant-first binary digits by successive integer division.",
+            "es": "Recuperar dígitos binarios del menos significativo al más mediante división entera sucesiva.",
+            "pt": "Recuperar dígitos binários do menos significativo para o mais por divisão inteira sucessiva."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+original_value = 13;
+remaining_value = original_value;
+digits = zeros(1,4);
+for k = 1:4
+  digits(k) = mod(remaining_value,2);
+  remaining_value = floor(remaining_value/2);
+end
+digits
+reconstructed = sum(digits.*2.^(0:3))
+
+% {{ comments.check[lang] }}
+example_check = all(digits == [1,0,1,1]) && reconstructed == original_value && remaining_value == 0

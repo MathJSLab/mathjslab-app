@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Prefix-code length bounds",
+            "es": "Cotas de longitud de código prefijo",
+            "pt": "Limites de comprimento de código prefixo"
+        },
+        "goal": {
+            "en": "Calculate average length and Kraft sum for an explicitly prefix-free binary code.",
+            "es": "Calcular longitud media y suma de Kraft de un código binario explícito sin prefijos.",
+            "pt": "Calcular comprimento médio e soma de Kraft de um código binário explícito sem prefixos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+codewords = {[0],[1,0],[1,1,0]};
+probabilities = [0.5,0.25,0.25];
+lengths = zeros(1,3);
+for k = 1:3
+  lengths(k) = numel(codewords{k});
+end
+average_bits = sum(probabilities.*lengths)
+entropy_bits = -sum(probabilities.*log(probabilities))/log(2)
+kraft_sum = sum(2.^(-lengths))
+
+% {{ comments.check[lang] }}
+example_check = average_bits == 1.75 && kraft_sum == 0.875 && average_bits >= entropy_bits && average_bits < entropy_bits+1

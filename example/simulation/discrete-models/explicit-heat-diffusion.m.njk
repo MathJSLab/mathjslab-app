@@ -1,0 +1,42 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Explicit heat diffusion",
+            "es": "Difusión de calor explícita",
+            "pt": "Difusão de calor explícita"
+        },
+        "goal": {
+            "en": "Diffuse a pulse on a short grid with fixed zero boundaries and a stable step.",
+            "es": "Difundir un pulso en una malla corta con bordes cero y un paso estable.",
+            "pt": "Difundir um pulso em uma grade curta com bordas zero e um passo estável."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+temperatures = [0,0,1,0,0]; initial_energy = sum(temperatures); coefficient_value = 0.2;
+for step_index = 1:6
+ next_values = temperatures;
+ for position_index = 2:4
+  next_values(position_index) = temperatures(position_index)+coefficient_value*(temperatures(position_index-1)-2*temperatures(position_index)+temperatures(position_index+1));
+ end
+ temperatures = next_values;
+end
+
+% {{ comments.check[lang] }}
+example_check = all(temperatures >= 0) && max(temperatures) < 1 && sum(temperatures) < initial_energy && temperatures(1) == 0 && temperatures(5) == 0

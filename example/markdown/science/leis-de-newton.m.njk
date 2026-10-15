@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "leis-de-newton.md",
+    "comments": {
+        "title": {
+            "en": "Forces and Newton’s second law",
+            "es": "Fuerzas y segunda ley de Newton",
+            "pt": "Forças e a segunda lei de Newton"
+        },
+        "goal": {
+            "en": "Open “Forces and Newton’s second law” from mathjslab-markdown.",
+            "es": "Abrir «Fuerzas y segunda ley de Newton» de mathjslab-markdown.",
+            "pt": "Abrir “Forças e a segunda lei de Newton” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/leis-de-newton.md")

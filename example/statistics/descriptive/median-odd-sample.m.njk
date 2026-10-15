@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Median of an odd sample",
+            "es": "Mediana de una muestra impar",
+            "pt": "Mediana de uma amostra ímpar"
+        },
+        "goal": {
+            "en": "Compute the middle sorted value explicitly instead of calling median.",
+            "es": "Calcular explícitamente el valor central ordenado en lugar de usar median.",
+            "pt": "Calcular explicitamente o valor central ordenado em vez de chamar median."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+data = [18,7,11,4,15]
+ordered = sort(data)
+middle_index = (numel(data)+1)/2
+sample_median = ordered(middle_index)
+
+% {{ comments.check[lang] }}
+example_check = sample_median == 11

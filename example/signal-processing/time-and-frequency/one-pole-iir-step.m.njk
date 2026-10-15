@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "One-pole IIR step",
+            "es": "Escalón IIR de un polo",
+            "pt": "Degrau IIR de um polo"
+        },
+        "goal": {
+            "en": "Apply a stable half-weight IIR recurrence starting from zero state.",
+            "es": "Aplicar una recurrencia IIR estable de peso medio desde estado cero.",
+            "pt": "Aplicar uma recorrência IIR estável de peso médio a partir de estado zero."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = ones(1,5);
+output_values = zeros(1,5);
+previous_value = 0;
+for k = 1:5
+  output_values(k) = 0.5*samples(k)+0.5*previous_value;
+  previous_value = output_values(k);
+end
+output_values
+
+% {{ comments.check[lang] }}
+example_check = all(output_values == [0.5,0.75,0.875,0.9375,0.96875])

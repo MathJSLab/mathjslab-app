@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Geometric mean",
+            "es": "Media geométrica",
+            "pt": "Média geométrica"
+        },
+        "goal": {
+            "en": "Calculate a geometric mean from logarithms of positive factors.",
+            "es": "Calcular una media geométrica con logaritmos de factores positivos.",
+            "pt": "Calcular uma média geométrica com logaritmos de fatores positivos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+factors = [2,4,8]
+geometric_average = exp(mean(log(factors)))
+direct_average = prod(factors)^(1/numel(factors))
+
+% {{ comments.check[lang] }}
+example_check = abs(geometric_average-4) < 1e-10 && abs(geometric_average-direct_average) < 1e-10

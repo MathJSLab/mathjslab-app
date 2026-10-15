@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Straight-line depreciation",
+            "es": "Depreciación lineal",
+            "pt": "Depreciação linear"
+        },
+        "goal": {
+            "en": "Model equal annual depreciation toward an assumed salvage value, without accounting rules.",
+            "es": "Modelar depreciación anual constante hasta un valor residual supuesto, sin reglas contables.",
+            "pt": "Modelar depreciação anual constante até um valor residual suposto, sem regras contábeis."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+initial_cost = 1200
+salvage_value = 200
+life_years = 5
+annual_decrease = (initial_cost-salvage_value)/life_years
+years = 0:life_years
+book_values = initial_cost-annual_decrease*years
+
+% {{ comments.check[lang] }}
+example_check = annual_decrease == 200 && book_values(end) == salvage_value

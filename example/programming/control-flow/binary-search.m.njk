@@ -1,0 +1,45 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Binary search",
+            "es": "Búsqueda binaria",
+            "pt": "Busca binária"
+        },
+        "goal": {
+            "en": "Locate a target by halving an interval in a sorted vector.",
+            "es": "Localizar un objetivo dividiendo un intervalo de un vector ordenado.",
+            "pt": "Localizar um alvo dividindo um intervalo de um vetor ordenado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [2,5,8,11,14,17,20];
+target = 14;
+left = 1;
+right = numel(values);
+found_index = 0;
+while left <= right
+  midpoint = floor((left+right)/2);
+  if values(midpoint) == target
+    found_index = midpoint;
+    break;
+  elseif values(midpoint) < target
+    left = midpoint+1;
+  else
+    right = midpoint-1;
+  end
+end
+found_index
+
+% {{ comments.check[lang] }}
+example_check = found_index == 5

@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Adjacency path counts",
+            "es": "Conteos de caminos por adyacencia",
+            "pt": "Contagens de caminhos por adjacência"
+        },
+        "goal": {
+            "en": "Use powers of a directed acyclic adjacency matrix to count fixed-length walks.",
+            "es": "Usar potencias de una matriz de adyacencia acíclica dirigida para contar recorridos de longitud fija.",
+            "pt": "Usar potências de uma matriz de adjacência acíclica dirigida para contar percursos de comprimento fixo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+adjacency = [0,1,1;0,0,1;0,0,0]
+two_step_walks = adjacency^2
+three_step_walks = adjacency^3
+
+% {{ comments.check[lang] }}
+example_check = two_step_walks(1,3) == 1 && all(all(three_step_walks == zeros(3,3)))

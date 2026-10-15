@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Illustrative tiered cost",
+            "es": "Costo por tramos ilustrativo",
+            "pt": "Custo por faixas ilustrativo"
+        },
+        "goal": {
+            "en": "Calculate a fictional tiered price: first ten units at two, remaining units at three.",
+            "es": "Calcular un precio ficticio por tramos: diez unidades a dos y las restantes a tres.",
+            "pt": "Calcular um preço fictício por faixas: dez unidades a dois e as restantes a três."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+quantity = 16
+first_tier_units = quantity;
+remaining_units = 0;
+if quantity > 10
+  first_tier_units = 10;
+  remaining_units = quantity-10;
+end
+total_cost = 2*first_tier_units+3*remaining_units
+
+% {{ comments.check[lang] }}
+example_check = total_cost == 38

@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Closest point on a segment",
+            "es": "Punto más cercano en un segmento",
+            "pt": "Ponto mais próximo em um segmento"
+        },
+        "goal": {
+            "en": "Project onto the segment direction and clamp the parameter to its endpoints.",
+            "es": "Proyectar sobre la dirección del segmento y limitar el parámetro a sus extremos.",
+            "pt": "Projetar na direção do segmento e limitar o parâmetro aos extremos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+a = [0,0]; b = [4,0]; point_value = [6,3]; direction = b-a;
+t_value = sum((point_value-a).*direction)/sum(direction.^2); t_value = max([0,min([1,t_value])]);
+closest_point = a+t_value*direction; distance_value = norm(point_value-closest_point);
+
+% {{ comments.check[lang] }}
+example_check = all(closest_point == [4,0]) && abs(distance_value-sqrt(13)) < 1e-10

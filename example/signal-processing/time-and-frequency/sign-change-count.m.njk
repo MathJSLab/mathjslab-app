@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Sign-change count",
+            "es": "Conteo de cambios de signo",
+            "pt": "Contagem de mudanças de sinal"
+        },
+        "goal": {
+            "en": "Count sign changes in nonzero samples using adjacent products.",
+            "es": "Contar cambios de signo en muestras no nulas usando productos adyacentes.",
+            "pt": "Contar mudanças de sinal em amostras não nulas usando produtos adjacentes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [-2,-1,3,4,-1,-2,2]
+change_mask = samples(1:end-1).*samples(2:end) < 0
+change_count = sum(change_mask)
+
+% {{ comments.check[lang] }}
+example_check = change_count == 3

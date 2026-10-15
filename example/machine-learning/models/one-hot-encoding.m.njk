@@ -1,0 +1,38 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "One-hot encoding",
+            "es": "Codificación one-hot",
+            "pt": "Codificação one-hot"
+        },
+        "goal": {
+            "en": "Convert categorical integer labels into indicator columns.",
+            "es": "Convertir etiquetas enteras categóricas en columnas indicadoras.",
+            "pt": "Converter rótulos inteiros categóricos em colunas indicadoras."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+labels = [2,1,3,2]; encoded = zeros(4,3);
+for row_index = 1:4
+ encoded(row_index,labels(row_index)) = 1;
+end
+
+% {{ comments.check[lang] }}
+example_check = all(sum(encoded,2) == 1) && all(sum(encoded,1) == [1,2,1])

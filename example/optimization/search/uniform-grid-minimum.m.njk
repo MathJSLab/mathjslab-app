@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Uniform-grid minimum",
+            "es": "Mínimo en cuadrícula uniforme",
+            "pt": "Mínimo em grade uniforme"
+        },
+        "goal": {
+            "en": "Locate a known quadratic minimum on a grid that contains its minimizer.",
+            "es": "Localizar un mínimo cuadrático conocido en una cuadrícula que contiene el minimizador.",
+            "pt": "Localizar um mínimo quadrático conhecido numa grade que contém o minimizador."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = 0:0.25:6
+objective_values = (samples-3).^2+2
+minimum_value = min(objective_values)
+best_samples = samples(objective_values == minimum_value)
+
+% {{ comments.check[lang] }}
+example_check = minimum_value == 2 && all(best_samples == 3)

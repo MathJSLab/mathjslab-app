@@ -1,0 +1,45 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Minimum coin change",
+            "es": "Cambio mínimo de monedas",
+            "pt": "Troco mínimo de moedas"
+        },
+        "goal": {
+            "en": "Build minimum coin counts for every amount up to a small target.",
+            "es": "Construir cantidades mínimas de monedas hasta un objetivo pequeño.",
+            "pt": "Construir quantidades mínimas de moedas até um pequeno alvo."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://github.com/TheAlgorithms/MATLAB-Octave",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://github.com/TheAlgorithms/MATLAB-Octave"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+coins = [1,3,4]; target_amount = 6; costs = 99*ones(1,7); costs(1) = 0;
+for amount_value = 1:6
+ for coin_index = 1:3
+  if coins(coin_index) <= amount_value
+   proposal = 1+costs(amount_value-coins(coin_index)+1);
+   if proposal < costs(amount_value+1)
+    costs(amount_value+1) = proposal;
+   end
+  end
+ end
+end
+
+% {{ comments.check[lang] }}
+example_check = costs(7) == 2 && costs(5) == 1

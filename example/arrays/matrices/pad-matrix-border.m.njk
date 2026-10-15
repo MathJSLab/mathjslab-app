@@ -1,0 +1,32 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Pad a matrix border",
+            "es": "Añadir borde a una matriz",
+            "pt": "Adicionar borda a uma matriz"
+        },
+        "goal": {
+            "en": "Place a small matrix inside a zero border using block assignment.",
+            "es": "Colocar una matriz pequeña dentro de un borde de ceros mediante bloques.",
+            "pt": "Colocar uma pequena matriz dentro de uma borda de zeros por blocos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+original = [1,2;3,4]
+padded = zeros(4,4);
+padded(2:3,2:3) = original;
+padded
+
+% {{ comments.check[lang] }}
+example_check = sum(sum(padded)) == 10 && all(padded(1,:) == 0) && all(all(padded(2:3,2:3) == original))

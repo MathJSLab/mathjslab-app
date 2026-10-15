@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "geometria-molecular.md",
+    "comments": {
+        "title": {
+            "en": "Molecular geometry of water",
+            "es": "Geometría molecular del agua",
+            "pt": "Geometria molecular da água"
+        },
+        "goal": {
+            "en": "Open “Molecular geometry of water” from mathjslab-markdown.",
+            "es": "Abrir «Geometría molecular del agua» de mathjslab-markdown.",
+            "pt": "Abrir “Geometria molecular da água” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/geometria-molecular.md")

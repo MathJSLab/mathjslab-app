@@ -1,0 +1,37 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Gradient fit through origin",
+            "es": "Ajuste por gradiente desde el origen",
+            "pt": "Ajuste por gradiente pela origem"
+        },
+        "goal": {
+            "en": "Estimate a slope by descending the mean squared error of an origin-constrained line.",
+            "es": "Estimar pendiente descendiendo el error cuadrático medio de una recta que pasa por el origen.",
+            "pt": "Estimar inclinação descendo o erro quadrático médio de uma reta que passa pela origem."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = [1,2,3,4];
+y = 3*x;
+slope = 0;
+for iteration = 1:100
+  residuals = slope*x-y;
+  gradient_value = 2*mean(residuals.*x);
+  slope = slope-0.01*gradient_value;
+end
+slope
+
+% {{ comments.check[lang] }}
+example_check = abs(slope-3) < 1e-6

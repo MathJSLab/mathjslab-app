@@ -1,0 +1,34 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Bayes bag selection",
+            "es": "Selección de bolsa con Bayes",
+            "pt": "Seleção de saco com Bayes"
+        },
+        "goal": {
+            "en": "Infer a bag probability after drawing a red ball using stated prior probabilities.",
+            "es": "Inferir la probabilidad de una bolsa tras sacar una bola roja con probabilidades previas dadas.",
+            "pt": "Inferir a probabilidade de um saco após retirar uma bola vermelha com probabilidades prévias dadas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+prior_a = 0.4
+prior_b = 0.6
+red_given_a = 0.7
+red_given_b = 0.3
+red_probability = prior_a*red_given_a+prior_b*red_given_b
+posterior_a = prior_a*red_given_a/red_probability
+
+% {{ comments.check[lang] }}
+example_check = abs(red_probability-0.46) < 1e-10 && abs(posterior_a-14/23) < 1e-10

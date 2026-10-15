@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "atomos-e-ions.md",
+    "comments": {
+        "title": {
+            "en": "Atoms and ions: charge and identity",
+            "es": "Átomos e iones: carga e identidad",
+            "pt": "Átomos e íons: carga e identidade"
+        },
+        "goal": {
+            "en": "Open “Atoms and ions: charge and identity” from mathjslab-markdown.",
+            "es": "Abrir «Átomos e iones: carga e identidad» de mathjslab-markdown.",
+            "pt": "Abrir “Átomos e íons: carga e identidade” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/atomos-e-ions.md")

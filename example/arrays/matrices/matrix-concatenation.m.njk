@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Join matrix blocks",
+            "es": "Unir bloques de matrices",
+            "pt": "Unir blocos de matrizes"
+        },
+        "goal": {
+            "en": "Assemble a larger matrix from identity and zero blocks.",
+            "es": "Construir una matriz mayor con bloques identidad y cero.",
+            "pt": "Montar uma matriz maior com blocos identidade e zero."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+I = eye(2)
+Z = zeros(2,2)
+block_matrix = [I,Z;Z,2*I]
+
+% {{ comments.check[lang] }}
+example_check = all(size(block_matrix) == [4,4]) && trace(block_matrix) == 6

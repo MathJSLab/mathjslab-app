@@ -1,0 +1,33 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Soft thresholding",
+            "es": "Umbral suave",
+            "pt": "Limiar suave"
+        },
+        "goal": {
+            "en": "Shrink magnitudes by a fixed threshold while preserving the remaining signs.",
+            "es": "Reducir magnitudes con un umbral fijo conservando los signos restantes.",
+            "pt": "Reduzir magnitudes por um limiar fixo preservando os sinais restantes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+values = [-5,-1,0,2,6]
+threshold = 2
+remaining = abs(values)-threshold;
+remaining(remaining < 0) = 0;
+shrunk = sign(values).*remaining
+
+% {{ comments.check[lang] }}
+example_check = all(shrunk == [-3,0,0,0,4])

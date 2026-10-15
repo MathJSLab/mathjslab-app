@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Logistic sigmoid curve",
+            "es": "Curva sigmoide logística",
+            "pt": "Curva sigmoide logística"
+        },
+        "goal": {
+            "en": "Plot the logistic sigmoid and inspect its midpoint and symmetry.",
+            "es": "Graficar la sigmoide logística y examinar su punto medio y simetría.",
+            "pt": "Traçar a sigmoide logística e examinar seu ponto médio e simetria."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+x = linspace(-6,6,61);
+y = 1./(1+exp(-x));
+plot(x,y)
+
+% {{ comments.check[lang] }}
+example_check = abs(y(31)-0.5) < 1e-10 && abs(y(1)+y(end)-1) < 1e-10 && all(diff(y) > 0)

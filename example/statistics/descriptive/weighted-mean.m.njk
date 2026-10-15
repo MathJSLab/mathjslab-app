@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Weighted mean",
+            "es": "Media ponderada",
+            "pt": "Média ponderada"
+        },
+        "goal": {
+            "en": "Combine grades with weights and check that the weights sum to one.",
+            "es": "Combinar notas con pesos y comprobar que los pesos suman uno.",
+            "pt": "Combinar notas com pesos e verificar que os pesos somam um."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+grades = [6,8,9]
+weights = [0.2,0.3,0.5]
+weighted_average = sum(grades.*weights)
+
+% {{ comments.check[lang] }}
+example_check = abs(sum(weights)-1) < 1e-10 && abs(weighted_average-8.1) < 1e-10

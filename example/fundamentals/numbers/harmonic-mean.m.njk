@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Harmonic mean",
+            "es": "Media armónica",
+            "pt": "Média harmônica"
+        },
+        "goal": {
+            "en": "Compare harmonic and arithmetic means of positive travel speeds.",
+            "es": "Comparar medias armónica y aritmética de velocidades positivas.",
+            "pt": "Comparar médias harmônica e aritmética de velocidades positivas."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+speeds = [30,60]
+harmonic_average = numel(speeds)/sum(1./speeds)
+arithmetic_average = mean(speeds)
+
+% {{ comments.check[lang] }}
+example_check = harmonic_average == 40 && arithmetic_average == 45

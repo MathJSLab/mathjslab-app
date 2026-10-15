@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Antithetic paired sampling",
+            "es": "Muestreo de pares antitéticos",
+            "pt": "Amostragem de pares antitéticos"
+        },
+        "goal": {
+            "en": "Pair each point with its reflection to integrate a linear function exactly.",
+            "es": "Emparejar cada punto con su reflejo para integrar exactamente una función lineal.",
+            "pt": "Emparelhar cada ponto com seu reflexo para integrar uma função linear exatamente."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://people.sc.fsu.edu/~jburkardt/m_src/m_src.html"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+samples = [0.1,0.3,0.8,0.9]; reflected_samples = 1-samples;
+paired_values = ((2*samples+1)+(2*reflected_samples+1))/2; estimate = sum(paired_values)/4;
+
+% {{ comments.check[lang] }}
+example_check = abs(estimate-2) < 1e-10 && all(abs(paired_values-2) < 1e-10)

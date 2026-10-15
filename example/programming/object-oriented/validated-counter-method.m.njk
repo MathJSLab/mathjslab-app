@@ -1,0 +1,50 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Validated counter method",
+            "es": "Método de contador validado",
+            "pt": "Método de contador validado"
+        },
+        "goal": {
+            "en": "Reject a negative increment inside a method and verify that state stays unchanged.",
+            "es": "Rechazar un incremento negativo dentro de un método y verificar que el estado no cambia.",
+            "pt": "Rejeitar um incremento negativo dentro de um método e verificar que o estado não muda."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+classdef ValidatedCounter < handle
+  properties
+    Count = 0;
+  end
+  methods
+    function increment(obj,amount)
+      if amount < 0
+        error("Example:NegativeAmount");
+      end
+      obj.Count = obj.Count+amount;
+    end
+  end
+end
+counter = ValidatedCounter();
+counter.increment(4);
+rejected = false;
+try
+  counter.increment(-2);
+catch
+  rejected = true;
+end
+count_value = counter.Count
+
+% {{ comments.check[lang] }}
+example_check = rejected && count_value == 4

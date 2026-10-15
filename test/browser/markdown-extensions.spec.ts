@@ -42,7 +42,7 @@ test('keeps two rich document instances isolated', async ({ page }) => {
     const distinct = await page.evaluate(() => {
         const viewers = Array.from(document.querySelectorAll('markdown-document'));
         const diagrams = viewers.map((viewer) => viewer.shadowRoot?.querySelector('[data-markdown-extension="mermaid"] svg'));
-        return diagrams[0] !== diagrams[1] && viewers[0]?.shadowRoot !== viewers[1]?.shadowRoot;
+        return diagrams[0] !== diagrams[1] && diagrams[0]?.id !== diagrams[1]?.id && viewers[0]?.shadowRoot !== viewers[1]?.shadowRoot;
     });
     expect(distinct).toBe(true);
 });
@@ -66,12 +66,17 @@ test('renders offline GeoJSON and TopoJSON maps', async ({ page }) => {
     const document = documents(page);
     await expect(document).toHaveAttribute('state', 'ready', { timeout: 90_000 });
     await expect(document.locator('[data-markdown-extension="maps"] .leaflet-container')).toHaveCount(2);
-    await expect(document.locator('[data-markdown-extension="maps"] .leaflet-marker-pane img')).toHaveCount(1);
-    await expect(document.locator('[data-markdown-extension="maps"] .leaflet-overlay-pane svg')).toHaveCount(1);
+    await expect(document.locator('[data-markdown-extension="maps"] .leaflet-marker-pane img')).toHaveCount(0);
+    await expect(document.locator('[data-markdown-extension="maps"] .leaflet-overlay-pane svg')).toHaveCount(2);
+    await expect(document.locator('[data-markdown-extension="maps"] .leaflet-interactive')).toHaveCount(2);
     await expectNoExtensionError(document);
 });
 
 test('renders molecular and general 3D models with WebGL', async ({ page, browserName }) => {
+    const deprecated: string[] = [];
+    page.on('console', (message) => {
+        if (message.text().includes('THREE.Clock')) deprecated.push(message.text());
+    });
     test.skip(browserName === 'firefox', 'Playwright Firefox does not provide the WebGL implementation required by Three.js on this test host.');
     await page.goto('/test/browser/fixtures/lifecycle.html');
     const hasWebGL = await page.evaluate(() => Boolean(globalThis.document.createElement('canvas').getContext('webgl2') ?? globalThis.document.createElement('canvas').getContext('webgl')));
@@ -86,4 +91,5 @@ test('renders molecular and general 3D models with WebGL', async ({ page, browse
     if (browserName !== 'webkit') await expect(molecule.locator('canvas').first()).toBeVisible();
     await expect(document.locator('[data-markdown-extension="model-3d"] canvas').first()).toBeVisible();
     await expectNoExtensionError(document);
+    expect(deprecated).toEqual([]);
 });

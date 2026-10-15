@@ -1,0 +1,31 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Matrix rows and columns",
+            "es": "Filas y columnas de una matriz",
+            "pt": "Linhas e colunas de uma matriz"
+        },
+        "goal": {
+            "en": "Extract one row and one column with the colon index.",
+            "es": "Extraer una fila y una columna con el índice de dos puntos.",
+            "pt": "Extrair uma linha e uma coluna com o índice de dois-pontos."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+A = [2,4,6;8,10,12;14,16,18]
+second_row = A(2,:)
+third_column = A(:,3)
+
+% {{ comments.check[lang] }}
+example_check = all(second_row == [8,10,12]) && all(third_column == [6;12;18])

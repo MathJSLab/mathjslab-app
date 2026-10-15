@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Raw autocorrelation",
+            "es": "Autocorrelación sin normalizar",
+            "pt": "Autocorrelação sem normalização"
+        },
+        "goal": {
+            "en": "Sum sample products at nonnegative lags without centering or normalization.",
+            "es": "Sumar productos de muestras en retardos no negativos sin centrar ni normalizar.",
+            "pt": "Somar produtos de amostras em atrasos não negativos sem centrar nem normalizar."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+
+samples = [1,2,3];
+correlations = zeros(1,3);
+for lag = 0:2
+  for k = 1:3-lag
+    correlations(lag+1) = correlations(lag+1)+samples(k)*samples(k+lag);
+  end
+end
+correlations
+
+% {{ comments.check[lang] }}
+example_check = all(correlations == [14,8,3]) && correlations(1) == sum(samples.^2)

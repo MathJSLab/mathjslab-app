@@ -1,0 +1,39 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Shifted inverse iteration",
+            "es": "Iteración inversa desplazada",
+            "pt": "Iteração inversa deslocada"
+        },
+        "goal": {
+            "en": "Use a shift near the desired eigenvalue.",
+            "es": "Usar un desplazamiento próximo al autovalor deseado.",
+            "pt": "Usar um deslocamento próximo do autovalor desejado."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [2,0;0,5]; shift_value = 4.8; v = [1;1];
+for step_index = 1:10
+ w = (A-shift_value*eye(2))\v; v = w/norm(w);
+end
+lambda_value = sum(sum(v.'*A*v))
+
+% {{ comments.check[lang] }}
+example_check = abs(lambda_value-5) < 1e-10

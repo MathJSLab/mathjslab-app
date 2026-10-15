@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Projection matrix identity",
+            "es": "Identidad de matriz de proyección",
+            "pt": "Identidade da matriz de projeção"
+        },
+        "goal": {
+            "en": "Build a rank-one projector and apply it twice.",
+            "es": "Construir un proyector de rango uno y aplicarlo dos veces.",
+            "pt": "Construir um projetor de posto um e aplicá-lo duas vezes."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+v = [1;2;2]; P = (v*v.')/sum(v.^2); x = [3;1;0];
+projected = P*x
+
+% {{ comments.check[lang] }}
+example_check = max(max(abs(P*P-P))) < 1e-10 && max(abs(P*projected-projected)) < 1e-10

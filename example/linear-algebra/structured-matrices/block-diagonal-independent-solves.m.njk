@@ -1,0 +1,36 @@
+---json
+{
+    "comments": {
+        "title": {
+            "en": "Independent block solves",
+            "es": "Soluciones independientes por bloques",
+            "pt": "Soluções independentes por blocos"
+        },
+        "goal": {
+            "en": "Solve two blocks and assemble their solution.",
+            "es": "Resolver dos bloques y reunir sus soluciones.",
+            "pt": "Resolver dois blocos e reunir suas soluções."
+        },
+        "check": {
+            "en": "Check the expected result; true means the check passed.",
+            "es": "Comprobar el resultado esperado; true indica que la comprobación pasó.",
+            "pt": "Verificar o resultado esperado; true indica que a verificação passou."
+        },
+        "reference": {
+            "en": "Topic reference (independently written example): https://fncbook.com/matlab/",
+            "es": "Referencia temática (ejemplo escrito de forma independiente): https://fncbook.com/matlab/",
+            "pt": "Referência temática (exemplo escrito de forma independente): https://fncbook.com/matlab/"
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+% {{ comments.reference[lang] }}
+clear
+
+A = [2,1;1,2]; B = [3,0;0,4]; C = [A,zeros(2,2);zeros(2,2),B]; rhs = [3;3;6;8];
+x = [A\rhs(1:2);B\rhs(3:4)]
+
+% {{ comments.check[lang] }}
+example_check = max(abs(C*x-rhs)) < 1e-10
