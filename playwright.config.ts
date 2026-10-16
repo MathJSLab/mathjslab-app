@@ -1,6 +1,10 @@
 import { defineConfig, devices } from '@playwright/test';
+import { mkdirSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 const allBrowsers = process.env.MARKDOWN_BROWSER_PROJECTS === 'all';
+const reportDirectory = resolve('report');
+mkdirSync(reportDirectory, { recursive: true });
 
 export default defineConfig({
     testDir: './test/browser',
@@ -17,7 +21,7 @@ export default defineConfig({
         video: 'retain-on-failure',
     },
     projects: [
-        { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+        { name: 'chromium', use: { ...devices['Desktop Chrome'], launchOptions: { args: [`--log-file=${resolve(reportDirectory, 'chromium-debug.log')}`] } } },
         ...(allBrowsers
             ? [
                   { name: 'firefox', use: { ...devices['Desktop Firefox'], video: 'off' as const } },

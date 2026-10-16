@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "music-pitagoras.md",
+    "comments": {
+        "title": {
+            "en": "The Mathematics and Physics of Music: From Pythagoras to Equal Temperament",
+            "es": "Las matemáticas y la física de la música: de Pitágoras al temperamento igual",
+            "pt": "A matemática e a física da música: de Pitágoras ao temperamento igual"
+        },
+        "goal": {
+            "en": "Open “The Mathematics and Physics of Music: From Pythagoras to Equal Temperament” from mathjslab-markdown.",
+            "es": "Abrir «Las matemáticas y la física de la música: de Pitágoras al temperamento igual» de mathjslab-markdown.",
+            "pt": "Abrir “A matemática e a física da música: de Pitágoras ao temperamento igual” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/music-pitagoras.md")

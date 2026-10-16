@@ -1,7 +1,7 @@
 # Example catalogue
 
-The catalogue contains **462 Nunjucks templates**: the original 39 examples,
-reorganized into directories, 340 new exercises and 83 Markdown document
+The catalogue contains **463 Nunjucks templates**: the original 39 examples,
+reorganized into directories, 340 new exercises and 84 Markdown document
 launchers. Each template generates an English, Spanish and Portuguese `.m`
 file. Captions, descriptions and teaching comments are translated. Numerical
 code stays the same; Markdown launchers select the document locale in their
@@ -26,7 +26,7 @@ URL.
 | `computational-geometry/` | Planar predicates, intersections and polygon calculations          |        10 |
 | `image-processing/`       | Synthetic matrix images, intensity transforms and morphology       |         8 |
 | `simulation/`             | Seeded experiments, event queues and discrete evolution models     |         7 |
-| `markdown/`               | Localized teaching notes from mathjslab-markdown                   |        83 |
+| `markdown/`               | Localized teaching notes from mathjslab-markdown                   |        84 |
 
 The directory tree, menu order and translated labels are defined by
 `example.json`. Templates must follow the same physical directory tree. The
@@ -34,7 +34,7 @@ first example remains `fundamentals/equations/bhaskara.m.njk`.
 
 ## Markdown teaching notes
 
-The Markdown category contains launchers for the package's 82 teaching notes
+The Markdown category contains launchers for the package's 83 teaching notes
 and its localized lesson index, grouped into mathematics/geometry,
 science/data, chemistry, music, geography/history, computing, electronics,
 teaching blocks and bibliography. Each template runs `clear` followed by
@@ -49,6 +49,11 @@ The notes added in mathjslab-markdown 0.4.0 include citations, TikZ/CircuiTikZ,
 interactive geometry, WaveDrom, teaching blocks and cross-references. Rendering
 these features requires a compatible package version and the corresponding
 extensions and capabilities to be enabled by the application host.
+
+The catalogue was checked against the 0.5.3 teaching collections: all 83 notes
+and the localized index are represented in each language. Menu captions and
+template comments follow the titles in those indexes. Lesson content changes
+are retrieved through the same raw GitHub URLs.
 
 These launchers require network access and the corresponding files on GitHub's
 `main` branch. They do not embed or copy the Markdown lesson bodies. In
@@ -167,3 +172,9 @@ frontmatter with translated `comments.title`, `comments.goal` and
 Markdown launchers instead declare `markdownDocument` in JSON frontmatter,
 provide translated `comments.title` and `comments.goal`, and render the URL
 with `{{ lang }}`. Their executable code varies only in the URL's locale.
+
+To audit all canonical lesson files, titles and launchers in the three locales,
+run `node script/check-markdown-examples.mjs ../mathjslab-markdown`. This reads
+the sibling checkout without modifying it and rejects missing, duplicated or
+obsolete launchers. The root example README and CSV resources are supporting
+files; each localized README is included as the lesson index.

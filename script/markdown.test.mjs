@@ -16,6 +16,16 @@ const nodeRequire = createRequire(import.meta.url);
 HTMLElement.prototype.replaceChildren = function (...nodes) {
     this.set_content(nodes);
 };
+// node-html-parser supplies structure only; renderer presentation also needs
+// independent style declarations on frames and parsed SVG nodes.
+const elementStyles = new WeakMap();
+Object.defineProperty(HTMLElement.prototype, 'style', {
+    configurable: true,
+    get() {
+        if (!elementStyles.has(this)) elementStyles.set(this, {});
+        return elementStyles.get(this);
+    },
+});
 const element = (html = '') => parse(`<div>${html}</div>`, { blockTextElements: { script: true, noscript: true, style: true } }).firstChild;
 
 function service() {

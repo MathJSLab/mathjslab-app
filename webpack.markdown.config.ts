@@ -1,3 +1,4 @@
+import { MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import webpack from 'webpack';
@@ -19,6 +20,7 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
     experiments: { outputModule: true },
     module: {
         rules: [
+            { test: /run-tex\.js$/i, resourceQuery: /url/, type: 'asset/resource', generator: { filename: 'tikzjax/run-tex.js' } },
             {
                 test: /\.ts$/i,
                 exclude: /node_modules/,
@@ -47,5 +49,5 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
         publicPath: 'auto',
         clean: true,
     },
-    plugins: [new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ })],
+    plugins: [new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ }), new MarkdownRuntimeAssetsPlugin()],
 });

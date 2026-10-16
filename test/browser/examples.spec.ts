@@ -189,7 +189,7 @@ test('loads algorithms, data structures and the four newest categories with sour
 });
 
 test('opens package Markdown lessons through the real command in each locale', async ({ page }) => {
-    test.setTimeout(90_000);
+    test.setTimeout(120_000);
     await routeApplicationAssets(page);
     const rawBase = 'https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/';
     const requested: string[] = [];
@@ -202,10 +202,13 @@ test('opens package Markdown lessons through the real command in each locale', a
             await route.fulfill({ contentType: 'text/markdown', body: '# Remote package lesson\n\n![Lesson resource](resources/pixel.svg)\n' });
         }
     });
-    for (const [locale, group, caption] of [
-        ['en', 'Mathematics and geometry', 'Arithmetic and geometric sequences'],
-        ['es', 'Matemáticas y geometría', 'Progresiones aritméticas y geométricas'],
-        ['pt', 'Matemática e geometria', 'Progressões'],
+    for (const [locale, group, caption, filename] of [
+        ['en', 'Music', 'The Mathematics and Physics of Music: From Pythagoras to Equal Temperament', 'music-pitagoras.md'],
+        ['es', 'Música', 'Las matemáticas y la física de la música: de Pitágoras al temperamento igual', 'music-pitagoras.md'],
+        ['pt', 'Música', 'A matemática e a física da música: de Pitágoras ao temperamento igual', 'music-pitagoras.md'],
+        ['en', 'Mathematics and geometry', 'Arithmetic and geometric sequences', 'progressoes.md'],
+        ['es', 'Matemáticas y geometría', 'Progresiones aritméticas y geométricas', 'progressoes.md'],
+        ['pt', 'Matemática e geometria', 'Progressões aritméticas e geométricas', 'progressoes.md'],
     ] as const) {
         await page.goto(`/dist/${locale}/index.html?lang=${locale}`);
         const root = page.locator('#example-markdown');
@@ -218,8 +221,8 @@ test('opens package Markdown lessons through the real command in each locale', a
         await menu.getByRole('button', { name: new RegExp(`^${group}`) }).click();
         await menu.getByRole('button', { name: caption, exact: true }).click();
         await expect(menu).toBeHidden();
-        const sourceUrl = `${rawBase}${locale}/progressoes.md`;
-        await expect(editor).toHaveValue(new RegExp(`/example/${locale}/progressoes\\.md`));
+        const sourceUrl = `${rawBase}${locale}/${filename}`;
+        await expect(editor).toHaveValue(new RegExp(`/example/${locale}/${filename.replace('.', '\\.')}`));
         const viewer = page.locator(`markdown-document[src="${sourceUrl}"]`);
         await expect(viewer).toHaveAttribute('state', 'ready', { timeout: 30_000 });
         await expect(viewer.getByRole('heading', { name: 'Remote package lesson' })).toBeVisible();

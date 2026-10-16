@@ -1,3 +1,4 @@
+import { MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
 /**
  * webpack.config.ts: Webpack configuration factory.
  */
@@ -45,6 +46,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
             },
             module: {
                 rules: [
+                    { test: /run-tex\.js$/i, resourceQuery: /url/, type: 'asset/resource', generator: { filename: 'tikzjax/run-tex.js' } },
                     {
                         test: /\.ts$/i,
                         exclude: defaultExclude.map((dir) => (typeof dir === 'string' ? path.join(__dirname, dir) : dir)),
@@ -154,6 +156,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                 // that unreachable browser dependency keeps the WASM chunk
                 // usable without polyfilling Node's module API.
                 new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ }),
+                new MarkdownRuntimeAssetsPlugin(),
                 ...htmlPages.map(
                     (page) =>
                         new HtmlWebpackPlugin({

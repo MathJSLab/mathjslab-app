@@ -1,34 +1,19 @@
+import { createEducationalMarkdownEngine } from './markdown/createEducationalMarkdownEngine';
 import { appEngine } from './appEngine';
 import { PlotEngine, type PlotOutputRequest } from './PlotEngine';
-import { MarkdownEngine, type MarkdownDocument, type MarkdownDocumentContext, type MarkdownExtension } from './MarkdownEngine';
-import { abcExtension } from './markdown/extensions/abc/extension';
-import { graphvizExtension } from './markdown/extensions/graphviz/extension';
-import { mapsExtension } from './markdown/extensions/maps/extension';
+import type { MarkdownDocument, MarkdownDocumentContext, MarkdownExtension } from './MarkdownEngine';
 import { mathJSLabExtension } from './markdown/extensions/mathjslab/extension';
 import { createBrowserMathJSLabWorkerExecutor } from './markdown/extensions/mathjslab/browserWorkerExecutor';
 import { MarkdownNavigator } from './markdown/MarkdownNavigator';
 import { onMarkdownDocumentDispose } from './markdown/lifecycle';
-import { mermaidExtension } from './markdown/extensions/mermaid/extension';
-import { model3DExtension } from './markdown/extensions/model-3d/extension';
-import { molecule3DExtension } from './markdown/extensions/molecule-3d/extension';
-import { smilesExtension } from './markdown/extensions/smiles/extension';
-import { vegaLiteExtension } from './markdown/extensions/vega-lite/extension';
-import { verovioExtension } from './markdown/extensions/verovio/extension';
 import type { MarkedOptions } from 'marked';
 import { withActiveInterpreter } from './InterpreterRuntime';
 import { markdownMapConfiguration } from './MarkdownMapConfiguration';
 
-const engine = new MarkdownEngine({
+const engine = createEducationalMarkdownEngine({
+    features: 'all',
+    mapOptions: markdownMapConfiguration,
     extensions: [
-        mermaidExtension(),
-        smilesExtension(),
-        graphvizExtension(),
-        abcExtension(),
-        verovioExtension(),
-        vegaLiteExtension(),
-        mapsExtension(markdownMapConfiguration),
-        molecule3DExtension(),
-        model3DExtension(),
         mathJSLabExtension(
             createBrowserMathJSLabWorkerExecutor({
                 toMathML: (source, display) => withActiveInterpreter(appEngine.interpreter, () => appEngine.interpreter.ToMathML(source, display)),

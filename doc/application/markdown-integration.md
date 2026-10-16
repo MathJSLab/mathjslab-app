@@ -61,3 +61,11 @@ continues to belong to the package. See the package's
 For reusable API contracts, presets, component events and resource limits, see
 the
 [package documentation](https://github.com/MathJSLab/mathjslab-markdown/blob/main/doc/README.md).
+
+## Example catalogue
+
+The app uses the published `mathjslab-markdown` 0.5.3 package and registers the
+complete educational preset. All 83 teaching notes and the localized index have
+menu launchers in English, Spanish and Portuguese, including the music lesson
+on Pythagorean tuning and equal temperament. See the
+[example catalogue](../../example/README.md) for the offline coverage audit.

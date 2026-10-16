@@ -5795,64 +5795,64 @@
                         "caption": {
                             "en": "Arithmetic and geometric sequences",
                             "es": "Progresiones aritméticas y geométricas",
-                            "pt": "Progressões"
+                            "pt": "Progressões aritméticas e geométricas"
                         },
                         "description": {
                             "en": "Open “Arithmetic and geometric sequences” from mathjslab-markdown.",
                             "es": "Abrir «Progresiones aritméticas y geométricas» de mathjslab-markdown.",
-                            "pt": "Abrir “Progressões” do mathjslab-markdown."
+                            "pt": "Abrir “Progressões aritméticas e geométricas” do mathjslab-markdown."
                         }
                     },
                     "trigonometria": {
                         "file": "trigonometria.m",
                         "caption": {
-                            "en": "Trigonometric functions",
-                            "es": "Funciones trigonométricas",
-                            "pt": "Trigonometria"
+                            "en": "Trigonometric functions and their relationships",
+                            "es": "Funciones trigonométricas y sus relaciones",
+                            "pt": "Funções trigonométricas e suas relações"
                         },
                         "description": {
-                            "en": "Open “Trigonometric functions” from mathjslab-markdown.",
-                            "es": "Abrir «Funciones trigonométricas» de mathjslab-markdown.",
-                            "pt": "Abrir “Trigonometria” do mathjslab-markdown."
+                            "en": "Open “Trigonometric functions and their relationships” from mathjslab-markdown.",
+                            "es": "Abrir «Funciones trigonométricas y sus relaciones» de mathjslab-markdown.",
+                            "pt": "Abrir “Funções trigonométricas e suas relações” do mathjslab-markdown."
                         }
                     },
                     "sistemas-lineares": {
                         "file": "sistemas-lineares.m",
                         "caption": {
-                            "en": "Linear systems",
-                            "es": "Sistemas lineales",
-                            "pt": "Sistemas lineares"
+                            "en": "Linear systems: solving and checking",
+                            "es": "Sistemas lineales: resolver y comprobar",
+                            "pt": "Sistemas lineares: resolver e verificar"
                         },
                         "description": {
-                            "en": "Open “Linear systems” from mathjslab-markdown.",
-                            "es": "Abrir «Sistemas lineales» de mathjslab-markdown.",
-                            "pt": "Abrir “Sistemas lineares” do mathjslab-markdown."
+                            "en": "Open “Linear systems: solving and checking” from mathjslab-markdown.",
+                            "es": "Abrir «Sistemas lineales: resolver y comprobar» de mathjslab-markdown.",
+                            "pt": "Abrir “Sistemas lineares: resolver e verificar” do mathjslab-markdown."
                         }
                     },
                     "geometria-solidos": {
                         "file": "geometria-solidos.m",
                         "caption": {
-                            "en": "Tetrahedron",
-                            "es": "Tetraedro",
-                            "pt": "Tetraedro"
+                            "en": "Solid geometry: a tetrahedron in OBJ",
+                            "es": "Geometría espacial: un tetraedro en OBJ",
+                            "pt": "Geometria espacial: um tetraedro em OBJ"
                         },
                         "description": {
-                            "en": "Open “Tetrahedron” from mathjslab-markdown.",
-                            "es": "Abrir «Tetraedro» de mathjslab-markdown.",
-                            "pt": "Abrir “Tetraedro” do mathjslab-markdown."
+                            "en": "Open “Solid geometry: a tetrahedron in OBJ” from mathjslab-markdown.",
+                            "es": "Abrir «Geometría espacial: un tetraedro en OBJ» de mathjslab-markdown.",
+                            "pt": "Abrir “Geometria espacial: um tetraedro em OBJ” do mathjslab-markdown."
                         }
                     },
                     "cubo-em-stl": {
                         "file": "cubo-em-stl.m",
                         "caption": {
-                            "en": "a cube in STL",
-                            "es": "cubo en STL",
-                            "pt": "cubo em STL"
+                            "en": "Cube: surface area, volume and triangle mesh",
+                            "es": "Cubo: superficie, volumen y malla triangular",
+                            "pt": "Cubo: superfície, volume e malha triangular"
                         },
                         "description": {
-                            "en": "Open “a cube in STL” from mathjslab-markdown.",
-                            "es": "Abrir «cubo en STL» de mathjslab-markdown.",
-                            "pt": "Abrir “cubo em STL” do mathjslab-markdown."
+                            "en": "Open “Cube: surface area, volume and triangle mesh” from mathjslab-markdown.",
+                            "es": "Abrir «Cubo: superficie, volumen y malla triangular» de mathjslab-markdown.",
+                            "pt": "Abrir “Cubo: superfície, volume e malha triangular” do mathjslab-markdown."
                         }
                     },
                     "piramide-quadrada": {
@@ -6029,79 +6029,79 @@
                     "ciclo-da-agua": {
                         "file": "ciclo-da-agua.m",
                         "caption": {
-                            "en": "Water cycle",
-                            "es": "Ciclo del agua",
-                            "pt": "Ciclo da água"
+                            "en": "The water cycle and conservation of matter",
+                            "es": "El ciclo del agua y la conservación de la materia",
+                            "pt": "O ciclo da água e a conservação da matéria"
                         },
                         "description": {
-                            "en": "Open “Water cycle” from mathjslab-markdown.",
-                            "es": "Abrir «Ciclo del agua» de mathjslab-markdown.",
-                            "pt": "Abrir “Ciclo da água” do mathjslab-markdown."
+                            "en": "Open “The water cycle and conservation of matter” from mathjslab-markdown.",
+                            "es": "Abrir «El ciclo del agua y la conservación de la materia» de mathjslab-markdown.",
+                            "pt": "Abrir “O ciclo da água e a conservação da matéria” do mathjslab-markdown."
                         }
                     },
                     "metodo-cientifico": {
                         "file": "metodo-cientifico.m",
                         "caption": {
-                            "en": "Investigating germination",
-                            "es": "Investigación de la germinación",
-                            "pt": "Investigação da germinação"
+                            "en": "Investigating seed germination",
+                            "es": "Investigar la germinación de semillas",
+                            "pt": "Investigar a germinação de sementes"
                         },
                         "description": {
-                            "en": "Open “Investigating germination” from mathjslab-markdown.",
-                            "es": "Abrir «Investigación de la germinación» de mathjslab-markdown.",
-                            "pt": "Abrir “Investigação da germinação” do mathjslab-markdown."
+                            "en": "Open “Investigating seed germination” from mathjslab-markdown.",
+                            "es": "Abrir «Investigar la germinación de semillas» de mathjslab-markdown.",
+                            "pt": "Abrir “Investigar a germinação de sementes” do mathjslab-markdown."
                         }
                     },
                     "movimento-uniforme": {
                         "file": "movimento-uniforme.m",
                         "caption": {
-                            "en": "Uniform motion",
-                            "es": "Movimiento uniforme",
-                            "pt": "Movimento uniforme"
+                            "en": "Physics: uniform motion and graph slope",
+                            "es": "Física: movimiento uniforme y pendiente del gráfico",
+                            "pt": "Física: movimento uniforme e inclinação do gráfico"
                         },
                         "description": {
-                            "en": "Open “Uniform motion” from mathjslab-markdown.",
-                            "es": "Abrir «Movimiento uniforme» de mathjslab-markdown.",
-                            "pt": "Abrir “Movimento uniforme” do mathjslab-markdown."
+                            "en": "Open “Physics: uniform motion and graph slope” from mathjslab-markdown.",
+                            "es": "Abrir «Física: movimiento uniforme y pendiente del gráfico» de mathjslab-markdown.",
+                            "pt": "Abrir “Física: movimento uniforme e inclinação do gráfico” do mathjslab-markdown."
                         }
                     },
                     "redes-alimentares": {
                         "file": "redes-alimentares.m",
                         "caption": {
-                            "en": "Food webs",
-                            "es": "Redes alimentarias",
-                            "pt": "Redes alimentares"
+                            "en": "Biology: a simplified food web",
+                            "es": "Biología: una red alimentaria simplificada",
+                            "pt": "Biologia: uma rede alimentar simplificada"
                         },
                         "description": {
-                            "en": "Open “Food webs” from mathjslab-markdown.",
-                            "es": "Abrir «Redes alimentarias» de mathjslab-markdown.",
-                            "pt": "Abrir “Redes alimentares” do mathjslab-markdown."
+                            "en": "Open “Biology: a simplified food web” from mathjslab-markdown.",
+                            "es": "Abrir «Biología: una red alimentaria simplificada» de mathjslab-markdown.",
+                            "pt": "Abrir “Biologia: uma rede alimentar simplificada” do mathjslab-markdown."
                         }
                     },
                     "estatistica": {
                         "file": "estatistica.m",
                         "caption": {
-                            "en": "Grade distribution",
-                            "es": "Distribución de calificaciones",
-                            "pt": "Distribuição de notas"
+                            "en": "Statistics: grade distribution and mean",
+                            "es": "Estadística: distribución de calificaciones y media",
+                            "pt": "Estatística: distribuição de notas e média"
                         },
                         "description": {
-                            "en": "Open “Grade distribution” from mathjslab-markdown.",
-                            "es": "Abrir «Distribución de calificaciones» de mathjslab-markdown.",
-                            "pt": "Abrir “Distribuição de notas” do mathjslab-markdown."
+                            "en": "Open “Statistics: grade distribution and mean” from mathjslab-markdown.",
+                            "es": "Abrir «Estadística: distribución de calificaciones y media» de mathjslab-markdown.",
+                            "pt": "Abrir “Estatística: distribuição de notas e média” do mathjslab-markdown."
                         }
                     },
                     "leitura-de-dados": {
                         "file": "leitura-de-dados.m",
                         "caption": {
-                            "en": "Reading data",
-                            "es": "Lectura de datos",
-                            "pt": "Leitura de dados"
+                            "en": "Reading data: tables, units and provenance",
+                            "es": "Lectura de datos: tabla, unidad y procedencia",
+                            "pt": "Leitura de dados: tabela, unidade e procedência"
                         },
                         "description": {
-                            "en": "Open “Reading data” from mathjslab-markdown.",
-                            "es": "Abrir «Lectura de datos» de mathjslab-markdown.",
-                            "pt": "Abrir “Leitura de dados” do mathjslab-markdown."
+                            "en": "Open “Reading data: tables, units and provenance” from mathjslab-markdown.",
+                            "es": "Abrir «Lectura de datos: tabla, unidad y procedencia» de mathjslab-markdown.",
+                            "pt": "Abrir “Leitura de dados: tabela, unidade e procedência” do mathjslab-markdown."
                         }
                     },
                     "media-e-valores-extremos": {
@@ -6265,53 +6265,53 @@
                     "funcoes-organicas": {
                         "file": "funcoes-organicas.m",
                         "caption": {
-                            "en": "Organic functional groups",
-                            "es": "Funciones orgánicas",
-                            "pt": "Funções orgânicas"
+                            "en": "Organic compound classes: recognizing functional groups",
+                            "es": "Funciones orgánicas: reconocer grupos funcionales",
+                            "pt": "Funções orgânicas: reconhecer grupos funcionais"
                         },
                         "description": {
-                            "en": "Open “Organic functional groups” from mathjslab-markdown.",
-                            "es": "Abrir «Funciones orgánicas» de mathjslab-markdown.",
-                            "pt": "Abrir “Funções orgânicas” do mathjslab-markdown."
+                            "en": "Open “Organic compound classes: recognizing functional groups” from mathjslab-markdown.",
+                            "es": "Abrir «Funciones orgánicas: reconocer grupos funcionales» de mathjslab-markdown.",
+                            "pt": "Abrir “Funções orgânicas: reconhecer grupos funcionais” do mathjslab-markdown."
                         }
                     },
                     "nomenclatura-organica": {
                         "file": "nomenclatura-organica.m",
                         "caption": {
-                            "en": "Organic nomenclature",
-                            "es": "Nomenclatura orgánica",
-                            "pt": "Nomenclatura orgânica"
+                            "en": "Organic nomenclature: from chain to name",
+                            "es": "Nomenclatura orgánica: de la cadena al nombre",
+                            "pt": "Nomenclatura orgânica: da cadeia ao nome"
                         },
                         "description": {
-                            "en": "Open “Organic nomenclature” from mathjslab-markdown.",
-                            "es": "Abrir «Nomenclatura orgánica» de mathjslab-markdown.",
-                            "pt": "Abrir “Nomenclatura orgânica” do mathjslab-markdown."
+                            "en": "Open “Organic nomenclature: from chain to name” from mathjslab-markdown.",
+                            "es": "Abrir «Nomenclatura orgánica: de la cadena al nombre» de mathjslab-markdown.",
+                            "pt": "Abrir “Nomenclatura orgânica: da cadeia ao nome” do mathjslab-markdown."
                         }
                     },
                     "isomeria": {
                         "file": "isomeria.m",
                         "caption": {
-                            "en": "Isomerism",
-                            "es": "Isomería",
-                            "pt": "Isomeria"
+                            "en": "Isomerism: same formula, different structures",
+                            "es": "Isomería: misma fórmula, estructuras diferentes",
+                            "pt": "Isomeria: mesma fórmula, estruturas diferentes"
                         },
                         "description": {
-                            "en": "Open “Isomerism” from mathjslab-markdown.",
-                            "es": "Abrir «Isomería» de mathjslab-markdown.",
-                            "pt": "Abrir “Isomeria” do mathjslab-markdown."
+                            "en": "Open “Isomerism: same formula, different structures” from mathjslab-markdown.",
+                            "es": "Abrir «Isomería: misma fórmula, estructuras diferentes» de mathjslab-markdown.",
+                            "pt": "Abrir “Isomeria: mesma fórmula, estruturas diferentes” do mathjslab-markdown."
                         }
                     },
                     "esterificacao": {
                         "file": "esterificacao.m",
                         "caption": {
-                            "en": "Esterification",
-                            "es": "Esterificación",
-                            "pt": "Esterificação"
+                            "en": "Esterification: reactants, products and equilibrium",
+                            "es": "Esterificación: reactivos, productos y equilibrio",
+                            "pt": "Esterificação: reagentes, produtos e equilíbrio"
                         },
                         "description": {
-                            "en": "Open “Esterification” from mathjslab-markdown.",
-                            "es": "Abrir «Esterificación» de mathjslab-markdown.",
-                            "pt": "Abrir “Esterificação” do mathjslab-markdown."
+                            "en": "Open “Esterification: reactants, products and equilibrium” from mathjslab-markdown.",
+                            "es": "Abrir «Esterificación: reactivos, productos y equilibrio» de mathjslab-markdown.",
+                            "pt": "Abrir “Esterificação: reagentes, produtos e equilíbrio” do mathjslab-markdown."
                         }
                     },
                     "geometria-molecular": {
@@ -6330,14 +6330,14 @@
                     "cadeias-carbonicas": {
                         "file": "cadeias-carbonicas.m",
                         "caption": {
-                            "en": "Carbon chains",
-                            "es": "Cadenas carbonadas",
-                            "pt": "Cadeias carbônicas"
+                            "en": "Carbon chains and aromaticity",
+                            "es": "Cadenas carbonadas y aromaticidad",
+                            "pt": "Cadeias carbônicas e aromaticidade"
                         },
                         "description": {
-                            "en": "Open “Carbon chains” from mathjslab-markdown.",
-                            "es": "Abrir «Cadenas carbonadas» de mathjslab-markdown.",
-                            "pt": "Abrir “Cadeias carbônicas” do mathjslab-markdown."
+                            "en": "Open “Carbon chains and aromaticity” from mathjslab-markdown.",
+                            "es": "Abrir «Cadenas carbonadas y aromaticidad» de mathjslab-markdown.",
+                            "pt": "Abrir “Cadeias carbônicas e aromaticidade” do mathjslab-markdown."
                         }
                     },
                     "balanceamento-quimico": {
@@ -6382,14 +6382,14 @@
                     "metano-tetraedrico": {
                         "file": "metano-tetraedrico.m",
                         "caption": {
-                            "en": "methane in SDF",
-                            "es": "metano en SDF",
-                            "pt": "metano em SDF"
+                            "en": "Methane: tetrahedral geometry",
+                            "es": "Metano: geometría tetraédrica",
+                            "pt": "Metano: a geometria tetraédrica"
                         },
                         "description": {
-                            "en": "Open “methane in SDF” from mathjslab-markdown.",
-                            "es": "Abrir «metano en SDF» de mathjslab-markdown.",
-                            "pt": "Abrir “metano em SDF” do mathjslab-markdown."
+                            "en": "Open “Methane: tetrahedral geometry” from mathjslab-markdown.",
+                            "es": "Abrir «Metano: geometría tetraédrica» de mathjslab-markdown.",
+                            "pt": "Abrir “Metano: a geometria tetraédrica” do mathjslab-markdown."
                         }
                     },
                     "acidos-bases": {
@@ -6462,27 +6462,27 @@
                     "ode-a-alegria": {
                         "file": "ode-a-alegria.m",
                         "caption": {
-                            "en": "Ode to Joy",
-                            "es": "Oda a la alegría",
-                            "pt": "Ode à alegria"
+                            "en": "Ode to Joy: melody, beat and phrases",
+                            "es": "Oda a la alegría: melodía, pulso y frases",
+                            "pt": "Ode à alegria: melodia, pulso e frases"
                         },
                         "description": {
-                            "en": "Open “Ode to Joy” from mathjslab-markdown.",
-                            "es": "Abrir «Oda a la alegría» de mathjslab-markdown.",
-                            "pt": "Abrir “Ode à alegria” do mathjslab-markdown."
+                            "en": "Open “Ode to Joy: melody, beat and phrases” from mathjslab-markdown.",
+                            "es": "Abrir «Oda a la alegría: melodía, pulso y frases» de mathjslab-markdown.",
+                            "pt": "Abrir “Ode à alegria: melodia, pulso e frases” do mathjslab-markdown."
                         }
                     },
                     "ritmo-e-partitura": {
                         "file": "ritmo-e-partitura.m",
                         "caption": {
-                            "en": "Rhythm and scores",
-                            "es": "Ritmo y partitura",
-                            "pt": "Ritmo e partitura"
+                            "en": "Rhythm and reading a MusicXML score",
+                            "es": "Ritmo y lectura de una partitura en MusicXML",
+                            "pt": "Ritmo e leitura de partitura em MusicXML"
                         },
                         "description": {
-                            "en": "Open “Rhythm and scores” from mathjslab-markdown.",
-                            "es": "Abrir «Ritmo y partitura» de mathjslab-markdown.",
-                            "pt": "Abrir “Ritmo e partitura” do mathjslab-markdown."
+                            "en": "Open “Rhythm and reading a MusicXML score” from mathjslab-markdown.",
+                            "es": "Abrir «Ritmo y lectura de una partitura en MusicXML» de mathjslab-markdown.",
+                            "pt": "Abrir “Ritmo e leitura de partitura em MusicXML” do mathjslab-markdown."
                         }
                     },
                     "pausas-musicais": {
@@ -6501,14 +6501,14 @@
                     "intervalos-musicais": {
                         "file": "intervalos-musicais.m",
                         "caption": {
-                            "en": "intervals in MEI",
-                            "es": "intervalos en MEI",
-                            "pt": "intervalos em MEI"
+                            "en": "Intervals: successive and simultaneous notes",
+                            "es": "Intervalos: notas sucesivas y simultáneas",
+                            "pt": "Intervalos: notas sucessivas e simultâneas"
                         },
                         "description": {
-                            "en": "Open “intervals in MEI” from mathjslab-markdown.",
-                            "es": "Abrir «intervalos en MEI» de mathjslab-markdown.",
-                            "pt": "Abrir “intervalos em MEI” do mathjslab-markdown."
+                            "en": "Open “Intervals: successive and simultaneous notes” from mathjslab-markdown.",
+                            "es": "Abrir «Intervalos: notas sucesivas y simultáneas» de mathjslab-markdown.",
+                            "pt": "Abrir “Intervalos: notas sucessivas e simultâneas” do mathjslab-markdown."
                         }
                     },
                     "compasso-composto": {
@@ -6562,6 +6562,19 @@
                             "es": "Abrir «Canon: entrada retrasada de una voz» de mathjslab-markdown.",
                             "pt": "Abrir “Cânone: entrada atrasada de uma voz” do mathjslab-markdown."
                         }
+                    },
+                    "music-pitagoras": {
+                        "file": "music-pitagoras.m",
+                        "caption": {
+                            "en": "The Mathematics and Physics of Music: From Pythagoras to Equal Temperament",
+                            "es": "Las matemáticas y la física de la música: de Pitágoras al temperamento igual",
+                            "pt": "A matemática e a física da música: de Pitágoras ao temperamento igual"
+                        },
+                        "description": {
+                            "en": "Open “The Mathematics and Physics of Music: From Pythagoras to Equal Temperament” from mathjslab-markdown.",
+                            "es": "Abrir «Las matemáticas y la física de la música: de Pitágoras al temperamento igual» de mathjslab-markdown.",
+                            "pt": "Abrir “A matemática e a física da música: de Pitágoras ao temperamento igual” do mathjslab-markdown."
+                        }
                     }
                 }
             },
@@ -6581,27 +6594,27 @@
                     "geografia-coordenadas": {
                         "file": "geografia-coordenadas.m",
                         "caption": {
-                            "en": "Coordinates in Brazil",
-                            "es": "Coordenadas en Brasil",
-                            "pt": "Coordenadas no Brasil"
+                            "en": "Geography: location and coordinates in Brazil",
+                            "es": "Geografía: ubicación y coordenadas en Brasil",
+                            "pt": "Geografia: localização e coordenadas no Brasil"
                         },
                         "description": {
-                            "en": "Open “Coordinates in Brazil” from mathjslab-markdown.",
-                            "es": "Abrir «Coordenadas en Brasil» de mathjslab-markdown.",
-                            "pt": "Abrir “Coordenadas no Brasil” do mathjslab-markdown."
+                            "en": "Open “Geography: location and coordinates in Brazil” from mathjslab-markdown.",
+                            "es": "Abrir «Geografía: ubicación y coordenadas en Brasil» de mathjslab-markdown.",
+                            "pt": "Abrir “Geografia: localização e coordenadas no Brasil” do mathjslab-markdown."
                         }
                     },
                     "historia-capitais": {
                         "file": "historia-capitais.m",
                         "caption": {
-                            "en": "Capitals of Brazil",
-                            "es": "Capitales de Brasil",
-                            "pt": "Capitais do Brasil"
+                            "en": "History: capitals and Brazil's territorial organization",
+                            "es": "Historia: capitales y organización territorial de Brasil",
+                            "pt": "História: capitais e organização territorial do Brasil"
                         },
                         "description": {
-                            "en": "Open “Capitals of Brazil” from mathjslab-markdown.",
-                            "es": "Abrir «Capitales de Brasil» de mathjslab-markdown.",
-                            "pt": "Abrir “Capitais do Brasil” do mathjslab-markdown."
+                            "en": "Open “History: capitals and Brazil's territorial organization” from mathjslab-markdown.",
+                            "es": "Abrir «Historia: capitales y organización territorial de Brasil» de mathjslab-markdown.",
+                            "pt": "Abrir “História: capitais e organização territorial do Brasil” do mathjslab-markdown."
                         }
                     },
                     "bacia-hidrografica": {
@@ -6661,27 +6674,27 @@
                     "algoritmos": {
                         "file": "algoritmos.m",
                         "caption": {
-                            "en": "Summing with an algorithm",
-                            "es": "Suma con un algoritmo",
-                            "pt": "Soma com um algoritmo"
+                            "en": "Algorithms: summing a sequence in JavaScript",
+                            "es": "Algoritmos: sumar una sucesión en JavaScript",
+                            "pt": "Algoritmos: somar uma sequência em JavaScript"
                         },
                         "description": {
-                            "en": "Open “Summing with an algorithm” from mathjslab-markdown.",
-                            "es": "Abrir «Suma con un algoritmo» de mathjslab-markdown.",
-                            "pt": "Abrir “Soma com um algoritmo” do mathjslab-markdown."
+                            "en": "Open “Algorithms: summing a sequence in JavaScript” from mathjslab-markdown.",
+                            "es": "Abrir «Algoritmos: sumar una sucesión en JavaScript» de mathjslab-markdown.",
+                            "pt": "Abrir “Algoritmos: somar uma sequência em JavaScript” do mathjslab-markdown."
                         }
                     },
                     "comunicacao-digital": {
                         "file": "comunicacao-digital.m",
                         "caption": {
-                            "en": "Digital communication",
-                            "es": "Comunicación digital",
-                            "pt": "Comunicação digital"
+                            "en": "Digital communication: request and response",
+                            "es": "Comunicación digital: solicitud y respuesta",
+                            "pt": "Comunicação digital: pedido e resposta"
                         },
                         "description": {
-                            "en": "Open “Digital communication” from mathjslab-markdown.",
-                            "es": "Abrir «Comunicación digital» de mathjslab-markdown.",
-                            "pt": "Abrir “Comunicação digital” do mathjslab-markdown."
+                            "en": "Open “Digital communication: request and response” from mathjslab-markdown.",
+                            "es": "Abrir «Comunicación digital: solicitud y respuesta» de mathjslab-markdown.",
+                            "pt": "Abrir “Comunicação digital: pedido e resposta” do mathjslab-markdown."
                         }
                     },
                     "numeros-binarios": {

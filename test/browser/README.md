@@ -17,6 +17,15 @@ for manual investigation. Artifacts from failed tests are written to
 `test/result/playwright`; the HTML report used in CI is written to
 `playwright-report`.
 
+Chromium diagnostic logs are written to `report/chromium-debug.log`. Store
+captured command output in `report/` as well, rather than creating `.log` files
+at the repository root. For example, in PowerShell:
+
+```powershell
+New-Item -ItemType Directory -Path report -Force | Out-Null
+npm run test:unit *> report/unit-tests.log
+```
+
 The accessibility suite covers fragment and collection navigation, focus after
 page changes, live announcements, `aria-current`, keyboard shortcuts, arrow
 navigation in tables of contents, the narrow container layout, and reduced

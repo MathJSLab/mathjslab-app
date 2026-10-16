@@ -3,34 +3,75 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.17.0
+
+- Use the published mathjslab-markdown ^0.5.3 dependency and its registry
+  lockfile entry, replacing the temporary local validation dependency.
+- Add the mathematics and physics of music lesson in English, Spanish and
+  Portuguese. Cover all 83 teaching notes and the localized index: 84 Markdown
+  launchers and 463 example templates in total.
+- Verify catalogue completeness, translated titles and launcher metadata
+  against the canonical example collections, and exercise the new music menu
+  entry in all three application languages.
+- Restrict inline presentation to renderers that explicitly support it, keeping
+  timing diagrams, charts, circuits, scores and interactive viewports in block
+  layout. Preserve native dimensions when only display is configured.
+- Retain readable SMILES block and inline scales and the responsive molecular
+  viewport defaults introduced in Markdown 0.5.1. Preserve native defaults for
+  other renderers and keep explicit width and height controls proportional.
+- Restore the same native scale for both diagrams in the translated temporal
+  lessons in the canonical Markdown package.
+- Add a real-browser Shadow DOM regression for diagram proportions, block-only
+  renderers, readable chemistry, true inline SMILES and narrow containers.
+- Extend the legacy facade test DOM with independent style declarations so
+  presentation-aware rendering is exercised by the compatibility suite.
+
+- Register the complete educational Markdown preset in the application,
+  including didactic blocks, cross-references, citations, WaveDrom, geometry
+  and TikZ.
+- Emit the TikZ worker and deploy its TeX and font assets in both application
+  and standalone Markdown builds. Test translated didactic notes through the
+  application facade.
+
+- Audit the catalogue against mathjslab-markdown 0.5.3: retain complete
+  coverage of all 83 translated teaching notes and the localized index, with no
+  missing or obsolete launchers. Synchronize captions, descriptions and
+  template comments with the current lesson indexes in all three languages.
+- Preserve localized raw GitHub URLs so updated lesson bodies are loaded from
+  the package repository without duplicating Markdown content in the app.
+  Update the Portuguese browser navigation assertion for the current title.
+- Remove historical log files from the repository root, direct Chromium
+  diagnostics to report/chromium-debug.log and document report/ as the
+  destination for captured command output.
+
 ## 1.16.0
 
 - Add 32 Markdown example templates in English, Spanish and Portuguese,
   covering all 82 teaching notes and the localized index from
   mathjslab-markdown 0.4.0. Expand the application catalogue to 462 templates,
   including 83 Markdown launchers using localized raw GitHub URLs.
-- Add Markdown categories for electronics and timing diagrams, teaching
-  blocks and exercises, and citations and bibliography. Expand the existing
+- Add Markdown categories for electronics and timing diagrams, teaching blocks
+  and exercises, and citations and bibliography. Expand the existing
   mathematics, science, chemistry, music, computing and geography categories.
-- Include launchers for notes featuring citations, TikZ/CircuiTikZ,
-  interactive geometry, WaveDrom, didactic blocks and cross-references;
-  document their host extension and capability requirements.
-- Update the example catalogue documentation with the new totals and
-  categories while preserving existing templates and the initial example.
-- Update mathjslab-markdown to ^0.4.0, Eleventy to ^3.1.7, ts-jest to
-  ^29.4.15 and webpack to ^5.112.0, and refresh the dependency lockfile.
+- Include launchers for notes featuring citations, TikZ/CircuiTikZ, interactive
+  geometry, WaveDrom, didactic blocks and cross-references; document their host
+  extension and capability requirements.
+- Update the example catalogue documentation with the new totals and categories
+  while preserving existing templates and the initial example.
+- Update mathjslab-markdown to ^0.4.0, Eleventy to ^3.1.7, ts-jest to ^29.4.15
+  and webpack to ^5.112.0, and refresh the dependency lockfile.
 
 ## 1.15.0
 
 - Add recursive example directories and subdirectories, with localized menus,
-  keyboard navigation, focus management, empty states and loading errors.
-  Keep menus within the viewport without horizontal scrolling and preserve
-  editor content when browsing folders or changing language.
+  keyboard navigation, focus management, empty states and loading errors. Keep
+  menus within the viewport without horizontal scrolling and preserve editor
+  content when browsing folders or changing language.
 - Expand the catalogue to 430 Nunjucks templates in English, Spanish and
   Portuguese: reorganize the original 39 examples, add 340 numerical and
-  programming exercises, and provide 51 Markdown document launchers.
-  Include reference URLs for adapted examples and retain Bhaskara as the
-  initial example.
+  programming exercises, and provide 51 Markdown document launchers. Include
+  reference URLs for adapted examples and retain Bhaskara as the initial
+  example.
 - Add a Markdown category covering the package's 50 teaching notes and
   localized lesson index, using raw GitHub URLs in the selected language.
 - Validate the recursive manifest, paths and required files before asset
@@ -44,8 +85,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
   with OpenStreetMap as the application default.
 - Preserve inline package styles for Shadow DOM when using locally linked
   packages and add a helper to synchronize matching local Markdown builds.
-- Consolidate application documentation in English, remove obsolete guides
-  and delegate reusable Markdown engine documentation to mathjslab-markdown.
+- Consolidate application documentation in English, remove obsolete guides and
+  delegate reusable Markdown engine documentation to mathjslab-markdown.
   Announce the expanded example catalogue in all three project READMEs.
 - Remove the unused standalone Markdown example page and consolidate test
   infrastructure around the installed packages and a shared browser server.
@@ -56,7 +97,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.14.0
 
-- Refresh supporting dependencies, including DOMPurify 3.4.17, Marked 18.1.1, Vega-Lite 6.5.0 and TypeScript ESLint 8.71.2.
+- Refresh supporting dependencies, including DOMPurify 3.4.17, Marked 18.1.1,
+  Vega-Lite 6.5.0 and TypeScript ESLint 8.71.2.
 
 - Adopt published mathjslab ^2.9.0 and mathjslab-markdown ^0.2.0.
 - Integrate Markdown statement suppression, diagnostic codes and resource
