@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "escala-em-mei.md",
+    "comments": {
+        "title": {
+            "en": "C major scale in MEI",
+            "es": "Escala de do mayor en MEI",
+            "pt": "Escala de dó maior em MEI"
+        },
+        "goal": {
+            "en": "Open “C major scale in MEI” from mathjslab-markdown.",
+            "es": "Abrir «Escala de do mayor en MEI» de mathjslab-markdown.",
+            "pt": "Abrir “Escala de dó maior em MEI” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/escala-em-mei.md")

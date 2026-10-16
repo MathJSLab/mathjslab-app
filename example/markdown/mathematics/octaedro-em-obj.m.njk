@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "octaedro-em-obj.md",
+    "comments": {
+        "title": {
+            "en": "Octahedron: vertices and faces",
+            "es": "Octaedro: vértices y caras",
+            "pt": "Octaedro: vértices e faces"
+        },
+        "goal": {
+            "en": "Open “Octahedron: vertices and faces” from mathjslab-markdown.",
+            "es": "Abrir «Octaedro: vértices y caras» de mathjslab-markdown.",
+            "pt": "Abrir “Octaedro: vértices e faces” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/octaedro-em-obj.md")

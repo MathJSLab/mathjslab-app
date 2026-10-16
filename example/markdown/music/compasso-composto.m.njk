@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "compasso-composto.md",
+    "comments": {
+        "title": {
+            "en": "Compound meter in 6/8",
+            "es": "Compás compuesto en 6/8",
+            "pt": "Compasso composto em 6/8"
+        },
+        "goal": {
+            "en": "Open “Compound meter in 6/8” from mathjslab-markdown.",
+            "es": "Abrir «Compás compuesto en 6/8» de mathjslab-markdown.",
+            "pt": "Abrir “Compasso composto em 6/8” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/compasso-composto.md")

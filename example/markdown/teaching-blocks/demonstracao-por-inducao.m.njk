@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "demonstracao-por-inducao.md",
+    "comments": {
+        "title": {
+            "en": "Induction: sum of the first integers",
+            "es": "Inducción: suma de los primeros enteros",
+            "pt": "Indução: soma dos primeiros inteiros"
+        },
+        "goal": {
+            "en": "Open “Induction: sum of the first integers” from mathjslab-markdown.",
+            "es": "Abrir «Inducción: suma de los primeros enteros» de mathjslab-markdown.",
+            "pt": "Abrir “Indução: soma dos primeiros inteiros” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/demonstracao-por-inducao.md")

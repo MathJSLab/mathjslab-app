@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "catalogo-bibliografico.md",
+    "comments": {
+        "title": {
+            "en": "Bibliographic catalogue without citations",
+            "es": "Catálogo bibliográfico sin citas",
+            "pt": "Catálogo bibliográfico sem citações"
+        },
+        "goal": {
+            "en": "Open “Bibliographic catalogue without citations” from mathjslab-markdown.",
+            "es": "Abrir «Catálogo bibliográfico sin citas» de mathjslab-markdown.",
+            "pt": "Abrir “Catálogo bibliográfico sem citações” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/catalogo-bibliografico.md")

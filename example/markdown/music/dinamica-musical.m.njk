@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "dinamica-musical.md",
+    "comments": {
+        "title": {
+            "en": "Musical dynamics: piano and forte",
+            "es": "Dinámica musical: piano y forte",
+            "pt": "Dinâmica musical: piano e forte"
+        },
+        "goal": {
+            "en": "Open “Musical dynamics: piano and forte” from mathjslab-markdown.",
+            "es": "Abrir «Dinámica musical: piano y forte» de mathjslab-markdown.",
+            "pt": "Abrir “Dinâmica musical: piano e forte” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/dinamica-musical.md")

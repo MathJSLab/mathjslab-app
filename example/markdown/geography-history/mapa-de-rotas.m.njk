@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "mapa-de-rotas.md",
+    "comments": {
+        "title": {
+            "en": "Local routes: coordinates and connections",
+            "es": "Rutas locales: coordenadas y conexiones",
+            "pt": "Rotas locais: coordenadas e conexões"
+        },
+        "goal": {
+            "en": "Open “Local routes: coordinates and connections” from mathjslab-markdown.",
+            "es": "Abrir «Rutas locales: coordenadas y conexiones» de mathjslab-markdown.",
+            "pt": "Abrir “Rotas locais: coordenadas e conexões” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/mapa-de-rotas.md")

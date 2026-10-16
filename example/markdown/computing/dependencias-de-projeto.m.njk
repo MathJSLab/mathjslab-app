@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "dependencias-de-projeto.md",
+    "comments": {
+        "title": {
+            "en": "Project dependencies",
+            "es": "Dependencias de un proyecto",
+            "pt": "Dependências de um projeto"
+        },
+        "goal": {
+            "en": "Open “Project dependencies” from mathjslab-markdown.",
+            "es": "Abrir «Dependencias de un proyecto» de mathjslab-markdown.",
+            "pt": "Abrir “Dependências de um projeto” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/dependencias-de-projeto.md")

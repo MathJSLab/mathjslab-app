@@ -5919,6 +5919,97 @@
                             "es": "Abrir «Crecimiento compuesto: un modelo multiplicativo» de mathjslab-markdown.",
                             "pt": "Abrir “Crescimento composto: um modelo multiplicativo” do mathjslab-markdown."
                         }
+                    },
+                    "arvore-de-probabilidade": {
+                        "file": "arvore-de-probabilidade.m",
+                        "caption": {
+                            "en": "Probability tree with TikZ",
+                            "es": "Árbol de probabilidad con TikZ",
+                            "pt": "Árvore de probabilidade com TikZ"
+                        },
+                        "description": {
+                            "en": "Open “Probability tree with TikZ” from mathjslab-markdown.",
+                            "es": "Abrir «Árbol de probabilidad con TikZ» de mathjslab-markdown.",
+                            "pt": "Abrir “Árvore de probabilidade com TikZ” do mathjslab-markdown."
+                        }
+                    },
+                    "circuncentro-do-triangulo": {
+                        "file": "circuncentro-do-triangulo.m",
+                        "caption": {
+                            "en": "Circumcenter of a triangle",
+                            "es": "Circuncentro de un triángulo",
+                            "pt": "Circuncentro de um triângulo"
+                        },
+                        "description": {
+                            "en": "Open “Circumcenter of a triangle” from mathjslab-markdown.",
+                            "es": "Abrir «Circuncentro de un triángulo» de mathjslab-markdown.",
+                            "pt": "Abrir “Circuncentro de um triângulo” do mathjslab-markdown."
+                        }
+                    },
+                    "elipse-e-focos": {
+                        "file": "elipse-e-focos.m",
+                        "caption": {
+                            "en": "Ellipse: sum of distances to the foci",
+                            "es": "Elipse: suma de distancias a los focos",
+                            "pt": "Elipse: soma das distâncias aos focos"
+                        },
+                        "description": {
+                            "en": "Open “Ellipse: sum of distances to the foci” from mathjslab-markdown.",
+                            "es": "Abrir «Elipse: suma de distancias a los focos» de mathjslab-markdown.",
+                            "pt": "Abrir “Elipse: soma das distâncias aos focos” do mathjslab-markdown."
+                        }
+                    },
+                    "geometria-dinamica": {
+                        "file": "geometria-dinamica.m",
+                        "caption": {
+                            "en": "Dynamic geometry: midpoints and circles",
+                            "es": "Geometría dinámica: puntos medios y circunferencias",
+                            "pt": "Geometria dinâmica: pontos médios e circunferências"
+                        },
+                        "description": {
+                            "en": "Open “Dynamic geometry: midpoints and circles” from mathjslab-markdown.",
+                            "es": "Abrir «Geometría dinámica: puntos medios y circunferencias» de mathjslab-markdown.",
+                            "pt": "Abrir “Geometria dinâmica: pontos médios e circunferências” do mathjslab-markdown."
+                        }
+                    },
+                    "octaedro-em-obj": {
+                        "file": "octaedro-em-obj.m",
+                        "caption": {
+                            "en": "Octahedron: vertices and faces",
+                            "es": "Octaedro: vértices y caras",
+                            "pt": "Octaedro: vértices e faces"
+                        },
+                        "description": {
+                            "en": "Open “Octahedron: vertices and faces” from mathjslab-markdown.",
+                            "es": "Abrir «Octaedro: vértices y caras» de mathjslab-markdown.",
+                            "pt": "Abrir “Octaedro: vértices e faces” do mathjslab-markdown."
+                        }
+                    },
+                    "paralelas-e-perpendiculares": {
+                        "file": "paralelas-e-perpendiculares.m",
+                        "caption": {
+                            "en": "Parallel and perpendicular lines",
+                            "es": "Paralelas y perpendiculares",
+                            "pt": "Paralelas e perpendiculares"
+                        },
+                        "description": {
+                            "en": "Open “Parallel and perpendicular lines” from mathjslab-markdown.",
+                            "es": "Abrir «Paralelas y perpendiculares» de mathjslab-markdown.",
+                            "pt": "Abrir “Paralelas e perpendiculares” do mathjslab-markdown."
+                        }
+                    },
+                    "somas-e-vetores": {
+                        "file": "somas-e-vetores.m",
+                        "caption": {
+                            "en": "Sums and vectors: components and dot product",
+                            "es": "Sumas y vectores: componentes y producto escalar",
+                            "pt": "Somas e vetores: componentes e produto escalar"
+                        },
+                        "description": {
+                            "en": "Open “Sums and vectors: components and dot product” from mathjslab-markdown.",
+                            "es": "Abrir «Sumas y vectores: componentes y producto escalar» de mathjslab-markdown.",
+                            "pt": "Abrir “Somas e vetores: componentes e produto escalar” do mathjslab-markdown."
+                        }
                     }
                 }
             },
@@ -6142,6 +6233,19 @@
                             "es": "Abrir «Fuerzas y segunda ley de Newton» de mathjslab-markdown.",
                             "pt": "Abrir “Forças e a segunda lei de Newton” do mathjslab-markdown."
                         }
+                    },
+                    "comparacao-de-medicoes": {
+                        "file": "comparacao-de-medicoes.m",
+                        "caption": {
+                            "en": "Comparing measurements: two groups",
+                            "es": "Comparación de mediciones: dos grupos",
+                            "pt": "Comparação de medições: dois grupos"
+                        },
+                        "description": {
+                            "en": "Open “Comparing measurements: two groups” from mathjslab-markdown.",
+                            "es": "Abrir «Comparación de mediciones: dos grupos» de mathjslab-markdown.",
+                            "pt": "Abrir “Comparação de medições: dois grupos” do mathjslab-markdown."
+                        }
                     }
                 }
             },
@@ -6313,6 +6417,32 @@
                             "es": "Abrir «Polímeros: de la unidad a la cadena» de mathjslab-markdown.",
                             "pt": "Abrir “Polímeros: da unidade à cadeia” do mathjslab-markdown."
                         }
+                    },
+                    "alcool-e-eter": {
+                        "file": "alcool-e-eter.m",
+                        "caption": {
+                            "en": "Alcohol and ether: same formula, different bonds",
+                            "es": "Alcohol y éter: misma fórmula, enlaces diferentes",
+                            "pt": "Álcool e éter: mesma fórmula, ligações diferentes"
+                        },
+                        "description": {
+                            "en": "Open “Alcohol and ether: same formula, different bonds” from mathjslab-markdown.",
+                            "es": "Abrir «Alcohol y éter: misma fórmula, enlaces diferentes» de mathjslab-markdown.",
+                            "pt": "Abrir “Álcool e éter: mesma fórmula, ligações diferentes” do mathjslab-markdown."
+                        }
+                    },
+                    "amonia-piramidal": {
+                        "file": "amonia-piramidal.m",
+                        "caption": {
+                            "en": "Ammonia: pyramidal geometry",
+                            "es": "Amoníaco: geometría piramidal",
+                            "pt": "Amônia: geometria piramidal"
+                        },
+                        "description": {
+                            "en": "Open “Ammonia: pyramidal geometry” from mathjslab-markdown.",
+                            "es": "Abrir «Amoníaco: geometría piramidal» de mathjslab-markdown.",
+                            "pt": "Abrir “Amônia: geometria piramidal” do mathjslab-markdown."
+                        }
                     }
                 }
             },
@@ -6379,6 +6509,58 @@
                             "en": "Open “intervals in MEI” from mathjslab-markdown.",
                             "es": "Abrir «intervalos en MEI» de mathjslab-markdown.",
                             "pt": "Abrir “intervalos em MEI” do mathjslab-markdown."
+                        }
+                    },
+                    "compasso-composto": {
+                        "file": "compasso-composto.m",
+                        "caption": {
+                            "en": "Compound meter in 6/8",
+                            "es": "Compás compuesto en 6/8",
+                            "pt": "Compasso composto em 6/8"
+                        },
+                        "description": {
+                            "en": "Open “Compound meter in 6/8” from mathjslab-markdown.",
+                            "es": "Abrir «Compás compuesto en 6/8» de mathjslab-markdown.",
+                            "pt": "Abrir “Compasso composto em 6/8” do mathjslab-markdown."
+                        }
+                    },
+                    "dinamica-musical": {
+                        "file": "dinamica-musical.m",
+                        "caption": {
+                            "en": "Musical dynamics: piano and forte",
+                            "es": "Dinámica musical: piano y forte",
+                            "pt": "Dinâmica musical: piano e forte"
+                        },
+                        "description": {
+                            "en": "Open “Musical dynamics: piano and forte” from mathjslab-markdown.",
+                            "es": "Abrir «Dinámica musical: piano y forte» de mathjslab-markdown.",
+                            "pt": "Abrir “Dinâmica musical: piano e forte” do mathjslab-markdown."
+                        }
+                    },
+                    "escala-em-mei": {
+                        "file": "escala-em-mei.m",
+                        "caption": {
+                            "en": "C major scale in MEI",
+                            "es": "Escala de do mayor en MEI",
+                            "pt": "Escala de dó maior em MEI"
+                        },
+                        "description": {
+                            "en": "Open “C major scale in MEI” from mathjslab-markdown.",
+                            "es": "Abrir «Escala de do mayor en MEI» de mathjslab-markdown.",
+                            "pt": "Abrir “Escala de dó maior em MEI” do mathjslab-markdown."
+                        }
+                    },
+                    "melodia-em-canon": {
+                        "file": "melodia-em-canon.m",
+                        "caption": {
+                            "en": "Canon: delayed voice entry",
+                            "es": "Canon: entrada retrasada de una voz",
+                            "pt": "Cânone: entrada atrasada de uma voz"
+                        },
+                        "description": {
+                            "en": "Open “Canon: delayed voice entry” from mathjslab-markdown.",
+                            "es": "Abrir «Canon: entrada retrasada de una voz» de mathjslab-markdown.",
+                            "pt": "Abrir “Cânone: entrada atrasada de uma voz” do mathjslab-markdown."
                         }
                     }
                 }
@@ -6447,6 +6629,19 @@
                             "es": "Abrir «Mediterráneo antiguo: ciudades y conexiones» de mathjslab-markdown.",
                             "pt": "Abrir “Mediterrâneo antigo: cidades e conexões” do mathjslab-markdown."
                         }
+                    },
+                    "mapa-de-rotas": {
+                        "file": "mapa-de-rotas.m",
+                        "caption": {
+                            "en": "Local routes: coordinates and connections",
+                            "es": "Rutas locales: coordenadas y conexiones",
+                            "pt": "Rotas locais: coordenadas e conexões"
+                        },
+                        "description": {
+                            "en": "Open “Local routes: coordinates and connections” from mathjslab-markdown.",
+                            "es": "Abrir «Rutas locales: coordenadas y conexiones» de mathjslab-markdown.",
+                            "pt": "Abrir “Rotas locais: coordenadas e conexões” do mathjslab-markdown."
+                        }
                     }
                 }
             },
@@ -6513,6 +6708,272 @@
                             "en": "Open “Insertion sort: building a sorted section” from mathjslab-markdown.",
                             "es": "Abrir «Ordenación por inserción: construir una parte ordenada» de mathjslab-markdown.",
                             "pt": "Abrir “Ordenação por inserção: construir uma parte ordenada” do mathjslab-markdown."
+                        }
+                    },
+                    "busca-binaria": {
+                        "file": "busca-binaria.m",
+                        "caption": {
+                            "en": "Binary search: shrinking the interval",
+                            "es": "Búsqueda binaria: reducir el intervalo",
+                            "pt": "Busca binária: reduzir o intervalo"
+                        },
+                        "description": {
+                            "en": "Open “Binary search: shrinking the interval” from mathjslab-markdown.",
+                            "es": "Abrir «Búsqueda binaria: reducir el intervalo» de mathjslab-markdown.",
+                            "pt": "Abrir “Busca binária: reduzir o intervalo” do mathjslab-markdown."
+                        }
+                    },
+                    "dependencias-de-projeto": {
+                        "file": "dependencias-de-projeto.m",
+                        "caption": {
+                            "en": "Project dependencies",
+                            "es": "Dependencias de un proyecto",
+                            "pt": "Dependências de um projeto"
+                        },
+                        "description": {
+                            "en": "Open “Project dependencies” from mathjslab-markdown.",
+                            "es": "Abrir «Dependencias de un proyecto» de mathjslab-markdown.",
+                            "pt": "Abrir “Dependências de um projeto” do mathjslab-markdown."
+                        }
+                    }
+                }
+            },
+            "electronics": {
+                "directory": "electronics",
+                "caption": {
+                    "en": "Electronics and timing diagrams",
+                    "es": "Electrónica y diagramas temporales",
+                    "pt": "Eletrônica e diagramas temporais"
+                },
+                "description": {
+                    "en": "Electronics and timing diagrams",
+                    "es": "Electrónica y diagramas temporales",
+                    "pt": "Eletrônica e diagramas temporais"
+                },
+                "children": {
+                    "circuitos-eletricos": {
+                        "file": "circuitos-eletricos.m",
+                        "caption": {
+                            "en": "Technical drawings and electrical circuits",
+                            "es": "Dibujos técnicos y circuitos eléctricos",
+                            "pt": "Desenhos técnicos e circuitos elétricos"
+                        },
+                        "description": {
+                            "en": "Open “Technical drawings and electrical circuits” from mathjslab-markdown.",
+                            "es": "Abrir «Dibujos técnicos y circuitos eléctricos» de mathjslab-markdown.",
+                            "pt": "Abrir “Desenhos técnicos e circuitos elétricos” do mathjslab-markdown."
+                        }
+                    },
+                    "comunicacao-spi": {
+                        "file": "comunicacao-spi.m",
+                        "caption": {
+                            "en": "SPI: clock and selection",
+                            "es": "SPI: reloj y selección",
+                            "pt": "SPI: clock e seleção"
+                        },
+                        "description": {
+                            "en": "Open “SPI: clock and selection” from mathjslab-markdown.",
+                            "es": "Abrir «SPI: reloj y selección» de mathjslab-markdown.",
+                            "pt": "Abrir “SPI: clock e seleção” do mathjslab-markdown."
+                        }
+                    },
+                    "diagramas-temporais": {
+                        "file": "diagramas-temporais.m",
+                        "caption": {
+                            "en": "Digital timing diagrams",
+                            "es": "Diagramas temporales digitales",
+                            "pt": "Diagramas temporais digitais"
+                        },
+                        "description": {
+                            "en": "Open “Digital timing diagrams” from mathjslab-markdown.",
+                            "es": "Abrir «Diagramas temporales digitales» de mathjslab-markdown.",
+                            "pt": "Abrir “Diagramas temporais digitais” do mathjslab-markdown."
+                        }
+                    },
+                    "filtro-rc": {
+                        "file": "filtro-rc.m",
+                        "caption": {
+                            "en": "RC filter: capacitor voltage",
+                            "es": "Filtro RC: tensión en el condensador",
+                            "pt": "Filtro RC: tensão no capacitor"
+                        },
+                        "description": {
+                            "en": "Open “RC filter: capacitor voltage” from mathjslab-markdown.",
+                            "es": "Abrir «Filtro RC: tensión en el condensador» de mathjslab-markdown.",
+                            "pt": "Abrir “Filtro RC: tensão no capacitor” do mathjslab-markdown."
+                        }
+                    },
+                    "quadro-uart": {
+                        "file": "quadro-uart.m",
+                        "caption": {
+                            "en": "UART: start, data and stop",
+                            "es": "UART: inicio, datos y parada",
+                            "pt": "UART: início, dados e parada"
+                        },
+                        "description": {
+                            "en": "Open “UART: start, data and stop” from mathjslab-markdown.",
+                            "es": "Abrir «UART: inicio, datos y parada» de mathjslab-markdown.",
+                            "pt": "Abrir “UART: início, dados e parada” do mathjslab-markdown."
+                        }
+                    },
+                    "resistores-em-paralelo": {
+                        "file": "resistores-em-paralelo.m",
+                        "caption": {
+                            "en": "Parallel resistors with CircuiTikZ",
+                            "es": "Resistencias en paralelo con CircuiTikZ",
+                            "pt": "Resistores em paralelo com CircuiTikZ"
+                        },
+                        "description": {
+                            "en": "Open “Parallel resistors with CircuiTikZ” from mathjslab-markdown.",
+                            "es": "Abrir «Resistencias en paralelo con CircuiTikZ» de mathjslab-markdown.",
+                            "pt": "Abrir “Resistores em paralelo com CircuiTikZ” do mathjslab-markdown."
+                        }
+                    },
+                    "setup-e-hold": {
+                        "file": "setup-e-hold.m",
+                        "caption": {
+                            "en": "Setup and hold: stability window",
+                            "es": "Setup y hold: ventana de estabilidad",
+                            "pt": "Setup e hold: janela de estabilidade"
+                        },
+                        "description": {
+                            "en": "Open “Setup and hold: stability window” from mathjslab-markdown.",
+                            "es": "Abrir «Setup y hold: ventana de estabilidad» de mathjslab-markdown.",
+                            "pt": "Abrir “Setup e hold: janela de estabilidade” do mathjslab-markdown."
+                        }
+                    }
+                }
+            },
+            "teaching-blocks": {
+                "directory": "teaching-blocks",
+                "caption": {
+                    "en": "Teaching blocks and exercises",
+                    "es": "Bloques didácticos y ejercicios",
+                    "pt": "Blocos didáticos e exercícios"
+                },
+                "description": {
+                    "en": "Teaching blocks and exercises",
+                    "es": "Bloques didácticos y ejercicios",
+                    "pt": "Blocos didáticos e exercícios"
+                },
+                "children": {
+                    "blocos-didaticos": {
+                        "file": "blocos-didaticos.m",
+                        "caption": {
+                            "en": "Theorems, exercises and references",
+                            "es": "Teoremas, ejercicios y referencias",
+                            "pt": "Teoremas, exercícios e referências"
+                        },
+                        "description": {
+                            "en": "Open “Theorems, exercises and references” from mathjslab-markdown.",
+                            "es": "Abrir «Teoremas, ejercicios y referencias» de mathjslab-markdown.",
+                            "pt": "Abrir “Teoremas, exercícios e referências” do mathjslab-markdown."
+                        }
+                    },
+                    "definicoes-e-exemplos": {
+                        "file": "definicoes-e-exemplos.m",
+                        "caption": {
+                            "en": "Definitions and examples: vector norm",
+                            "es": "Definiciones y ejemplos: norma de un vector",
+                            "pt": "Definições e exemplos: norma de um vetor"
+                        },
+                        "description": {
+                            "en": "Open “Definitions and examples: vector norm” from mathjslab-markdown.",
+                            "es": "Abrir «Definiciones y ejemplos: norma de un vector» de mathjslab-markdown.",
+                            "pt": "Abrir “Definições e exemplos: norma de um vetor” do mathjslab-markdown."
+                        }
+                    },
+                    "demonstracao-por-inducao": {
+                        "file": "demonstracao-por-inducao.m",
+                        "caption": {
+                            "en": "Induction: sum of the first integers",
+                            "es": "Inducción: suma de los primeros enteros",
+                            "pt": "Indução: soma dos primeiros inteiros"
+                        },
+                        "description": {
+                            "en": "Open “Induction: sum of the first integers” from mathjslab-markdown.",
+                            "es": "Abrir «Inducción: suma de los primeros enteros» de mathjslab-markdown.",
+                            "pt": "Abrir “Indução: soma dos primeiros inteiros” do mathjslab-markdown."
+                        }
+                    },
+                    "exercicios-com-dicas": {
+                        "file": "exercicios-com-dicas.m",
+                        "caption": {
+                            "en": "Exercises with hints: successive percentages",
+                            "es": "Ejercicios con pistas: porcentajes sucesivos",
+                            "pt": "Exercícios com dicas: porcentagens sucessivas"
+                        },
+                        "description": {
+                            "en": "Open “Exercises with hints: successive percentages” from mathjslab-markdown.",
+                            "es": "Abrir «Ejercicios con pistas: porcentajes sucesivos» de mathjslab-markdown.",
+                            "pt": "Abrir “Exercícios com dicas: porcentagens sucessivas” do mathjslab-markdown."
+                        }
+                    }
+                }
+            },
+            "bibliography": {
+                "directory": "bibliography",
+                "caption": {
+                    "en": "Citations and bibliography",
+                    "es": "Citas y bibliografía",
+                    "pt": "Citações e bibliografia"
+                },
+                "description": {
+                    "en": "Citations and bibliography",
+                    "es": "Citas y bibliografía",
+                    "pt": "Citações e bibliografia"
+                },
+                "children": {
+                    "catalogo-bibliografico": {
+                        "file": "catalogo-bibliografico.m",
+                        "caption": {
+                            "en": "Bibliographic catalogue without citations",
+                            "es": "Catálogo bibliográfico sin citas",
+                            "pt": "Catálogo bibliográfico sem citações"
+                        },
+                        "description": {
+                            "en": "Open “Bibliographic catalogue without citations” from mathjslab-markdown.",
+                            "es": "Abrir «Catálogo bibliográfico sin citas» de mathjslab-markdown.",
+                            "pt": "Abrir “Catálogo bibliográfico sem citações” do mathjslab-markdown."
+                        }
+                    },
+                    "citacoes-e-bibliografia": {
+                        "file": "citacoes-e-bibliografia.m",
+                        "caption": {
+                            "en": "Citations and bibliography",
+                            "es": "Citas y bibliografía",
+                            "pt": "Citações e bibliografia"
+                        },
+                        "description": {
+                            "en": "Open “Citations and bibliography” from mathjslab-markdown.",
+                            "es": "Abrir «Citas y bibliografía» de mathjslab-markdown.",
+                            "pt": "Abrir “Citações e bibliografia” do mathjslab-markdown."
+                        }
+                    },
+                    "citacoes-numericas": {
+                        "file": "citacoes-numericas.m",
+                        "caption": {
+                            "en": "Numeric citations and source order",
+                            "es": "Citas numéricas y orden de las fuentes",
+                            "pt": "Citações numéricas e ordem das fontes"
+                        },
+                        "description": {
+                            "en": "Open “Numeric citations and source order” from mathjslab-markdown.",
+                            "es": "Abrir «Citas numéricas y orden de las fuentes» de mathjslab-markdown.",
+                            "pt": "Abrir “Citações numéricas e ordem das fontes” do mathjslab-markdown."
+                        }
+                    },
+                    "paginas-e-desambiguacao": {
+                        "file": "paginas-e-desambiguacao.m",
+                        "caption": {
+                            "en": "Pages and citation disambiguation",
+                            "es": "Páginas y desambiguación de citas",
+                            "pt": "Páginas e desambiguação de citações"
+                        },
+                        "description": {
+                            "en": "Open “Pages and citation disambiguation” from mathjslab-markdown.",
+                            "es": "Abrir «Páginas y desambiguación de citas» de mathjslab-markdown.",
+                            "pt": "Abrir “Páginas e desambiguação de citações” do mathjslab-markdown."
                         }
                     }
                 }

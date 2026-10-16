@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "blocos-didaticos.md",
+    "comments": {
+        "title": {
+            "en": "Theorems, exercises and references",
+            "es": "Teoremas, ejercicios y referencias",
+            "pt": "Teoremas, exercícios e referências"
+        },
+        "goal": {
+            "en": "Open “Theorems, exercises and references” from mathjslab-markdown.",
+            "es": "Abrir «Teoremas, ejercicios y referencias» de mathjslab-markdown.",
+            "pt": "Abrir “Teoremas, exercícios e referências” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/blocos-didaticos.md")

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "amonia-piramidal.md",
+    "comments": {
+        "title": {
+            "en": "Ammonia: pyramidal geometry",
+            "es": "Amoníaco: geometría piramidal",
+            "pt": "Amônia: geometria piramidal"
+        },
+        "goal": {
+            "en": "Open “Ammonia: pyramidal geometry” from mathjslab-markdown.",
+            "es": "Abrir «Amoníaco: geometría piramidal» de mathjslab-markdown.",
+            "pt": "Abrir “Amônia: geometria piramidal” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/amonia-piramidal.md")

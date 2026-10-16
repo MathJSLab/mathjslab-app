@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "paginas-e-desambiguacao.md",
+    "comments": {
+        "title": {
+            "en": "Pages and citation disambiguation",
+            "es": "Páginas y desambiguación de citas",
+            "pt": "Páginas e desambiguação de citações"
+        },
+        "goal": {
+            "en": "Open “Pages and citation disambiguation” from mathjslab-markdown.",
+            "es": "Abrir «Páginas y desambiguación de citas» de mathjslab-markdown.",
+            "pt": "Abrir “Páginas e desambiguação de citações” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/paginas-e-desambiguacao.md")

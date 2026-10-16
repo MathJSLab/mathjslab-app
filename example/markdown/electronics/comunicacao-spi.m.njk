@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "comunicacao-spi.md",
+    "comments": {
+        "title": {
+            "en": "SPI: clock and selection",
+            "es": "SPI: reloj y selección",
+            "pt": "SPI: clock e seleção"
+        },
+        "goal": {
+            "en": "Open “SPI: clock and selection” from mathjslab-markdown.",
+            "es": "Abrir «SPI: reloj y selección» de mathjslab-markdown.",
+            "pt": "Abrir “SPI: clock e seleção” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/comunicacao-spi.md")

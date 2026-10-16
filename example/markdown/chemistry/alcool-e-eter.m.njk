@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "alcool-e-eter.md",
+    "comments": {
+        "title": {
+            "en": "Alcohol and ether: same formula, different bonds",
+            "es": "Alcohol y éter: misma fórmula, enlaces diferentes",
+            "pt": "Álcool e éter: mesma fórmula, ligações diferentes"
+        },
+        "goal": {
+            "en": "Open “Alcohol and ether: same formula, different bonds” from mathjslab-markdown.",
+            "es": "Abrir «Alcohol y éter: misma fórmula, enlaces diferentes» de mathjslab-markdown.",
+            "pt": "Abrir “Álcool e éter: mesma fórmula, ligações diferentes” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/alcool-e-eter.md")

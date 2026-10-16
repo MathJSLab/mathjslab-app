@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "setup-e-hold.md",
+    "comments": {
+        "title": {
+            "en": "Setup and hold: stability window",
+            "es": "Setup y hold: ventana de estabilidad",
+            "pt": "Setup e hold: janela de estabilidade"
+        },
+        "goal": {
+            "en": "Open “Setup and hold: stability window” from mathjslab-markdown.",
+            "es": "Abrir «Setup y hold: ventana de estabilidad» de mathjslab-markdown.",
+            "pt": "Abrir “Setup e hold: janela de estabilidade” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/setup-e-hold.md")

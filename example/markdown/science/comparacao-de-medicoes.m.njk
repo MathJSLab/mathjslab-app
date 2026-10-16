@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "comparacao-de-medicoes.md",
+    "comments": {
+        "title": {
+            "en": "Comparing measurements: two groups",
+            "es": "Comparación de mediciones: dos grupos",
+            "pt": "Comparação de medições: dois grupos"
+        },
+        "goal": {
+            "en": "Open “Comparing measurements: two groups” from mathjslab-markdown.",
+            "es": "Abrir «Comparación de mediciones: dos grupos» de mathjslab-markdown.",
+            "pt": "Abrir “Comparação de medições: dois grupos” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/comparacao-de-medicoes.md")

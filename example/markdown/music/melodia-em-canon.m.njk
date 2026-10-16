@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "melodia-em-canon.md",
+    "comments": {
+        "title": {
+            "en": "Canon: delayed voice entry",
+            "es": "Canon: entrada retrasada de una voz",
+            "pt": "Cânone: entrada atrasada de uma voz"
+        },
+        "goal": {
+            "en": "Open “Canon: delayed voice entry” from mathjslab-markdown.",
+            "es": "Abrir «Canon: entrada retrasada de una voz» de mathjslab-markdown.",
+            "pt": "Abrir “Cânone: entrada atrasada de uma voz” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/melodia-em-canon.md")

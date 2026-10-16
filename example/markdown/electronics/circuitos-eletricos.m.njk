@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "circuitos-eletricos.md",
+    "comments": {
+        "title": {
+            "en": "Technical drawings and electrical circuits",
+            "es": "Dibujos técnicos y circuitos eléctricos",
+            "pt": "Desenhos técnicos e circuitos elétricos"
+        },
+        "goal": {
+            "en": "Open “Technical drawings and electrical circuits” from mathjslab-markdown.",
+            "es": "Abrir «Dibujos técnicos y circuitos eléctricos» de mathjslab-markdown.",
+            "pt": "Abrir “Desenhos técnicos e circuitos elétricos” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/circuitos-eletricos.md")

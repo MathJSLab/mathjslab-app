@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "geometria-dinamica.md",
+    "comments": {
+        "title": {
+            "en": "Dynamic geometry: midpoints and circles",
+            "es": "Geometría dinámica: puntos medios y circunferencias",
+            "pt": "Geometria dinâmica: pontos médios e circunferências"
+        },
+        "goal": {
+            "en": "Open “Dynamic geometry: midpoints and circles” from mathjslab-markdown.",
+            "es": "Abrir «Geometría dinámica: puntos medios y circunferencias» de mathjslab-markdown.",
+            "pt": "Abrir “Geometria dinâmica: pontos médios e circunferências” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/geometria-dinamica.md")

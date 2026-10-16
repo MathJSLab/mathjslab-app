@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "citacoes-numericas.md",
+    "comments": {
+        "title": {
+            "en": "Numeric citations and source order",
+            "es": "Citas numéricas y orden de las fuentes",
+            "pt": "Citações numéricas e ordem das fontes"
+        },
+        "goal": {
+            "en": "Open “Numeric citations and source order” from mathjslab-markdown.",
+            "es": "Abrir «Citas numéricas y orden de las fuentes» de mathjslab-markdown.",
+            "pt": "Abrir “Citações numéricas e ordem das fontes” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/citacoes-numericas.md")

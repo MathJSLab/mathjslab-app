@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "definicoes-e-exemplos.md",
+    "comments": {
+        "title": {
+            "en": "Definitions and examples: vector norm",
+            "es": "Definiciones y ejemplos: norma de un vector",
+            "pt": "Definições e exemplos: norma de um vetor"
+        },
+        "goal": {
+            "en": "Open “Definitions and examples: vector norm” from mathjslab-markdown.",
+            "es": "Abrir «Definiciones y ejemplos: norma de un vector» de mathjslab-markdown.",
+            "pt": "Abrir “Definições e exemplos: norma de um vetor” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/definicoes-e-exemplos.md")

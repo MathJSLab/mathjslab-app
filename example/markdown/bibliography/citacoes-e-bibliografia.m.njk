@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "citacoes-e-bibliografia.md",
+    "comments": {
+        "title": {
+            "en": "Citations and bibliography",
+            "es": "Citas y bibliografía",
+            "pt": "Citações e bibliografia"
+        },
+        "goal": {
+            "en": "Open “Citations and bibliography” from mathjslab-markdown.",
+            "es": "Abrir «Citas y bibliografía» de mathjslab-markdown.",
+            "pt": "Abrir “Citações e bibliografia” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/citacoes-e-bibliografia.md")

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "exercicios-com-dicas.md",
+    "comments": {
+        "title": {
+            "en": "Exercises with hints: successive percentages",
+            "es": "Ejercicios con pistas: porcentajes sucesivos",
+            "pt": "Exercícios com dicas: porcentagens sucessivas"
+        },
+        "goal": {
+            "en": "Open “Exercises with hints: successive percentages” from mathjslab-markdown.",
+            "es": "Abrir «Ejercicios con pistas: porcentajes sucesivos» de mathjslab-markdown.",
+            "pt": "Abrir “Exercícios com dicas: porcentagens sucessivas” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/exercicios-com-dicas.md")

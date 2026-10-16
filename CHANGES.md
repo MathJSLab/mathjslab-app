@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.16.0
+
+- Add 32 Markdown example templates in English, Spanish and Portuguese,
+  covering all 82 teaching notes and the localized index from
+  mathjslab-markdown 0.4.0. Expand the application catalogue to 462 templates,
+  including 83 Markdown launchers using localized raw GitHub URLs.
+- Add Markdown categories for electronics and timing diagrams, teaching
+  blocks and exercises, and citations and bibliography. Expand the existing
+  mathematics, science, chemistry, music, computing and geography categories.
+- Include launchers for notes featuring citations, TikZ/CircuiTikZ,
+  interactive geometry, WaveDrom, didactic blocks and cross-references;
+  document their host extension and capability requirements.
+- Update the example catalogue documentation with the new totals and
+  categories while preserving existing templates and the initial example.
+- Update mathjslab-markdown to ^0.4.0, Eleventy to ^3.1.7, ts-jest to
+  ^29.4.15 and webpack to ^5.112.0, and refresh the dependency lockfile.
+
 ## 1.15.0
 
 - Add recursive example directories and subdirectories, with localized menus,

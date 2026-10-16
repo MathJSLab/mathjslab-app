@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "arvore-de-probabilidade.md",
+    "comments": {
+        "title": {
+            "en": "Probability tree with TikZ",
+            "es": "Árbol de probabilidad con TikZ",
+            "pt": "Árvore de probabilidade com TikZ"
+        },
+        "goal": {
+            "en": "Open “Probability tree with TikZ” from mathjslab-markdown.",
+            "es": "Abrir «Árbol de probabilidad con TikZ» de mathjslab-markdown.",
+            "pt": "Abrir “Árvore de probabilidade com TikZ” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/arvore-de-probabilidade.md")

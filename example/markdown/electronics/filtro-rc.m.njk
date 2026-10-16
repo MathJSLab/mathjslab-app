@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "filtro-rc.md",
+    "comments": {
+        "title": {
+            "en": "RC filter: capacitor voltage",
+            "es": "Filtro RC: tensión en el condensador",
+            "pt": "Filtro RC: tensão no capacitor"
+        },
+        "goal": {
+            "en": "Open “RC filter: capacitor voltage” from mathjslab-markdown.",
+            "es": "Abrir «Filtro RC: tensión en el condensador» de mathjslab-markdown.",
+            "pt": "Abrir “Filtro RC: tensão no capacitor” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/filtro-rc.md")

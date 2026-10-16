@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "quadro-uart.md",
+    "comments": {
+        "title": {
+            "en": "UART: start, data and stop",
+            "es": "UART: inicio, datos y parada",
+            "pt": "UART: início, dados e parada"
+        },
+        "goal": {
+            "en": "Open “UART: start, data and stop” from mathjslab-markdown.",
+            "es": "Abrir «UART: inicio, datos y parada» de mathjslab-markdown.",
+            "pt": "Abrir “UART: início, dados e parada” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/quadro-uart.md")
