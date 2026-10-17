@@ -35,3 +35,8 @@ The corpus under `test/markdown/` supplies music, maps and 3D fixtures and is
 also checked through the application facade. The live map-provider test remains
 opt-in (`MARKDOWN_LIVE_MAPS=1`); ordinary map tests use deterministic tiles.
 WebGL checks may be skipped when the browser does not provide a usable context.
+The combined extension audits omit only the PDB, XYZ, STL and OBJ fences when
+WebGL 1 or 2 is unavailable, or when using the Playwright Firefox runtime covered
+by the dedicated 3D suites' host limitation. The remaining extension checks
+still run. Audit annotations record whether 3D was included, and initial alert
+texts are attached before the zero-alert assertion.

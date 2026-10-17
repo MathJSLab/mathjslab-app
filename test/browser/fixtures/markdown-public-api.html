@@ -15,7 +15,24 @@
             ]);
             const presetEngine = core.createMarkdownEnginePreset('safe-remote');
             const presetReady =
-                presetEngine.profile === 'gfm' && core.markdownEnginePresets['safe-remote'].securityMode === 'sanitized' && Object.keys(core.markdownExtensionCatalog).length === 14;
+                presetEngine.profile === 'gfm' &&
+                core.markdownEnginePresets['safe-remote'].securityMode === 'sanitized' &&
+                [
+                    'heading-ids',
+                    'relative-urls',
+                    'syntax-highlight',
+                    'mathjax',
+                    'mermaid',
+                    'smiles',
+                    'graphviz',
+                    'vega-lite',
+                    'abc',
+                    'verovio',
+                    'maps',
+                    'molecule-3d',
+                    'model-3d',
+                    'mathjslab',
+                ].every((name) => core.markdownExtensionCatalog[name]?.manifest);
             await presetEngine.dispose();
             window.markdownPublicApiTest = {
                 core:

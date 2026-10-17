@@ -6854,6 +6854,32 @@
                             "es": "Abrir «Setup y hold: ventana de estabilidad» de mathjslab-markdown.",
                             "pt": "Abrir “Setup e hold: janela de estabilidade” do mathjslab-markdown."
                         }
+                    },
+                    "digital-communication-buses": {
+                        "file": "digital-communication-buses.m",
+                        "caption": {
+                            "en": "Digital communication buses: from bits to distributed systems",
+                            "es": "Buses de comunicación digital: de los bits a los sistemas distribuidos",
+                            "pt": "Barramentos de comunicação digital: dos bits aos sistemas distribuídos"
+                        },
+                        "description": {
+                            "en": "Open “Digital communication buses: from bits to distributed systems” from mathjslab-markdown.",
+                            "es": "Abrir «Buses de comunicación digital: de los bits a los sistemas distribuidos» de mathjslab-markdown.",
+                            "pt": "Abrir “Barramentos de comunicação digital: dos bits aos sistemas distribuídos” do mathjslab-markdown."
+                        }
+                    },
+                    "electrical-circuits": {
+                        "file": "electrical-circuits.m",
+                        "caption": {
+                            "en": "Electrical Circuits",
+                            "es": "Circuitos eléctricos",
+                            "pt": "Circuitos Elétricos"
+                        },
+                        "description": {
+                            "en": "Open “Electrical Circuits” from mathjslab-markdown.",
+                            "es": "Abrir «Circuitos eléctricos» de mathjslab-markdown.",
+                            "pt": "Abrir “Circuitos Elétricos” do mathjslab-markdown."
+                        }
                     }
                 }
             },

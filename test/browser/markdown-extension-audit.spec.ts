@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page } from '@playwright/test';
 import { routeApplicationAssets } from './helpers/application';
 import { Jimp } from 'jimp';
 import { writeFile } from 'node:fs/promises';
@@ -6,8 +6,39 @@ import { writeFile } from 'node:fs/promises';
 const failures = (events: any[]) =>
     events.filter((event) => (event.type !== 'console' || event.level === 'error') && !(event.type === 'requestfailed' && event.error?.errorText === 'net::ERR_ABORTED'));
 
-test('audits the manual extension document', async ({ page }, testInfo) => {
+const geometryLanguages = ['pdb', 'xyz', 'stl', 'obj'];
+
+/** Keep the non-WebGL audit running even on hosts without a usable 3D runtime. */
+async function prepareGeometryAudit(page: Page, browserName: string): Promise<boolean> {
+    await page.goto('/test/browser/fixtures/lifecycle.html');
+    // Match the dedicated 3D suites: Playwright Firefox lacks their required
+    // WebGL implementation on the CI host, even when a context can be created.
+    const hasWebGL =
+        browserName !== 'firefox' &&
+        (await page.evaluate(() => {
+            // Three.js needs WebGL 2; 3Dmol also needs a usable WebGL 1 context.
+            const contexts = [document.createElement('canvas').getContext('webgl'), document.createElement('canvas').getContext('webgl2')];
+            const supported = contexts.every(Boolean);
+            for (const context of contexts) context?.getExtension('WEBGL_lose_context')?.loseContext();
+            return supported;
+        }));
+    if (!hasWebGL) {
+        await page.route('**/test/browser/fixtures/extension-showcase.md', async (route) => {
+            const response = await route.fetch();
+            const source = await response.text();
+            // Only omit the four GPU-dependent fences; retain all other audit
+            // content and assertions, including maps, music and MathJSLab plots.
+            const body = source.replace(/^```(?:pdb|xyz|stl|obj)[^\r\n]*\r?\n[\s\S]*?^```[ \t]*\r?$/gm, '');
+            await route.fulfill({ response, body });
+        });
+    }
+    return hasWebGL;
+}
+
+test('audits the manual extension document', async ({ page, browserName }, testInfo) => {
     test.setTimeout(180_000);
+    const hasWebGL = await prepareGeometryAudit(page, browserName);
+    testInfo.annotations.push({ type: 'WebGL', description: hasWebGL ? '3D geometry included' : '3D fences omitted; remaining extensions audited' });
     const events: unknown[] = [];
     page.on('console', (message) => events.push({ type: 'console', level: message.type(), text: message.text() }));
     page.on('pageerror', (error) => events.push({ type: 'pageerror', message: error.message }));
@@ -20,6 +51,10 @@ test('audits the manual extension document', async ({ page }, testInfo) => {
     );
     await expect(page.locator('markdown-document')).toHaveAttribute('state', 'ready', { timeout: 150_000 });
     const viewer = page.locator('markdown-document');
+    await testInfo.attach('initial-diagnostics.json', {
+        body: JSON.stringify({ hasWebGL, alerts: await viewer.locator('[role="alert"]').allTextContents(), events }, null, 2),
+        contentType: 'application/json',
+    });
     await expect(viewer.locator('[role="alert"]')).toHaveCount(0);
     for (const language of ['mei', 'musicxml']) await expect(viewer.locator(`[data-markdown-language="${language}"] .note use`)).toHaveCount(1);
     await expect(viewer.locator('.leaflet-interactive')).toHaveCount(3);
@@ -56,7 +91,7 @@ test('audits the manual extension document', async ({ page }, testInfo) => {
     await writeFile(testInfo.outputPath('audit.json'), JSON.stringify({ events, blocks }, null, 2));
     await testInfo.attach('audit.json', { path: testInfo.outputPath('audit.json'), contentType: 'application/json' });
     await page.screenshot({ path: testInfo.outputPath('extensions.png'), fullPage: true });
-    for (const language of ['mei', 'musicxml', 'geojson', 'topojson', 'pdb', 'xyz', 'stl', 'obj']) {
+    for (const language of ['mei', 'musicxml', 'geojson', 'topojson', ...(hasWebGL ? geometryLanguages : [])]) {
         const block = page.locator(`markdown-document [data-markdown-language="${language}"]`);
         await block.scrollIntoViewIfNeeded();
         const screenshot = await block.screenshot({ path: testInfo.outputPath(`${language}.png`) });
@@ -92,8 +127,10 @@ test('reports an exact missing resource without blocking a neighboring extension
     await expect(viewer.locator('[data-markdown-extension="graphviz"] svg')).toBeVisible();
 });
 
-test('audits markdown() in the application', async ({ page }, testInfo) => {
+test('audits markdown() in the application', async ({ page, browserName }, testInfo) => {
     test.setTimeout(180_000);
+    const hasWebGL = await prepareGeometryAudit(page, browserName);
+    testInfo.annotations.push({ type: 'WebGL', description: hasWebGL ? '3D geometry included' : '3D fences omitted; remaining extensions audited' });
     // Network-independent coverage of the app's online map defaults.
     const tile = '<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect width="256" height="256" fill="#d8e7cb"/></svg>';
     await page.route('https://tile.openstreetmap.org/**', (route) => route.fulfill({ contentType: 'image/svg+xml', body: tile }));
@@ -132,6 +169,10 @@ test('audits markdown() in the application', async ({ page }, testInfo) => {
     await prompt.locator('textarea').press('Enter');
     const viewer = page.locator('markdown-document[src$="/test/browser/fixtures/extension-showcase.md"]');
     await expect(viewer).toHaveAttribute('state', 'ready', { timeout: 150_000 });
+    await testInfo.attach('initial-application-diagnostics.json', {
+        body: JSON.stringify({ hasWebGL, alerts: await viewer.locator('[role="alert"]').allTextContents(), startupEvents, events }, null, 2),
+        contentType: 'application/json',
+    });
     await expect(viewer.locator('[role="alert"]')).toHaveCount(0);
     await expect(viewer.locator('[data-markdown-extension="mathjslab"] .js-plotly-plot')).toHaveCount(2);
     const blocks = await viewer.evaluate((element) =>

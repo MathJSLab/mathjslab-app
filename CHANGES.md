@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.18.0
+
+- Add digital communication bus and electrical circuit Markdown launchers in
+  English, Spanish and Portuguese under the electronics category, using the
+  corresponding raw GitHub lesson URL for the selected language.
+- Cover all 85 teaching notes and the localized index from mathjslab-markdown
+  0.5.4: 86 Markdown launchers and 465 application example templates in total.
+  Update the catalogue and integration guides with the current coverage.
+- Adopt the published mathjslab-markdown ^0.5.4 dependency and refreshed
+  registry lockfile.
+- Make browser public API checks tolerate additional extension registrations.
+  Keep combined extension audits running when 3D rendering is unavailable,
+  and attach initial diagnostics before checking for rendering errors.
+
 ## 1.17.0
 
 - Use the published mathjslab-markdown ^0.5.3 dependency and its registry
