@@ -5,6 +5,8 @@ test('keeps Markdown output in the document panel after evaluating a URL', async
     await routeApplicationAssets(page);
     await page.route('https://example.org/lesson.md', (route) => route.fulfill({ contentType: 'text/markdown', body: '# Panel regression' }));
     await page.goto('/dist/en/index.html');
+    // The initial example loads asynchronously and creates its own prompts.
+    await expect(page.locator('command-prompt .js-plotly-plot .main-svg').first()).toBeVisible({ timeout: 30_000 });
     const prompts = page.locator('command-prompt');
     await expect(prompts.last().locator('textarea')).toBeVisible({ timeout: 30_000 });
     const prompt = prompts.nth((await prompts.count()) - 1);
@@ -25,6 +27,8 @@ test('keeps the synchronous app prompt and renders Plotly after an external-func
     // directory without changing the production HTML or application settings.
     await routeApplicationAssets(page);
     await page.goto('/dist/en/index.html');
+    // The initial example loads asynchronously and creates its own prompts.
+    await expect(page.locator('command-prompt .js-plotly-plot .main-svg').first()).toBeVisible({ timeout: 30_000 });
     const prompts = page.locator('command-prompt');
     await expect(prompts.last().locator('textarea')).toBeVisible({ timeout: 30_000 });
     const evaluate = async (source: string) => {

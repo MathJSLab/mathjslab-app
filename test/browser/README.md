@@ -36,7 +36,13 @@ also checked through the application facade. The live map-provider test remains
 opt-in (`MARKDOWN_LIVE_MAPS=1`); ordinary map tests use deterministic tiles.
 WebGL checks may be skipped when the browser does not provide a usable context.
 The combined extension audits omit only the PDB, XYZ, STL and OBJ fences when
-WebGL 1 or 2 is unavailable, or when using the Playwright Firefox runtime covered
-by the dedicated 3D suites' host limitation. The remaining extension checks
-still run. Audit annotations record whether 3D was included, and initial alert
-texts are attached before the zero-alert assertion.
+WebGL 1 or 2 is unavailable, or when using the Playwright Firefox runtime
+covered by the dedicated 3D suites' host limitation. The remaining extension
+checks still run. Audit annotations record whether 3D was included, and initial
+alert texts are attached before the zero-alert assertion.
+
+## Real HDL integration
+
+Run npm run test:hdl:browser after building the app. It launches an installed Chrome (or HDL_BROWSER executable), operates the real app in pt/en/es, and records requests and Wasm MIME under report/. It does not start a native HDL service. Production runs against a GET-only static server; the same runner supports the real webpack dev-server. VHDL-2008 simulation/replay uses NVC, synthesis uses GHDL/YoWASP, and Verilog remains covered. The runner verifies the packaged profile, not complete language compatibility. HDL_APP_FOCUS=custom runs only the additional sources/lifecycle probes for debugging; it is not the complete acceptance matrix. Remove this variable for acceptance runs. See doc/application/hdl-validation.md for executed browser versions, evidence and the known empty-trace limitation.
+
+See [HDL integration and validation](../../doc/application/hdl-validation.md) for the pinned local package, build and dev-server commands, asset hashes, executed results and release blockers. The two HDL Playwright wrappers are opt-in with HDL_BROWSER_TESTS=1; direct npm run test:hdl:browser avoids rebuilding unrelated standalone suites.

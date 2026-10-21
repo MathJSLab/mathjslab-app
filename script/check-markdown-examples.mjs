@@ -12,12 +12,24 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'example/example.json'), 'utf8'));
 const leaves = exampleLeaves(manifest).filter((leaf) => leaf.path.startsWith('markdown/'));
 const documents = new Map();
+const shared = [];
 for (const leaf of leaves) {
     const template = fs.readFileSync(path.join(root, 'example', leaf.path + '.njk'), 'utf8');
     const frontmatter = template.match(/^---json\s*\r?\n([\s\S]*?)\r?\n---/u);
     assert.ok(frontmatter, 'Missing frontmatter: ' + leaf.path);
     const data = JSON.parse(frontmatter[1]);
     assert.match(data.markdownDocument, /^(?:[a-z0-9-]+|README)\.md$/u);
+    if (data.markdownDirectory !== undefined) {
+        assert.equal(data.markdownDirectory, 'digital-electronics/pt');
+        assert.equal(data.markdownDocument, 'README.md');
+        assert.ok(fs.existsSync(path.join(canonical, 'example', data.markdownDirectory, data.markdownDocument)));
+        for (const locale of ['en', 'es', 'pt']) {
+            assert.equal(data.comments.title[locale], leaf.entry.caption[locale]);
+            assert.equal(data.comments.goal[locale], leaf.entry.description[locale]);
+        }
+        shared.push(leaf.path);
+        continue;
+    }
     assert.ok(!documents.has(data.markdownDocument), 'Duplicate launcher: ' + data.markdownDocument);
     documents.set(data.markdownDocument, { leaf, data });
 }
@@ -39,3 +51,6 @@ for (const locale of ['en', 'es', 'pt']) {
     }
     console.log(locale + ': ' + files.length + ' canonical documents covered exactly once, with matching translated metadata.');
 }
+
+assert.deepEqual(shared, ['markdown/electronics/digital-electronics.m']);
+console.log('Shared Portuguese Digital Electronics contents available in all three menu locales.');

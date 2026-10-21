@@ -91,7 +91,9 @@ async function main() {
                 if (data.markdownDocument !== undefined) {
                     assert.ok(leaf.path.startsWith('markdown/'), 'Markdown wrappers belong to their catalogue category.');
                     assert.match(data.markdownDocument, /^(?:[a-z0-9-]+|README)\.md$/u, 'Expected a lesson filename or localized index.');
-                    const expectedUrl = `https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/${locale}/${data.markdownDocument}`;
+                    if (data.markdownDirectory !== undefined)
+                        assert.equal(data.markdownDirectory, 'digital-electronics/pt', 'Only the explicitly shared Portuguese collection overrides locale.');
+                    const expectedUrl = `https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/${data.markdownDirectory ?? locale}/${data.markdownDocument}`;
                     const commands = source
                         .replace(/^\s*%[^\r\n]*/gmu, '')
                         .trim()
@@ -130,7 +132,9 @@ async function main() {
                 );
                 if (selfChecking && leaf.path.startsWith('graphics/')) assert.ok(plotRequests.length, 'Graphics exercise must emit a plot.');
                 if (data.markdownDocument) {
-                    assert.deepEqual(markdownRequests, [`https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/${locale}/${data.markdownDocument}`]);
+                    assert.deepEqual(markdownRequests, [
+                        `https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/${data.markdownDirectory ?? locale}/${data.markdownDocument}`,
+                    ]);
                     markdownLoads++;
                 }
                 if (leaf.path.endsWith('/histogram-of-counts.m')) {

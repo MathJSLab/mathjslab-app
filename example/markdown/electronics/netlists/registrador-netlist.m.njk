@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "registrador-netlist.md",
+    "comments": {
+        "title": {
+            "en": "D flip-flop: connections and clock",
+            "es": "Flip-flop D: conexiones y reloj",
+            "pt": "Flip-flop D: conexões e clock"
+        },
+        "goal": {
+            "en": "Open “D flip-flop: connections and clock” from mathjslab-markdown.",
+            "es": "Abrir «Flip-flop D: conexiones y reloj» de mathjslab-markdown.",
+            "pt": "Abrir “Flip-flop D: conexões e clock” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/registrador-netlist.md")

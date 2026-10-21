@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "hdl-stimuli-checks.md",
+    "comments": {
+        "title": {
+            "en": "HDL: scripted stimuli and checks",
+            "es": "HDL: estímulos y verificaciones",
+            "pt": "HDL: estímulos e verificações"
+        },
+        "goal": {
+            "en": "Open “HDL: scripted stimuli and checks” from mathjslab-markdown.",
+            "es": "Abrir «HDL: estímulos y verificaciones» de mathjslab-markdown.",
+            "pt": "Abrir “HDL: estímulos e verificações” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/hdl-stimuli-checks.md")

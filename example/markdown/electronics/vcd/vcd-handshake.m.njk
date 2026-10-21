@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "vcd-handshake.md",
+    "comments": {
+        "title": {
+            "en": "VCD: handshake and hierarchical aliases",
+            "es": "VCD: handshake y alias jerárquicos",
+            "pt": "VCD: handshake e aliases hierárquicos"
+        },
+        "goal": {
+            "en": "Open “VCD: handshake and hierarchical aliases” from mathjslab-markdown.",
+            "es": "Abrir «VCD: handshake y alias jerárquicos» de mathjslab-markdown.",
+            "pt": "Abrir “VCD: handshake e aliases hierárquicos” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/vcd-handshake.md")

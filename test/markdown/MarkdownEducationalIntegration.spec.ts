@@ -8,15 +8,35 @@ describe('application educational Markdown integration', () => {
         const { Markdown } = await import('../../src/Markdown');
         const source =
             ':::: theorem Claim {#claim}\n\nText.\n\n::: solution\n\nAnswer.\n\n:::\n\n::::\n\n{@ref claim} [@source]\n\n' +
-            ['wavedrom', 'geometry', 'tikz', 'circuitikz', 'bibtex', 'csl-json', 'bibliography'].map((language) => '\x60\x60\x60' + language + '\n{}\n\x60\x60\x60').join('\n\n');
+            ['wavedrom', 'geometry', 'tikz', 'circuitikz', 'bibtex', 'csl-json', 'bibliography', 'netlist', 'vcd']
+                .map((language) => '\x60\x60\x60' + language + '\n{}\n\x60\x60\x60')
+                .join('\n\n');
         const container = document.createElement('div');
         container.innerHTML = Markdown.parse(source);
         expect(container.querySelector('[data-markdown-block="theorem"]')).not.toBeNull();
         expect(container.querySelector('details[data-markdown-block="solution"]')).not.toBeNull();
         expect(container.querySelector('[data-markdown-reference]')).not.toBeNull();
         expect(container.querySelector('[data-markdown-citation]')).not.toBeNull();
-        for (const language of ['wavedrom', 'geometry', 'tikz', 'circuitikz', 'bibtex', 'csl-json', 'bibliography'])
+        for (const language of ['wavedrom', 'geometry', 'tikz', 'circuitikz', 'bibtex', 'csl-json', 'bibliography', 'netlist', 'vcd'])
             expect(container.querySelector('[data-markdown-language="' + language + '"]')).not.toBeNull();
+    });
+
+    test('highlights HDL source and diagnoses executable fences without an executor', async () => {
+        const { Markdown } = await import('../../src/Markdown');
+        for (const [language, code] of [
+            ['vhdl', 'entity gate is end entity;'],
+            ['verilog', 'module gate(input a, output y); assign y = a; endmodule'],
+            ['systemverilog', 'module gate(input logic a, output logic y); assign y = a; endmodule'],
+        ]) {
+            const container = document.createElement('div');
+            container.innerHTML = Markdown.parse(`\x60\x60\x60${language}\n${code}\n\x60\x60\x60`);
+            expect(container.querySelector('code .hljs-keyword')).not.toBeNull();
+        }
+        const container = document.createElement('div');
+        const session = await Markdown.renderDocument('```vhdl-run\n{}\n```\n\n```verilog-live\n{}\n```', container);
+        expect(container.querySelectorAll('[role="alert"]')).toHaveLength(2);
+        expect(container.querySelector('[data-hdl-action]')).toBeNull();
+        await session.dispose();
     });
 
     test.each(['pt', 'en', 'es'])('renders the unchanged %s lesson with nested blocks and links', async (locale) => {

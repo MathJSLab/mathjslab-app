@@ -1,7 +1,7 @@
 # Example catalogue
 
-The catalogue contains **465 Nunjucks templates**: the original 39 examples,
-reorganized into directories, 340 new exercises and 86 Markdown document
+The catalogue contains **485 Nunjucks templates**: the original 39 examples,
+reorganized into directories, 340 new exercises and 106 Markdown document
 launchers. Each template generates an English, Spanish and Portuguese `.m`
 file. Captions, descriptions and teaching comments are translated. Numerical
 code stays the same; Markdown launchers select the document locale in their
@@ -26,7 +26,7 @@ URL.
 | `computational-geometry/` | Planar predicates, intersections and polygon calculations          |        10 |
 | `image-processing/`       | Synthetic matrix images, intensity transforms and morphology       |         8 |
 | `simulation/`             | Seeded experiments, event queues and discrete evolution models     |         7 |
-| `markdown/`               | Localized teaching notes from mathjslab-markdown                   |        86 |
+| `markdown/`               | Localized teaching notes from mathjslab-markdown                   |       106 |
 
 The directory tree, menu order and translated labels are defined by
 `example.json`. Templates must follow the same physical directory tree. The
@@ -34,7 +34,7 @@ first example remains `fundamentals/equations/bhaskara.m.njk`.
 
 ## Markdown teaching notes
 
-The Markdown category contains launchers for the package's 85 teaching notes
+The Markdown category contains launchers for the package's 105 teaching notes
 and its localized lesson index, grouped into mathematics/geometry,
 science/data, chemistry, music, geography/history, computing, electronics,
 teaching blocks and bibliography. Each template runs `clear` followed by
@@ -50,10 +50,16 @@ interactive geometry, WaveDrom, teaching blocks and cross-references. Rendering
 these features requires a compatible package version and the corresponding
 extensions and capabilities to be enabled by the application host.
 
-The catalogue was checked against the 0.5.4 teaching collections: all 85 notes
+The catalogue was checked against the 0.6.1 teaching collections: all 105 notes
 and the localized index are represented in each language. Menu captions and
 template comments follow the titles in those indexes. Lesson content changes
 are retrieved through the same raw GitHub URLs.
+
+Electronics also contains HDL, netlist and VCD subdirectories. WaveDrom
+register maps and logic diagrams, HDL syntax highlighting, netlist schematics
+and local VCD inspection work without a compiler. HDL simulation, synthesis and
+live sessions require an explicitly configured executor; see the application
+[HDL integration](../doc/application/markdown-integration.md#hdl-execution-in-development).
 
 These launchers require network access and the corresponding files on GitHub's
 `main` branch. They do not embed or copy the Markdown lesson bodies. In
@@ -172,6 +178,12 @@ frontmatter with translated `comments.title`, `comments.goal` and
 Markdown launchers instead declare `markdownDocument` in JSON frontmatter,
 provide translated `comments.title` and `comments.goal`, and render the URL
 with `{{ lang }}`. Their executable code varies only in the URL's locale.
+
+The Digital Electronics contents launcher is the deliberate exception:
+`markdownDirectory: "digital-electronics/pt"` fixes its content language to
+Portuguese in every menu. English and Spanish labels identify this explicitly.
+The contents links to available chapters; planned chapters are not invented.
+There are now 107 Markdown launchers and 486 templates overall.
 
 To audit all canonical lesson files, titles and launchers in the three locales,
 run `node script/check-markdown-examples.mjs ../mathjslab-markdown`. This reads

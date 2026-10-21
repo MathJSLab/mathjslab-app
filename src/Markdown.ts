@@ -9,11 +9,19 @@ import { onMarkdownDocumentDispose } from './markdown/lifecycle';
 import type { MarkedOptions } from 'marked';
 import { withActiveInterpreter } from './InterpreterRuntime';
 import { markdownMapConfiguration } from './MarkdownMapConfiguration';
+import { markdownHDLConfiguration } from './MarkdownHDLConfiguration';
+
+declare const __webpack_public_path__: string;
+
+// Follow the loaded bundle, including a deployment subpath.
+const hdlConfiguration = markdownHDLConfiguration(new URL('hdl/', new URL(typeof __webpack_public_path__ === 'string' ? __webpack_public_path__ : './', document.baseURI)));
 
 const engine = createEducationalMarkdownEngine({
     features: 'all',
     mapOptions: markdownMapConfiguration,
+    executionPolicy: hdlConfiguration.executionPolicy,
     extensions: [
+        ...hdlConfiguration.extensions,
         mathJSLabExtension(
             createBrowserMathJSLabWorkerExecutor({
                 toMathML: (source, display) => withActiveInterpreter(appEngine.interpreter, () => appEngine.interpreter.ToMathML(source, display)),

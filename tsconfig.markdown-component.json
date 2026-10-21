@@ -15,6 +15,7 @@
         "src/markdown-extensions.ts",
         "src/markdown-mathjslab.ts",
         "src/markdown-mathjslab-worker.ts",
+        "src/markdown-hdl.ts",
         "types/**/*.d.ts"
     ]
 }

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "expressoes-logicas.md",
+    "comments": {
+        "title": {
+            "en": "Logic expressions: gates and combinations",
+            "es": "Expresiones lógicas: puertas y combinaciones",
+            "pt": "Expressões lógicas: portas e combinações"
+        },
+        "goal": {
+            "en": "Open “Logic expressions: gates and combinations” from mathjslab-markdown.",
+            "es": "Abrir «Expresiones lógicas: puertas y combinaciones» de mathjslab-markdown.",
+            "pt": "Abrir “Expressões lógicas: portas e combinações” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/expressoes-logicas.md")

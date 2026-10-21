@@ -6880,6 +6880,324 @@
                             "es": "Abrir «Circuitos eléctricos» de mathjslab-markdown.",
                             "pt": "Abrir “Circuitos Elétricos” do mathjslab-markdown."
                         }
+                    },
+                    "expressoes-logicas": {
+                        "file": "expressoes-logicas.m",
+                        "caption": {
+                            "en": "Logic expressions: gates and combinations",
+                            "es": "Expresiones lógicas: puertas y combinaciones",
+                            "pt": "Expressões lógicas: portas e combinações"
+                        },
+                        "description": {
+                            "en": "Open “Logic expressions: gates and combinations” from mathjslab-markdown.",
+                            "es": "Abrir «Expresiones lógicas: puertas y combinaciones» de mathjslab-markdown.",
+                            "pt": "Abrir “Expressões lógicas: portas e combinações” do mathjslab-markdown."
+                        }
+                    },
+                    "registradores-digitais": {
+                        "file": "registradores-digitais.m",
+                        "caption": {
+                            "en": "Digital registers: fields and formats",
+                            "es": "Registros digitales: campos y formatos",
+                            "pt": "Registradores digitais: campos e formatos"
+                        },
+                        "description": {
+                            "en": "Open “Digital registers: fields and formats” from mathjslab-markdown.",
+                            "es": "Abrir «Registros digitales: campos y formatos» de mathjslab-markdown.",
+                            "pt": "Abrir “Registradores digitais: campos e formatos” do mathjslab-markdown."
+                        }
+                    },
+                    "hdl": {
+                        "directory": "hdl",
+                        "caption": {
+                            "en": "HDL code and execution",
+                            "es": "Código HDL y ejecución",
+                            "pt": "Código HDL e execução"
+                        },
+                        "description": {
+                            "en": "HDL code and execution",
+                            "es": "Código HDL y ejecución",
+                            "pt": "Código HDL e execução"
+                        },
+                        "children": {
+                            "codigo-hdl": {
+                                "file": "codigo-hdl.m",
+                                "caption": {
+                                    "en": "VHDL and Verilog: four hardware descriptions",
+                                    "es": "VHDL y Verilog: cuatro descripciones de hardware",
+                                    "pt": "VHDL e Verilog: quatro descrições de hardware"
+                                },
+                                "description": {
+                                    "en": "Open “VHDL and Verilog: four hardware descriptions” from mathjslab-markdown.",
+                                    "es": "Abrir «VHDL y Verilog: cuatro descripciones de hardware» de mathjslab-markdown.",
+                                    "pt": "Abrir “VHDL e Verilog: quatro descrições de hardware” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-contador": {
+                                "file": "hdl-contador.m",
+                                "caption": {
+                                    "en": "HDL: simulating a synchronous counter",
+                                    "es": "HDL: simulación de un contador síncrono",
+                                    "pt": "HDL: simulação de um contador síncrono"
+                                },
+                                "description": {
+                                    "en": "Open “HDL: simulating a synchronous counter” from mathjslab-markdown.",
+                                    "es": "Abrir «HDL: simulación de un contador síncrono» de mathjslab-markdown.",
+                                    "pt": "Abrir “HDL: simulação de um contador síncrono” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-live-and": {
+                                "file": "hdl-live-and.m",
+                                "caption": {
+                                    "en": "Interactive simulation: AND gate",
+                                    "es": "Simulación interactiva: puerta AND",
+                                    "pt": "Simulação interativa: porta AND"
+                                },
+                                "description": {
+                                    "en": "Open “Interactive simulation: AND gate” from mathjslab-markdown.",
+                                    "es": "Abrir «Simulación interactiva: puerta AND» de mathjslab-markdown.",
+                                    "pt": "Abrir “Simulação interativa: porta AND” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-live-counter": {
+                                "file": "hdl-live-counter.m",
+                                "caption": {
+                                    "en": "Interactive simulation: counter and reset",
+                                    "es": "Simulación interactiva: contador y reset",
+                                    "pt": "Simulação interativa: contador e reset"
+                                },
+                                "description": {
+                                    "en": "Open “Interactive simulation: counter and reset” from mathjslab-markdown.",
+                                    "es": "Abrir «Simulación interactiva: contador y reset» de mathjslab-markdown.",
+                                    "pt": "Abrir “Simulação interativa: contador e reset” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-live-mux": {
+                                "file": "hdl-live-mux.m",
+                                "caption": {
+                                    "en": "Interactive simulation: multiplexer",
+                                    "es": "Simulación interactiva: multiplexor",
+                                    "pt": "Simulação interativa: multiplexador"
+                                },
+                                "description": {
+                                    "en": "Open “Interactive simulation: multiplexer” from mathjslab-markdown.",
+                                    "es": "Abrir «Simulación interactiva: multiplexor» de mathjslab-markdown.",
+                                    "pt": "Abrir “Simulação interativa: multiplexador” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-live-register": {
+                                "file": "hdl-live-register.m",
+                                "caption": {
+                                    "en": "Interactive simulation: enabled register",
+                                    "es": "Simulación interactiva: registro con enable",
+                                    "pt": "Simulação interativa: registrador com enable"
+                                },
+                                "description": {
+                                    "en": "Open “Interactive simulation: enabled register” from mathjslab-markdown.",
+                                    "es": "Abrir «Simulación interactiva: registro con enable» de mathjslab-markdown.",
+                                    "pt": "Abrir “Simulação interativa: registrador com enable” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-multiplexador": {
+                                "file": "hdl-multiplexador.m",
+                                "caption": {
+                                    "en": "HDL: synthesizing a multiplexer",
+                                    "es": "HDL: síntesis de un multiplexor",
+                                    "pt": "HDL: síntese de um multiplexador"
+                                },
+                                "description": {
+                                    "en": "Open “HDL: synthesizing a multiplexer” from mathjslab-markdown.",
+                                    "es": "Abrir «HDL: síntesis de un multiplexor» de mathjslab-markdown.",
+                                    "pt": "Abrir “HDL: síntese de um multiplexador” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-porta-and": {
+                                "file": "hdl-porta-and.m",
+                                "caption": {
+                                    "en": "HDL: simulating an AND gate",
+                                    "es": "HDL: simulación de una puerta AND",
+                                    "pt": "HDL: simulação de uma porta AND"
+                                },
+                                "description": {
+                                    "en": "Open “HDL: simulating an AND gate” from mathjslab-markdown.",
+                                    "es": "Abrir «HDL: simulación de una puerta AND» de mathjslab-markdown.",
+                                    "pt": "Abrir “HDL: simulação de uma porta AND” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-somador": {
+                                "file": "hdl-somador.m",
+                                "caption": {
+                                    "en": "HDL: synthesizing an adder with carry",
+                                    "es": "HDL: síntesis de un sumador con acarreo",
+                                    "pt": "HDL: síntese de um somador com carry"
+                                },
+                                "description": {
+                                    "en": "Open “HDL: synthesizing an adder with carry” from mathjslab-markdown.",
+                                    "es": "Abrir «HDL: síntesis de un sumador con acarreo» de mathjslab-markdown.",
+                                    "pt": "Abrir “HDL: síntese de um somador com carry” do mathjslab-markdown."
+                                }
+                            },
+                            "hdl-stimuli-checks": {
+                                "file": "hdl-stimuli-checks.m",
+                                "caption": {
+                                    "en": "HDL: scripted stimuli and checks",
+                                    "es": "HDL: estímulos y verificaciones",
+                                    "pt": "HDL: estímulos e verificações"
+                                },
+                                "description": {
+                                    "en": "Open “HDL: scripted stimuli and checks” from mathjslab-markdown.",
+                                    "es": "Abrir «HDL: estímulos y verificaciones» de mathjslab-markdown.",
+                                    "pt": "Abrir “HDL: estímulos e verificações” do mathjslab-markdown."
+                                }
+                            }
+                        }
+                    },
+                    "netlists": {
+                        "directory": "netlists",
+                        "caption": {
+                            "en": "Netlist schematics",
+                            "es": "Esquemas de netlist",
+                            "pt": "Esquemas de netlist"
+                        },
+                        "description": {
+                            "en": "Netlist schematics",
+                            "es": "Esquemas de netlist",
+                            "pt": "Esquemas de netlist"
+                        },
+                        "children": {
+                            "multiplexador-netlist": {
+                                "file": "multiplexador-netlist.m",
+                                "caption": {
+                                    "en": "Four-bit multiplexer: buses",
+                                    "es": "Multiplexor de cuatro bits: buses",
+                                    "pt": "Multiplexador de quatro bits: barramentos"
+                                },
+                                "description": {
+                                    "en": "Open “Four-bit multiplexer: buses” from mathjslab-markdown.",
+                                    "es": "Abrir «Multiplexor de cuatro bits: buses» de mathjslab-markdown.",
+                                    "pt": "Abrir “Multiplexador de quatro bits: barramentos” do mathjslab-markdown."
+                                }
+                            },
+                            "porta-and-netlist": {
+                                "file": "porta-and-netlist.m",
+                                "caption": {
+                                    "en": "AND gate: netlist schematic",
+                                    "es": "Puerta AND: esquema de netlist",
+                                    "pt": "Porta AND: esquema por netlist"
+                                },
+                                "description": {
+                                    "en": "Open “AND gate: netlist schematic” from mathjslab-markdown.",
+                                    "es": "Abrir «Puerta AND: esquema de netlist» de mathjslab-markdown.",
+                                    "pt": "Abrir “Porta AND: esquema por netlist” do mathjslab-markdown."
+                                }
+                            },
+                            "registrador-netlist": {
+                                "file": "registrador-netlist.m",
+                                "caption": {
+                                    "en": "D flip-flop: connections and clock",
+                                    "es": "Flip-flop D: conexiones y reloj",
+                                    "pt": "Flip-flop D: conexões e clock"
+                                },
+                                "description": {
+                                    "en": "Open “D flip-flop: connections and clock” from mathjslab-markdown.",
+                                    "es": "Abrir «Flip-flop D: conexiones y reloj» de mathjslab-markdown.",
+                                    "pt": "Abrir “Flip-flop D: conexões e clock” do mathjslab-markdown."
+                                }
+                            },
+                            "somador-netlist": {
+                                "file": "somador-netlist.m",
+                                "caption": {
+                                    "en": "Four-bit adder: RTL structure",
+                                    "es": "Sumador de cuatro bits: estructura RTL",
+                                    "pt": "Somador de quatro bits: estrutura RTL"
+                                },
+                                "description": {
+                                    "en": "Open “Four-bit adder: RTL structure” from mathjslab-markdown.",
+                                    "es": "Abrir «Sumador de cuatro bits: estructura RTL» de mathjslab-markdown.",
+                                    "pt": "Abrir “Somador de quatro bits: estrutura RTL” do mathjslab-markdown."
+                                }
+                            }
+                        }
+                    },
+                    "vcd": {
+                        "directory": "vcd",
+                        "caption": {
+                            "en": "VCD waveforms",
+                            "es": "Formas de onda VCD",
+                            "pt": "Formas de onda VCD"
+                        },
+                        "description": {
+                            "en": "VCD waveforms",
+                            "es": "Formas de onda VCD",
+                            "pt": "Formas de onda VCD"
+                        },
+                        "children": {
+                            "vcd-barramento": {
+                                "file": "vcd-barramento.m",
+                                "caption": {
+                                    "en": "VCD: tri-state bus and unknown values",
+                                    "es": "VCD: bus tri-state y valores desconocidos",
+                                    "pt": "VCD: barramento tri-state e valores desconhecidos"
+                                },
+                                "description": {
+                                    "en": "Open “VCD: tri-state bus and unknown values” from mathjslab-markdown.",
+                                    "es": "Abrir «VCD: bus tri-state y valores desconocidos» de mathjslab-markdown.",
+                                    "pt": "Abrir “VCD: barramento tri-state e valores desconhecidos” do mathjslab-markdown."
+                                }
+                            },
+                            "vcd-contador": {
+                                "file": "vcd-contador.m",
+                                "caption": {
+                                    "en": "VCD: reset and a four-bit counter",
+                                    "es": "VCD: reset y contador de cuatro bits",
+                                    "pt": "VCD: reset e contador de quatro bits"
+                                },
+                                "description": {
+                                    "en": "Open “VCD: reset and a four-bit counter” from mathjslab-markdown.",
+                                    "es": "Abrir «VCD: reset y contador de cuatro bits» de mathjslab-markdown.",
+                                    "pt": "Abrir “VCD: reset e contador de quatro bits” do mathjslab-markdown."
+                                }
+                            },
+                            "vcd-handshake": {
+                                "file": "vcd-handshake.m",
+                                "caption": {
+                                    "en": "VCD: handshake and hierarchical aliases",
+                                    "es": "VCD: handshake y alias jerárquicos",
+                                    "pt": "VCD: handshake e aliases hierárquicos"
+                                },
+                                "description": {
+                                    "en": "Open “VCD: handshake and hierarchical aliases” from mathjslab-markdown.",
+                                    "es": "Abrir «VCD: handshake y alias jerárquicos» de mathjslab-markdown.",
+                                    "pt": "Abrir “VCD: handshake e aliases hierárquicos” do mathjslab-markdown."
+                                }
+                            },
+                            "vcd-porta-and": {
+                                "file": "vcd-porta-and.m",
+                                "caption": {
+                                    "en": "VCD: AND gate and irregular events",
+                                    "es": "VCD: puerta AND y eventos irregulares",
+                                    "pt": "VCD: porta AND e eventos irregulares"
+                                },
+                                "description": {
+                                    "en": "Open “VCD: AND gate and irregular events” from mathjslab-markdown.",
+                                    "es": "Abrir «VCD: puerta AND y eventos irregulares» de mathjslab-markdown.",
+                                    "pt": "Abrir “VCD: porta AND e eventos irregulares” do mathjslab-markdown."
+                                }
+                            }
+                        }
+                    },
+                    "digital-electronics": {
+                        "file": "digital-electronics.m",
+                        "caption": {
+                            "en": "Digital Electronics — contents (Portuguese)",
+                            "es": "Electrónica Digital — índice (portugués)",
+                            "pt": "Eletrônica Digital — sumário"
+                        },
+                        "description": {
+                            "en": "Open the Portuguese Digital Electronics contents and available chapters.",
+                            "es": "Abrir el índice en portugués de Electrónica Digital y los capítulos disponibles.",
+                            "pt": "Abrir o sumário de Eletrônica Digital e os capítulos disponíveis."
+                        }
                     }
                 }
             },

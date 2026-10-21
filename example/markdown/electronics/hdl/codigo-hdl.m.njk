@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "codigo-hdl.md",
+    "comments": {
+        "title": {
+            "en": "VHDL and Verilog: four hardware descriptions",
+            "es": "VHDL y Verilog: cuatro descripciones de hardware",
+            "pt": "VHDL e Verilog: quatro descrições de hardware"
+        },
+        "goal": {
+            "en": "Open “VHDL and Verilog: four hardware descriptions” from mathjslab-markdown.",
+            "es": "Abrir «VHDL y Verilog: cuatro descripciones de hardware» de mathjslab-markdown.",
+            "pt": "Abrir “VHDL e Verilog: quatro descrições de hardware” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/codigo-hdl.md")

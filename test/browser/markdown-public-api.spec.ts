@@ -21,6 +21,7 @@ test('loads each standalone public API entrypoint with isolated exports', async 
         extensions: true,
         mathjslab: true,
         worker: true,
+        hdl: true,
     });
     expect(errors).toEqual([]);
     expect(optionalChunks).toEqual([]);

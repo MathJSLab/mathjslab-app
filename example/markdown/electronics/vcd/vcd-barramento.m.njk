@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "vcd-barramento.md",
+    "comments": {
+        "title": {
+            "en": "VCD: tri-state bus and unknown values",
+            "es": "VCD: bus tri-state y valores desconocidos",
+            "pt": "VCD: barramento tri-state e valores desconhecidos"
+        },
+        "goal": {
+            "en": "Open “VCD: tri-state bus and unknown values” from mathjslab-markdown.",
+            "es": "Abrir «VCD: bus tri-state y valores desconocidos» de mathjslab-markdown.",
+            "pt": "Abrir “VCD: barramento tri-state e valores desconhecidos” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/vcd-barramento.md")

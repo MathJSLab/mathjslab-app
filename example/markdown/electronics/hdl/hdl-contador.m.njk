@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "hdl-contador.md",
+    "comments": {
+        "title": {
+            "en": "HDL: simulating a synchronous counter",
+            "es": "HDL: simulación de un contador síncrono",
+            "pt": "HDL: simulação de um contador síncrono"
+        },
+        "goal": {
+            "en": "Open “HDL: simulating a synchronous counter” from mathjslab-markdown.",
+            "es": "Abrir «HDL: simulación de un contador síncrono» de mathjslab-markdown.",
+            "pt": "Abrir “HDL: simulação de um contador síncrono” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/hdl-contador.md")

@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "porta-and-netlist.md",
+    "comments": {
+        "title": {
+            "en": "AND gate: netlist schematic",
+            "es": "Puerta AND: esquema de netlist",
+            "pt": "Porta AND: esquema por netlist"
+        },
+        "goal": {
+            "en": "Open “AND gate: netlist schematic” from mathjslab-markdown.",
+            "es": "Abrir «Puerta AND: esquema de netlist» de mathjslab-markdown.",
+            "pt": "Abrir “Porta AND: esquema por netlist” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/porta-and-netlist.md")

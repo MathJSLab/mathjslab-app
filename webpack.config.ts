@@ -1,4 +1,4 @@
-import { MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
+import { MarkdownNetlistBrowserPlugin, MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
 /**
  * webpack.config.ts: Webpack configuration factory.
  */
@@ -125,6 +125,8 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                 extensions: ['.ts', '.js'],
                 fallback: {
                     module: false,
+                    // onml uses sax.parser(), not the optional Node SAXStream API.
+                    stream: false,
                 },
                 extensionAlias: {
                     '.js': ['.js', '.ts'],
@@ -144,7 +146,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
             output: {
                 filename: 'mathjslab-app.js',
                 path: path.join(__dirname, 'dist'),
-                publicPath: '/',
+                publicPath: 'auto',
                 environment: {
                     module: true,
                     dynamicImport: true,
@@ -156,6 +158,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                 // that unreachable browser dependency keeps the WASM chunk
                 // usable without polyfilling Node's module API.
                 new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ }),
+                new MarkdownNetlistBrowserPlugin(),
                 new MarkdownRuntimeAssetsPlugin(),
                 ...htmlPages.map(
                     (page) =>

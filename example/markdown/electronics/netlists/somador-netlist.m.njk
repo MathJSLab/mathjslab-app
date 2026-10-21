@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "somador-netlist.md",
+    "comments": {
+        "title": {
+            "en": "Four-bit adder: RTL structure",
+            "es": "Sumador de cuatro bits: estructura RTL",
+            "pt": "Somador de quatro bits: estrutura RTL"
+        },
+        "goal": {
+            "en": "Open “Four-bit adder: RTL structure” from mathjslab-markdown.",
+            "es": "Abrir «Sumador de cuatro bits: estructura RTL» de mathjslab-markdown.",
+            "pt": "Abrir “Somador de quatro bits: estrutura RTL” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/somador-netlist.md")

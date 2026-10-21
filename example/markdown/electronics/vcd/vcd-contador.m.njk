@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "vcd-contador.md",
+    "comments": {
+        "title": {
+            "en": "VCD: reset and a four-bit counter",
+            "es": "VCD: reset y contador de cuatro bits",
+            "pt": "VCD: reset e contador de quatro bits"
+        },
+        "goal": {
+            "en": "Open “VCD: reset and a four-bit counter” from mathjslab-markdown.",
+            "es": "Abrir «VCD: reset y contador de cuatro bits» de mathjslab-markdown.",
+            "pt": "Abrir “VCD: reset e contador de quatro bits” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/vcd-contador.md")

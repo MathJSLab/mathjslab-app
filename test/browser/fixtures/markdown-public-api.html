@@ -6,12 +6,13 @@
     </head>
     <body>
         <script type="module">
-            const [core, component, extensions, mathjslab, worker] = await Promise.all([
+            const [core, component, extensions, mathjslab, worker, hdl] = await Promise.all([
                 import('/dist/markdown-document/core.js'),
                 import('/dist/markdown-document/component.js'),
                 import('/dist/markdown-document/extensions.js'),
                 import('/dist/markdown-document/mathjslab.js'),
                 import('/dist/markdown-document/mathjslab-worker.js'),
+                import('/dist/markdown-document/hdl.js'),
             ]);
             const presetEngine = core.createMarkdownEnginePreset('safe-remote');
             const presetReady =
@@ -47,6 +48,7 @@
                 extensions: typeof extensions.mermaidExtension === 'function' && !('mathJSLabExtension' in extensions),
                 mathjslab: typeof mathjslab.mathJSLabExtension === 'function' && !('MathJSLabWorkerRuntime' in mathjslab),
                 worker: typeof worker.MathJSLabWorkerRuntime === 'function' && !('mathJSLabExtension' in worker),
+                hdl: typeof hdl.createHTTPHDLExecutor === 'function' && !('createNativeHDLExecutor' in hdl),
             };
             const registration = await import('/dist/markdown-document/component-register.js');
             window.markdownPublicApiTest.componentRegistered =

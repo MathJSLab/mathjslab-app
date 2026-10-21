@@ -1,4 +1,4 @@
-import { MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
+import { MarkdownNetlistBrowserPlugin, MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import webpack from 'webpack';
@@ -16,6 +16,7 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
         extensions: path.join(directory, 'src', 'markdown-extensions.ts'),
         mathjslab: path.join(directory, 'src', 'markdown-mathjslab.ts'),
         'mathjslab-worker': path.join(directory, 'src', 'markdown-mathjslab-worker.ts'),
+        hdl: path.join(directory, 'src', 'markdown-hdl.ts'),
     },
     experiments: { outputModule: true },
     module: {
@@ -31,7 +32,8 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
     },
     resolve: {
         extensions: ['.ts', '.js'],
-        fallback: { module: false },
+        // netlistsvg/onml only needs sax.parser(); no Node stream polyfill is needed.
+        fallback: { module: false, stream: false },
         extensionAlias: { '.js': ['.js', '.ts'] },
     },
     optimization: { runtimeChunk: 'single', splitChunks: { chunks: 'all' } },
@@ -49,5 +51,5 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
         publicPath: 'auto',
         clean: true,
     },
-    plugins: [new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ }), new MarkdownRuntimeAssetsPlugin()],
+    plugins: [new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ }), new MarkdownNetlistBrowserPlugin(), new MarkdownRuntimeAssetsPlugin()],
 });

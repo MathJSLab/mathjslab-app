@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "hdl-live-mux.md",
+    "comments": {
+        "title": {
+            "en": "Interactive simulation: multiplexer",
+            "es": "Simulación interactiva: multiplexor",
+            "pt": "Simulação interativa: multiplexador"
+        },
+        "goal": {
+            "en": "Open “Interactive simulation: multiplexer” from mathjslab-markdown.",
+            "es": "Abrir «Simulación interactiva: multiplexor» de mathjslab-markdown.",
+            "pt": "Abrir “Simulação interativa: multiplexador” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/hdl-live-mux.md")

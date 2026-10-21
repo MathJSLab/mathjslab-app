@@ -29,7 +29,7 @@ const tsPluginConfigRules = {
 
 module.exports = [
     {
-        ignores: ['dist/**', 'node_modules/**', 'script/build/**', '*.min.*'],
+        ignores: ['dist/**', 'node_modules/**', 'script/build/**', 'report/**', 'test/result/**', 'playwright-report/**', '.npm/**', '*.min.*'],
     },
     {
         files: ['src/**/*.ts'],
@@ -115,5 +115,9 @@ module.exports = [
             'no-console': 'off',
             ...prettierRules,
         },
+    },
+    {
+        files: ['script/test-hdl-browser.mjs', 'script/test-release-menu.mjs'],
+        languageOptions: { ecmaVersion: 2022, parserOptions: { ecmaVersion: 2022 } },
     },
 ];

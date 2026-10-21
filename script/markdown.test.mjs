@@ -47,6 +47,7 @@ function service() {
         },
     };
     const document = element();
+    document.baseURI = 'http://localhost/';
     document.createElement = (tag) => parse(`<${tag}></${tag}>`).firstChild;
     document.createTextNode = (text) => new TextNode(text);
     document.createElementNS = (_namespace, tag) => {
@@ -155,7 +156,21 @@ function service() {
             }
             return name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name)) : nodeRequire(name);
         };
-        vm.runInNewContext(compatibleOutput, { exports: moduleExports, require, document, Element: HTMLElement, Error, MathJax, URL, AbortController, AbortSignal, TextEncoder });
+        vm.runInNewContext(compatibleOutput, {
+            exports: moduleExports,
+            require,
+            document,
+            Element: HTMLElement,
+            Error,
+            MathJax,
+            URL,
+            AbortController,
+            AbortSignal,
+            TextEncoder,
+            setTimeout,
+            clearTimeout,
+            process: { env: { NODE_ENV: 'test' } },
+        });
         return moduleExports;
     };
     const { Markdown, MarkdownEngine, markdownEngine } = load(path.join(sourceRoot, 'Markdown'));

@@ -1,0 +1,22 @@
+---json
+{
+    "markdownDocument": "README.md",
+    "markdownDirectory": "digital-electronics/pt",
+    "comments": {
+        "title": {
+            "en": "Digital Electronics — contents (Portuguese)",
+            "es": "Electrónica Digital — índice (portugués)",
+            "pt": "Eletrônica Digital — sumário"
+        },
+        "goal": {
+            "en": "Open the Portuguese Digital Electronics contents and available chapters.",
+            "es": "Abrir el índice en portugués de Electrónica Digital y los capítulos disponibles.",
+            "pt": "Abrir o sumário de Eletrônica Digital e os capítulos disponíveis."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/digital-electronics/pt/README.md")

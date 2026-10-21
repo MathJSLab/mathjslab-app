@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "hdl-live-and.md",
+    "comments": {
+        "title": {
+            "en": "Interactive simulation: AND gate",
+            "es": "Simulación interactiva: puerta AND",
+            "pt": "Simulação interativa: porta AND"
+        },
+        "goal": {
+            "en": "Open “Interactive simulation: AND gate” from mathjslab-markdown.",
+            "es": "Abrir «Simulación interactiva: puerta AND» de mathjslab-markdown.",
+            "pt": "Abrir “Simulação interativa: porta AND” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/hdl-live-and.md")

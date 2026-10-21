@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "hdl-live-counter.md",
+    "comments": {
+        "title": {
+            "en": "Interactive simulation: counter and reset",
+            "es": "Simulación interactiva: contador y reset",
+            "pt": "Simulação interativa: contador e reset"
+        },
+        "goal": {
+            "en": "Open “Interactive simulation: counter and reset” from mathjslab-markdown.",
+            "es": "Abrir «Simulación interactiva: contador y reset» de mathjslab-markdown.",
+            "pt": "Abrir “Simulação interativa: contador e reset” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/hdl-live-counter.md")

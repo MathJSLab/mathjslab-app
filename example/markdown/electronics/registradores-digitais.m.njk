@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "registradores-digitais.md",
+    "comments": {
+        "title": {
+            "en": "Digital registers: fields and formats",
+            "es": "Registros digitales: campos y formatos",
+            "pt": "Registradores digitais: campos e formatos"
+        },
+        "goal": {
+            "en": "Open “Digital registers: fields and formats” from mathjslab-markdown.",
+            "es": "Abrir «Registros digitales: campos y formatos» de mathjslab-markdown.",
+            "pt": "Abrir “Registradores digitais: campos e formatos” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/registradores-digitais.md")

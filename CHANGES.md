@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.20.0
+
+- Consume the published mathjslab-markdown 0.7.1 registry distribution, verify
+  its locked installation and complete HDL assets, and add translated launchers for
+  HDL, netlist schematics, VCD recordings, register maps and logic expressions.
+  Cover all 105 teaching notes and the localized index in each language, plus
+  the shared Digital Electronics contents: 107 Markdown launchers and 486
+  example templates in total.
+- Group the new electronics lessons into HDL, netlist and VCD subdirectories,
+  preserving localized raw GitHub URLs and existing example ordering.
+- Integrate the new renderers through the complete educational preset and
+  validate VHDL, Verilog and SystemVerilog highlighting in the app facade.
+- Resolve netlistsvg's own ELK dependency to its browser bundle in application
+  and standalone builds, avoiding Node worker dependencies. Deploy both
+  renderer and layout-engine licenses with the runtime assets.
+- Disable sax's unused optional Node stream entry in both browser builds;
+  retain its synchronous parser without introducing a stream polyfill.
+- Add the browser-only HDL executor compatibility entry and its declarations to
+  the standalone distribution, without exposing native Node backends.
+- Authorize browser HDL batch and interactive executors in trusted application
+  code in both development and production. Compile/simulate Verilog with Icarus
+  Wasm and synthesize with YoWASP in module Workers, without an HDL service,
+  credentials, sessionStorage or an environment guard.
+- Copy every HDL runtime asset byte for byte in both Webpack pipelines, retain
+  hashes/licenses and resolve HDL URLs relative to the bundle's public path.
+- Enable VHDL-2008 synthesis through GHDL Wasm/YoWASP and real simulation and
+  interactive replay through NVC Wasm, preserving host authorization, scheduling
+  and disposal. Copy the complete 32-file HDL distribution, including nvc/.
+  The packaged library/digital-port profile does not imply complete language
+  compatibility. The published package records scoped compiler reproduction
+  and complete corresponding Icarus sources, replacing the historical local
+  compiler snapshots; this app does not independently rebuild the toolchains.
+- Add the Portuguese Digital Electronics contents to all three menu locales,
+  retaining Portuguese content and relative navigation to available chapters.
+- Validate the real app's lessons, controls, downloads and Worker lifecycle in
+  browsers, recording network requests and Wasm MIME on static hosting.
+
 ## 1.18.0
 
 - Add digital communication bus and electrical circuit Markdown launchers in
@@ -14,8 +51,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - Adopt the published mathjslab-markdown ^0.5.4 dependency and refreshed
   registry lockfile.
 - Make browser public API checks tolerate additional extension registrations.
-  Keep combined extension audits running when 3D rendering is unavailable,
-  and attach initial diagnostics before checking for rendering errors.
+  Keep combined extension audits running when 3D rendering is unavailable, and
+  attach initial diagnostics before checking for rendering errors.
 
 ## 1.17.0
 

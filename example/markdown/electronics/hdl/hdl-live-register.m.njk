@@ -1,0 +1,21 @@
+---json
+{
+    "markdownDocument": "hdl-live-register.md",
+    "comments": {
+        "title": {
+            "en": "Interactive simulation: enabled register",
+            "es": "Simulación interactiva: registro con enable",
+            "pt": "Simulação interativa: registrador com enable"
+        },
+        "goal": {
+            "en": "Open “Interactive simulation: enabled register” from mathjslab-markdown.",
+            "es": "Abrir «Simulación interactiva: registro con enable» de mathjslab-markdown.",
+            "pt": "Abrir “Simulação interativa: registrador com enable” do mathjslab-markdown."
+        }
+    }
+}
+---
+% {{ comments.title[lang] }}
+% {{ comments.goal[lang] }}
+clear
+markdown("https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/{{ lang }}/hdl-live-register.md")

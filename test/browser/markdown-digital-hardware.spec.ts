@@ -1,0 +1,34 @@
+import { expect, test } from '@playwright/test';
+import { readFileSync } from 'node:fs';
+import { routeApplicationAssets } from './helpers/application';
+
+test('opens a nested VCD lesson and renders digital hardware through the app preset', async ({ page }) => {
+    test.setTimeout(90_000);
+    await routeApplicationAssets(page);
+    const sourceUrl = 'https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/en/vcd-porta-and.md';
+    const fixture = readFileSync(new URL('./fixtures/digital-hardware.md', import.meta.url), 'utf8');
+    await page.route(sourceUrl, (route) => route.fulfill({ contentType: 'text/markdown', body: fixture }));
+    await page.goto('/dist/en/index.html?lang=en');
+    const editor = page.locator('batch-code-editor textarea');
+    await expect(editor).toHaveValue(/Delta = b\^2-4\*a\*c/, { timeout: 30_000 });
+    await page.locator('#examples').locator('label').click();
+    await page.locator('#example-markdown').click();
+    const menu = page.locator('.example-menu');
+    await menu.getByRole('button', { name: /^Electronics and timing diagrams/ }).click();
+    await menu.getByRole('button', { name: /^VCD waveforms/ }).click();
+    await menu.getByRole('button', { name: 'VCD: AND gate and irregular events', exact: true }).click();
+    await expect(menu).toBeHidden();
+    await expect(editor).toHaveValue(/example\/en\/vcd-porta-and\.md/);
+    const viewer = page.locator(`markdown-document[src="${sourceUrl}"]`);
+    await expect(viewer).toHaveAttribute('state', 'ready', { timeout: 60_000 });
+    await expect(viewer.locator('.wavedrom svg')).toHaveCount(2);
+    await expect(viewer.locator('.netlist svg')).toHaveCount(1);
+    const vcd = viewer.locator('.vcd-viewer');
+    await vcd.scrollIntoViewIfNeeded();
+    await expect(vcd.locator('svg')).toBeVisible();
+    await expect(vcd.locator('input').first()).toBeVisible();
+    await expect(viewer.locator('[role="alert"]')).toHaveCount(0);
+    await expect(page.locator('command-prompt .bad')).toHaveCount(0);
+    await page.setViewportSize({ width: 390, height: 844 });
+    await expect(viewer.locator('.netlist svg')).toBeVisible();
+});
