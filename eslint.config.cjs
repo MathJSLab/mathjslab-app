@@ -20,6 +20,7 @@ const basePlugins = {
 const prettierRules = {
     ...prettierPlugin.configs.recommended.rules,
     ...eslintConfigPrettier.rules,
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
 };
 
 const tsPluginConfigRules = {

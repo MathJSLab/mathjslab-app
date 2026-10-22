@@ -246,3 +246,22 @@ and CI/synchronization configuration regression checks. The production build
 was not repeated for this configuration-only change; the preceding 2 GiB build
 remains the production evidence. No remote CircleCI run, commit or push was
 performed. Retry CircleCI after committing these changes.
+
+### GitHub Actions line-ending follow-up (2026-10-22)
+
+The infrastructure lint assertion introduced above counted all lint errors.
+With LF checkout contents, EditorConfig's CRLF preference produced exactly
+718 prettier/prettier errors: one for each of the 653 and 65 script lines.
+This was reproduced locally by linting the actual scripts with LF endings;
+there were no parsing errors. ESLint's Prettier integration now uses
+endOfLine: auto, retaining the other formatting and syntax rules. The regression
+runs both actual scripts with LF and CRLF and checks that invalid syntax still
+fails. EditorConfig's editor preference remains unchanged.
+
+Local validation after this change: the complete npm test command, including
+pretest's Eleventy/assets build, passed (35 unit, eight infrastructure and
+16 legacy tests, plus documentation and TypeScript checks). Read-only eslint .
+passed with zero errors and the existing src/main.ts console warning. The
+line-ending regression used the real scripts in both LF and CRLF form on
+Windows; a Linux-hosted Actions rerun is still required. No runtime or dependency
+changes, commit, push, publication or deployment were performed.

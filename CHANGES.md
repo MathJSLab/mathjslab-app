@@ -5,6 +5,8 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.20.0
 
+- Accept checkout-native LF and CRLF in ESLint's Prettier integration and
+  validate both variants of the browser scripts, avoiding Linux-only test failures.
 - Validate the locked checkout in CircleCI without replacing project files from
   the organization repository. Preserve the app-owned ESLint, Eleventy and
   synchronization manifest during shared-file refreshes and cleanup.

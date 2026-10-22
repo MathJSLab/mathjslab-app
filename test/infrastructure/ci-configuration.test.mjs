@@ -21,9 +21,13 @@ test('CI validates the locked checkout without replacing project configuration',
 
 test('browser validation scripts parse with the effective ESLint configuration', async () => {
     const eslint = new ESLint({ fix: false });
-    const results = await eslint.lintFiles(['script/test-hdl-browser.mjs', 'script/test-release-menu.mjs']);
-    assert.equal(
-        results.reduce((sum, result) => sum + result.errorCount, 0),
-        0,
-    );
+    for (const filePath of ['script/test-hdl-browser.mjs', 'script/test-release-menu.mjs']) {
+        const source = (await readFile(filePath, 'utf8')).replace(/\r\n/g, '\n');
+        for (const endOfLine of ['\n', '\r\n']) {
+            const [result] = await eslint.lintText(source.replace(/\n/g, endOfLine), { filePath });
+            assert.equal(result.errorCount, 0, `${filePath} (${JSON.stringify(endOfLine)}): ${JSON.stringify(result.messages)}`);
+        }
+    }
+    const [invalid] = await eslint.lintText('await ( ;\n', { filePath: 'script/test-hdl-browser.mjs' });
+    assert.ok(invalid.fatalErrorCount > 0, 'invalid syntax must still fail');
 });
