@@ -106,7 +106,7 @@
         "test:docs": "node script/check-documentation.mjs",
         "test:types": "tsc --project tsconfig.jest.json --noEmit",
         "test:unit": "node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand",
-        "test:infrastructure": "node --test test/examples/example-assets.test.cjs test/infrastructure/browser-server.test.mjs",
+        "test:infrastructure": "node --test test/examples/example-assets.test.cjs test/infrastructure/*.test.mjs",
         "test": "npm run test:docs && npm run test:types && npm run test:unit && npm run test:infrastructure && npm run test:markdown:legacy",
         "test:markdown:all": "npm run test:markdown && npm run test:markdown:legacy",
         "prepare:markdown:local": "node script/prepare-markdown-local.mjs",

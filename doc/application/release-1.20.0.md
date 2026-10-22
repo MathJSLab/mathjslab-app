@@ -184,3 +184,48 @@ service. For a deployment enforcing CSP, public Markdown downloads need their
 content origin (raw.githubusercontent.com) in connect-src; this does not permit
 remote HDL processing. Compiler assets remain hosted with the application.
 No commit, push, package publication or deployment was performed.
+
+## Netlify heap failure follow-up — 2026-10-22
+
+The first Netlify deployment failed in Eleventy at roughly 2 GiB of V8 heap,
+before Webpack. The previous local acceptance used a larger default heap and
+did not expose that limit. Reproduction on Windows with Node 26.7.0 and
+`node --max-old-space-size=2048 eleventy.build.mjs` produced the same heap OOM.
+
+Eleventy's default local-data suffixes include the empty suffix. Consequently,
+`example/example.json`, the large runtime menu catalogue, was also treated as
+directory data and inherited throughout the paginated example templates. It is
+not needed in their build contexts; the runtime asset copier reads it directly.
+
+The build now uses `configureEleventyData` to select only `.11tydata` local
+data files. This retains example/example.11tydata.mjs, language pagination and
+global JSON in data/, while excluding the runtime catalogue from the cascade.
+There is no dependency, runtime HDL, Netlify setting or permanent heap-limit
+change. The build command remains `npm run build` and the output remains dist/.
+
+Executed checks after the correction:
+
+- Eleventy with 2 GiB heap: **1,470 files passed**, 5.52 seconds in the complete
+  build run (a separate initial run passed in 4.48 seconds).
+- The complete **`npm run build` passed with NODE_OPTIONS set to
+  `--max-old-space-size=2048`**, including asset verification/copy and production
+  Webpack. Webpack finished in 256.311 seconds with its three bundle/performance
+  warnings. The variable was set only for this validation process.
+- Eleventy also passed with **512 MiB heap**, producing all 1,470 files in
+  2.83 seconds on a warm local filesystem. This is not a Netlify timing estimate.
+- A real Eleventy regression fixture checks that runtime JSON is not inherited,
+  while global JSON and explicit directory data still generate all three locale
+  pages correctly. All **six infrastructure tests passed**. The fixture stays
+  on the checkout drive for Windows compatibility and explicitly disables Git
+  ignores for its disposable test input.
+- A 1,469-file output snapshot confirmed unchanged lesson scripts and app HTML.
+  The ignored generated CSS constants JSON had different bytes when regenerated;
+  its SCSS/template sources were not modified. Generated-only timestamp changes
+  in tracked files were removed from the patch.
+- All 32 deployed HDL files remained byte-identical to the installed package.
+
+Evidence is in report/netlify-eleventy-before.log, netlify-eleventy-after.log,
+netlify-eleventy-512.log, netlify-build-2048.log, netlify-infrastructure.log and
+netlify-eleventy-output-comparison.json. This is a local constrained-heap
+reproduction, not a new Linux/Netlify-hosted deployment; that deployment must
+be retried after sending the correction. No commit, push or deploy was run.

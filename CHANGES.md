@@ -5,6 +5,9 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.20.0
 
+- Keep the runtime examples catalogue out of Eleventy's local data cascade.
+  Only explicit .11tydata files provide local build data, preventing the
+  multilingual templates from exhausting the 2 GiB CI heap.
 - Consume the published mathjslab-markdown 0.7.1 registry distribution, verify
   its locked installation and complete HDL assets, and add translated launchers for
   HDL, netlist schematics, VCD recordings, register maps and logic expressions.

@@ -2,6 +2,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import EleventyUtil from './script/helper/EleventyUtil.mjs';
+import { configureEleventyData } from './script/helper/eleventy-data.mjs';
 
 /**
  * This filename.
@@ -30,6 +31,7 @@ const stepData = [
     {
         options: getStepOption(0),
         config: async function (eleventyConfig) {
+            configureEleventyData(eleventyConfig);
             const filters = {
                 ...EleventyUtil.utilFilters,
             };
