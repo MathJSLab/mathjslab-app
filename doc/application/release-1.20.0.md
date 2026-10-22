@@ -229,3 +229,20 @@ netlify-eleventy-512.log, netlify-build-2048.log, netlify-infrastructure.log and
 netlify-eleventy-output-comparison.json. This is a local constrained-heap
 reproduction, not a new Linux/Netlify-hosted deployment; that deployment must
 be retried after sending the correction. No commit, push or deploy was run.
+
+### CircleCI configuration follow-up (2026-10-22)
+
+The CI setup refreshed organization files before lint, replacing the tracked
+ESLint configuration (including the ES2022 override for browser test scripts)
+and Eleventy configuration (including the local-data memory fix). CircleCI now
+uses npm ci and the checked-out configuration, without a shared-file refresh.
+The optional synchronization workflow retains its project-owned manifest and
+excludes ESLint and Eleventy; cleanup also retains this manifest.
+
+Local validation: npm run lint passed with zero errors and the existing
+src/main.ts:122 no-console warning; npm run build:script passed; all eight
+infrastructure tests passed, including effective ESLint parsing of both scripts
+and CI/synchronization configuration regression checks. The production build
+was not repeated for this configuration-only change; the preceding 2 GiB build
+remains the production evidence. No remote CircleCI run, commit or push was
+performed. Retry CircleCI after committing these changes.

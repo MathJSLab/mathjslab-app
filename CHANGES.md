@@ -5,6 +5,9 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.20.0
 
+- Validate the locked checkout in CircleCI without replacing project files from
+  the organization repository. Preserve the app-owned ESLint, Eleventy and
+  synchronization manifest during shared-file refreshes and cleanup.
 - Keep the runtime examples catalogue out of Eleventy's local data cascade.
   Only explicit .11tydata files provide local build data, preventing the
   multilingual templates from exhausting the 2 GiB CI heap.

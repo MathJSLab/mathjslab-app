@@ -14,10 +14,9 @@ jobs:
             npm -v
 
       - run:
-          name: Install dependencies and download artifacts from MathJSLab organization repository
+          name: Install locked dependencies and build scripts
           command: |
-            npm install
-            npm run clone:copy:clean:repository
+            npm ci
             npm run build:script
 
       - run:
