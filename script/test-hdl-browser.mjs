@@ -78,12 +78,28 @@ async function download(locator) {
 async function recording(block) {
     return JSON.parse((await download(block.locator(':scope > .hdl-exports [data-hdl-export=json]'))).text);
 }
-async function synthesisExports(block, language) {
+async function synthesisExports(block, language, locale) {
     await expect(block.locator('.netlist svg').first()).toBeVisible({ timeout: 90_000 });
     await expect(block.locator('[role=alert]')).toHaveCount(0);
     const json = JSON.parse((await download(block.locator(':scope > .hdl-exports [data-hdl-export=json]'))).text);
     expect(json.language).toBe(language);
     expect(json.result.status).toBe('success');
+    if (locale)
+        await expect(block.locator(':scope > [data-hdl-status=success]')).toHaveText({ pt: 'Execução HDL concluída', en: 'HDL execution completed', es: 'Ejecución HDL completada' }[locale]);
+    const details = block.locator(':scope > .hdl-log-details');
+    await expect(details).toHaveCount(1);
+    if (locale) await expect(details.locator('summary')).toHaveText({ pt: 'Logs e diagnósticos', en: 'Logs and diagnostics', es: 'Registros y diagnósticos' }[locale]);
+    await expect(details).not.toHaveAttribute('open', '');
+    expect(await details.locator('.hdl-logs').textContent()).not.toContain('\u001b');
+    expect(
+        await block.evaluate((element) => {
+            const children = [...element.children];
+            return children.indexOf(element.querySelector(':scope > .netlist')) < children.indexOf(element.querySelector(':scope > .hdl-log-details'));
+        }),
+    ).toBe(true);
+    await details.locator('summary').click();
+    await expect(details.locator('.hdl-logs')).toBeVisible();
+    await details.locator('summary').click();
     const netlist = JSON.parse((await download(block.locator(':scope > .hdl-exports [data-hdl-export=netlist]'))).text);
     expect(netlist).toEqual(json.result.netlist);
     const module = netlist.netlist.modules[netlist.top];
@@ -95,6 +111,7 @@ async function synthesisExports(block, language) {
     expect((await download(block.locator('[data-hdl-export=svg]').first())).text).toContain('<svg');
     const txt = await download(block.locator(':scope > .hdl-exports [data-hdl-export=txt]'));
     expect(txt.text).toBe(json.result.logs);
+    expect(txt.text).not.toContain('\u001b');
     await expect.poll(() => page.evaluate(() => window.hdlWorkers.size)).toBe(0);
     return json;
 }
@@ -121,7 +138,7 @@ try {
             await vhdl.scrollIntoViewIfNeeded();
             if (['hdl-multiplexador', 'hdl-somador'].includes(lesson)) {
                 const before = await page.evaluate(() => window.hdlTicks);
-                await synthesisExports(vhdl, 'vhdl');
+                await synthesisExports(vhdl, 'vhdl', locale);
                 const after = await page.evaluate(() => window.hdlTicks);
                 expect(after).toBeGreaterThan(before);
                 responsiveness.push({ locale, lesson, before, after });

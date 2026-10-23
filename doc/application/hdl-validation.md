@@ -593,3 +593,21 @@ npm run test:hdl:browser
 $env:HDL_BROWSER = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'
 npm run test:hdl:browser
 ```
+
+## Pré-publicação 1.20.1 com mathjslab-markdown 0.7.2
+
+A dependência instalada e travada é a distribuição 0.7.2 do registro; mathjslab
+permanece em 2.9.0. O build completo do componente, Worker de testes e app passou.
+Os 32 assets HDL são idênticos byte a byte nos dois destinos de produção.
+
+Produção exclusivamente estática: 77 casos passaram em Chrome 155.0.8059.85 e
+77 em Edge 155.0.4283.62, sem erros de página. A rodada cobre as dez famílias
+em pt/en/es, fontes novas, síntese/simulação, replay, controles, exportações e
+descarte. Verificações novas confirmam os rótulos localizados, esquema antes dos
+logs, detalhes recolhidos e expansíveis e TXT/JSON sem ESC. Foram registradas
+2.933 requisições GET sem corpo; 168 tentativas externas eram imagens do README,
+bloqueadas pela CSP de teste. Não houve delegação de processamento HDL.
+
+Esta rodada não repete desenvolvimento nem reconstrói os compiladores. Consulte
+release-1.20.1.md para evidências e limites. A compatibilidade permanece restrita
+ao perfil de linguagem, bibliotecas e replay documentados pelo pacote.

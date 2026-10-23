@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.20.1
+
+- Update mathjslab-markdown to 0.7.2, prioritizing HDL schematics and
+  waveforms with localized execution status and collapsible compiler logs.
+  Display and export normalized logs without terminal escape sequences.
+- Extend the integrated synthesis browser checks to verify collapsed details,
+  result ordering, expansion and normalized TXT/JSON exports.
+
 ## 1.20.0
 
 - Accept checkout-native LF and CRLF in ESLint's Prettier integration and
