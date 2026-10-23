@@ -611,3 +611,23 @@ bloqueadas pela CSP de teste. Não houve delegação de processamento HDL.
 Esta rodada não repete desenvolvimento nem reconstrói os compiladores. Consulte
 release-1.20.1.md para evidências e limites. A compatibilidade permanece restrita
 ao perfil de linguagem, bibliotecas e replay documentados pelo pacote.
+
+
+## Pré-publicação 1.21.0 com mathjslab-markdown 0.8.0
+
+Em 2026-10-23, a distribuição 0.8.0 do registro passou no build do componente,
+Worker de testes e app. Os 32 assets HDL são idênticos byte a byte nos dois
+destinos de produção. mathjslab permanece em 2.9.0.
+
+Produção estática: 77 casos passaram no Chrome 155.0.8059.85 e 77 no Edge
+155.0.4283.62, sem erros de página, cobrindo as dez famílias em pt/en/es,
+fontes novas, síntese, simulação, replay, exportações e descarte. As 2895
+requisições registradas foram GETs sem corpo; 168 tentativas externas eram
+imagens do README, bloqueadas pela CSP de teste. Não houve envio de fontes
+HDL para processamento externo. Wasm local com MIME correto, sob /lab/,
+sem COOP/COEP.
+
+A suíte geral passou 79 testes, com três opt-in ignorados; inclui três novos
+casos de referências de seção localizadas e navegação no app. Esta rodada não
+repete desenvolvimento nem reconstrói os compiladores. Veja release-1.21.0.md
+para evidências, escopo e limites.

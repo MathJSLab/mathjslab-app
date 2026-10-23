@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.21.0
+
+- Update mathjslab-markdown to 0.8.0, enabling explicit heading anchors and
+  localized section references through the existing educational preset.
+  Preserve manual section numbering and document-local navigation.
+- Verify heading labels, references and strict escaping in the application
+  integration, alongside the browser-only HDL regression.
+
 ## 1.20.1
 
 - Update mathjslab-markdown to 0.7.2, prioritizing HDL schematics and

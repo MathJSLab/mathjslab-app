@@ -4,6 +4,26 @@ import { readFileSync } from 'node:fs';
 jest.unstable_mockModule('../../src/appEngine', () => ({ appEngine: { interpreter: {} } }));
 
 describe('application educational Markdown integration', () => {
+    test.each([
+        ['pt', 'Seção'],
+        ['en', 'Section'],
+        ['es', 'Sección'],
+    ])('renders explicit heading anchors and localized references in %s', async (locale, section) => {
+        const { Markdown } = await import('../../src/Markdown');
+        const container = document.createElement('div');
+        const diagnostics: unknown[] = [];
+        const session = await Markdown.renderDocument('## 2.3 Logic {#logic}\n\n{@ref logic}\n\n## Notes {#notes}\n\n{@ref notes}', container, {
+            locale,
+            onDiagnostic: (diagnostic) => diagnostics.push(diagnostic),
+        });
+        expect(diagnostics).toEqual([]);
+        expect(container.querySelector('h2#logic')?.textContent).toBe('2.3 Logic');
+        expect(container.querySelector('[data-markdown-reference] a')?.textContent).toBe(`${section} 2.3`);
+        expect(container.querySelector('[data-markdown-reference] a')?.getAttribute('href')).toBe('#logic');
+        expect(container.querySelectorAll('[data-markdown-reference] a')[1]?.textContent).toBe('Notes');
+        await session.dispose();
+    });
+
     test('registers all educational syntax without importing optional renderer libraries', async () => {
         const { Markdown } = await import('../../src/Markdown');
         const source =
