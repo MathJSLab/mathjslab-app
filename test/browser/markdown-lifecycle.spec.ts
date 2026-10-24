@@ -4,7 +4,7 @@ test.describe.configure({ timeout: 120_000 });
 
 const openFixture = async (page: Page): Promise<void> => {
     await page.goto('/test/browser/fixtures/lifecycle.html');
-    await expect(page.locator('body')).toHaveAttribute('data-ready', 'true');
+    await expect(page.locator('body')).toHaveAttribute('data-ready', 'true', { timeout: 30_000 });
 };
 
 test('reconnects during an extension render without adopting the obsolete session', async ({ page }) => {

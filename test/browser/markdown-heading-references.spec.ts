@@ -28,6 +28,20 @@ for (const [locale, section] of [
         await expect(viewer.locator('[data-markdown-reference] a[href="#notes"]')).toHaveText('Notes');
         const pageUrl = page.url();
         await link.click();
+        // A heading may intersect the viewport transiently during smooth scrolling.
+        // Assert the destination only after its geometry has stopped changing.
+        await viewer.locator('h2#gates').evaluate(async (heading) => {
+            let previous = heading.getBoundingClientRect().top;
+            let stableFrames = 0;
+            for (let frame = 0; frame < 300; frame++) {
+                await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+                const top = heading.getBoundingClientRect().top;
+                stableFrames = Math.abs(top - previous) < 0.25 ? stableFrames + 1 : 0;
+                previous = top;
+                if (stableFrames >= 15) return;
+            }
+            throw new Error('Heading geometry did not settle after fragment navigation');
+        });
         await expect(viewer.locator('h2#gates')).toBeInViewport();
         expect(page.url()).toBe(pageUrl);
         expect(await page.evaluate(() => (window as Window & { headingInjection?: boolean }).headingInjection)).toBeUndefined();

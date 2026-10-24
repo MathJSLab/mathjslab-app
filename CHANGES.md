@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.21.1
+
+- Update mathjslab-markdown to 0.8.2, settling document layout before fragment
+  scrolling and retaining accurate active-outline geometry and reduced motion.
+- Restore molecular rendering when OffscreenCanvas is absent or unusable,
+  using the package's pinned private runtime and native HTML WebGL path.
+  Deploy its license with both browser distributions.
+- Assert heading visibility after smooth scrolling settles, preventing transient
+  intersections from masking the WebKit navigation regression.
+- Verify decoded, successfully downloaded cross-origin images without CORS
+  fetches; distinguish Firefox's cancelled intermediate image requests from
+  failures of the displayed resources.
+- Allow the lifecycle browser fixture up to 30 seconds to initialize its module
+  before checking extension isolation and resource disposal.
+
 ## 1.21.0
 
 - Update mathjslab-markdown to 0.8.0, enabling explicit heading anchors and

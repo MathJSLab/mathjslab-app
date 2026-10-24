@@ -631,3 +631,45 @@ A suíte geral passou 79 testes, com três opt-in ignorados; inclui três novos
 casos de referências de seção localizadas e navegação no app. Esta rodada não
 repete desenvolvimento nem reconstrói os compiladores. Veja release-1.21.0.md
 para evidências, escopo e limites.
+
+
+## Pré-publicação 1.21.1 com mathjslab-markdown 0.8.1
+
+A distribuição do registro foi verificada e os 32 assets são idênticos byte a
+byte nos dois destinos de produção. Chrome 155.0.8059.85 passou 77 casos HDL
+em produção estática, cobrindo as dez famílias em pt/en/es, fontes novas,
+síntese/simulação, interatividade, exportações e descarte. As 1439 requisições
+registradas foram GETs sem corpo; 84 tentativas externas eram imagens do
+README, sem processamento remoto. Não foram repetidas nesta versão as matrizes
+HDL de Edge ou desenvolvimento.
+
+Os nove testes de referências de seção passaram em Chromium/Firefox/WebKit,
+mas a matriz geral teve três falhas 3Dmol no WebKit do Windows, independentes
+do HDL. O candidato permanece com essa pendência de compatibilidade. Consulte
+release-1.21.1.md para resultados, diagnóstico e limites.
+
+## Pré-publicação 1.21.1 com mathjslab-markdown 0.8.2
+
+A dependência do registro 0.8.2 substitui o candidato 0.8.1. Os 32 assets HDL
+foram verificados byte a byte nos dois destinos de produção; a licença do novo
+runtime molecular também é distribuída sem alteração. MathJSLab permanece 2.9.0.
+
+Chrome 155.0.8059.86 e Edge 155.0.4283.62 passaram 77 casos HDL cada, em produção
+estática sob /lab/, com zero erros de página. A cobertura inclui as dez famílias
+em pt/en/es, VHDL e Verilog, síntese/simulação, netlists, controles, replay,
+fontes novas, numeric_std, diagnósticos, exportações e descarte de Workers.
+As 2.878 requisições registradas foram GETs sem corpo; 168 tentativas externas
+eram imagens do README bloqueadas pela CSP de teste. Não houve processamento
+HDL externo. As 803 respostas Wasm tinham status 200 e MIME application/wasm,
+sem COOP/COEP.
+
+A matriz geral de 246 casos passou 234, ignorou 11 por opt-in/capacidade e falhou
+uma vez na inicialização do módulo de teste WebKit (limite de cinco segundos).
+Após ajustar somente essa espera para 30 segundos, toda a suíte de ciclo de
+vida passou nos três motores: 20 aprovações e uma exclusão WebGL já existente.
+As auditorias e o caso molecular que falhavam em 0.8.1 passaram nesta versão.
+A matriz completa não foi repetida após o ajuste; os resultados são separados
+no relatório. Esta rodada não repete desenvolvimento nem reconstrói compiladores.
+Permanecem o perfil HDL e os limites de traces vazios documentados pelo pacote.
+Consulte [o relatório atual](release-1.21.1-0.8.2.md) para evidências, escopo,
+auditoria de dependências e limitações. Nenhum commit ou publicação foi feito.

@@ -49,11 +49,15 @@ test('sanitized documents mediate allowed images and prevent cross-origin reques
     expect(requests.some((url) => url.includes('outside.test'))).toBe(false);
 });
 
-test('sanitized documents display policy-approved cross-origin images without CORS fetches', async ({ page }) => {
-    const requests: string[] = [];
-    const failures: string[] = [];
-    page.on('request', (request) => requests.push(request.url()));
-    page.on('requestfailed', (request) => failures.push(`${request.url()}: ${request.failure()?.errorText ?? ''}`));
+test('sanitized documents display policy-approved cross-origin images without CORS fetches', async ({ page, browserName }) => {
+    const requests: { url: string; type: string }[] = [];
+    const failures: { url: string; type: string; error: string }[] = [];
+    const loadedResponses = new Set<string>();
+    page.on('request', (request) => requests.push({ url: request.url(), type: request.resourceType() }));
+    page.on('requestfailed', (request) => failures.push({ url: request.url(), type: request.resourceType(), error: request.failure()?.errorText ?? '' }));
+    page.on('response', (response) => {
+        if (response.request().resourceType() === 'image' && response.ok()) loadedResponses.add(response.url());
+    });
     const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="4" height="4"><rect width="4" height="4" fill="green"/></svg>';
     await page.route('https://mathjslab.com/**', (route) => route.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
     await page.route('https://dl.circleci.com/**', (route) => route.fulfill({ status: 200, contentType: 'image/svg+xml', body: svg }));
@@ -75,8 +79,8 @@ test('sanitized documents display policy-approved cross-origin images without CO
             },
         );
         const sources = Array.from(container.querySelectorAll('img'), (image) => image.getAttribute('src'));
-        await Promise.all(Array.from(container.querySelectorAll('img'), (image) => image.decode().catch(() => undefined)));
-        const loaded = Array.from(container.querySelectorAll('img'), (image) => image.naturalWidth > 0);
+        await Promise.all(Array.from(container.querySelectorAll('img'), (image) => image.decode()));
+        const loaded = Array.from(container.querySelectorAll('img'), (image) => image.complete && image.naturalWidth > 0);
         await session.dispose();
         await engine.dispose();
         return { sources, loaded };
@@ -88,6 +92,15 @@ test('sanitized documents display policy-approved cross-origin images without CO
         'https://badges.gitter.im/Join%20Chat.svg',
     ]);
     expect(result.loaded).toEqual([true, true, true]);
-    expect(requests.some((url) => url.includes('Join%20Chat.svg'))).toBe(true);
-    expect(failures).toEqual([]);
+    const imageRequests = requests.filter(({ url }) => result.sources.includes(url));
+    expect(imageRequests.length).toBeGreaterThanOrEqual(3);
+    expect(imageRequests.every(({ type }) => type === 'image')).toBe(true);
+    for (const url of result.sources) expect(loadedResponses.has(url!)).toBe(true);
+    // Firefox may cancel intermediate sanitizer image requests. The final images
+    // must still decode and receive successful responses; all other failures fail.
+    expect(
+        failures.filter(
+            ({ url, type, error }) => !(browserName === 'firefox' && type === 'image' && error === 'NS_BINDING_ABORTED' && result.sources.includes(url) && loadedResponses.has(url)),
+        ),
+    ).toEqual([]);
 });

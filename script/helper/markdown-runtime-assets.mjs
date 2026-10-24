@@ -62,6 +62,8 @@ export class MarkdownRuntimeAssetsPlugin {
                 ]) {
                     compilation.emitAsset(`netlist/licenses/${name}-LICENSE`, new compiler.webpack.sources.RawSource(fs.readFileSync(path.join(directory, 'LICENSE'))));
                 }
+                const molecularLicense = require.resolve('mathjslab-markdown/bundles/molecule-3d/licenses/3dmol-LICENSE');
+                compilation.emitAsset('molecule-3d/licenses/3dmol-LICENSE', new compiler.webpack.sources.RawSource(fs.readFileSync(molecularLicense)));
             });
         });
     }
