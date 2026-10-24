@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.21.3
+
+- Update mathjslab-markdown to 0.8.4, enabling localized warning teaching blocks
+  and their independently numbered cross-references through the existing preset.
+- Verify warning rendering, references and literal code examples in the app's
+  three locales, preserving execution authorization and pinned HDL assets.
+
 ## 1.21.2
 
 - Update mathjslab-markdown to 0.8.3, including its complete example catalogue

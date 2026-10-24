@@ -6,7 +6,16 @@ import { routeApplicationAssets } from './helpers/application';
 const base = 'https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/refs/heads/main/example/digital-electronics/pt/';
 const chapter = 'introduction-to-digital-electronics.md';
 const directory = `${process.env.MARKDOWN_EXAMPLE_SOURCE_ROOT ?? 'node_modules/mathjslab-markdown/example'}/digital-electronics/pt/`;
-const labels = ['fig-analog-digital', 'fig-digitization-flow', 'fig-logic-interface', 'fig-sequential-system', 'fig-abstraction-levels', 'fig-temperature-controller'];
+const labels = [
+    'fig-analog-digital',
+    'fig-digitization-flow',
+    'fig-logic-interface',
+    'fig-digital-timing',
+    'fig-sequential-system',
+    'fig-abstraction-levels',
+    'fig-temperature-controller',
+    'fig-illumination-logic',
+];
 
 for (const locale of ['pt', 'en', 'es']) {
     test(`real Digital Electronics chapter through the ${locale} menu`, async ({ page }, testInfo) => {
@@ -54,27 +63,43 @@ for (const locale of ['pt', 'en', 'es']) {
         for (const label of labels) await expect(viewer.locator(`[data-markdown-block="figure"][data-markdown-label="${label}"]`)).toHaveCount(1);
         await expect(viewer.locator('[data-markdown-label="ex-combinational-or-sequential"]')).toHaveCount(1);
         const refs = viewer.locator('[data-markdown-reference]');
-        await expect(refs).toHaveCount(4);
-        await expect(refs.locator('a')).toHaveText([1, 2, 3, 5].map((i) => `${word} ${i}`));
-        expect(await viewer.evaluate((element) => element.shadowRoot?.textContent ?? '')).not.toMatch(/\{@ref\s|\{#(?:fig-|ex-)/);
+        const section = locale === 'pt' ? 'Seção' : locale === 'es' ? 'Sección' : 'Section';
+        const table = locale === 'pt' ? 'Tabela' : locale === 'es' ? 'Tabla' : 'Table';
+        await expect(refs).toHaveCount(9);
+        await expect(refs.locator('a')).toHaveText([`${word} 1`, `${section} 1.1`, `${word} 2`, `${section} 1.1`, `${table} 1`, `${word} 3`, `${word} 4`, `${word} 6`, `${word} 8`]);
+        expect(await viewer.evaluate((element) => element.shadowRoot?.textContent ?? '')).not.toMatch(/\{@ref\s|\{#(?:fig-|ex-|tab-|sec-)/);
         const navigations = [];
-        for (const label of [labels[0], labels[1], labels[2], labels[4]]) {
-            const link = viewer.locator(`[data-markdown-reference="${label}"] a`);
-            const target = viewer.locator(`[data-markdown-block="figure"][data-markdown-label="${label}"]`);
+        for (const label of [
+            'fig-analog-digital',
+            'sec-analog-and-digital-quantities',
+            'fig-digitization-flow',
+            'tab-logic-thresholds',
+            'fig-logic-interface',
+            'fig-digital-timing',
+            'fig-abstraction-levels',
+            'fig-illumination-logic',
+        ]) {
+            const link = viewer.locator(`[data-markdown-reference="${label}"] a`).first();
+            const target = viewer.locator(`[data-markdown-label="${label}"], [data-markdown-heading="${label}"]`);
             await expect(link).toHaveAttribute('href', `#${await target.getAttribute('id')}`);
             const pageUrl = page.url();
             await link.click();
-            const caption = target.locator('.markdown-block-heading');
-            const geometry = await caption.evaluate(async (element) => {
+            const caption = label.startsWith('sec-') ? target : target.locator('.markdown-block-heading');
+            const geometry = await caption.evaluate(async (element, headingText) => {
                 await new Promise((resolve) => setTimeout(resolve, 2000));
                 const samples = [];
                 for (let i = 0; i < 3; i++) {
-                    const r = element.getBoundingClientRect();
+                    // Native scrolling can round a heading's border box past the
+                    // viewport by a fraction of a pixel. Require its complete
+                    // text range, rather than accepting clipped heading text.
+                    const range = window.document.createRange();
+                    range.selectNodeContents(element);
+                    const r = headingText ? range.getBoundingClientRect() : element.getBoundingClientRect();
                     samples.push({ top: r.top, bottom: r.bottom, height: innerHeight });
                     await new Promise((resolve) => setTimeout(resolve, 150));
                 }
                 return samples;
-            });
+            }, label.startsWith('sec-'));
             expect(geometry).toHaveLength(3);
             const firstSample = geometry[0];
             if (!firstSample) throw new Error('No final geometry samples');
@@ -83,7 +108,7 @@ for (const locale of ['pt', 'en', 'es']) {
                 expect(sample.bottom).toBeLessThanOrEqual(sample.height);
                 expect(Math.abs(sample.top - firstSample.top)).toBeLessThan(1);
             }
-            await expect(caption).toBeInViewport({ ratio: 1 });
+            await expect(caption).toBeInViewport({ ratio: label.startsWith('sec-') ? 0 : 1 });
             expect(page.url()).toBe(pageUrl);
             navigations.push({ label, geometry });
         }
