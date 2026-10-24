@@ -211,6 +211,7 @@ test('opens package Markdown lessons through the real command in each locale', a
         ['pt', 'Matemática e geometria', 'Progressões aritméticas e geométricas', 'progressoes.md'],
     ] as const) {
         await page.goto(`/dist/${locale}/index.html?lang=${locale}`);
+        await expect(page.locator('command-prompt .js-plotly-plot .main-svg').first()).toBeVisible({ timeout: 30_000 });
         const root = page.locator('#example-markdown');
         await expect(root).toBeAttached({ timeout: 30_000 });
         const editor = page.locator('batch-code-editor textarea');
@@ -219,7 +220,11 @@ test('opens package Markdown lessons through the real command in each locale', a
         await root.click();
         const menu = page.locator('.example-menu');
         await menu.getByRole('button', { name: new RegExp(`^${group}`) }).click();
+        const exampleResponse = page.waitForResponse((response) => new URL(response.url()).pathname.endsWith(`/${filename.replace('.md', '.m')}`));
         await menu.getByRole('button', { name: caption, exact: true }).click();
+        const response = await exampleResponse;
+        expect(response.ok()).toBe(true);
+        expect(await response.finished()).toBeNull();
         await expect(menu).toBeHidden();
         const sourceUrl = `${rawBase}${locale}/${filename}`;
         await expect(editor).toHaveValue(new RegExp(`/example/${locale}/${filename.replace('.', '\\.')}`));

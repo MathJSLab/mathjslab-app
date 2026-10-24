@@ -9,6 +9,7 @@ test('opens a nested VCD lesson and renders digital hardware through the app pre
     const fixture = readFileSync(new URL('./fixtures/digital-hardware.md', import.meta.url), 'utf8');
     await page.route(sourceUrl, (route) => route.fulfill({ contentType: 'text/markdown', body: fixture }));
     await page.goto('/dist/en/index.html?lang=en');
+    await expect(page.locator('command-prompt .js-plotly-plot .main-svg').first()).toBeVisible({ timeout: 30_000 });
     const editor = page.locator('batch-code-editor textarea');
     await expect(editor).toHaveValue(/Delta = b\^2-4\*a\*c/, { timeout: 30_000 });
     await page.locator('#examples').locator('label').click();
@@ -16,7 +17,11 @@ test('opens a nested VCD lesson and renders digital hardware through the app pre
     const menu = page.locator('.example-menu');
     await menu.getByRole('button', { name: /^Electronics and timing diagrams/ }).click();
     await menu.getByRole('button', { name: /^VCD waveforms/ }).click();
+    const exampleResponse = page.waitForResponse((response) => new URL(response.url()).pathname.endsWith('/vcd-porta-and.m'));
     await menu.getByRole('button', { name: 'VCD: AND gate and irregular events', exact: true }).click();
+    const response = await exampleResponse;
+    expect(response.ok()).toBe(true);
+    expect(await response.finished()).toBeNull();
     await expect(menu).toBeHidden();
     await expect(editor).toHaveValue(/example\/en\/vcd-porta-and\.md/);
     const viewer = page.locator(`markdown-document[src="${sourceUrl}"]`);

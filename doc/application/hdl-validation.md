@@ -673,3 +673,31 @@ no relatório. Esta rodada não repete desenvolvimento nem reconstrói compilado
 Permanecem o perfil HDL e os limites de traces vazios documentados pelo pacote.
 Consulte [o relatório atual](release-1.21.1-0.8.2.md) para evidências, escopo,
 auditoria de dependências e limitações. Nenhum commit ou publicação foi feito.
+
+## Pré-publicação 1.21.2 com mathjslab-markdown 0.8.3
+
+A distribuição do registro 0.8.3 está instalada sem link para o pacote irmão;
+MathJSLab permanece 2.9.0. Os dois conjuntos de 32 assets HDL e as licenças
+moleculares foram comparados byte a byte com o pacote após os builds.
+
+Chrome 155.0.8059.86 passou 77 casos HDL em produção estática sob /lab/, com
+zero erros de página. A cobertura inclui as dez famílias em pt/en/es, fontes
+novas, VHDL/Verilog, síntese/simulação, netlists, controles, replay, histórico,
+exportações, diagnósticos e descarte. As 1.446 requisições foram GETs sem corpo;
+84 tentativas externas eram imagens do README, sem processamento HDL remoto.
+As 403 respostas Wasm eram locais, status 200 e MIME application/wasm, sem
+COOP/COEP. Os fontes de aulas do helper existente foram verificados idênticos
+aos 328 arquivos de exemplos distribuídos no npm.
+
+A matriz geral terminou com 245 aprovações, 11 exclusões existentes e duas
+falhas de sincronização do menu no WebKit. Após aguardar a inicialização do app
+e o download completo dos exemplos, 18 repetições dos cenários afetados passaram
+nos três motores, sem retries. A matriz completa não foi repetida após esse
+ajuste. Os nove casos do capítulo real, nove de títulos e três de isolamento
+passaram na matriz original. Outros três casos passaram com download público
+real do capítulo, sem roteamento, em Chromium.
+
+Esta rodada não repete desenvolvimento ou HDL real no Edge nem reconstrói
+compiladores. Permanecem os limites do perfil HDL e de traces vazios. Veja
+[a validação 1.21.2](release-1.21.2.md) para evidências, falhas iniciais,
+resultados finais e auditoria de dependências. Não houve commit ou publicação.

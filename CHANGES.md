@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.21.2
+
+- Update mathjslab-markdown to 0.8.3, including its complete example catalogue
+  and the corrected Digital Electronics figure and exercise identifiers.
+- Validate the real shared Portuguese chapter through all three localized
+  menus, including numbered references, settled navigation and document
+  isolation.
+- Use the installed package's real examples in browser regressions, so CI can
+  run them without a sibling development checkout.
+- Synchronize menu browser assertions with application readiness and completed
+  example downloads before checking menu closure and rendered output.
+
 ## 1.21.1
 
 - Update mathjslab-markdown to 0.8.2, settling document layout before fragment
