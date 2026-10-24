@@ -90,19 +90,46 @@ test('tracks the visible section after user scrolling', async ({ page }) => {
 });
 
 test('uses instant fragment scrolling when reduced motion is requested', async ({ page }) => {
+    await page.setViewportSize({ width: 900, height: 260 });
     await page.emulateMedia({ reducedMotion: 'reduce' });
     await page.addInitScript(() => {
         const calls: ScrollIntoViewOptions[] = [];
+        const nativeScrollIntoView = Element.prototype.scrollIntoView;
         Object.defineProperty(window, '__scrollCalls', { value: calls });
         Element.prototype.scrollIntoView = function (options?: boolean | ScrollIntoViewOptions): void {
-            if (typeof options === 'object') calls.push(options);
+            if (this.id === 'local-section' && typeof options === 'object') calls.push(options);
+            nativeScrollIntoView.call(this, options);
         };
     });
     await page.goto('/test/browser/fixtures/');
     const document = viewer(page);
     await expect(document).toHaveAttribute('state', 'ready');
+    const target = document.locator('#local-section');
+    // Ensure navigation must move the real viewport, with enough trailing room
+    // that the page's scroll limit cannot leave the heading below its destination.
+    await target.evaluate((heading) => {
+        (heading as HTMLElement).style.marginTop = '1200px';
+        window.document.body.style.paddingBottom = '1000px';
+    });
+    await expect(target).not.toBeInViewport();
+    const pageUrl = page.url();
     await document.getByRole('link', { name: 'Jump to the local section' }).click();
 
-    const calls = await page.evaluate(() => (window as unknown as { __scrollCalls: ScrollIntoViewOptions[] }).__scrollCalls);
-    expect(calls).toContainEqual({ block: 'start', behavior: 'auto' });
+    // Fragment scrolling is scheduled for the next animation frame, after the
+    // component publishes ready state and rebuilds its navigation controls.
+    await expect.poll(() => page.evaluate(() => (window as unknown as { __scrollCalls: ScrollIntoViewOptions[] }).__scrollCalls)).toContainEqual({ block: 'start', behavior: 'auto' });
+    await target.evaluate(async (heading) => {
+        let previous = heading.getBoundingClientRect().top;
+        let stableFrames = 0;
+        for (let frame = 0; frame < 300; frame++) {
+            await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+            const top = heading.getBoundingClientRect().top;
+            stableFrames = Math.abs(top - previous) < 0.25 ? stableFrames + 1 : 0;
+            previous = top;
+            if (stableFrames >= 15) return;
+        }
+        throw new Error('Reduced-motion fragment destination did not settle');
+    });
+    await expect(target).toBeInViewport({ ratio: 1 });
+    expect(page.url()).toBe(pageUrl);
 });
