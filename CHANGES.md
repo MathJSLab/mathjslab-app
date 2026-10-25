@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.22.1
+
+- Update mathjslab-markdown to 0.9.1, enabling localized, independently
+  numbered note blocks with inline titles and document-scoped references.
+- Consume the expanded Digital Electronics drafts while preserving explicit
+  execution authorization and the mathjslab 2.9.0 kernel.
+
 ## 1.22.0
 
 - Update mathjslab-markdown to 0.9.0, enabling inline Markdown, mathematics

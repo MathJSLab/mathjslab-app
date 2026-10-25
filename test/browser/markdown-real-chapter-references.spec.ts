@@ -8,7 +8,9 @@ const chapter = 'introduction-to-digital-electronics.md';
 const directory = `${process.env.MARKDOWN_EXAMPLE_SOURCE_ROOT ?? 'node_modules/mathjslab-markdown/example'}/digital-electronics/pt/`;
 const labels = [
     'fig-analog-digital',
+    'fig-sampling-quantization',
     'fig-digitization-flow',
+    'fig-noise-margin-bands',
     'fig-logic-interface',
     'fig-digital-timing',
     'fig-sequential-system',
@@ -65,18 +67,34 @@ for (const locale of ['pt', 'en', 'es']) {
         const refs = viewer.locator('[data-markdown-reference]');
         const section = locale === 'pt' ? 'Seção' : locale === 'es' ? 'Sección' : 'Section';
         const table = locale === 'pt' ? 'Tabela' : locale === 'es' ? 'Tabla' : 'Table';
-        await expect(refs).toHaveCount(9);
-        await expect(refs.locator('a')).toHaveText([`${word} 1`, `${section} 1.1`, `${word} 2`, `${section} 1.1`, `${table} 1`, `${word} 3`, `${word} 4`, `${word} 6`, `${word} 8`]);
+        await expect(refs).toHaveCount(12);
+        await expect(refs.locator('a')).toHaveText([
+            `${word} 1`,
+            `${section} 1.1`,
+            `${word} 2`,
+            `${word} 3`,
+            `${section} 1.1`,
+            `${table} 1`,
+            `${word} 4`,
+            `${word} 5`,
+            `${word} 6`,
+            `${word} 8`,
+            `${table} 2`,
+            `${word} 10`,
+        ]);
         expect(await viewer.evaluate((element) => element.shadowRoot?.textContent ?? '')).not.toMatch(/\{@ref\s|\{#(?:fig-|ex-|tab-|sec-)/);
         const navigations = [];
         for (const label of [
             'fig-analog-digital',
             'sec-analog-and-digital-quantities',
+            'fig-sampling-quantization',
             'fig-digitization-flow',
             'tab-logic-thresholds',
+            'fig-noise-margin-bands',
             'fig-logic-interface',
             'fig-digital-timing',
             'fig-abstraction-levels',
+            'tab-illumination-truth',
             'fig-illumination-logic',
         ]) {
             const link = viewer.locator(`[data-markdown-reference="${label}"] a`).first();
