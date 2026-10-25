@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.22.0
+
+- Update mathjslab-markdown to 0.9.0, enabling inline Markdown, mathematics
+  and cross-references in structured block titles, plus opt-in full-width
+  tables through the existing educational preset.
+- Preserve explicit execution authorization, client-side HDL assets and
+  the installed mathjslab 2.9.0 kernel.
+
 ## 1.21.3
 
 - Update mathjslab-markdown to 0.8.4, enabling localized warning teaching blocks
