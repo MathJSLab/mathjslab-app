@@ -63,9 +63,38 @@ The infrastructure suite runs the actual workflow runner against a fake npm
 executable in temporary directories. It checks the complete successful
 sequence, a failure at every prerequisite, dry-run behavior, exit-code
 propagation and rejection of unknown options. These tests do not update real
-dependencies or run real Git commands.
+dependencies or stage, commit or push repository changes. Lock checks use
+isolated temporary Git repositories.
 
 The observation Worker build has its own prebuild hook for Eleventy and assets.
 Its TypeScript configuration also checks application modules, so both generated
 src/build-configuration.json and src/first-example.json must exist before that
 compilation, even when the production application has not been built yet.
+
+## GitHub Actions browser jobs
+
+The Markdown compatibility workflow uses Ubuntu 24.04 and installs the
+committed lockfile with npm ci. Three independent jobs each install and test
+one browser (Chromium, Firefox or WebKit), with one worker and zero retries. A
+failing job does not cancel the other engines. This avoids sharing one
+30-minute budget between OS dependency installation, builds and the complete
+browser matrix.
+
+Each job has a 90-minute ceiling. Dependency and browser installation each have
+a 10-minute step limit. Playwright has a 30-minute global timeout inside a
+35-minute test step, leaving time for reports to finish before forced
+termination. Reports are uploaded separately per browser on success or failure;
+a canceled job may not reach artifact upload. The local do:all workflow keeps
+its sequential browser matrix and Git publication behavior.
+
+## Git index locks
+
+Before cleanup and again before publication, do:all checks Git's index.lock
+path, including linked worktrees. A lock stops the workflow without deleting
+it: an active Git operation must finish first. Only remove an abandoned lock
+after checking for running Git processes and confirming the file is not in use.
+This read-only check cannot prevent another process from creating a lock later.
+
+If only git:add failed after all checks passed, resolve the lock and run npm
+run git:all to publish the already validated changes. That command stages,
+commits and pushes; do:all does not need to be repeated solely for a Git lock.

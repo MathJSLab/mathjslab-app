@@ -5,6 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { assertGitIndexAvailable, runPipeline } from '../../script/do-all.mjs';
 
 const root = fileURLToPath(new URL('../../', import.meta.url));
 const runner = path.join(root, 'script/do-all.mjs');
@@ -51,7 +52,7 @@ if (script === 'git:all') fs.writeFileSync(process.env.PIPELINE_TEST_PUBLICATION
             encoding: 'utf8',
             env: { ...process.env, npm_execpath: npm, PIPELINE_TEST_CALLS: calls, PIPELINE_TEST_PUBLICATION: publication, PIPELINE_TEST_FAIL: fail },
         });
-    return { execute, calls: () => (fs.existsSync(calls) ? JSON.parse(fs.readFileSync(calls, 'utf8')) : []), published: () => fs.existsSync(publication) };
+    return { directory, npm, execute, calls: () => (fs.existsSync(calls) ? JSON.parse(fs.readFileSync(calls, 'utf8')) : []), published: () => fs.existsSync(publication) };
 }
 
 test('do:all reaches Git publication only after every preparation and verification stage', (t) => {
@@ -145,4 +146,53 @@ test('browser observation Worker prepares generated application JSON before Type
     assert.ok(scripts['build:test-browser'].includes('npm run build:markdown-test-worker'));
     assert.ok(fs.existsSync(path.join(root, 'src/build-configuration.json.njk')));
     assert.match(fs.readFileSync(path.join(root, 'script/helper/example-assets.cjs'), 'utf8'), /first-example\.json/);
+});
+
+test('an index lock blocks preparation and is never automatically removed', (t) => {
+    const workspace = fixture(t);
+    const initialized = spawnSync('git', ['init', workspace.directory], { encoding: 'utf8' });
+    assert.equal(initialized.status, 0, initialized.stderr);
+    assert.doesNotThrow(() => assertGitIndexAvailable(workspace.directory));
+    const lock = path.join(workspace.directory, '.git/index.lock');
+    for (const content of ['', 'index data']) {
+        fs.writeFileSync(lock, content);
+        assert.throws(
+            () =>
+                runPipeline({
+                    npmExecPath: workspace.npm,
+                    log: () => {},
+                    checkGit: () => assertGitIndexAvailable(workspace.directory),
+                }),
+            /Git index is locked/,
+        );
+        assert.equal(fs.readFileSync(lock, 'utf8'), content);
+        assert.deepEqual(workspace.calls(), []);
+        assert.equal(workspace.published(), false);
+    }
+});
+
+test('a lock appearing during validation prevents publication without rerunning earlier stages', (t) => {
+    const workspace = fixture(t);
+    let checks = 0;
+    const previousCalls = process.env.PIPELINE_TEST_CALLS;
+    process.env.PIPELINE_TEST_CALLS = path.join(workspace.directory, 'calls.json');
+    try {
+        assert.throws(
+            () =>
+                runPipeline({
+                    npmExecPath: workspace.npm,
+                    log: () => {},
+                    checkGit: () => {
+                        if (++checks === 2) throw new Error('Git index is locked');
+                    },
+                }),
+            /Git index is locked/,
+        );
+    } finally {
+        if (previousCalls === undefined) delete process.env.PIPELINE_TEST_CALLS;
+        else process.env.PIPELINE_TEST_CALLS = previousCalls;
+    }
+    assert.equal(checks, 2);
+    assert.deepEqual(workspace.calls(), stages.slice(0, -1));
+    assert.equal(workspace.published(), false);
 });

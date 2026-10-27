@@ -31,3 +31,25 @@ test('browser validation scripts parse with the effective ESLint configuration',
     const [invalid] = await eslint.lintText('await ( ;\n', { filePath: 'script/test-hdl-browser.mjs' });
     assert.ok(invalid.fatalErrorCount > 0, 'invalid syntax must still fail');
 });
+
+test('GitHub browser jobs use locked dependencies and independently bounded browser coverage', async () => {
+    const config = YAML.parse(await readFile('.github/workflows/markdown-engine.yml', 'utf8'));
+    const job = config.jobs.compatibility;
+    assert.equal(job['runs-on'], 'ubuntu-24.04');
+    assert.deepEqual([...job.strategy.matrix.browser].sort(), ['chromium', 'firefox', 'webkit']);
+    assert.equal(job.strategy['fail-fast'], false, 'one engine failure must not cancel the other diagnostics');
+    const install = job.steps.find((step) => step.run?.startsWith('npm ci'));
+    assert.ok(install, 'CI must use the committed lockfile');
+    const browsers = job.steps.find((step) => step.run?.includes('playwright install'));
+    assert.ok(browsers.run.includes('${{ matrix.browser }}'));
+    assert.ok(browsers['timeout-minutes'] < job['timeout-minutes']);
+    const suite = job.steps.find((step) => step.run?.startsWith('npx playwright test'));
+    assert.ok(suite.run.includes('--project=${{ matrix.browser }}'));
+    assert.match(suite.run, /--workers=1.*--retries=0/);
+    const globalMinutes = Number(suite.run.match(/--global-timeout=(\d+)/)[1]) / 60_000;
+    assert.ok(globalMinutes < suite['timeout-minutes'], 'Playwright must finish reports before the step is killed');
+    assert.ok(suite['timeout-minutes'] < job['timeout-minutes']);
+    const upload = job.steps.find((step) => step.uses?.startsWith('actions/upload-artifact@'));
+    assert.ok(upload.with.name.includes('${{ matrix.browser }}'), 'matrix artifacts must have distinct names');
+    assert.equal(upload.if, '${{ !cancelled() }}');
+});

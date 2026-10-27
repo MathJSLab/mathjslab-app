@@ -18,7 +18,10 @@ declare global {
 }
 
 test.beforeEach(async ({ page }) => {
+    const initializationErrors: string[] = [];
+    page.on('pageerror', (error) => initializationErrors.push(error.message));
     await page.goto('/test/browser/fixtures/mathjslab-worker.html');
+    expect(initializationErrors, 'Worker fixture module initialization').toEqual([]);
     await expect(page.locator('markdown-document')).toHaveAttribute('state', 'ready', { timeout: 20_000 });
 });
 

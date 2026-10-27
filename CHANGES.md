@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## Unreleased
+
+- Check Git index locks before maintenance starts and before publication,
+  stopping with recovery instructions without removing locks automatically.
+
+- Load Worker fixture dependencies statically so navigation waits for its
+  module graph before component readiness checks; cover delayed entry delivery
+  and report module initialization errors explicitly.
+
+- Pin GitHub browser compatibility jobs to Ubuntu 24.04, use locked npm
+  dependencies and split engines into independent jobs with bounded
+  installation and test steps, zero retries and separate diagnostic artifacts.
+
 ## 1.23.0
 
 - Remove delayed startup scrolling that could move controls during a click;

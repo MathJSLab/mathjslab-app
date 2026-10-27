@@ -7,7 +7,9 @@
     </head>
     <body>
         <script type="module">
-            const { createBrowserMathJSLabWorkerExecutor, createEducationalMarkdownEngine, mathJSLabExtension } = await import('/dist/markdown-document/markdown-document.js');
+            // Static dependencies participate in navigation's load boundary.
+            // A top-level dynamic import can leave an empty fixture after load.
+            import { createBrowserMathJSLabWorkerExecutor, createEducationalMarkdownEngine, mathJSLabExtension } from '/dist/markdown-document/markdown-document.js';
             const effects = [];
             const workers = [];
             const effectObservers = new Set();

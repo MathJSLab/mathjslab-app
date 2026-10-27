@@ -39,8 +39,12 @@ on:
 
 jobs:
   compatibility:
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     env:
       CI: 'true'
       MARKDOWN_BROWSER_PROJECTS: all
@@ -49,23 +53,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
       - name: Install dependencies
-        run: npm install --ignore-scripts
-      - name: Install browser engines
-        run: npx playwright install --with-deps chromium firefox webkit
+        timeout-minutes: 10
+        run: npm ci --ignore-scripts
+      - name: Install selected browser engine
+        timeout-minutes: 10
+        run: npx playwright install --with-deps ${{ matrix.browser }}
       - name: Check types and run application unit tests
         run: npm test
       - name: Build browser test bundles and application
         run: npm run build:test-browser
       - name: Measure optional chunks
         run: npm run measure:markdown
-      - name: Run browser compatibility matrix
-        run: npx playwright test --workers=1
+      - name: Run browser compatibility tests
+        timeout-minutes: 35
+        run: npx playwright test --project=${{ matrix.browser }} --workers=1 --retries=0 --global-timeout=1800000
       - name: Upload browser diagnostics
-        if: failure()
+        if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: markdown-playwright-diagnostics
+          name: markdown-playwright-diagnostics-${{ matrix.browser }}
           path: |
             playwright-report
             test/result/playwright
