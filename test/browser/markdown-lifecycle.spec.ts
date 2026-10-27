@@ -316,8 +316,8 @@ test('dispose cancels the Three.js animation loop and removes its WebGL canvas',
 
 declare global {
     interface Window {
-        markdownTestApi?: typeof import('../../src/markdown-document');
-        markdownLifecycle?: { viewer: import('../../src/components/markdown-document/markdown-document.component').MarkdownDocumentElement; aborted: string[] };
+        markdownTestApi?: typeof import('mathjslab-markdown/browser');
+        markdownLifecycle?: { viewer: import('mathjslab-markdown/component').MarkdownDocumentElement; aborted: string[] };
         markdownResizeObservers?: Set<object>;
         markdownAnimationFrames?: Set<number>;
         markdownTimerListeners?: Set<EventListenerOrEventListenerObject>;

@@ -1,7 +1,6 @@
 # Resumable execution and Workers
 
-The production Worker in
-`src/markdown/extensions/mathjslab/mathjslab.worker.ts` creates
+The production Worker in `src/mathjslab.worker.ts` creates
 `InProcessMathJSLabRuntime` and `RuntimeWorkerServer` from `mathjslab/runtime`.
 The Markdown adapter uses `RemoteMathJSLabRuntime`; each document session has a
 Dedicated Worker. The app supplies host integration rather than another

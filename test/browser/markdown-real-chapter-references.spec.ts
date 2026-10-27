@@ -50,9 +50,9 @@ for (const locale of ['pt', 'en', 'es']) {
         await page.locator('#mathjslab-shell-run').click();
         const viewer = page.locator('markdown-document').last();
         await expect(viewer).toHaveAttribute('state', 'ready', { timeout: 90_000 });
-        const chapterResponse = page.waitForResponse((response) => response.url() === base + chapter);
-        await viewer.getByRole('link', { name: 'Ler o Capítulo 1 — Introdução à Eletrônica Digital', exact: true }).click();
-        const response = await chapterResponse;
+        const chapterLink = viewer.locator(`a[href="${base + chapter}"]`);
+        await expect(chapterLink).toHaveCount(1);
+        const [response] = await Promise.all([page.waitForResponse((response) => response.url() === base + chapter), chapterLink.click()]);
         expect(response.ok()).toBe(true);
         const delivered = await response.body();
         expect(delivered.equals(await readFile(directory + chapter))).toBe(true);

@@ -14,68 +14,67 @@
 [![OpenAIRE](https://img.shields.io/badge/OpenAIRE-blue?style=flat&link=https://explore.openaire.eu/search/advanced/research-outcomes?f0=q&fv0=MathJSLab)](https://explore.openaire.eu/search/advanced/research-outcomes?f0=q&fv0=MathJSLab)
 [![jsDelivr hits](https://img.shields.io/jsdelivr/gh/hy/MathJSLab/mathjslab-app)](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
 
-> An [interpreter](<https://en.wikipedia.org/wiki/Interpreter_(computing)>)
-> with language syntax like
-> [MATLAB&reg;](https://www.mathworks.com/)/[Octave](https://www.gnu.org/software/octave/)
-> written in [TypeScript](https://www.typescriptlang.org/).
+> An interactive environment for numerical computing and educational Markdown,
+> powered by `mathjslab` and `mathjslab-markdown`.
 
 **[ISBN 978-65-00-84828-1](https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)**
 
-This is a demo application of
-[MathJSLab](https://www.npmjs.com/package/mathjslab)
-[npm package](https://en.wikipedia.org/wiki/Npm). See this demo on the project
-page at [mathjslab.com](https://mathjslab.com/). The repository is in the
-[MathJSLab Organization](https://github.com/MathJSLab) on
-[GitHub](https://github.com/).
+English | [Español](LEAME.md) | [Português](LEIAME.md)
 
-`mathjslab-app` now includes **more than 300 examples**, available in English,
-Spanish and Portuguese and organized into categories and subdirectories. The
-collection covers linear algebra, statistics, programming (including classes,
-algorithms and data structures), signal processing, numerical methods, graphics
-and other topics. Browse the application's examples panel to load and explore
-each script, adapted to MathJSLab's supported features. See the
-[example catalogue guide](example/README.md) for the complete organization.
+`mathjslab-app` is the browser application at
+[mathjslab.com](https://mathjslab.com/). It combines a command prompt and
+script editor with numerical computation, interactive plots and educational
+documents. The interface and example menus are available in English, Spanish
+and Portuguese.
 
-**Important Notice:** This software, the **[MathJSLab](https://mathjslab.com/),
-is not affiliated, sponsored, or endorsed by
-[The MathWorks, Inc.](https://www.mathworks.com/)**
-[MATLAB&reg;](https://www.mathworks.com/products/matlab.html) is a registered
-trademark of [The MathWorks, Inc.](https://www.mathworks.com/) For more
-information about [MATLAB](https://www.mathworks.com/products/matlab.html),
-visit [www.mathworks.com](https://www.mathworks.com/).
+## Packages and architecture
 
-This [application](https://en.wikipedia.org/wiki/Web_application), developed as
-a
-[Progressive Web App (PWA)](https://pt.wikipedia.org/wiki/Progressive_web_app),
-demonstrates the capabilities of the
-[MathJSLab](https://www.npmjs.com/package/mathjslab) package in a modern and
-interactive environment. The
-[application](https://en.wikipedia.org/wiki/Web_application)'s interface is
-structured with
-[Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components),
-ensuring modularity, encapsulation, and efficient reuse of visual elements,
-which simplifies maintenance and enhances project scalability. In addition, the
-[application](https://en.wikipedia.org/wiki/Web_application) adopts a
-[responsive design](https://en.wikipedia.org/wiki/Responsive_web_design),
-providing a consistent experience, regardless of the device used, allowing it
-to adapt to different screen sizes without compromising usability.
+The application integrates two independently maintained npm packages:
 
-The [application](https://en.wikipedia.org/wiki/Web_application)'s logic is
-written in [TypeScript](https://www.typescriptlang.org/), ensuring uniform and
-standardized typing across all parts of the code.
-[Styling](https://www.w3.org/TR/css/) is managed through
-[SASS](https://sass-lang.com/) templates, with definitions in a more
-rationalized and modular way, facilitating the customization, maintenance and
-code reuse easier.
+- [`mathjslab`](https://github.com/MathJSLab/mathjslab) implements the
+  interpreter with MATLAB®/Octave-like syntax, numerical evaluation, resumable
+  sessions and plot requests.
+- [`mathjslab-markdown`](https://github.com/MathJSLab/mathjslab-markdown)
+  implements Markdown rendering, the `<markdown-document>` Web Component,
+  document navigation, resource handling and educational extensions. Reusable
+  Markdown APIs and engine development belong in that package.
 
-This demo application also uses:
+This repository owns the application interface, prompt, editor, language and
+theme selection, example menus and browser adapters. It configures the Markdown
+engine, the MathJSLab Worker and Plotly rendering through package entry points,
+without maintaining a local copy of the Markdown engine.
 
-- [Marked](https://www.npmjs.com/package/marked) to format
-  [Markdown](https://www.markdownguide.org/) files as
-  [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML).
-- [Plotly.js](https://plotly.com/javascript/) to generate plots, histograms and
-  3D graphics.
-- [Mermaid](https://mermaid.js.org/) to generate charts and diagrams.
+The application uses TypeScript, Web Components and Sass. Eleventy generates
+localized pages and example scripts; Webpack builds the browser bundles and
+copies the package's HDL runtime assets. The responsive interface is delivered
+as a Progressive Web App (PWA).
+
+See the [application architecture](doc/application/architecture.md) and
+[Markdown integration guide](doc/application/markdown-integration.md). For
+reusable components and APIs in other projects, consult the
+[package documentation](https://github.com/MathJSLab/mathjslab-markdown/blob/main/doc/README.md).
+
+## Documents and examples
+
+Use `markdown(url)` to open a remote document, `markdown()` to select a local
+file, or `help` to browse interpreter documentation. Documents can combine
+mathematics, executable MathJSLab code and plots with diagrams, maps, music,
+molecular and 3D visualizations, and HDL examples through the package's
+educational extensions. Some resources require a network connection; HDL
+execution has its own runtime and authorization requirements described in the
+[HDL guide](doc/application/hdl-validation.md).
+
+The catalogue contains **486 example templates**, including **107 Markdown
+entries per interface language**: 106 localized documents from
+`mathjslab-markdown` and the shared Digital Electronics book entry. Numerical
+examples cover linear algebra, statistics, programming, signal processing,
+numerical methods and graphics. In all three interface languages, Digital
+Electronics opens the **Portuguese contents**.
+
+The [example catalogue guide](example/README.md) describes the organization and
+coverage audit. Educational document URLs point to the Markdown repository's
+`main` branch; updating the installed package does not pin those remote
+documents to the package version.
 
 ## Downloads of the [`mathjslab` package from the `npm` registry](https://www.npmjs.com/package/mathjslab) and [hits via the `jsdelivr` CDN](https://www.jsdelivr.com/package/npm/mathjslab)
 
@@ -87,63 +86,39 @@ This demo application also uses:
 To contribute to this project see our
 [contributing guidelines](https://github.com/MathJSLab/mathjslab-app/blob/main/CONTRIBUTING.md).
 
-Join the community chat:
+## Development and validation
 
-[![Join the chat at https://matrix.to/#/#mathjslab:gitter.im](https://badges.gitter.im/Join%20Chat.svg)](https://matrix.to/#/#mathjslab:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Use a supported Node.js version and npm. `npm run update` updates dependency
+ranges, installs packages, synchronizes shared organization resources and
+prepares build helpers. To install the versions already recorded in the
+lockfile, use `npm ci`; this does not replace organization resource setup.
 
-## Build scripts
+| Command                    | Purpose                                                                                                               |
+| -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `npm run update`           | Update dependencies and prepare the workspace                                                                         |
+| `npm run format:lint`      | Format files and run ESLint with fixes                                                                                |
+| `npm run build:dev`        | Start the development server                                                                                          |
+| `npm run build:debug`      | Start the development server with debug configuration                                                                 |
+| `npm run build:prod`       | Generate the production build                                                                                         |
+| `npm test`                 | Prepare assets; check documentation, catalogue coverage and types; run unit, infrastructure and Markdown facade tests |
+| `npm run test:examples`    | Generate and execute examples in all three languages                                                                  |
+| `npm run install:browsers` | Install Chromium, Firefox and WebKit for Playwright                                                                   |
+| `npm run test:browser:all` | Build and run the browser integration matrix                                                                          |
+| `npm run clean`            | Remove generated build files                                                                                          |
+| `npm run clean:all`        | Also remove synchronized resources, dependencies and the lockfile; run update afterwards                              |
 
-The following build scripts are defined:
+`npm run do:all` runs the complete cleanup, dependency update, formatting,
+lint, build and standard validation cycle, then stages, commits and pushes
+repository changes to GitHub through `git:all`. It stops at the first failure
+and does not publish npm packages. Preview the sequence without executing it:
 
-1. **Before building** `mathjslab-app`, to **initialize** the project
-   workspace, run:
-
-```bash
-npm run update
+```sh
+npm run do:all -- --dry-run
 ```
 
-This will update the dependencies and install all of them, preparing any
-resources needed to build the project.
-
-2. **Format** and **lint** `mathjslab-app` code:
-
-```bash
-npm run format:lint
-```
-
-3. Build `mathjslab-app` in **development mode**:
-
-```bash
-npm run build:dev
-```
-
-4. Build `mathjslab-app` in **debug mode**:
-
-```bash
-npm run build:debug
-```
-
-5. Build `mathjslab-app` in **production mode**:
-
-```bash
-npm run build:prod
-```
-
-6. To **cleanup** all build files in workspace use:
-
-```bash
-npm run clean
-```
-
-7. To **delete dependencies**, the `package-lock.json` file and `node_modules`
-   directory too, use:
-
-```bash
-npm run clean:all
-```
-
-After run this command you will need to do workspace setup running
-`npm run update` again.
+See the [maintenance workflow](doc/application/maintenance.md) and
+[test guide](test/README.md) (in Portuguese) for focused commands, optional
+native HDL and live map checks, and browser prerequisites.
 
 ## Community
 
@@ -162,7 +137,7 @@ Join the community chat:
 
 > [MIT License](https://opensource.org/license/mit)
 >
-> Copyright &copy; 2016-2024 [Sergio Lindau](mailto:sergiolindau@gmail.com),
+> Copyright &copy; 2016-2026 [Sergio Lindau](mailto:sergiolindau@gmail.com),
 > [mathjslab.com](https://mathjslab.com/),
 > [ISBN 978-65-00-84828-1](https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)
 >

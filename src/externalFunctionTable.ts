@@ -2,7 +2,7 @@ import { type NodeExpr, type BuiltInFunctionTable, CharString, AST } from 'mathj
 import { commonExternalFunctionTable } from './commonExternalFunctionTable';
 import { createOpenFileButton, openFileDialog } from './openFileDialog';
 import { markdownEngine } from './Markdown';
-import { disposeMarkdownDocument, mountMarkdownDocument } from './markdown/MarkdownDocumentHost';
+import { disposeMarkdownDocument, mountMarkdownDocument } from 'mathjslab-markdown/component';
 import { appEngine, getCommandOutputTarget, withCommandOutputTarget } from './appEngine';
 import { getActiveInterpreter } from './InterpreterRuntime';
 import i18n from './i18n';

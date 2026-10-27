@@ -1,56 +1,58 @@
 import { Interpreter } from 'mathjslab';
-import { PlotEngine } from '../../src/PlotEngine';
-import { capturePlotOutput, type PlotOutputRequest, withPlotOutputCapture } from '../../src/PlotOutputCapture';
+import { currentPlotInterpreter, type PlotOutputRequest, withPlotOutputCapture } from '../../src/PlotOutputCapture';
 
-const request = (value: number): PlotOutputRequest => ({
-    type: 'plot',
-    data: [{ y: [value], type: 'scatter' }],
-    layout: { autosize: true },
-    config: { responsive: true },
-});
+const plot = (interpreter: Interpreter, values: number[]): void => {
+    interpreter.Evaluate(interpreter.Parse(`plot([${values.join(',')}])`)!);
+};
+const values = (requests: readonly PlotOutputRequest[]) => requests.map((request) => request.data[0]!.y);
 
 describe('MathJSLab Plotly output capture', () => {
-    test('captures immutable requests per interpreter evaluation and restores nested captures', () => {
+    test('keeps native plot requests with their owning interpreter across nested evaluations', () => {
         const firstInterpreter = Interpreter.Create();
         const secondInterpreter = Interpreter.Create();
-
         const outer = withPlotOutputCapture(firstInterpreter, () => {
-            capturePlotOutput(request(1));
-            const inner = withPlotOutputCapture(secondInterpreter, () => capturePlotOutput(request(2)));
-            capturePlotOutput(request(3));
+            expect(currentPlotInterpreter()).toBe(firstInterpreter);
+            plot(firstInterpreter, [1, 2]);
+            const inner = withPlotOutputCapture(secondInterpreter, () => {
+                expect(currentPlotInterpreter()).toBe(secondInterpreter);
+                plot(secondInterpreter, [3, 4]);
+            });
+            expect(currentPlotInterpreter()).toBe(firstInterpreter);
+            plot(firstInterpreter, [5, 6]);
             return inner.requests;
         });
-
-        expect(outer.requests).toHaveLength(2);
-        expect(outer.value).toHaveLength(1);
-        expect(outer.requests.map((request) => request.type)).toEqual(['plot', 'plot']);
-        expect((outer.requests[0]!.data[0] as { y: number[] }).y).toEqual([1]);
-        expect((outer.value[0]!.data[0] as { y: number[] }).y).toEqual([2]);
-        expect((outer.requests[1]!.data[0] as { y: number[] }).y).toEqual([3]);
+        expect(values(outer.requests)).toEqual([
+            [1, 2],
+            [5, 6],
+        ]);
+        expect(values(outer.value)).toEqual([[3, 4]]);
+        expect(() => currentPlotInterpreter()).toThrow('outside an interpreter evaluation');
     });
 
-    test('publishes native session plots through the renderer host exactly once and preserves the callback result', () => {
+    test('captures each native session plot once without retaining the preceding evaluation output', () => {
         const interpreter = Interpreter.Create();
-        const captured = withPlotOutputCapture(
-            interpreter,
-            () => {
-                interpreter.Evaluate(interpreter.Parse('plot([1,2])')!);
-                return true;
-            },
-            PlotEngine,
-        );
+        const captured = withPlotOutputCapture(interpreter, () => {
+            plot(interpreter, [1, 2]);
+            return true;
+        });
         const value: boolean = captured.value;
         expect(value).toBe(true);
-        expect(captured.requests).toHaveLength(1);
-        expect(captured.requests[0]!.data[0]!.y).toEqual([1, 2]);
-        const subsequent = withPlotOutputCapture(interpreter, () => {
-            interpreter.Evaluate(interpreter.Parse('plot([3,4])')!);
-        });
-        expect(subsequent.requests).toHaveLength(1);
-        expect(captured.requests).toHaveLength(1);
+        expect(values(captured.requests)).toEqual([[1, 2]]);
+        const subsequent = withPlotOutputCapture(interpreter, () => plot(interpreter, [3, 4]));
+        expect(values(subsequent.requests)).toEqual([[3, 4]]);
+        expect(values(captured.requests)).toEqual([[1, 2]]);
     });
 
-    test('rejects plotting outside an active evaluation capture', () => {
-        expect(() => capturePlotOutput(request(1))).toThrow('outside an interpreter evaluation');
+    test('restores capture ownership after an exception and permits the next evaluation', () => {
+        const interpreter = Interpreter.Create();
+        expect(() =>
+            withPlotOutputCapture(interpreter, () => {
+                plot(interpreter, [1, 2]);
+                throw new Error('failed operation');
+            }),
+        ).toThrow('failed operation');
+        expect(() => currentPlotInterpreter()).toThrow('outside an interpreter evaluation');
+        const subsequent = withPlotOutputCapture(interpreter, () => plot(interpreter, [3, 4]));
+        expect(values(subsequent.requests)).toEqual([[3, 4]]);
     });
 });

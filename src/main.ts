@@ -1,12 +1,13 @@
 import './InterpreterConfiguration';
 import './components/components';
+import 'mathjslab-markdown/component/register';
 import { evalInput } from './evalInput';
 import { evalCommand, evalPrompt } from './evalPrompt';
 import { Shell } from './Shell';
 import { appEngine } from './appEngine';
 import i18n from './i18n';
 import { markdownEngine } from './Markdown';
-import { mountMarkdownDocument } from './markdown/MarkdownDocumentHost';
+import { mountMarkdownDocument } from 'mathjslab-markdown/component';
 import { type AppearanceMode, type AppearanceModeToggleEvent } from './components/appearance-mode/appearance-mode.component';
 import { type LanguageSwitcher, type LanguageSwitcherSelectEvent } from './components/language-switcher/language-switcher.component';
 import './main.scss';
@@ -93,9 +94,9 @@ const setTheme = (theme: Theme): void => {
  * Return to the top of the page after startup or locale changes.
  */
 const scrollToTop = (): void => {
-    globalThis.setTimeout(() => {
-        globalThis.scrollTo(0, 0);
-    }, 600);
+    // A delayed startup scroll can move controls between pointerdown and
+    // pointerup, cancelling native label activation or menu clicks.
+    globalThis.scrollTo(0, 0);
 };
 
 /**

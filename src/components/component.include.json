@@ -9,7 +9,6 @@
         "control-bar",
         "language-switcher",
         "appearance-mode",
-        "application-wrapper",
-        "markdown-document"
+        "application-wrapper"
     ]
 }

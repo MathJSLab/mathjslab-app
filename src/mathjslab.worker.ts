@@ -1,7 +1,7 @@
 import { InProcessMathJSLabRuntime, RuntimeWorkerServer, type RuntimeOutput, type RuntimeWorkerServerScope } from 'mathjslab/runtime';
-import { commonExternalFunctionTable } from '../../../commonExternalFunctionTable';
-import { withActiveInterpreter } from '../../../InterpreterRuntime';
-import { withPlotOutputCapture } from '../../../PlotOutputCapture';
+import { commonExternalFunctionTable } from './commonExternalFunctionTable';
+import { withActiveInterpreter } from './InterpreterRuntime';
+import { withPlotOutputCapture } from './PlotOutputCapture';
 
 new RuntimeWorkerServer(
     globalThis as unknown as RuntimeWorkerServerScope,

@@ -71,10 +71,6 @@
             "dest": "src/styles/abstract/_constants.scss"
         },
         {
-            "src": "includes/styles/constants.json.njk",
-            "dest": "src/styles/constants.json.njk"
-        },
-        {
             "src": "includes/head-macros.njk",
             "dest": "src/includes/head-macros.njk"
         },
@@ -160,8 +156,6 @@
         "images/theme-light-white-mathjslab.svg",
         "images/theme-dark-white-mathjslab.svg",
         "src/InterpreterRuntime.ts",
-        "src/PlotEngine.ts",
-        "src/outputFunction.ts",
         "src/commonExternalFunctionTable.ts",
         "src/components/component.include.ts",
         "src/components/constructorFactory.ts",

@@ -1,5 +1,5 @@
 import { expect, test } from '@playwright/test';
-import type { MathJSLabExecutor, MathJSLabExecutionResult } from '../../src/markdown/extensions/mathjslab/executor';
+import type { MathJSLabExecutor, MathJSLabExecutionResult } from 'mathjslab-markdown/mathjslab';
 
 declare global {
     interface Window {

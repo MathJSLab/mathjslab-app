@@ -14,69 +14,70 @@
 [![OpenAIRE](https://img.shields.io/badge/OpenAIRE-blue?style=flat&link=https://explore.openaire.eu/search/advanced/research-outcomes?f0=q&fv0=MathJSLab)](https://explore.openaire.eu/search/advanced/research-outcomes?f0=q&fv0=MathJSLab)
 [![Acessos via jsDelivr](https://img.shields.io/jsdelivr/gh/hy/MathJSLab/mathjslab-app)](https://cdn.jsdelivr.net/gh/MathJSLab/mathjslab-app/)
 
-> Um [interpretador](https://pt.wikipedia.org/wiki/Interpretador) com sintaxe
-> de linguagem tipo
-> [MATLAB&reg;](https://www.mathworks.com/)/[Octave](https://www.gnu.org/software/octave/)
-> escrito em [TypeScript](https://www.typescriptlang.org/).
+> Um ambiente interativo de cálculo numérico e Markdown educacional, baseado em
+> `mathjslab` e `mathjslab-markdown`.
 
 **[ISBN 978-65-00-84828-1](https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)**
 
-Este é um aplicativo de demonstração do
-[pacote npm](<https://pt.wikipedia.org/wiki/Npm_(software)>)
-[MathJSLab](https://www.npmjs.com/package/mathjslab). Veja esta demonstração na
-página do projeto em [mathjslab.com](https://mathjslab.com/). O repositório
-está na [Organização MathJSLab](https://github.com/MathJSLab) no
-[GitHub](https://github.com/).
+[English](README.md) | [Español](LEAME.md) | Português
 
-O `mathjslab-app` agora conta com **mais de 300 exemplos**, disponíveis em
-inglês, espanhol e português e organizados em categorias e subdiretórios. A
-coleção abrange álgebra linear, estatística, programação (incluindo classes,
-algoritmos e estruturas de dados), processamento de sinais, métodos numéricos,
-gráficos e outros temas. Explore o painel de exemplos da aplicação para
-carregar e estudar cada script, adaptado aos recursos disponíveis no MathJSLab.
-Consulte o [guia do catálogo de exemplos](example/README.md) (em inglês) para
-conhecer a organização completa.
+`mathjslab-app` é a aplicação web disponível em
+[mathjslab.com](https://mathjslab.com/). Combina um prompt de comandos e um
+editor de scripts com cálculo numérico, gráficos interativos e documentos
+educacionais. A interface e os menus de exemplos estão disponíveis em inglês,
+espanhol e português.
 
-**Aviso importante:** Este software, o **[MathJSLab](https://mathjslab.com/),
-não é afiliado, patrocinado ou endossado por
-[The MathWorks, Inc.](https://www.mathworks.com/)**
-[MATLAB&reg;](https://www.mathworks.com/products/matlab.html) é uma marca
-registrada de [The MathWorks, Inc.](https://www.mathworks.com/) Para mais
-informações sobre o [MATLAB](https://www.mathworks.com/products/matlab.html),
-visite [www.mathworks.com](https://www.mathworks.com).
+## Pacotes e arquitetura
 
-Esta [aplicação](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_web),
-desenvolvida como uma
-[Aplicação Web Progressiva (PWA)](https://pt.wikipedia.org/wiki/Progressive_web_app),
-demonstra as capacidades do pacote
-[MathJSLab](https://www.npmjs.com/package/mathjslab) em um ambiente moderno e
-interativo. A interface da
-[aplicação](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_web) é
-estruturada com
-[Web Components](https://developer.mozilla.org/pt-BR/docs/Web/API/Web_components),
-garantindo modularidade, encapsulamento e reutilização eficiente dos elementos
-visuais, o que facilita a manutenção e a escalabilidade do projeto. Além disso,
-a [aplicação](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_web) adota um
-[design responsivo](https://pt.wikipedia.org/wiki/Web_design_responsivo),
-proporcionando uma experiência consistente, de forma independente do
-dispositivo que utilizar, permitindo que se adapte a diferentes tamanhos de
-tela sem comprometer a usabilidade.
+A aplicação integra dois pacotes npm mantidos de forma independente:
 
-A lógica da [aplicação](https://pt.wikipedia.org/wiki/Aplica%C3%A7%C3%A3o_web)
-é escrita em [TypeScript](https://www.typescriptlang.org/), tornando a tipagem
-uniforme e padronizada entre as partes do código. A
-[estilização](https://www.w3.org/TR/css/) é organizada por meio de templates
-[SASS](https://sass-lang.com/), com definições de maneira mais racionalizada e
-modular, facilitando a personalização, manutenção e reutilização do código.
+- [`mathjslab`](https://github.com/MathJSLab/mathjslab) implementa o
+  interpretador com sintaxe semelhante a MATLAB®/Octave, a avaliação numérica,
+  as sessões retomáveis e as solicitações de gráficos.
+- [`mathjslab-markdown`](https://github.com/MathJSLab/mathjslab-markdown)
+  implementa a renderização Markdown, o Web Component `<markdown-document>`, a
+  navegação de documentos, o gerenciamento de recursos e as extensões
+  educacionais. As APIs Markdown reutilizáveis e o desenvolvimento do motor
+  pertencem a esse pacote.
 
-Esta aplicação de demontração também usa:
+Este repositório mantém a interface, o prompt, o editor, a seleção de idioma e
+tema, os menus de exemplos e os adaptadores do navegador. Configura o motor
+Markdown, o Worker do MathJSLab e a renderização com Plotly pelos pontos de
+entrada dos pacotes, sem manter uma cópia local do motor Markdown.
 
-- [Marked](https://www.npmjs.com/package/marked) para formatar arquivos
-  [Markdown](https://www.markdownguide.org/) como
-  [HTML](https://developer.mozilla.org/pt-BR/docs/Web/HTML).
-- [Plotly.js](https://plotly.com/javascript/) para gerar gráficos, histogramas
-  e gráficos 3D.
-- [Mermaid](https://mermaid.js.org/) para gerar grafos e diagramas.
+A aplicação utiliza TypeScript, Web Components e Sass. O Eleventy gera páginas
+e scripts de exemplo localizados; o Webpack compila os bundles do navegador e
+copia os recursos de execução HDL do pacote. A interface responsiva é
+distribuída como uma aplicação web progressiva (PWA).
+
+Consulte a [arquitetura da aplicação](doc/application/architecture.md) e o
+[guia de integração Markdown](doc/application/markdown-integration.md) (em
+inglês). Para utilizar componentes e APIs reutilizáveis em outros projetos,
+consulte a
+[documentação do pacote](https://github.com/MathJSLab/mathjslab-markdown/blob/main/doc/README.md).
+
+## Documentos e exemplos
+
+Use `markdown(url)` para abrir um documento remoto, `markdown()` para
+selecionar um arquivo local ou `help` para consultar a documentação do
+interpretador. Os documentos podem combinar matemática, código MathJSLab
+executável e gráficos com diagramas, mapas, música, visualizações moleculares e
+3D e exemplos HDL por meio das extensões educacionais do pacote. Alguns
+recursos exigem conexão com a Internet; a execução HDL tem requisitos próprios
+de runtime e autorização descritos no
+[guia HDL](doc/application/hdl-validation.md) (em inglês).
+
+O catálogo contém **486 templates de exemplos**, incluindo **107 entradas
+Markdown por idioma da interface**: 106 documentos localizados do
+`mathjslab-markdown` e a entrada compartilhada do livro de Eletrônica Digital.
+Os exemplos numéricos abrangem álgebra linear, estatística, programação,
+processamento de sinais, métodos numéricos e gráficos. Nos três idiomas da
+interface, Eletrônica Digital abre o **sumário em português**.
+
+O [guia do catálogo de exemplos](example/README.md) (em inglês) descreve a
+organização e a auditoria de cobertura. As URLs dos documentos educacionais
+apontam para a branch `main` do repositório Markdown; atualizar o pacote
+instalado não fixa esses documentos remotos à versão do pacote.
 
 ## Downloads do [pacote `mathjslab` no registro `npm`](https://www.npmjs.com/package/mathjslab) e [acessos pela CDN `jsdelivr`](https://www.jsdelivr.com/package/npm/mathjslab)
 
@@ -88,64 +89,42 @@ Esta aplicação de demontração também usa:
 Para contribuir com este projeto, consulte nossas
 [diretrizes de contribuição](https://github.com/MathJSLab/mathjslab-app/blob/main/CONTRIBUTING.md).
 
-Participe do bate-papo da comunidade:
+## Desenvolvimento e validação
 
-[![Participe do bate-papo em https://matrix.to/#/#mathjslab:gitter.im](https://badges.gitter.im/Join%20Chat.svg)](https://matrix.to/#/#mathjslab:gitter.im?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Utilize uma versão compatível do Node.js e o npm. `npm run update` atualiza as
+faixas de dependências, instala os pacotes, sincroniza os recursos
+compartilhados da organização e prepara as ferramentas de build. Para instalar
+as versões já registradas no lockfile, use `npm ci`; isso não substitui a
+preparação dos recursos da organização.
 
-## Scripts de compilação
+| Comando                    | Finalidade                                                                                                                                   |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run update`           | Atualizar dependências e preparar a área de trabalho                                                                                         |
+| `npm run format:lint`      | Formatar arquivos e executar ESLint com correções                                                                                            |
+| `npm run build:dev`        | Iniciar o servidor de desenvolvimento                                                                                                        |
+| `npm run build:debug`      | Iniciar o servidor de desenvolvimento com configuração de depuração                                                                          |
+| `npm run build:prod`       | Gerar o build de produção                                                                                                                    |
+| `npm test`                 | Preparar recursos; verificar documentação, cobertura do catálogo e tipos; executar testes unitários, de infraestrutura e da fachada Markdown |
+| `npm run test:examples`    | Gerar e executar os exemplos nos três idiomas                                                                                                |
+| `npm run install:browsers` | Instalar Chromium, Firefox e WebKit para Playwright                                                                                          |
+| `npm run test:browser:all` | Compilar e executar a matriz de integração em navegadores                                                                                    |
+| `npm run clean`            | Remover arquivos de build gerados                                                                                                            |
+| `npm run clean:all`        | Remover também recursos sincronizados, dependências e lockfile; executar update depois                                                       |
 
-Os seguintes scripts de compilação são definidos:
+`npm run do:all` executa o ciclo completo de limpeza, atualização de
+dependências, formatação, lint, build e validação padrão; depois adiciona as
+alterações, cria o commit e as envia ao GitHub por meio de `git:all`. O
+processo para na primeira falha e não publica pacotes npm. Consulte a sequência
+sem executá-la:
 
-1. **Antes de compilar** `mathjslab-app`, para **iniciar** a área de trabalho
-   do projeto, execute:
-
-```bash
-npm run update
+```sh
+npm run do:all -- --dry-run
 ```
 
-Isso atualizará as dependências e instalará todas elas, preparando todos os
-recursos necessários para compilar o projeto.
-
-2. Para **formatar** e aplicar a **ferramenta de lint** no código do
-   `mathjslab-app`, execute:
-
-```bash
-npm run format:lint
-```
-
-3. **Compile** o `mathjslab-app` no **modo de desenvolvimento** usando:
-
-```bash
-npm run build:dev
-```
-
-4. **Compile** o `mathjslab-app` no **modo de depuração** usando:
-
-```bash
-npm run build:debug
-```
-
-5. **Compile** o `mathjslab-app` no **modo de produção** usando:
-
-```bash
-npm run build:prod
-```
-
-6. Para **apagar** todos os arquivos de compilação na área de trabalho, use:
-
-```bash
-npm run clean
-```
-
-7. Para também **excluir todas as dependências**, no arquivo
-   `package-lock.json` e no diretório `node_modules`, use:
-
-```bash
-npm run clean:all
-```
-
-Após executar este comando, você precisará fazer a configuração do espaço de
-trabalho executando `npm run update` novamente.
+Consulte o [processo de manutenção](doc/application/maintenance.md) (em inglês)
+e o [guia de testes](test/README.md) para os comandos específicos, as
+verificações opcionais de HDL nativo e mapas online e os requisitos dos
+navegadores.
 
 ## Comunidade
 
@@ -164,7 +143,7 @@ Participe do bate-papo da comunidade:
 
 > [MIT License](https://opensource.org/license/mit)
 >
-> Copyright &copy; 2016-2024 [Sergio Lindau](mailto:sergiolindau@gmail.com),
+> Copyright &copy; 2016-2026 [Sergio Lindau](mailto:sergiolindau@gmail.com),
 > [mathjslab.com](https://mathjslab.com/),
 > [ISBN 978-65-00-84828-1](https://grp.isbn-international.org/search/piid_solr?keys=978-65-00-84828-1)
 >

@@ -1,13 +1,37 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type Page, type Locator } from '@playwright/test';
 import { routeApplicationAssets } from './helpers/application';
+
+// These tests exercise local menus and example scripts, not live badge services.
+// Later lesson-specific routes still supply their own remote document fixtures.
+test.beforeEach(async ({ page }) => {
+    await page.route('**/*', async (route) => {
+        const url = new URL(route.request().url());
+        if (url.origin !== 'http://127.0.0.1:4173') await route.abort();
+        else await route.fallback();
+    });
+});
+
+async function selectExample(page: Page, menu: Locator, caption: string): Promise<void> {
+    const [source] = await Promise.all([
+        page.waitForResponse((response) => new URL(response.url()).pathname.endsWith('.m')),
+        menu.getByRole('button', { name: caption, exact: true }).click(),
+    ]);
+    expect(source.ok()).toBe(true);
+    expect(await source.finished()).toBeNull();
+    await expect(menu).toBeHidden();
+}
 
 test('browses nested examples with keyboard and fits desktop/mobile themes', async ({ page }, testInfo) => {
     test.setTimeout(90_000);
     await routeApplicationAssets(page);
-    await page.goto('/dist/pt/index.html?lang=pt');
+    await page.goto('/dist/pt/index.html?lang=pt', { waitUntil: 'domcontentloaded' });
     const root = page.locator('#example-graphics');
     await expect(root).toBeAttached({ timeout: 30_000 });
+    // Page labels are populated after Shell.initialize; README rendering is independent.
+    await expect(page.locator('#readme label')).not.toBeEmpty();
+    await expect(page.locator('batch-code-editor textarea')).not.toHaveValue('');
     await page.locator('#examples').locator('label').click();
+    await expect(page.locator('#examples input[type=checkbox]')).toBeChecked();
     await expect(root).toBeVisible();
     const editor = page.locator('batch-code-editor textarea');
     // Root buttons appear before the initial asynchronous file load completes.
@@ -77,10 +101,14 @@ test('scrolls long directories within a narrow viewport and keeps content after 
             await route.continue({ url: url.href });
         } else await route.fallback();
     });
-    await page.goto('/dist/en/index.html?lang=en');
+    await page.goto('/dist/en/index.html?lang=en', { waitUntil: 'domcontentloaded' });
     const root = page.locator('#example-list');
     await expect(root).toBeAttached();
+    // Page labels are populated after Shell.initialize; README rendering is independent.
+    await expect(page.locator('#readme label')).not.toBeEmpty();
+    await expect(page.locator('batch-code-editor textarea')).not.toHaveValue('');
     await page.locator('#examples').locator('label').click();
+    await expect(page.locator('#examples input[type=checkbox]')).toBeChecked();
     await root.click();
     const menu = page.locator('.example-menu');
     await expect(menu).toBeVisible();
@@ -100,20 +128,34 @@ test('scrolls long directories within a narrow viewport and keeps content after 
 
 test('loads new numerical and graphical exercises from the grouped catalogue', async ({ page }) => {
     await routeApplicationAssets(page);
-    await page.goto('/dist/pt/index.html?lang=pt');
+    await page.goto('/dist/pt/index.html?lang=pt', { waitUntil: 'domcontentloaded' });
     const methods = page.locator('#example-numerical-methods');
     await expect(methods).toBeAttached();
+    // Page labels are populated after Shell.initialize; README rendering is independent.
+    await expect(page.locator('#readme label')).not.toBeEmpty();
+    await expect(page.locator('batch-code-editor textarea')).not.toHaveValue('');
     await page.locator('#examples').locator('label').click();
+    await expect(page.locator('#examples input[type=checkbox]')).toBeChecked();
     const menu = page.locator('.example-menu');
     await methods.click();
     await menu.getByRole('button', { name: /^Integração e derivadas/ }).click();
-    await menu.getByRole('button', { name: 'Regra dos trapézios composta', exact: true }).click();
+    const [numericalSource] = await Promise.all([
+        page.waitForResponse((response) => new URL(response.url()).pathname.endsWith('/numerical-methods/calculus/trapezoidal-integration.m')),
+        menu.getByRole('button', { name: 'Regra dos trapézios composta', exact: true }).click(),
+    ]);
+    expect(numericalSource.ok()).toBe(true);
+    expect(await numericalSource.finished()).toBeNull();
     await expect(menu).toBeHidden();
     await expect(page.locator('batch-code-editor textarea')).toHaveValue(/example_check = absolute_error < 0\.0002/);
     await expect(page.locator('command-prompt .bad')).toHaveCount(0);
     await page.locator('#example-graphics').click();
     await menu.getByRole('button', { name: /^Funções/ }).click();
-    await menu.getByRole('button', { name: 'Amostras de uma parábola', exact: true }).click();
+    const [graphicalSource] = await Promise.all([
+        page.waitForResponse((response) => new URL(response.url()).pathname.endsWith('/graphics/functions/parabola-samples.m')),
+        menu.getByRole('button', { name: 'Amostras de uma parábola', exact: true }).click(),
+    ]);
+    expect(graphicalSource.ok()).toBe(true);
+    expect(await graphicalSource.finished()).toBeNull();
     await expect(menu).toBeHidden();
     await expect(page.locator('batch-code-editor textarea')).toHaveValue(/% Amostras de uma parábola/);
     await expect(page.locator('command-prompt .bad')).toHaveCount(0);
@@ -122,37 +164,42 @@ test('loads new numerical and graphical exercises from the grouped catalogue', a
 
 test('loads signal-processing and optimization exercises from the new categories', async ({ page }) => {
     await routeApplicationAssets(page);
-    await page.goto('/dist/pt/index.html?lang=pt');
+    await page.goto('/dist/pt/index.html?lang=pt', { waitUntil: 'domcontentloaded' });
     const signals = page.locator('#example-signal-processing');
     await expect(signals).toBeAttached();
+    // Page labels are populated after Shell.initialize; README rendering is independent.
+    await expect(page.locator('#readme label')).not.toBeEmpty();
+    await expect(page.locator('batch-code-editor textarea')).not.toHaveValue('');
     await page.locator('#examples').locator('label').click();
+    await expect(page.locator('#examples input[type=checkbox]')).toBeChecked();
     const menu = page.locator('.example-menu');
     await signals.click();
     await menu.getByRole('button', { name: /^Tempo e frequência/ }).click();
-    await menu.getByRole('button', { name: 'DFT manual de quatro pontos', exact: true }).click();
-    await expect(menu).toBeHidden();
+    await selectExample(page, menu, 'DFT manual de quatro pontos');
     await expect(page.locator('batch-code-editor textarea')).toHaveValue(/% DFT manual de quatro pontos/);
     await expect(page.locator('command-prompt .bad')).toHaveCount(0);
     await page.locator('#example-optimization').click();
     await menu.getByRole('button', { name: /^Busca e descida/ }).click();
-    await menu.getByRole('button', { name: 'Busca pela seção áurea', exact: true }).click();
-    await expect(menu).toBeHidden();
+    await selectExample(page, menu, 'Busca pela seção áurea');
     await expect(page.locator('batch-code-editor textarea')).toHaveValue(/example_check = abs\(estimate-1\.2\) < 0\.00001/);
     await expect(page.locator('command-prompt .bad')).toHaveCount(0);
 });
 
 test('constructs and uses objects through the object-oriented examples menu', async ({ page }) => {
     await routeApplicationAssets(page);
-    await page.goto('/dist/pt/index.html?lang=pt');
+    await page.goto('/dist/pt/index.html?lang=pt', { waitUntil: 'domcontentloaded' });
     const programming = page.locator('#example-programming');
     await expect(programming).toBeAttached();
+    // Page labels are populated after Shell.initialize; README rendering is independent.
+    await expect(page.locator('#readme label')).not.toBeEmpty();
+    await expect(page.locator('batch-code-editor textarea')).not.toHaveValue('');
     await page.locator('#examples').locator('label').click();
+    await expect(page.locator('#examples input[type=checkbox]')).toBeChecked();
     const menu = page.locator('.example-menu');
     for (const caption of ['Construtor de retângulo', 'Contador handle compartilhado', 'Composição de objetos']) {
         await programming.click();
         await menu.getByRole('button', { name: /^Programação orientada a objetos/ }).click();
-        await menu.getByRole('button', { name: caption, exact: true }).click();
-        await expect(menu).toBeHidden();
+        await selectExample(page, menu, caption);
         await expect(page.locator('batch-code-editor textarea')).toHaveValue(new RegExp(`% ${caption}`));
         await expect(page.locator('command-prompt .bad')).toHaveCount(0);
     }
@@ -161,9 +208,13 @@ test('constructs and uses objects through the object-oriented examples menu', as
 test('loads algorithms, data structures and the four newest categories with source references', async ({ page }) => {
     test.setTimeout(90_000);
     await routeApplicationAssets(page);
-    await page.goto('/dist/pt/index.html?lang=pt');
+    await page.goto('/dist/pt/index.html?lang=pt', { waitUntil: 'domcontentloaded' });
     await expect(page.locator('#example-machine-learning')).toBeAttached({ timeout: 30_000 });
+    // Page labels are populated after Shell.initialize; README rendering is independent.
+    await expect(page.locator('#readme label')).not.toBeEmpty();
+    await expect(page.locator('batch-code-editor textarea')).not.toHaveValue('');
     await page.locator('#examples').locator('label').click();
+    await expect(page.locator('#examples input[type=checkbox]')).toBeChecked();
     const menu = page.locator('.example-menu');
     const editor = page.locator('batch-code-editor textarea');
     await expect(editor).toHaveValue(/Delta = b\^2-4\*a\*c/);
@@ -180,8 +231,7 @@ test('loads algorithms, data structures and the four newest categories with sour
         await menu.getByRole('button', { name: new RegExp(`^${directory}`) }).click();
         await expect(editor).toHaveValue('conteúdo preservado ao navegar');
         expect(await menu.evaluate((element) => element.scrollWidth <= element.clientWidth)).toBe(true);
-        await menu.getByRole('button', { name: caption, exact: true }).click();
-        await expect(menu).toBeHidden();
+        await selectExample(page, menu, caption);
         await expect(editor).toHaveValue(new RegExp(`% ${caption}`));
         await expect(editor).toHaveValue(/% Referência temática .*https:\/\//);
         await expect(page.locator('command-prompt .bad')).toHaveCount(0);
@@ -210,13 +260,17 @@ test('opens package Markdown lessons through the real command in each locale', a
         ['es', 'Matemáticas y geometría', 'Progresiones aritméticas y geométricas', 'progressoes.md'],
         ['pt', 'Matemática e geometria', 'Progressões aritméticas e geométricas', 'progressoes.md'],
     ] as const) {
-        await page.goto(`/dist/${locale}/index.html?lang=${locale}`);
+        await page.goto(`/dist/${locale}/index.html?lang=${locale}`, { waitUntil: 'domcontentloaded' });
         await expect(page.locator('command-prompt .js-plotly-plot .main-svg').first()).toBeVisible({ timeout: 30_000 });
         const root = page.locator('#example-markdown');
         await expect(root).toBeAttached({ timeout: 30_000 });
         const editor = page.locator('batch-code-editor textarea');
         await expect(editor).toHaveValue(/Delta = b\^2-4\*a\*c/);
+        // Page labels are populated after Shell.initialize; README rendering is independent.
+        await expect(page.locator('#readme label')).not.toBeEmpty();
+        await expect(page.locator('batch-code-editor textarea')).not.toHaveValue('');
         await page.locator('#examples').locator('label').click();
+        await expect(page.locator('#examples input[type=checkbox]')).toBeChecked();
         await root.click();
         const menu = page.locator('.example-menu');
         await menu.getByRole('button', { name: new RegExp(`^${group}`) }).click();

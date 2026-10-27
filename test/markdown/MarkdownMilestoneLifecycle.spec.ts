@@ -1,10 +1,10 @@
 import { jest } from '@jest/globals';
 import { TextEncoder } from 'node:util';
-import { MarkdownEngine } from '../../src/MarkdownEngine';
-import { DefaultMarkdownResourceService } from '../../src/markdown/security';
-import { mathJSLabExtension } from '../../src/markdown/extensions/mathjslab/extension';
-import { mathJaxExtension } from '../../src/markdown/extensions/mathjax/extension';
-import { mountMarkdownDocument, disposeMarkdownDocument } from '../../src/markdown/MarkdownDocumentHost';
+import { MarkdownEngine } from 'mathjslab-markdown';
+import { DefaultMarkdownResourceService } from 'mathjslab-markdown/compat/markdown/security';
+import { mathJSLabExtension } from 'mathjslab-markdown/mathjslab';
+import { mathJaxExtension } from 'mathjslab-markdown/extensions';
+import { mountMarkdownDocument, disposeMarkdownDocument } from 'mathjslab-markdown/component';
 
 Object.assign(globalThis, { TextEncoder });
 const gate = <T = void>() => {

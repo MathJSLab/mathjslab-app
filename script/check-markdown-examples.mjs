@@ -4,11 +4,10 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { exampleLeaves } from '../src/example-manifest.cjs';
 
-// The canonical examples are repository resources, not npm package payload.
-// Pass their checkout explicitly so this audit never needs network access.
-const canonical = process.argv[2];
-assert.ok(canonical, 'Usage: node script/check-markdown-examples.mjs <mathjslab-markdown checkout>');
+// Audit the installed distribution by default. An explicit checkout remains
+// available for comparing changes before publication; neither mode uses network.
 const root = fileURLToPath(new URL('../', import.meta.url));
+const canonical = path.resolve(process.argv[2] ?? path.join(root, 'node_modules/mathjslab-markdown'));
 const manifest = JSON.parse(fs.readFileSync(path.join(root, 'example/example.json'), 'utf8'));
 const leaves = exampleLeaves(manifest).filter((leaf) => leaf.path.startsWith('markdown/'));
 const documents = new Map();

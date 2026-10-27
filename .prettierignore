@@ -12,3 +12,9 @@ script/build/
 dist/
 # SVG files.
 *.svg
+
+test/result/
+playwright-report/
+.npm/
+vendor/
+repo/

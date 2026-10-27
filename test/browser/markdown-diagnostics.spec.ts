@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 
 declare global {
     interface Window {
-        markdownTestApi?: typeof import('../../src/markdown-document');
+        markdownTestApi?: typeof import('mathjslab-markdown/browser');
     }
 }
 

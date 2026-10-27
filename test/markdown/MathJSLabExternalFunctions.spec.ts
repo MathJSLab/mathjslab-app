@@ -1,14 +1,13 @@
 import { Interpreter, Decimal } from 'mathjslab';
 import { commonExternalFunctionTable } from '../../src/commonExternalFunctionTable';
 import { getActiveInterpreter } from '../../src/InterpreterRuntime';
-import { PlotEngine } from '../../src/PlotEngine';
 import { currentPlotInterpreter, withPlotOutputCapture } from '../../src/PlotOutputCapture';
 
 describe('session-owned synchronous external functions', () => {
     test('uses each owning workspace and restores scopes, precision and capture after errors', () => {
-        const first = Interpreter.Create({ externalFunctionTable: { ...commonExternalFunctionTable, ...PlotEngine.externalFunctionTable } });
-        const second = Interpreter.Create({ externalFunctionTable: { ...commonExternalFunctionTable, ...PlotEngine.externalFunctionTable } });
-        const evaluate = (interpreter: Interpreter, source: string) => withPlotOutputCapture(interpreter, () => interpreter.Evaluate(interpreter.Parse(source)), PlotEngine);
+        const first = Interpreter.Create({ externalFunctionTable: { ...commonExternalFunctionTable } });
+        const second = Interpreter.Create({ externalFunctionTable: { ...commonExternalFunctionTable } });
+        const evaluate = (interpreter: Interpreter, source: string) => withPlotOutputCapture(interpreter, () => interpreter.Evaluate(interpreter.Parse(source)));
         evaluate(first, 'n=3');
         evaluate(second, 'n=4');
         expect(first.Unparse(evaluate(first, 'summation(k,1,n,k)+productory(k,1,n,k)').value).trim()).toBe('12');

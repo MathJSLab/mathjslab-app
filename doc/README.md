@@ -6,9 +6,9 @@ installed packages. All documentation here is maintained in English.
 ## Application guides
 
 - [Architecture and package boundaries](application/architecture.md)
+- [Maintenance workflow and Git publication](application/maintenance.md)
 - [Markdown integration](application/markdown-integration.md)
 - [HDL integration validation](application/hdl-validation.md)
-- [Release 1.20.0 preparation](application/release-1.20.0.md)
 - [Resumable execution and Workers](application/resumable-execution.md)
 - [Rendering diagnostics and troubleshooting](application/troubleshooting.md)
 - [Examples catalogue](../example/README.md)

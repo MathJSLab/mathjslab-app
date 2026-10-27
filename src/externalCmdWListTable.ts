@@ -1,7 +1,7 @@
 import { appEngine, getCommandOutputTarget } from './appEngine';
 import i18n from './i18n';
 import { Markdown, markdownEngine } from './Markdown';
-import { disposeMarkdownDocument, mountMarkdownDocument } from './markdown/MarkdownDocumentHost';
+import { disposeMarkdownDocument, mountMarkdownDocument } from 'mathjslab-markdown/component';
 
 /**
  * External command-form functions that receive the raw command word list from

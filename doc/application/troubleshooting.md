@@ -34,11 +34,10 @@ default configuration is separate from the package's vector-only default.
 
 ## Timing, resize and disposal
 
-Static STL/OBJ models do not need an animation loop. The package uses
-`THREE.Timer` for animated models, pauses work outside the viewport and
-releases its visibility listener, frames and renderer on disposal. A browser
-long-task warning from a layout library is not automatically a rendering
-exception.
+Renderer animation and resource cleanup belong to the installed Markdown
+package. When investigating persistent work, check visibility, pending frames
+and disposal with the browser lifecycle tests. A long-task warning from a
+layout library is not automatically a rendering exception.
 
 Replacing a document aborts obsolete operations. `net::ERR_ABORTED` may be an
 expected cancellation; verify that the current document completes and that

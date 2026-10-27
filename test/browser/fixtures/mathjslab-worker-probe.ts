@@ -1,4 +1,4 @@
-import '../../../src/markdown/extensions/mathjslab/mathjslab.worker';
+import '../../../src/mathjslab.worker';
 import { getActiveInterpreter } from '../../../src/InterpreterRuntime';
 import { currentPlotInterpreter } from '../../../src/PlotOutputCapture';
 

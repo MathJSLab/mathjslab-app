@@ -77,7 +77,7 @@ function service() {
         },
     };
     const imports = {
-        './markdown/extensions/mathjslab/applicationExecutor': {
+        'test:execution-session': {
             async createApplicationMathJSLabSession() {
                 return {
                     parse(source) {
@@ -102,11 +102,11 @@ function service() {
             },
         },
         './CommandOutputTarget': {},
-        './markdown/extensions/mathjslab/browserWorkerExecutor': {
+        'test:worker-executor': {
             createBrowserMathJSLabWorkerExecutor(options) {
                 return {
                     toMathML: options.toMathML,
-                    createSession: imports['./markdown/extensions/mathjslab/applicationExecutor'].createApplicationMathJSLabSession,
+                    createSession: imports['test:execution-session'].createApplicationMathJSLabSession,
                 };
             },
         },
@@ -152,7 +152,8 @@ function service() {
             const normalized = name.replace(/\.js$/, '');
             if (imports[normalized]) return imports[normalized];
             if (name.startsWith('mathjslab-markdown')) {
-                return load(nodeRequire.resolve(name));
+                const api = load(nodeRequire.resolve(name));
+                return name === 'mathjslab-markdown/mathjslab' ? { ...api, ...imports['test:worker-executor'] } : api;
             }
             return name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name)) : nodeRequire(name);
         };
@@ -173,7 +174,8 @@ function service() {
         });
         return moduleExports;
     };
-    const { Markdown, MarkdownEngine, markdownEngine } = load(path.join(sourceRoot, 'Markdown'));
+    const { Markdown, markdownEngine } = load(path.join(sourceRoot, 'Markdown'));
+    const { MarkdownEngine } = load(nodeRequire.resolve('mathjslab-markdown'));
     Markdown.initialize();
     return { Markdown, MarkdownEngine, markdownEngine, calls, bindings, evaluations, libraryLoads, math, mathClears, mathTypesets, smiles, document };
 }

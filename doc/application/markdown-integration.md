@@ -64,16 +64,25 @@ the
 
 ## Example catalogue
 
-The app uses a locked registry distribution of `mathjslab-markdown@0.7.1` and registers the
-complete educational preset. All 105 teaching notes and the localized index
-have menu launchers in English, Spanish and Portuguese, including the music
-lesson on Pythagorean tuning and equal temperament. See the
-[example catalogue](../../example/README.md) for the offline coverage audit.
+The application consumes the registry distribution selected by package.json and
+package-lock.json and registers the complete educational preset. Localized
+launchers select the document language; the shared Digital Electronics book
+opens its Portuguese contents in all three menu locales.
+
+Lesson URLs target the Markdown repository's raw main branch. Updating the npm
+package updates the rendering engine, but does not pin or replace those remote
+document bytes. Tests that route these URLs to local sources validate local
+integration rather than the current public response.
+
+See the [example catalogue](../../example/README.md) for launcher organization
+and the offline coverage audit.
 
 ## HDL execution in static deployments
 
-The app registers createBrowserHDLExecutor with explicit application policies in both development and production. Verilog compilation, simulation and synthesis run in browser Workers with packaged Icarus/YoWASP assets. VHDL-2008 synthesis uses GHDL Wasm and YoWASP; simulation and interactive replay use NVC Wasm within its documented library and digital-port profile. All 32 HDL assets, including nvc/, are copied without transformation. This does not claim complete VHDL language compatibility; see the application HDL validation report for executed checks and limits.
+The app enables browser HDL execution through src/MarkdownHDLConfiguration.ts.
+Its Webpack asset plugin copies the installed package's HDL runtime alongside
+the application bundle. Development and production use the same executor;
+execution requires no processing service or credentials.
 
-The default dependency is now the published registry package, fixed by package-lock.json integrity. The optional sibling/tarball paths remain development tools only. Both Webpack builds preserve the complete HDL asset tree byte for byte, including GHDL and its libraries. No service, credentials or sessionStorage are required. See [integration, validation and remaining work](hdl-validation.md) for installation, static hosting, CSP, asset verification and real browser commands.
-
-The Digital Electronics contents launcher opens example/digital-electronics/pt/README.md in all three menu locales. English/Spanish labels explicitly identify Portuguese content; the other 106 localized launchers are unchanged.
+See [HDL integration and validation](hdl-validation.md) for authorization,
+static hosting, asset verification and browser checks.

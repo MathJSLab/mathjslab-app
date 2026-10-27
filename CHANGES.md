@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file. This
 project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.23.0
+
+- Remove delayed startup scrolling that could move controls during a click;
+  wait for shell initialization and completed example downloads in catalogue
+  browser checks before asserting panel activation and menu closure. Isolate
+  catalogue tests from unrelated live services and use DOM readiness rather
+  than waiting for external badge images.
+
+- Prepare localized assets and generated application JSON before compiling the
+  browser observation Worker, including builds started from a clean workspace.
+
+- Keep final dependency cleanup app-owned so organization clean:copy cannot
+  remove its executable before clean:all finishes; cover the failure with an
+  isolated cleanup regression.
+
+- Consume mathjslab-markdown 0.9.2 and its public entry points directly; remove
+  local delegation modules, obsolete executors, unused source files and
+  redundant type declarations while preserving standalone browser URLs.
+- Keep the configured application Markdown facade and production Worker;
+  capture plots through the mathjslab kernel callback and limit PlotEngine to
+  rendering, resizing and disposal.
+- Remove redundant runtime and development dependencies and refresh the
+  lockfile. Retain explicit AJV 8 for compatible Webpack schema validation
+  under the repository's legacy peer-dependency installation policy.
+- Protect application-owned integration, build and lint files from shared
+  organization synchronization; add an isolated clean/copy replay verifier and
+  infrastructure checks for package boundaries and installed validators.
+- Expand do:all to clean, update dependencies, install browser binaries,
+  format, lint, build, run standard checks and all localized examples, verify
+  deployed HDL assets, run Chromium/Firefox/WebKit and measure chunks before
+  staging, committing and pushing. Stop on failure and support dry-run.
+- Audit Markdown launcher coverage against the installed package during
+  standard tests. Preserve all 107 Markdown entries per locale and the
+  Portuguese Digital Electronics contents in all three interface languages; add
+  real-menu browser coverage and synchronize download assertions.
+- Remove historical release documents and obsolete development notes; refresh
+  architecture, integration, HDL and maintenance guides and provide equivalent
+  English, Spanish and Portuguese project overviews.
+
 ## 1.22.1
 
 - Update mathjslab-markdown to 0.9.1, enabling localized, independently
@@ -12,16 +51,17 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.22.0
 
-- Update mathjslab-markdown to 0.9.0, enabling inline Markdown, mathematics
-  and cross-references in structured block titles, plus opt-in full-width
-  tables through the existing educational preset.
-- Preserve explicit execution authorization, client-side HDL assets and
-  the installed mathjslab 2.9.0 kernel.
+- Update mathjslab-markdown to 0.9.0, enabling inline Markdown, mathematics and
+  cross-references in structured block titles, plus opt-in full-width tables
+  through the existing educational preset.
+- Preserve explicit execution authorization, client-side HDL assets and the
+  installed mathjslab 2.9.0 kernel.
 
 ## 1.21.3
 
-- Update mathjslab-markdown to 0.8.4, enabling localized warning teaching blocks
-  and their independently numbered cross-references through the existing preset.
+- Update mathjslab-markdown to 0.8.4, enabling localized warning teaching
+  blocks and their independently numbered cross-references through the existing
+  preset.
 - Verify warning rendering, references and literal code examples in the app's
   three locales, preserving execution authorization and pinned HDL assets.
 
@@ -41,11 +81,11 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 - Update mathjslab-markdown to 0.8.2, settling document layout before fragment
   scrolling and retaining accurate active-outline geometry and reduced motion.
-- Restore molecular rendering when OffscreenCanvas is absent or unusable,
-  using the package's pinned private runtime and native HTML WebGL path.
-  Deploy its license with both browser distributions.
-- Assert heading visibility after smooth scrolling settles, preventing transient
-  intersections from masking the WebKit navigation regression.
+- Restore molecular rendering when OffscreenCanvas is absent or unusable, using
+  the package's pinned private runtime and native HTML WebGL path. Deploy its
+  license with both browser distributions.
+- Assert heading visibility after smooth scrolling settles, preventing
+  transient intersections from masking the WebKit navigation regression.
 - Verify decoded, successfully downloaded cross-origin images without CORS
   fetches; distinguish Firefox's cancelled intermediate image requests from
   failures of the displayed resources.
@@ -62,16 +102,17 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## 1.20.1
 
-- Update mathjslab-markdown to 0.7.2, prioritizing HDL schematics and
-  waveforms with localized execution status and collapsible compiler logs.
-  Display and export normalized logs without terminal escape sequences.
+- Update mathjslab-markdown to 0.7.2, prioritizing HDL schematics and waveforms
+  with localized execution status and collapsible compiler logs. Display and
+  export normalized logs without terminal escape sequences.
 - Extend the integrated synthesis browser checks to verify collapsed details,
   result ordering, expansion and normalized TXT/JSON exports.
 
 ## 1.20.0
 
 - Accept checkout-native LF and CRLF in ESLint's Prettier integration and
-  validate both variants of the browser scripts, avoiding Linux-only test failures.
+  validate both variants of the browser scripts, avoiding Linux-only test
+  failures.
 - Validate the locked checkout in CircleCI without replacing project files from
   the organization repository. Preserve the app-owned ESLint, Eleventy and
   synchronization manifest during shared-file refreshes and cleanup.
@@ -79,11 +120,11 @@ project adheres to [Semantic Versioning](http://semver.org/).
   Only explicit .11tydata files provide local build data, preventing the
   multilingual templates from exhausting the 2 GiB CI heap.
 - Consume the published mathjslab-markdown 0.7.1 registry distribution, verify
-  its locked installation and complete HDL assets, and add translated launchers for
-  HDL, netlist schematics, VCD recordings, register maps and logic expressions.
-  Cover all 105 teaching notes and the localized index in each language, plus
-  the shared Digital Electronics contents: 107 Markdown launchers and 486
-  example templates in total.
+  its locked installation and complete HDL assets, and add translated launchers
+  for HDL, netlist schematics, VCD recordings, register maps and logic
+  expressions. Cover all 105 teaching notes and the localized index in each
+  language, plus the shared Digital Electronics contents: 107 Markdown
+  launchers and 486 example templates in total.
 - Group the new electronics lessons into HDL, netlist and VCD subdirectories,
   preserving localized raw GitHub URLs and existing example ordering.
 - Integrate the new renderers through the complete educational preset and
@@ -102,12 +143,13 @@ project adheres to [Semantic Versioning](http://semver.org/).
 - Copy every HDL runtime asset byte for byte in both Webpack pipelines, retain
   hashes/licenses and resolve HDL URLs relative to the bundle's public path.
 - Enable VHDL-2008 synthesis through GHDL Wasm/YoWASP and real simulation and
-  interactive replay through NVC Wasm, preserving host authorization, scheduling
-  and disposal. Copy the complete 32-file HDL distribution, including nvc/.
-  The packaged library/digital-port profile does not imply complete language
-  compatibility. The published package records scoped compiler reproduction
-  and complete corresponding Icarus sources, replacing the historical local
-  compiler snapshots; this app does not independently rebuild the toolchains.
+  interactive replay through NVC Wasm, preserving host authorization,
+  scheduling and disposal. Copy the complete 32-file HDL distribution,
+  including nvc/. The packaged library/digital-port profile does not imply
+  complete language compatibility. The published package records scoped
+  compiler reproduction and complete corresponding Icarus sources, replacing
+  the historical local compiler snapshots; this app does not independently
+  rebuild the toolchains.
 - Add the Portuguese Digital Electronics contents to all three menu locales,
   retaining Portuguese content and relative navigation to available chapters.
 - Validate the real app's lessons, controls, downloads and Worker lifecycle in
