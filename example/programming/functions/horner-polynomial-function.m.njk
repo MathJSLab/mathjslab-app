@@ -30,6 +30,8 @@ function result = horner_value(coefficients,x)
   end
 end
 evaluated = horner_value([2,-3,0,5],[0,1,2])
+native_values = polyval([2,-3,0,5],[0,1,2])
+product_coefficients = conv([1,-1],[1,1])
 
 % {{ comments.check[lang] }}
-example_check = all(evaluated == [5,4,9])
+example_check = all(evaluated == [5,4,9]) && all(native_values == evaluated) && all(product_coefficients == [1,0,-1])

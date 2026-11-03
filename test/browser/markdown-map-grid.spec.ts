@@ -22,6 +22,7 @@ test('diagnoses the complete manual document map tile grid', async ({ page }, te
         await routeApplicationAssets(page);
         await page.goto('/dist/en/index.html');
         await expect(page.locator('markdown-document').first()).toHaveAttribute('state', 'ready', { timeout: 30_000 });
+        await expect(page.locator('[data-prompt-session-state]')).toHaveAttribute('data-prompt-session-state', 'idle');
         const prompt = page.locator('command-prompt').last();
         await prompt.locator('textarea').fill('markdown("../test/browser/fixtures/extension-showcase.md")');
         await prompt.locator('textarea').press('Enter');

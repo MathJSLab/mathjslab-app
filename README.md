@@ -88,24 +88,28 @@ To contribute to this project see our
 
 ## Development and validation
 
-Use a supported Node.js version and npm. `npm run update` updates dependency
-ranges, installs packages, synchronizes shared organization resources and
-prepares build helpers. To install the versions already recorded in the
-lockfile, use `npm ci`; this does not replace organization resource setup.
+Use Node.js 22.13.x or later in the 22.x series, or Node.js 24+, with npm 10+.
+The release uses `mathjslab ^2.10.0` and `mathjslab-markdown ^0.10.0` from the
+registry. `npm run update` updates dependency ranges, installs packages,
+synchronizes shared organization resources and prepares build helpers. To
+install the versions already recorded in the lockfile, use `npm ci`; this does
+not replace organization resource setup.
 
-| Command                    | Purpose                                                                                                               |
-| -------------------------- | --------------------------------------------------------------------------------------------------------------------- |
-| `npm run update`           | Update dependencies and prepare the workspace                                                                         |
-| `npm run format:lint`      | Format files and run ESLint with fixes                                                                                |
-| `npm run build:dev`        | Start the development server                                                                                          |
-| `npm run build:debug`      | Start the development server with debug configuration                                                                 |
-| `npm run build:prod`       | Generate the production build                                                                                         |
-| `npm test`                 | Prepare assets; check documentation, catalogue coverage and types; run unit, infrastructure and Markdown facade tests |
-| `npm run test:examples`    | Generate and execute examples in all three languages                                                                  |
-| `npm run install:browsers` | Install Chromium, Firefox and WebKit for Playwright                                                                   |
-| `npm run test:browser:all` | Build and run the browser integration matrix                                                                          |
-| `npm run clean`            | Remove generated build files                                                                                          |
-| `npm run clean:all`        | Also remove synchronized resources, dependencies and the lockfile; run update afterwards                              |
+| Command                               | Purpose                                                                                                               |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `npm run update`                      | Update dependencies and prepare the workspace                                                                         |
+| `npm run format:lint`                 | Format files and run ESLint with fixes                                                                                |
+| `npm run build:dev`                   | Start the development server                                                                                          |
+| `npm run build:debug`                 | Start the development server with debug configuration                                                                 |
+| `npm run build:prod`                  | Generate the production build                                                                                         |
+| `npm test`                            | Prepare assets; check documentation, catalogue coverage and types; run unit, infrastructure and Markdown facade tests |
+| `npm run test:examples`               | Generate and execute examples in all three languages                                                                  |
+| `npm run install:browsers`            | Install Chromium, Firefox and WebKit for Playwright                                                                   |
+| `npm run test:browser:all`            | Build and run the browser integration matrix                                                                          |
+| `npm run test:candidate`              | Build and validate the release candidate without updating dependencies, committing or publishing                      |
+| `npm run verify:runtime:distribution` | Verify installed packages and matching prepared core/runtime/Worker outputs                                           |
+| `npm run clean`                       | Remove generated build files                                                                                          |
+| `npm run clean:all`                   | Also remove synchronized resources, dependencies and the lockfile; run update afterwards                              |
 
 `npm run do:all` runs the complete cleanup, dependency update, formatting,
 lint, build and standard validation cycle, then stages, commits and pushes
@@ -120,6 +124,10 @@ See the [maintenance workflow](doc/application/maintenance.md) and
 [test guide](test/README.md) (in Portuguese) for focused commands, optional
 native HDL and live map checks, and browser prerequisites.
 
+For release metadata, validation evidence and the boundary between preparation
+and publication, see the
+[release preparation guide](doc/application/release-preparation.md).
+
 ## Community
 
 Join the community chat:
@@ -132,6 +140,39 @@ Join the community chat:
   trademark of [The MathWorks, Inc.](https://www.mathworks.com/)
 - [MathJSLab](https://mathjslab.com/) is not affiliated, sponsored, or endorsed
   by [The MathWorks, Inc.](https://www.mathworks.com/)
+
+## Local development
+
+Development uses the installed registry packages. Sibling `file:` dependencies
+are optional when testing unpublished integrations. Start the local server
+without opening a browser:
+
+```shell
+npm run build:dev -- --host 127.0.0.1 --port 8080 --server-type http --no-open
+```
+
+The installed Markdown teaching catalogue is available at
+`/markdown-examples/`. To test the local Digital Electronics book, execute
+`markdown('/markdown-examples/digital-electronics/pt/README.md')` in the
+prompt. Relative chapter links use the same local package. Production examples
+retain their published URLs.
+
+## Coordinated release validation
+
+The coordinated release gate is `npm run test:candidate`. It builds all three
+browser outputs, runs application checks and the full example catalogue,
+verifies installed HDL and runtime fingerprints, and runs Chromium, Firefox and
+WebKit without retries, then executes the real browser HDL application suite.
+Set `HDL_BROWSER` when Chromium is outside that script's default path. It
+records source fingerprints and fails if a check changes source, documentation
+or configuration. Reports remain under `test-results/candidate-*`; validation
+never updates dependencies or fixes formatting. Install the exact core and
+Markdown candidates together before running it. The application is deployed
+through its existing Git/Netlify workflow to https://app.mathjslab.com after
+its compatible npm dependencies are published.
+
+Stop development servers before release gates so linked-distribution watchers
+cannot start concurrent builds while candidates are being frozen.
 
 ## License
 

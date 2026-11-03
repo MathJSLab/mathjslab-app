@@ -71,14 +71,14 @@ sibling mathjslab-markdown/example directory; HDL_LESSONS_DIR can select
 another example directory. The registry installation and normal app build do
 not require that sibling checkout.
 
-| Variable          | Purpose                                                                                  |
-| ----------------- | ---------------------------------------------------------------------------------------- |
-| HDL_BROWSER       | Installed Chromium-compatible executable; the runner defaults to the Windows Chrome path |
-| HDL_APP_DIST      | Static build directory; defaults to dist                                                 |
-| HDL_APP_URL       | Existing app server; bypasses the runner's static server                                 |
-| HDL_APP_MODE      | Report/server mode; defaults to production                                               |
-| HDL_LESSONS_DIR   | Lesson source directory for the runner's static server                                   |
-| HDL_REPORT_SUFFIX | Suffix used for generated report names                                                   |
+| Variable          | Purpose                                                                                   |
+| ----------------- | ----------------------------------------------------------------------------------------- |
+| HDL_BROWSER       | Optional Chromium-compatible executable; defaults to the Chromium installed by Playwright |
+| HDL_APP_DIST      | Static build directory; defaults to dist                                                  |
+| HDL_APP_URL       | Existing app server; bypasses the runner's static server                                  |
+| HDL_APP_MODE      | Report/server mode; defaults to production                                                |
+| HDL_LESSONS_DIR   | Lesson source directory for the runner's static server                                    |
+| HDL_REPORT_SUFFIX | Suffix used for generated report names                                                    |
 
 For the development-server harness, first generate the usual app assets with
 npm run prebuild:dev, then start:

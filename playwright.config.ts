@@ -11,6 +11,8 @@ export default defineConfig({
     outputDir: './test/result/playwright',
     globalSetup: './test/browser/global-setup.ts',
     fullyParallel: true,
+    // Full application cases include cold Plotly/Worker startup in software browsers.
+    timeout: 90_000,
     forbidOnly: Boolean(process.env.CI),
     retries: process.env.CI ? 2 : 0,
     reporter: process.env.CI ? [['html', { outputFolder: 'playwright-report', open: 'never' }], ['line']] : 'list',

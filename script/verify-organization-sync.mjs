@@ -20,6 +20,10 @@ const ownedFiles = [
     'src/mathjslab.worker.ts',
     'src/MarkdownHDLConfiguration.ts',
     'src/MarkdownMapConfiguration.ts',
+    'src/CommandWorkspace.ts',
+    'src/PromptSession.ts',
+    'src/PromptSequence.ts',
+    'src/CommandOutputResources.ts',
 ];
 const obsoleteFiles = ['src/outputFunction.ts', 'src/styles/constants.json.njk', 'src/styles/constants.json'];
 const destination = (entry) => (typeof entry === 'string' ? entry : (entry.dest ?? entry.src));

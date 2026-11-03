@@ -1,4 +1,5 @@
-import { MarkdownNetlistBrowserPlugin, MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
+import { mathjslabAliases, MathJSLabDistributionPlugin } from './script/helper/mathjslab-distribution.mjs';
+import { markdownD3SideEffectsRule, MarkdownNetlistBrowserPlugin, MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
 /**
  * webpack.config.ts: Webpack configuration factory.
  */
@@ -46,6 +47,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
             },
             module: {
                 rules: [
+                    markdownD3SideEffectsRule(),
                     { test: /run-tex\.js$/i, resourceQuery: /url/, type: 'asset/resource', generator: { filename: 'tikzjax/run-tex.js' } },
                     {
                         test: /\.ts$/i,
@@ -122,6 +124,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                 ],
             },
             resolve: {
+                alias: mathjslabAliases,
                 extensions: ['.ts', '.js'],
                 fallback: {
                     module: false,
@@ -145,6 +148,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
             ],
             output: {
                 filename: 'mathjslab-app.js',
+                chunkFilename: '[name].[contenthash:12].js',
                 path: path.join(__dirname, 'dist'),
                 publicPath: 'auto',
                 environment: {
@@ -153,6 +157,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                 },
             },
             plugins: [
+                new MathJSLabDistributionPlugin(),
                 // Verovio's Emscripten module contains a Node-only dynamic
                 // import guarded by its runtime environment check. Omitting
                 // that unreachable browser dependency keeps the WASM chunk
@@ -175,7 +180,7 @@ export default (env: any, argv: any): webpack.Configuration[] => {
     ];
     const bundlesConfiguration = WebpackConfiguration.filter((config) => buildConfiguration.bundles.includes(config.name!));
     if (isProduction) {
-        const analyzerConfig = (buildConfiguration as any).analyzer;
+        const analyzerConfig = env?.analyze === 'false' ? undefined : (buildConfiguration as any).analyzer;
         if (typeof analyzerConfig !== 'undefined') {
             bundlesConfiguration.forEach((config) => {
                 let options: BundleAnalyzerPlugin.Options = {
@@ -200,7 +205,14 @@ export default (env: any, argv: any): webpack.Configuration[] => {
                     devtool: 'inline-source-map',
                     devServer: {
                         devMiddleware: { publicPath: '/', writeToDisk: true },
-                        static: { directory: path.join(__dirname, 'dist'), serveIndex: false, publicPath: '/' },
+                        static: [
+                            { directory: path.join(__dirname, 'dist'), serveIndex: false, publicPath: '/' },
+                            {
+                                directory: path.join(__dirname, 'node_modules', 'mathjslab-markdown', 'example'),
+                                serveIndex: false,
+                                publicPath: '/markdown-examples/',
+                            },
+                        ],
                         historyApiFallback: { index: '/index.html', disableDotRule: true },
                         compress: typeof devServerConfig.compress !== 'undefined' ? devServerConfig.compress : true,
                         port: typeof devServerConfig.port !== 'undefined' ? devServerConfig.port : 8080,

@@ -21,7 +21,7 @@ test('keeps Markdown output in the document panel after evaluating a URL', async
     expect(await panel.evaluate((element) => getComputedStyle(element).backgroundColor)).toBe('rgb(255, 255, 255)');
 });
 
-test('keeps the synchronous app prompt and renders Plotly after an external-function failure', async ({ page }) => {
+test('keeps the session prompt and renders Plotly after an external-function failure', async ({ page }) => {
     test.setTimeout(90_000);
     // The built app uses root asset URLs. Serve those assets from its local dist
     // directory without changing the production HTML or application settings.

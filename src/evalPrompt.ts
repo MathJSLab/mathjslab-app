@@ -89,8 +89,8 @@ function evalCommandWithInterpreter(interpreter: Interpreter, input: string, tar
     });
 }
 
-function evalCommand(input: string, target: CommandOutputTarget): boolean {
-    return evalCommandWithInterpreter(appEngine.interpreter, input, target);
+function evalCommand(input: string, target: CommandOutputTarget): Promise<boolean> {
+    return appEngine.promptSession.execute(input, target);
 }
 
 /**
@@ -98,8 +98,8 @@ function evalCommand(input: string, target: CommandOutputTarget): boolean {
  * @param prompt Command prompt to evaluate.
  * @param _index Unused.
  */
-function evalPrompt(prompt: CommandPrompt, _index?: number): void {
-    evalCommand(prompt.value, new PromptOutputTarget(prompt));
+async function evalPrompt(prompt: CommandPrompt, _index?: number): Promise<void> {
+    await evalCommand(prompt.value, new PromptOutputTarget(prompt));
 }
 export { evalCommand, evalCommandWithInterpreter, evalPrompt };
 export default { evalCommand, evalPrompt };

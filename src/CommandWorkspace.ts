@@ -1,5 +1,8 @@
 import { CharString, FunctionHandle, Interpreter, MultiArray } from 'mathjslab';
 import i18n from './i18n';
+import { appEngine } from './appEngine';
+import { loadPromptSequence } from './PromptSequence';
+import { mountPromptSessionControls } from './PromptSessionControls';
 import type { BatchCodeEditor } from './components/batch-code-editor/batch-code-editor.component';
 import type { BatchOutput } from './components/batch-output/batch-output.component';
 import type { CommandPrompt } from './components/command-prompt/command-prompt.component';
@@ -20,7 +23,7 @@ export type EvalInputHandler = (input: string) => EvalInputResult;
 /**
  * Presentation-neutral command evaluator.
  */
-export type EvalCommandHandler = (input: string, target: CommandOutputTarget) => boolean;
+export type EvalCommandHandler = (input: string, target: CommandOutputTarget) => boolean | Promise<boolean>;
 
 /**
  * Available command workspace presentations.
@@ -113,7 +116,9 @@ export class CommandWorkspace {
         this.element.promptSet.evalPromptRefresh = this.refreshNameList;
     }
 
+    /** Attach workspace controls, locale updates and window resize listeners. */
     public connect(): void {
+        mountPromptSessionControls(this.element.modeControls);
         this.element.modeSelect.value = this.mode;
         this.element.modeSelect.addEventListener('change', this.changeMode);
         this.element.showCommandCheckbox.addEventListener('change', this.toggleShowCommand);
@@ -163,17 +168,19 @@ export class CommandWorkspace {
         this.element.variables.resize();
     };
 
-    public readonly restart = (): void => {
-        this.interpreterPointer.Restart();
+    /** Reset the prompt workspace and release evaluated output while retaining editor source. */
+    public readonly restart = async (): Promise<void> => {
+        await appEngine.promptSession.reset();
         this.nameList.replaceChildren();
-        this.element.promptSet.clear();
+        this.element.promptSet.clearAll();
         this.element.output.clear();
         this.element.variables.resize();
     };
 
-    public readonly evaluate = (): void => {
+    /** Await editor execution and update status; unexpected errors propagate only in debug mode. */
+    public readonly evaluate = async (): Promise<void> => {
         try {
-            const { statements, hasErrors } = this.load();
+            const { statements, hasErrors } = await this.load();
             this.setStatus(hasErrors ? { type: 'error' } : { type: 'finished', count: statements.length });
         } catch (error) {
             this.setStatus({ type: 'error' });
@@ -186,7 +193,9 @@ export class CommandWorkspace {
     /**
      * Clear evaluated prompts while keeping the source currently in the editor.
      */
-    public readonly clearOutput = (): void => {
+    public readonly clearOutput = async (): Promise<void> => {
+        await appEngine.promptSession.interrupt();
+        await appEngine.promptSession.clearPlots();
         if (this.mode === 'editor-output') {
             this.element.output.clear();
         } else {
@@ -200,14 +209,15 @@ export class CommandWorkspace {
     /**
      * Restore the last example source loaded into the batch editor.
      */
-    public readonly resetSample = (): void => {
+    public readonly resetSample = async (): Promise<void> => {
         this.element.batch.value = this.lastLoadedSource;
-        this.restart();
+        await this.restart();
         this.setStatus({ type: 'ready' });
         this.resize();
         this.element.batch.focus();
     };
 
+    /** Present user bindings from the active prompt scope, excluding native names. */
     public readonly refreshNameList = (): void => {
         this.nameList.replaceChildren();
         for (const name in this.interpreterPointer.context.currentScope.nameTable) {
@@ -243,21 +253,29 @@ export class CommandWorkspace {
         }
     };
 
-    public load(text?: string): { statements: string[]; lines: string[]; hasErrors: boolean } {
+    /**
+     * Execute editor statements in order in the current prompt workspace.
+     * @param text Optional replacement source, also retained for Reset sample.
+     * @returns Parsed source and error status after awaited execution; a busy session is not scheduled.
+     */
+    public async load(text?: string): Promise<{ statements: string[]; lines: string[]; hasErrors: boolean }> {
         if (text !== undefined) {
             this.element.batch.value = text;
             this.lastLoadedSource = text;
         }
+        if (appEngine.promptSession.state !== 'idle') return { statements: [], lines: [], hasErrors: true };
+        await appEngine.promptSession.clearPlots();
         this.nameList.replaceChildren();
         const { statements, lines, hasError } = this.evalInput(this.element.batch.value);
         let hasErrors = hasError === true;
+        const executionStatements = hasErrors ? [this.element.batch.value] : statements;
         if (this.mode === 'editor-output') {
             this.element.output.clear();
-            for (const statement of statements) {
-                hasErrors = !this.evalCommand(statement, new BatchOutputTarget(this.element.output, statement)) || hasErrors;
+            for (const statement of executionStatements) {
+                hasErrors = !(await this.evalCommand(statement, new BatchOutputTarget(this.element.output, statement))) || hasErrors;
             }
         } else {
-            this.element.promptSet.promptLoadEval([...statements]);
+            await loadPromptSequence(this.element.promptSet, executionStatements, this.evalPrompt);
             hasErrors = this.element.promptSet.element.prompt.some((prompt) => prompt.element.frameBox.classList.contains('bad')) || hasErrors;
         }
         this.refreshNameList();
@@ -292,7 +310,7 @@ export class CommandWorkspace {
         this.element.batch.element.input.addEventListener('paste', this.delayedResize);
         this.element.batch.element.input.addEventListener('drop', this.delayedResize);
         this.element.batch.element.input.addEventListener('keydown', this.delayedResize);
-        this.element.batch.element.input.addEventListener('blur', this.restart);
+
         this.element.runButton.addEventListener('click', this.evaluate);
         this.element.clearOutputButton.addEventListener('click', this.clearOutput);
         this.element.resetButton.addEventListener('click', this.resetSample);
@@ -309,7 +327,7 @@ export class CommandWorkspace {
         this.element.batch.element.input.removeEventListener('paste', this.delayedResize);
         this.element.batch.element.input.removeEventListener('drop', this.delayedResize);
         this.element.batch.element.input.removeEventListener('keydown', this.delayedResize);
-        this.element.batch.element.input.removeEventListener('blur', this.restart);
+
         this.element.runButton.removeEventListener('click', this.evaluate);
         this.element.clearOutputButton.removeEventListener('click', this.clearOutput);
         this.element.resetButton.removeEventListener('click', this.resetSample);

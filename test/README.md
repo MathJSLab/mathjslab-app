@@ -28,6 +28,12 @@ pacote Markdown instalado, o Worker de observação e a aplicação antes de
 executar o Chromium. Esses três comandos verificam comportamentos diferentes e
 se complementam.
 
+Para preparar uma versão sem instalar dependências, formatar, fazer commit ou
+publicar, use `npm run test:candidate`. O comando exige versões consistentes no
+package e lockfile, além da entrada correspondente no changelog, e registra os
+resultados em `test-results/candidate-*`. Consulte o
+[guia de preparação](../doc/application/release-preparation.md).
+
 Para a matriz de navegadores, instale seus binários com
 `npx playwright install chromium firefox webkit` e execute
 `npm run test:browser:all`. Depois de preparar os builds, uma execução focada

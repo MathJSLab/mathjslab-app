@@ -14,9 +14,16 @@ the document's resource context and materializes plot descriptions on the main
 thread. Plot preparation in the kernel has no DOM or Plotly dependency.
 
 Common external functions and `plot2d` sampling use the interpreter of the
-active operation, including in the synchronous prompt. Temporary scopes,
-precision and plot capture are restored in `finally` after success or failure.
-A suspended operation must not leave an interpreter or plot capture active.
+active operation, including in the in-process prompt RuntimeSession. Temporary
+scopes, precision and plot capture are restored in `finally` after each
+synchronous advance. A suspended operation must not leave an interpreter or
+plot capture active.
+
+The editor's prompt sequence awaits execution and rich output mounting before
+scheduling the next command. A busy diagnostic protects an already active
+workspace; it must not be bypassed to compensate for concurrent scheduling.
+Presentation errors reach a terminal error state, and failed reset operations
+release the controller's resetting guard so later commands can run.
 
 Fences share their document's workspace and execute in order. Other documents
 have independent workspaces. Returned array/cell elements and supported
@@ -25,11 +32,13 @@ defined by the kernel, not by the app's adapter.
 
 ## Host effects, cancellation and recovery
 
-Script reads resolve against the document source URL and use its resource
-service, policy and signal. Cancelled delays remove their timer and listener.
-Cancellation, timeout and disposal abort pending effects and ignore late
-responses. A host implementation that ignores its signal may continue its own
-work, but cannot resume a terminated Worker.
+Markdown script reads resolve against the document source URL and use its
+resource service, policy and signal. Prompt script references retain the
+surrounding page's `document.baseURI` and its active execution signal.
+Cancelled delays remove their timer and listener. Cancellation, timeout and
+disposal abort pending effects and ignore late responses. A host implementation
+that ignores its signal may continue its own work, but cannot resume a
+terminated Worker.
 
 A normal host failure is delivered to the suspended operation, allowing
 supported `catch` and `unwind_protect_cleanup` paths to run. Earlier workspace
@@ -37,6 +46,13 @@ effects remain. Remote cancellation or timeout terminates the Worker; a later
 operation recreates a clean workspace. Previous commands are not replayed.
 There is no rollback or persistent continuation after termination. Disposing
 one session does not dispose other documents.
+
+Numeric settings belong to each session. With mathjslab 2.10,
+`configure('real','number')` and `configure('real','decimal')` migrate the live
+workspace through the core's supported migration contract. Reset restores
+creation settings; a recreated Worker also starts from its initial options. The
+app does not replay old commands or use global configuration to change another
+session's values. Number arithmetic has fixed precision 15.
 
 The adapter retains final MathML, supported script messages and plots. It does
 not promise an output for every internal instruction or partial output after an

@@ -1,3 +1,4 @@
+import { releaseCommandResources } from './CommandOutputResources';
 import type { BatchOutput } from './components/batch-output/batch-output.component';
 import type { CommandPrompt } from './components/command-prompt/command-prompt.component';
 
@@ -46,10 +47,12 @@ export class PromptOutputTarget implements CommandOutputTarget {
     }
 
     public setHTML(html: string): void {
+        void releaseCommandResources(this.content);
         this.content.innerHTML = html;
     }
 
     public setText(text: string): void {
+        void releaseCommandResources(this.content);
         this.content.textContent = text;
     }
 
@@ -58,6 +61,7 @@ export class PromptOutputTarget implements CommandOutputTarget {
     }
 
     public clear(): void {
+        void releaseCommandResources(this.content);
         this.content.replaceChildren();
     }
 }
@@ -78,10 +82,12 @@ export class BatchOutputTarget implements CommandOutputTarget {
     }
 
     public setHTML(html: string): void {
+        void releaseCommandResources(this.content);
         this.content.innerHTML = html;
     }
 
     public setText(text: string): void {
+        void releaseCommandResources(this.content);
         this.content.textContent = text;
     }
 
@@ -90,6 +96,7 @@ export class BatchOutputTarget implements CommandOutputTarget {
     }
 
     public clear(): void {
+        void releaseCommandResources(this.content);
         this.content.replaceChildren();
     }
 }

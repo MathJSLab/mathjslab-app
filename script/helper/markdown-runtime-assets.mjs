@@ -4,6 +4,18 @@ import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
 
+/**
+ * Preserve D3's transition prototype registration when Mermaid imports only select().
+ * D3 7.9.1 marks its barrel side-effect-free, allowing production builds to skip
+ * d3-transition despite Mermaid's tooltip handlers calling selection.transition().
+ * Resolve from Mermaid's installation so linked adapters use the same D3 identity.
+ */
+export function markdownD3SideEffectsRule() {
+    const markdownRequire = createRequire(require.resolve('mathjslab-markdown'));
+    const mermaidRequire = createRequire(markdownRequire.resolve('mermaid'));
+    return { include: mermaidRequire.resolve('d3'), sideEffects: true };
+}
+
 const netlistPackages = () => {
     // Resolve optional renderer dependencies from their owning package. A local
     // development link need not hoist them into the application's node_modules.

@@ -29,10 +29,12 @@
 % {{ comments.reference[lang] }}
 clear
 
-state_value = 3; positions = zeros(1,9); steps = zeros(1,8);
-for step_index = 1:8
- state_value = mod(5*state_value+1,16); steps(step_index) = 2*(state_value >= 8)-1; positions(step_index+1) = positions(step_index)+steps(step_index);
-end
+rng(3)
+initial_state = rng();
+steps = 2*(rand(1,8) >= 0.5)-1;
+positions = [0,cumsum(steps)]
+rng(initial_state)
+repeated_steps = 2*(rand(1,8) >= 0.5)-1;
 
 % {{ comments.check[lang] }}
-example_check = all(positions == [0,-1,-2,-3,-2,-1,0,-1,0]) && all(abs(steps) == 1)
+example_check = all(steps == repeated_steps) && positions(end) == sum(steps) && all(abs(steps) == 1)

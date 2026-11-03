@@ -1,6 +1,7 @@
 import { Interpreter } from 'mathjslab';
 import { Shell } from './Shell';
 import { Markdown } from './Markdown';
+import type { PromptSession } from './PromptSession';
 import type { CommandOutputTarget } from './CommandOutputTarget';
 
 /**
@@ -22,6 +23,7 @@ type AppEngine = {
     setLanguage: (lang?: string) => void;
     buildMessage: string;
     interpreter: Interpreter;
+    promptSession: PromptSession;
     shell: Shell;
     commandOutputTarget: CommandOutputTarget | null;
     openFile: () => void;
@@ -40,6 +42,7 @@ const appEngine: AppEngine = {
     setLanguage: () => {},
     buildMessage: '',
     interpreter: null as unknown as Interpreter,
+    promptSession: null as unknown as PromptSession,
     shell: null as unknown as Shell,
     commandOutputTarget: null,
     openFile: () => {},

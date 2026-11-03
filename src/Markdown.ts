@@ -1,5 +1,5 @@
 import { createEducationalMarkdownEngine, MarkdownNavigator, type MarkdownDocument, type MarkdownDocumentContext, type MarkdownExtension } from 'mathjslab-markdown';
-import { appEngine } from './appEngine';
+import { Interpreter } from 'mathjslab';
 import { PlotEngine, type PlotOutputRequest } from './PlotEngine';
 import { mathJSLabExtension, createBrowserMathJSLabWorkerExecutor } from 'mathjslab-markdown/mathjslab';
 // The package exposes this session-lifetime hook only through its compatibility
@@ -15,6 +15,8 @@ declare const __webpack_public_path__: string;
 // Follow the loaded bundle, including a deployment subpath.
 const hdlConfiguration = markdownHDLConfiguration(new URL('hdl/', new URL(typeof __webpack_public_path__ === 'string' ? __webpack_public_path__ : './', document.baseURI)));
 
+const markdownFormatter = Interpreter.Create();
+
 const engine = createEducationalMarkdownEngine({
     features: 'all',
     mapOptions: markdownMapConfiguration,
@@ -23,7 +25,7 @@ const engine = createEducationalMarkdownEngine({
         ...hdlConfiguration.extensions,
         mathJSLabExtension(
             createBrowserMathJSLabWorkerExecutor({
-                toMathML: (source, display) => withActiveInterpreter(appEngine.interpreter, () => appEngine.interpreter.ToMathML(source, display)),
+                toMathML: (source, display) => withActiveInterpreter(markdownFormatter, () => markdownFormatter.ToMathML(source, display)),
                 timeoutMs: 10000,
                 workerFactory: () => new Worker(new URL('./mathjslab.worker.ts', import.meta.url), { type: 'module', name: 'mathjslab-markdown' }),
                 plotRenderer: {

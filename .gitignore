@@ -64,3 +64,6 @@ node_modules/
 .codex/
 
 coverage/
+
+# Candidate and integration evidence remains local.
+test-results/

@@ -1,4 +1,5 @@
-import { MarkdownNetlistBrowserPlugin, MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
+import { mathjslabAliases, MathJSLabDistributionPlugin } from './script/helper/mathjslab-distribution.mjs';
+import { markdownD3SideEffectsRule, MarkdownNetlistBrowserPlugin, MarkdownRuntimeAssetsPlugin } from './script/helper/markdown-runtime-assets.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import webpack from 'webpack';
@@ -21,11 +22,13 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
     experiments: { outputModule: true },
     module: {
         rules: [
+            markdownD3SideEffectsRule(),
             { test: /run-tex\.js$/i, resourceQuery: /url/, type: 'asset/resource', generator: { filename: 'tikzjax/run-tex.js' } },
             { test: /\.css$/i, resourceQuery: /inline/, type: 'asset/source' },
         ],
     },
     resolve: {
+        alias: mathjslabAliases,
         extensions: ['.ts', '.js'],
         // netlistsvg/onml only needs sax.parser(); no Node stream polyfill is needed.
         fallback: { module: false, stream: false },
@@ -46,5 +49,5 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
         publicPath: 'auto',
         clean: true,
     },
-    plugins: [new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ }), new MarkdownNetlistBrowserPlugin(), new MarkdownRuntimeAssetsPlugin()],
+    plugins: [new MathJSLabDistributionPlugin(), new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ }), new MarkdownNetlistBrowserPlugin(), new MarkdownRuntimeAssetsPlugin()],
 });

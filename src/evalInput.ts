@@ -10,6 +10,7 @@ import type { Interpreter } from 'mathjslab';
  */
 function evalInputWithInterpreter(interpreter: Interpreter, input: string, reportError = true): EvalInputResult {
     const lines: string[] = input.split(/\r?\n/);
+    const lineOffsets = [0, ...Array.from(input.matchAll(/\r?\n/g), (match) => match.index! + match[0].length)];
     try {
         const statements: string[] = [];
         const tree = interpreter.Parse(input);
@@ -18,32 +19,11 @@ function evalInputWithInterpreter(interpreter: Interpreter, input: string, repor
                 const statement = tree.list[i]!;
                 const previous = tree.list[i - 1];
                 const next = tree.list[i + 1];
-                const startLine = lines[statement.start.line - 1] ?? '';
-                const stopLine = lines[statement.stop.line - 1] ?? '';
-                if (statement.stop.line === statement.start.line) {
-                    // Preserve a whole single-line statement when it is alone on that line.
-                    if ((!previous || previous.stop.line < statement.start.line) && (!next || next.start.line > statement.start.line)) {
-                        statements[i] = startLine;
-                    } else {
-                        statements[i] = startLine.substring(statement.start.column, statement.stop.column + 1);
-                    }
-                } else {
-                    let result: string;
-                    if (!previous || previous.stop.line < statement.start.line) {
-                        result = startLine + '\n';
-                    } else {
-                        result = startLine.substring(statement.start.column) + '\n';
-                    }
-                    if (statement.stop.line > statement.start.line + 1) {
-                        result += lines.slice(statement.start.line, statement.stop.line - 1).join('\n') + '\n';
-                    }
-                    if (!next || next.start.line > statement.start.line) {
-                        result += stopLine;
-                    } else {
-                        result += stopLine.substring(0, statement.stop.column);
-                    }
-                    statements[i] = result.trim();
-                }
+                // Keep indentation/trailing trivia where no other command shares
+                // that line; shared lines use the parser's inclusive boundaries.
+                const startColumn = !previous || previous.stop.line < statement.start.line ? 0 : statement.start.column;
+                const stopColumn = !next || next.start.line > statement.stop.line ? lines[statement.stop.line - 1]!.length : statement.stop.column + 1;
+                statements[i] = input.slice(lineOffsets[statement.start.line - 1] + startColumn, lineOffsets[statement.stop.line - 1] + stopColumn);
             }
             return { statements, lines };
         } else {
@@ -55,7 +35,7 @@ function evalInputWithInterpreter(interpreter: Interpreter, input: string, repor
         return { statements: [], lines, hasError: true, error };
     }
 }
-function evalInput(input: string, reportError = true): EvalInputResult {
+function evalInput(input: string, reportError = false): EvalInputResult {
     return evalInputWithInterpreter(appEngine.interpreter, input, reportError);
 }
 export { evalInput, evalInputWithInterpreter };

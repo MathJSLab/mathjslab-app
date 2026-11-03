@@ -7,9 +7,9 @@
             "pt": "Regra dos trapézios composta"
         },
         "goal": {
-            "en": "Approximate the integral of x squared on zero to one with forty trapezoids, without trapz.",
-            "es": "Aproximar la integral de x al cuadrado de cero a uno con cuarenta trapecios, sin trapz.",
-            "pt": "Aproximar a integral de x ao quadrado de zero a um com quarenta trapézios, sem trapz."
+            "en": "Compare a forty-trapezoid formula with trapz and cumulative integration for x squared on zero to one.",
+            "es": "Comparar una fórmula de cuarenta trapecios con trapz y la integración acumulada de x al cuadrado entre cero y uno.",
+            "pt": "Comparar uma fórmula com quarenta trapézios com trapz e a integração acumulada de x ao quadrado entre zero e um."
         },
         "check": {
             "en": "Check the expected result; true means the check passed.",
@@ -28,7 +28,9 @@ y = x.^2
 width = x(2)-x(1)
 area = width*(sum(y)-0.5*y(1)-0.5*y(end))
 exact_area = 1/3
+native_area = trapz(x,y)
+cumulative_area = cumtrapz(x,y)
 absolute_error = abs(area-exact_area)
 
 % {{ comments.check[lang] }}
-example_check = absolute_error < 0.0002
+example_check = absolute_error < 0.0002 && abs(native_area-area) < 1e-12 && abs(cumulative_area(end)-area) < 1e-12

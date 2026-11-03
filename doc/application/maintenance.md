@@ -1,5 +1,24 @@
 # Maintenance workflow and Git publication
 
+## Prepare a release without committing
+
+For a prepared dependency graph and reviewed source tree, use:
+
+```sh
+npm run test:candidate
+```
+
+This gate checks release metadata, builds and validates the application without
+installing, formatting, committing or pushing. It records logs and source
+fingerprints under ignored `test-results/candidate-*`. See the
+[release preparation guide](release-preparation.md) for dependency, Worker,
+organization synchronization and deployment checks.
+
+The shared component export generator is deterministic; regenerate intentional
+manifest changes before validating the candidate.
+
+## Complete maintenance and publication
+
 Run the complete local maintenance workflow with:
 
 ```sh

@@ -28,14 +28,24 @@ compat/markdown/lifecycle export, isolated in this module because the public
 entry points do not expose that hook. An operation abort signal cannot replace
 it: ordinary navigation also aborts the previous operation.
 
-The synchronous shell and asynchronous Markdown execution have distinct output
-ownership. `CommandOutputTarget` binds output to the command that initiated it.
+The prompt RuntimeSession and Markdown Worker sessions have distinct workspace
+and output ownership. PromptSession owns host effects, cancellation and reset;
+Markdown documents own their Worker lifecycle. `configure` changes arithmetic
+within its owning session, including workspace-preserving backend migration in
+mathjslab 2.10. Explicit host replacement can also create a new empty session.
+`PromptSequence` awaits editor commands independently of shared UI helpers.
+`CommandOutputTarget` binds output to the command that initiated it.
 `InterpreterRuntime` and `PlotOutputCapture` scope interpreter access and plots
 to an active evaluation. The reusable Markdown engine does not import those
 application modules. Plot requests are captured directly through the kernel
 callback for each evaluation; PlotEngine only renders, resizes and disposes
 Plotly output. There is no second global plot buffer or numerical function
 implementation in that renderer.
+
+`CommandPresentation` captures source markup inside the active numeric
+environment and avoids repeating unchanged results. `CommandOutputResources`
+owns mounted graph disposal across nested shadow roots, even when a shared
+component clears output without app-specific lifecycle hooks.
 
 ## Builds and tests
 
@@ -84,6 +94,11 @@ AJV 8 remains an explicit development dependency: the repository installs with
 legacy-peer-deps=true, so the AJV peer of ajv-keywords must resolve to the
 compatible major version required by the Webpack schema validators. The
 infrastructure suite checks that those validators load and validate options.
+
+The app also enforces the Markdown package's netlistsvg JSON5/yargs overrides
+at its own root: npm does not inherit overrides from dependencies. ESLint 10 is
+retained; the unused import-rule plugin with an incompatible peer range was
+removed without removing active lint rules.
 
 Package versions and local development references are defined by `package.json`
 and the lockfile. Documentation does not substitute for testing the installed

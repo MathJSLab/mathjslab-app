@@ -1,5 +1,5 @@
 import { appEngine } from './appEngine';
-import firstExample from './first-example.json';
+import firstExample from './first-example.json' with { type: 'json' };
 import i18n from './i18n';
 import { exampleLeaves } from './example-manifest.cjs';
 import type { ExampleEntry, ExampleDirectory, ExampleLeaf, LocalizedText } from './ExampleManifest';
@@ -46,7 +46,15 @@ class Example {
             }
         });
         window.addEventListener('resize', () => this.positionMenu());
-        window.addEventListener('scroll', () => this.positionMenu(), true);
+        window.addEventListener(
+            'scroll',
+            (event) => {
+                // Scrolling this fixed menu does not move its origin. Moving
+                // the menu during an internal scroll can cancel a pointer click.
+                if (!(event.target instanceof Node) || !this.menu.contains(event.target)) this.positionMenu();
+            },
+            true,
+        );
     }
 
     public get examples(): Record<string, ExampleEntry> {
@@ -75,7 +83,7 @@ class Example {
             const response = await globalThis.fetch(this.exampleUrl(leaf));
             if (!response.ok) throw new Error('Network response error.');
             const text = await response.text();
-            this.loadHandler(text);
+            await this.loadHandler(text);
             this.failed = false;
             this.updateStatus();
             return true;
@@ -227,7 +235,7 @@ class Example {
             }
         }
         if (this.isFileProtocol || !this.examplesAvailable) {
-            this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
+            await this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
             return;
         }
         for (const [key, entry] of Object.entries(this.examplesRecord)) {
@@ -236,7 +244,7 @@ class Example {
         this.examplesContainer.append(this.status);
         document.body.append(this.menu);
         const first = this.leaves[0];
-        if (!first || !(await this.loadExample(first.keys))) this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
+        if (!first || !(await this.loadExample(first.keys))) await this.loadHandler(this.localizedText(firstExample.content as LocalizedText));
     }
 
     public static async initialize(id: string, loadHandler: LoadExampleHandler): Promise<Example> {

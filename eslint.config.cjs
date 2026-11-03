@@ -8,12 +8,10 @@ const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const tsParser = require('@typescript-eslint/parser');
 const prettierPlugin = require('eslint-plugin-prettier');
 const eslintConfigPrettier = require('eslint-config-prettier');
-const importPlugin = require('eslint-plugin-import');
 
 console.log(`Running project lint (configuration: ${path.basename(__filename)}) ...`);
 
 const basePlugins = {
-    import: importPlugin,
     prettier: prettierPlugin,
 };
 

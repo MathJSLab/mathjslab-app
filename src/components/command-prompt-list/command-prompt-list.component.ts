@@ -23,8 +23,8 @@ export const CommandPromptListElementEntryKey: (keyof CommandPromptListElementEn
 /**
  * Command prompt interpreter handler.
  */
-export type CommandPromptEvalHandler<T = void> = (prompt: CommandPrompt, index?: number) => T;
-export type PromptEvaluator<T = void> = CommandPromptEvalHandler<T>;
+export type CommandPromptEvalHandler<T = void | Promise<void>> = (prompt: CommandPrompt, index?: number) => T;
+export type PromptEvaluator<T = void | Promise<void>> = CommandPromptEvalHandler<T>;
 
 type CalcInputMode = 'app' | 'native';
 
@@ -222,15 +222,15 @@ export class CommandPromptList extends HTMLElement {
     /**
      * Append a prompt with optional text, then evaluate it.
      */
-    public promptAdd(text?: string | null): void {
+    public async promptAdd(text?: string | null): Promise<void> {
         const { newPrompt } = this.promptAppend(text);
-        this.evalPrompt(newPrompt, this.promptIndex);
+        await this.evalPrompt(newPrompt, this.promptIndex);
     }
 
     /**
      * Load and evaluate a group of statements, keeping a final empty prompt.
      */
-    public promptLoadEval(statements: string[]): string[] {
+    public async promptLoadEval(statements: string[]): Promise<string[]> {
         this.clear();
         if (statements.length === 0) {
             statements = [''];
@@ -238,7 +238,7 @@ export class CommandPromptList extends HTMLElement {
             statements.push('');
         }
         for (const statement of statements) {
-            this.promptAdd(statement);
+            await this.promptAdd(statement);
         }
         this.element.prompt[0]?.focusInput();
         return statements;
@@ -350,7 +350,7 @@ export class CommandPromptList extends HTMLElement {
         this.evaluate(this.currentPrompt);
     }
 
-    private evaluate(prompt: CommandPrompt): void {
+    private async evaluate(prompt: CommandPrompt): Promise<void> {
         if (!prompt.value.trim()) {
             return;
         }
@@ -360,7 +360,7 @@ export class CommandPromptList extends HTMLElement {
         if (isLastPrompt) {
             newPrompt = this.promptAppend(this.emptyPromptPrefix).newPrompt;
         }
-        this.evalPrompt(prompt, currentPromptIndex);
+        await this.evalPrompt(prompt, currentPromptIndex);
         const nextPrompt = newPrompt ?? this.element.prompt[currentPromptIndex + 1];
         if (nextPrompt) {
             this.promptIndex = this.indexOfPrompt(nextPrompt);

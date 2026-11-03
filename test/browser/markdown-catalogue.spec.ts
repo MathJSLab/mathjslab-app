@@ -16,7 +16,7 @@ for (const locale of ['pt', 'en', 'es']) {
             requested.push(route.request().url());
             await route.fulfill(route.request().url() === contentsUrl ? { contentType: 'text/markdown', body: contents } : { status: 404, body: 'Unexpected document URL' });
         });
-        await page.goto(`/dist/${locale}/index.html?lang=${locale}`);
+        await page.goto(`/dist/${locale}/index.html?lang=${locale}`, { waitUntil: 'domcontentloaded' });
         await expect(page.locator('command-prompt .js-plotly-plot .main-svg').first()).toBeVisible({ timeout: 30_000 });
         await page.locator('#examples label').click();
         await page.locator('#example-markdown').click();

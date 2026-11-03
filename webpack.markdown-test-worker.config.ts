@@ -1,3 +1,4 @@
+import { mathjslabAliases, MathJSLabDistributionPlugin } from './script/helper/mathjslab-distribution.mjs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import webpack from 'webpack';
@@ -19,6 +20,7 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
         ],
     },
     resolve: {
+        alias: mathjslabAliases,
         extensions: ['.ts', '.js'],
         fallback: { module: false },
         extensionAlias: { '.js': ['.js', '.ts'] },
@@ -30,5 +32,5 @@ export default (_environment: unknown, arguments_: { mode?: 'development' | 'pro
         publicPath: 'auto',
         clean: true,
     },
-    plugins: [new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ })],
+    plugins: [new MathJSLabDistributionPlugin(), new webpack.IgnorePlugin({ resourceRegExp: /^node:module$/ })],
 });

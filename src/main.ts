@@ -1,4 +1,4 @@
-import './InterpreterConfiguration';
+import { promptReady } from './InterpreterConfiguration';
 import './components/components';
 import 'mathjslab-markdown/component/register';
 import { evalInput } from './evalInput';
@@ -187,6 +187,7 @@ const initializePage = (): void => {
  * by the command prompt and examples panel.
  */
 async function bootstrap(): Promise<void> {
+    await promptReady;
     appEngine.shell = await Shell.initialize({
         shellId: 'mathjslab-shell',
         examplesId: 'mathjslab-examples',
@@ -197,3 +198,11 @@ async function bootstrap(): Promise<void> {
     initializePage();
 }
 void bootstrap();
+
+// Detached documents and plots have explicit owners, including page teardown.
+globalThis.addEventListener('pagehide', (event) => {
+    if (!(event as PageTransitionEvent).persisted) {
+        void appEngine.promptSession?.dispose();
+        void appEngine.Markdown.dispose();
+    }
+});

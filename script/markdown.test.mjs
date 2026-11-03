@@ -77,6 +77,10 @@ function service() {
         },
     };
     const imports = {
+        mathjslab: {
+            ...nodeRequire('mathjslab'),
+            Interpreter: { Create: () => imports['./appEngine'].appEngine.interpreter },
+        },
         'test:execution-session': {
             async createApplicationMathJSLabSession() {
                 return {
@@ -155,7 +159,7 @@ function service() {
                 const api = load(nodeRequire.resolve(name));
                 return name === 'mathjslab-markdown/mathjslab' ? { ...api, ...imports['test:worker-executor'] } : api;
             }
-            return name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name)) : nodeRequire(name);
+            return name.startsWith('.') ? load(path.resolve(path.dirname(resolved), name)) : createRequire(resolved)(name);
         };
         vm.runInNewContext(compatibleOutput, {
             exports: moduleExports,

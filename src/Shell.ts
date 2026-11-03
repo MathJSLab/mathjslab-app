@@ -59,6 +59,7 @@ class Shell {
             newShell.commandShell.evalInput = options.evalInput;
         }
         newShell.options.evalInput = newShell.commandShell.evalInput;
+        appEngine.shell = newShell;
         newShell.commandShell.connect();
         newShell.commandShell.debugMessage(appEngine.buildMessage);
         if (options.examplesId) {

@@ -1,3 +1,4 @@
+/** Exercise the built application's HDL hosting, execution and disposal in a real browser. */
 import { chromium, expect } from '@playwright/test';
 import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -6,7 +7,7 @@ import { parseVCD } from 'mathjslab-markdown/extensions';
 
 const mode = process.env.HDL_APP_MODE ?? 'production';
 const server = process.env.HDL_APP_URL ? { origin: process.env.HDL_APP_URL, requests: [], close: async () => {} } : await serveHDLApp(path.resolve(process.env.HDL_APP_DIST ?? 'dist'), mode);
-const executablePath = process.env.HDL_BROWSER ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe';
+const executablePath = process.env.HDL_BROWSER ?? chromium.executablePath();
 const reportName = `hdl-${mode}-${path.basename(executablePath)}-${process.env.HDL_REPORT_SUFFIX ?? 'vhdl-simulation'}`;
 const browser = await chromium.launch({ executablePath, headless: true });
 const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });

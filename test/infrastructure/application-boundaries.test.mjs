@@ -62,6 +62,10 @@ test('shared-repository updates cannot overwrite app-owned build, lint, Markdown
         'src/PlotEngine.ts',
         'src/MarkdownHDLConfiguration.ts',
         'src/MarkdownMapConfiguration.ts',
+        'src/CommandWorkspace.ts',
+        'src/PromptSession.ts',
+        'src/PromptSequence.ts',
+        'src/CommandOutputResources.ts',
     ]);
     for (const entry of configuration.files) {
         const destination = typeof entry === 'string' ? entry : (entry.dest ?? entry.src);

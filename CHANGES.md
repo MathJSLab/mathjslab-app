@@ -5,6 +5,60 @@ project adheres to [Semantic Versioning](http://semver.org/).
 
 ## Unreleased
 
+## 1.24.0
+
+- Make the prompt timeout preservation check deterministic: wait for completed
+  prefix effects before advancing a controlled clock to the execution deadline.
+
+- Preserve D3 transition registration in optimized app and standalone Markdown
+  bundles after dependency updates. Cover Mermaid tooltip hover/leave so
+  chapter navigation cannot accumulate `transition is not a function` errors.
+
+- Consume the published mathjslab 2.10.0 and mathjslab-markdown 0.10.0
+  distributions, with matching core/runtime/Worker fingerprints and one core
+  identity per realm. Refresh the remaining application dependencies.
+- Remove the unused import-rule plugin whose peer range excludes ESLint 10,
+  retain current ESLint, and enforce the upstream netlistsvg JSON5/yargs fixes
+  at the application root. Declare the Markdown toolchain Node/npm
+  requirements.
+- Recover terminal prompt state after presentation failures and reset errors.
+  Generate stable component exports so candidate validation does not change
+  tracked source timestamps. Expand runtime lifecycle and release
+  documentation. Declare JSON import attributes for current ESM tooling and
+  wait for settled reference navigation geometry in browser checks.
+
+- Keep RuntimeSession prompt commands sequential after organization updates.
+  Own batch scheduling and shadow-tree plot cleanup in the application, and
+  mirror Promise-aware prompt evaluation into the organization component. Cover
+  startup execution against the published core/Markdown packages in all three
+  locales.
+
+- Recover editor commands directly from corrected parser source ranges,
+  preserving literal formatting, LF/CRLF and semicolon output suppression.
+  Remove reparsing and Unparse reconstruction from command recovery.
+
+- Restore left-aligned prompt input/result presentation, showing a computed
+  result only when it differs from the input. Remove numeric selectors and
+  initial host numeric preferences; users configure arithmetic through
+  `configure`, preserving workspace. Correct prompt session translations.
+- Await asynchronous example loading before returning keyboard focus, keep the
+  fixed example menu stationary during its own scrolling, and expose the
+  installed Markdown catalogue through the development server. Forward dev
+  server arguments through the nested npm script.
+- Add non-corrective candidate validation and installed distribution checks;
+  keep browser readiness budgets separate from application execution timeouts.
+
+- Execute prompts with RuntimeSession, awaited host pause/load effects,
+  cancellation, timeout diagnostics and independent Markdown session lifetimes.
+  Keep user numeric configuration within each prompt/document session.
+
+- Dispose prompt and batch plot resources across shadow component removal and
+  reset. Resolve linked core/runtime imports to one distribution, fingerprint
+  build inputs and give production Worker chunks content hashes.
+
+- Use backend-neutral arithmetic for external summation/productory and add
+  native polynomial, sampled integration and reproducible RNG examples.
+
 - Check Git index locks before maintenance starts and before publication,
   stopping with recovery instructions without removing locks automatically.
 

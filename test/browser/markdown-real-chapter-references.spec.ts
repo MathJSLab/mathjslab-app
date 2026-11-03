@@ -7,8 +7,8 @@ const base = 'https://raw.githubusercontent.com/MathJSLab/mathjslab-markdown/ref
 const chapter = 'introduction-to-digital-electronics.md';
 const directory = `${process.env.MARKDOWN_EXAMPLE_SOURCE_ROOT ?? 'node_modules/mathjslab-markdown/example'}/digital-electronics/pt/`;
 const labels = [
+    'fig-signal-types',
     'fig-analog-digital',
-    'fig-sampling-quantization',
     'fig-digitization-flow',
     'fig-noise-margin-bands',
     'fig-logic-interface',
@@ -41,6 +41,9 @@ for (const locale of ['pt', 'en', 'es']) {
         const manifest = JSON.parse(await readFile('example/example.json', 'utf8'));
         await page.goto(`/dist/${locale}/index.html?lang=${locale}`);
         await expect(page.locator('command-prompt .js-plotly-plot .main-svg').first()).toBeVisible({ timeout: 60_000 });
+        // A visible plot can precede completion of startup execution and focus updates.
+        await expect(page.locator('[data-prompt-session-state]')).toHaveAttribute('data-prompt-session-state', 'idle');
+        await expect(page.locator('#readme label')).not.toBeEmpty();
         await page.locator('#examples label').click();
         await page.locator('#example-markdown').click();
         const menu = page.locator('.example-menu');
@@ -57,9 +60,13 @@ for (const locale of ['pt', 'en', 'es']) {
         const delivered = await response.body();
         expect(delivered.equals(await readFile(directory + chapter))).toBe(true);
         received.push({ url: response.url(), sha256: createHash('sha256').update(delivered).digest('hex') });
-        await expect(viewer).toContainText('Objetivos de aprendizagem', { timeout: 90_000 });
+        await expect(viewer).toContainText('1. Introdução à Eletrônica Digital', { timeout: 90_000 });
         await expect(viewer).toHaveAttribute('state', 'ready', { timeout: 90_000 });
         const effectiveLocale = await viewer.evaluate((element: any) => element.getAttribute('locale') ?? element.context.locale ?? 'en');
+        // Exercise both tooltip handlers explicitly; incidental pointer movement
+        // previously made missing D3 transition registration look intermittent.
+        await viewer.locator('[data-markdown-extension="mermaid"] svg g.node').first().hover();
+        await page.mouse.move(0, 0);
         const word = String(effectiveLocale).startsWith('en') ? 'Figure' : 'Figura';
         await expect(viewer.locator('[data-markdown-block="figure"] [data-markdown-block-label]')).toHaveText(labels.map((_, i) => `${word} ${i + 1}`));
         for (const label of labels) await expect(viewer.locator(`[data-markdown-block="figure"][data-markdown-label="${label}"]`)).toHaveCount(1);
@@ -67,9 +74,10 @@ for (const locale of ['pt', 'en', 'es']) {
         const refs = viewer.locator('[data-markdown-reference]');
         const section = locale === 'pt' ? 'Seção' : locale === 'es' ? 'Sección' : 'Section';
         const table = locale === 'pt' ? 'Tabela' : locale === 'es' ? 'Tabla' : 'Table';
-        await expect(refs).toHaveCount(12);
+        await expect(refs).toHaveCount(13);
         await expect(refs.locator('a')).toHaveText([
             `${word} 1`,
+            `${word} 2`,
             `${section} 1.1`,
             `${word} 2`,
             `${word} 3`,
@@ -87,7 +95,7 @@ for (const locale of ['pt', 'en', 'es']) {
         for (const label of [
             'fig-analog-digital',
             'sec-analog-and-digital-quantities',
-            'fig-sampling-quantization',
+            'fig-signal-types',
             'fig-digitization-flow',
             'tab-logic-thresholds',
             'fig-noise-margin-bands',
@@ -103,29 +111,33 @@ for (const locale of ['pt', 'en', 'es']) {
             const pageUrl = page.url();
             await link.click();
             const caption = label.startsWith('sec-') ? target : target.locator('.markdown-block-heading');
-            const geometry = await caption.evaluate(async (element, headingText) => {
-                await new Promise((resolve) => setTimeout(resolve, 2000));
-                const samples = [];
-                for (let i = 0; i < 3; i++) {
-                    // Native scrolling can round a heading's border box past the
-                    // viewport by a fraction of a pixel. Require its complete
-                    // text range, rather than accepting clipped heading text.
-                    const range = window.document.createRange();
-                    range.selectNodeContents(element);
-                    const r = headingText ? range.getBoundingClientRect() : element.getBoundingClientRect();
-                    samples.push({ top: r.top, bottom: r.bottom, height: innerHeight });
-                    await new Promise((resolve) => setTimeout(resolve, 150));
+            // Wait for settled geometry instead of assuming smooth scrolling finishes in two seconds.
+            // Keep the same full-visibility and stability requirements in every engine.
+            let geometry: { top: number; bottom: number; height: number }[] = [];
+            await expect(async () => {
+                geometry = await caption.evaluate(async (element, headingText) => {
+                    const samples = [];
+                    for (let i = 0; i < 3; i++) {
+                        // Native scrolling can round a heading's border box past the
+                        // viewport by a fraction of a pixel. Require its complete
+                        // text range, rather than accepting clipped heading text.
+                        const range = window.document.createRange();
+                        range.selectNodeContents(element);
+                        const r = headingText ? range.getBoundingClientRect() : element.getBoundingClientRect();
+                        samples.push({ top: r.top, bottom: r.bottom, height: innerHeight });
+                        await new Promise((resolve) => setTimeout(resolve, 150));
+                    }
+                    return samples;
+                }, label.startsWith('sec-'));
+                expect(geometry).toHaveLength(3);
+                const firstSample = geometry[0];
+                if (!firstSample) throw new Error('No final geometry samples');
+                for (const sample of geometry) {
+                    expect(sample.top).toBeGreaterThanOrEqual(0);
+                    expect(sample.bottom).toBeLessThanOrEqual(sample.height);
+                    expect(Math.abs(sample.top - firstSample.top)).toBeLessThan(1);
                 }
-                return samples;
-            }, label.startsWith('sec-'));
-            expect(geometry).toHaveLength(3);
-            const firstSample = geometry[0];
-            if (!firstSample) throw new Error('No final geometry samples');
-            for (const sample of geometry) {
-                expect(sample.top).toBeGreaterThanOrEqual(0);
-                expect(sample.bottom).toBeLessThanOrEqual(sample.height);
-                expect(Math.abs(sample.top - firstSample.top)).toBeLessThan(1);
-            }
+            }).toPass({ timeout: 15_000, intervals: [100, 250, 500] });
             await expect(caption).toBeInViewport({ ratio: label.startsWith('sec-') ? 0 : 1 });
             expect(page.url()).toBe(pageUrl);
             navigations.push({ label, geometry });

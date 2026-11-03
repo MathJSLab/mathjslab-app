@@ -118,7 +118,9 @@ test('scrolls long directories within a narrow viewport and keeps content after 
     expect(bounds!.x).toBeGreaterThanOrEqual(0);
     expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(390);
     expect(bounds!.y + bounds!.height).toBeLessThanOrEqual(844);
+    const failedResponse = page.waitForResponse((response) => response.url().endsWith('/example/list/entry-79.m'));
     await menu.getByRole('button', { name: 'Example 79 with a longer caption', exact: true }).click();
+    expect((await failedResponse).status()).toBe(503);
     await expect(page.locator('.example-status')).toHaveText('Unable to load the example. Please try again.');
     await expect(menu).toBeVisible();
     await expect(page.locator('batch-code-editor textarea')).toHaveValue('1;');

@@ -1,5 +1,5 @@
 import './showOpenFilePickerPolyfill';
-import { Interpreter, InterpreterConfig, AliasNameTable } from 'mathjslab';
+import { InterpreterConfig, AliasNameTable } from 'mathjslab';
 import { appEngine } from './appEngine';
 import { Markdown } from './Markdown';
 import buildConfiguration from './build-configuration.json';
@@ -7,6 +7,7 @@ import { externalFunctionTable, openMathJSLabFile } from './externalFunctionTabl
 import { externalCmdWListTable } from './externalCmdWListTable';
 import i18n from './i18n';
 import { languageAlias } from './InterpreterAliases';
+import { PromptSession } from './PromptSession';
 
 export { languageAlias };
 
@@ -29,7 +30,7 @@ const syncLanguage = (): void => {
      * Update aliases in the existing interpreter context so locale changes do
      * not recreate the workspace, re-evaluate prompts, or replace user input.
      */
-    appEngine.interpreter.context.setAliasNameTable(InterpreterConfiguration.aliasNameTable);
+    appEngine.promptSession?.setAliases(InterpreterConfiguration.aliasNameTable!);
     if (appEngine.shell?.commandShell) {
         appEngine.shell.commandShell.setLanguage();
     }
@@ -85,7 +86,7 @@ Object.assign(InterpreterConfiguration.externalCmdWListTable!, {
 /**
  * Initialize the interpreter and Markdown services.
  */
-function bootstrap() {
+async function bootstrap() {
     const baseUrl =
         globalThis.location.protocol === 'file:' ? globalThis.location.href.substring(0, globalThis.location.href.lastIndexOf('/') + 1) : new URL('/', globalThis.location.href).href;
     if (typeof appEngine.config === 'undefined' || appEngine.config === null) {
@@ -125,9 +126,11 @@ function bootstrap() {
     }
     appEngine.lang = i18n.locale;
     InterpreterConfiguration.aliasNameTable = aliasTableFor(i18n.locale);
-    appEngine.interpreter = Interpreter.Create(InterpreterConfiguration);
+    const { load: _load, ...sessionFunctions } = externalFunctionTable;
+    appEngine.promptSession = new PromptSession({ ...InterpreterConfiguration, externalFunctionTable: sessionFunctions });
+    await appEngine.promptSession.initialize();
     appEngine.interpreter.debug = buildConfiguration.debug;
     appEngine.buildMessage = buildConfiguration.buildMessage;
     Markdown.initialize();
 }
-bootstrap();
+export const promptReady = bootstrap();

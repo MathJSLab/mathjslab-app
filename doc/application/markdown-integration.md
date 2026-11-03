@@ -38,8 +38,9 @@ so it is not overwritten by that output.
 
 `help` rejects HTML responses, including a hosting fallback page returned with
 status 200. Do not assume every Markdown-loading entry point makes this same
-check. The shell remains synchronous: starting a document load does not make
-the evaluator wait for its network request.
+check. The prompt uses RuntimeSession. Document commands still mount their own
+asynchronous document components; pause/load use awaited runtime host effects.
+The Markdown formatter and Worker sessions are independent of the prompt.
 
 ## Rendering and ownership
 
@@ -86,3 +87,20 @@ execution requires no processing service or credentials.
 
 See [HDL integration and validation](hdl-validation.md) for authorization,
 static hosting, asset verification and browser checks.
+
+## Numeric sessions and distribution
+
+The browser adapter exposes host `numeric` creation options. The application
+uses the default initial configuration; users select arithmetic through
+`configure("real", "number")` or `configure("real", "decimal")` in their code.
+Each document receives independent Worker state. Backend changes preserve its
+workspace and do not alter the prompt or other documents. Conversion to number
+uses native floating-point precision. Reset/dispose remain document-owned,
+including host plot disposal.
+
+All three Webpack configurations use exact aliases into the installed core's
+`lib` distribution, including imports from file-linked packages. They emit
+`mathjslab-distribution.json` with SHA-256 input fingerprints. Production app
+chunks, including Workers, use content hashes. Deploy each complete output
+together, refresh the entry HTML/JS cache, and retain old hashed chunks while
+older pages may still be active.
